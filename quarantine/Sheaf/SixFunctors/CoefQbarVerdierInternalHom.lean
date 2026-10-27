@@ -6,6 +6,8 @@ Authors: SHEAF group V1
 module
 
 public import Sheaf.SixFunctors.CoefQbarVerdierData
+import Sheaf.SixFunctors.CoefQbarVerdierInternalHomComparison
+import Sheaf.SixFunctors.CoefQbarVerdierInternalHomUniversal
 
 /-! # Internal Hom for the descended Verdier evaluation
 
@@ -84,7 +86,11 @@ displayed actual tensor-evaluation composite, not merely an arbitrary equivalenc
 of Hom sets. All pairs are permitted by commonStageHomPairs_all. -/
 theorem internal_hom_descent (B : Duality D l hl Ω X) :
     Nonempty (InternalHom D l hl Ω X B) := by
-  sorry
+  obtain ⟨permitted, ⟨comparison⟩⟩ := internal_hom_comparison_exists
+    D l hl Ω X B
+  refine ⟨{ permitted := permitted, comparison := comparison, universal := ?_ }⟩
+  exact internal_hom_universal_of_comparison D l hl Ω X B permitted comparison B.property
+
 
 omit [IsAlgClosure (Padic l) Ω] in
 /-- The finite evaluation transpose is bijective at every recorded stage.
