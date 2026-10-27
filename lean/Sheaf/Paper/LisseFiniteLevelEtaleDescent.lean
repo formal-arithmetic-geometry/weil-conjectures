@@ -12,6 +12,8 @@ import Sheaf.AlgebraicGeometry.DerivedHomSheafComparisonLisse
 import Sheaf.AlgebraicGeometry.DerivedIsomSheafComparisonFromHom
 import Sheaf.Paper.ProEtaleLisseOrigin
 import Sheaf.Paper.ProEtaleFiniteLocalConstancyReflection
+import Sheaf.Paper.LisseFiniteLevelEtaleModel
+import Sheaf.Paper.LisseFiniteLevelEtaleStalks
 
 /-! # Descent of one separately marked finite level
 
@@ -89,6 +91,11 @@ theorem lisse_finite_level_etale_descent
       Nonempty ((lisseTowerFixedRealization (U.hom ≫ g) d n).obj
         ((ProEtale.comparisonUpperStar
           (ModuleCat.{u + 1} (lisseTowerEtaleRing d n)) U.left).mapDerivedCategory.obj D) ≅
-        (adicTowerPullback (U.hom ≫ g) ((pbcAdicRings X d).obj (op n))).obj N) := by sorry
+        (adicTowerPullback (U.hom ≫ g) ((pbcAdicRings X d).obj (op n))).obj N) := by
+  obtain ⟨D, hDbounded, hDlisse, hcomparison⟩ :=
+    lisse_finite_level_etale_model X Y g d U n N E hbounded hfinite hmodels
+  have hstalk := lisse_finite_level_etale_stalks X Y g d U n N E D
+    hDbounded hDlisse hcomparison hmodels
+  exact ⟨D, hDbounded, hDlisse, hstalk, hcomparison⟩
 
 end AlgebraicGeometry.Scheme

@@ -1,0 +1,119 @@
+{
+ "id": "new-lem-weil-pbc-lisse-finite-level-etale-model",
+ "kind": "statement",
+ "title": "Bounded finite-lisse etale model at one coefficient level",
+ "statement": "Let X,Y,g,d,U,n,N,E,hbounded,hfinite,hmodels be as in lem-weil-pbc-lisse-finite-level-etale-descent. There exists an etale derived complex D over U.left at coefficient ring lisseTowerEtaleRing d n whose cohomology has the same bounded window and is finite locally constant in every degree, together with an isomorphism from its explicit lisseTowerFixedRealization to the pulled-back N. This subclaim omits the geometric Isom-stalk assertion.",
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tags 099Y, 099Z and 09B1, bounded-below classical comparison; Tag 09BV, local Isom torsors."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-lisse-tower-etale-descent-data",
+  "def-weil-pbc-derived-local-isomorphism-sheaf",
+  "def-weil-pbc-adic-coefficient-datum",
+  "def-weil-pbc-bounded-constructible-tower",
+  "lem-weil-pbc-constant-adic-quotient-scalar-comparison",
+  "def-weil-pbc-derived-normalization-arrows",
+  "def-constructible-finite-locally-constant",
+  "def-weil-derived-cohomology-sheaves"
+ ],
+ "proof": [
+  {
+   "text": "Apply finite coefficient scalar comparison and bounded-below classical etale descent to the local models. Exactness preserves the homology bounds and finite local constancy, and the transported local comparison gives the fixed-realization isomorphism.",
+   "uses": [
+    "lem-weil-pbc-comparison-pullback",
+    "thm-weil-pbc-site-comparison",
+    "det-pe-classical-derived-equivalence",
+    "lem-sf-proetale-locally-constant-origin",
+    "lem-weil-pbc-comparison-finite-local-constancy-reflection"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-comparison-pullback",
+  "thm-weil-pbc-site-comparison",
+  "det-pe-classical-derived-equivalence",
+  "lem-sf-proetale-locally-constant-origin",
+  "lem-weil-pbc-comparison-finite-local-constancy-reflection"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tags 099Y, 099Z and 09B1, bounded-below classical comparison; Tag 09BV, local Isom torsors."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "bounded finite locally constant derived pro-etale complex etale origin",
+   "results": "No exact fixed-realization descent theorem; existing searches return generic locally constant and derived-category APIs.",
+   "date": "2026-10-28",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory homology finite locally constant sheaf comparison",
+   "results": "No exact finite-level descent match.",
+   "date": "2026-10-28",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "lisseTowerFixedRealization derivedLocalIsomorphismSheaf",
+   "results": "Repository search found only the finite-level descent family and its tower consumers; no duplicate theorem.",
+   "date": "2026-10-28",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.LisseFiniteLevelEtaleDescent",
+  "date": "2026-10-28",
+  "group": "K3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-lisse-finite-level-etale-descent",
+   "place": "Strict subclaim split from the model and stalk clauses of the finite-level descent proof.",
+   "via": [
+    "lem-weil-pbc-lisse-finite-level-etale-descent"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.LisseFiniteLevelEtaleModel",
+  "file": "lean/Sheaf/Paper/LisseFiniteLevelEtaleModel.lean",
+  "declaration": "AlgebraicGeometry.Scheme.lisse_finite_level_etale_model",
+  "statement": "theorem lisse_finite_level_etale_model\n    (X Y : Scheme.{u}) (g : Y ⟶ X)\n    {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A)\n    (U : Y.ProEt) (n : ℕ)\n    (N : DerivedCategory (pbcModules X ((pbcAdicRings X d).obj (op n))))\n    (E : DerivedCategory (ModuleCat.{u + 1} (lisseTowerEtaleRing d n)))\n    (hbounded : ∃ a b : ℤ, ∀ q : ℤ, q < a ∨ b < q →\n      IsZero ((DerivedCategory.homologyFunctor _ q).obj E))\n    (hfinite : ∀ q : ℤ, Module.Finite (lisseTowerEtaleRing d n)\n      ((DerivedCategory.homologyFunctor\n        (ModuleCat.{u + 1} (lisseTowerEtaleRing d n)) q).obj E))\n    (hmodels : ∃ T : Sieve U, T ∈ ProEt.topology Y U ∧\n      ∀ (W : Y.ProEt) (w : W ⟶ U), T w →\n        Nonempty ((constantAdicQuotientRealization (W.hom ≫ g) d n).obj E ≅\n          (adicTowerPullback (W.hom ≫ g)\n            ((pbcAdicRings X d).obj (op n))).obj N)) :\n    ∃ D : DerivedCategory\n        (Sheaf U.left.smallEtaleTopology (ModuleCat.{u + 1} (lisseTowerEtaleRing d n))),\n      (∃ a b : ℤ, ∀ q : ℤ, q < a ∨ b < q →\n        IsZero ((DerivedCategory.homologyFunctor _ q).obj D)) ∧\n      (∀ q : ℤ, IsFiniteLocallyConstantSheaf\n        ((DerivedCategory.homologyFunctor _ q).obj D)) ∧\n      Nonempty ((lisseTowerFixedRealization (U.hom ≫ g) d n).obj\n        ((ProEtale.comparisonUpperStar\n          (ModuleCat.{u + 1} (lisseTowerEtaleRing d n)) U.left).mapDerivedCategory.obj D) ≅\n        (adicTowerPullback (U.hom ≫ g) ((pbcAdicRings X d).obj (op n))).obj N)",
+  "branch": "sheaf-dag",
+  "by": "K3",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K3",
+  "result": "pass",
+  "landing": "20261027T210123-L-1659679",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K3",
+  "result": "pass",
+  "landing": "20261027T210123-L-1659679",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
