@@ -6,6 +6,7 @@ Authors: SHEAF group F1
 module
 
 public import Sheaf.Paper.ConstantCompletionDerivedPull
+import Sheaf.Paper.ConstantCompletionOrdinaryReducedPullTransport
 
 /-!
 # Ordinary finite reduction of constant-to-completed scalar insertion
@@ -60,6 +61,14 @@ theorem ordinaryReducedPull_isIso
     (I : Ideal A) (n : ℕ) :
     IsIso (Functor.whiskerRight (ordinaryPullComparison F A I)
       (change (quotient J' A I n))) := by
-  sorry
+  let _adj := adj
+  obtain ⟨X, s, t, h⟩ := ordinaryReducedPull_transport F A I n
+  have hi : IsIso (Functor.whiskerRight (ordinaryPullComparison F A I)
+      (change (quotient J' A I n)) ≫ t.hom) := by
+    rw [h]
+    infer_instance
+  exact IsIso.of_isIso_comp_right
+    (Functor.whiskerRight (ordinaryPullComparison F A I)
+      (change (quotient J' A I n))) t.hom
 
 end CategoryTheory.ConstantCompletion

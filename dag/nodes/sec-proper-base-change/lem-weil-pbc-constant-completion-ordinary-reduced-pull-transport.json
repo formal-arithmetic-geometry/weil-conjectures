@@ -1,0 +1,116 @@
+{
+ "id": "lem-weil-pbc-constant-completion-ordinary-reduced-pull-transport",
+ "kind": "statement",
+ "title": "Finite transport of the ordinary constant-completion comparison",
+ "statement": "Let F be the supplied algebraic inverse-image data for an adjunction of finite-limit-preserving sheaf inverse images. For a commutative Noetherian ring A, ideal I and n, there exist a functor X from completed J-modules to finite J'-modules and natural isomorphisms from each finite-reduced side of ordinaryPullComparison F A I to X such that the reduced ordinary comparison followed by the target transport equals the source transport.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03EK, 03EL, 093M; the ordinary coefficient argument underlying sites-cohomology.tex Tag 06YY"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-algebraic-inverse-image",
+  "def-pur-constant-coefficient-inverse-image-data",
+  "def-weil-pbc-noetherian-ring",
+  "def-pur-strict-quotient-completion-data"
+ ],
+ "proof": [
+  {
+   "text": "Use the sectionwise adic quotient identifications and the normalized finite pullback comparison to identify the source finite reduction with the ordinary finite quotient module functor. Use the coefficient-map projection equation and the second-site quotient identification to make the analogous identification for the target. Naturality of ordinaryPullComparison and its defining insertion equation show that the reduced comparison carries the first transport to the second.",
+   "uses": [
+    "lem-weil-pbc-constant-module-section-properties",
+    "lem-weil-pbc-sectionwise-adic-algebra-limit",
+    "lem-weil-pbc-common-quotient-ordinary-insertion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03EK, 03EL, 093M; Tag 06YY"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-constant-module-section-properties",
+  "lem-weil-pbc-sectionwise-adic-algebra-limit",
+  "lem-weil-pbc-common-quotient-ordinary-insertion"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03EK, 03EL, 093M; Tag 06YY",
+  "note": "The transport/conjugacy part of the ordinary common-quotient insertion argument is isolated from the final categorical cancellation."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "ordinaryPullComparison finiteComparison pullbackTowerComparison",
+   "results": "The project modules provide the normalized ordinary finite pull and tower comparison declarations; no Mathlib declaration states this constant-completion transport.",
+   "date": "2026-10-28",
+   "verdict": "no exact Mathlib match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsIso ordinary scalar extension finite quotient inverse image",
+   "results": "No exact match.",
+   "date": "2026-10-28",
+   "verdict": "no exact Mathlib match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "finite reduction of constant completion pullback comparison",
+   "results": "No exact match.",
+   "date": "2026-10-28",
+   "verdict": "no exact Mathlib match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ConstantCompletionOrdinaryReducedPull",
+  "date": "2026-10-28",
+  "group": "B4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-constant-completion-ordinary-reduced-pull",
+   "place": "Proof step 1 and the transport portion of proof step 3",
+   "via": [
+    "lem-weil-pbc-constant-completion-ordinary-reduced-pull"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ConstantCompletionOrdinaryReducedPullTransport",
+  "file": "lean/Sheaf/Paper/ConstantCompletionOrdinaryReducedPullTransport.lean",
+  "declaration": "CategoryTheory.ConstantCompletion.ordinaryReducedPull_transport",
+  "statement": "theorem ordinaryReducedPull_transport (A : Type u) [CommRing A] [IsNoetherianRing A] (I : Ideal A) (n : ℕ) : ∃ (X : Mod (completed J A I) ⥤ Mod (finite J' A I n)) (s : (res (coefficientMap J A I) ⋙ pull F (constantMap F A) ⋙ change (quotient J' A I n)) ≅ X) (t : (pull F (completedMap F A I) ⋙ res (coefficientMap J' A I) ⋙ change (quotient J' A I n)) ≅ X), Functor.whiskerRight (ordinaryPullComparison F A I) (change (quotient J' A I n)) ≫ t.hom = s.hom",
+  "branch": "sheaf-dag",
+  "by": "B4",
+  "date": "2026-10-28"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B4",
+  "result": "pass",
+  "landing": "20261027T205802-L-1616318",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B4",
+  "result": "pass",
+  "landing": "20261027T205802-L-1616318",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
