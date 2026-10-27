@@ -103,4 +103,10 @@ lemma IsLocallyFree.exists_exactPairing_singleFunctor {X : Scheme.{u}}
           ((DerivedCategory.singleFunctor _ q).obj P)) :=
   sorry
 
+/-- The unit `Λ_X` of the module objects over `Λ_X` is locally free (indeed free of rank one). -/
+lemma isLocallyFree_tensorUnit (X : Scheme.{u}) :
+    IsLocallyFree (condensedRingObj Λ X)
+      (𝟙_ (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X))) :=
+  sorry
+
 end AlgebraicGeometry.ProEtale

@@ -18,7 +18,8 @@ Let `Λ` be a commutative condensed ring satisfying `ProEtale.CondensedRing.Tens
 (locally finitely presented module objects are locally free and the bounded constructible
 complexes form a triangulated subcategory, on schemes with noetherian underlying space): for
 instance the field coefficients `E̲` and `ℚ̲̄_ℓ`. Let `T` be a scheme with noetherian underlying
-space such that the derived pushforwards `Rj_*` along the open immersions `j` into closed subschemes of
+space such that the derived pushforwards `Rj_*` along the open immersions `j` into closed
+subschemes of
 `T` preserve bounded constructible complexes (Deligne's finiteness theorem, for `T` of finite type
 over a field in which `ℓ` is invertible). Then the bounded constructible complexes on `T` are
 stable under the derived internal hom `RHom(K, L)`
@@ -242,5 +243,41 @@ theorem boundedConstructible_ihom (hΛ : TensorHypotheses Λ) {T : Scheme.{u}}
         (ih Z' hZ' _ (V.closedComplement ≫ c) hrange _ _
           (boundedConstructible_leftDerivedUpperStar_obj_of_scheme Λ _ K hK)
           (boundedConstructible_leftDerivedUpperStar_obj_of_scheme Λ _ C hC)))
+
+/-- **The bounded constructible complexes are stable under the derived internal hom**, on a
+separated scheme `X` of finite type over a field `k`, for a coefficient ring `Λ` satisfying
+`ProEtale.CondensedRing.TensorHypotheses` and such that the derived pushforwards along open
+immersions of separated `k`-schemes of finite type preserve bounded constructible complexes
+(Deligne's finiteness theorem). -/
+theorem boundedConstructible_ihom_of_over (hΛ : TensorHypotheses Λ) {k : Type u} [Field k]
+    (X : Over (Spec (.of k))) [LocallyOfFiniteType X.hom] [QuasiCompact X.hom]
+    [IsSeparated X.hom]
+    (hRf : ∀ (U Y : Over (Spec (.of k))) [LocallyOfFiniteType U.hom] [QuasiCompact U.hom]
+      [IsSeparated U.hom] [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] [IsSeparated Y.hom]
+      (j : U ⟶ Y) [IsOpenImmersion j.left]
+      (A : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology U.left) Ab.{u + 1})
+        (condensedRingObj Λ U.left))), boundedConstructible (condensedRingObj Λ U.left) A →
+        boundedConstructible (condensedRingObj Λ Y.left) ((R((j.left)_*⟦Λ⟧)).obj A))
+    {K L : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X.left) Ab.{u + 1})
+      (condensedRingObj Λ X.left))}
+    (hK : boundedConstructible (condensedRingObj Λ X.left) K)
+    (hL : boundedConstructible (condensedRingObj Λ X.left) L) :
+    boundedConstructible (condensedRingObj Λ X.left) ((ihom K).obj L) := by
+  have : IsLocallyNoetherian X.left := LocallyOfFiniteType.isLocallyNoetherian X.hom
+  have : CompactSpace X.left := QuasiCompact.compactSpace_of_compactSpace X.hom
+  have : IsNoetherian X.left := {}
+  refine boundedConstructible_ihom hΛ (fun D c _ V A hA ↦ ?_) hK hL
+  have : TopologicalSpace.NoetherianSpace D := c.isClosedEmbedding.isInducing.noetherianSpace
+  have : TopologicalSpace.NoetherianSpace V := V.ι.isOpenEmbedding.isInducing.noetherianSpace
+  have : QuasiCompact V.ι := ⟨fun _ _ _ ↦ TopologicalSpace.NoetherianSpace.isCompact _⟩
+  have : LocallyOfFiniteType (Over.mk (V.ι ≫ c ≫ X.hom)).hom := by dsimp; infer_instance
+  have : QuasiCompact (Over.mk (V.ι ≫ c ≫ X.hom)).hom := by dsimp; infer_instance
+  have : IsSeparated (Over.mk (V.ι ≫ c ≫ X.hom)).hom := by dsimp; infer_instance
+  have : LocallyOfFiniteType (Over.mk (c ≫ X.hom)).hom := by dsimp; infer_instance
+  have : QuasiCompact (Over.mk (c ≫ X.hom)).hom := by dsimp; infer_instance
+  have : IsSeparated (Over.mk (c ≫ X.hom)).hom := by dsimp; infer_instance
+  let f : Over.mk (V.ι ≫ c ≫ X.hom) ⟶ Over.mk (c ≫ X.hom) := Over.homMk V.ι rfl
+  have : IsOpenImmersion f.left := inferInstanceAs (IsOpenImmersion V.ι)
+  exact hRf _ _ f A hA
 
 end AlgebraicGeometry.ProEtale.CondensedRing

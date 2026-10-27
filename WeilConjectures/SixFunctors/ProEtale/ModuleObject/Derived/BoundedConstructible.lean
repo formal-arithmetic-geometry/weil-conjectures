@@ -11,7 +11,9 @@ public import WeilConjectures.Compactification.NagataCompactification
 public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Subcategory
 public import WeilConjectures.Compactification.Over
 public import WeilConjectures.ConstructibleSheaf.ProEtaleModule.DerivedCategory
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructibleIhom
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructibleUpperStar
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.FieldCoefficientTensorHypotheses
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Hom
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.LowerShriek
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Monoidal
@@ -774,7 +776,12 @@ is false for a general condensed ring: for `Λ = ℤ/4` on a geometric point of 
 `Tor_i^{ℤ/4}(ℤ/2, ℤ/2) = ℤ/2` for all `i ≥ 0`. -/
 instance isMonoidal_boundedConstructible [Fact (ringChar k ≠ ℓ)] :
     (boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ) X.left)).IsMonoidal :=
-  sorry
+  have : IsLocallyNoetherian X.left := LocallyOfFiniteType.isLocallyNoetherian X.hom
+  have : CompactSpace X.left := QuasiCompact.compactSpace_of_compactSpace X.hom
+  have : IsNoetherian X.left := {}
+  { prop_unit := boundedConstructible_tensorUnit _ X.left
+    prop_tensor _ _ hK hL :=
+      boundedConstructible_tensorObj (tensorHypotheses_padicAlgClRingObj ℓ) hK hL }
 
 -- An instance proved by `sorry` keeps only the section variables its statement mentions, so its
 -- hypotheses are restated as binders; they repeat section variables.
@@ -787,7 +794,9 @@ geometric point of characteristic `3`, `Ext^i_{ℤ/4}(ℤ/2, ℤ/2) = ℤ/2` for
 instance isMonoidalClosed_boundedConstructible [Fact (ringChar k ≠ ℓ)] :
     (boundedConstructible
       (condensedRingObj (Profinite.padicAlgClRingObj ℓ) X.left)).IsMonoidalClosed :=
-  sorry
+  ⟨fun _ _ hK hL ↦ boundedConstructible_ihom_of_over (tensorHypotheses_padicAlgClRingObj ℓ) X
+    (fun _ _ _ _ _ _ _ _ j _ A hA ↦ boundedConstructible_rightDerivedLowerStar_obj ℓ j ⟨A, hA⟩)
+    hK hL⟩
 
 /-- The derived tensor product `- ⊗ᴸ - : Dᵇc(X)⟦ℚ̲̄_ℓ⟧ ⥤ Dᵇc(X)⟦ℚ̲̄_ℓ⟧ ⥤ Dᵇc(X)⟦ℚ̲̄_ℓ⟧` on bounded
 constructible complexes: the tensor product of the monoidal structure on the
@@ -871,7 +880,12 @@ instance isMonoidal_boundedConstructible
     [Fact (ringChar k ≠ ℓ)] :
     (boundedConstructible
       (condensedRingObj (Profinite.continuousMapRingObj E) X.left)).IsMonoidal :=
-  sorry
+  have : IsLocallyNoetherian X.left := LocallyOfFiniteType.isLocallyNoetherian X.hom
+  have : CompactSpace X.left := QuasiCompact.compactSpace_of_compactSpace X.hom
+  have : IsNoetherian X.left := {}
+  { prop_unit := boundedConstructible_tensorUnit _ X.left
+    prop_tensor _ _ hK hL :=
+      boundedConstructible_tensorObj (tensorHypotheses_continuousMapRingObj ℓ E) hK hL }
 
 -- An instance proved by `sorry` keeps only the section variables its statement mentions, so its
 -- hypotheses are restated as binders; they repeat section variables.
@@ -884,7 +898,9 @@ instance isMonoidalClosed_boundedConstructible
     [Fact (ringChar k ≠ ℓ)] :
     (boundedConstructible
       (condensedRingObj (Profinite.continuousMapRingObj E) X.left)).IsMonoidalClosed :=
-  sorry
+  ⟨fun _ _ hK hL ↦ boundedConstructible_ihom_of_over (tensorHypotheses_continuousMapRingObj ℓ E) X
+    (fun _ _ _ _ _ _ _ _ j _ A hA ↦ boundedConstructible_rightDerivedLowerStar_obj ℓ E j ⟨A, hA⟩)
+    hK hL⟩
 
 /-- The derived tensor product `- ⊗ᴸ - : Dᵇc(X)⟦E̲⟧ ⥤ Dᵇc(X)⟦E̲⟧ ⥤ Dᵇc(X)⟦E̲⟧` on bounded
 constructible complexes: the tensor product of the monoidal structure on the full

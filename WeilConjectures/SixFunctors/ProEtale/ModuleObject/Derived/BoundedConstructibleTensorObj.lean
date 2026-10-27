@@ -197,4 +197,15 @@ theorem boundedConstructible_tensorObj (hΛ : TensorHypotheses Λ) {T : Scheme.{
         (boundedConstructible_leftDerivedUpperStar_obj_of_scheme Λ _ K hK)
         (boundedConstructible_leftDerivedUpperStar_obj_of_scheme Λ _ L hL))
 
+variable (Λ) in
+/-- The unit `Λ_X` of the derived tensor product is bounded constructible: it is the free module
+object of rank one, placed in degree `0`. -/
+lemma boundedConstructible_tensorUnit (X : Scheme.{u}) :
+    boundedConstructible (condensedRingObj Λ X)
+      (𝟙_ (DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
+        (condensedRingObj Λ X)))) :=
+  (boundedConstructible _).prop_of_iso (DerivedCategory.singleFunctorObjUnitIso _)
+    (boundedConstructible_singleFunctor_zero_obj Λ _
+      (isLocallyFree_tensorUnit Λ X).isConstructibleModuleObject)
+
 end AlgebraicGeometry.ProEtale.CondensedRing
