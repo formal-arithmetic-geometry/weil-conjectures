@@ -5,6 +5,8 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import Sheaf.SixFunctors.EtaleHomComparisonModels
+import Sheaf.SixFunctors.EtaleHomTransposeExactShiftData
+import Sheaf.SixFunctors.EtaleHomTransposeExactCommShift
 
 /-! # Exactness of the evaluation-defined étale scalar Hom comparison
 
@@ -50,7 +52,11 @@ theorem etaleHomComparison_reversedExact
     {A B : Type (u + 1)} [CommRing A] [CommRing B]
     (X : Scheme.{u}) (φ : A →+* B) (M : DerivedCategoryModule A X)
     (v : EtaleHomLeft X φ M ⟶ EtaleHomRight X φ M)
-    (hv : IsEtaleHomTranspose X φ M v) : IsEtaleHomReversedExact X φ M v := by
-  sorry
+    (hv : IsEtaleHomTranspose X φ M v) : IsEtaleHomReversedExact X φ M v  := by
+  let _ := etaleHomScalarCommShift X φ
+  obtain ⟨sA, sB, chiPhi, chiPsi, hA, hB, hPhi, hPsi, hTriA, hTriB⟩ :=
+    etaleHomComparison_reversedExact_shiftData X φ M
+  have hComm := etaleHomComparison_reversedExact_commShift X φ M v hv sA sB chiPhi chiPsi hA hB
+  exact ⟨sA, sB, chiPhi, chiPsi, hA, hB, hPhi, hPsi, hTriA, hTriB, hComm⟩
 
 end AlgebraicGeometry.Etale

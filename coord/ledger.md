@@ -20385,3 +20385,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 23:42 L: merged deliver/R1/Sheaf.SixFunctors.CoefQbarVerdierHomComparisonScalarPasting (stage 3; reviewer PASS; first push; landing 20261027T234200-L-24263 (proof); batch 20261027T233735; modules 1; new nodes 0)
 - 23:42 L: merged deliver/R2/Sheaf.AlgebraicGeometry.ProjScalarExtensionTwistUnit (stage 3; reviewer PASS; first push; landing 20261027T234201-L-24762 (interface); batch 20261027T233735; modules 1; new nodes 0)
 - 23:42 L: merged deliver/NC/lem-pur-scalar-reduction-transpose-normalization (reviewer FIX; first push; new nodes: 0)
+- 23:42 L: merged deliver/R2/Sheaf.SixFunctors.EtaleHomTransposeExact (stage 3; reviewer PASS; first push; landing 20261027T234237-L-67616 (interface); batch 20261027T233735; modules 3; new nodes 2)

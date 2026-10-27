@@ -12,50 +12,28 @@
  ],
  "proof": [
   {
-   "text": "Use a K-injective model I of M and flat-term K-flat representatives P of K. For the Hom differential d(f)=d_I f-(-1)^j f d_P, source reindexing by -n with factor (-1)^(n*j+n*(n+1)/2) in degree j is a chain isomorphism. Its evaluation transpose is the specified signed tensor-shift cancellation. The identity epsilon(a+b)=(-1)^(a*b)epsilon(a)epsilon(b) cancels tensor-shift interchange, giving coherent CommShift structures for both coefficient Hom functors.",
+   "text": "Use the split shift-data theorem to obtain the two normalized Hom shifts, the induced component shifts, their evaluation normalizations, the two component equations, and triangulated structures.",
    "uses": [
-    "lem-pc-kflat-resolution",
-    "prop-pur-kinjective-resolutions-exist",
-    "def-pur-hom-complex",
-    "def-pur-derived-internal-hom",
-    "lem-sc-derived-hom-tensor-total"
+    "lem-coef-etale-hom-transpose-exact-shift-data"
    ],
    "elementary": false
   },
   {
-   "text": "Hom of a cone is the reversed cone, with the negative connecting projection; therefore the same normalized shifts are triangulated. The published internal Hom is identified with this Hom model by the normalized tensor-Hom adjunction. Derived scalar extension is triangulated with the adjoint-mate scalar shift. Compose these structures; their components are the two formulas for chiPhi and chiPsi in IsEtaleHomReversedExact.",
+   "text": "Apply the split transpose-shift theorem to hv and the normalized data to obtain NatTrans.CommShift v; package all fields into IsEtaleHomReversedExact.",
    "uses": [
-    "lem-weil-pbc-ringed-internal-hom-exact-restriction",
-    "lem-sbc-derived-scalar-extension-counit-shift",
-    "lem-pur-rhom-global-sections"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Transpose the shift square for v using its given evaluation equation. Both transposes are evaluation after ordinary scalar balancing; the normalized binary comparison identifies them on flat-term K-flat models, with coefficients in degree zero and no new sign. Naturality and localization extend equality to every derived object. Injectivity of the tensor-Hom bijection proves the shift square, including the reversed connecting arrow.",
-   "uses": [
-    "lem-coef-etale-tensor-model-comparison",
-    "lem-weil-pbc-site-derived-tensor-descent"
+    "lem-coef-etale-hom-transpose-exact-comm-shift"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "def-pur-derived-internal-hom",
-  "def-pur-hom-complex",
-  "lem-coef-etale-tensor-model-comparison",
-  "lem-pc-kflat-resolution",
-  "lem-pur-rhom-global-sections",
-  "lem-sbc-derived-scalar-extension-counit-shift",
-  "lem-sc-derived-hom-tensor-total",
-  "lem-weil-pbc-ringed-internal-hom-exact-restriction",
-  "lem-weil-pbc-site-derived-tensor-descent",
-  "prop-pur-kinjective-resolutions-exist"
+  "lem-coef-etale-hom-transpose-exact-shift-data",
+  "lem-coef-etale-hom-transpose-exact-comm-shift"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Tags 08JA, 08J9 and 08JC: Hom model, evaluation and contravariant exactness"
+  "place": "Tags 08JA, 08J9 and 08JC: evaluation transpose and contravariant exactness"
  },
  "mathlib_searches": [
   {
@@ -128,14 +106,14 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-20",
+  "date": "2026-10-27",
   "by": "L",
-  "reviewer": "C-b84be",
-  "group": "K2",
-  "result": "fix",
-  "landing": "20261020T230801-L-612184",
+  "reviewer": "COMPILER",
+  "group": "R2",
+  "result": "pass",
+  "landing": "20261027T234237-L-67616",
   "kind": "interface",
-  "note": "independent cc review: Delivered modules and 2 direct importers compiled clean; 14 moved decls + item theorem type hashes published vs delivered all equal; old/new EtaleHomTensorModelNormalization proved Iff.rfl; etaleHomTensorShiftCancellation raw Expr equal modulo hygienic/aux-proof names; axioms clean except sorryAx via the one new sorry etaleHomComparison_reversedExact (= item's exactness conjunct, v pinned by transpose)"
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  },
  "lean_audit": {
   "master": {
