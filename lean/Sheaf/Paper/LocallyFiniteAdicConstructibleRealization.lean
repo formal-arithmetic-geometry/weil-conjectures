@@ -5,8 +5,8 @@ Authors: SHEAF group Q49
 -/
 module
 
-public import WeilConjectures.WeilSheaf.LowerShriek
 public import WeilConjectures.SixFunctors.ProEtale.Adic.AdicSheafForgetAb
+public import WeilConjectures.SixFunctors.ProEtale.Adic.OpenImmersion
 public import WeilConjectures.CategoryTheory.ModuleObjects.MapMod
 public import Sheaf.CategoryTheory.InternalAbelianSheafModuleEquivalence
 public import Sheaf.Paper.GeneralAlgebraicallyClosedCoefficients
@@ -20,8 +20,6 @@ public import WeilConjectures.SixFunctors.ProEtale.Adic.Truncation
 import Sheaf.Paper.SfIntegralConstructible
 import Sheaf.Paper.RationalCoefficientCategoryComparison
 import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.FiniteType
-import Sheaf.Paper.ContinuousRationalDerivedRealization
-import Sheaf.Paper.RationalRealizationScalarCoherence
 import Sheaf.CategoryTheory.Triangulated.BoundedPostnikovTower
 import Sheaf.AlgebraicGeometry.ConstructibleModuleObjectsEssentiallySmall
 import Sheaf.SixFunctors.RingedDerivedMonoidalComparisons
