@@ -18,7 +18,8 @@ composition isomorphism `R(j ≫ ι)_! ≅ Rj_! ⋙ Rι_!` of the lower shriek o
 `ℚ̄_ℓ`-complexes is, through the identifications `Rf_! ≅ f_!` of the lower shriek of an open
 immersion with the extension by zero, the composition isomorphism `(j ≫ ι)_! ≅ j_! ⋙ ι_!` of the
 extensions by zero
-(`ProEtale.CondensedRing.boundedConstructibleLowerShriekComp_padicAlgCl_hom_app_of_isOpenImmersion`).
+(`ProEtale.CondensedRing.boundedConstructibleLowerShriekComp_padicAlgCl_hom_app_of_isOpenImmersion`
+).
 
 The composition isomorphism of the lower shriek is computed by any triangle of compactifications
 (`ProEtale.CondensedRing.boundedConstructibleLowerShriekComp_padicAlgCl_hom_eq_triangle`); for the
@@ -131,7 +132,8 @@ lemma lowerShriekComp_hom_app_of_compIso_aux {A B C : Type*} [Category A] [Categ
           (Lg.map (CategoryStruct.comp (Z := jf.obj K) (If.inv.app K) (ρX.hom.app (jf.obj K))))
           (CategoryStruct.comp (Z := jg.obj (jf.obj K)) (Ig.inv.app (jf.obj K))
             (ρZ.hom.app (jg.obj (jf.obj K)))) =
-      a.hom.app K ≫ CategoryStruct.comp (Y := jfg.obj K) (ρZ.hom.app (jfg.obj K)) (oc.hom.app K) := by
+      a.hom.app K ≫
+        CategoryStruct.comp (Y := jfg.obj K) (ρZ.hom.app (jfg.obj K)) (oc.hom.app K) := by
   have nI := Ig.inv.naturality (ρX.hom.app (jf.obj K))
   have nρ := ρZ.hom.naturality (oc.inv.app K)
   simp only [Functor.comp_map, Functor.id_map, Functor.comp_obj, Functor.id_obj] at nI nρ
@@ -151,7 +153,8 @@ lemma boundedConstructibleLowerShriekIsoOpenImmersionLowerShriek_padicAlgCl_hom_
       CategoryStruct.comp
         (Y := (boundedConstructibleOpenImmersionLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ j ⋙
           boundedConstructibleLowerStar ℓ (𝟙 X)).obj K)
-        (Z := (boundedConstructibleOpenImmersionLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ j).obj K)
+        (Z := (boundedConstructibleOpenImmersionLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ
+          j).obj K)
         (NatTrans.app (Iso.inv
           (X := boundedConstructibleOpenImmersionLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ j ⋙
             boundedConstructibleLowerStar ℓ (𝟙 X)) (Y := boundedConstructibleLowerShriek ℓ j)
@@ -171,7 +174,8 @@ lemma boundedConstructibleLowerShriekIsoOpenImmersionLowerShriek_padicAlgCl_hom_
       CategoryStruct.comp
         (Y := (boundedConstructibleOpenImmersionLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ j ⋙
           boundedConstructibleLowerStar ℓ (𝟙 X)).obj K)
-        (Z := (boundedConstructibleOpenImmersionLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ j).obj K)
+        (Z := (boundedConstructibleOpenImmersionLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ
+          j).obj K)
         (NatTrans.app (Iso.hom (X := boundedConstructibleLowerShriek ℓ j)
           (Y := boundedConstructibleOpenImmersionLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ j ⋙
             boundedConstructibleLowerStar ℓ (𝟙 X))

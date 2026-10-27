@@ -253,6 +253,66 @@ lemma compactSupportExchangeAux_lift_comp_app_of_eq {PC : ObjectProperty DC}
   exact compactSupportExchangeAux_lift_comp_app hSpC hSpX hT hON hON' hOM hOM' hR hR' i₁N i₂N
     i₁M i₂M νhN νhM χ hχ νj lsc lsc' H M
 
+/-- `compactSupportExchangeAux_lift_comp_app` for restricted functors `Sp`, `SpX`, `Ts` equal to
+the lifts (e.g. definitions unfolding to them) and transformations `νN`, `νM` (heterogeneously)
+equal to the shapes `compactSupportExchangeAux …`. -/
+lemma compactSupportExchangeAux_lift_comp_app_of_heq {PC : ObjectProperty DC}
+    {PC' : ObjectProperty DC'} {PX : ObjectProperty DX} {PX' : ObjectProperty DX'}
+    {PP : ObjectProperty DP} {PP' : ObjectProperty DP'} {Ps : ObjectProperty Ds}
+    {Ps' : ObjectProperty Ds'} {ΨC : DC ⥤ DC'} {ΨX : DX ⥤ DX'} {ΨP : DP ⥤ DP'}
+    {Ψs : Ds ⥤ Ds'} (hSpC : ∀ X, PC' ((PC.ι ⋙ ΨC).obj X)) (hSpX : ∀ X, PX' ((PX.ι ⋙ ΨX).obj X))
+    (hT : ∀ X, Ps' ((Ps.ι ⋙ Ψs).obj X)) {DhN : DC ⥤ DP} {DhN' : DC' ⥤ DP'}
+    {DhM : DX ⥤ DP} {DhM' : DX' ⥤ DP'} {Rp : DP ⥤ Ds} {Rp' : DP' ⥤ Ds'}
+    (hON : ∀ X, PP ((PC.ι ⋙ DhN).obj X)) (hON' : ∀ X, PP' ((PC'.ι ⋙ DhN').obj X))
+    (hOM : ∀ X, PP ((PX.ι ⋙ DhM).obj X)) (hOM' : ∀ X, PP' ((PX'.ι ⋙ DhM').obj X))
+    (hR : ∀ X, Ps ((PP.ι ⋙ Rp).obj X)) (hR' : ∀ X, Ps' ((PP'.ι ⋙ Rp').obj X))
+    {LSfN : PC.FullSubcategory ⥤ Ps.FullSubcategory}
+    {LSfN' : PC'.FullSubcategory ⥤ Ps'.FullSubcategory}
+    {LSfM : PX.FullSubcategory ⥤ Ps.FullSubcategory}
+    {LSfM' : PX'.FullSubcategory ⥤ Ps'.FullSubcategory}
+    (i₁N : LSfN' ≅ PP'.lift (PC'.ι ⋙ DhN') hON' ⋙ Ps'.lift (PP'.ι ⋙ Rp') hR')
+    (i₂N : LSfN ≅ PP.lift (PC.ι ⋙ DhN) hON ⋙ Ps.lift (PP.ι ⋙ Rp) hR)
+    (i₁M : LSfM' ≅ PP'.lift (PX'.ι ⋙ DhM') hOM' ⋙ Ps'.lift (PP'.ι ⋙ Rp') hR')
+    (i₂M : LSfM ≅ PP.lift (PX.ι ⋙ DhM) hOM ⋙ Ps.lift (PP.ι ⋙ Rp) hR)
+    (νhN : ΨC ⋙ DhN' ⟶ DhN ⋙ ΨP) (νhM : ΨX ⋙ DhM' ⟶ DhM ⋙ ΨP)
+    (χ : Rp ⋙ Ψs ⟶ ΨP ⋙ Rp') (hχ : IsIsoOn PP.ι χ)
+    {Dj : PC.FullSubcategory ⥤ PX.FullSubcategory}
+    {Dj' : PC'.FullSubcategory ⥤ PX'.FullSubcategory}
+    (lsc : LSfN ≅ Dj ⋙ LSfM) (lsc' : LSfN' ≅ Dj' ⋙ LSfM')
+    {Sp : PC.FullSubcategory ⥤ PC'.FullSubcategory}
+    {SpX : PX.FullSubcategory ⥤ PX'.FullSubcategory}
+    {Ts : Ps.FullSubcategory ⥤ Ps'.FullSubcategory}
+    (eSp : PC'.lift (PC.ι ⋙ ΨC) hSpC = Sp) (eSpX : PX'.lift (PX.ι ⋙ ΨX) hSpX = SpX)
+    (eTs : Ps'.lift (Ps.ι ⋙ Ψs) hT = Ts) (νj : Sp ⋙ Dj' ⟶ Dj ⋙ SpX)
+    (νN : Sp ⋙ LSfN' ⟶ LSfN ⋙ Ts)
+    (hνN : HEq νN (compactSupportExchangeAux Ps'.fullyFaithfulι i₁N i₂N
+        (PC'.liftCompιIso _ hSpC) (PP'.liftCompιIso _ hON') (Ps'.liftCompιIso _ hR')
+        (PP.liftCompιIso _ hON) (Ps.liftCompιIso _ hR) (Ps'.liftCompιIso _ hT) νhN
+        (invOnSubcategory PP.ι χ hχ)))
+    (νM : SpX ⋙ LSfM' ⟶ LSfM ⋙ Ts)
+    (hνM : HEq νM (compactSupportExchangeAux Ps'.fullyFaithfulι i₁M i₂M
+        (PX'.liftCompιIso _ hSpX) (PP'.liftCompιIso _ hOM') (Ps'.liftCompιIso _ hR')
+        (PP.liftCompιIso _ hOM) (Ps.liftCompιIso _ hR) (Ps'.liftCompιIso _ hT) νhM
+        (invOnSubcategory PP.ι χ hχ)))
+    (H : ∀ M : PC.FullSubcategory, ∃ (e : DhN.obj M.obj ⟶ DhM.obj (Dj.obj M).obj)
+      (e' : DhN'.obj (Sp.obj M).obj ⟶ DhM'.obj (Dj'.obj (Sp.obj M)).obj),
+      νhN.app M.obj ≫ ΨP.map e = DhN'.map (eqToHom (congrArg (fun F ↦ (F.obj M).obj) eSp)) ≫
+        e' ≫ DhM'.map (νj.app M).hom ≫
+          DhM'.map (eqToHom (congrArg (fun F ↦ (F.obj (Dj.obj M)).obj) eSpX.symm)) ≫
+          νhM.app (Dj.obj M).obj ∧
+      (i₁N.hom.app (Sp.obj M)).hom ≫ Rp'.map e' =
+        (lsc'.hom.app (Sp.obj M)).hom ≫ (i₁M.hom.app (Dj'.obj (Sp.obj M))).hom ∧
+      (i₂N.inv.app M ≫ lsc.hom.app M).hom = Rp.map e ≫ (i₂M.inv.app (Dj.obj M)).hom)
+    (M : PC.FullSubcategory) :
+    νN.app M ≫ Ts.map (lsc.hom.app M) =
+      lsc'.hom.app (Sp.obj M) ≫ LSfM'.map (νj.app M) ≫ νM.app (Dj.obj M) := by
+  subst eSp eSpX eTs
+  rw [eq_of_heq hνN, eq_of_heq hνM]
+  refine compactSupportExchangeAux_lift_comp_app hSpC hSpX hT hON hON' hOM hOM' hR hR' i₁N i₂N
+    i₁M i₂M νhN νhM χ hχ νj lsc lsc' (fun M ↦ ?_) M
+  obtain ⟨e, e', h1, h2, h3⟩ := H M
+  exact ⟨e, e', by simpa using h1, h2, h3⟩
+
 end Shape
 
 end AlgebraicGeometry.ProEtale.CondensedRing

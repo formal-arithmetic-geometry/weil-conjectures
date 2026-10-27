@@ -21,11 +21,13 @@ exchange `ν_j : Rj'_! Ψ_N ⟶ Ψ_M Rj_!` adjoint to `α_j⁻¹`
 (`ProEtale.CondensedRing.NearbyCyclesModel.Hom.boundedConstructibleLowerShriekExchange`) and shows:
 
 * its exceptional adjoint is `β_j = α_j⁻¹` through `Rj^! ≅ j^*`
-  (`ProEtale.CondensedRing.NearbyCyclesModel.Hom.exceptionalExchange_boundedConstructibleLowerShriekExchange_app`);
+  (`NearbyCyclesModel.Hom.exceptionalExchange_boundedConstructibleLowerShriekExchange_app`
+  );
 * a compactification `M ⊆ P` of a trait model over the base restricts to a compactification
   `N ⊆ P` (`NearbyCyclesModel.IsTraitModelOfBase.Compactification.ofOpen`), along which the
   compact-support exchange of `N` is the composite of `ν_j` and of the compact-support exchange
-  of `M` (`NearbyCyclesModel.IsTraitModelOfBase.Compactification.compactSupportExchange_ofOpen_app`).
+  of `M`
+  (`NearbyCyclesModel.IsTraitModelOfBase.Compactification.compactSupportExchange_ofOpen_app`).
 
 -/
 
@@ -90,6 +92,7 @@ noncomputable def NearbyCyclesModel.Hom.boundedConstructibleOpenExchange
     (boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunction _ ℓ j')
     (φ.boundedConstructiblePullbackExchange ℓ hN hM)
 
+omit [IsOpenImmersion j.left] [IsOpenImmersion j'.left] in
 /-- The components of the inverse of the restricted pullback exchange are those of the inverse of
 the ambient one. -/
 lemma NearbyCyclesModel.Hom.inv_boundedConstructiblePullbackExchange_app_hom
@@ -199,9 +202,12 @@ lemma boundedConstructibleUpperShriekIsoUpperStar_eq_padicAlgCl (j : U ⟶ X)
   have e : boundedConstructibleLowerShriekIsoOpenImmersionLowerShriek ℓ j =
       boundedConstructibleLowerShriekIsoOpenImmersionLowerShriek_padicAlgCl ℓ j := by
     ext K
-    simp [boundedConstructibleLowerShriekIsoOpenImmersionLowerShriek,
+    simp only [boundedConstructibleLowerShriekIsoOpenImmersionLowerShriek,
       boundedConstructibleLowerShriekIsoOpenImmersionLowerShriek_padicAlgCl,
-      boundedConstructibleLowerShriekOfCompactificationIso_padicAlgCl_eq']
+      boundedConstructibleLowerShriekOfCompactificationIso_padicAlgCl_eq', Iso.trans_hom,
+      NatTrans.comp_app, Iso.refl_hom, NatTrans.id_app, Functor.isoWhiskerLeft_hom,
+      Functor.whiskerLeft_app, Functor.rightUnitor_hom_app,
+      ObjectProperty.FullSubcategory.comp_hom]
     erw [Category.id_comp]
   rw [boundedConstructibleUpperShriekIsoUpperStar, e]
   rfl
@@ -239,7 +245,8 @@ lemma boundedConstructibleOpenImmersionLowerShriekComp_hom_app_hom (j : Y ⟶ X)
     boundedConstructibleOpenImmersionLowerShriek_map_hom, Adjunction.comp_unit_app,
     openImmersionLowerShriekUpperStarAdjunction_unit_app_hom, boundedConstructibleUpperStar_map_hom,
     upperStarComp_inv_app_hom,
-    boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunction_counit_app_hom, Functor.map_comp]
+    boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunction_counit_app_hom,
+    Functor.map_comp]
   rfl
 
 /-- **The associativity of the composition isomorphisms of the lower shriek**, for morphisms equal
@@ -385,6 +392,8 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).
   [IsSeparated X'.hom] {M : NearbyCyclesModel X.left X'.left} {qM : M.total ⟶ trait k'}
   {gM : M.generic ⟶ Spec (.of (traitGenericField k'))} {hM : M.IsTraitModelOfBase k qM gM}
 
+omit [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom]
+  [LocallyOfFiniteType X'.hom] [QuasiCompact X'.hom] [IsSeparated X'.hom] in
 /-- The compact-support exchange of the compactification `N ⊆ P` restricted from `M ⊆ P`. -/
 lemma Compactification.compactSupportExchange_ofOpen (C : hM.Compactification)
     (hN : N.IsTraitModelOfBase k q g) (j : Y ⟶ X) [IsOpenImmersion j.left] (j' : Y' ⟶ X')
@@ -408,13 +417,23 @@ the restricted compactification `N ⊆ P` is the composite of the exchange `ν_j
 `Ra_N! ≅ Rj_! ⋙ Ra_M!` and `Ra'_N! ≅ Rj'_! ⋙ Ra'_M!`.
 
 Mathematically: `ν_{jι} = ι'_!(ν_j) ∘ ν_ι(j_!)` through the conjugates `(j ≫ ι)_! ≅ j_! ⋙ ι_!` of
-the composition isomorphisms of the pullbacks (`ProEtale.CondensedRing.lowerShriekExchangeOfInv_comp_app`
+the composition isomorphisms of the pullbacks
+(`ProEtale.CondensedRing.lowerShriekExchangeOfInv_comp_app`
 with `NearbyCyclesModel.Hom.pullbackExchange_comp_app_of_eq`); these conjugates are the composition
 isomorphisms of the lower shrieks under `Rf_! ≅ f_!`
 (`ProEtale.CondensedRing.boundedConstructibleLowerShriekComp_padicAlgCl_hom_app_of_isOpenImmersion`,
-`ProEtale.CondensedRing.compactificationLowerShriekIso_hom_app_comp_map_openImmersionLowerShriekComp`);
+`compactificationLowerShriekIso_hom_app_comp_map_openImmersionLowerShriekComp`
+);
 the shapes `χ_P⁻¹ ∘ Rp'_*(ν)` then compose
-(`ProEtale.CondensedRing.compactSupportExchangeAux_lift_comp_app_of_eq`). -/
+(`ProEtale.CondensedRing.compactSupportExchangeAux_lift_comp_app_of_heq`).
+
+TODO: the proof is not yet formalized. All the ingredients above are proved; what remains is
+the instantiation of `compactSupportExchangeAux_lift_comp_app_of_heq` at the restricted functors
+(the bare instantiation, with `HEq.rfl` for the shapes, elaborates in a few seconds) and the
+three identities `H` at each object. Matching its conclusion with this statement leaves
+differences `(boundedConstructible R).FullSubcategory` versus `Dᵇc(-)⟦ℚ̄_ℓ⟧` whose instance
+arguments are elaborated differently, and the kernel runs out of time or memory on them, also
+after `cast_proofs`. -/
 theorem Compactification.compactSupportExchange_ofOpen_app (C : hM.Compactification)
     (hN : N.IsTraitModelOfBase k q g) (j : Y ⟶ X) [IsOpenImmersion j.left] (j' : Y' ⟶ X')
     [IsOpenImmersion j'.left] (φ : N.Hom M j.left j'.left) [IsOpenImmersion φ.total]
