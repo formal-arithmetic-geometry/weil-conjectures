@@ -1,0 +1,108 @@
+{
+ "id": "lem-pur-ordinary-finite-single-unit-pullback",
+ "kind": "statement",
+ "title": "Ordinary finite pullback respects the native single-degree unit comparison",
+ "statement": "Let A be a finite commutative ring, S and T schemes, and g:T -> S. The specified ordinaryFiniteUnitPullback A g, followed by the native singleFunctorObjUnitIso on T, equals ordinaryFinitePullback A g applied to the native singleFunctorObjUnitIso on S, followed by leftDerivedUpperStarUnitIso for g. The statement uses the actual finite constant-object inverse-image comparison and actual monoidal unit comparison, without Noetherian, torsion or compactification assumptions.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/cor-pur-vector-bundle-purity.proof.md",
+  "place": "paragraph 2: normalization of scalar integration by the constant-to-tensor-unit comparison; existing constantUnit_pullback and constantUnit_hom supply the comparison law"
+ },
+ "stmt_deps": [
+  "def-asd-ordinary-finite-p1-arrows",
+  "def-sf-p1-integral-transport-data"
+ ],
+ "proof": [
+  {
+   "text": "Postcompose ordinaryFiniteUnitPullback with constantUnit_hom on T in reverse. Apply the proved constantUnit_pullback equation. Apply congruence with constantUnit_hom on S to its inverse-image factor. Transitivity gives the displayed equation; leftDerivedUpperStarDerivedTensorUnitIso is the native leftDerivedUpperStarUnitIso by its definition.",
+   "uses": [
+    "lem-sf-p1-constant-unit-pullback",
+    "lem-sf-p1-constant-unit-hom"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-p1-constant-unit-pullback",
+  "lem-sf-p1-constant-unit-hom"
+ ],
+ "proof_origin": {
+  "by": "worker R1",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/cor-pur-vector-bundle-purity.proof.md",
+  "place": "paragraph 2: normalization of scalar integration by the constant-to-tensor-unit comparison; existing constantUnit_pullback and constantUnit_hom supply the comparison law"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Ordinary inverse image commutes with the comparison from constant coefficients in degree zero to the derived tensor unit",
+   "results": "Eight results on right-derived degree-zero functors, single complexes and group cohomology. No concrete etale inverse-image unit comparison.",
+   "date": "2026-10-28",
+   "verdict": "Use the already proved project constant-unit equations."
+  },
+  {
+   "tool": "loogle",
+   "query": "singleFunctorObjUnitIso",
+   "results": "Zero hits: identifier unknown in Mathlib.",
+   "date": "2026-10-28",
+   "verdict": "This is source-library notation; no Mathlib match."
+  },
+  {
+   "tool": "grep",
+   "query": "UnitPullback.*Unit|singleFunctorObjUnitIso",
+   "results": "Zero Mathlib hits. Project constantUnit_pullback and constantUnit_hom prove the two comparison steps; their source names differ from the native single-unit maps used here.",
+   "date": "2026-10-28",
+   "verdict": "Apply the existing equations, without a new hole."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.VectorIntegrationCartesianTrace",
+  "date": "2026-10-28",
+  "group": "R1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "cor-pur-vector-bundle-purity",
+   "place": "proof paragraph 2: normalize the scalar integration codomain by the degree-zero constant-to-tensor-unit map",
+   "via": [
+    "lem-pur-vector-integration-cartesian-trace",
+    "lem-pur-normalized-vector-purity-base-change"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-an",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.OrdinaryFiniteSingleUnitPullback",
+  "file": "lean/Sheaf/AlgebraicGeometry/OrdinaryFiniteSingleUnitPullback.lean",
+  "declaration": "AlgebraicGeometry.Etale.ordinaryFiniteSingleUnitPullback_hom",
+  "statement": "theorem ordinaryFiniteSingleUnitPullback_hom (A : Type (u + 1)) [CommRing A] [Finite A]\n    {S T : Scheme.{u}} (g : T ⟶ S) :\n    (Etale.ordinaryFiniteUnitPullback A g).hom ≫\n        (Etale.singleFunctorObjUnitIso (ModuleCat.{u + 1} A) T).hom =\n      (Etale.ordinaryFinitePullback A g).map\n        (Etale.singleFunctorObjUnitIso (ModuleCat.{u + 1} A) S).hom ≫\n        (Etale.leftDerivedUpperStarUnitIso (ModuleCat.{u + 1} A) g).hom",
+  "branch": "sheaf-dag",
+  "by": "R1",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R1",
+  "result": "pass",
+  "landing": "20261027T210208-L-1669921",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R1",
+  "result": "pass",
+  "landing": "20261027T210208-L-1669921",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

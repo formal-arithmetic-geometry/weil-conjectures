@@ -16,34 +16,38 @@
  ],
  "proof": [
   {
-   "text": "First use vectorBundleIntegration_baseChange for the canonical tensor-pullback bundle, including its normalized Tate coefficient map. The universal property of the two Cartesian squares gives a unique isomorphism from any given presentation to the canonical one over the new base.",
+   "text": "Apply the proved canonical tensor-pullback integration base-change theorem to F0=g*F. Its coefficient comparison is the purityPullbackSquare comparison: prove equality by transporting leftDerivedUpperStarComp along the equality of square composites. This uses no invariance under arbitrary isomorphisms.",
    "uses": [
     "lem-pur-vector-trace-geometric-descent"
    ],
    "elementary": false
   },
   {
-   "text": "On each geometric fibre, scalar integration on the shifted top Tate coefficient is the degree map on top compact-support cohomology. This follows from the normalized projective-line trace and iteration on affine coordinates. An isomorphism of affine-space fibres has degree one, so it preserves this map. This applies to the presentation isomorphism even if it is not linear or does not fix zero. The trace sources are concentrated in degree zero, and geometric stalks of sheaf maps are conservative, hence the two scalar traces agree globally.",
+   "text": "Compare the supplied pullback square with the canonical square using IsPullback.isoIsPullback. Its two projection equations give e.hom followed by the canonical top map equal to g prime and e.hom followed by the canonical bundle projection equal to the supplied bundle projection. Form its Cartesian square over the identity of B prime. Apply fixed-base presentation-isomorphism invariance of integration to this square.",
    "uses": [
-    "lem-amb-affine-space-top-trace",
-    "lem-pur-degree-zero-derived-map-gluing",
-    "lemma-weil-pbc-geometric-stalk-conservative"
+    "lem-pur-vector-integration-presentation-iso"
    ],
    "elementary": false
   },
   {
-   "text": "Paste compact-support exchange for the canonical square with exchange for the presentation isomorphism. Functoriality of ordinary pullback composition and of Tate pullback identifies the coefficient comparison with purityPullbackSquare followed by pulled-back vectorIntegrationBaseCoefficientPullback. Finally the single-constant-to-unit comparison commutes with pullback. This is precisely the stated equation. At d=0 the maps are unit comparisons; over an empty base equality is unique.",
+   "text": "Paste ordinary compact-support exchange for the canonical square with exchange for e. The inverse-image identity and composition unit laws remove the bottom identity. Naturality of exchange for the canonical coefficient map, followed by two inverse-image associativity equations and naturality of the composition comparison, identifies the resulting coefficient with the displayed purityPullbackSquare and Tate comparison. Substitute fixed-base invariance and canonical base change. This is a direct calculation of the actual morphisms, not an assumed compatibility for their transposes.",
    "uses": [
-    "lem-asd-etale-finite-twist-pullback",
-    "lem-amb-unbounded-compact-support-comparisons"
+    "lem-amb-affine-linear-exchange-coherence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Postcompose with the specified constant-to-tensor-unit isomorphism. Apply ordinaryFiniteSingleUnitPullback_hom, proved from constantUnit_pullback and constantUnit_hom in a separate module to keep kernel type checking within the per-file budget. Functoriality and associativity give exactly the original equation.",
+   "uses": [
+    "lem-pur-ordinary-finite-single-unit-pullback"
    ],
    "elementary": false
   }
  ],
  "proof_origin": {
-  "by": "agent H4",
+  "by": "worker R1",
   "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/cor-pur-vector-bundle-purity.proof.md",
-  "place": "paragraph 2; geometric degree invariance extends the canonical-presentation base-change formula to an arbitrary Cartesian presentation"
+  "place": "paragraph 2; canonical base change plus fixed-base presentation invariance, with the exchange/coefficient/unit pasting proved in Lean"
  },
  "mathlib_searches": [
   {
@@ -101,11 +105,9 @@
  },
  "proof_deps": [
   "lem-pur-vector-trace-geometric-descent",
-  "lem-amb-affine-space-top-trace",
-  "lem-pur-degree-zero-derived-map-gluing",
-  "lemma-weil-pbc-geometric-stalk-conservative",
-  "lem-asd-etale-finite-twist-pullback",
-  "lem-amb-unbounded-compact-support-comparisons"
+  "lem-pur-vector-integration-presentation-iso",
+  "lem-amb-affine-linear-exchange-coherence",
+  "lem-pur-ordinary-finite-single-unit-pullback"
  ],
  "reviewed": {
   "date": "2026-10-27",
@@ -120,11 +122,11 @@
  "reviewed_proof": {
   "date": "2026-10-27",
   "by": "L",
-  "reviewer": "C-66f85",
-  "group": "H4",
-  "result": "fix",
-  "landing": "20261027T180636-L-3885298",
+  "reviewer": "COMPILER",
+  "group": "R1",
+  "result": "pass",
+  "landing": "20261027T210208-L-1669921",
   "kind": "interface",
-  "note": "independent cc review: item proof, 4 new modules and the VectorIntegrationMate reproof against their nodes, the unit sk-prop-an route, axioms (scratch #print axioms), the 9/9 OK importers in packet 3b and the change record"
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
