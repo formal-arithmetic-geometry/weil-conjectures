@@ -8,6 +8,7 @@ module
 public import WeilConjectures.CategoryTheory.FilteredTwoColimit
 public import WeilConjectures.ConstructibleSheaf.ProEtaleModule.DerivedCategory
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.Compatibility
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.ExtendScalarsConstructible
 
 /-!
 
@@ -168,7 +169,7 @@ lemma boundedConstructible_derivedExtendScalarsSubfield_obj {E F : FiniteInterme
     (h : E ≤ F) (K : Dᵇc(X)⟦Profinite.continuousMapRingObj E⟧) :
     boundedConstructible (padicSubfieldRingObj X ℓ F)
       ((derivedExtendScalarsSubfield X ℓ h).obj K.obj) :=
-  sorry
+  CondensedRing.boundedConstructible_leftDerivedExtendScalars_obj _ K.obj K.property
 
 /-- Extension of scalars along `E_X ⟶ ℚ̄_ℓ,X` preserves bounded constructible complexes.
 See the module docstring. -/
@@ -176,7 +177,7 @@ lemma boundedConstructible_derivedExtendScalarsToPadicAlgCl_obj (E : FiniteInter
     (K : Dᵇc(X)⟦Profinite.continuousMapRingObj E⟧) :
     boundedConstructible (padicAlgClRingObj X ℓ)
       ((derivedExtendScalarsToPadicAlgCl X ℓ E).obj K.obj) :=
-  sorry
+  CondensedRing.boundedConstructible_leftDerivedExtendScalars_obj _ K.obj K.property
 
 /-- The extension of scalars `T^X_{E,F} : C_E(X) ⥤ C_F(X)` on bounded constructible complexes,
 for finite subextensions `E ≤ F`. -/
