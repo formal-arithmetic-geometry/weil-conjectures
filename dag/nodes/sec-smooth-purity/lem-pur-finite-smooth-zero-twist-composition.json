@@ -1,0 +1,126 @@
+{
+ "id": "lem-pur-finite-smooth-zero-twist-composition",
+ "kind": "lemma",
+ "title": "Composition of scalar unit comparisons on tensor-power zero",
+ "statement": "Let T be a scheme, ell,r,m,n natural numbers with n ≤ m ≤ r, and A_i=ULift (ULift (ZMod (ell^i))). Let the scalarZeroLineIso maps be the canonical scalar unit maps transported through the single/unit isomorphisms, as defined in def-pur-finite-smooth-coefficient-arrows. Then ordinaryScalar(A_m→A_n) applied to scalarZeroLineIso(A_r→A_m).hom, followed by scalarZeroLineIso(A_m→A_n).hom, equals the ordinaryAssociator component on line(A_r,ell^r,0), followed by scalarZeroLineIso(A_r→A_n).hom. No primality, positive-index, geometric or root comparison assumption occurs.",
+ "stmt_deps": [
+  "def-pur-finite-smooth-coefficient-arrows"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-compatibilities.proof.md",
+  "place": "Part (3), scalar/tensor associativity: unit case of the ordered root tensor-power induction."
+ },
+ "proof": [
+  {
+   "text": "Compose the scalar tensor and unit isomorphisms for the two consecutive quotients. Naturality of the second tensor comparison and the constituent left-unit laws show that this composite satisfies the left-unit law. Binary scalar tensor coherence identifies it with the direct tensor comparison through the canonical scalar associator. The generic tensorIso_preserves_unit theorem therefore identifies the composite unit map with the direct unit map followed by the associator.",
+   "uses": [
+    "lem-pur-quotient-scalar-tensor-composition",
+    "lem-pur-composite-left-unit-coherence",
+    "lem-pur-tensor-iso-unit-coherence",
+    "lem-pur-scalar-left-unit"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Transport this unit equality through the three single/unit isomorphisms. Functoriality cancels the middle inverse pair. Naturality of the scalar associator moves the source single/unit map to its right. The resulting equality is exactly the tensor-power-zero comparison. This last calculation is first proved in arbitrary categories so the specialized derived data need not be unfolded in its rewrite motives.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-quotient-scalar-tensor-composition",
+  "lem-pur-composite-left-unit-coherence",
+  "lem-pur-tensor-iso-unit-coherence",
+  "lem-pur-scalar-left-unit"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "K1",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-compatibilities.proof.md",
+  "place": "Part (3), scalar/tensor associativity: unit case of the ordered root tensor-power induction."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Composition coherence of extension of scalars on tensor powers and roots of unity",
+   "results": "8 hits: ModuleCat.extendScalarsComp_hom_app_one_tmul, TensorPower.cast_trans, LinearEquiv.rTensor_zpow, LinearEquiv.rTensor_pow, LinearEquiv.lTensor_zpow, LinearEquiv.baseChange_zpow, TensorProduct.congr_zpow, TensorPower.algebraMap₀_mul",
+   "date": "2026-10-28",
+   "verdict": "Ordinary scalar composition or generic adjunction coherence; no exact normalized derived binary tensor square."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.leftAdjointUniq",
+   "results": "12 hits: CategoryTheory.Adjunction.leftAdjointUniq, CategoryTheory.Adjunction.leftAdjointUniq_refl, CategoryTheory.Adjunction.leftAdjointUniq_inv_app, CategoryTheory.Adjunction.leftAdjointUniq_hom_counit, CategoryTheory.Adjunction.unit_leftAdjointUniq_hom, CategoryTheory.Adjunction.leftAdjointUniq_trans, CategoryTheory.Adjunction.leftAdjointUniq_trans_app, CategoryTheory.Adjunction.leftAdjointUniq_hom_app_counit",
+   "date": "2026-10-28",
+   "verdict": "Ordinary scalar composition or generic adjunction coherence; no exact normalized derived binary tensor square."
+  },
+  {
+   "tool": "grep",
+   "query": "extendScalarsComp|leftAdjointUniq.*comp",
+   "results": "9 hits: Mathlib/Algebra/Category/ModuleCat/Pseudofunctor.lean, Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean, Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean, Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean, Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean, Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean, Mathlib/Order/Category/BddLat.lean, Mathlib/CategoryTheory/Sites/CoverLifting.lean",
+   "date": "2026-10-28",
+   "verdict": "Ordinary scalar composition or generic adjunction coherence; no exact normalized derived binary tensor square."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived extension of scalars composition is compatible with the canonical tensor product comparison",
+   "results": "8 hits: ModuleCat.extendScalarsComp_hom_app_one_tmul, TensorProduct.AlgebraTensorModule.rTensor_comp, PolynomialLaw.comp_toFun', TensorProduct.AlgebraTensorModule.distribBaseChange, Algebra.Extension.Hom.comp, ModuleCat.extendScalarsComp, IsLocalization.moduleTensorEquiv, IsLocalization.algebraTensorEquiv",
+   "date": "2026-10-28",
+   "verdict": "Ordinary scalar composition or generic adjunction coherence; no exact normalized derived binary tensor square."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteSmoothOrdinaryTwistCocycle",
+  "date": "2026-10-28",
+  "group": "K1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "nt-target-smooth-purity-qbar",
+   "place": "Proof through finite reduction compatibilities (3): exact degree-zero scalar normalization of the rank-one root comparison.",
+   "via": [
+    "lem-pur-finite-smooth-ordinary-twist-cocycle",
+    "lem-pur-finite-smooth-ordinary-twisted-cocycles",
+    "lem-pur-finite-smooth-quotient-coherence",
+    "lem-pur-finite-smooth-adjunction-general-base"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-purity-transport",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FiniteSmoothZeroTwistComposition",
+  "file": "lean/Sheaf/Paper/FiniteSmoothZeroTwistComposition.lean",
+  "declaration": "AlgebraicGeometry.Etale.FiniteSmoothPurity.ordinaryZeroTwistComp",
+  "statement": "theorem ordinaryZeroTwistComp\n    (T : Scheme.{u}) (ell : ℕ) {r m n : ℕ} (hmr : m ≤ r) (hnm : n ≤ m) :\n    (ordinaryScalar (FiniteReduction.quotient ell hnm) T).map\n        (scalarZeroLineIso (FiniteReduction.quotient ell hmr)\n          (ell ^ r) (ell ^ m) (CharP.cast_eq_zero _ _) (CharP.cast_eq_zero _ _) T).hom ≫\n      (scalarZeroLineIso (FiniteReduction.quotient ell hnm)\n        (ell ^ m) (ell ^ n) (CharP.cast_eq_zero _ _) (CharP.cast_eq_zero _ _) T).hom =\n    (ordinaryAssociator T ell hmr hnm).hom.app\n        (line (coefficient ell r) (ell ^ r) (CharP.cast_eq_zero _ _) T 0) ≫\n      (scalarZeroLineIso (FiniteReduction.quotient ell (hnm.trans hmr))\n        (ell ^ r) (ell ^ n) (CharP.cast_eq_zero _ _) (CharP.cast_eq_zero _ _) T).hom",
+  "branch": "sheaf-dag",
+  "by": "K1",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K1",
+  "result": "pass",
+  "landing": "20261027T210116-L-1657492",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K1",
+  "result": "pass",
+  "landing": "20261027T210116-L-1657492",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

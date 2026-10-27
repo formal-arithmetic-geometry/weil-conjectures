@@ -1,0 +1,116 @@
+{
+ "id": "lem-pur-finite-smooth-root-derived-normalization",
+ "kind": "lemma",
+ "title": "Exact degree-zero normalization of the root comparison",
+ "statement": "Let T be a scheme, phi:A→B a homomorphism of commutative coefficient rings in the module universe, and N,M natural numbers annihilating A,B respectively. Let e be a CoefficientLineComparison phi N M hA hB T as in def-pur-finite-smooth-coefficient-arrows. Then e.derivedIso.hom is the exact degree-zero adjunction insertion, in the sense of def-sp-exact-degree-zero-adjoint-interface, of the ordinary scalar adjunct of e.sheafIso.hom. The adjunctions and exact-single comparison are the published canonical ones. This is an equality of the specified maps, not the existence of a new comparison.",
+ "stmt_deps": [
+  "def-pur-finite-smooth-coefficient-arrows",
+  "def-sp-exact-degree-zero-adjoint-interface"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-compatibilities.proof.md",
+  "place": "Part (3), orientation: rank-one sheaves and scalar-extension normalization; the exact single-object adjunct of the root-line comparison."
+ },
+ "proof": [
+  {
+   "text": "Apply the proved scalar single-map adjoint-insertion formula to e.sheafIso.hom and compose the result with e.derived_normalization. This proves the claimed normalization without a representative choice or an additional hypothesis.",
+   "uses": [
+    "lem-pur-scalar-single-map-adjoint-insertion"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-scalar-single-map-adjoint-insertion"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "K1",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-compatibilities.proof.md",
+  "place": "Part (3), orientation: rank-one sheaves and scalar-extension normalization; the exact single-object adjunct of the root-line comparison."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Composition coherence of extension of scalars on tensor powers and roots of unity",
+   "results": "8 hits: ModuleCat.extendScalarsComp_hom_app_one_tmul, TensorPower.cast_trans, LinearEquiv.rTensor_zpow, LinearEquiv.rTensor_pow, LinearEquiv.lTensor_zpow, LinearEquiv.baseChange_zpow, TensorProduct.congr_zpow, TensorPower.algebraMap₀_mul",
+   "date": "2026-10-28",
+   "verdict": "Ordinary scalar composition or generic adjunction coherence; no exact normalized derived binary tensor square."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.leftAdjointUniq",
+   "results": "12 hits: CategoryTheory.Adjunction.leftAdjointUniq, CategoryTheory.Adjunction.leftAdjointUniq_refl, CategoryTheory.Adjunction.leftAdjointUniq_inv_app, CategoryTheory.Adjunction.leftAdjointUniq_hom_counit, CategoryTheory.Adjunction.unit_leftAdjointUniq_hom, CategoryTheory.Adjunction.leftAdjointUniq_trans, CategoryTheory.Adjunction.leftAdjointUniq_trans_app, CategoryTheory.Adjunction.leftAdjointUniq_hom_app_counit",
+   "date": "2026-10-28",
+   "verdict": "Ordinary scalar composition or generic adjunction coherence; no exact normalized derived binary tensor square."
+  },
+  {
+   "tool": "grep",
+   "query": "extendScalarsComp|leftAdjointUniq.*comp",
+   "results": "9 hits: Mathlib/Algebra/Category/ModuleCat/Pseudofunctor.lean, Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean, Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean, Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean, Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean, Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean, Mathlib/Order/Category/BddLat.lean, Mathlib/CategoryTheory/Sites/CoverLifting.lean",
+   "date": "2026-10-28",
+   "verdict": "Ordinary scalar composition or generic adjunction coherence; no exact normalized derived binary tensor square."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived extension of scalars composition is compatible with the canonical tensor product comparison",
+   "results": "8 hits: ModuleCat.extendScalarsComp_hom_app_one_tmul, TensorProduct.AlgebraTensorModule.rTensor_comp, PolynomialLaw.comp_toFun', TensorProduct.AlgebraTensorModule.distribBaseChange, Algebra.Extension.Hom.comp, ModuleCat.extendScalarsComp, IsLocalization.moduleTensorEquiv, IsLocalization.algebraTensorEquiv",
+   "date": "2026-10-28",
+   "verdict": "Ordinary scalar composition or generic adjunction coherence; no exact normalized derived binary tensor square."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteSmoothOrdinaryTwistCocycle",
+  "date": "2026-10-28",
+  "group": "K1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "nt-target-smooth-purity-qbar",
+   "place": "Proof through finite reduction compatibilities (3): exact degree-zero scalar normalization of the rank-one root comparison.",
+   "via": [
+    "lem-pur-finite-smooth-ordinary-twist-cocycle",
+    "lem-pur-finite-smooth-ordinary-twisted-cocycles",
+    "lem-pur-finite-smooth-quotient-coherence",
+    "lem-pur-finite-smooth-adjunction-general-base"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-purity-transport",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FiniteSmoothRootDerivedNormalization",
+  "file": "lean/Sheaf/Paper/FiniteSmoothRootDerivedNormalization.lean",
+  "declaration": "AlgebraicGeometry.Etale.FiniteSmoothPurity.CoefficientLineComparison.derived_eq_scalarInsertion",
+  "statement": "theorem CoefficientLineComparison.derived_eq_scalarInsertion\n    {A B : Type (u + 1)} [CommRing A] [CommRing B]\n    {phi : A →+* B} {N M : ℕ} {hA : (N : A) = 0} {hB : (M : B) = 0}\n    {T : Scheme.{u}} (e : CoefficientLineComparison phi N M hA hB T) :\n    e.derivedIso.hom = SheafExactDegreeZero.scalarAdjointInsertion T.smallEtaleTopology phi\n      ((ProEtale.etaleSheafExtendScalarsAdjunction phi T).homEquiv _ _ e.sheafIso.hom)",
+  "branch": "sheaf-dag",
+  "by": "K1",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K1",
+  "result": "pass",
+  "landing": "20261027T210116-L-1657492",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K1",
+  "result": "pass",
+  "landing": "20261027T210116-L-1657492",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
