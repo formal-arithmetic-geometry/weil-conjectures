@@ -1,0 +1,75 @@
+{
+ "id": "new-e2-constant-completion-finite-system-properties",
+ "kind": "lemma",
+ "title": "Flatness and reduction data for the finite constant completion tower",
+ "statement": "theorem finiteSystem_properties (J : GrothendieckTopology C) (A : Type u) [CommRing A] [IsNoetherianRing A] (I : Ideal A) [∀ (n : ℕ) (U : Cᵒᵖ), Module (A ⧸ I ^ (n + 1)) (adicTerm J A (finiteSystemUnder J A I) n U)] : (∀ (n : ℕ) (U : Cᵒᵖ), IsScalarTower A (A ⧸ I ^ (n + 1)) (adicTerm J A (finiteSystemUnder J A I) n U)) ∧ (∀ (n : ℕ) (U : Cᵒᵖ), Module.Flat (A ⧸ I ^ (n + 1)) (adicTerm J A (finiteSystemUnder J A I) n U)) ∧ (∀ (n : ℕ) (U : Cᵒᵖ), Function.Surjective (adicTransition J A (finiteSystemUnder J A I) (n + 1) n (Nat.le_succ n) U)) ∧ (∀ (m n : ℕ) (U : Cᵒᵖ), ∃ e : TensorProduct A (adicTerm J A (finiteSystemUnder J A I) m U) (A ⧸ I ^ (n + 1)) ≃ₗ[A] adicTerm J A (finiteSystemUnder J A I) (min m n) U, ∀ (b : adicTerm J A (finiteSystemUnder J A I) m U) (a : A), e (b ⊗ₜ[A] Ideal.Quotient.mk _ a) = a • adicTransition J A (finiteSystemUnder J A I) m (min m n) (Nat.min_le_left m n) U b)",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 093M, sectionwise completion argument"
+ },
+ "stmt_deps": [],
+ "proof": [
+  {
+   "text": "Apply the sectionwise flat finite quotient tower argument to the finite constant coefficient system.",
+   "uses": [
+    "new-e2-constant-completion-finite-system-modules",
+    "lem-weil-pbc-sectionwise-adic-algebra-limit"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "new-e2-constant-completion-finite-system-modules",
+  "lem-weil-pbc-sectionwise-adic-algebra-limit"
+ ],
+ "proof_origin": "stage-3 decomposition",
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "open",
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "blueprint": {
+  "is": null,
+  "from": null,
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ConstantCompletionFiniteSystemProperties",
+  "file": "lean/Sheaf/Paper/ConstantCompletionFiniteSystemProperties.lean",
+  "declaration": "CategoryTheory.ConstantCompletion.finiteSystem_properties",
+  "declarations": [
+   "CategoryTheory.ConstantCompletion.finiteSystem_properties"
+  ],
+  "statement": "theorem finiteSystem_properties (J : GrothendieckTopology C) (A : Type u) [CommRing A] [IsNoetherianRing A] (I : Ideal A) [∀ (n : ℕ) (U : Cᵒᵖ), Module (A ⧸ I ^ (n + 1)) (adicTerm J A (finiteSystemUnder J A I) n U)] : (∀ (n : ℕ) (U : Cᵒᵖ), IsScalarTower A (A ⧸ I ^ (n + 1)) (adicTerm J A (finiteSystemUnder J A I) n U)) ∧ (∀ (n : ℕ) (U : Cᵒᵖ), Module.Flat (A ⧸ I ^ (n + 1)) (adicTerm J A (finiteSystemUnder J A I) n U)) ∧ (∀ (n : ℕ) (U : Cᵒᵖ), Function.Surjective (adicTransition J A (finiteSystemUnder J A I) (n + 1) n (Nat.le_succ n) U)) ∧ (∀ (m n : ℕ) (U : Cᵒᵖ), ∃ e : TensorProduct A (adicTerm J A (finiteSystemUnder J A I) m U) (A ⧸ I ^ (n + 1)) ≃ₗ[A] adicTerm J A (finiteSystemUnder J A I) (min m n) U, ∀ (b : adicTerm J A (finiteSystemUnder J A I) m U) (a : A), e (b ⊗ₜ[A] Ideal.Quotient.mk _ a) = a • adicTransition J A (finiteSystemUnder J A I) m (min m n) (Nat.min_le_left m n) U b)",
+  "branch": "sheaf-dag",
+  "by": "E2",
+  "date": "2026-10-28"
+ },
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ConstantCompletionFlatAndQuotientsProjection",
+  "date": "2026-10-28",
+  "group": "E2"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E2",
+  "result": "pass",
+  "landing": "20261027T205916-L-1632976",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E2",
+  "result": "pass",
+  "landing": "20261027T205916-L-1632976",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
