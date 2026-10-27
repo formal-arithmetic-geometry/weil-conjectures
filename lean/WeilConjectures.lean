@@ -12772,3 +12772,4 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheore
 public import WeilConjectures.SmoothPurity.Defs
 public import WeilConjectures.PoincareDuality.Poincare
 public import WeilConjectures.TraceFormula.Dualizing
+public import WeilConjectures.TraceFormula.BorelMoore
