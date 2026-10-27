@@ -1,0 +1,89 @@
+{
+ "id": "lem-pur-etale-ordered-open-projection-scalar-postcomp",
+ "kind": "lemma",
+ "title": "Postcomposed signed-symmetry form of the ordered local scalar square",
+ "status": "split",
+ "statement": "For commutative rings A and B, a ring map φ, an open immersion j:X→Z, and derived inputs T and M, assume the normalized mixed scalar/open equation. After postcomposing both ordered projection composites by the final signed tensor symmetry, the resulting morphisms are equal. The final symmetry is an isomorphism and can be cancelled in the item theorem.",
+ "stmt_deps": [
+  "lem-coef-etale-open-scalar-coherence",
+  "lem-kun-tensor-sym",
+  "def-pur-exceptional-coefficient-normalizations"
+ ],
+ "source": {
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tags 0E8I, 0GL6 and 07A4; signed symmetry and scalar balancing in the local open projection square"
+ },
+ "proof": [
+  {
+   "text": "Cancel the normalized open and tensor comparisons in the mixed scalar equation, transport restriction through the exact/left-derived pullback comparison, and conjugate by the signed symmetry on the X tensor. On flat K-flat representatives both routes have the same degree-zero scalar balancing map and Koszul sign; localization and naturality extend the equality.",
+   "uses": [
+    "lem-coef-etale-open-scalar-coherence",
+    "lem-kun-tensor-sym",
+    "lem-pc-kflat-resolution"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-etale-open-scalar-coherence",
+  "lem-kun-tensor-sym",
+  "lem-pc-kflat-resolution"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "K4",
+  "date": "2026-10-28",
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tags 0E8I, 0GL6 and 07A4; signed symmetry postcomposition"
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [],
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.EtaleOrderedOpenProjectionScalar",
+  "group": "K4",
+  "date": "2026-10-28"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-etale-ordered-open-projection-scalar",
+   "place": "Signed-symmetry and normalization part of the local ordered projection proof",
+   "via": [
+    "lem-pur-etale-ordered-open-projection-scalar"
+   ]
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-an",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.EtaleOrderedOpenProjectionScalarConjugation",
+  "file": "lean/Sheaf/Paper/EtaleOrderedOpenProjectionScalarConjugation.lean",
+  "declaration": "AlgebraicGeometry.Etale.etaleOrderedOpenProjectionScalar_postcomp",
+  "statement": "theorem etaleOrderedOpenProjectionScalar_postcomp {A B : Type (u + 1)} [CommRing A] [CommRing B] (φ : A →+* B) {X Z : Scheme.{u}} (j : X ⟶ Z) [IsOpenImmersion j] (T : DerivedCategoryModule A Z) (M : DerivedCategoryModule A X) (oA : ((derivedTensor (ModuleCat.{u + 1} A) Z).obj T).obj ((openImmersionLowerShriek (ModuleCat.{u + 1} A) j).mapDerivedCategory.obj M) ⟶ (openImmersionLowerShriek (ModuleCat.{u + 1} A) j).mapDerivedCategory.obj (((derivedTensor (ModuleCat.{u + 1} A) X).obj ((upperStar (ModuleCat.{u + 1} A) j).leftDerivedFunctor.obj T)).obj M)) (oB : ((derivedTensor (ModuleCat.{u + 1} B) Z).obj ((scalarExtension φ Z).obj T)).obj ((openImmersionLowerShriek (ModuleCat.{u + 1} B) j).mapDerivedCategory.obj ((scalarExtension φ X).obj M)) ⟶ (openImmersionLowerShriek (ModuleCat.{u + 1} B) j).mapDerivedCategory.obj (((derivedTensor (ModuleCat.{u + 1} B) X).obj ((upperStar (ModuleCat.{u + 1} B) j).leftDerivedFunctor.obj ((scalarExtension φ Z).obj T))).obj ((scalarExtension φ X).obj M))) (h : canonicalGammaExact (ModuleCat.{u + 1} B) j ((scalarExtension φ X).obj M) ((scalarExtension φ Z).obj T) ≫ ((derivedTensor (ModuleCat.{u + 1} B) Z).map ((openScalarExtension φ j).inv.app M)).app ((scalarExtension φ Z).obj T) ≫ (etaleHomTensorComparison Z φ ((derivedExtension j).obj M) T).hom = (derivedExtension (A := B) j).map (((derivedTensor (ModuleCat.{u + 1} B) X).obj ((scalarExtension φ X).obj M)).map ((openScalarRestriction φ j).inv.app T) ≫ (etaleHomTensorComparison X φ M ((derivedRestriction j).obj T)).hom) ≫ (openScalarExtension φ j).inv.app (((derivedTensor (ModuleCat.{u + 1} A) X).obj M).obj ((derivedRestriction j).obj T)) ≫ (scalarExtension φ Z).map (canonicalGammaExact (ModuleCat.{u + 1} A) j M T)) : ((scalarExtension φ Z).map oA ≫ (ExceptionalCoefficients.openIso φ j).hom.app (((derivedTensor (ModuleCat.{u + 1} A) X).obj ((upperStar (ModuleCat.{u + 1} A) j).leftDerivedFunctor.obj T)).obj M) ≫ (openImmersionLowerShriek (ModuleCat.{u + 1} B) j).mapDerivedCategory.map ((ExceptionalCoefficients.tensorIso φ X).hom.app ((upperStar (ModuleCat.{u + 1} A) j).leftDerivedFunctor.obj T, M) ≫ ((derivedTensor (ModuleCat.{u + 1} B) X).map ((scalarPullbackIso φ j).inv.app T)).app ((scalarExtension φ X).obj M))) ≫ (openImmersionLowerShriek (ModuleCat.{u + 1} B) j).mapDerivedCategory.map (((derivedTensorSymmetry (ModuleCat.{u + 1} B) X).hom.app ((upperStar (ModuleCat.{u + 1} B) j).leftDerivedFunctor.obj ((scalarExtension φ Z).obj T))).app ((scalarExtension φ X).obj M)) = ((ExceptionalCoefficients.tensorIso φ Z).hom.app (T, (openImmersionLowerShriek (ModuleCat.{u + 1} A) j).mapDerivedCategory.obj M) ≫ ((derivedTensor (ModuleCat.{u + 1} B) Z).obj ((scalarExtension φ Z).obj T)).map ((ExceptionalCoefficients.openIso φ j).hom.app M) ≫ oB) ≫ (openImmersionLowerShriek (ModuleCat.{u + 1} B) j).mapDerivedCategory.map (((derivedTensorSymmetry (ModuleCat.{u + 1} B) X).hom.app ((upperStar (ModuleCat.{u + 1} B) j).leftDerivedFunctor.obj ((scalarExtension φ Z).obj T))).app ((scalarExtension φ X).obj M))",
+  "branch": "sheaf-dag",
+  "by": "K4",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K4",
+  "result": "pass",
+  "landing": "20261027T210124-L-1659963",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K4",
+  "result": "pass",
+  "landing": "20261027T210124-L-1659963",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

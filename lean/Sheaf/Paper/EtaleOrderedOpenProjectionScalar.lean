@@ -8,6 +8,8 @@ module
 public import Sheaf.Paper.ExceptionalCoefficientMaps
 public import WeilConjectures.SixFunctors.Etale.Derived.OpenImmersionLowerShriekProjection
 public import Sheaf.AlgebraicGeometry.EtaleDerivedTensorSymmetry
+import Sheaf.SixFunctors.EtaleOpenScalarCoherence
+import Sheaf.Paper.EtaleOrderedOpenProjectionScalarConjugation
 
 /-! # Scalar change for the local ordered open projection
 
@@ -89,6 +91,14 @@ theorem etaleOrderedOpenProjectionScalar
         ((scalarExtension φ Z).obj T)).map
           ((ExceptionalCoefficients.openIso φ j).hom.app M) ≫
       orderedOpenProjection B j ((scalarExtension φ Z).obj T)
-        ((scalarExtension φ X).obj M) := by sorry
+        ((scalarExtension φ X).obj M) := by
+  have hmix := (etaleOpenScalarComparisons φ j).mixed_tensor_scalar M T
+  apply (cancel_mono ((openImmersionLowerShriek (ModuleCat.{u + 1} B) j).mapDerivedCategory.map
+    (((derivedTensorSymmetry (ModuleCat.{u + 1} B) X).hom.app
+      ((upperStar (ModuleCat.{u + 1} B) j).leftDerivedFunctor.obj
+        ((scalarExtension φ Z).obj T))).app ((scalarExtension φ X).obj M)))).mp
+  exact etaleOrderedOpenProjectionScalar_postcomp φ j T M
+    (orderedOpenProjection A j T M)
+    (orderedOpenProjection B j ((scalarExtension φ Z).obj T) ((scalarExtension φ X).obj M)) hmix
 
 end AlgebraicGeometry.Etale
