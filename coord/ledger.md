@@ -19855,3 +19855,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 18:10 L: merged deliver/X9/Sheaf.AlgebraicGeometry.ProjectiveSpace.StandardUnitCocycleOffDiagonal (stage 3; reviewer PASS; first push; landing 20261027T181012-L-3921196 (interface); batch 20261027T180444; modules 3; new nodes 2)
 - 18:10 L: merged deliver/Y6/Sheaf.SixFunctors.IntegralExpressionTransposeIsIso (stage 3; reviewer PASS; first push; landing 20261027T181013-L-3921391 (proof); batch 20261027T180444; modules 1; new nodes 0)
 - 18:10 L: merged deliver/Y7/Sheaf.SixFunctors.IntegralProperTowerTransition (stage 3; reviewer PASS; first push; landing 20261027T181015-L-3921514 (interface); batch 20261027T180444; modules 3; new nodes 2)
+- 18:10 L: merged deliver/Y8/Sheaf.SixFunctors.ProperOpenInterchangeReductionSquare (stage 3; reviewer PASS; first push; landing 20261027T181016-L-3921681 (interface); batch 20261027T180444; modules 3; new nodes 2)

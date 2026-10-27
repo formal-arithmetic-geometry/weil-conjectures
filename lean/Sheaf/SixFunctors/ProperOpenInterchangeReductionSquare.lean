@@ -5,6 +5,8 @@ Authors: SHEAF group E3
 -/
 module
 public import Sheaf.SixFunctors.OpenInterchangeReductionData
+import Sheaf.SixFunctors.ProperOpenLambdaReductionSquareUnbounded
+import Sheaf.SixFunctors.ProperOpenInterchangeFromLambda
 
 /-! # The coefficient square for the open transpose of proper/open restriction
 Source: the open-adjunction and clopen expansion of the coherence proof.
@@ -63,5 +65,10 @@ theorem properOpenInterchangeReductionSquare
       (GeneratorKind.properOpenInterchange k r p i h hk hki hio hii hr hp B)) :
     Assertion Cf.l E W location o K
       (GeneratorKind.properOpenInterchange k r p i h hk hki hio hii hr hp B) := by
-  sorry
+  apply properOpenInterchange_from_lambda_square Cf E o hStructural W hW location k r p i h hk hki
+    hio hii hr hp B hSourceLength hTargetLength K lo hi torLo torHi hInputs
+    hSource hTarget hGenerator
+  exact properOpenLambdaReductionSquare_unbounded Cf E o hStructural W hW location k r p i h hk hki
+    hio hii hr hp B hSourceLength hTargetLength K lo hi torLo torHi hInputs
+    hSource hTarget hGenerator
 end WeilConjectures.OpenInterchangeReduction
