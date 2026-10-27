@@ -47,7 +47,16 @@ variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [I
 
 set_option maxHeartbeats 800000 in
 -- the Künneth maps of the two products are large terms
-/-- **Averaging gives retraction data for the Künneth square.** -/
+/-- **Invariants under a finite group commute with the Künneth map** (blueprint
+`det-nearby-kunneth-invariants`, in the form used in the generic-slicing step of
+`sk-prop-tf-nearby-external-kunneth`). Let finite families of automorphisms `σM i`, `σN i`, `σP i`
+of the pullback models act on nearby cycles (`NearbyCyclesModel.Hom.autAction`). Suppose the
+Künneth map `Π'` of the pullback models is equivariant, the action on the second factor is
+trivial, and `n` times the idempotents of split pullback exchanges `α_{ρ_M}(A)`,
+`α_{ρ_P}(A ⊠ B)` are
+the sums of the actions, i.e. the exchanges are the inclusions of the invariants. Then
+`(E ⊗ B)^G = E^G ⊗ B`: the retractions are carried into each other by `Π'`
+(`CategoryTheory.IsTensorRetract`). -/
 theorem isTensorRetract_of_average (φ₁ : P.Hom M f₁ f₁') (φ₂ : P.Hom N f₂ f₂')
     (φ₁U : PU.Hom MU e₁ e₁') (φ₂U : PU.Hom NU e₂ e₂') (ρM : MU.Hom M r₁ r₁')
     (ρN : NU.Hom N r₂ r₂') (ρP : PU.Hom P r r')
