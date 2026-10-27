@@ -6,10 +6,8 @@ Authors: SHEAF group B6
 module
 
 public import Sheaf.SixFunctors.RationalVerdierModels
-
-import Sheaf.Paper.IntegralResidueTor
-import Sheaf.Paper.PbcRationalTransport
-import Sheaf.Paper.IntegralOperationsPreserveConstructible
+import Sheaf.SixFunctors.RationalVerdierDatumFromIntegral
+import Sheaf.SixFunctors.RationalVerdierDatumNaturality
 
 /-! # Rationalization of one integral Verdier duality
 
@@ -72,6 +70,9 @@ theorem datum_exists
           (completedIntegralCommRingSheafUnrestricted l E X))
         (f : K ⟶ K') (g : L ⟶ L'),
         A.ordinary.tensor.map (Prod.mkHom f g) ≫ (A.symmetry.swap K' L').hom =
-          (A.symmetry.swap K L).hom ≫ A.ordinary.tensor.map (Prod.mkHom g f) := by sorry
+        (A.symmetry.swap K L).hom ≫ A.ordinary.tensor.map (Prod.mkHom g f) := by
+  obtain ⟨A, hflat⟩ := datum_of_integral_kflat D l hl X E wE
+    (integral_verdier_biduality D l hl E X wE.omega wE.reduction)
+  exact ⟨A, datum_naturality_of_kflat D l hl X E wE A hflat⟩
 
 end WeilConjectures.RationalVerdier
