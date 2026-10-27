@@ -1,0 +1,83 @@
+{
+ "id": "lem-pur-pullback-tensor-rational-composition-coherence-right-localization",
+ "kind": "statement",
+ "title": "Localization of the right rational composition route",
+ "statement": "theorem canonicalRationalPullbackTensorComposition_right_localization {X Y Z : Scheme.{u}} (f : X ⟶ Y) (h : Z ⟶ X) [hX : ∀ x : X, Invertible (l : X.residueField x)] [hY : ∀ y : Y, Invertible (l : Y.residueField y)] [hZ : ∀ z : Z, Invertible (l : Z.residueField z)] (M N : sfRationalConstructibleCategory l E Y) : HEq ((pullbackTensorRationalComposition l E f h ((rationalDerivedTensor l E Y).obj (M,N))).hom ≫ (rationalDerivedPullback l E h).map (canonicalRationalPullbackTensor l E f M N).hom ≫ (canonicalRationalPullbackTensor l E h ((rationalDerivedPullback l E f).obj M) ((rationalDerivedPullback l E f).obj N)).hom) ((sfRationalConstructibleLocalization l E Z).map ((pullbackTensorIntegralComposition l E f h).hom.app ((constructibleIntegralTensor l E Y).obj (M.obj,N.obj)) ≫ (constructibleIntegralPullback l E h).map (canonicalIntegralPullbackTensor l E f M.obj N.obj).hom ≫ (canonicalIntegralPullbackTensor l E h ((constructibleIntegralPullback l E f).obj M.obj) ((constructibleIntegralPullback l E f).obj N.obj)).hom))",
+ "stmt_deps": [
+  "def-weil-derived-pullback-tensor-hom",
+  "def-pur-completed-pullback-tensor-comparison",
+  "lem-pur-pullback-tensor-rational-composition-coherence-localization"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 07A4 and 0941; normalized localization of the right composition route."
+ },
+ "proof": [
+  {
+   "text": "Apply the localization formulas for the compositor, pullback map and canonical tensor comparison, then functoriality of localization identifies the composite with the localized integral route.",
+   "uses": [
+    "def-weil-derived-pullback-tensor-hom",
+    "def-pur-completed-pullback-tensor-comparison"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-derived-pullback-tensor-hom",
+  "def-pur-completed-pullback-tensor-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 07A4 and 0941; normalized localization of the right composition route."
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.PullbackTensorRationalCompositionCoherence",
+  "date": "2026-10-28",
+  "group": "D4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-pullback-tensor-composition-coherence",
+   "place": "Right-route localization substep."
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-purity-conv",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CanonicalRationalPullbackTensorCompositionRightLocalization",
+  "file": "lean/Sheaf/Paper/CanonicalRationalPullbackTensorCompositionRightLocalization.lean",
+  "declaration": "WeilConjectures.canonicalRationalPullbackTensorComposition_right_localization",
+  "statement": "theorem canonicalRationalPullbackTensorComposition_right_localization {X Y Z : Scheme.{u}}\n    (f : X ⟶ Y) (h : Z ⟶ X)\n    [hX : ∀ x : X, Invertible (l : X.residueField x)]\n    [hY : ∀ y : Y, Invertible (l : Y.residueField y)]\n    [hZ : ∀ z : Z, Invertible (l : Z.residueField z)]\n    (M N : sfRationalConstructibleCategory l E Y) :\n    HEq\n      ((pullbackTensorRationalComposition l E f h\n          ((rationalDerivedTensor l E Y).obj (M,N))).hom ≫\n        (rationalDerivedPullback l E h).map\n          (canonicalRationalPullbackTensor l E f M N).hom ≫\n        (canonicalRationalPullbackTensor l E h\n          ((rationalDerivedPullback l E f).obj M)\n          ((rationalDerivedPullback l E f).obj N)).hom)\n      ((sfRationalConstructibleLocalization l E Z).map\n        ((pullbackTensorIntegralComposition l E f h).hom.app\n            ((constructibleIntegralTensor l E Y).obj (M.obj,N.obj)) ≫\n          (constructibleIntegralPullback l E h).map\n            (canonicalIntegralPullbackTensor l E f M.obj N.obj).hom ≫\n          (canonicalIntegralPullbackTensor l E h\n            ((constructibleIntegralPullback l E f).obj M.obj)\n            ((constructibleIntegralPullback l E f).obj N.obj)).hom))",
+  "branch": "sheaf-dag",
+  "by": "D4",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D4",
+  "result": "pass",
+  "landing": "20261027T233853-L-4127398",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D4",
+  "result": "pass",
+  "landing": "20261027T233853-L-4127398",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

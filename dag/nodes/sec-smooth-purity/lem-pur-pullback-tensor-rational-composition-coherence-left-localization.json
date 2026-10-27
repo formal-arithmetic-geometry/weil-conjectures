@@ -1,0 +1,82 @@
+{
+ "id": "lem-pur-pullback-tensor-rational-composition-coherence-left-localization",
+ "kind": "statement",
+ "title": "Localization of the left rational composition route",
+ "statement": "theorem canonicalRationalPullbackTensorComposition_left_localization {X Y Z : Scheme.{u}} (f : X ⟶ Y) (h : Z ⟶ X) [hX : ∀ x : X, Invertible (l : X.residueField x)] [hY : ∀ y : Y, Invertible (l : Y.residueField y)] [hZ : ∀ z : Z, Invertible (l : Z.residueField z)] (M N : sfRationalConstructibleCategory l E Y) : HEq ((canonicalRationalPullbackTensor l E (h ≫ f) M N).hom ≫ (rationalDerivedTensor l E Z).map (Prod.mkHom (pullbackTensorRationalComposition l E f h M).hom (pullbackTensorRationalComposition l E f h N).hom)) ((sfRationalConstructibleLocalization l E Z).map ((canonicalIntegralPullbackTensor l E (h ≫ f) M.obj N.obj).hom ≫ (constructibleIntegralTensor l E Z).map (Prod.mkHom ((pullbackTensorIntegralComposition l E f h).hom.app M.obj) ((pullbackTensorIntegralComposition l E f h).hom.app N.obj))))",
+ "stmt_deps": [
+  "def-weil-derived-pullback-tensor-hom",
+  "def-pur-completed-pullback-tensor-comparison"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 07A4 and 0941; normalized localization of the left composition route."
+ },
+ "proof": [
+  {
+   "text": "Apply normalization of the rational canonical tensor and compositor, and bilinearity of localized tensor, to obtain the localization of the integral left route.",
+   "uses": [
+    "def-weil-derived-pullback-tensor-hom",
+    "def-pur-completed-pullback-tensor-comparison"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-derived-pullback-tensor-hom",
+  "def-pur-completed-pullback-tensor-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 07A4 and 0941; normalized localization of the left composition route."
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.PullbackTensorRationalCompositionCoherence",
+  "date": "2026-10-28",
+  "group": "D4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-pullback-tensor-composition-coherence",
+   "place": "Left-route localization substep."
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-purity-conv",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CanonicalRationalPullbackTensorCompositionLeftLocalization",
+  "file": "lean/Sheaf/Paper/CanonicalRationalPullbackTensorCompositionLeftLocalization.lean",
+  "declaration": "WeilConjectures.canonicalRationalPullbackTensorComposition_left_localization",
+  "statement": "theorem canonicalRationalPullbackTensorComposition_left_localization {X Y Z : Scheme.{u}}\n    (f : X ⟶ Y) (h : Z ⟶ X)\n    [hX : ∀ x : X, Invertible (l : X.residueField x)]\n    [hY : ∀ y : Y, Invertible (l : Y.residueField y)]\n    [hZ : ∀ z : Z, Invertible (l : Z.residueField z)]\n    (M N : sfRationalConstructibleCategory l E Y) :\n    HEq\n      ((canonicalRationalPullbackTensor l E (h ≫ f) M N).hom ≫\n        (rationalDerivedTensor l E Z).map (Prod.mkHom\n          (pullbackTensorRationalComposition l E f h M).hom\n          (pullbackTensorRationalComposition l E f h N).hom))\n      ((sfRationalConstructibleLocalization l E Z).map\n        ((canonicalIntegralPullbackTensor l E (h ≫ f) M.obj N.obj).hom ≫\n          (constructibleIntegralTensor l E Z).map (Prod.mkHom\n            ((pullbackTensorIntegralComposition l E f h).hom.app M.obj)\n            ((pullbackTensorIntegralComposition l E f h).hom.app N.obj))))",
+  "branch": "sheaf-dag",
+  "by": "D4",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D4",
+  "result": "pass",
+  "landing": "20261027T233853-L-4127398",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D4",
+  "result": "pass",
+  "landing": "20261027T233853-L-4127398",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
