@@ -7,6 +7,7 @@ module
 
 public import Sheaf.Paper.IntegralOrdinaryPullbackComparison
 public import Sheaf.Paper.CompletedPullbackTowerRealizations
+import all Sheaf.Paper.IntegralOperationsWellDefined
 
 /-! # Descent of the reduction/pullback augmentation equation
 
@@ -55,6 +56,20 @@ theorem pullbackReductionAugmentation_of_good {X Y : Scheme.{u}} (f : X ⟶ Y)
         (pullbackTensorCalculus l E X).adjunction.unit.app
             ((PurCompactSupport.pull (PurCompactSupport.completed l E) f).obj K) ≫
           (coefficientSequenceLimit l E X).map (a.hom.app K) := by
-  sorry
+  let L := integralOperationsGoodLocalization l E Y
+  let W := (HomologicalComplex.quasiIso (integralTowerModules l E Y) (.up ℤ)).inverseImage
+    (integralOperationsGoodComplex l E Y).ι
+  have : L.IsLocalization W := integralOperationsGoodLocalization_isLocalization l E Y
+  let b : PurCompactSupport.pull (PurCompactSupport.completed l E) f ⟶
+      pullbackTensorReferencePullback l E f :=
+    pullComparison l E f ≫ (pullbackTensorIntegralPullbackModel l E f).hom
+  let c : PurCompactSupport.pull (PurCompactSupport.completed l E) f ⟶
+      pullbackTensorReferencePullback l E f :=
+    Functor.whiskerLeft (PurCompactSupport.pull (PurCompactSupport.completed l E) f)
+        (pullbackTensorCalculus l E X).adjunction.unit ≫
+      Functor.whiskerRight a.hom (coefficientSequenceLimit l E X)
+  have h : b = c := Localization.natTrans_ext L W ha
+  intro K
+  exact congrArg (fun t ↦ t.app K) h
 
 end WeilConjectures.IntegralOrdinary

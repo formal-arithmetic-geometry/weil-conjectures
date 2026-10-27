@@ -65,16 +65,33 @@
  },
  "proof": [
   {
-   "text": "Carry out the corresponding representative calculation or localization descent described in the declaration docstring.",
+   "text": "Use the existing integralOperationsGoodLocalization_isLocalization theorem from IntegralOperationsWellDefined to identify the good-complex functor L with a localization at the inverse image of cochain quasi-isomorphisms.",
+   "uses": [
+    "lem-pur-integral-operations-well-defined"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Form the natural transformation b as pullComparison followed by the hom of pullbackTensorIntegralPullbackModel. Form c by whiskering the reduction/limit adjunction unit with ordinary pullback and then whiskering a.hom with coefficientSequenceLimit. Their source and target are the same functors, and the given hypothesis ha is precisely equality of their components on L(P).",
    "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Apply Mathlib Localization.natTrans_ext to L, its quasi-isomorphism class W and ha to obtain b = c. Evaluate this equality at the arbitrary derived object K. This proves the original component equation without any new representative calculation.",
+   "uses": [
+    "lem-weil-pbc-localization-universal-property"
+   ],
    "elementary": false
   }
  ],
- "proof_deps": [],
+ "proof_deps": [
+  "lem-pur-integral-operations-well-defined",
+  "lem-weil-pbc-localization-universal-property"
+ ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-rem-sf-pf-done/fix-prop-projection-formula.proof.md",
-  "place": "Decomposition of the coherent reduction mate into representative calculation and localization descent"
+  "place": "The localization descent step, implemented directly by Mathlib Localization.natTrans_ext and the existing good-representative localization theorem; V2, 2026-10-28."
  },
  "lean": {
   "existing": false,
@@ -106,10 +123,10 @@
   "date": "2026-10-27",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "C6",
+  "group": "V2",
   "result": "pass",
-  "landing": "20261027T205848-L-1625313",
-  "kind": "interface",
+  "landing": "20261027T234334-L-105416",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
