@@ -8,6 +8,7 @@ module
 public import Sheaf.Paper.IntegralCompactSupportCoefficientComparison
 public import Sheaf.Paper.FrobeniusWitnessedCompactification
 import Sheaf.Paper.FiniteRingRefinementCoordinatesCore
+import Sheaf.Paper.RingOpenMapOpenUnit
 
 /-! # Finite ring-sheaf coordinates of one normalized refinement
 
@@ -22,6 +23,25 @@ set_option backward.isDefEq.respectTransparency.types true
 universe w
 open CategoryTheory AlgebraicGeometry AlgebraicGeometry.Scheme
 namespace WeilConjectures.ConstructibleExceptionalCoefficients
+
+private theorem normalized_iso_unique
+    {C D : Type*} [Category* C] [Category* D] {F : C ⥤ D} {G : D ⥤ C}
+    (adj : F ⊣ G) {K T : C} {M : D} (η : K ⟶ T) (ρ : G.obj M ⟶ T)
+    (e e' : F.obj K ≅ M) (hu : IsIso adj.unit) (hη : IsIso η)
+    (he : adj.homEquiv _ _ e.hom ≫ ρ = η)
+    (he' : adj.homEquiv _ _ e'.hom ≫ ρ = η) : e = e' := by
+  let := hu
+  let := hη
+  have : IsIso (adj.homEquiv _ _ e.hom) := by
+    rw [Adjunction.homEquiv_unit]
+    infer_instance
+  have : IsIso (adj.homEquiv _ _ e.hom ≫ ρ) := by
+    rw [he]
+    infer_instance
+  have : IsIso ρ := IsIso.of_isIso_comp_left (adj.homEquiv _ _ e.hom) ρ
+  apply Iso.ext
+  apply (adj.homEquiv _ _).injective
+  exact (cancel_mono ρ).mp (he.trans he'.symm)
 
 /-- The finite open-unit refinement word has the recorded intrinsic coordinates.
 Source: compactification-coherence proof, first two paragraphs; Stacks 03DI, 03D6, 0F7B
@@ -88,6 +108,20 @@ theorem finite_ring_refinement_coordinates
       (PurCompactSupport.finiteImageIso l E n d).app O.K =
     (PurCompactSupport.finiteImageIso l E n c).app O.K ≪≫
       FrobeniusExchange.intrinsicRefinement
-        (Padic.coefficientExtensionRing l E (n + 1)) r O := by sorry
+        (Padic.coefficientExtensionRing l E (n + 1)) r O := by
+  obtain ⟨ε₀, hε₀, hcoord⟩ :=
+    finite_ring_refinement_coordinates_canonical l E n r O hi hg
+  have heq : ε = ε₀ := normalized_iso_unique
+    (PurCompactSupport.openDerivedAdjunction
+      (PurCompactSupport.finite l E (n + 1) (Nat.succ_pos n)) d.i) _ _ ε ε₀
+    (PurCompactSupport.openDerivedAdjunction_unit_isIso _ d.i)
+    (by
+      let adj := PurCompactSupport.openDerivedAdjunction
+        (PurCompactSupport.finite l E (n + 1) (Nat.succ_pos n)) c.i
+      let := PurCompactSupport.openDerivedAdjunction_unit_isIso
+        (PurCompactSupport.finite l E (n + 1) (Nat.succ_pos n)) c.i
+      exact NatIso.isIso_app_of_isIso adj.unit O.K) hε hε₀
+  subst ε
+  exact hcoord
 
 end WeilConjectures.ConstructibleExceptionalCoefficients

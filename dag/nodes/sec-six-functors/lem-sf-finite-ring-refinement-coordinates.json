@@ -17,9 +17,9 @@
  },
  "proof": [
   {
-   "text": "Put A=O_E/(pi_E^(n+1)). The theorem finiteDirectImage_eq identifies the ring-sheaf direct image with constant-A direct image on sections, including its structural ring map. Its left-adjoint uniqueness comparison is finitePullbackIso, and the corresponding open left-adjoint uniqueness comparison is finiteOpenIso. Their defining unit equations transport the displayed normalization to the constant-coefficient open adjunction.",
+   "text": "Apply the already stated finite_ring_refinement_coordinates_canonical to r, O, hi and hg, obtaining a canonical isomorphism epsilon_0, its open-unit normalization and its endpoint coordinate formula. No new witness theorem is introduced.",
    "uses": [
-    "lem-pur-compact-support-integral-coefficient-comparison"
+    "lem-sf-finite-ring-refinement-coordinates-canonical"
    ],
    "elementary": false,
    "source": {
@@ -28,11 +28,9 @@
    }
   },
   {
-   "text": "Retain the supplied bounded-below etale-origin witness O.L and O.alpha. The canonical proper/open comparison transported through that very witness has the same open-adjunction transpose, followed by the same pullback-composition and proper-counit restriction, equal to the open unit. Open extension is fully faithful, so the unit is invertible. Since epsilon is an isomorphism, its transpose is also invertible. Its normalization makes the restriction factor invertible. Cancel this factor and use injectivity of the Hom equivalence to identify epsilon with the transported canonical proper/open comparison.",
+   "text": "The units of both open derived adjunctions are invertible by openDerivedAdjunction_unit_isIso. For an isomorphism epsilon, its transpose is the open unit followed by restriction of epsilon, hence invertible. Since that transpose followed by the restriction factor equals the other invertible open unit, the restriction factor is invertible. Cancel it between the two normalization equations, then apply injectivity of the adjunction Hom equivalence and Iso.ext. Thus epsilon equals epsilon_0. This argument applies to identity and empty opens and zero objects.",
    "uses": [
-    "lem-weil-pbc-proper-open-comparison-proetale",
-    "def-pur-integral-compact-support-coefficient-data",
-    "def-weil-frobenius-witnessed-compactification"
+    "lem-sf-ring-open-map-open-unit"
    ],
    "elementary": false,
    "source": {
@@ -41,13 +39,11 @@
    }
   },
   {
-   "text": "The ring-sheaf proper compositor is defined as the conjugate of pullback composition. Sectionwise normalization of finiteDirectImage_eq and the unit equations of finitePullbackIso identify this compositor with the canonical constant-coefficient direct-image compositor. Its derived version is identified by the uniqueness of right-derived extension. Substitute the comparison from the preceding step into the inverse-compositor/proper-image word. Naturality cancels the open and proper coordinate isomorphisms. The endpoint coordinate changes are exactly finiteImageIso; the remaining witnessed word is intrinsicRefinement by its explicit definition. All cancellations are isomorphism cancellations, so they also apply to zero objects, empty opens, and identity refinements. No cartesian refinement square is assumed.",
+   "text": "Substitute epsilon = epsilon_0 in the required equality and use the canonical witness endpoint formula. The statement, the retained etale-origin witness and all coefficient-composition hypotheses remain unchanged.",
    "uses": [
-    "lem-pur-compact-support-integral-coefficient-comparison",
-    "lem-weil-derived-direct-image-composition",
-    "def-weil-frobenius-witnessed-compactification"
+    "lem-sf-finite-ring-refinement-coordinates-canonical"
    ],
-   "elementary": false,
+   "elementary": true,
    "source": {
     "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/prop-compactification-coherence.proof.md",
     "place": "First two paragraphs: the inverse proper/open comparison followed by the proper direct-image compositor; its finite intrinsic ring-sheaf coordinate identification. Stacks sites-modules.tex Tags 03D6 and 03DI, more-etale.tex Tag 0F7B."
@@ -55,16 +51,15 @@
   }
  ],
  "proof_deps": [
-  "def-pur-integral-compact-support-coefficient-data",
-  "def-weil-frobenius-witnessed-compactification",
-  "lem-pur-compact-support-integral-coefficient-comparison",
-  "lem-weil-derived-direct-image-composition",
-  "lem-weil-pbc-proper-open-comparison-proetale"
+  "lem-sf-finite-ring-refinement-coordinates-canonical",
+  "lem-sf-ring-open-map-open-unit"
  ],
  "proof_origin": {
   "by": "agent",
+  "group": "D2",
+  "date": "2026-10-28",
   "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/prop-compactification-coherence.proof.md",
-  "place": "First two paragraphs: the inverse proper/open comparison followed by the proper direct-image compositor; its finite intrinsic ring-sheaf coordinate identification. Stacks sites-modules.tex Tags 03D6 and 03DI, more-etale.tex Tag 0F7B."
+  "place": "First two paragraphs, using the existing canonical-witness theorem and the proved open-unit lemma; uniqueness is proved by categorical cancellation."
  },
  "mathlib_match": null,
  "mathlib_searches": [
@@ -133,16 +128,10 @@
   "date": "2026-10-27",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "B7",
+  "group": "D2",
   "result": "pass",
-  "landing": "20261027T205813-L-1617744",
-  "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
-  "sorry_before": [
-   "WeilConjectures.ConstructibleExceptionalCoefficients.finite_ring_refinement_coordinates"
-  ],
-  "sorry_after": [
-   "WeilConjectures.ConstructibleExceptionalCoefficients.finite_ring_refinement_coordinates"
-  ]
+  "landing": "20261027T233838-L-4122827",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
