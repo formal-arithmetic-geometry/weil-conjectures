@@ -14,61 +14,30 @@
  ],
  "proof": [
   {
-   "text": "By [def-trf-projective-bundle-morphism], choose $P=\\mathbf P_S(\\mathcal E)$, its projection $\\pi$, and a closed immersion $i:X\\hookrightarrow P$ over $S$ with $f=\\pi i$, absorbing the given isomorphism into $i$. Apply [lem-trf-projective-bundle-affine-presentations] to $\\mathcal E$. Obtain an affine covering $(U_\\alpha)$ and H-projective projections $\\mathbf P_{U_\\alpha}(\\mathcal E|_{U_\\alpha})\\to U_\\alpha$, together with finite generating sections and their closed embeddings into finite projective spaces.",
+   "text": "Unpack [def-trf-projective-bundle-morphism] to obtain a finite-type quasi-coherent module E, a closed immersion i into the canonical relative Proj of Sym(E), and the equality f = i ≫ relProjHom. Apply [lem-trf-canonical-relative-proj-proper] to the canonical projection.",
    "uses": [
     "def-trf-projective-bundle-morphism",
-    "lem-trf-projective-bundle-affine-presentations"
+    "lem-trf-canonical-relative-proj-proper"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/morphisms.tex",
-    "place": "Tags 01W8 (definition-projective) and 01WB (lemma-characterize-locally-projective), finite generators and local presentations"
-   }
+   "elementary": false
   },
   {
-   "text": "For $U=U_\\alpha$, the open-base clause of [lem-trf-projective-bundle-quotient-geometry] (with $V=U$; it assumes only quasi-coherence of $\\mathcal E$) identifies $P_U=\\pi^{-1}(U)=P\\times_SU$ canonically, over $U$, with $\\mathbf P_U(\\mathcal E|_U)$, carrying $\\pi|_{P_U}$ to the projective-bundle projection; the relative Proj there is that of the canonical symmetric graded algebra, which is the algebra of [def-trf-projective-bundle-morphism] on every affine open. Precomposing the finite-space closed embedding $j_\\alpha$ from Step 1 with this isomorphism preserves closed immersion: the underlying homeomorphism onto a closed subset and the surjective structure-sheaf map in [def-weil-closed-immersion] are composed with an isomorphism. Thus $P_U\\to U$ equals the projective-space projection composed with a closed immersion, so it is H-projective by [def-kun-projective], and is proper by [lem-kun-projective-implies-proper].",
+   "text": "The closed-immersion and composition clauses of [lem-kun-projective-implies-proper] make i proper and then make i ≫ relProjHom proper. Transport along the factorization equality to obtain properness of f.",
    "uses": [
-    "lem-trf-projective-bundle-quotient-geometry",
-    "def-trf-projective-bundle-morphism",
-    "def-weil-closed-immersion",
-    "def-kun-projective",
     "lem-kun-projective-implies-proper"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/morphisms.tex",
-    "place": "Tag 01WB (lemma-characterize-locally-projective), proof: X_U a closed subscheme of P(E) over the affine U, closed immersion into P^n_R; Tag 01WC proof, properness of H-projective morphisms."
-   }
-  },
-  {
-   "text": "Put $X_U=f^{-1}(U)$. Since $f=\\pi i$, the inverse image under $i$ of the open subscheme $P_U$ is exactly $X_U$. Hence $i_U:X_U\\to P_U$ is the base change of $i$ along $P_U\\hookrightarrow P$, and is a closed immersion by [lem-weil-pbc-closed-immersion-base-change]. The restriction of $f$ is $(\\pi|_{P_U})i_U$. Step 2 and clause (b) of [lem-weil-pbc-closed-immersion-proper] make this composite proper. The opens $U$ cover $S$, so [lemma-nagata-projective-target-local] gives properness of $f$. This last application allows an infinite cover.",
-   "uses": [
-    "lem-weil-pbc-closed-immersion-base-change",
-    "lem-weil-pbc-closed-immersion-proper",
-    "lemma-nagata-projective-target-local"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/morphisms.tex",
-    "place": "Tag 01WC (lemma-locally-projective-proper), closed immersions, composition and locality; Tags 01QR, 01W5, 01W3 and 01W2"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "def-kun-projective",
   "def-trf-projective-bundle-morphism",
-  "def-weil-closed-immersion",
-  "lem-kun-projective-implies-proper",
-  "lem-trf-projective-bundle-affine-presentations",
-  "lem-trf-projective-bundle-quotient-geometry",
-  "lem-weil-pbc-closed-immersion-base-change",
-  "lem-weil-pbc-closed-immersion-proper",
-  "lemma-nagata-projective-target-local"
+  "lem-trf-canonical-relative-proj-proper",
+  "lem-kun-projective-implies-proper"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/morphisms.tex",
-  "place": "Tags 01WB and 01WC, proofs, using the open-base identification of projective bundles (lem-trf-projective-bundle-quotient-geometry) and the finite-generating-section embedding of Tag 087S."
+  "place": "Tags 01WB and 01WC: split off properness of the canonical relative Proj, then compose with the closed immersion."
  },
  "mathlib_searches": [
   {
@@ -233,5 +202,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C1",
+  "result": "pass",
+  "landing": "20261027T205822-L-1620572",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

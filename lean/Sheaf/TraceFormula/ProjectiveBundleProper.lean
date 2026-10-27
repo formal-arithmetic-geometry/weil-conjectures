@@ -6,12 +6,8 @@ module
 
 public import Sheaf.AlgebraicGeometry.ProjectiveBundleMorphism
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
-import Sheaf.AlgebraicGeometry.GloballyGeneratedProjectiveBundle
+import Sheaf.TraceFormula.CanonicalRelativeProjProper
 import Sheaf.AlgebraicGeometry.Morphisms.ProjectiveImpliesProper
-import Sheaf.AlgebraicGeometry.CoherentFiniteType
-import Sheaf.AlgebraicGeometry.QuasiCoherentSymmetricAlgebra
-import WeilConjectures.AlgebraicGeometry.RelativeProj.Basic
-import WeilConjectures.LinearAlgebra.SymmetricAlgebra.Graded
 
 /-!
 # Properness of projective-bundle morphisms
@@ -25,7 +21,6 @@ together with Lemma 01WB (lemma-characterize-locally-projective) and Definition 
 @[expose] public section
 
 set_option autoImplicit false
-set_option warn.sorry false
 
 universe u
 
@@ -54,7 +49,18 @@ morphism is proper.  These are the arguments recorded in the proof dependencies
 (blueprint: lem-trf-projective-bundle-proper). -/
 theorem projectiveBundle_proper {X S : Scheme.{u}} (f : X ⟶ S)
     (hf : IsProjectiveBundle f) : IsProper f := by
-  sorry
+  obtain ⟨E, hE, hEfin, i, hi, hcomp⟩ := hf
+  have hA : IsProper
+      (@SymmetricAlgebraSheaf.gradedAlgebraData S E hE).relProjHom :=
+    canonicalRelativeProj_proper E ⟨hE, hEfin⟩
+  have hi' : IsProper i :=
+    (hProjective_properness.2.2.1 i hi)
+  have hicomp : IsProper
+      (i ≫ (@SymmetricAlgebraSheaf.gradedAlgebraData S E hE).relProjHom) :=
+    hProjective_properness.2.2.2 i
+      (@SymmetricAlgebraSheaf.gradedAlgebraData S E hE).relProjHom hi' hA
+  rw [← hcomp]
+  exact hicomp
 
 end AlgebraicGeometry
 
