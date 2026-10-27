@@ -6,6 +6,7 @@ Authors: SHEAF group Q79
 module
 
 public import Sheaf.Paper.ExceptionalFiniteScalarMatesData
+import Sheaf.Paper.ExceptionalFiniteScalarOperationCore
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -33,7 +34,21 @@ theorem finiteScalarOperation_exists
     (f : X ⟶ Y) [f.IsOver (Spec (.of D.k))]
     [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]
     (c : Compactification f) : Nonempty (Operation l E n c) := by
-  sorry
+  classical
+  obtain ⟨o⟩ := operationCore_exists D l _hl E n f c
+  let o' : Operation l E n c := {
+    F := o.F
+    G := o.G
+    left := o.left
+    right := o.right
+    adjunction := o.adjunction
+    leftShift := o.leftShift
+    rightShift := o.rightShift
+    unitShift := o.unitShift
+    counitShift := o.counitShift
+    leftShiftRealization := o.leftShiftRealization
+    normalized := operationCore_normalized D l _hl E n f c o }
+  exact ⟨o'⟩
 
 
 end WeilConjectures.ExceptionalFiniteScalar

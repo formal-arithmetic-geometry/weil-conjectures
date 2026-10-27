@@ -1,0 +1,86 @@
+{
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-compatibility",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-compatibility/_section.md",
+  "place": "finite operation packaging"
+ },
+ "stmt_deps": [
+  "lem-sf-exceptional-finite-operations",
+  "def-sf-exceptional-finite-scalar-mates-data"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "agent": "E9",
+  "date": "2026-10-28",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-compatibility/_section.md",
+  "place": "package existing finite operation data and isolate normalization transport"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ExceptionalFiniteScalarOperation",
+  "date": "2026-10-28",
+  "group": "E9"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sf-exceptional-finite-scalar-operation",
+   "place": "finite operation packaging",
+   "via": []
+  },
+  "same_as": []
+ },
+ "id": "lem-sf-exceptional-finite-scalar-operation-core",
+ "kind": "statement",
+ "title": "Finite operation core package",
+ "statement": "theorem operationCore_exists (D : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (_hl : l ≠ D.p) (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (n : ℕ) {X Y : Scheme.{u}} [X.Over (Spec (.of D.k))] [Y.Over (Spec (.of D.k))] [LocallyOfFiniteType (X ↘ Spec (.of D.k))] [QuasiCompact (X ↘ Spec (.of D.k))] [LocallyOfFiniteType (Y ↘ Spec (.of D.k))] [QuasiCompact (Y ↘ Spec (.of D.k))] (f : X ⟶ Y) [f.IsOver (Spec (.of D.k))] [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f] (c : Compactification f) : Nonempty (OperationCore l E n c)",
+ "proof": [
+  {
+   "text": "Apply the existing finite exceptional operation construction and transport its realization and normalization data through the canonical comparison maps.",
+   "uses": [
+    "lem-sf-exceptional-finite-operations"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-exceptional-finite-operations"
+ ],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ExceptionalFiniteScalarOperationCore",
+  "file": "lean/Sheaf/Paper/ExceptionalFiniteScalarOperationCore.lean",
+  "branch": "sheaf-dag",
+  "by": "E9",
+  "date": "2026-10-28",
+  "declaration": "WeilConjectures.ExceptionalFiniteScalar.operationCore_exists",
+  "declarations": [
+   "WeilConjectures.ExceptionalFiniteScalar.operationCore_exists"
+  ],
+  "statement": "theorem operationCore_exists (D : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (_hl : l ≠ D.p) (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (n : ℕ) {X Y : Scheme.{u}} [X.Over (Spec (.of D.k))] [Y.Over (Spec (.of D.k))] [LocallyOfFiniteType (X ↘ Spec (.of D.k))] [QuasiCompact (X ↘ Spec (.of D.k))] [LocallyOfFiniteType (Y ↘ Spec (.of D.k))] [QuasiCompact (Y ↘ Spec (.of D.k))] (f : X ⟶ Y) [f.IsOver (Spec (.of D.k))] [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f] (c : Compactification f) : Nonempty (OperationCore l E n c)"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E9",
+  "result": "pass",
+  "landing": "20261027T205933-L-1635977",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E9",
+  "result": "pass",
+  "landing": "20261027T205933-L-1635977",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
