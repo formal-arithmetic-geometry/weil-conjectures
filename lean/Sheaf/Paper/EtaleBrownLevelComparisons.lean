@@ -7,6 +7,11 @@ module
 
 public import Sheaf.Paper.EtaleBrownProjectionRealization
 public import Sheaf.Paper.FiniteFieldFiber
+import Sheaf.Paper.EtaleBrownLevelRealization
+import Sheaf.Paper.EtaleBrownImageRealization
+import Sheaf.Paper.EtaleBrownProperScalarTransport
+import Sheaf.Paper.EtaleBrownOpenScalarTransport
+import WeilConjectures.CategoryTheory.InverseMateEquivalence
 
 /-! # Normalized finite-level geometric comparisons
 
@@ -31,6 +36,24 @@ attribute [local instance] CoefficientSystemOrdinaryImage.inverseAdditive
   CoefficientSystemOrdinaryImage.rightAdditive
   CoefficientSystemOrdinaryImage.systemInverseAdditive
   CoefficientSystemOrdinaryImage.systemRightAdditive
+
+private def inverseMateIso
+    {A B C D : Type*} [Category A] [Category B] [Category C] [Category D]
+    {L : A ⥤ B} {R : B ⥤ A} {L' : C ⥤ D} {R' : D ⥤ C}
+    {F : A ⥤ C} {G : B ⥤ D} [F.IsEquivalence] [G.IsEquivalence]
+    (a : L ⊣ R) (b : L' ⊣ R') (e : R ⋙ F ≅ G ⋙ R') :
+    L ⋙ G ≅ F ⋙ L' := by
+  let α := ((mateEquiv a b).symm (.mk _ _ _ _ e.hom)).natTrans
+  letI : IsIso α := isIso_inverseMate_of_equivalences a b e
+  exact (asIso α).symm
+
+private theorem inverseMateIso_mate
+    {A B C D : Type*} [Category A] [Category B] [Category C] [Category D]
+    {L : A ⥤ B} {R : B ⥤ A} {L' : C ⥤ D} {R' : D ⥤ C}
+    {F : A ⥤ C} {G : B ⥤ D} [F.IsEquivalence] [G.IsEquivalence]
+    (a : L ⊣ R) (b : L' ⊣ R') (e : R ⋙ F ≅ G ⋙ R') :
+    (mateEquiv a b (.mk _ _ _ _ (inverseMateIso a b e).inv)).natTrans = e.hom := by
+  exact congrArg TwoSquare.natTrans ((mateEquiv a b).apply_symm_apply _)
 
 /-- Normalized realizations and coefficient projection, without singleton extension.
 Source: Zheng, Construction 4.1, Constructions 5.14--5.15 and Lemma 5.16,
@@ -126,6 +149,107 @@ theorem etaleBrownLevelComparisons
         (ModuleCat.{u + 1} (strictEtaleBrownRing O t m)) c).map
           ((realizationX.scalar h).hom.app P) =
     (Etale.compactScalarMap (strictEtaleBrownRingMap O t h) c).app
-      ((realizationX.derived n).obj P)) := by sorry
+      ((realizationX.derived n).obj P)) := by
+  classical
+  have _ := hl
+  have _ := htorsion
+  obtain ⟨RX⟩ := etaleBrownLevelRealization_exists O t X S.PX
+  obtain ⟨RZ⟩ := etaleBrownLevelRealization_exists O t c.Z S.PZ
+  obtain ⟨RY⟩ := etaleBrownLevelRealization_exists O t Y S.PY
+  let rp (n : ℕ) := (etaleBrownImageRealization_exists O t c.g n S.properImage
+    (S.properDerived.level n) RZ RY).some
+  let ro (n : ℕ) := (etaleBrownImageRealization_exists O t c.i n S.openImage
+    (S.openDerived.level n) RX RZ).some
+  let : ∀ n, (RX.derived n).IsEquivalence := RX.val.equivalence
+  let : ∀ n, (RZ.derived n).IsEquivalence := RZ.val.equivalence
+  let a (n : ℕ) :=
+    ((Etale.openImmersionLowerShriekUpperStarAdjunction
+      (ModuleCat.{u + 1} (strictEtaleBrownRing O t n))
+      c.i).mapDerivedCategoryRightDerivedAdjunction).ofNatIsoRight
+      (Etale.upperStar (ModuleCat.{u + 1} (strictEtaleBrownRing O t n))
+        c.i).rightDerivedFunctorIsoMapDerivedCategory
+  let jo (n : ℕ) := inverseMateIso (S.levelDerivedOpenAdjunction n) (a n)
+    (ro n).inverse.symm
+  have hjo (n : ℕ) :
+      (mateEquiv (S.levelDerivedOpenAdjunction n) (a n)
+        (.mk _ _ _ _ (jo n).inv)).natTrans = (ro n).inverse.inv :=
+    inverseMateIso_mate _ _ _
+  have hp {m n : ℕ} (h : m ≤ n) :=
+    letI := hfinite n
+    etaleBrownProperScalarTransport O t c.g S.properImage S.PY S.PZ
+      S.properDerived RZ RY rp h
+  let pp {m n : ℕ} (h : m ≤ n) := (hp h).choose
+  have hpp {m n : ℕ} (h : m ≤ n) := (hp h).choose_spec.1
+  have hproper {m n : ℕ} (h : m ≤ n) := (hp h).choose_spec.2
+  have ho {m n : ℕ} (h : m ≤ n) :=
+    etaleBrownOpenScalarTransport O t c S RX RZ ro jo hjo h
+  let op {m n : ℕ} (h : m ≤ n) := (ho h).choose
+  have hop {m n : ℕ} (h : m ≤ n) := (ho h).choose_spec.1
+  have hopen {m n : ℕ} (h : m ≤ n) := (ho h).choose_spec.2
+  refine ⟨RX, RZ, RY, rp, ro, jo, @op, @pp, hjo, @hop, @hpp, ?_⟩
+  let lc (n : ℕ) : S.levelFunctor n ⋙ RY.derived n ≅
+      RX.derived n ⋙ Etale.rightDerivedLowerShriekOfCompactification
+        (ModuleCat.{u + 1} (strictEtaleBrownRing O t n)) c :=
+    Functor.associator _ _ _ ≪≫ isoWhiskerLeft _ (rp n).right ≪≫
+      (Functor.associator _ _ _).symm ≪≫ isoWhiskerRight (jo n) _ ≪≫
+      Functor.associator _ _ _
+  let q {m n : ℕ} (h : m ≤ n) : (S.PX.scalar h).derived ⋙ S.levelFunctor m ≅
+      S.levelFunctor n ⋙ (S.PY.scalar h).derived :=
+    (Functor.associator _ _ _).symm ≪≫ isoWhiskerRight (op h) _ ≪≫
+      Functor.associator _ _ _ ≪≫ isoWhiskerLeft _ (pp h) ≪≫
+      (Functor.associator _ _ _).symm
+  change ∀ {m n : ℕ} (h : m ≤ n)
+    (P : DerivedCategory (strictEtaleLevel X O t n)),
+    (Etale.scalarExtension (strictEtaleBrownRingMap O t h) Y).map ((lc n).inv.app P) ≫
+      (RY.scalar h).inv.app ((S.levelFunctor n).obj P) ≫
+      (RY.derived m).map ((q h).inv.app P) ≫
+      (lc m).hom.app ((S.PX.scalar h).derived.obj P) ≫
+      (Etale.rightDerivedLowerShriekOfCompactification
+        (ModuleCat.{u + 1} (strictEtaleBrownRing O t m)) c).map
+        ((RX.scalar h).hom.app P) =
+      (Etale.compactScalarMap (strictEtaleBrownRingMap O t h) c).app
+        ((RX.derived n).obj P)
+  intro m n h P
+  have hsquare :
+      (RY.derived m).map ((q h).inv.app P) ≫
+        (lc m).hom.app ((S.PX.scalar h).derived.obj P) ≫
+        (Etale.rightDerivedLowerShriekOfCompactification
+          (ModuleCat.{u + 1} (strictEtaleBrownRing O t m)) c).map
+          ((RX.scalar h).hom.app P) =
+      (RY.scalar h).hom.app ((S.levelFunctor n).obj P) ≫
+        (Etale.scalarExtension (strictEtaleBrownRingMap O t h) Y).map
+          ((lc n).hom.app P) ≫
+        (Etale.compactScalarMap (strictEtaleBrownRingMap O t h) c).app
+          ((RX.derived n).obj P) := by
+    have hn := (rp m).right.hom.naturality ((op h).inv.app P)
+    have ht := (Etale.scalarMate (strictEtaleBrownRingMap O t h) c.g).naturality
+      ((jo n).hom.app P)
+    -- Expose the subtype interfaces before expanding their projections.
+    unfold StrictEtaleCompactSupport at S
+    unfold StrictEtaleBrownRealization at RX RZ RY
+    unfold StrictEtaleBrownImageRealization at rp ro
+    dsimp +instances only [Functor.comp_map, Functor.comp_obj] at hn ht
+    dsimp +instances only [q, lc, StrictEtaleCompactSupport.levelFunctor,
+      Etale.compactScalarMap,
+      Etale.ExceptionalCoefficients.compactSupportMap,
+      Etale.rightDerivedLowerShriekOfCompactification]
+    simp +instances only [Iso.trans_hom, Iso.trans_inv, Iso.symm_hom, Iso.symm_inv,
+      NatTrans.comp_app, Functor.isoWhiskerLeft_hom, Functor.isoWhiskerRight_hom,
+      Functor.isoWhiskerLeft_inv, Functor.isoWhiskerRight_inv,
+      Functor.whiskerLeft_app, Functor.whiskerRight_app,
+      Functor.associator_hom_app, Functor.associator_inv_app,
+      Functor.map_comp,
+      Category.id_comp, Category.comp_id, Functor.comp_map,
+      Functor.comp_obj, Category.assoc]
+    rw [reassoc_of% hn]
+    simp +instances only [← Functor.map_comp]
+    rw [hopen h P]
+    simp only [Functor.map_comp]
+    rw [reassoc_of% (hproper h ((S.val.levelDerivedOpen n).obj P))]
+    rw [← reassoc_of% ht]
+  rw [hsquare]
+  simp only [Iso.inv_hom_id_app_assoc]
+  rw [← Functor.map_comp_assoc, Iso.inv_hom_id_app,
+    _root_.CategoryTheory.Functor.map_id, Category.id_comp]
 
 end AlgebraicGeometry

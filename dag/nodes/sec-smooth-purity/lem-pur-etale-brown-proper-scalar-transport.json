@@ -1,0 +1,188 @@
+{
+ "id": "lem-pur-etale-brown-proper-scalar-transport",
+ "kind": "statement",
+ "title": "Proper scalar projection and its single-factor normalized realization square",
+ "statement": "For a proper morphism g:V→W, any supplied ordinary and derived strict image packages, normalized realizations and normalized image realizations, and m≤n with finite source quotient ring, the proper geometric mate of derivedTensor is invertible. Its inverse defines projection p. Under the normalized realizations p.inv satisfies the displayed square with the published scalarMate. This statement contains no open extension or compact-support comparison.\n\nNotation and interfaces: [def-per-strict-etale-system-interfaces], [def-pur-coefficient-system-image-data], [def-pur-etale-brown-projection-realization].\n\nPrecise statement:\n```lean\ntheorem etaleBrownProperScalarTransport\n    (O : Type (u + 1)) [CommRing O] (t : O)\n    {V W : Scheme.{u}} (g : V ⟶ W) [IsProper g]\n    (A : StrictEtaleOrdinaryImage O t g)\n    (PW : StrictEtaleEvaluation W O t) (PV : StrictEtaleEvaluation V O t)\n    (B : CoefficientSystemDerivedImage (J := W.smallEtaleTopology)\n      (K := V.smallEtaleTopology) O t _ _ _ A PW PV)\n    (RV : StrictEtaleBrownRealization O t V PV)\n    (RW : StrictEtaleBrownRealization O t W PW)\n    (rg : ∀ n, StrictEtaleBrownImageRealization O t g n A (B.level n) RV RW)\n    {m n : ℕ} (h : m ≤ n) [Finite (strictEtaleBrownRing O t n)] :\n    ∃ p : (PV.scalar h).derived ⋙ (B.level m).direct ≅\n        (B.level n).direct ⋙ (PW.scalar h).derived,\n      p.inv = (mateEquiv (B.level n).adjunction (B.level m).adjunction\n        (.mk _ _ _ _ (B.derivedTensor h).hom)).natTrans ∧\n      ∀ P : DerivedCategory (strictEtaleLevel V O t n),\n        (RW.derived m).map (p.inv.app P) ≫\n          (rg m).right.hom.app ((PV.scalar h).derived.obj P) ≫\n          (Etale.lowerStar (ModuleCat.{u + 1} (strictEtaleBrownRing O t m))\n            g).rightDerivedFunctor.map ((RV.scalar h).hom.app P) =\n        (RW.scalar h).hom.app ((B.level n).direct.obj P) ≫\n          (Etale.scalarExtension (strictEtaleBrownRingMap O t h) W).map\n            ((rg n).right.hom.app P) ≫\n          (Etale.scalarMate (strictEtaleBrownRingMap O t h) g).app\n            ((RV.derived n).obj P)\n```",
+ "source": {
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Construction 4.1, Constructions 5.14–5.15 and Lemma 5.16; Stacks 03CY, 06YY, 07A4 and 0GL6. The corresponding local step of lem-pur-etale-brown-level-comparisons."
+ },
+ "stmt_deps": [
+  "def-per-strict-etale-system-interfaces",
+  "def-pur-coefficient-system-image-data",
+  "def-pur-etale-brown-projection-realization"
+ ],
+ "proof": [
+  {
+   "step": 1,
+   "text": "form the geometric right mate of the recorded derivedTensor. Its transport\nthrough the normalized image and scalar comparisons is scalarMate: apply the scalar\nHom bijection, replace scalar comparisons by their restriction mates, and use the\nunit-compatible direct-image squares on cochains. The ordinary restriction square\nis the identity on sections in both encodings, so localization and the uniqueness\nof the right-derived unit give the same restricted square. The scalar unit equation\nthen identifies the transposes. This proves the displayed local square. The proper\nfinite-coefficient projection theorem makes scalarMate invertible on every derived\ninput. All other factors in the square are isomorphisms, and RW.derived m reflects\nisomorphisms; hence the recorded mate is invertible. Take its inverse isomorphism\nas projection. This proof applies to nonflat quotients and the zero ring; no bound\non the input, no regularity, and no separatedness of the target is used.",
+   "uses": [
+    "lem-fix-etale-proper-coefficient-tensor-unit",
+    "lem-pur-derived-mate-comparison",
+    "lem-pur-etale-scalar-mate-projection",
+    "lem-weil-pbc-mate-pasting"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-fix-etale-proper-coefficient-tensor-unit",
+  "lem-pur-derived-mate-comparison",
+  "lem-pur-etale-scalar-mate-projection",
+  "lem-weil-pbc-mate-pasting"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Zheng Construction 4.1 and Constructions 5.14–5.15, Lemma 5.16",
+  "place": "The local realization/scalar step of lem-pur-etale-brown-level-comparisons, expanded using the recorded interfaces."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "mapDerivedCategory.*[Ee]quivalence|conjugateIsoEquiv",
+   "date": "2026-10-27",
+   "results": {
+    "t": "2026-10-27T16:31:59Z",
+    "tool": "grep",
+    "query": "mapDerivedCategory.*[Ee]quivalence|conjugateIsoEquiv",
+    "sub": "",
+    "ok": true,
+    "n_hits": 25,
+    "note": "",
+    "top": [
+     "Mathlib/Condensed/Light/Small.lean",
+     "Mathlib/Condensed/Light/Small.lean",
+     "Mathlib/CategoryTheory/Adjunction/CompositionIso.lean",
+     "Mathlib/CategoryTheory/Adjunction/CompositionIso.lean",
+     "Mathlib/CategoryTheory/Adjunction/Unique.lean",
+     "Mathlib/CategoryTheory/Adjunction/Unique.lean",
+     "Mathlib/CategoryTheory/Adjunction/Unique.lean",
+     "Mathlib/CategoryTheory/Adjunction/Unique.lean"
+    ],
+    "digest": "3af53914b51740ac"
+   },
+   "verdict": "No exact normalized comparison statement; the generic mate and localization APIs are tools for the indicated step."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv",
+   "date": "2026-10-27",
+   "results": {
+    "t": "2026-10-27T16:31:59Z",
+    "tool": "loogle",
+    "query": "CategoryTheory.mateEquiv",
+    "sub": "",
+    "ok": true,
+    "n_hits": 12,
+    "note": "",
+    "top": [
+     "CategoryTheory.mateEquiv",
+     "CategoryTheory.mateEquiv_counit",
+     "CategoryTheory.mateEquiv_counit_symm",
+     "CategoryTheory.unit_mateEquiv",
+     "CategoryTheory.unit_mateEquiv_symm",
+     "CategoryTheory.conjugateEquiv_mateEquiv_vcomp",
+     "CategoryTheory.mateEquiv_conjugateEquiv_vcomp",
+     "CategoryTheory.mateEquiv_vcomp"
+    ],
+    "digest": "b8ac30fd6644aa85"
+   },
+   "verdict": "No exact normalized comparison statement; the generic mate and localization APIs are tools for the indicated step."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exact equivalence of sheaves of modules over a constant ring sheaf with module-valued sheaves induces equivalence of derived categories and compatible adjunction mates",
+   "date": "2026-10-27",
+   "results": {
+    "t": "2026-10-27T16:32:02Z",
+    "tool": "leanfinder",
+    "query": "Exact equivalence of sheaves of modules over a constant ring sheaf with module-valued sheaves induces equivalence of derived categories and compatible adjunction mates",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "SheafOfModules.pushforwardPushforwardAdj",
+     "SheafOfModules.PullbackConstruction.adjunction",
+     "CategoryTheory.Functor.IsDenseSubsite.sheafEquiv",
+     "SheafOfModules.pushforwardCongr",
+     "SheafOfModules.instIsRightAdjointPushforwardIdSheafRingCat",
+     "CategoryTheory.Functor.sheafAdjunctionCocontinuous_homEquiv_apply_val",
+     "SheafOfModules.pushforwardNatIso",
+     "SheafOfModules.toSheafCompSheafToPresheafIso"
+    ],
+    "digest": "e5050810822629ff"
+   },
+   "verdict": "No exact normalized comparison statement; the generic mate and localization APIs are tools for the indicated step."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An equivalence of categories of module sheaves induces an equivalence of derived categories compatible with adjunction mates and coefficient restriction",
+   "date": "2026-10-28",
+   "results": [
+    "SheafOfModules.PullbackConstruction.adjunction",
+    "SheafOfModules.pushforwardPushforwardAdj",
+    "CategoryTheory.Equivalence.sheafCongrPrecoherent",
+    "PresheafOfModules.sheafificationAdjunction",
+    "SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit",
+    "CategoryTheory.Equivalence.sheafCongr_functor",
+    "CategoryTheory.Equivalence.sheafCongrPrecoherent_functor_obj_val_obj",
+    "CategoryTheory.Equivalence.sheafCongr"
+   ],
+   "verdict": "Generic sheaf adjunctions and site equivalences; none is the normalized fixed-ring derived image or scalar transport statement. Use the local exact-localization and mate argument."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.EtaleBrownLevelComparisons",
+  "date": "2026-10-28",
+  "group": "M6"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-operations",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Local step of lem-pur-etale-brown-level-comparisons; the inherited created.item chain ends in a module name and has no imported blueprint ancestor.",
+   "via": [
+    "lem-pur-etale-brown-level-comparisons",
+    "lem-pur-etale-brown-geometric-comparisons",
+    "lem-pur-etale-system-brown-construction"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.EtaleBrownProperScalarTransport",
+  "file": "lean/Sheaf/Paper/EtaleBrownProperScalarTransport.lean",
+  "declaration": "AlgebraicGeometry.etaleBrownProperScalarTransport",
+  "statement": "theorem etaleBrownProperScalarTransport\n    (O : Type (u + 1)) [CommRing O] (t : O)\n    {V W : Scheme.{u}} (g : V ⟶ W) [IsProper g]\n    (A : StrictEtaleOrdinaryImage O t g)\n    (PW : StrictEtaleEvaluation W O t) (PV : StrictEtaleEvaluation V O t)\n    (B : CoefficientSystemDerivedImage (J := W.smallEtaleTopology)\n      (K := V.smallEtaleTopology) O t _ _ _ A PW PV)\n    (RV : StrictEtaleBrownRealization O t V PV)\n    (RW : StrictEtaleBrownRealization O t W PW)\n    (rg : ∀ n, StrictEtaleBrownImageRealization O t g n A (B.level n) RV RW)\n    {m n : ℕ} (h : m ≤ n) [Finite (strictEtaleBrownRing O t n)] :\n    ∃ p : (PV.scalar h).derived ⋙ (B.level m).direct ≅\n        (B.level n).direct ⋙ (PW.scalar h).derived,\n      p.inv = (mateEquiv (B.level n).adjunction (B.level m).adjunction\n        (.mk _ _ _ _ (B.derivedTensor h).hom)).natTrans ∧\n      ∀ P : DerivedCategory (strictEtaleLevel V O t n),\n        (RW.derived m).map (p.inv.app P) ≫\n          (rg m).right.hom.app ((PV.scalar h).derived.obj P) ≫\n          (Etale.lowerStar (ModuleCat.{u + 1} (strictEtaleBrownRing O t m))\n            g).rightDerivedFunctor.map ((RV.scalar h).hom.app P) =\n        (RW.scalar h).hom.app ((B.level n).direct.obj P) ≫\n          (Etale.scalarExtension (strictEtaleBrownRingMap O t h) W).map\n            ((rg n).right.hom.app P) ≫\n          (Etale.scalarMate (strictEtaleBrownRingMap O t h) g).app\n            ((RV.derived n).obj P)",
+  "branch": "sheaf-dag",
+  "by": "M6",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M6",
+  "result": "pass",
+  "landing": "20261027T180709-L-3892130",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M6",
+  "result": "pass",
+  "landing": "20261027T180709-L-3892130",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

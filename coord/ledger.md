@@ -19769,3 +19769,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 18:07 L: merged deliver/M1/Sheaf.Paper.CompletedQuotientReductionPresentation (stage 3; reviewer PASS; first push; landing 20261027T180705-L-3891599 (interface); batch 20261027T180444; modules 1; new nodes 0)
 - 18:07 L: merged deliver/M1/Sheaf.Paper.ConstantCompletionOrdinaryPullComparison (stage 3; reviewer PASS; first push; landing 20261027T180706-L-3891770 (interface); batch 20261027T180444; modules 1; new nodes 0; change records: coord/changes/M1-ordinary-pull-comparison-proof.md)
 - 18:07 L: merged deliver/M3/Sheaf.Paper.QuotientSectionPullTransport (stage 3; reviewer PASS; first push; landing 20261027T180707-L-3892001 (proof); batch 20261027T180444; modules 1; new nodes 2)
+- 18:07 L: merged deliver/M6/Sheaf.Paper.EtaleBrownLevelComparisons (stage 3; reviewer PASS; first push; landing 20261027T180709-L-3892130 (interface); batch 20261027T180444; modules 5; new nodes 4)

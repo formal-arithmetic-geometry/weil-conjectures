@@ -15,44 +15,49 @@
  ],
  "proof": [
   {
-   "text": "Identify module sheaves over each constant quotient ring sheaf with sheaves over the quotient ring by constant-scalar restriction. Exact localization yields the derived realization; ordinary identity-on-sections restriction squares and scalar adjunction determine its normalization.",
+   "step": 1,
+   "text": "Apply the single-scheme realization theorem at X, c.Z and Y, and the single-image comparison theorem at each proper and open coefficient level.",
    "uses": [
-    "lem-cbc-constant-ring-module-sheaves",
-    "lem-weil-pbc-exact-functor-derived-factorization"
+    "lem-pur-etale-brown-level-realization",
+    "lem-pur-etale-brown-image-realization"
    ],
    "elementary": false
   },
   {
-   "text": "The sectionwise direct-image identification induces the unique right-derived comparison with the published lowerStar functor. Its mate gives inverse image. Conjugate the open inverse comparison against the extension/restriction adjunction.",
+   "step": 2,
+   "text": "Construct the open extension comparison as the inverse mate of the normalized inverse-image comparison. The realization functors are equivalences, so the inverse mate is an isomorphism. The inverse law for mateEquiv gives its required mate equation.",
    "uses": [
-    "lem-pur-coefficient-system-derived-comparison",
-    "def-weil-pbc-adjunction-conjugate"
+    "lem-stage3-inverse-mate-equivalences"
    ],
    "elementary": false
   },
   {
-   "text": "Take the proper scalar mate. Transport scalar_directImage_isIso and scalar_unit_directImage from the proper coefficient tensor-unit result through the normalized realizations. The open mate is scalar balancing, with its scalar unit equation from the open scalar exchange calculation. Paste these unit equations by naturality and the composite counit formula; uniqueness under the scalar adjunction identifies the inverse composite with the explicitly defined compactScalarMap. No successive-coefficient cocycle or system coefficient projection theorem is used.",
+   "step": 3,
+   "text": "Obtain the open and proper scalar projections from their single-factor transport theorems; install hfinite n for the proper factor. These give both displayed mate equations and the local scalar squares.",
    "uses": [
-    "lem-fix-etale-proper-coefficient-tensor-unit",
-    "lem-pur-etale-open-scalar-exchange",
-    "lem-weil-pbc-mate-pasting"
+    "lem-pur-etale-brown-proper-scalar-transport",
+    "lem-pur-etale-brown-open-scalar-transport"
    ],
    "elementary": false
+  },
+  {
+   "step": 4,
+   "text": "Expand the two pasted isomorphisms into their component maps. Naturality of the proper image realization moves the inverse open projection through it. Apply the local open square, then the local proper square. Naturality of scalarMate at the open comparison changes the result into the published proper mate followed by proper image of openIso, namely compactScalarMap. Precompose with the inverse scalar realization and the scalar image of inverse levelComparison; cancel the two isomorphism pairs. This proves the final transport equation on every derived object.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-cbc-constant-ring-module-sheaves",
-  "lem-weil-pbc-exact-functor-derived-factorization",
-  "lem-pur-coefficient-system-derived-comparison",
-  "def-weil-pbc-adjunction-conjugate",
-  "lem-fix-etale-proper-coefficient-tensor-unit",
-  "lem-pur-etale-open-scalar-exchange",
-  "lem-weil-pbc-mate-pasting"
+  "lem-pur-etale-brown-level-realization",
+  "lem-pur-etale-brown-image-realization",
+  "lem-stage3-inverse-mate-equivalences",
+  "lem-pur-etale-brown-proper-scalar-transport",
+  "lem-pur-etale-brown-open-scalar-transport"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
-  "place": "Zheng Construction 4.1; Lemma 5.13; Constructions 5.14–5.15 and Lemma 5.16. Explicit normalized Hom-transpose steps of lem-pur-etale-brown-geometric-comparisons."
+  "place": "Zheng Construction 4.1 and Constructions 5.14–5.15, Lemma 5.16. Four strictly local comparison obligations; open inverse-mate construction and proper/open naturality pasting proved in Lean by M6."
  },
  "mathlib_searches": [
   {
@@ -144,12 +149,12 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-25",
+  "date": "2026-10-27",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "H6",
+  "group": "M6",
   "result": "pass",
-  "landing": "20261025T180724-L-4024248",
+  "landing": "20261027T180709-L-3892130",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
