@@ -1,0 +1,134 @@
+{
+ "id": "lem-sf-canonical-reduction-tensor-pull-complex-component",
+ "kind": "lemma",
+ "title": "Degreewise ordinary reduction and total tensor pullback",
+ "statement": "For every degree n, the strict-system cochain maps in [lem-sf-canonical-reduction-tensor-pull-complex] have equal n-components. This is the finite pure-tensor calculation before homological-complex extensionality.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-pf-reduction/lem-fix-operation-reduction.proof.md",
+  "place": "First paragraph, the pure-tensor and finite-component calculation before assembling the strict cochain map; Stacks sites-cohomology.tex Tags 07A4, 07A6, 0941."
+ },
+ "stmt_deps": [
+  "def-sf-integral-system-canonical-bridge",
+  "lem-coef-tensor-reduction-strict-assembly",
+  "lem-pur-sequence-pullback-tensor-cochain"
+ ],
+ "proof": [
+  {
+   "text": "Expand both composites in degree n using the component formulas for homological-complex composition and functor maps.",
+   "uses": [
+    "def-sf-integral-system-canonical-bridge"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the finite-component characterization of tensorReductionStrictMap and the normalized unit formula for pullbackTensorSequenceCochain to the pure-tensor summands, then extend by balancing and additivity.",
+   "uses": [
+    "lem-coef-tensor-reduction-strict-assembly",
+    "lem-pur-sequence-pullback-tensor-cochain",
+    "lem-sf-scalar-pull-coefficient-total-tensor"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Check compatibility with every quotient transition; this gives equality of the n-components for arbitrary P and Q.",
+   "uses": [
+    "lem-coef-tensor-reduction-strict-assembly",
+    "lem-pur-sequence-pullback-tensor-cochain"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sf-integral-system-canonical-bridge",
+  "lem-coef-tensor-reduction-strict-assembly",
+  "lem-pur-sequence-pullback-tensor-cochain",
+  "lem-sf-scalar-pull-coefficient-total-tensor"
+ ],
+ "proof_origin": {
+  "by": "B6",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-pf-reduction/lem-fix-operation-reduction.proof.md",
+  "place": "First paragraph, before the direct-sum and differential assembly."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "degree component equality tensorReductionStrictMap pullbackTensorSequenceCochain",
+   "results": "No exact result for the ordinary strict-system component identity; only generic HomologicalComplex extensionality and tensor summand lemmas.",
+   "date": "2026-10-28",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "loogle",
+   "query": "HomologicalComplex.Hom.ext",
+   "results": "Generic extensionality theorem for homological-complex morphisms.",
+   "date": "2026-10-28",
+   "verdict": "Used by the parent theorem, not a proof of the component identity."
+  },
+  {
+   "tool": "grep",
+   "query": "tensorReductionStrictMap.*pullbackTensorSequenceCochain|reductionPullComplex.*tensor",
+   "results": "No existing theorem for this degreewise square.",
+   "date": "2026-10-28",
+   "verdict": "The component calculation remains a new statement."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.CanonicalReductionTensorPullComplex",
+  "date": "2026-10-28",
+  "group": "B6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sf-canonical-reduction-tensor-pull-complex",
+   "place": "Proof step 2, before direct-sum assembly and cochain extensionality.",
+   "via": [
+    "lem-sf-canonical-reduction-tensor-pull-complex"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-compatibility",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.CanonicalReductionTensorPullComplexComponent",
+  "file": "lean/Sheaf/SixFunctors/CanonicalReductionTensorPullComplexComponent.lean",
+  "declaration": "WeilConjectures.IntegralSystemRealization.canonicalReductionTensorPullComplex_component",
+  "statement": "theorem canonicalReductionTensorPullComplex_component\n    (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]\n    [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]\n    (a : OrdinaryLimitModel l E) {U V : Scheme.{u}} (f : U ⟶ V)\n    (P Q : CochainComplex (integralTowerModules l E V) ℤ) (n : ℤ) :\n    let F := (integralOrdinaryPull l E f).mapHomologicalComplex (.up ℤ)\n    let R (W : Scheme.{u}) :=\n      (pullbackTensorOrdinaryReduction l E W).mapHomologicalComplex (.up ℤ)\n    let S := (pullbackTensorSequenceInverse l E f).mapHomologicalComplex (.up ℤ)\n    let T := (coefficientTotalTensor.{u, u + 1, u} (ProEt.topology V)\n      (completedIntegralCommRingSheafUnrestricted l E V)).obj (P, Q)\n    (a.reductionPullComplex l E f T ≫\n        S.map (tensorReductionStrictMap l E V P Q) ≫\n        (pullbackTensorSequenceCochain l E f).hom.app ((R V).obj P, (R V).obj Q)).f n =\n      ((R U).map\n          (proEtaleTensorPullbackTotalIso f ((PurCompactSupport.completed l E).ring V)\n            ((PurCompactSupport.completed l E).ring U)\n            ((PurCompactSupport.completed l E).pull f) P Q).inv ≫\n        tensorReductionStrictMap l E U (F.obj P) (F.obj Q) ≫\n        (coefficientTotalTensor.{u, u + 1, u}\n          (coefficientSequenceTopology (ProEt.topology U))\n          (coefficientSequenceCommRingSheaf l E U)).map\n          (Prod.mkHom (a.reductionPullComplex l E f P)\n            (a.reductionPullComplex l E f Q))).f n",
+  "branch": "sheaf-dag",
+  "by": "B6",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B6",
+  "result": "pass",
+  "landing": "20261027T233808-L-4116113",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B6",
+  "result": "pass",
+  "landing": "20261027T233808-L-4116113",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
