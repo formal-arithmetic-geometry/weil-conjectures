@@ -555,6 +555,7 @@ private theorem localizationPullbackEquality {V W : Scheme.{u}} (f : V ⟶ W)
       have hq := congrArg Iso.inv (eq_of_heq (hβ Q.stage L hQ Q.obj))
       dsimp only [Iso.app_hom, Iso.app_inv] at hp hq
       rw [hp, hq]
+      rfl
   · exact (commonStageDerivedPullback_existsUnique l Ω f).exists.choose_spec
 
 private theorem localizationProofIndexedEq {A B : Sort*} {P : A → Prop}
