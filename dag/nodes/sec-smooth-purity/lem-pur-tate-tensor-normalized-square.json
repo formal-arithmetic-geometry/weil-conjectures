@@ -1,0 +1,109 @@
+{
+ "id": "lem-pur-tate-tensor-normalized-square",
+ "kind": "statement",
+ "title": "Finite scalar square of an existing projection-normalized Tate tower",
+ "statement": "Let T be a Noetherian scheme, ell a prime invertible on T, and d a natural number. Suppose M is an AdicTower for datum ell, e_n identifies its levels with derivedRealization of finiteTwist, h identifies its tower with strictDerivedTower, and ProjectionNormalized T ell hT d M e h holds, using [def-pur-condensed-tate-integral-tower-data] and [def-weil-pbc-bounded-constructible-tower]. For one fixed pair a<=b and every generator-normalized CoefficientLineComparison r of the ell^(b+1) and ell^(a+1) root lines, extension of e_b followed by scalarComparison and derivedRealization of proTwistMap d r equals M.normalization followed by e_a. No construction or existence of M,e,h,r is claimed.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-purity-transport/_section.md",
+  "place": "Step 4: equality of normalization squares for a fixed comparable pair of lem-pur-normalized-tate-tensor-reductions"
+ },
+ "stmt_deps": [
+  "def-pur-condensed-tate-integral-tower-data",
+  "def-weil-pbc-bounded-constructible-tower"
+ ],
+ "proof": [
+  {
+   "text": "Use ProjectionNormalized to compare both maps on their single-sheaf models. On local scalar/root generators, roots_power and generators of the given comparison agree with actual root projections; derived_normalization supplies the scalar counit/single comparison. Tensor factor by factor, using coefficient multiplication at d=0, and take the prescribed site and scalar adjunction mates. By AdicTower.transition the other map is the strict quotient transition. The two paths both send ((x tensor c) tensor a) to x tensor q(c)a. Fixed-degree single is fully faithful, and exact restriction retains underlying sheaf maps; equality therefore follows from generator equality and sheafification. This proves the square for an existing tower without constructing any data.",
+   "uses": [
+    "def-pur-roots-of-unity-sheaf",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pur-roots-of-unity-sheaf",
+  "def-pur-sheaf-tensor-product"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-purity-transport/_section.md",
+  "place": "Step 4: equality of normalization squares for a fixed comparable pair"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "An inverse system of roots of unity tensor powers has a canonical projection-normalized derived reduction tower",
+   "results": "TensorProduct.directLimitLeft_symm_of_tmul, TensorProduct.fromDirectLimit, InverseSystem.isNatEquiv_piEquivLim, ProfiniteGrp.isIso_toLimit and rootsOfUnityEquivNthRoots_symm_apply; none states ordinary sheaf balancing with these projections, the derived strict tower lift, or its finite scalar square.",
+   "date": "2026-10-27",
+   "verdict": "No matching statement."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An inverse limit of locally free roots of unity sheaves has normalized reductions equal to finite Tate tensor powers",
+   "results": "BDeRhamPlus, BDeRham, Ideal.rootsOfUnityMapQuot, AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_symm_of; no sheaf or derived normalization theorem. Loogle CategoryTheory.Functor.map_comp supplies only assembly glue.",
+   "date": "2026-10-27",
+   "verdict": "No matching statement."
+  },
+  {
+   "tool": "grep",
+   "query": "ProjectionBalanced|ProjectionNormalized|strictDerivedTower|AdicTower; whole blueprint titles: normalized.*tate.*tower|tate.*tensor.*quotient|strict.*quotient.*tower",
+   "results": "Mathlib has no matching project predicates. The project has the parent NormalizedTateTensorTowerCore, its assembled parent and the separate constructibility and zero clauses. QuotientRootLineComparison already proves existence of normalized finite comparisons and is reused. OrdinaryLineDerivedScalarComparison is general line/scalar theory but does not identify these actual integral projections or construct this strict ordinary quotient tower.",
+   "date": "2026-10-27",
+   "verdict": "No duplicate of these individual components found; reuse existing finite root comparison."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.NormalizedTateTensorTowerCore",
+  "date": "2026-10-27",
+  "group": "D4"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-purity-transport",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sk-thm-purity-transport",
+   "place": "Step 4: equality of normalization squares for a fixed comparable pair within Step 2 (adic stage)",
+   "via": [
+    "lem-pur-normalized-tate-tensor-reductions",
+    "lem-pur-normalized-tate-tensor-tower",
+    "lem-pur-condensed-tate-integral-tower"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.TateTensorNormalizedSquare",
+  "file": "lean/Sheaf/Paper/TateTensorNormalizedSquare.lean",
+  "declaration": "AlgebraicGeometry.Scheme.PurityIntegralTower.tateTensor_normalizedSquare",
+  "statement": "theorem tateTensor_normalizedSquare\n    (T : Scheme.{u}) [IsNoetherian T] (ell : ℕ) [Fact ell.Prime]\n    (hT : IsUnit (ell : Γ(T, ⊤))) (d : ℕ)\n    (M : AdicTower T (datum.{u} ell))\n    (e : ∀ n : ℕ, M.level n ≅ (derivedRealization T ell n).obj (finiteTwist T ell n d))\n    (h : M.tower = strictDerivedTower T ell d)\n    (hp : ProjectionNormalized T ell hT d M e h)\n    (b a : ℕ) (hab : a ≤ b)\n    (r : CoefficientLineComparison\n      (FiniteReduction.quotient.{u} ell (Nat.add_le_add_right hab 1))\n      (ell ^ (b + 1)) (ell ^ (a + 1))\n      (CharP.cast_eq_zero _ _) (CharP.cast_eq_zero _ _) T) :\n    (pbcDerivedExtend (pbcAdicQuotient T (datum.{u} ell) b a hab)).map (e b).hom ≫\n        (scalarComparison T ell b a hab).hom.app (finiteTwist T ell b d) ≫\n        (derivedRealization T ell a).map (proTwistMap d r) =\n      (M.normalization b a hab).hom ≫ (e a).hom",
+  "branch": "sheaf-dag",
+  "by": "D4",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D4",
+  "result": "pass",
+  "landing": "20261027T180523-L-3870450",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D4",
+  "result": "pass",
+  "landing": "20261027T180523-L-3870450",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

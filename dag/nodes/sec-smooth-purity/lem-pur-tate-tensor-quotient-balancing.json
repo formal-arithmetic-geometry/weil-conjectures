@@ -1,0 +1,115 @@
+{
+ "id": "lem-pur-tate-tensor-quotient-balancing",
+ "kind": "statement",
+ "title": "Projection-balanced ordinary quotient of an integral Tate tensor",
+ "statement": "Let T be a Noetherian scheme, ell a prime invertible on T, and n,d natural numbers. Using the actual completed root tensor and quotientLine of [def-pur-condensed-tate-integral-tower-data], there is a sheaf isomorphism from realization T ell n of finiteSheaf T ell n d to quotientLine T ell n d satisfying ProjectionBalanced, with all local quotient scalars and every compatible root lift. This makes no derived or tower assertion.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-purity-transport/_section.md",
+  "place": "Step 1: ordinary quotient balancing and its root-projection formula of lem-pur-normalized-tate-tensor-reductions"
+ },
+ "stmt_deps": [
+  "def-pur-condensed-tate-integral-tower-data",
+  "def-weil-pbc-bounded-constructible-tower"
+ ],
+ "proof": [
+  {
+   "text": "On the compatible primitive-root covering, identify the completed root module with the completed coefficient unit by sending a compatible residue family to the corresponding powers of the compatible roots. The actual projections are residue followed by the finite root generator. Use the fixed residue and completion isomorphisms and iterate sheaf tensor balancing to identify the d-fold integral quotient with the finite ordinary root tensor. At zero use coefficient multiplication. The arbitrary-scalar formula is exactly ProjectionBalanced and hence glues.",
+   "uses": [
+    "lem-pur-twist-sheaf-locally-free",
+    "det-def-sp-tate-twist-locally-free",
+    "def-pur-sheaf-inverse-limit",
+    "lem-weil-pbc-constant-completion-equivalence",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-twist-sheaf-locally-free",
+  "det-def-sp-tate-twist-locally-free",
+  "def-pur-sheaf-inverse-limit",
+  "lem-weil-pbc-constant-completion-equivalence",
+  "def-pur-sheaf-tensor-product"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-purity-transport/_section.md",
+  "place": "Step 1: ordinary quotient balancing and its root-projection formula"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "An inverse system of roots of unity tensor powers has a canonical projection-normalized derived reduction tower",
+   "results": "TensorProduct.directLimitLeft_symm_of_tmul, TensorProduct.fromDirectLimit, InverseSystem.isNatEquiv_piEquivLim, ProfiniteGrp.isIso_toLimit and rootsOfUnityEquivNthRoots_symm_apply; none states ordinary sheaf balancing with these projections, the derived strict tower lift, or its finite scalar square.",
+   "date": "2026-10-27",
+   "verdict": "No matching statement."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An inverse limit of locally free roots of unity sheaves has normalized reductions equal to finite Tate tensor powers",
+   "results": "BDeRhamPlus, BDeRham, Ideal.rootsOfUnityMapQuot, AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_symm_of; no sheaf or derived normalization theorem. Loogle CategoryTheory.Functor.map_comp supplies only assembly glue.",
+   "date": "2026-10-27",
+   "verdict": "No matching statement."
+  },
+  {
+   "tool": "grep",
+   "query": "ProjectionBalanced|ProjectionNormalized|strictDerivedTower|AdicTower; whole blueprint titles: normalized.*tate.*tower|tate.*tensor.*quotient|strict.*quotient.*tower",
+   "results": "Mathlib has no matching project predicates. The project has the parent NormalizedTateTensorTowerCore, its assembled parent and the separate constructibility and zero clauses. QuotientRootLineComparison already proves existence of normalized finite comparisons and is reused. OrdinaryLineDerivedScalarComparison is general line/scalar theory but does not identify these actual integral projections or construct this strict ordinary quotient tower.",
+   "date": "2026-10-27",
+   "verdict": "No duplicate of these individual components found; reuse existing finite root comparison."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.NormalizedTateTensorTowerCore",
+  "date": "2026-10-27",
+  "group": "D4"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-purity-transport",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sk-thm-purity-transport",
+   "place": "Step 1: ordinary quotient balancing and its root-projection formula within Step 2 (adic stage)",
+   "via": [
+    "lem-pur-normalized-tate-tensor-reductions",
+    "lem-pur-normalized-tate-tensor-tower",
+    "lem-pur-condensed-tate-integral-tower"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.TateTensorQuotientBalancing",
+  "file": "lean/Sheaf/Paper/TateTensorQuotientBalancing.lean",
+  "declaration": "AlgebraicGeometry.Scheme.PurityIntegralTower.tateTensorQuotient_balancing",
+  "statement": "theorem tateTensorQuotient_balancing\n    (T : Scheme.{u}) [IsNoetherian T] (ell : ℕ) [Fact ell.Prime]\n    (hT : IsUnit (ell : Γ(T, ⊤))) (n d : ℕ) :\n    ∃ b : (realization T ell n).obj (finiteSheaf T ell n d) ≅ quotientLine T ell n d,\n      ProjectionBalanced T ell n d b",
+  "branch": "sheaf-dag",
+  "by": "D4",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D4",
+  "result": "pass",
+  "landing": "20261027T180523-L-3870450",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D4",
+  "result": "pass",
+  "landing": "20261027T180523-L-3870450",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
