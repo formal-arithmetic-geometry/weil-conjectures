@@ -20266,3 +20266,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 23:39 L: merged deliver/F6/Sheaf.Paper.PodReindexingReductionTensorSquare (stage 3; reviewer PASS; first push; landing 20261027T233934-L-4138968 (interface); batch 20261027T233735; modules 2; new nodes 1)
 - 23:39 L: merged deliver/F7/Sheaf.Paper.RingOpenMapNormalizedRefinementFinite (stage 3; reviewer PASS; first push; landing 20261027T233936-L-4139153 (proof); batch 20261027T233735; modules 1; new nodes 0)
 - 23:39 L: merged deliver/F8/Sheaf.Paper.RingOpenMapNormalizedRefinementIntegral (stage 3; reviewer PASS; first push; landing 20261027T233937-L-4139349 (proof); batch 20261027T233735; modules 1; new nodes 0)
+- 23:39 L: merged deliver/F9/Sheaf.SixFunctors.IntegralPullEvaluationCochainSquare (stage 3; reviewer PASS; first push; landing 20261027T233938-L-4139662 (interface); batch 20261027T233735; modules 2; new nodes 1)

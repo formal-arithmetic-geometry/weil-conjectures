@@ -1,0 +1,110 @@
+{
+ "id": "lem-sf-integral-pull-evaluation-cochain-square-component",
+ "kind": "statement",
+ "title": "Degreewise ordinary pullback evaluation transition square",
+ "statement": "For a prime l, a finite extension E of Q_l, a scheme map f:X→Y, n≥0, a normalized scalar restriction comparison r₀ heterogeneously equal to the canonical identity-on-sections comparison, a coefficient-system cochain complex P on Y and a degree i, the i-component of the ordinary cochain pullback evaluation comparison commutes with the coefficient transition on X, the scalar restriction map, the finite intrinsic pullback of the coefficient transition on Y, and the inverse mate of r₀.inv.",
+ "source": {
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Construction 4.1, printed p. 21, and the paragraph preceding Lemma 4.10, printed p. 23."
+ },
+ "stmt_deps": [
+  "def-pur-completed-pullback-tower-core",
+  "def-pur-completed-pullback-tensor-construction",
+  "def-coef-ringed-sequence-site",
+  "def-weil-pbc-adjunction-mate"
+ ],
+ "proof": [
+  {
+   "text": "Compute on a section at (n,U). The inverse-image/evaluation map is the inverse mate of the identity direct-image evaluation comparison, the intrinsic finite map preserves the adjunction unit, and scalar restriction/direct image act by the same underlying section map. Naturality in the horizontal coefficient arrow and the canonical identity-on-sections comparison r₀ identify both composites. Extensionality gives the component equality.",
+   "uses": [
+    "def-pur-completed-pullback-tower-core",
+    "def-pur-completed-pullback-tensor-construction",
+    "def-coef-ringed-sequence-site",
+    "def-weil-pbc-adjunction-mate"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pur-completed-pullback-tower-core",
+  "def-pur-completed-pullback-tensor-construction",
+  "def-coef-ringed-sequence-site",
+  "def-weil-pbc-adjunction-mate"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Construction 4.1 and paragraph preceding Lemma 4.10, degreewise section calculation."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "degreewise cochain pullback evaluation transition square",
+   "results": "8 hits, all unrelated CochainComplex constructors and no fixed pullback evaluation transition square.",
+   "date": "2026-10-28",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "loogle",
+   "query": "HomologicalComplex.hom_ext mapHomologicalComplex comp_f",
+   "results": "0 hits; mapHomologicalComplex was not recognized by the search service.",
+   "date": "2026-10-28",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "grep",
+   "query": "pullbackTensorSequenceInverseEvaluation coefficientSequenceTransition",
+   "results": "0 hits for a completed degreewise square.",
+   "date": "2026-10-28",
+   "verdict": "No exact match."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.IntegralPullEvaluationCochainSquare",
+  "date": "2026-10-28",
+  "group": "F9"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-compatibility",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "fix-prop-coherence",
+   "place": "Coefficient comparisons preserve evaluation and adjunction units/counits: ordinary quotient pullback square",
+   "via": [
+    "lem-sf-integral-pull-evaluation-cochain-square"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.IntegralPullEvaluationCochainSquareComponent",
+  "file": "lean/Sheaf/SixFunctors/IntegralPullEvaluationCochainSquareComponent.lean",
+  "declaration": "WeilConjectures.IntegralSystemRealization.integralPullEvaluation_cochainSquare_component",
+  "statement": "theorem integralPullEvaluation_cochainSquare_component {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ)\n    (r₀ : normalizedDVRModuleRes l E X (Nat.le_succ n) ⋙\n        proEtaleConstantModuleDirectImage f (Padic.coefficientExtensionRing l E (n + 2)) ≅\n      proEtaleConstantModuleDirectImage f (Padic.coefficientExtensionRing l E (n + 1)) ⋙\n        normalizedDVRModuleRes l E Y (Nat.le_succ n))\n    (hr₀ : HEq r₀ (proEtaleCoefficientDirectImageComparison f\n      (Padic.coefficientExtensionTransition l E (n + 1))).symm)\n    (P : CochainComplex (coefficientSequenceModules l E Y) ℤ) (i : ℤ) :\n    ((NatTrans.mapHomologicalComplex\n        (coefficientSequenceTransition l E X (Nat.le_succ n)) (.up ℤ)).app\n        (((pullbackTensorSequenceInverse l E f).mapHomologicalComplex (.up ℤ)).obj P)).f i ≫\n      (((normalizedDVRModuleRes l E X (Nat.le_succ n)).mapHomologicalComplex (.up ℤ)).map\n        ((ordinaryPullEvaluationComplex l E f n).hom.app P)).f i =\n    (((ordinaryPullEvaluationComplex l E f (n + 1)).hom.app P)).f i ≫\n      (((sfIntrinsicPullback (finiteCoefficientRing l E (n + 2)) f).mapHomologicalComplex\n        (.up ℤ)).map\n        ((NatTrans.mapHomologicalComplex\n          (coefficientSequenceTransition l E Y (Nat.le_succ n)) (.up ℤ)).app P)).f i ≫\n      ((NatTrans.mapHomologicalComplex\n        ((mateEquiv\n            (sfIntrinsicConstantModuleAdjunction f (finiteCoefficientRing l E (n + 1)))\n            (sfIntrinsicConstantModuleAdjunction f (finiteCoefficientRing l E (n + 2)))).symm\n          (TwoSquare.mk _ _ _ _ r₀.inv)).natTrans (.up ℤ)).app\n        (((coefficientSequenceEvaluation l E Y n).mapHomologicalComplex (.up ℤ)).obj P)).f i"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F9",
+  "result": "pass",
+  "landing": "20261027T233938-L-4139662",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F9",
+  "result": "pass",
+  "landing": "20261027T233938-L-4139662",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
