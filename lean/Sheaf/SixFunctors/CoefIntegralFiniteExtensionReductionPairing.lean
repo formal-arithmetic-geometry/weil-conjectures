@@ -1,6 +1,9 @@
 module
 
 public import Sheaf.SixFunctors.CoefIntegralFiniteExtensionCore
+import Sheaf.SixFunctors.CoefIntegralFiniteExtensionDeltaSquare
+import Sheaf.SixFunctors.CoefIntegralFiniteExtensionHomReductionSquare
+import Sheaf.SixFunctors.CoefIntegralFiniteExtensionBetaReductionSquare
 
 /-! # Canonical integral finite-extension comparisons
 
@@ -142,6 +145,13 @@ theorem reductionPairing
             (mE n).target (mL n).target (rE.obj K.obj) (integralDualizingFiniteTerm l E D X n) ≫
           Hn.map (Prod.mkHom (quotient l E L ι X n K.obj K.property.1).hom.op
             (finiteU l E L ι X D n))) := by
-  sorry
+  dsimp only
+  refine ⟨?_, ?_, ?_⟩
+  · exact CoefIntegralFiniteExtensionDeltaSquare l E L ι X D hl wE wL a b sE sL mE mL
+      hnatE hnatL hevalE hevalL hfinE hfinL
+  · exact CoefIntegralFiniteExtensionHomReductionSquare l E L ι X D hl wE wL a b sE sL mE mL
+      hnatE hnatL hevalE hevalL hfinE hfinL
+  · exact CoefIntegralFiniteExtensionBetaReductionSquare l E L ι X D hl wE wL a b sE sL mE mL
+      hnatE hnatL hevalE hevalL hfinE hfinL
 
 end WeilConjectures.IntegralFiniteExtension
