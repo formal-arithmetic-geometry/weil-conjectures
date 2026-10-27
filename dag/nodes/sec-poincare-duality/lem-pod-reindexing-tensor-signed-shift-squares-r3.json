@@ -1,0 +1,113 @@
+{
+ "id": "lem-pod-reindexing-tensor-signed-shift-squares-r3",
+ "kind": "statement",
+ "title": "Tensor-factor signed-shift squares",
+ "statement": "theorem podReindexingTensorSignedShifts_tensorSquares\n    {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]\n    [∀ x : X, Invertible (l : X.residueField x)]\n    [∀ y : Y, Invertible (l : Y.residueField y)]\n    (D : PodCompletionReindex l E g D) (hD : PodCompletionReindex.Laws l E g D)\n    (T : PodCompletedTensorReindex l E g D)\n    (hT : PodCompletedTensorReindex.Laws l E g D T)\n    (SY : PodTensorSignedShift l E Y) (SX : PodTensorSignedShift l E X) :\n    (∀ (M N M' N' : sfIntegralConstructibleCategory l E Y) (r : ℤ)\n      (a : M'.obj ≅ M.obj⟦r⟧) (b : N'.obj ≅ N.obj⟦r⟧), equation₁) ∧\n    (∀ (M N M' N' : sfIntegralConstructibleCategory l E Y) (r : ℤ)\n      (a : M'.obj ≅ M.obj⟦r⟧) (b : N'.obj ≅ N.obj⟦r⟧), equation₂)",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-poincare-duality/sk-thm-frobenius/prop-pod-dual-tate-data-compatibility.proof.md",
+  "place": "Steps 1 and 5; tensor-factor signed-shift squares."
+ },
+ "stmt_deps": [
+  "def-pod-completion-reindex-models",
+  "def-pod-completion-reindex-shifts",
+  "def-pod-completion-tensor-reindex-models",
+  "def-pod-completion-tensor-normalization"
+ ],
+ "proof": [
+  {
+   "text": "On homogeneous tensor generators reindexing preserves degrees and signs. Generator extensionality and the normalized Roos equations descend the two factor squares to completed tensor objects and derived presentations.",
+   "uses": [
+    "lem-pur-kflat-total-tensor-model",
+    "lem-pur-integral-operations-well-defined",
+    "lem-pod-reindexing-signed-roos-shift"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-poincare-duality/sk-thm-frobenius/prop-pod-dual-tate-data-compatibility.proof.md",
+    "place": "Steps 1 and 5; tensor-factor signed-shift squares."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-kflat-total-tensor-model",
+  "lem-pur-integral-operations-well-defined",
+  "lem-pod-reindexing-signed-roos-shift"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "lean/Sheaf/Paper/PodReindexingTensorSignedShifts.lean",
+  "place": "Steps 1 and 5; tensor-factor signed-shift squares."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "signed tensor shifts commute with reindexing and Roos models",
+   "results": "No exact project-specific match; generic tensor shift maps only.",
+   "date": "2026-10-28",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "NatTrans.CommShift tensor reindexing Roos",
+   "results": "Generic CommShift and tensor shift declarations; no normalized project theorem.",
+   "date": "2026-10-28",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "PodReindexSignedShifts|PodTensorSignedShift",
+   "results": "Only the definitions and this decomposition in Sheaf/Paper.",
+   "date": "2026-10-28",
+   "verdict": "no duplicate"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.PodReindexingTensorSignedShifts",
+  "date": "2026-10-28",
+  "group": "R3"
+ },
+ "chapter": "sec-poincare-duality",
+ "unit": "sk-def-weil",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pod-reindexing-tensor-signed-shifts",
+   "place": "Steps 1 and 5; tensor-factor signed-shift squares.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.PodReindexingTensorSignedSquares",
+  "file": "lean/Sheaf/Paper/PodReindexingTensorSignedSquares.lean",
+  "declaration": "WeilConjectures.podReindexingTensorSignedShifts_tensorSquares",
+  "statement": "theorem podReindexingTensorSignedShifts_tensorSquares {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g] [∀ x : X, Invertible (l : X.residueField x)] [∀ y : Y, Invertible (l : Y.residueField y)] (D : PodCompletionReindex l E g) (_hD : PodCompletionReindex.Laws l E g D) (T : PodCompletedTensorReindex l E g D) (_hT : PodCompletedTensorReindex.Laws l E g D T) (SY : PodTensorSignedShift l E Y) (SX : PodTensorSignedShift l E X) : (∀ (M N M' N' : sfIntegralConstructibleCategory l E Y) (r : ℤ) (a : M'.obj ≅ M.obj⟦r⟧) (b : N'.obj ≅ N.obj⟦r⟧), ((podOrdinaryReindex l E g).map (SY.left M N M' r a).hom ≫ ((podOrdinaryReindex l E g).commShiftIso r).hom.app _ ≫ (T.tensor M N).hom⟦r⟧' = (T.tensor M' N).hom ≫ (SX.left ⟨_,T.constructible M⟩ ⟨_,T.constructible N⟩ ⟨_,T.constructible M'⟩ r ((podOrdinaryReindex l E g).mapIso a ≪≫ ((podOrdinaryReindex l E g).commShiftIso r).app M.obj)).hom)) ∧ (∀ (M N M' N' : sfIntegralConstructibleCategory l E Y) (r : ℤ) (a : M'.obj ≅ M.obj⟦r⟧) (b : N'.obj ≅ N.obj⟦r⟧), ((podOrdinaryReindex l E g).map (SY.right M N N' r b).hom ≫ ((podOrdinaryReindex l E g).commShiftIso r).hom.app _ ≫ (T.tensor M N).hom⟦r⟧' = (T.tensor M N').hom ≫ (SX.right ⟨_,T.constructible M⟩ ⟨_,T.constructible N⟩ ⟨_,T.constructible N'⟩ r ((podOrdinaryReindex l E g).mapIso b ≪≫ ((podOrdinaryReindex l E g).commShiftIso r).app N.obj)).hom))",
+  "branch": "sheaf-dag",
+  "by": "R3",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R3",
+  "result": "pass",
+  "landing": "20261027T234252-L-83074",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R3",
+  "result": "pass",
+  "landing": "20261027T234252-L-83074",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

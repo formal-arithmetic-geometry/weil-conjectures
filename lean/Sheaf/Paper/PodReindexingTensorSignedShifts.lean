@@ -6,6 +6,8 @@ Authors: SHEAF group U2
 module
 
 public import Sheaf.Paper.PodCompletionReindexShifts
+import Sheaf.Paper.PodReindexingTensorSignedShiftsCore
+import Sheaf.Paper.PodReindexingTensorSignedSquares
 
 /-! # Signed shifts of fixed normalized tensor reindexing
 
@@ -66,6 +68,12 @@ theorem podReindexingTensorSignedShifts
     (T : PodCompletedTensorReindex l E g D)
     (hT : PodCompletedTensorReindex.Laws l E g D T) :
     ∃ SY : PodTensorSignedShift l E Y, ∃ SX : PodTensorSignedShift l E X,
-      PodReindexSignedShifts l E g D T SY SX := by sorry
+      PodReindexSignedShifts l E g D T SY SX := by
+  obtain ⟨SY, SX, h₁, h₂, h₃, h₄, h₅, h₆, h₇, h₈⟩ :=
+    podReindexingTensorSignedShifts_core l E g D hD T hT
+  have hs := podReindexingTensorSignedShifts_tensorSquares l E g D hD T hT SY SX
+  refine ⟨SY, SX, h₁, h₂, h₃, h₄, h₅, h₆, h₇, h₈, ?_⟩
+  intro M N M' N' r a b
+  exact ⟨hs.1 M N M' N' r a b, hs.2 M N M' N' r a b⟩
 
 end WeilConjectures

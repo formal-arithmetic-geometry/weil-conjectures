@@ -18,28 +18,26 @@
  ],
  "proof": [
   {
-   "text": "construct left and right tensor-shift comparisons by relabeling the total tensor summands on flat-term K-flat representatives. The right comparison has the Koszul factor (-1)^(pr); the left comparison has its prescribed sign. The signed total differentials verify these are chain isomorphisms for every integer shift, and the quotient transitions commute with them. Localize these maps to get SY and SX with their Generators laws. Apply the same two-coordinate Roos realization used in T.Model to obtain their Model laws. On a shifted Roos complex the second coordinate is multiplied by (-1)^r, while the first is the projection-defined shift/product comparison. D.shiftSource.Laws and D.shiftTarget.Laws fix exactly these maps. D.LimitModel therefore supplies the two PodLimitSignedShift identities. On the coherent reduction system, shifting commutes with the quotient tensor generator map, proving CommShift of D.reduction.hom; the diagonal Roos equation proves CommShift of D.limit.hom. Finally reindexing preserves degrees and integer signs, so both tensor-shift squares agree on all homogeneous summands and descend through T.Model. This verifies negative shifts, shift zero, empty schemes and zero inputs too. .",
+   "text": "Apply the core signed-shift construction to obtain SY and SX with the reduction, limit, signed Roos, generator, and representative-model laws. Apply the tensor-square calculation to these models and combine its two equations with the preceding laws; unfolding PodReindexSignedShifts gives the conclusion.",
    "uses": [
-    "lem-pur-kflat-total-tensor-model",
-    "lem-pur-integral-operations-well-defined",
-    "lem-pod-reindexing-signed-roos-shift"
+    "lem-pod-reindexing-tensor-signed-shifts-core-r3",
+    "lem-pod-reindexing-tensor-signed-shift-squares-r3"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/latest/blueprint/sec-poincare-duality/sk-thm-frobenius/prop-pod-dual-tate-data-compatibility.proof.md",
-    "place": "Steps 1 and 5, expanded in parent node proof: Signed shifts of fixed normalized tensor reindexing."
+    "place": "Steps 1 and 5; assembly of the core signed-shift models and tensor-factor squares."
    }
   }
  ],
  "proof_deps": [
-  "lem-pur-kflat-total-tensor-model",
-  "lem-pur-integral-operations-well-defined",
-  "lem-pod-reindexing-signed-roos-shift"
+  "lem-pod-reindexing-tensor-signed-shifts-core-r3",
+  "lem-pod-reindexing-tensor-signed-shift-squares-r3"
  ],
  "proof_origin": {
-  "by": "agent",
-  "document": "literature/blueprint/latest/blueprint/sec-poincare-duality/sk-thm-frobenius/prop-pod-dual-tate-data-compatibility.proof.md",
-  "place": "Steps 1 and 5; strictly partial reduction of lem-pod-reindexing-completion-unit-tensor"
+  "by": "worker",
+  "document": "lean/Sheaf/Paper/PodReindexingTensorSignedShifts.lean",
+  "place": "Assembly from the two strictly lower signed-shift components."
  },
  "mathlib_searches": [
   {
@@ -125,12 +123,12 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-25",
+  "date": "2026-10-27",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "U2",
+  "group": "R3",
   "result": "pass",
-  "landing": "20261025T123949-L-1921632",
+  "landing": "20261027T234252-L-83074",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

@@ -20388,3 +20388,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 23:42 L: merged deliver/R2/Sheaf.SixFunctors.EtaleHomTransposeExact (stage 3; reviewer PASS; first push; landing 20261027T234237-L-67616 (interface); batch 20261027T233735; modules 3; new nodes 2)
 - 23:42 L: merged deliver/R2/Sheaf.WeilSheaf.SmoothDualizingVanishing (stage 3; reviewer PASS; first push; landing 20261027T234250-L-81777 (interface); batch 20261027T233735; modules 2; new nodes 1)
 - 23:42 L: merged deliver/R3/Sheaf.AlgebraicGeometry.VectorIntegrationBaseChangeLocal (stage 3; reviewer PASS; first push; landing 20261027T234251-L-82352 (interface); batch 20261027T233735; modules 2; new nodes 1)
+- 23:42 L: merged deliver/R3/Sheaf.Paper.PodReindexingTensorSignedShifts (stage 3; reviewer PASS; first push; landing 20261027T234252-L-83074 (interface); batch 20261027T233735; modules 3; new nodes 2)
