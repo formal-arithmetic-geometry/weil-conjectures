@@ -1,14 +1,13 @@
 # Work queue
 
-211 items; claim with `tools/claim.py next <group> [--stage N]`.
+210 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Rework: quarantined by the upstream sync (3 clusters, 1164 modules)
+## Rework: quarantined by the upstream sync (2 clusters, 1164 modules)
 
 Priority over every queue (the human, 2026-10-20; tools/rework.py, coord/rework.tsv). One item per cluster: its root (a quarantined module importing no other quarantined one) and the quarantined modules importing it; fix the root, then the dependents as far as possible, deliver every module that compiles.
 
 | item (root) | modules | other roots | cause of the root |
 |---|---|---|---|
-| `Sheaf.Paper.ExceptionalFiniteSupportRealization` | 1 |  | error: Sheaf/Paper/ExceptionalFiniteSupportRealization.lean:155:6: error: Application type mismatch: The argument | (integralExceptionalEtaleRealization l E X n |
 | `Sheaf.Paper.NativeCompactSupportGeometry` | 1 |  | error: Sheaf/Paper/NativeCompactSupportGeometry.lean:42:2: error(lean.synthInstanceFailed): failed to synthesize instance of type class | IsCommMonObj | ((sheaf |
 | `Sheaf.Paper.ExceptionalDerivedSiteRealization` | 1 |  | error: Sheaf/Paper/ExceptionalDerivedSiteRealization.lean:250:10: error: synthesized type class instance is not definitionally equal to expression inferred by t |
 
