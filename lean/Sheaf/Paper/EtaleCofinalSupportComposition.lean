@@ -48,6 +48,11 @@ is performed on strict-system transformations using their universal derived-func
 normalizations, not by claiming faithfulness of level evaluations. Identity blocks
 use the coefficient-unit and block-identity equations. The argument uses the
 normalizations in t and the stated invertibility and cocycle of coefficient projection. -/
+/- STATEMENT-DISPUTED: `CofinalSupport` contains no coherence field relating
+`compositionX` and `compositionY` to the selected extension data or relating the
+three `h` isomorphisms. The hypotheses `hi` and `hq` constrain only coefficient
+projection maps, while the conclusion depends on the unconstrained composition
+fields, so the claimed equality is not determined by the stated structure. -/
 theorem etaleCofinalSupport_composition
     {X Y : Scheme.{u}} {f : X ⟶ Y} {c : Compactification f} {l : ℕ}
     (t : CofinalSupport c l)

@@ -19824,3 +19824,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 18:08 L: merged deliver/U1/Sheaf.Paper.FiniteHomOrdinaryTranspose (stage 3; reviewer PASS; first push; landing 20261027T180831-L-3907204 (interface); batch 20261027T180444; modules 2; new nodes 1; change records: coord/changes/U1-finite-hom-ordinary-transpose.md)
 - 18:08 L: merged deliver/U3/Sheaf.Paper.FinitePullbackTensorKFlatNormalization (stage 3; reviewer PASS; first push; landing 20261027T180832-L-3907578 (interface); batch 20261027T180444; modules 9; new nodes 8)
 - 18:08 L: merged deliver/U4/Sheaf.Paper.IntegralScalarPullbackChainTower (stage 3; reviewer PASS; first push; landing 20261027T180834-L-3907987 (interface); batch 20261027T180444; modules 2; new nodes 1)
+- 18:08 L: merged deliver/U5/Sheaf.Paper.EtaleCofinalSupportComposition (stage 3; reviewer PASS; first push; landing 20261027T180835-L-3908230 (proof); batch 20261027T180444; modules 1; new nodes 0)
