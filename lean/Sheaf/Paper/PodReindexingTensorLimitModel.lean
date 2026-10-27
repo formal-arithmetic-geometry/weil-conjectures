@@ -7,6 +7,7 @@ module
 
 public import Sheaf.Paper.PodCompletionTensorNormalization
 public import Sheaf.Paper.PodReindexingReductionTensorSquare
+import Sheaf.Paper.PodReindexingTensorLimitModelDescent
 
 /-! # Limit realization of the normalized completed tensor reindexing
 
@@ -62,6 +63,9 @@ theorem podReindexing_tensor_limit_model
     let q := podReindexingTensorFrame l E g A hA M.obj N.obj
     let t : q.F.obj q.CY ⟶ q.CX := (T.tensor M N).hom
     q.F.map q.dY.hom ≫ q.δ.app q.U ≫ q.RX.map q.w₁ ≫ q.RX.map q.w₂ =
-      t ≫ q.dX.hom := by sorry
+      t ≫ q.dX.hom := by
+  have h := podReindexing_tensor_limit_model_descent l E g A T hA
+    hT.2.2.2.2.1 hT.2.2.2.1 M N
+  simpa only [Functor.map_comp, Category.assoc] using h
 
 end WeilConjectures
