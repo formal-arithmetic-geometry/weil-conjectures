@@ -10,6 +10,7 @@ public import WeilConjectures.TraceFormula.Specialization.NearbyDualityGlobal
 public import WeilConjectures.TraceFormula.Specialization.NearbyDualityProper
 public import WeilConjectures.TraceFormula.Specialization.TraitModelProperExchange
 public import WeilConjectures.TraceFormula.Specialization.TraitModelCompactification
+public import WeilConjectures.TraceFormula.Specialization.NearbyDualityFiniteSupport
 
 /-!
 
@@ -124,22 +125,18 @@ theorem isIso_lowerStar_nearbyDualityMap_of_isProper (D : NearbyDualizingData k 
 of the trait model `M` over the base are proper, then the duality map `δ_{M,K}` is an isomorphism
 away from finitely many closed points of the special fibre.
 
-Unfinished. The blueprint proof covers the total space by neighbourhoods with quasi-finite
-coordinate maps to `𝔸^q_S` and, for each coordinate, identifies the restriction of `δ_{M,K}` to
-the generic point of the special-fibre coordinate line with the `P`-invariants of the duality map
-of a generic slice, twisted by `ℚ̄_ℓ(1)[2]` (blueprint `det-tf-nearby-duality-slice`, with the
-finite-group core `CategoryTheory.invariantsDualIso`); the slice has smaller generic dimension,
-over the trait given by the strict localization of `𝔸¹_S` at a generic point of its special
-fibre, so the induction runs over all such traits. -/
+This is the case of proper models of
+`NearbyCyclesModel.exists_finset_isIso_upperStar_nearbyDualityMap`, the finite-support step from
+the generic slices. -/
 theorem exists_finset_isIso_upperStar_nearbyDualityMap_of_isProper
     (D : NearbyDualizingData k k' ℓ) (h : M.IsTraitModelOfBase k q g)
     [IsProper (toPoint X).left] [IsProper (toPoint X').left] [IsProper q]
-    (hgen : IsPullback M.ε g X.hom (traitGenericPoint k' ≫ traitToBase k k'))
+    (_hgen : IsPullback M.ε g X.hom (traitGenericPoint k' ≫ traitToBase k k'))
     (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
     ∃ (S : Finset X'.left) (hS : ∀ x ∈ S, IsClosed {x}),
       IsIso ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ
         (opensOverι (finsetComplOpens S hS))).map (nearbyDualityMap ℓ D h K)) :=
-  sorry
+  exists_finset_isIso_upperStar_nearbyDualityMap ℓ D h K
 
 /-- **Gabber's theorem for proper models** (Illusie, *Autour du théorème de monodromie locale*,
 Thm. 4.2; blueprint `sk-prop-tf-nearby-duality-foundation`): if `X`, `X'` and the total space of
