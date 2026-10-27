@@ -5,6 +5,7 @@ Authors: Claude
 -/
 module
 
+public import WeilConjectures.CategoryTheory.DerivedCategory.NatTransId
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Linear
 public import WeilConjectures.CategoryTheory.ModuleObjects.Linear
 public import WeilConjectures.CategoryTheory.RingObjects.Condensed.ContinuousMapGlobalSections
@@ -115,8 +116,8 @@ lemma smul_id_Q_obj {X : Scheme.{u}}
       (condensedRingObj Λ X)) ℤ) (a : K) :
     letI := modLinear Λ φ X
     a • 𝟙 (DerivedCategory.Q.obj M) = DerivedCategory.Q.map
-      ((HomologicalComplex.Hom.mk (fun n ↦ Mod.smulEnd (constRingHom Λ φ X a) (M.X n))
-        fun _ _ _ ↦ Mod.hom_ext _ _ (Mod.globalSmul_naturality _ _)) : M ⟶ M) := by
+      ((HomologicalComplex.natTransId (Mod.smulNatTrans (constRingHom Λ φ X a).hom)
+        (ComplexShape.up ℤ)).app M) := by
   let _ := modLinear Λ φ X
   rw [← DerivedCategory.Q.map_id, ← Functor.map_smul]
   congr 1
@@ -157,9 +158,8 @@ lemma padicSubfield_smul_id_Q_obj {X : Scheme.{u}}
     (M : CochainComplex (Mod (Sheaf (ProEt.topology X) Ab.{u + 1})
       (padicSubfieldRingObj X ℓ F)) ℤ) (b : F) :
     b • 𝟙 (DerivedCategory.Q.obj M) = DerivedCategory.Q.map
-      ((HomologicalComplex.Hom.mk
-        (fun n ↦ Mod.smulEnd (padicSubfieldConstRingHom ℓ F X b) (M.X n))
-        fun _ _ _ ↦ Mod.hom_ext _ _ (Mod.globalSmul_naturality _ _)) : M ⟶ M) :=
+      ((HomologicalComplex.natTransId (Mod.smulNatTrans (padicSubfieldConstRingHom ℓ F X b).hom)
+        (ComplexShape.up ℤ)).app M) :=
   smul_id_Q_obj _ (Profinite.continuousMapConstRingHom.{u} F) M b
 
 variable {k : Type u} [Field k] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)]

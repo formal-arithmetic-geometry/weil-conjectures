@@ -7746,7 +7746,6 @@ public import WeilConjectures.CategoryTheory.Adjunction.ExchangeRestrict
 public import WeilConjectures.CategoryTheory.Adjunction.ExchangeRestriction
 public import WeilConjectures.CategoryTheory.Adjunction.ExchangeRestrictionOfHomEq
 public import WeilConjectures.CategoryTheory.Adjunction.ExchangeRightCube
-public import WeilConjectures.CategoryTheory.Adjunction.ExchangeRightMate
 public import WeilConjectures.CategoryTheory.Adjunction.ExchangeRightPaste
 public import WeilConjectures.CategoryTheory.Adjunction.ExchangeTransport
 public import WeilConjectures.CategoryTheory.Adjunction.FiniteProductRingFunctor
@@ -8415,7 +8414,6 @@ public import WeilConjectures.CategoryTheory.ModuleObjects.ExtendScalarsBasis
 public import WeilConjectures.CategoryTheory.ModuleObjects.ExtendScalarsComapBiproduct
 public import WeilConjectures.CategoryTheory.ModuleObjects.ExtendScalarsComapUnit
 public import WeilConjectures.CategoryTheory.ModuleObjects.ExtendScalarsFlat
-public import WeilConjectures.CategoryTheory.ModuleObjects.ExtendScalarsGlobalSectionBasis
 public import WeilConjectures.CategoryTheory.ModuleObjects.ExtendScalarsMonoidal
 public import WeilConjectures.CategoryTheory.ModuleObjects.ExtendScalarsMonoidalComp
 public import WeilConjectures.CategoryTheory.ModuleObjects.ExtendScalarsOfIsIso
@@ -8433,7 +8431,6 @@ public import WeilConjectures.CategoryTheory.ModuleObjects.FreeMapMod
 public import WeilConjectures.CategoryTheory.ModuleObjects.GrothendieckAbelian
 public import WeilConjectures.CategoryTheory.ModuleObjects.Linear
 public import WeilConjectures.CategoryTheory.ModuleObjects.MapMod
-public import WeilConjectures.CategoryTheory.ModuleObjects.MapModFiniteFree
 public import WeilConjectures.CategoryTheory.ModuleObjects.MapModIhom
 public import WeilConjectures.CategoryTheory.ModuleObjects.MapModLimits
 public import WeilConjectures.CategoryTheory.ModuleObjects.MapModMonoidal
@@ -8594,8 +8591,6 @@ public import WeilConjectures.CategoryTheory.RightDerivedZeroTransformation
 public import WeilConjectures.CategoryTheory.RightKanExtensionCoherentShift
 public import WeilConjectures.CategoryTheory.RingObjects.Ab
 public import WeilConjectures.CategoryTheory.RingObjects.Condensed.ContinuousMap
-public import WeilConjectures.CategoryTheory.RingObjects.Condensed.ContinuousMapFiniteFree
-public import WeilConjectures.CategoryTheory.RingObjects.Condensed.ContinuousMapFiniteFreeSMul
 public import WeilConjectures.CategoryTheory.RingObjects.Condensed.ContinuousMapGlobalSections
 public import WeilConjectures.CategoryTheory.RingObjects.Condensed.ContinuousMapRingObjMap
 public import WeilConjectures.CategoryTheory.RingObjects.Condensed.EllAdic
