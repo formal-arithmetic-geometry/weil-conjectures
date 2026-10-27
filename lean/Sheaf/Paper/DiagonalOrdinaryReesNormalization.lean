@@ -6,6 +6,7 @@ module
 
 public import Sheaf.Paper.PurityDiagonalDualizingData
 public import Sheaf.Paper.FiniteSmoothPurityMaps
+import Sheaf.Paper.DiagonalOrdinaryReesEquation
 
 /-! # From coordinate counits to the ordinary Rees normalization
 
@@ -65,6 +66,37 @@ theorem diagonalOrdinaryReesNormalization (P : PurityFiniteSetting.{u})
     (he : P.DiagonalOrientationNormalization d f aY e) :
     Etale.FiniteSmoothPurity.OrientationNormalized P.Coefficient P.diagonalExponent
       (pow_pos P.coefficients.prime.out.pos P.level) P.diagonalExponent_annihilates
-      f d G (P.diagonalExponent_isUnit (f ≫ aY)) e := by sorry
+      f d G (P.diagonalExponent_isUnit (f ≫ aY)) e := by
+  let _ := G
+  have _ := hP
+  let hN : 0 < P.diagonalExponent :=
+    pow_pos P.coefficients.prime.out.pos P.level
+  let hX : IsUnit (P.diagonalExponent : Γ(X, ⊤)) :=
+    P.diagonalExponent_isUnit (f ≫ aY)
+  obtain ⟨κ, hκ, _⟩ :=
+    AlgebraicGeometry.Etale.FiniteRingSectionDeformation.existsUnique_normalized
+      P.diagonalExponent hN P.Coefficient P.diagonalExponent_annihilates hX d
+      (pullback.fst f f) (pullback.diagonal f) (pullback.diagonal_fst f)
+  let q := AlgebraicGeometry.Etale.FiniteSmoothPurity.reesConeComparison
+      (pullback.diagonal f) ≪≫
+    AlgebraicGeometry.Etale.FiniteRingSectionDeformation.coneBundleIso d
+      (pullback.fst f f) (pullback.diagonal f)
+  have hq : q.hom ≫ VectorBundleZeroSection.π X d
+      (ConormalGradedAlgebra.piece (pullback.diagonal f) 1) =
+      Scheme.Hom.normalConeProj (pullback.fst f f) (pullback.diagonal f) := by
+    dsimp [q]
+    rw [Category.assoc,
+      (AlgebraicGeometry.Etale.FiniteRingSectionDeformation.coneBundleIso_spec d
+        (pullback.fst f f) (pullback.diagonal f) (pullback.diagonal_fst f)).1,
+      (AlgebraicGeometry.Etale.FiniteSmoothPurity.reesConeComparison_spec
+        (pullback.diagonal f)).1]
+    exact Scheme.Hom.purityNormalProjection_eq _ _ (pullback.diagonal_fst f)
+  have sq : IsPullback q.hom
+      (Scheme.Hom.normalConeProj (pullback.fst f f) (pullback.diagonal f))
+      (VectorBundleZeroSection.π X d
+        (ConormalGradedAlgebra.piece (pullback.diagonal f) 1)) (𝟙 X) :=
+    IsPullback.of_horiz_isIso ⟨by simpa using hq⟩
+  exact ⟨κ, hκ, sq, by
+    exact diagonalOrdinaryReesEquation P d f aY G e κ hκ sq he⟩
 
 end WeilConjectures.PurityFiniteSetting
