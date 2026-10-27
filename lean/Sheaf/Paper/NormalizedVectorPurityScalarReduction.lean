@@ -5,6 +5,9 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import Sheaf.Paper.VectorPurityFiniteReduction
+import Sheaf.Paper.NormalizedVectorPurityBundle
+import Sheaf.Paper.NormalizedVectorPurityScalarLineWitness
+import Sheaf.Paper.NormalizedVectorPurityScalarCompatibility
 
 /-! # Scalar reduction of independently integration-normalized vector purity. -/
 
@@ -38,6 +41,13 @@ theorem vectorIntegrationCounit_scalarReduction
     (hn : VectorPurityGammaNormalized A N hN hA B hB d F γ)
     (hi : ∀ K : Etale.DerivedCategoryModule A B, IsIso (γ.app K))
     (A' : Type (u + 1)) [CommRing A'] [Finite A'] (φ : A →+* A') :
-    PurityScalarReductionEquation φ N hN hA B hB d F γ := by sorry
+    PurityScalarReductionEquation φ N hN hA B hB d F γ := by
+  obtain ⟨hA', c, hc⟩ := exists_purityScalarLineNormalization
+    A N hN hA B hB A' φ
+  have hnorm := vectorBundleNormalized A' N hN hA' B hB d F
+  obtain ⟨_, γm, hnm, hγm⟩ := hnorm
+  have hcompat := scalarReduction_compatibility_of_witnesses
+    A N hN hA B hB d F γ hn hi A' φ hA' c γm hnm hγm hc
+  exact ⟨hA', c, γm, hnm, hc, hcompat⟩
 
 end WeilConjectures.PurityFiniteSetting
