@@ -6,6 +6,8 @@ Authors: SHEAF group C7
 module
 
 public import Sheaf.Paper.RationalP1ScalarChernMaps
+public import Sheaf.Paper.RationalP1ScalarChernQSplitting
+public import Sheaf.Paper.RationalP1ScalarChernP2Splitting
 
 /-! # The two scalar unit/Chern splittings
 
@@ -87,6 +89,8 @@ theorem scalar_chern_splittings
       (T (ProjectiveLine Y)) (T (diagonalSurface Y)) (secondLineComparison l c k p hpl Y)
     let cq := scalarQChern l c Y r a
     let c₂ := scalarP2Chern l c Y r b
-    IsIso (biprod.desc uq cq) ∧ IsIso (biprod.desc u₂ c₂) := by sorry
+    IsIso (biprod.desc uq cq) ∧ IsIso (biprod.desc u₂ c₂) := by
+  exact ⟨scalar_q_chern_splitting l c k p hpl Y δ family r a ha b hb,
+    scalar_p2_chern_splitting l c k p hpl Y δ family r a ha b hb⟩
 
 end AlgebraicGeometry.ProEtale.RationalP1
