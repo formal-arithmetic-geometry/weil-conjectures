@@ -1,6 +1,8 @@
 module
 
 public import Sheaf.Paper.AmbientPullbackSiteData
+import Sheaf.Paper.AmbientCoefficientPullbackFiniteIso
+import Sheaf.Paper.AmbientCoefficientSequencePullbackIso
 
 /-! # Components of ambient pullback coherence
 
@@ -24,6 +26,7 @@ variable (ell : ℕ) [Fact ell.Prime] (E : Type u) [Field E]
 attribute [local irreducible] pull CategoryTheory.Functor.leftAdjoint
   CategoryTheory.Functor.mapDerivedCategory
 
+
 /-- Inverse image preserves the actual coefficient ring, on the finite or sequence site.
 Source: Stacks 0H7J, 03CB and 0941
 (blueprint: lem-sf-ambient-coefficient-pullback-iso).
@@ -40,6 +43,9 @@ maps. Evaluation on ordinary ring sheaves reflects isomorphisms, so the finite
 comparisons prove invertibility on the sequence site as well. No derived
 evaluation, flat transition, nonzero-ring or finiteness hypothesis is used. -/
 theorem coefficientPullback_isIso {X Y : Scheme.{t}} (f : X ⟶ Y) (s : Option ℕ) :
-    IsIso (ringMap ell E f s) := by sorry
+    IsIso (ringMap ell E f s) := by
+  cases s with
+  | some n => exact coefficientPullback_some_isIso ell E f n
+  | none => exact coefficientPullback_none_isIso ell E f
 
 end WeilConjectures.AmbientPullbackTensor
