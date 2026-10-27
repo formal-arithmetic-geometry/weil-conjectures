@@ -13,10 +13,17 @@
  ],
  "proof": [
   {
-   "text": "expand compactificationExchangeFromData: proper exchange on the open image, then proper image of open base change. Obtain the proper-exchange coefficient square by applying the primitive square to formal variables for the open-image objects and inserting the actual open coefficient by naturality. For the open base-change factor, transpose its defining open-adjunction equation. Pullback composition coherence and the unit/counit mate squares identify its reduction; invertibility of the fixed openReduction permits cancellation. This direct mate argument needs no quasi-compactness of the compactification open. Whisker by proper image using ordinaryPushReduction.naturality, and paste the two squares. For projection, expand its three factors: proper projection, proper image of open projection, and open/proper image of the inverse pull compositor with cf.comm. The proper-projection square at formal variables extends to the open-image coefficient and the other child coefficient by naturality in both inputs. The open projection square follows by transposing its prescribed inverse: tensor reduction compatibility and the open unit square identify the two transposes, and openReduction is invertible. Apply inverse pull-composition compatibility to the last factor and transport by cf.comm. Bifunctoriality pastes these three squares and inserts both child coefficients. No completion comparison is used.",
+   "text": "Apply ordinaryCompactificationExchangeSquare to the same compactifications, maps, pullback witness and expression. This isolates precisely the exchange clause; the tensor/projection clause is proved below.",
    "uses": [
-    "lem-sf-integral-ordinary-canonical-iso-square",
+    "lem-sf-integral-ordinary-compactification-exchange-square"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Specialize ordinaryExchangeProjectionSquares.2 to two formal variables and use uncurried projection naturality to insert both arbitrary child coefficients. Invert the open_projection_inverse_square of IntegralOrdinaryCanonicalIsoSquare to obtain the forward open projection square. Naturality of the inverse open-reduction components lifts the tensor square for the inverse pull compositor and the actual compactification equation. The latter follows from pull_comp_inverse, pull compositor naturality, and equality substitution. Lift the open projection and compositor squares through proper image using ordinaryPushReduction.naturality, and paste the three squares. The resulting composite is exactly compactificationProjection and its independently fixed ringed counterpart.",
+   "uses": [
     "lem-sf-integral-ordinary-exchange-projection-squares",
+    "lem-sf-integral-ordinary-canonical-iso-square",
     "lem-sf-open-reconstruction-effectivity",
     "lem-sf-tensor-adjunction-reduction-squares"
    ],
@@ -24,15 +31,16 @@
   }
  ],
  "proof_deps": [
-  "lem-sf-integral-ordinary-canonical-iso-square",
+  "lem-sf-integral-ordinary-compactification-exchange-square",
   "lem-sf-integral-ordinary-exchange-projection-squares",
+  "lem-sf-integral-ordinary-canonical-iso-square",
   "lem-sf-open-reconstruction-effectivity",
   "lem-sf-tensor-adjunction-reduction-squares"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-compatibility/fix-prop-coherence.proof.md",
-  "place": "Explicit ordinary coefficient recursion and its primitive generator diagrams; refinement of lem-sf-integral-basic-generator-square."
+  "place": "H2: exchange reduced to its separate clause, with proved mate and open-square helpers; projection proved by pasting the proper projection, open projection and inverse pull compositor squares, including the actual cf.comm equation."
  },
  "mathlib_searches": [
   {
@@ -99,12 +107,12 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-26",
+  "date": "2026-10-27",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "J7",
+  "group": "H2",
   "result": "pass",
-  "landing": "20261026T235911-L-1467113",
+  "landing": "20261027T210024-L-1647914",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

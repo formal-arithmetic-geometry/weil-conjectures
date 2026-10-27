@@ -1,0 +1,107 @@
+{
+ "id": "lem-sf-integral-ordinary-compactification-exchange-square",
+ "kind": "lemma",
+ "title": "Ordinary coefficient square for compactification exchange",
+ "statement": "Fix l,E,o,a, a base B, an input family X and ordinary integral inputs K [def-sf-integral-realization-assembly-data]. For compactifications cf of f:U→V and cfprime of fprime:Uprime→Vprime, and a compatible map x,y,z of their open/proper diagrams with cartesian open square, the explicit ordinary coefficient map [def-sf-integral-ordinary-expression-reduction] of pull_y(compactSupport_cf(e)), followed by the prescribed system compactification exchange, equals reduction of the prescribed ringed compactification exchange followed by the coefficient of compactSupport_cfprime(pull_x(e)). This is only exchange; no tensor or projection compatibility is asserted. The fixed maps are not replaced by chosen maps.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-compatibility/fix-prop-coherence.proof.md",
+  "place": "The maps used here are tensor reassociation, evaluation, and adjunction units and counits, whose coefficient comparisons are proved in lem-fix-operation-reduction; coherence inherited from individual maps."
+ },
+ "stmt_deps": [
+  "def-sf-integral-realization-assembly-data",
+  "def-sf-integral-ordinary-expression-reduction"
+ ],
+ "proof": [
+  {
+   "text": "Derive the ordinary proper-exchange coefficient square directly from pull_square_nat: invert its component square to obtain the forward pullback boundary, then transpose with the two direct-image adjunctions. The generic mate_pasting_square proof uses only naturality and the defining counit equations. Naturality of properExchange inserts the actual open coefficient arrow. The inverse-open mate unit equation and open_beta_inverse_square (the general mate helper of IntegralOrdinaryCanonicalIsoSquare) give the forward open base-change coefficient square without a quasi-compactness hypothesis. Apply ordinaryPushReduction.naturality to the ringed open base-change arrow, then paste the proper exchange and open squares. Expanding compactificationExchangeFromData identifies their composite with the required fixed exchange.",
+   "uses": [
+    "lem-sf-integral-ordinary-canonical-iso-square",
+    "lem-sf-open-reconstruction-effectivity",
+    "lem-sf-tensor-adjunction-reduction-squares"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-integral-ordinary-canonical-iso-square",
+  "lem-sf-open-reconstruction-effectivity",
+  "lem-sf-tensor-adjunction-reduction-squares"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-compatibility/fix-prop-coherence.proof.md",
+  "place": "H2: the exchange factor of the prescribed proper/open composite; the generic mate, pullback boundary and forward open base-change helpers are proved in its module."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A coefficient reduction functor intertwines associators, adjunction units counits, exchange projection maps and their composites; transpose recursive coefficient maps under an adjunction",
+   "results": "conjugateEquiv_associator_hom; mateEquiv_apply; mateEquiv_counit and its inverse; iterated_mateEquiv_conjugateEquiv. No project expression coefficient theorem.",
+   "date": "2026-10-27",
+   "verdict": "Use the general adjunction API and the project normalized primitive maps."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mateEquiv\"",
+   "results": "mateEquiv, mateEquiv_counit, unit_mateEquiv, mateEquiv_vcomp/hcomp, conjugateEquiv_mateEquiv_vcomp, iterated_mateEquiv_conjugateEquiv.",
+   "date": "2026-10-27",
+   "verdict": "Generic mate calculus, not the project-specific coefficient diagrams."
+  },
+  {
+   "tool": "grep",
+   "query": "ordinary.*(Square|Reduction)|transpose_substitution; homEquiv_naturality_right_square_iff|iso.*naturality",
+   "results": "Mathlib generic adjunction naturality and project private ordinaryR/tensorOrdinaryR/pushOrdinaryR in TensorAdjunctionReductionSquares. Those private word APIs require GeneratorReduction.Operations, including unitReduction/unitNormalization not supplied by AmbientModels. No independent coefficient recursion for Expression.",
+   "date": "2026-10-27",
+   "verdict": "Construct the ordinary coefficient maps on Expression and transpose with the actual adjunction."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.IntegralOrdinaryCompactificationSquares",
+  "date": "2026-10-28",
+  "group": "H2"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-compatibility",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sf-integral-ordinary-compactification-squares",
+   "place": "The first, exchange clause of the conjunction; the projection clause is proved.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.IntegralOrdinaryCompactificationExchangeSquare",
+  "file": "lean/Sheaf/SixFunctors/IntegralOrdinaryCompactificationExchangeSquare.lean",
+  "declaration": "WeilConjectures.IntegralSystemRealization.ordinaryCompactificationExchangeSquare",
+  "statement": "theorem ordinaryCompactificationExchangeSquare\n    (o : Operations l E) (a : AmbientModels l E o)\n    {B : Scheme.{u}} {I : Type u} {X : I → Over B}\n    (K : ∀ i, Integral l E (X i).left)\n    {U V U' V' : Over B}\n    (f : U ⟶ V) (f' : U' ⟶ V') (cf : Compactification f.left)\n    (cf' : Compactification f'.left) (x : U' ⟶ U) (y : V' ⟶ V) (z : cf'.Z ⟶ cf.Z)\n    (wi : x.left ≫ cf.i = cf'.i ≫ z) (wp : z ≫ cf.g = cf'.g ≫ y.left)\n    (hi : IsPullback x.left cf'.i cf.i z) (e : Expression B I X U) :\n    (Expression.pull y (.compactSupport f cf e)).ordinaryReduction l E o a K ≫\n        (compactificationExchange l E o a.compositors a.openComparisons\n          cf cf' x.left y.left z wi wp hi).app\n            (e.systemObj l E o ((inputReduction l E X).obj K)) =\n      (calculus l E V'.left).reduction.map\n          ((ringedCompactificationExchange l E a.ringedModels a.ringedOpenComparisons\n            cf cf' x.left y.left z wi wp hi).app (e.ringedObj l E a.ringedModels K)) ≫\n        (Expression.compactSupport f' cf' (.pull x e)).ordinaryReduction l E o a K",
+  "branch": "sheaf-dag",
+  "by": "H2",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H2",
+  "result": "pass",
+  "landing": "20261027T210024-L-1647914",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H2",
+  "result": "pass",
+  "landing": "20261027T210024-L-1647914",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
