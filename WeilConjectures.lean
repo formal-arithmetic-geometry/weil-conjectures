@@ -13628,6 +13628,7 @@ public import WeilConjectures.TraceFormula.Specialization.Basic
 public import WeilConjectures.TraceFormula.Specialization.ClopenCounit
 public import WeilConjectures.TraceFormula.Specialization.ClosedPointsSupport
 public import WeilConjectures.TraceFormula.Specialization.CompactSupportExchange
+public import WeilConjectures.TraceFormula.Specialization.CompactSupportRefinement
 public import WeilConjectures.TraceFormula.Specialization.CompactificationRouteClosedExtension
 public import WeilConjectures.TraceFormula.Specialization.CompactificationRouteCoherence
 public import WeilConjectures.TraceFormula.Specialization.CompactifiedModel
