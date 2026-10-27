@@ -27,12 +27,24 @@
  ],
  "proof": [
   {
-   "text": "Replace realization using ordinaryRealization_eq and apply constant/degree-zero embedding to ordinaryModuleEvalG_comp. Naturality and the exact-single natural-isomorphism/compositor coherence identify the result with StrictTower.gComp. For open composition, the defining inverse mate of evalG that constructs evalJInv preserves its unit equation through exact localization, recovery by the fully faithful degree-zero embedding and constant embedding. Hence the inverse ordinary open comparison has the specified pullback comparison as mate. Apply mateEquiv to the two inverse open-composition maps: mate pasting and conjugation of the normalized leftAdjointCompIso compositors turn their equality into the established pullback equation. Injectivity and inversion give the forward open-composition equation. No cartesian beta or clopen projection occurs.",
+   "text": "For exact additive functors F,G,H and e:H≅F⋙G, cancel the exact-single hom comparisons in mapDerivedCategoryNatIso_comp_hom_app_singleFunctor to obtain the inverse-single composition equation. The constant-tower comparison satisfies its compositor equation componentwise. Naturality of the single comparison past the constant comparison combines these equations into constantSingle_comp for the specified ordinaryConstantSingleComparison. This is a proved generic calculation, not a new assumed normalization.",
+   "uses": [
+    "lem-sp-varying-ring-ordinary-evaluation-comparisons"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Use the proved generic paste_comp calculation: expand the pasted comparison, move the realization equality transports by naturality, cancel the middle transport with its inverse, and move the constant/single comparison past moduleEvalG by naturality. Apply ordinaryModuleEvalG_comp and constantSingle_comp. The resulting outer transports are exactly those in ordinaryPullComparison, giving OrdinaryPullComposition with its original isomorphisms.",
    "uses": [
     "lem-sp-varying-ring-ordinary-evaluation-comparisons",
-    "lem-sp-varying-ring-ordinary-module-composition",
-    "lem-coef-semilinear-derived-sections",
-    "lem-cbc-strict-tower-proper-open-calculus",
+    "lem-sp-varying-ring-ordinary-module-composition"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Take the vertical composite of the inverse ordinary open comparisons, and compare it to the inverse composite-open comparison after whiskering by the inverse open compositors. Apply mateEquiv_hcomp and ordinaryOpen_mate. The conjugates of moduleJComp.inv and StrictTower.jComp.inv are the inverse pullback compositors by conjugateEquiv_leftAdjointCompIso_inv. The pullback equation from the previous step, after cancellation of invertible factors, gives equality of these mates. Injectivity gives equality of the inverse open-composition isomorphisms; Iso.ext_inv and inversion give OrdinaryOpenComposition.",
+   "uses": [
+    "lem-sp-varying-ring-ordinary-open-unit",
     "lem-weil-pbc-mate-pasting"
    ],
    "elementary": false
@@ -41,14 +53,13 @@
  "proof_deps": [
   "lem-sp-varying-ring-ordinary-evaluation-comparisons",
   "lem-sp-varying-ring-ordinary-module-composition",
-  "lem-coef-semilinear-derived-sections",
-  "lem-cbc-strict-tower-proper-open-calculus",
+  "lem-sp-varying-ring-ordinary-open-unit",
   "lem-weil-pbc-mate-pasting"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
-  "place": "Construction 4.1 and Lemma 4.10; Stacks 03DI and 09AE for open adjunctions, 0F7B for the intrinsic clopen construction. This normalization is an agent-formulated consequence."
+  "place": "Construction 4.1 and Lemma 4.10; Stacks 03DI and 09AE for open adjunctions, 0F7B for the intrinsic clopen construction. This normalization is an agent-formulated consequence. A2: generic exact-single/constant composition and mate-pasting calculations, using the proved ordinaryOpen_mate normalization."
  },
  "mathlib_searches": [
   {
@@ -120,11 +131,11 @@
  "reviewed_proof": {
   "date": "2026-10-27",
   "by": "L",
-  "reviewer": "C-77a07",
-  "group": "E9",
-  "result": "fix",
-  "landing": "20261027T054600-L-966087",
+  "reviewer": "COMPILER",
+  "group": "A2",
+  "result": "pass",
+  "landing": "20261027T180446-L-3862278",
   "kind": "interface",
-  "note": "independent cc review: item module + 6 new modules vs clone item (verbatim extraction diff), node JSONs vs Lean, 2 direct importers compiled against delivered modules"
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

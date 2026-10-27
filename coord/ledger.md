@@ -19665,3 +19665,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 18:04 L: returned deliver/R2/Sheaf.Paper.DiagonalScalarPullbackCompatibility (reviewer RETURN: (the landing tools, head 8e21083b7) the delivery did not land: lean/Sheaf/Paper/DiagonalScalarPullbackCompatibility.lean)
 - 18:04 L: returned deliver/T7/Sheaf.Paper.FiniteP1CoefficientAdjunctionCoordinates (reviewer RETURN: (the landing tools, head 8784ba119) the delivery did not land: lean/Sheaf/Paper/FiniteP1CoefficientAdjunctionCoordinates)
 - 18:04 L: returned deliver/T8/Sheaf.Paper.FiniteP1KummerBoundaryTransport (reviewer RETURN: (the landing tools, head 207039432) the delivery did not land: lean/Sheaf/Paper/FiniteP1KummerBoundaryTransport.lean was)
+- 18:04 L: merged deliver/A2/Sheaf.AlgebraicGeometry.VaryingRingOrdinaryComparisonNormalization (stage 3; reviewer PASS; first push; landing 20261027T180446-L-3862278 (interface); batch 20261027T180444; modules 1; new nodes 0)
