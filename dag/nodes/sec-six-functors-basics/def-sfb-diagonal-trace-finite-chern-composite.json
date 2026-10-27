@@ -1,0 +1,98 @@
+{
+ "id": "def-sfb-diagonal-trace-finite-chern-composite",
+ "kind": "definition",
+ "title": "The projected finite coefficient Chern composite",
+ "statement": "For l prime, T with localization conventions, Chern data c, restriction r and normalized coefficients k, a normalized derived-limit model L, n natural and P in Pic(T), finiteChernComposite is (k.unitMap(L)≫L.projection(n)) followed by evaluation_n(D(r.F)(firstChern(c,P))). Its source and target are inferred from that actual composite. This is the right-hand arrow of the finite trace equation, not a new assertion.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-trace.proof.md",
+  "place": "paragraph (2), finite Cartier normalization and forget supports, before the divisor line is decomposed; diagonal-limit clause (3), and classes proof (3)"
+ },
+ "stmt_deps": [
+  "def-sfb-diagonal-trace-models",
+  "def-sfb-diagonal-trace-coefficients",
+  "def-sp-tower-class-chern"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": {
+  "kind": "adapted",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-trace.proof.md",
+  "place": "paragraph (2), finite Cartier normalization and forget supports, before the divisor line is decomposed; diagonal-limit clause (3), and classes proof (3)",
+  "by": "D4"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The supported Kummer cycle class of an effective Cartier divisor gives the first Chern class after forgetting support",
+   "results": "8 hits: Algebra.unramifiedLocus_eq_compl_support, MeromorphicOn.divisor, CochainComplex.HomComplex.CohomologyClass.mkAddMonoidHom_apply, Algebra.etaleLocus_eq_compl_support, groupHomology.isCycle₁_of_mem_cycles₁, groupHomology.cyclesMk₁_eq, KaehlerDifferential.kerTotal_eq, groupHomology.mapCycles₁_hom",
+   "date": "2026-10-28",
+   "verdict": "This construction uses the existing Chern morphism, not a new geometric identification."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.mapIso",
+   "results": "12 hits: CategoryTheory.Functor.mapIso, CategoryTheory.Functor.mapIso_refl, CategoryTheory.Functor.mapIso_symm, CategoryTheory.Functor.mapIso_hom, CategoryTheory.Functor.mapIso_inv, CategoryTheory.Functor.mapIso_trans, CategoryTheory.Functor.mapIso_injective, CategoryTheory.Functor.preimageIso_mapIso",
+   "date": "2026-10-28",
+   "verdict": "Use functoriality of the specified exact restriction and evaluation functors."
+  },
+  {
+   "tool": "grep",
+   "query": "mapDerivedCategorySingleFunctor|commShiftIso",
+   "results": "21 hits: Mathlib/Algebra/Homology/DerivedCategory/TStructure.lean, Mathlib/Algebra/Homology/DerivedCategory/TStructure.lean, Mathlib/Algebra/Homology/DerivedCategory/ShortExact.lean, Mathlib/Algebra/Homology/DerivedCategory/ShortExact.lean, Mathlib/Algebra/Homology/DerivedCategory/ShortExact.lean, Mathlib/Algebra/Homology/DerivedCategory/ShortExact.lean, Mathlib/Algebra/Homology/DerivedCategory/Basic.lean, Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean; searched Mathlib/Algebra/Homology/DerivedCategory",
+   "date": "2026-10-28",
+   "verdict": "The published coefficient comparison and firstChern supply the complete composite."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.DiagonalTraceFiniteCartierChern",
+  "date": "2026-10-28",
+  "group": "D4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-prop-diagonal-tower-trace",
+   "place": "paragraph (2), finite Cartier normalization and forget supports, before the divisor line is decomposed; diagonal-limit clause (3), and classes proof (3)",
+   "via": [
+    "lem-sfb-diagonal-trace-finite-cartier-chern",
+    "lem-sfb-diagonal-trace-finite-divisor-adjoint"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-diagonal-tower",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.DiagonalTraceFiniteChernComposite",
+  "file": "lean/Sheaf/Paper/DiagonalTraceFiniteChernComposite.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.DiagonalTrace.finiteChernComposite",
+  "statement": "def finiteChernComposite (l : ℕ) [Fact l.Prime] (T : Scheme.{u})\n    [DiagonalTraceLocalizations l T]\n    (c : SpTowerClasses.Chern l (ULift.{u} (Padic l)) T)\n    (r : Restriction l (ULift.{u} (Padic l)) T)\n    (k : Coefficients l (ULift.{u} (Padic l)) T c r)\n    (L : DiagonalRlim (DiagonalMod l T)) (n : ℕ) (P : T.Pic)",
+  "branch": "sheaf-dag",
+  "by": "D4",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-a4ee8",
+  "group": "D4",
+  "result": "fix",
+  "landing": "20261027T233852-L-4126810",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-a4ee8",
+  "group": "D4",
+  "result": "fix",
+  "landing": "20261027T233852-L-4126810",
+  "kind": "interface",
+  "note": "independent cc review: item theorem, 18 new modules and 25 nodes against packet/clone; IsDiagonalLimit old vs new finite clause unfolded (defeq; HasExt is Prop); scratch build of all 19 modules with #print axioms; 9 direct importers OK in 3b"
+ }
+}

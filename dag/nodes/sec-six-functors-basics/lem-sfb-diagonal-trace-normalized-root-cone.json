@@ -1,0 +1,110 @@
+{
+ "id": "lem-sfb-diagonal-trace-normalized-root-cone",
+ "kind": "statement",
+ "title": "The ordinary root cone under the normalized linear isomorphism",
+ "statement": "Let l be prime, T a scheme with [def-sfb-diagonal-trace-models], c over ULift(Q_l), r and normalized coefficients k [def-sfb-diagonal-trace-coefficients], H a strict root system with roots identification, t the ordinary completed-root limit isomorphism with its prescribed underlying root-limit map, and e:H≅r.F(lineModule(c)) whose underlying additive map is roots.hom≫k.lineForget.inv. Then for every n, t.hom≫limit.projection(H,n)≫e.hom(n)=k.lineProjection(n).",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-trace.proof.md",
+  "place": "paragraph (2), finite Cartier normalization and forget supports, before the divisor line is decomposed; diagonal-limit clause (3), and classes proof (3)"
+ },
+ "stmt_deps": [
+  "def-sfb-diagonal-trace-models",
+  "def-sfb-diagonal-trace-coefficients",
+  "det-prop-diagonal-tower-limit"
+ ],
+ "proof": [
+  {
+   "text": "Forget scalars and postcompose k.lineForget.hom(n), a monomorphism. The normalization of e cancels k.lineForget inverse. The inverse preserved-limit comparison and the inverse diagram-isomorphism comparison followed by projection give the root-limit projection. k.line_projection gives that same map for the coefficient cone. Faithfulness of forgetting proves the equality of the original linear sheaf arrows.",
+   "uses": [
+    "def-sfb-diagonal-trace-coefficients",
+    "det-prop-diagonal-tower-limit"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-diagonal-trace-coefficients",
+  "det-prop-diagonal-tower-limit"
+ ],
+ "proof_origin": {
+  "kind": "adapted",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-trace.proof.md",
+  "place": "paragraph (2), finite Cartier normalization and forget supports, before the divisor line is decomposed; diagonal-limit clause (3), and classes proof (3)",
+  "by": "D4"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Naturality of derived inverse limit projections and comparison with a shifted complex concentrated in degree zero",
+   "results": "8 hits: CategoryTheory.Limits.HasLimit.isoOfNatIso_inv_π, CategoryTheory.InjectiveResolution.isoRightDerivedObj_inv_naturality_assoc, CategoryTheory.ProjectiveResolution.isoLeftDerivedObj_inv_naturality, CategoryTheory.ProjectiveResolution.isoLeftDerivedToHomotopyCategoryObj_inv_naturality_assoc, CategoryTheory.InjectiveResolution.isoRightDerivedObj_inv_naturality, CategoryTheory.ProjectiveResolution.isoLeftDerivedToHomotopyCategoryObj_inv_naturality, CategoryTheory.ProjectiveResolution.isoLeftDerivedObj_inv_naturality_assoc, CategoryTheory.ShortComplex.mapRightHomologyIso_inv_naturality_assoc",
+   "date": "2026-10-28",
+   "verdict": "Use Mathlib preservesLimitIso_inv_π and HasLimit.isoOfNatIso_inv_π."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.homEquiv_naturality_right",
+   "results": "1 hits: CategoryTheory.Adjunction.homEquiv_naturality_right",
+   "date": "2026-10-28",
+   "verdict": "Naturality and the inverse-isomorphism equations give the cone comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "mapDerivedCategorySingleFunctor|commShiftIso",
+   "results": "21 hits: Mathlib/Algebra/Homology/DerivedCategory/TStructure.lean, Mathlib/Algebra/Homology/DerivedCategory/TStructure.lean, Mathlib/Algebra/Homology/DerivedCategory/ShortExact.lean, Mathlib/Algebra/Homology/DerivedCategory/ShortExact.lean, Mathlib/Algebra/Homology/DerivedCategory/ShortExact.lean, Mathlib/Algebra/Homology/DerivedCategory/ShortExact.lean, Mathlib/Algebra/Homology/DerivedCategory/Basic.lean, Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean; searched Mathlib/Algebra/Homology/DerivedCategory",
+   "date": "2026-10-28",
+   "verdict": "The ordinary projection calculation requires no derived-shift lemma."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.DiagonalTraceFiniteCartierChern",
+  "date": "2026-10-28",
+  "group": "D4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-prop-diagonal-tower-trace",
+   "place": "paragraph (2), finite Cartier normalization and forget supports, before the divisor line is decomposed; diagonal-limit clause (3), and classes proof (3)",
+   "via": [
+    "lem-sfb-diagonal-trace-finite-cartier-chern",
+    "lem-sfb-diagonal-trace-finite-divisor-adjoint"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-diagonal-tower",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.DiagonalTraceNormalizedRootCone",
+  "file": "lean/Sheaf/Paper/DiagonalTraceNormalizedRootCone.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.DiagonalTrace.diagonalTrace_normalizedRootCone",
+  "statement": "theorem diagonalTrace_normalizedRootCone (l : ℕ) [Fact l.Prime] (T : Scheme.{u})\n    [DiagonalTraceLocalizations l T]\n    (c : SpTowerClasses.Chern l (ULift.{u} (Padic l)) T)\n    (r : Restriction l (ULift.{u} (Padic l)) T)\n    (k : Coefficients l (ULift.{u} (Padic l)) T c r)\n    (H : DiagonalSystems l T)\n    (roots : H ⋙ diagonalForget l T ≅\n      Scheme.proEtaleRootsOfUnityTower T l (Fact.out : l.Prime))\n    (t : (diagonalCompletedRestriction l T).obj (Scheme.purTwistZlModule T l) ≅ limit H)\n    (ht : HEq ((diagonalForget l T).map t.hom)\n      (diagonalRootLimitComparison l T H roots).inv)\n    (e : H ≅ r.F.obj (SpTowerClasses.lineModule l (ULift.{u} (Padic l)) c))\n    (he : Functor.whiskerRight e.hom (diagonalForget l T) =\n      roots.hom ≫ k.lineForget.inv) (n : ℕ) :\n    t.hom ≫ limit.π H (op n) ≫ e.hom.app (op n) = k.lineProjection.app (op n)",
+  "branch": "sheaf-dag",
+  "by": "D4",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-a4ee8",
+  "group": "D4",
+  "result": "fix",
+  "landing": "20261027T233852-L-4126810",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-a4ee8",
+  "group": "D4",
+  "result": "fix",
+  "landing": "20261027T233852-L-4126810",
+  "kind": "interface",
+  "note": "independent cc review: item theorem, 18 new modules and 25 nodes against packet/clone; IsDiagonalLimit old vs new finite clause unfolded (defeq; HasExt is Prop); scratch build of all 19 modules with #print axioms; 9 direct importers OK in 3b"
+ }
+}

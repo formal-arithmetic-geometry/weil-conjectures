@@ -5,8 +5,9 @@
  "status": "split",
  "statement": "Let $\\ell$ be prime and $Y$ a scheme with $\\ell$ invertible. Use the simultaneous derived reduction $D$ and strict Cartier system of [det-prop-diagonal-tower-system], and the completed coefficients, derived limits, source and target comparisons of [det-prop-diagonal-tower-limit], with that node's derived-category size conventions. A completed arrow $\\delta:\\Delta_*\\Zl\\to\\Zl(1)[2]$ is a normalized diagonal limit when it admits exactly the full normalized data in the conclusion of the latter node: a root system $H$ with its root identification, the canonical single-functor source comparison, the signed boundary class and all finite positive Cartier normalizations; total derived limit and completed reduction data; ordinary source and root limit isomorphisms normalized by their canonical generators and projections; invertible derived-limit comparisons; derived completeness of both endpoints; the whole-system comparison equation for $\\delta$ and its uniqueness for those comparisons; and the stated reduction comparisons at every finite level. The root-limit comparison is the actual composite of preservesLimitIso and HasLimit.isoOfNatIso. This is a predicate on an already specified arrow, not a choice from its finite evaluations.",
  "stmt_deps": [
-  "det-prop-diagonal-tower-system",
-  "det-prop-diagonal-tower-limit"
+  "def-sfb-diagonal-trace-finite-cartier-normalization",
+  "det-prop-diagonal-tower-limit",
+  "det-prop-diagonal-tower-system"
  ],
  "source": {
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-limit.md",
@@ -160,5 +161,15 @@
   "group": "O1",
   "result": "pass",
   "note": "Read node, 4 new def nodes, report, all 5 modules and the recorded deps (diagonalTower_limit, DiagonalTowerSystem, GeoP1Cohomology, SpTowerShriek, TowerClass*). Clause 1: strict splitting IsIso on constant-Z_l towers, completed trace pinned by IsTrace, reductions plus torsion 0/1 normalization, p1/p2 models over fst/snd (checked). Clause 2: IsIntegration a≫R.map δ≫t=𝟙 for both projections. δ fixed by IsDiagonalLimit = diagonalTower_limit conclusion token for token (∃! as named δ plus uniqueness). SupportedSource HEq types equal by with_unfolding_all rfl (probe clean). All comparisons pinned; no free arrows. No extra hypotheses; edge cases (empty Y, n=0, l=2) and universes ok. Statements verbatim, docstrings with all 11 steps, item changed only lean plus new def stmt_deps. nt_compile --json: clean once (Limit 57.5 s at load 125), later Limit timeouts (IsDiagonalLimit ~40 s CPU) → maintainer: land at lower load, re-push same head if returned. Advisory: new def node cites theorem det-sp-tower-shriek-levels for plain SpTowerShriek defs (no owning def node; landed tower-class nodes do the same); torsion trace characterized rather than naming geoP1Trace; Model generalizes SpTowerClasses.Projective."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-a4ee8",
+  "group": "D4",
+  "result": "fix",
+  "landing": "20261027T233852-L-4126810",
+  "kind": "interface",
+  "note": "independent cc review: item theorem, 18 new modules and 25 nodes against packet/clone; IsDiagonalLimit old vs new finite clause unfolded (defeq; HasExt is Prop); scratch build of all 19 modules with #print axioms; 9 direct importers OK in 3b"
  }
 }

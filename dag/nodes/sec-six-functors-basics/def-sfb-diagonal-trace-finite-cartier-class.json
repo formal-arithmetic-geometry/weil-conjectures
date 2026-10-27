@@ -1,0 +1,97 @@
+{
+ "id": "def-sfb-diagonal-trace-finite-cartier-class",
+ "kind": "definition",
+ "title": "Positive finite Cartier classes with inferred scalar endpoints",
+ "statement": "Let l be prime and Y a scheme with l invertible on Y. At exponent n+1, finiteCartierClass is exactly diagonalExactFunctorExtImage(diagonalFiniteToPadic(l,n), cartierResidueReducedPro(l,n+1,diagonalImmersion(Y), its Cartier property, invertibility)). Its endpoints are inferred from that actual class. This names the positive coefficient-linear finite Cartier class without changing its object or sign.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-trace.proof.md",
+  "place": "paragraph (2), finite Cartier normalization and forget supports, before the divisor line is decomposed; diagonal-limit clause (3), and classes proof (3)"
+ },
+ "stmt_deps": [
+  "det-prop-diagonal-tower-limit",
+  "def-sp-tower-class-diagonal"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": {
+  "kind": "adapted",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-trace.proof.md",
+  "place": "paragraph (2), finite Cartier normalization and forget supports, before the divisor line is decomposed; diagonal-limit clause (3), and classes proof (3)",
+  "by": "D4"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The supported Kummer cycle class of an effective Cartier divisor gives the first Chern class after forgetting support",
+   "results": "8 hits: Algebra.unramifiedLocus_eq_compl_support, MeromorphicOn.divisor, CochainComplex.HomComplex.CohomologyClass.mkAddMonoidHom_apply, Algebra.etaleLocus_eq_compl_support, groupHomology.isCycle₁_of_mem_cycles₁, groupHomology.cyclesMk₁_eq, KaehlerDifferential.kerTotal_eq, groupHomology.mapCycles₁_hom",
+   "date": "2026-10-28",
+   "verdict": "No exact named positive Cartier class in Mathlib."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.homEquiv_naturality_right",
+   "results": "1 hits: CategoryTheory.Adjunction.homEquiv_naturality_right",
+   "date": "2026-10-28",
+   "verdict": "Use the already defined exact-functor map on Ext."
+  },
+  {
+   "tool": "grep",
+   "query": "mapDerivedCategorySingleFunctor|commShiftIso",
+   "results": "21 hits: Mathlib/Algebra/Homology/DerivedCategory/TStructure.lean, Mathlib/Algebra/Homology/DerivedCategory/TStructure.lean, Mathlib/Algebra/Homology/DerivedCategory/ShortExact.lean, Mathlib/Algebra/Homology/DerivedCategory/ShortExact.lean, Mathlib/Algebra/Homology/DerivedCategory/ShortExact.lean, Mathlib/Algebra/Homology/DerivedCategory/ShortExact.lean, Mathlib/Algebra/Homology/DerivedCategory/Basic.lean, Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean; searched Mathlib/Algebra/Homology/DerivedCategory",
+   "date": "2026-10-28",
+   "verdict": "The project diagonalExactFunctorExtImage supplies the complete construction."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.DiagonalTraceFiniteCartierChern",
+  "date": "2026-10-28",
+  "group": "D4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-prop-diagonal-tower-trace",
+   "place": "paragraph (2), finite Cartier normalization and forget supports, before the divisor line is decomposed; diagonal-limit clause (3), and classes proof (3)",
+   "via": [
+    "lem-sfb-diagonal-trace-finite-cartier-chern",
+    "lem-sfb-diagonal-trace-finite-divisor-adjoint"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-diagonal-tower",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.DiagonalTraceFiniteCartierClass",
+  "file": "lean/Sheaf/Paper/DiagonalTraceFiniteCartierClass.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.DiagonalTrace.finiteCartierClass",
+  "statement": "def finiteCartierClass (l : ℕ) [Fact l.Prime]\n    (Y : Scheme.{u}) (hY : IsUnit (l : Γ(Y, ⊤))) (n : ℕ)",
+  "branch": "sheaf-dag",
+  "by": "D4",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-a4ee8",
+  "group": "D4",
+  "result": "fix",
+  "landing": "20261027T233852-L-4126810",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-a4ee8",
+  "group": "D4",
+  "result": "fix",
+  "landing": "20261027T233852-L-4126810",
+  "kind": "interface",
+  "note": "independent cc review: item theorem, 18 new modules and 25 nodes against packet/clone; IsDiagonalLimit old vs new finite clause unfolded (defeq; HasExt is Prop); scratch build of all 19 modules with #print axioms; 9 direct importers OK in 3b"
+ }
+}

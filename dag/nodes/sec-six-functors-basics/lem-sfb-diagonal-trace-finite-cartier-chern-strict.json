@@ -1,0 +1,145 @@
+{
+ "id": "lem-sfb-diagonal-trace-finite-cartier-chern-strict",
+ "kind": "statement",
+ "title": "The finite Chern equation from an explicit strict presentation",
+ "statement": "Fix the prime l, noetherian Y and its projective line and diagonal surface, with l invertible, and the surface localization conventions. Let D be an ordinary strict reduction, delta a completed supported diagonal arrow, H a strict system identified with the root tower, xi in Ext²(D.E(diagonalIntegralSource),H) satisfying FiniteCartierNormalization, s an ordinary completed-source limit isomorphism satisfying SupportedSourceConeNormalization, and t an ordinary completed-root limit isomorphism with the prescribed root-limit normalization. Let c be normalized Chern data with FiniteChernNormalization, r and k normalized coefficients, p a chosen derived presentation of xi, and L0,L normalized derived-limit models. Assume the whole-system equation U(delta) followed by the shifted target comparison formed from t and p.target equals the source comparison formed from s and p.source followed by L0.R(p.arrow). Then after precomposing completedSupportedUnit and evaluating level n through the coefficient line comparison for L, this arrow is the projected coefficient first Chern arrow of diagonalPic(Y), exactly as in the parent. This is a proved calculation from explicit data, not a new proof obligation.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-trace.proof.md",
+  "place": "paragraph (2), finite Cartier normalization and forget supports, before the divisor line is decomposed; diagonal-limit clause (3), and classes proof (3)"
+ },
+ "stmt_deps": [
+  "def-sfb-diagonal-trace-models",
+  "def-sfb-diagonal-trace-coefficients",
+  "det-prop-diagonal-tower-limit",
+  "def-sfb-diagonal-trace-finite-cartier-normalization",
+  "def-sfb-diagonal-trace-supported-source-cone-normalization",
+  "def-sfb-diagonal-trace-ext-derived-presentation",
+  "def-sfb-diagonal-trace-derived-presentation-equation",
+  "def-sfb-diagonal-trace-finite-chern-equation",
+  "def-sfb-diagonal-trace-completed-supported-unit",
+  "def-sfb-diagonal-completed-endpoints"
+ ],
+ "proof": [
+  {
+   "text": "Construct the normalized linear root isomorphism and prove its ordinary cone equation. Apply the finite root projection equation to identify the target comparison.",
+   "uses": [
+    "lem-sfb-diagonal-trace-normalized-root-iso",
+    "lem-sfb-diagonal-trace-normalized-root-cone",
+    "lem-sfb-diagonal-trace-root-projection"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the supported finite Cartier/Chern equation to the chosen strict presentation. Expand the named composite equations, precompose the whole-system equation by the supported unit, and use projection naturality to move p.arrow to its finite evaluation. Associativity gives the displayed equality.",
+   "uses": [
+    "lem-sfb-diagonal-trace-supported-finite-boundary",
+    "def-sfb-diagonal-trace-finite-boundary-equation",
+    "def-sfb-diagonal-trace-supported-source-comparison",
+    "def-sfb-diagonal-trace-ext-source-comparison",
+    "def-sfb-diagonal-trace-supported-boundary-equation",
+    "def-sfb-diagonal-trace-root-projection-equation",
+    "def-sfb-diagonal-trace-finite-chern-composite",
+    "def-sfb-diagonal-trace-finite-chern-equation",
+    "def-sfb-diagonal-trace-completed-boundary-equation",
+    "def-sfb-diagonal-trace-completed-supported-unit"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-diagonal-trace-completed-boundary-equation",
+  "def-sfb-diagonal-trace-completed-supported-unit",
+  "def-sfb-diagonal-trace-ext-source-comparison",
+  "def-sfb-diagonal-trace-finite-boundary-equation",
+  "def-sfb-diagonal-trace-finite-chern-composite",
+  "def-sfb-diagonal-trace-finite-chern-equation",
+  "def-sfb-diagonal-trace-root-projection-equation",
+  "def-sfb-diagonal-trace-supported-boundary-equation",
+  "def-sfb-diagonal-trace-supported-source-comparison",
+  "lem-sfb-diagonal-trace-normalized-root-cone",
+  "lem-sfb-diagonal-trace-normalized-root-iso",
+  "lem-sfb-diagonal-trace-root-projection",
+  "lem-sfb-diagonal-trace-supported-finite-boundary"
+ ],
+ "proof_origin": {
+  "kind": "adapted",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-trace.proof.md",
+  "place": "paragraph (2), finite Cartier normalization and forget supports, before the divisor line is decomposed; diagonal-limit clause (3), and classes proof (3)",
+  "by": "D4"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Naturality of derived inverse limit projections and comparison with a shifted complex concentrated in degree zero",
+   "results": "8 hits: CategoryTheory.Limits.HasLimit.isoOfNatIso_inv_π, CategoryTheory.InjectiveResolution.isoRightDerivedObj_inv_naturality_assoc, CategoryTheory.ProjectiveResolution.isoLeftDerivedObj_inv_naturality, CategoryTheory.ProjectiveResolution.isoLeftDerivedToHomotopyCategoryObj_inv_naturality_assoc, CategoryTheory.InjectiveResolution.isoRightDerivedObj_inv_naturality, CategoryTheory.ProjectiveResolution.isoLeftDerivedToHomotopyCategoryObj_inv_naturality, CategoryTheory.ProjectiveResolution.isoLeftDerivedObj_inv_naturality_assoc, CategoryTheory.ShortComplex.mapRightHomologyIso_inv_naturality_assoc",
+   "date": "2026-10-28",
+   "verdict": "The existing comparison APIs give the categorical glue used in the proof."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.homEquiv_naturality_right",
+   "results": "1 hits: CategoryTheory.Adjunction.homEquiv_naturality_right",
+   "date": "2026-10-28",
+   "verdict": "Projection naturality combines the strict whole-system equation and finite equations."
+  },
+  {
+   "tool": "grep",
+   "query": "mapDerivedCategorySingleFunctor|commShiftIso",
+   "results": "21 hits: Mathlib/Algebra/Homology/DerivedCategory/TStructure.lean, Mathlib/Algebra/Homology/DerivedCategory/TStructure.lean, Mathlib/Algebra/Homology/DerivedCategory/ShortExact.lean, Mathlib/Algebra/Homology/DerivedCategory/ShortExact.lean, Mathlib/Algebra/Homology/DerivedCategory/ShortExact.lean, Mathlib/Algebra/Homology/DerivedCategory/ShortExact.lean, Mathlib/Algebra/Homology/DerivedCategory/Basic.lean, Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean; searched Mathlib/Algebra/Homology/DerivedCategory",
+   "date": "2026-10-28",
+   "verdict": "Exact single and shift comparisons occur in the two lower calculations; the parent combination is proved here."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.DiagonalTraceFiniteCartierChern",
+  "date": "2026-10-28",
+  "group": "D4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-prop-diagonal-tower-trace",
+   "place": "paragraph (2), finite Cartier normalization and forget supports, before the divisor line is decomposed; diagonal-limit clause (3), and classes proof (3)",
+   "via": [
+    "lem-sfb-diagonal-trace-finite-cartier-chern",
+    "lem-sfb-diagonal-trace-finite-divisor-adjoint"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-diagonal-tower",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.DiagonalTraceFiniteCartierChernStrict",
+  "file": "lean/Sheaf/Paper/DiagonalTraceFiniteCartierChernStrict.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.DiagonalTrace.diagonalTrace_finiteCartierChern_strict",
+  "statement": "theorem diagonalTrace_finiteCartierChern_strict\n    (l : ℕ) [Fact l.Prime]\n    (Y : Scheme.{u}) [IsNoetherian Y] [IsNoetherian (ProjectiveLine Y)]\n    [IsNoetherian (diagonalSurface Y)] (hY : IsUnit (l : Γ(Y, ⊤)))\n    [DiagonalTraceLocalizations l (diagonalSurface Y)]\n    (D : DiagonalReductionPresentation l (diagonalScalarExtension l (diagonalSurface Y)))\n    (δ : diagonalCompletedDomain l Y ⟶ diagonalCompletedCodomain l Y)\n    (H : DiagonalSystems l (diagonalSurface Y))\n    (roots : H ⋙ diagonalForget l (diagonalSurface Y) ≅\n      Scheme.proEtaleRootsOfUnityTower (diagonalSurface Y) l (Fact.out : l.Prime))\n    (xi : CategoryTheory.Abelian.Ext (D.E.obj (diagonalIntegralSource Y)) H 2)\n    (hfinite : FiniteCartierNormalization l Y hY D H roots xi)\n    (s : (diagonalCompletedRestriction l (diagonalSurface Y)).obj\n        (diagonalCompletedSource l Y) ≅ limit (D.E.obj (diagonalIntegralSource Y)))\n    (hs : SupportedSourceConeNormalization l Y D s)\n    (t : (diagonalCompletedRestriction l (diagonalSurface Y)).obj\n        (Scheme.purTwistZlModule (diagonalSurface Y) l) ≅ limit H)\n    (ht : HEq ((diagonalForget l (diagonalSurface Y)).map t.hom)\n      (diagonalRootLimitComparison l (diagonalSurface Y) H roots).inv)\n    (c : SpTowerClasses.Chern l (ULift.{u} (Padic l)) (diagonalSurface Y))\n    (hn : c.Normalized l (ULift.{u} (Padic l)))\n    (hc : SpTowerClasses.FiniteChernNormalization l (ULift.{u} (Padic l)) c)\n    (r : Restriction l (ULift.{u} (Padic l)) (diagonalSurface Y))\n    (k : Coefficients l (ULift.{u} (Padic l)) (diagonalSurface Y) c r)\n    (p : ExtDerivedPresentation (D.E.obj (diagonalIntegralSource Y)) H)\n    (hp : p.Presents xi)\n    (L₀ L : DiagonalRlim (DiagonalMod l (diagonalSurface Y))) (n : ℕ)\n    (hwhole : (diagonalCompletedUnderlying l (diagonalSurface Y)).map δ ≫\n        diagonalShiftedSingleLimitComparison (diagonalCompletedRestriction l (diagonalSurface Y))\n          L₀ (Scheme.purTwistZlModule (diagonalSurface Y) l) H p.J t p.target =\n      diagonalSingleLimitComparison (diagonalCompletedRestriction l (diagonalSurface Y))\n          L₀ (diagonalCompletedSource l Y) (D.E.obj (diagonalIntegralSource Y)) p.K s p.source ≫\n        L₀.R.map p.arrow) :\n    finiteChernEquation l Y c r k L n δ",
+  "branch": "sheaf-dag",
+  "by": "D4",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-a4ee8",
+  "group": "D4",
+  "result": "fix",
+  "landing": "20261027T233852-L-4126810",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-a4ee8",
+  "group": "D4",
+  "result": "fix",
+  "landing": "20261027T233852-L-4126810",
+  "kind": "interface",
+  "note": "independent cc review: item theorem, 18 new modules and 25 nodes against packet/clone; IsDiagonalLimit old vs new finite clause unfolded (defeq; HasExt is Prop); scratch build of all 19 modules with #print axioms; 9 direct importers OK in 3b"
+ }
+}

@@ -1,0 +1,114 @@
+{
+ "id": "lem-sfb-diagonal-trace-root-projection",
+ "kind": "statement",
+ "title": "Finite projections of the normalized root-limit comparison",
+ "statement": "Fix l prime and a scheme T with localizations, c over ULift(Q_l), restriction r and normalized coefficients k. Let H be a strict system, J a derived strict-system object with b:J≅H[2], t:F(completed root module)≅lim H, and e:H≅r.F(lineModule(c)). Assume the ordinary cone equation t.hom≫projection(H,n)≫e.hom(n)=k.lineProjection(n) for every n. For any normalized derived-limit models L0,L, the finite projection of diagonalShiftedSingleLimitComparison(F,L0,t,b), followed by evaluation of rootSystemTransport(r.F,lineModule(c),b,e), is shiftedComparison(k.lineMap(L)) followed by L.projection(n). No root-limit normalization, Cartier class or Chern arrow occurs among these hypotheses.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-trace.proof.md",
+  "place": "paragraph (2), finite Cartier normalization and forget supports, before the divisor line is decomposed; diagonal-limit clause (3), and classes proof (3)"
+ },
+ "stmt_deps": [
+  "def-sfb-diagonal-trace-models",
+  "def-sfb-diagonal-trace-coefficients",
+  "det-prop-diagonal-tower-limit",
+  "def-sfb-diagonal-trace-coefficient-root-transport",
+  "def-sfb-diagonal-trace-root-projection-equation"
+ ],
+ "proof": [
+  {
+   "text": "Use hcone to identify the ordinary cone components. Apply the normalized derived-limit projection on the single complex. Naturality moves the b and e comparisons across it, and the exact single and shift factors cancel against rootSystemTransport. The comparison between right-derived-limit models is fixed by the shared derived unit, hence has these same finite projections. This proves the equation at n without assuming that evaluations detect arbitrary derived morphisms.",
+   "uses": [
+    "def-sfb-diagonal-trace-models",
+    "def-sfb-diagonal-trace-coefficient-root-transport",
+    "lem-sfb-diagonal-trace-exact-cone-projection"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-diagonal-trace-coefficient-root-transport",
+  "def-sfb-diagonal-trace-models",
+  "lem-sfb-diagonal-trace-exact-cone-projection"
+ ],
+ "proof_origin": {
+  "kind": "adapted",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-trace.proof.md",
+  "place": "paragraph (2), finite Cartier normalization and forget supports, before the divisor line is decomposed; diagonal-limit clause (3), and classes proof (3)",
+  "by": "D4"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Naturality of derived inverse limit projections and comparison with a shifted complex concentrated in degree zero",
+   "results": "8 hits: CategoryTheory.Limits.HasLimit.isoOfNatIso_inv_π, CategoryTheory.InjectiveResolution.isoRightDerivedObj_inv_naturality_assoc, CategoryTheory.ProjectiveResolution.isoLeftDerivedObj_inv_naturality, CategoryTheory.ProjectiveResolution.isoLeftDerivedToHomotopyCategoryObj_inv_naturality_assoc, CategoryTheory.InjectiveResolution.isoRightDerivedObj_inv_naturality, CategoryTheory.ProjectiveResolution.isoLeftDerivedToHomotopyCategoryObj_inv_naturality, CategoryTheory.ProjectiveResolution.isoLeftDerivedObj_inv_naturality_assoc, CategoryTheory.ShortComplex.mapRightHomologyIso_inv_naturality_assoc",
+   "date": "2026-10-28",
+   "verdict": "The ordinary limit isomorphism projection is in Mathlib; the normalized shifted derived-limit equation is not."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Equality of derived morphisms after evaluation of inverse systems, naturality of the right adjoint limit projection",
+   "results": "8 hits: InverseSystem.globalEquiv_naturality, LightProfinite.lightToProfinite_map_proj_eq, InverseSystem.invLimEquiv_apply_coe, CategoryTheory.Limits.limitObjIsoLimitCompEvaluation_inv_π_app, InverseSystem.invLimEquiv, CategoryTheory.Limits.limitObjIsoLimitCompEvaluation_inv_π_app_assoc, CategoryTheory.Limits.limitObjIsoLimitCompEvaluation_inv_limit_map, LightProfinite.proj_comp_transitionMap",
+   "date": "2026-10-28",
+   "verdict": "Generic inverse-limit identities only; no coefficient-root cone statement."
+  },
+  {
+   "tool": "grep",
+   "query": "mapDerivedCategorySingleFunctor|commShiftIso",
+   "results": "21 hits: Mathlib/Algebra/Homology/DerivedCategory/TStructure.lean, Mathlib/Algebra/Homology/DerivedCategory/TStructure.lean, Mathlib/Algebra/Homology/DerivedCategory/ShortExact.lean, Mathlib/Algebra/Homology/DerivedCategory/ShortExact.lean, Mathlib/Algebra/Homology/DerivedCategory/ShortExact.lean, Mathlib/Algebra/Homology/DerivedCategory/ShortExact.lean, Mathlib/Algebra/Homology/DerivedCategory/Basic.lean, Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean; searched Mathlib/Algebra/Homology/DerivedCategory",
+   "date": "2026-10-28",
+   "verdict": "Exact single and shift APIs are available, but not this normalized root-cone comparison."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.DiagonalTraceFiniteCartierChern",
+  "date": "2026-10-28",
+  "group": "D4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-prop-diagonal-tower-trace",
+   "place": "paragraph (2), finite Cartier normalization and forget supports, before the divisor line is decomposed; diagonal-limit clause (3), and classes proof (3)",
+   "via": [
+    "lem-sfb-diagonal-trace-finite-cartier-chern",
+    "lem-sfb-diagonal-trace-finite-divisor-adjoint"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-diagonal-tower",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.DiagonalTraceRootProjection",
+  "file": "lean/Sheaf/Paper/DiagonalTraceRootProjection.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.DiagonalTrace.diagonalTrace_rootProjection",
+  "statement": "theorem diagonalTrace_rootProjection (l : ℕ) [Fact l.Prime] (T : Scheme.{u})\n    [DiagonalTraceLocalizations l T]\n    (c : SpTowerClasses.Chern l (ULift.{u} (Padic l)) T)\n    (r : Restriction l (ULift.{u} (Padic l)) T)\n    (k : Coefficients l (ULift.{u} (Padic l)) T c r)\n    (H : DiagonalSystems l T)\n    (J : DerivedCategory (DiagonalSystems l T))\n    (b : J ≅ ((DerivedCategory.singleFunctor _ 0).obj H)⟦(2 : ℤ)⟧)\n    (t : (diagonalCompletedRestriction l T).obj (Scheme.purTwistZlModule T l) ≅\n      limit H)\n    (e : H ≅ r.F.obj (SpTowerClasses.lineModule l (ULift.{u} (Padic l)) c))\n    (hcone : ∀ n : ℕ, t.hom ≫ limit.π H (op n) ≫ e.hom.app (op n) =\n      k.lineProjection.app (op n))\n    (L₀ L : DiagonalRlim (DiagonalMod l T)) (n : ℕ) :\n    rootProjectionEquation L₀.R\n      ((evaluation ℕᵒᵖ (DiagonalMod l T)).obj (op n)).mapDerivedCategory\n      (L₀.projection n)\n      (diagonalShiftedSingleLimitComparison (diagonalCompletedRestriction l T) L₀\n        (Scheme.purTwistZlModule T l) H J t b)\n      (coefficientRootTransport l T c r b e).hom\n      (shiftedComparison (diagonalCompletedUnderlying l T)\n        (r.F.mapDerivedCategory ⋙ L.R) (k.lineMap l (ULift.{u} (Padic l)) L) 2 ≫\n        (L.projection n).app _)",
+  "branch": "sheaf-dag",
+  "by": "D4",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-a4ee8",
+  "group": "D4",
+  "result": "fix",
+  "landing": "20261027T233852-L-4126810",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-a4ee8",
+  "group": "D4",
+  "result": "fix",
+  "landing": "20261027T233852-L-4126810",
+  "kind": "interface",
+  "note": "independent cc review: item theorem, 18 new modules and 25 nodes against packet/clone; IsDiagonalLimit old vs new finite clause unfolded (defeq; HasExt is Prop); scratch build of all 19 modules with #print axioms; 9 direct importers OK in 3b"
+ }
+}

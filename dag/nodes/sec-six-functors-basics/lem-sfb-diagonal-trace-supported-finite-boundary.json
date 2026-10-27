@@ -1,0 +1,152 @@
+{
+ "id": "lem-sfb-diagonal-trace-supported-finite-boundary",
+ "kind": "statement",
+ "title": "The finite forget-support equation for a normalized strict Cartier class",
+ "statement": "Let l be prime, Y and its projective line and diagonal surface noetherian, l invertible on Y, and use the surface localization conventions. Let D be an ordinary strict reduction presentation, H a strict root system, xi in Ext²(D.E(diagonalIntegralSource),H), and assume diagonalFiniteCycleNormalization for xi with the positive canonical Cartier class at every exponent n+1 [det-prop-diagonal-tower-limit]. Let s be the ordinary completed supported-source limit isomorphism satisfying the integral-generator equation. Let c be normalized Chern data with FiniteChernNormalization, r a scalar restriction, k its normalized coefficient cones, and e:H≅r.F(lineModule(c)) whose underlying map is roots.hom≫k.lineForget.inv. For arbitrary presentations a:K≅single(D.E(diagonalIntegralSource)), b:J≅single(H)[2], and f:K→J with xi.hom=a.inv≫f≫b.hom, and any derived-limit models L0,L, evaluate the source-limit comparison at n, precompose completedSupportedUnit, apply f and rootSystemTransport, and obtain (k.unitMap(L)≫L.projection(n))≫evaluation(D(r.F)(firstChern(diagonalPic(Y)))). The full source, target, and comparisons are fixed by the Lean statement. No completed diagonal arrow or IsDiagonalLimit hypothesis occurs.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-trace.proof.md",
+  "place": "paragraph (2), finite Cartier normalization and forget supports, before the divisor line is decomposed; diagonal-limit clause (3), and classes proof (3)"
+ },
+ "stmt_deps": [
+  "def-sfb-diagonal-trace-models",
+  "def-sfb-diagonal-trace-coefficients",
+  "def-sfb-diagonal-trace-completed-supported-unit",
+  "def-sfb-diagonal-trace-coefficient-root-transport",
+  "def-sp-tower-class-chern",
+  "def-sp-tower-class-finite",
+  "def-sp-tower-class-diagonal",
+  "det-prop-diagonal-tower-limit",
+  "def-sfb-diagonal-trace-supported-boundary-equation",
+  "def-sfb-diagonal-trace-finite-cartier-normalization",
+  "def-sfb-diagonal-trace-supported-source-cone-normalization",
+  "def-sfb-diagonal-trace-ext-arrow-presentation",
+  "def-sfb-diagonal-trace-ext-derived-presentation",
+  "def-sfb-diagonal-trace-supported-source-comparison",
+  "def-sfb-diagonal-trace-derived-presentation-equation",
+  "def-sfb-diagonal-trace-finite-chern-composite",
+  "def-sfb-diagonal-trace-finite-boundary-equation"
+ ],
+ "proof": [
+  {
+   "text": "The source generator equation and DiagonalSourceNormalization pin the n-th source map to the canonical positive finite quotient. completedSupportedUnit sends one to the supported section one. Projecting xi and applying its finite-cycle equation therefore gives exactly the positive finite Cartier class with its integral generator.",
+   "uses": [
+    "det-prop-diagonal-tower-limit",
+    "def-sfb-diagonal-trace-completed-supported-unit"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Cartier reduction existence and uniqueness, with the site comparison, identify this class with the etale supported Kummer class. The supported Kummer Chern realization identifies the composite with the constant-to-support unit as the positive Chern class of the dual diagonal ideal, diagonalPic(Y).",
+   "uses": [
+    "lem-sp-cartier-reduction-existence",
+    "lem-asd-supported-kummer-chern-realization",
+    "def-sp-tower-class-diagonal"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply FiniteChernNormalization at diagonalPic(Y) and n. k.coefficient_one, k.line_tensor, and the normalization of e identify the finite endpoint maps with this Kummer calculation; Chern.Normalized fixes the boundary and scalar comparisons. Regularity of l on the completed coefficient ring and its actual finite quotient identify derived reduction of its unit with the finite unit, with adjunct the actual coefficient projection. Use that reduction adjunction and then scalar_unit_ext_bijective to recover equality of the coefficient-linear arrows from the integral adjuncts. Finally diagonalTrace_exactConeComparison_projection identifies the input with k.unitMap(L) followed by L.projection(n).",
+   "uses": [
+    "def-sp-tower-class-finite",
+    "def-sp-tower-class-chern",
+    "def-sfb-diagonal-trace-coefficients",
+    "lem-sp-scalar-unit-ext-bijective",
+    "lem-sfb-diagonal-trace-exact-cone-projection"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-diagonal-trace-coefficients",
+  "def-sfb-diagonal-trace-completed-supported-unit",
+  "def-sp-tower-class-chern",
+  "def-sp-tower-class-diagonal",
+  "def-sp-tower-class-finite",
+  "det-prop-diagonal-tower-limit",
+  "lem-asd-supported-kummer-chern-realization",
+  "lem-sfb-diagonal-trace-exact-cone-projection",
+  "lem-sp-cartier-reduction-existence",
+  "lem-sp-scalar-unit-ext-bijective"
+ ],
+ "proof_origin": {
+  "kind": "adapted",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-trace.proof.md",
+  "place": "paragraph (2), finite Cartier normalization and forget supports, before the divisor line is decomposed; diagonal-limit clause (3), and classes proof (3)",
+  "by": "D4"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The supported Kummer cycle class of an effective Cartier divisor gives the first Chern class after forgetting support",
+   "results": "8 hits: Algebra.unramifiedLocus_eq_compl_support, MeromorphicOn.divisor, CochainComplex.HomComplex.CohomologyClass.mkAddMonoidHom_apply, Algebra.etaleLocus_eq_compl_support, groupHomology.isCycle₁_of_mem_cycles₁, groupHomology.cyclesMk₁_eq, KaehlerDifferential.kerTotal_eq, groupHomology.mapCycles₁_hom",
+   "date": "2026-10-28",
+   "verdict": "No supported Kummer or Chern equation in Mathlib; use the project supported-Kummer realization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For an effective Cartier divisor, the supported Kummer class composed with the constant-to-supported unit equals the first Chern class",
+   "results": "8 hits: AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux, AlgebraicGeometry.StructureSheaf.normalize_finite_fraction_representation, AlgebraicGeometry.exists_eq_pow_mul_of_isAffineOpen, AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isAffineOpen, AlgebraicGeometry.StructureSheaf.const_mul_rev, ClassGroup.exists_mk0_eq_mk0, AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isCompact, AlgebraicGeometry.StructureSheaf.const_mul_cancel'",
+   "date": "2026-10-28",
+   "verdict": "No exact normalized Cartier/Chern arrow statement; existing project declarations supply its geometric steps."
+  },
+  {
+   "tool": "grep",
+   "query": "mapDerivedCategorySingleFunctor|commShiftIso",
+   "results": "21 hits: Mathlib/Algebra/Homology/DerivedCategory/TStructure.lean, Mathlib/Algebra/Homology/DerivedCategory/TStructure.lean, Mathlib/Algebra/Homology/DerivedCategory/ShortExact.lean, Mathlib/Algebra/Homology/DerivedCategory/ShortExact.lean, Mathlib/Algebra/Homology/DerivedCategory/ShortExact.lean, Mathlib/Algebra/Homology/DerivedCategory/ShortExact.lean, Mathlib/Algebra/Homology/DerivedCategory/Basic.lean, Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean; searched Mathlib/Algebra/Homology/DerivedCategory",
+   "date": "2026-10-28",
+   "verdict": "Generic exact-functor comparison APIs only; no normalized coefficient-linear Chern calculation."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.DiagonalTraceFiniteCartierChern",
+  "date": "2026-10-28",
+  "group": "D4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-prop-diagonal-tower-trace",
+   "place": "paragraph (2), finite Cartier normalization and forget supports, before the divisor line is decomposed; diagonal-limit clause (3), and classes proof (3)",
+   "via": [
+    "lem-sfb-diagonal-trace-finite-cartier-chern",
+    "lem-sfb-diagonal-trace-finite-divisor-adjoint"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-diagonal-tower",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.DiagonalTraceSupportedFiniteBoundary",
+  "file": "lean/Sheaf/Paper/DiagonalTraceSupportedFiniteBoundary.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.DiagonalTrace.diagonalTrace_supportedFiniteBoundary",
+  "statement": "theorem diagonalTrace_supportedFiniteBoundary\n    (l : ℕ) [Fact l.Prime]\n    (Y : Scheme.{u}) [IsNoetherian Y] [IsNoetherian (ProjectiveLine Y)]\n    [IsNoetherian (diagonalSurface Y)] (hY : IsUnit (l : Γ(Y, ⊤)))\n    [DiagonalTraceLocalizations l (diagonalSurface Y)]\n    (D : DiagonalReductionPresentation l (diagonalScalarExtension l (diagonalSurface Y)))\n    (H : DiagonalSystems l (diagonalSurface Y))\n    (roots : H ⋙ diagonalForget l (diagonalSurface Y) ≅\n      Scheme.proEtaleRootsOfUnityTower (diagonalSurface Y) l (Fact.out : l.Prime))\n    (xi : Ext (D.E.obj (diagonalIntegralSource Y)) H 2)\n    (hxi : FiniteCartierNormalization l Y hY D H roots xi)\n    (s : (diagonalCompletedRestriction l (diagonalSurface Y)).obj\n        (diagonalCompletedSource l Y) ≅ limit (D.E.obj (diagonalIntegralSource Y)))\n    (hs : SupportedSourceConeNormalization l Y D s)\n    (c : SpTowerClasses.Chern l (ULift.{u} (Padic l)) (diagonalSurface Y))\n    (hn : c.Normalized l (ULift.{u} (Padic l)))\n    (hc : SpTowerClasses.FiniteChernNormalization l (ULift.{u} (Padic l)) c)\n    (r : Restriction l (ULift.{u} (Padic l)) (diagonalSurface Y))\n    (k : Coefficients l (ULift.{u} (Padic l)) (diagonalSurface Y) c r)\n    (e : H ≅ r.F.obj (SpTowerClasses.lineModule l (ULift.{u} (Padic l)) c))\n    (he : Functor.whiskerRight e.hom (diagonalForget l (diagonalSurface Y)) =\n      roots.hom ≫ k.lineForget.inv)\n    (p : ExtDerivedPresentation (D.E.obj (diagonalIntegralSource Y)) H)\n    (hp : p.Presents xi)\n    (L₀ L : DiagonalRlim (DiagonalMod l (diagonalSurface Y))) (n : ℕ) :\n    finiteBoundaryEquation l Y D H p s c r k e L₀ L n",
+  "branch": "sheaf-dag",
+  "by": "D4",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-a4ee8",
+  "group": "D4",
+  "result": "fix",
+  "landing": "20261027T233852-L-4126810",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-a4ee8",
+  "group": "D4",
+  "result": "fix",
+  "landing": "20261027T233852-L-4126810",
+  "kind": "interface",
+  "note": "independent cc review: item theorem, 18 new modules and 25 nodes against packet/clone; IsDiagonalLimit old vs new finite clause unfolded (defeq; HasExt is Prop); scratch build of all 19 modules with #print axioms; 9 direct importers OK in 3b"
+ }
+}

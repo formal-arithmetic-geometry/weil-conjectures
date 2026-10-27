@@ -1,0 +1,94 @@
+{
+ "id": "def-sfb-diagonal-trace-supported-boundary-equation",
+ "kind": "definition",
+ "title": "Supported boundary equation with shared categorical interfaces",
+ "statement": "For categories A,C,D, U:A→D, R,E:C→D, pi:R→E, g:P→Q in A, s:U(Q)→R(K), f:K→J, b:J→W and v:U(P)→E(W), supportedBoundaryEquation(U,R,E,pi,g,s,f,b,v) means U(g)≫s≫pi(K)≫E(f)≫E(b)=v. The wrapper changes no mathematical condition and explicitly shares the category instances of this finite arrow equation.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-trace.proof.md",
+  "place": "paragraph (2), finite Cartier normalization and forget supports, before the divisor line is decomposed; diagonal-limit clause (3), and classes proof (3)"
+ },
+ "stmt_deps": [],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": {
+  "kind": "adapted",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-trace.proof.md",
+  "place": "paragraph (2), finite Cartier normalization and forget supports, before the divisor line is decomposed; diagonal-limit clause (3), and classes proof (3)",
+  "by": "D4"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The supported Kummer cycle class of an effective Cartier divisor gives the first Chern class after forgetting support",
+   "results": "8 hits: Algebra.unramifiedLocus_eq_compl_support, MeromorphicOn.divisor, CochainComplex.HomComplex.CohomologyClass.mkAddMonoidHom_apply, Algebra.etaleLocus_eq_compl_support, groupHomology.isCycle₁_of_mem_cycles₁, groupHomology.cyclesMk₁_eq, KaehlerDifferential.kerTotal_eq, groupHomology.mapCycles₁_hom",
+   "date": "2026-10-28",
+   "verdict": "The wrapper itself is an elementary categorical equation, not a new geometric condition."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.homEquiv_naturality_right",
+   "results": "1 hits: CategoryTheory.Adjunction.homEquiv_naturality_right",
+   "date": "2026-10-28",
+   "verdict": "Use standard functoriality and naturality; no existing name for the full finite composite."
+  },
+  {
+   "tool": "grep",
+   "query": "mapDerivedCategorySingleFunctor|commShiftIso",
+   "results": "21 hits: Mathlib/Algebra/Homology/DerivedCategory/TStructure.lean, Mathlib/Algebra/Homology/DerivedCategory/TStructure.lean, Mathlib/Algebra/Homology/DerivedCategory/ShortExact.lean, Mathlib/Algebra/Homology/DerivedCategory/ShortExact.lean, Mathlib/Algebra/Homology/DerivedCategory/ShortExact.lean, Mathlib/Algebra/Homology/DerivedCategory/ShortExact.lean, Mathlib/Algebra/Homology/DerivedCategory/Basic.lean, Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean; searched Mathlib/Algebra/Homology/DerivedCategory",
+   "date": "2026-10-28",
+   "verdict": "No existing definition of this specific boundary equation."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.DiagonalTraceFiniteCartierChern",
+  "date": "2026-10-28",
+  "group": "D4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-prop-diagonal-tower-trace",
+   "place": "paragraph (2), finite Cartier normalization and forget supports, before the divisor line is decomposed; diagonal-limit clause (3), and classes proof (3)",
+   "via": [
+    "lem-sfb-diagonal-trace-finite-cartier-chern",
+    "lem-sfb-diagonal-trace-finite-divisor-adjoint"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-diagonal-tower",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.DiagonalTraceProjectionEquations",
+  "file": "lean/Sheaf/Paper/DiagonalTraceProjectionEquations.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.DiagonalTrace.supportedBoundaryEquation",
+  "statement": "def supportedBoundaryEquation\n    {A C D : Type*} [Category A] [Category C] [Category D]\n    (U : A ⥤ D) (R E : C ⥤ D) (pi : R ⟶ E)\n    {P Q : A} {K J W : C}\n    (g : P ⟶ Q) (s : U.obj Q ⟶ R.obj K) (f : K ⟶ J)\n    (b : J ⟶ W) (v : U.obj P ⟶ E.obj W) : Prop",
+  "branch": "sheaf-dag",
+  "by": "D4",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-a4ee8",
+  "group": "D4",
+  "result": "fix",
+  "landing": "20261027T233852-L-4126810",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-a4ee8",
+  "group": "D4",
+  "result": "fix",
+  "landing": "20261027T233852-L-4126810",
+  "kind": "interface",
+  "note": "independent cc review: item theorem, 18 new modules and 25 nodes against packet/clone; IsDiagonalLimit old vs new finite clause unfolded (defeq; HasExt is Prop); scratch build of all 19 modules with #print axioms; 9 direct importers OK in 3b"
+ }
+}

@@ -1,0 +1,96 @@
+{
+ "id": "def-sfb-diagonal-trace-ext-arrow-presentation",
+ "kind": "definition",
+ "title": "A derived arrow presenting a strict degree-two Ext class",
+ "statement": "In any abelian category A with Ext and a chosen derived category, for xi:Ext²(S,H), derived objects K,J, isomorphisms a:K≅single(S), b:J≅single(H)[2], and f:K→J, ExtArrowPresentation(xi,a,b,f) means xi.hom=a.inverse≫f≫b.hom. This is precisely the existing Ext.hom presentation equation, with its category structures shared explicitly.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-trace.proof.md",
+  "place": "paragraph (2), finite Cartier normalization and forget supports, before the divisor line is decomposed; diagonal-limit clause (3), and classes proof (3)"
+ },
+ "stmt_deps": [
+  "def-weil-abstract-derived-category"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": {
+  "kind": "adapted",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-trace.proof.md",
+  "place": "paragraph (2), finite Cartier normalization and forget supports, before the divisor line is decomposed; diagonal-limit clause (3), and classes proof (3)",
+  "by": "D4"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A degree two Ext class as a morphism between single complexes in the derived category",
+   "results": "8 hits: CategoryTheory.Abelian.Ext.hom, CategoryTheory.Abelian.Ext.hom', CategoryTheory.Abelian.Ext.mk₀_hom, CategoryTheory.ShortComplex.ShortExact.extClass_hom, CategoryTheory.Abelian.Ext, CategoryTheory.Abelian.Ext.homEquiv, CategoryTheory.ProjectiveResolution.extMk_hom, CategoryTheory.Abelian.Ext.mk₀",
+   "date": "2026-10-28",
+   "verdict": "Mathlib Ext.hom and Ext.homEquiv give the actual morphism; use that API."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Abelian.Ext.hom",
+   "results": "12 hits: CategoryTheory.Abelian.Ext.hom, CategoryTheory.Abelian.Ext.ext, CategoryTheory.Abelian.Ext.ext_iff, CategoryTheory.Abelian.Ext.mk₀_hom, CategoryTheory.Abelian.Ext.comp_hom, CategoryTheory.Abelian.Ext.zero_hom, CategoryTheory.Abelian.Ext.neg_hom, CategoryTheory.Abelian.Ext.add_hom",
+   "date": "2026-10-28",
+   "verdict": "Use Ext.hom directly; the wrapper only shares the presentation equation."
+  },
+  {
+   "tool": "grep",
+   "query": "homEquiv|def hom",
+   "results": "0 hits: ; searched Mathlib/Mathlib/Algebra/Homology/DerivedCategory/Ext",
+   "date": "2026-10-28",
+   "verdict": "The Ext API supplies the morphism; no separate predicate naming this presentation was found."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.DiagonalTraceFiniteCartierChern",
+  "date": "2026-10-28",
+  "group": "D4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-prop-diagonal-tower-trace",
+   "place": "paragraph (2), finite Cartier normalization and forget supports, before the divisor line is decomposed; diagonal-limit clause (3), and classes proof (3)",
+   "via": [
+    "lem-sfb-diagonal-trace-finite-cartier-chern",
+    "lem-sfb-diagonal-trace-finite-divisor-adjoint"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-diagonal-tower",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.DiagonalTraceExtPresentation",
+  "file": "lean/Sheaf/Paper/DiagonalTraceExtPresentation.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.DiagonalTrace.ExtArrowPresentation",
+  "statement": "def ExtArrowPresentation\n    {A : Type*} [Category A] [Abelian A] [HasExt A] [HasDerivedCategory A]\n    {S H : A} (xi : Ext S H 2) {K J : DerivedCategory A}\n    (a : K ≅ (DerivedCategory.singleFunctor A 0).obj S)\n    (b : J ≅ ((DerivedCategory.singleFunctor A 0).obj H)⟦(2 : ℤ)⟧)\n    (f : K ⟶ J) : Prop",
+  "branch": "sheaf-dag",
+  "by": "D4",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-a4ee8",
+  "group": "D4",
+  "result": "fix",
+  "landing": "20261027T233852-L-4126810",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-a4ee8",
+  "group": "D4",
+  "result": "fix",
+  "landing": "20261027T233852-L-4126810",
+  "kind": "interface",
+  "note": "independent cc review: item theorem, 18 new modules and 25 nodes against packet/clone; IsDiagonalLimit old vs new finite clause unfolded (defeq; HasExt is Prop); scratch build of all 19 modules with #print axioms; 9 direct importers OK in 3b"
+ }
+}

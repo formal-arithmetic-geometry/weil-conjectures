@@ -1,0 +1,122 @@
+{
+ "id": "lem-sfb-diagonal-trace-normalized-root-iso",
+ "kind": "statement",
+ "title": "The normalized linear isomorphism of two strict root systems",
+ "statement": "Let l be prime, T a scheme with the localization conventions of [def-sfb-diagonal-trace-models], c a Chern datum over ULift(Q_l), r a scalar restriction, k normalized coefficients [def-sfb-diagonal-trace-coefficients], and H a strict Z_l-module system with roots:H⋙diagonalForget≅the root-of-unity tower. There is an isomorphism e:H≅r.F(lineModule(c)) whose underlying additive map is exactly roots.hom followed by k.lineForget.inv.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-trace.proof.md",
+  "place": "paragraph (2), finite Cartier normalization and forget supports, before the divisor line is decomposed; diagonal-limit clause (3), and classes proof (3)"
+ },
+ "stmt_deps": [
+  "def-sfb-diagonal-trace-models",
+  "def-sfb-diagonal-trace-coefficients",
+  "def-sp-tower-class-chern"
+ ],
+ "proof": [
+  {
+   "text": "For an additive map into a module killed by l^m, choose the integer approximation of a p-adic scalar modulo l^m. The error is divisible by l^m and acts by zero on the target, so the additive map commutes with that scalar. This is the inline padic_map_smul_target proof using PadicInt.appr_spec.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "The scalar equation in Restriction says that l^(n+1) acts by its zero residue at level n. Thus every restricted target is killed by this power.",
+   "uses": [
+    "def-sfb-diagonal-trace-models"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Compose roots.hom with k.lineForget.inv. Lift its components to linear sheaf maps by the preceding scalar calculation. Faithfulness of forgetting proves the transition equations. Forgetting reflects isomorphisms, so the resulting natural map is invertible and its underlying map is the prescribed composite.",
+   "uses": [
+    "def-sfb-diagonal-trace-models",
+    "def-sfb-diagonal-trace-coefficients"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-diagonal-trace-coefficients",
+  "def-sfb-diagonal-trace-models"
+ ],
+ "proof_origin": {
+  "kind": "adapted",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-trace.proof.md",
+  "place": "paragraph (2), finite Cartier normalization and forget supports, before the divisor line is decomposed; diagonal-limit clause (3), and classes proof (3)",
+  "by": "D4"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "An additive map into a module killed by a prime power is linear over the p-adic integers",
+   "results": "8 hits: AddMonoidHom.coe_toZModLinearMap, PadicInt.lift, PadicInt.ker_toZModPow, AddMonoidHom.toZModLinearMap, WittVector.toPadicInt, PadicInt.limNthHom_add, PadicInt.isFractionRing, PadicInt.limNthHom",
+   "date": "2026-10-28",
+   "verdict": "The ZMod-linearization and PadicInt kernel lemmas give the local algebra, not the normalized sheaf-system isomorphism."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An additive map between modules killed by a power of a prime is linear over the p-adic integers",
+   "results": "8 hits: PadicInt.limNthHom, PadicInt.lift, PadicInt.toZModHom, PadicInt.toZModPow, PadicInt.limNthHom_add, PadicInt.nthHom, WittVector.toPadicInt, AddMonoidHom.toZModLinearMap",
+   "date": "2026-10-28",
+   "verdict": "AddMonoidHom.toZModLinearMap is relevant; the p-adic target and system normalizations still need the inline proof."
+  },
+  {
+   "tool": "grep",
+   "query": "toZModPow",
+   "results": "15 hits: Mathlib/NumberTheory/Padics/RingHoms.lean, Mathlib/NumberTheory/Padics/RingHoms.lean, Mathlib/NumberTheory/Padics/RingHoms.lean, Mathlib/NumberTheory/Padics/RingHoms.lean, Mathlib/NumberTheory/Padics/RingHoms.lean, Mathlib/NumberTheory/Cyclotomic/CyclotomicCharacter.lean, Mathlib/NumberTheory/Cyclotomic/CyclotomicCharacter.lean, Mathlib/NumberTheory/Cyclotomic/CyclotomicCharacter.lean",
+   "date": "2026-10-28",
+   "verdict": "Use the actual residue map in the restriction-killed calculation."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.DiagonalTraceFiniteCartierChern",
+  "date": "2026-10-28",
+  "group": "D4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-prop-diagonal-tower-trace",
+   "place": "paragraph (2), finite Cartier normalization and forget supports, before the divisor line is decomposed; diagonal-limit clause (3), and classes proof (3)",
+   "via": [
+    "lem-sfb-diagonal-trace-finite-cartier-chern",
+    "lem-sfb-diagonal-trace-finite-divisor-adjoint"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-diagonal-tower",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.DiagonalTraceNormalizedRootIso",
+  "file": "lean/Sheaf/Paper/DiagonalTraceNormalizedRootIso.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.DiagonalTrace.diagonalTrace_normalizedRootIso",
+  "statement": "theorem diagonalTrace_normalizedRootIso (l : ℕ) [Fact l.Prime] (T : Scheme.{u})\n    [DiagonalTraceLocalizations l T]\n    (c : Chern l (ULift.{u} (Padic l)) T)\n    (r : Restriction l (ULift.{u} (Padic l)) T)\n    (k : Coefficients l (ULift.{u} (Padic l)) T c r)\n    (H : DiagonalSystems l T)\n    (roots : H ⋙ diagonalForget l T ≅\n      Scheme.proEtaleRootsOfUnityTower T l (Fact.out : l.Prime)) :\n    ∃ e : H ≅ r.F.obj (lineModule l (ULift.{u} (Padic l)) c),\n      Functor.whiskerRight e.hom (diagonalForget l T) =\n        roots.hom ≫ k.lineForget.inv",
+  "branch": "sheaf-dag",
+  "by": "D4",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-a4ee8",
+  "group": "D4",
+  "result": "fix",
+  "landing": "20261027T233852-L-4126810",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-a4ee8",
+  "group": "D4",
+  "result": "fix",
+  "landing": "20261027T233852-L-4126810",
+  "kind": "interface",
+  "note": "independent cc review: item theorem, 18 new modules and 25 nodes against packet/clone; IsDiagonalLimit old vs new finite clause unfolded (defeq; HasExt is Prop); scratch build of all 19 modules with #print axioms; 9 direct importers OK in 3b"
+ }
+}

@@ -7,58 +7,26 @@ module
 public import Sheaf.Paper.DiagonalTowerTraceLimit
 public import Sheaf.Paper.DiagonalTowerTraceCoefficients
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackFree
+public import Sheaf.Paper.DiagonalTraceCompletedSupportedUnit
+
+import Sheaf.Paper.DiagonalTraceFiniteCartierChernStrict
 
 /-! # Forgetting the support of the completed diagonal at one finite level -/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
+set_option Elab.async false
 set_option synthInstance.maxSize 4096
 universe u
 open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.ProEtale.DiagonalTrace
 
+attribute [local instance] AlgebraicGeometry.ProEtale.diagonalHasLimit
+  AlgebraicGeometry.ProEtale.diagonalConstantTowerLimits
+
 attribute [local irreducible] DerivedCategory Functor.mapDerivedCategory
   diagonalCompletedSource diagonalCompletedCoefficientMap
 
-
-/-- The ordinary constant-to-supported map induced by the completed coefficient map.
-Source: diagonal tower trace proof (2), forgetting support of the diagonal divisor.
-(blueprint: def-sfb-diagonal-trace-completed-supported-unit). -/
-def completedSupportedUnit (l : ℕ) [Fact l.Prime] (Y : Scheme.{u}) :
-    SheafOfModules.unit.{u, u + 1, u + 1}
-      (Scheme.purTwistRing (diagonalSurface Y)
-        (Scheme.purTwistZlCompletion (diagonalSurface Y) l)) ⟶
-      diagonalCompletedSource l Y := by
-  let unitToPushforwardRestrictedUnit
-      {C D : Type (u + 1)} [Category.{u} C] [Category.{u} D]
-      {J : GrothendieckTopology C} {K : GrothendieckTopology D}
-      {F : C ⥤ D} [F.IsContinuous J K]
-      {R : Sheaf J RingCat.{u + 1}} {S T : Sheaf K RingCat.{u + 1}}
-      (α : R ⟶ (F.sheafPushforwardContinuous RingCat J K).obj S) (φ : S ⟶ T) :
-      SheafOfModules.unit.{u, u + 1, u + 1} R ⟶
-        (SheafOfModules.pushforward.{u + 1} α).obj
-          ((SheafOfModules.restrictScalars φ).obj (SheafOfModules.unit T)) := by
-    exact SheafOfModules.unitToPushforwardObjUnit
-      (α ≫ (F.sheafPushforwardContinuous RingCat J K).map φ)
-  unfold diagonalCompletedSource Scheme.proEtaleRingedDirectImage
-  let i := diagonalImmersion Y
-  let R := Scheme.purTwistZlCompletion (diagonalSurface Y) l
-  exact unitToPushforwardRestrictedUnit
-    (C := (diagonalSurface Y).ProEt) (D := (ProjectiveLine Y).ProEt)
-    (J := Scheme.ProEt.topology (diagonalSurface Y))
-    (K := Scheme.ProEt.topology (ProjectiveLine Y))
-    (F := Scheme.proEtaleBaseChange i)
-    (R := Scheme.purTwistRing (diagonalSurface Y) R)
-    (S := Scheme.proEtaleModuleCoefficients
-      ((Scheme.proEtaleSheafInverseImage i CommRingCat.{u + 1}).obj R))
-    (T := Scheme.purTwistRing (ProjectiveLine Y)
-      (Scheme.purTwistZlCompletion (ProjectiveLine Y) l))
-    ⟨Functor.whiskerRight
-      ((Scheme.proEtaleSheafAdjunction i CommRingCat.{u + 1}).unit.app R).hom
-      (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})⟩
-    ((sheafCompose (Scheme.ProEt.topology (ProjectiveLine Y))
-      (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).map
-        (diagonalCompletedCoefficientMap l i))
 
 /-- On the surface, forgetting support of the finite completed diagonal gives the
 Chern arrow of the actual divisor line. The assertion precedes direct image
@@ -124,6 +92,24 @@ theorem diagonalTrace_finiteCartierChern
       shiftedComparison U (V ⋙ L.R) (k.lineMap l E L) 2 ≫ (L.projection n).app _ =
         (k.unitMap l E L ≫ (L.projection n).app _) ≫
           ev.map (V.map (SpTowerClasses.firstChern l E c
-            (SpTowerClasses.diagonalPic Y))) := by sorry
+            (SpTowerClasses.diagonalPic Y))) := by
+  suffices h : finiteChernEquation l Y c r k L n δ by
+    dsimp only
+    unfold finiteChernEquation completedBoundaryEquation finiteChernComposite at h
+    dsimp only at h
+    exact h
+  rcases hδ with ⟨H, roots, a, b, xi, _ha, hxi, hfinite,
+    L₀, _M, s, t, ⟨hs, ht, _hcompat⟩, hwhole⟩
+  have hs' : SupportedSourceConeNormalization l Y D.ordinary s := by
+    unfold SupportedSourceConeNormalization
+    exact hs
+  let presentation : ExtDerivedPresentation
+      (D.ordinary.E.obj (diagonalIntegralSource Y)) H :=
+    ⟨_, _, a, b, D.T.map (diagonalIntegralBoundary Y).hom⟩
+  have hxi' : presentation.Presents xi := by
+    unfold ExtDerivedPresentation.Presents ExtArrowPresentation
+    exact hxi
+  exact diagonalTrace_finiteCartierChern_strict l Y hY D.ordinary δ H roots xi hfinite
+    s hs' t ht c hn hc r k presentation hxi' L₀ L n hwhole
 
 end AlgebraicGeometry.ProEtale.DiagonalTrace

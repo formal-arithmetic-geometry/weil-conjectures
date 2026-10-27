@@ -7,6 +7,8 @@ module
 
 public import Sheaf.Paper.DiagonalTowerLimit
 
+public import Sheaf.Paper.DiagonalTraceFiniteCartierNormalization
+
 /-! # The normalized completed diagonal arrow
 Source: blueprint main-20261015, diagonal-limit clause 3 and trace proof step 11
 (blueprint: def-sfb-diagonal-trace-limit-characterization).
@@ -21,8 +23,8 @@ set_option autoImplicit false
 set_option genSizeOf false
 set_option genInjectivity false
 set_option Elab.async false
-set_option backward.isDefEq.respectTransparency false
-set_option backward.isDefEq.respectTransparency.types false
+set_option backward.isDefEq.respectTransparency true
+set_option backward.isDefEq.respectTransparency.types true
 universe u w v a b c va vb vc wa wb wc
 open CategoryTheory CategoryTheory.Abelian CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.ProEtale.DiagonalTrace
@@ -66,26 +68,7 @@ def IsDiagonalLimit (ℓ : ℕ) [Fact ℓ.Prime] (Y : Scheme.{u})
     a.hom = diagonalDerivedSingleCounit ℓ
       (diagonalScalarExtension ℓ (diagonalSurface Y)) D (diagonalIntegralSource Y) ∧
     c.hom = a.inv ≫ D.T.map (diagonalIntegralBoundary Y).hom ≫ b.hom ∧
-    diagonalFiniteCycleNormalization
-      (A := DiagonalMod ℓ (diagonalSurface Y))
-      (D.ordinary.E.obj (diagonalIntegralSource Y)) H c
-      (fun n ↦ (diagonalFiniteToPadic ℓ n (diagonalSurface Y)).obj
-        ((lowerStar (ModuleCat.{u + 1} (diagonalResidue.{u} ℓ n))
-          (diagonalImmersion Y)).obj
-            (geoCartierConstant (diagonalResidue.{u} ℓ n) (ProjectiveLine Y))))
-      (fun n ↦ (diagonalFiniteToPadic ℓ n (diagonalSurface Y)).obj
-        (geoCartierLine (diagonalResidue.{u} ℓ n) (ℓ ^ (n + 1))
-          (cartierResidue_cast ℓ (n + 1)) (diagonalSurface Y)))
-      (fun n s ↦ DiagonalSourceNormalization ℓ Y D.ordinary n s)
-      (fun n t ↦ HEq ((diagonalForget ℓ (diagonalSurface Y)).map t.hom)
-        (roots.hom.app (op n) ≫
-          cartierProRootMap (diagonalResidue.{u} ℓ n) (ℓ ^ (n + 1))
-            (cartierResidue_cast ℓ (n + 1)) (diagonalSurface Y)
-            (pow_pos (Fact.out : ℓ.Prime).pos _) (diagonalSurface_power_unit ℓ Y hY n)))
-      (fun n ↦ diagonalExactFunctorExtImage (diagonalFiniteToPadic ℓ n (diagonalSurface Y))
-        (cartierResidueReducedPro ℓ (Fact.out : ℓ.Prime) (n + 1)
-          (diagonalImmersion Y) (diagonalImmersion_cartier Y)
-          (diagonalSurface_power_unit ℓ Y hY n))) ∧
+    FiniteCartierNormalization ℓ Y hY D.ordinary H roots c ∧
     ∃ (L : DiagonalRlim (DiagonalMod ℓ (diagonalSurface Y)))
       (M : DiagonalCompletedReduction ℓ (diagonalSurface Y))
       (s₀ : (diagonalCompletedRestriction ℓ (diagonalSurface Y)).obj
