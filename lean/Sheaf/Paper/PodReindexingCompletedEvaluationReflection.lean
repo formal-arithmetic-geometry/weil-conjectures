@@ -12,6 +12,8 @@ public import Sheaf.Paper.CompletedIntegralConstantMapOfUniverses
 public import Sheaf.NumberTheory.Padics.CoefficientExtensionFinite
 public import Sheaf.Paper.ConstantCompletionEquivalence
 public import Sheaf.Paper.WeilCompletedTensorReflector
+import Sheaf.Paper.PodReindexingTensorAugmentationSquare
+import Sheaf.Paper.PodReindexingOrdinaryCurrying
 import Sheaf.Paper.SfIntegralConstructibleTriangulated
 import Sheaf.Paper.PodNormalizedTensorSignedShifts
 import Sheaf.Paper.PurNormalizedReconstructionAdjunctionCalculus
@@ -25,6 +27,7 @@ Stacks Tags 099B, 0A0E and 099M
 -/
 
 @[expose] public noncomputable section
+set_option Elab.async false
 set_option autoImplicit false
 set_option synthInstance.maxSize 4096
 set_option backward.isDefEq.respectTransparency false
@@ -120,7 +123,6 @@ theorem reindex_eq {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g] :
       (completedIntegralCoefficientSheafUnrestricted l E Y) ≅
         completedIntegralCoefficientSheafUnrestricted l E X ↦
       (isoSectionwiseModuleInverseImage g c.hom).mapDerivedCategory) he
-
 
 
 private theorem adjunction_unit_bijective
@@ -414,6 +416,7 @@ theorem reflection_laws (W : Scheme.{u}) :
     exact (precompose_bijective l E W M ⟨hom l E W M.obj N.obj, hH⟩ N).injective
       (h.trans he.symm)
 
+
 /-- The ambient isomorphism restricts to the actual constructible integral category.
 Source: blueprint dual-Tate compatibility, Step 4
 (blueprint: lem-pod-reindexing-completed-evaluation-reflection).
@@ -437,6 +440,7 @@ theorem constructible_hom {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
     (homComparison l E g c M.obj N.obj)
     (T.constructible ⟨hom l E Y M.obj N.obj, hH⟩)
 
+
 /-- The restricted c⁰ has exactly the ambient isomorphism as its underlying arrow.
 Source: blueprint dual-Tate compatibility, Step 4
 (blueprint: lem-pod-reindexing-completed-evaluation-reflection). -/
@@ -451,6 +455,7 @@ def restrictedComparison {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
     ⟨hom l E X ((podOrdinaryReindex l E g).obj M.obj)
       ((podOrdinaryReindex l E g).obj N.obj), constructible_hom l E g A T c M N hH⟩ :=
   ObjectProperty.isoMk _ (homComparison l E g c M.obj N.obj)
+
 
 /-- The completed evaluation and transpose equations for these very normalized maps.
 Source: blueprint dual-Tate compatibility, Steps 2 and 4; Stacks 099B
@@ -492,19 +497,59 @@ def ReindexingLaws {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
         (Prod.mkHom ((podOrdinaryReindex l E g).map a).op
           ((podOrdinaryReindex l E g).map b)))
 
+
+private theorem transportedHom_naturality
+    {C0 : Type v} [Category.{w} C0] {D0 : Type t} [Category.{u} D0]
+    (HC : C0ᵒᵖ × C0 ⥤ C0) (HD : D0ᵒᵖ × D0 ⥤ D0)
+    (F G : C0 ⥤ D0) (e : F ≅ G)
+    (c : HC ⋙ F ≅ (F.op.prod F) ⋙ HD) :
+    let k := fun M N ↦ ((e.app (HC.obj (op M, N))).symm ≪≫
+      c.app (op M, N) ≪≫ HD.mapIso (((e.app M).symm.op).prod (e.app N))).hom
+    ∀ (M M' N N' : C0) (a : M' ⟶ M) (b : N ⟶ N'),
+      G.map (HC.map (Prod.mkHom a.op b)) ≫ k M' N' =
+        k M N ≫ HD.map (Prod.mkHom (G.map a).op (G.map b)) := by
+  intro k M M' N N' a b
+  let d : HC ⋙ G ≅ (G.op.prod G) ⋙ HD :=
+    Functor.isoWhiskerLeft HC e.symm ≪≫ c ≪≫
+      Functor.isoWhiskerRight (NatIso.prod (NatIso.op e.symm) e) HD
+  exact d.hom.naturality (Prod.mkHom a.op b)
+
+
+private theorem transported_precompose_bijective
+    {C0 : Type v} [Category.{w} C0] {A0 A1 B0 B1 N0 : C0}
+    (e : A0 ≅ A1) (d : B0 ≅ B1) (u : A1 ⟶ B1) (v : A0 ⟶ B0)
+    (h : u ≫ d.inv = e.inv ≫ v)
+    (hb : Function.Bijective (fun f : B1 ⟶ N0 ↦ u ≫ f)) :
+    Function.Bijective (fun f : B0 ⟶ N0 ↦ v ≫ f) := by
+  have hh := e.symm.homFromEquiv.bijective.comp (hb.comp d.homFromEquiv.bijective)
+  convert hh using 1
+  funext f
+  simp only [Function.comp_def, Iso.homFromEquiv_apply, Iso.symm_inv]
+  rw [← Category.assoc u d.inv f, h]
+  simp only [Category.assoc, Iso.hom_inv_id_assoc]
+
+
+section
+attribute [local irreducible] podReindexCalculus
+
+set_option backward.isDefEq.respectTransparency true in
+set_option backward.isDefEq.respectTransparency.types true in
 /-- Completed evaluation, its tensor-Hom transpose, and the exact ordinary equation
 obtained by precomposition with the normalized tensor unit.
 Source: blueprint dual-Tate compatibility, Steps 2 and 4; Stacks 099B, 0A0E
 (blueprint: lem-pod-reindexing-completed-evaluation-reflection).
 
-Proof (node Steps 4--5): on simultaneous K-flat representatives the tensor generator
-formula identifies F(unit), then μᶜ, with μ⁰, then unit. This gives the first equation.
-Ordinary evaluation compatibility makes the two completed-evaluation composites
-agree after F(unit). The reflector map is bijective into FN, proving their equality
-and its equivalence with the ordinary equation. For b put b₀=unit followed by b.
-The first equation identifies the ordinary reduction of the transported b with
-μ⁰ inverse followed by F(b₀). Ordinary transposition gives c⁰F(b₀ sharp).
-The definition of completed transpose gives the displayed equality for every b. -/
+Proof (node Steps 4--5): the normalized tensor-augmentation square gives the first
+law. Its inverse form identifies unit_X followed by the inverse completed tensor
+comparison with the inverse ordinary comparison followed by F(unit_Y). Composing
+the reflector bijection with the two tensor isomorphisms proves the second law.
+For b, the same inverse unit square reduces completed currying to ambient ordinary
+M-first currying, proving the transpose law. To prove evaluation compatibility,
+precompose by the inverse tensor comparison and apply completed currying injectivity.
+Naturality in its second input sends the Hom comparison followed by evaluation to
+the Hom comparison itself, since evaluation transposes to the identity. The transpose
+law gives the same answer for F(evaluation). The last law is naturality of the
+ambient natural isomorphism obtained by whiskering the original c with reindexIso. -/
 theorem reindexing_laws {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
     [∀ x : X, Invertible (l : X.residueField x)]
     [∀ y : Y, Invertible (l : Y.residueField y)]
@@ -512,7 +557,88 @@ theorem reindexing_laws {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
     (hA : PodCompletionReindex.Laws l E g A)
     (hT : PodCompletedTensorReindex.Laws l E g A T) (c : Comparison l E g) :
     ReindexingLaws l E g A T c := by
-  sorry
+  have hu : ∀ M L : sfIntegralConstructibleCategory l E Y,
+      (podOrdinaryReindex l E g).map (unit l E Y M.obj L.obj) ≫ (T.tensor M L).hom =
+        (tensorComparison l E g c M.obj L.obj).hom ≫
+          unit l E X ((podOrdinaryReindex l E g).obj M.obj)
+            ((podOrdinaryReindex l E g).obj L.obj) := by
+    as_aux_lemma =>
+      exact podReindexing_tensor_augmentation_square l E g A T hA hT (unit l E) rfl c
+        (reindex_eq l E g)
+  have ho (M L N : D l E Y) (b : (closed l E Y).tensor.obj (M, L) ⟶ N) :
+      ordinaryTranspose l E X ((podOrdinaryReindex l E g).obj M)
+          ((podOrdinaryReindex l E g).obj L) ((podOrdinaryReindex l E g).obj N)
+          ((tensorComparison l E g c M L).inv ≫ (podOrdinaryReindex l E g).map b) =
+        (podOrdinaryReindex l E g).map (ordinaryTranspose l E Y M L N b) ≫
+          (homComparison l E g c M N).hom := by
+    as_aux_lemma =>
+      have h := podReindexing_ordinary_currying l E g (closed l E X) (closed l E Y)
+        (models l E X) (models l E Y) c (podOrdinaryReindex l E g)
+        (reindex_eq l E g) M L N b
+      dsimp only [ordinaryTranspose, tensorComparison, homComparison, reindexIso, hom] at h ⊢
+      exact h
+  have hu' (M L : sfIntegralConstructibleCategory l E Y) :
+      unit l E X ((podOrdinaryReindex l E g).obj M.obj)
+          ((podOrdinaryReindex l E g).obj L.obj) ≫ (T.tensor M L).inv =
+        (tensorComparison l E g c M.obj L.obj).inv ≫
+          (podOrdinaryReindex l E g).map (unit l E Y M.obj L.obj) := by
+    as_aux_lemma =>
+      apply (cancel_epi (tensorComparison l E g c M.obj L.obj).hom).mp
+      have h := congrArg (· ≫ (T.tensor M L).inv) (hu M L).symm
+      simp only [Category.assoc, Iso.hom_inv_id_assoc, Iso.hom_inv_id,
+        Category.comp_id] at h ⊢
+      exact h
+  have ht (M L N : sfIntegralConstructibleCategory l E Y)
+      (b : (integralCompletedTensor l E Y).obj (M.obj, L.obj) ⟶ N.obj) :
+      transpose l E X ⟨_, T.constructible M⟩ ⟨_, T.constructible L⟩ ⟨_, T.constructible N⟩
+          ((T.tensor M L).inv ≫ (podOrdinaryReindex l E g).map b) =
+        (podOrdinaryReindex l E g).map (transpose l E Y M L N b) ≫
+          (homComparison l E g c M.obj N.obj).hom := by
+    as_aux_lemma =>
+      change ordinaryTranspose l E X _ _ _ (unit l E X _ _ ≫ _) = _
+      rw [← Category.assoc, hu', Category.assoc, ← CategoryTheory.Functor.map_comp]
+      exact ho M.obj L.obj N.obj (unit l E Y M.obj L.obj ≫ b)
+  refine ⟨hu, ?_, ?_, ht, ?_⟩
+  · as_aux_lemma =>
+      intro M L N
+      exact transported_precompose_bijective
+        (tensorComparison l E g c M.obj L.obj) (T.tensor M L)
+        (unit l E X _ _) ((podOrdinaryReindex l E g).map (unit l E Y M.obj L.obj))
+        (hu' M L) (precompose_bijective l E X
+          ⟨_, T.constructible M⟩ ⟨_, T.constructible L⟩ ⟨_, T.constructible N⟩)
+  · intro M N hH
+    let H : sfIntegralConstructibleCategory l E Y := ⟨hom l E Y M.obj N.obj, hH⟩
+    let FM : sfIntegralConstructibleCategory l E X := ⟨_, T.constructible M⟩
+    let FN : sfIntegralConstructibleCategory l E X := ⟨_, T.constructible N⟩
+    let FH : sfIntegralConstructibleCategory l E X := ⟨_, T.constructible H⟩
+    let HX : sfIntegralConstructibleCategory l E X :=
+      ⟨_, constructible_hom l E g A T c M N hH⟩
+    let f : FH ⟶ HX := ObjectProperty.homMk (homComparison l E g c M.obj N.obj).hom
+    apply (cancel_epi (T.tensor M H).inv).mp
+    apply (transpose l E X FM FH FN).injective
+    simp only [H, Iso.inv_hom_id_assoc]
+    have hn := (reflection_laws l E X).2.1 FM FM HX FH FN FN
+      (𝟙 FM) f (𝟙 FN) (evaluation l E X FM FN HX.property)
+    have heX : transpose l E X FM HX FN (evaluation l E X FM FN HX.property) = 𝟙 _ :=
+      (transpose l E X FM HX FN).apply_symm_apply (𝟙 _)
+    have heY : transpose l E Y M H N (evaluation l E Y M N hH) = 𝟙 _ :=
+      (transpose l E Y M H N).apply_symm_apply (𝟙 _)
+    have htr := ht M H N (evaluation l E Y M N hH)
+    simp only [heY, CategoryTheory.Functor.map_id, Category.id_comp] at htr
+    simp only [ObjectProperty.FullSubcategory.id_hom, Category.comp_id,
+      CategoryTheory.Functor.map_id, heX, f, ObjectProperty.homMk,
+      CategoryTheory.op_id, ← CategoryTheory.prod_id] at hn ⊢
+    exact hn.trans htr.symm
+  · as_aux_lemma =>
+      intro M M' N N' a b
+      exact transportedHom_naturality
+        (podReindexingDerivedHom l E Y none) (podReindexingDerivedHom l E X none)
+        (podReindexingDerivedFunctor l E g none) (podOrdinaryReindex l E g)
+        (reindexIso l E g) c.derived M M' N N' a b
+
+
+end
+
 
 /-- All completed equations are exactly their ordinary-unit precompositions.
 This applies also after identifying signed shifts, identities and compositors:

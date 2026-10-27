@@ -1,0 +1,121 @@
+{
+ "id": "lem-pod-reindexing-ordinary-braiding",
+ "kind": "statement",
+ "title": "Normalized tensor reindexing preserves the specified signed braiding",
+ "statement": "For a scheme isomorphism g:X→Y, at any finite or completed coefficient stage, let c be the recorded Hom/tensor reindexing comparison and let β_X, β_Y be the specified signed tensor braidings for its closed structures and tensor models. For arbitrary unbounded derived objects M,N, F(β_Y(M,N));c.tensor(N,M)=c.tensor(M,N);β_X(FM,FN). No constructibility or completeness of M,N is assumed.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-poincare-duality/sk-thm-frobenius/prop-pod-dual-tate-data-compatibility.proof.md",
+  "place": "Steps 2 and 4: evaluation under inverse image, with the completion-unit refinement; Stacks 07A4, 08J9, 099B, 099M."
+ },
+ "stmt_deps": [
+  "def-coef-ringed-tensor-hom-model",
+  "lem-pod-reindexing-evaluation-shift-composition",
+  "def-pur-finite-pullback-tensor-braiding"
+ ],
+ "proof": [
+  {
+   "text": "On simultaneous K-flat representatives, both composites send each homogeneous x tensor y to the exchanged reindexed generators with sign (-1)^(pq). The comparison tensor_model and the braiding localization models descend the chain equality. K-flat resolutions of arbitrary inputs give localization isomorphisms; naturality of both tensor comparisons and braidings transports the square along them.",
+   "uses": [
+    "lem-pod-reindexing-evaluation-shift-composition",
+    "def-pur-finite-pullback-tensor-braiding",
+    "def-coef-ringed-tensor-hom-model",
+    "lem-pc-kflat-resolution"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pod-reindexing-evaluation-shift-composition",
+  "def-pur-finite-pullback-tensor-braiding",
+  "def-coef-ringed-tensor-hom-model",
+  "lem-pc-kflat-resolution"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-poincare-duality/sk-thm-frobenius/prop-pod-dual-tate-data-compatibility.proof.md",
+  "place": "Steps 2 and 4; reuse symmetry_chain, symmetry_models and symmetry_iso with the specified signed braidings."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Ordinary tensor internal Hom currying and signed symmetry commute with exact inverse image of sheaves",
+   "results": "8 hits: LightCondensed.ihomPoints_symm_comp, SheafOfModules.conjugateEquiv_pullbackComp_inv, LightCondensed.ihomPoints_symm_apply, instMonoidalClosedSheafOfHasSheafifyOfFunctorOpposite, CategoryTheory.Sheaf.symmetricCategory, LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit",
+   "date": "2026-10-27",
+   "verdict": "No exact normalized derived sheaf reindexing statement; generic results do not fix the tensor augmentation, signed braiding and projection-normalized comparisons."
+  },
+  {
+   "tool": "grep",
+   "query": "homEquiv_naturality|transpose.*naturality",
+   "results": "25 hits: Mathlib/Condensed/Light/Epi.lean, Mathlib/Topology/Algebra/Category/ProfiniteGrp/Completion.lean, Mathlib/Condensed/Light/InternallyProjective.lean, Mathlib/CategoryTheory/Endofunctor/Algebra.lean, Mathlib/CategoryTheory/Endofunctor/Algebra.lean, Mathlib/CategoryTheory/Endofunctor/Algebra.lean, Mathlib/CategoryTheory/Endofunctor/Algebra.lean, Mathlib/CategoryTheory/Endofunctor/Algebra.lean",
+   "date": "2026-10-27",
+   "verdict": "No exact normalized derived sheaf reindexing statement; generic results do not fix the tensor augmentation, signed braiding and projection-normalized comparisons."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Tensor internal Hom adjunction currying preserved by symmetric monoidal functor between derived sheaf categories",
+   "results": "8 hits: CategoryTheory.MonoidalClosed.internalHomAdjunction₂, CategoryTheory.MonoidalClosed.homEquiv_apply_eq, CategoryTheory.ihom.adjunction, CategoryTheory.MonoidalClosed.curry, CategoryTheory.exp.adjunction, CategoryTheory.internalizeHom, CategoryTheory.MonoidalClosed.FunctorCategory.adj, ModuleCat.monoidalClosedHomEquiv",
+   "date": "2026-10-27",
+   "verdict": "No exact normalized derived sheaf reindexing statement; generic results do not fix the tensor augmentation, signed braiding and projection-normalized comparisons."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.PodReindexingCompletedEvaluationReflection",
+  "group": "K6",
+  "date": "2026-10-27"
+ },
+ "chapter": "sec-poincare-duality",
+ "unit": "sk-def-weil",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-pod-dual-tate-data-compatibility",
+   "place": "Steps 2 and 4: signed braiding of the normalized tensor comparison",
+   "via": [
+    "lem-pod-reindexing-ordinary-currying",
+    "lem-pod-reindexing-completed-evaluation-reflection"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.PodReindexingOrdinaryBraiding",
+  "file": "lean/Sheaf/Paper/PodReindexingOrdinaryBraiding.lean",
+  "declaration": "WeilConjectures.PodReindexingCoherence.podReindexingOrdinaryBraiding",
+  "statement": "theorem podReindexingOrdinaryBraiding {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]\n    [EssentiallySmall.{u + 1} X.ProEt] [EssentiallySmall.{u + 1} Y.ProEt] (s : Option ℕ)\n    (SX : Closed l E X s) (SY : Closed l E Y s)\n    (TX : Models l E X s SX) (TY : Models l E Y s SY)\n    (c : Comparison l E g s SX SY TX TY) (M N : podReindexingDerived l E Y s) :\n    let F := podReindexingDerivedFunctor l E g s\n    let βY := pullbackTensorBraiding (ProEt.topology Y) (podReindexingRing l E Y s) SY TY\n    let βX := pullbackTensorBraiding (ProEt.topology X) (podReindexingRing l E X s) SX TX\n    F.map (βY.app (M, N)).hom ≫ c.tensor.hom.app (N, M) =\n      c.tensor.hom.app (M, N) ≫ (βX.app (F.obj M, F.obj N)).hom",
+  "branch": "sheaf-dag",
+  "by": "K6",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K6",
+  "result": "pass",
+  "landing": "20261027T180703-L-3891229",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K6",
+  "result": "pass",
+  "landing": "20261027T180703-L-3891229",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
