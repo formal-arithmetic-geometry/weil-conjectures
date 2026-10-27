@@ -11,21 +11,13 @@ public import Sheaf.Paper.FiniteFieldFiber
 public import WeilConjectures.Compactification.RefinementCategory
 public import Mathlib.Algebra.Homology.DerivedCategory.Basic
 public import Sheaf.NumberTheory.Padics.CoefficientExtensionFinite
+import Sheaf.SixFunctors.CompletedShriekCompositionLaws
 import Sheaf.Paper.ProEtaleFiniteCoefficientDirectImage
-import Sheaf.AlgebraicGeometry.FiniteTypeGeometryFibreBound
-import Sheaf.Paper.ProEtaleScalarMateNormalization
-import Sheaf.Paper.ProperEtaleOriginScalarIsomorphism
-import Sheaf.Paper.PurNormalizedReconstructionAdjunctionCalculus
 import Sheaf.Paper.OpenExtensionFiniteTor
-import Sheaf.Paper.FiniteRingConstructibleDerivedOrigin
-import Sheaf.Paper.NormalizedEtaleOriginWitnesses
-import Sheaf.Paper.FiniteTorAmplitudeSites
-import Sheaf.Paper.SfIntegralConstructible
-import Sheaf.Paper.CoefficientSystemDerivedComparison
-import Sheaf.SixFunctors.OpenTensorNormalization
-import Mathlib.AlgebraicGeometry.Morphisms.Proper
-import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
-import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
+import Sheaf.Paper.FiniteCoefficientFlatModel
+import Sheaf.Paper.DirectImagesConstructible
+import WeilConjectures.AlgebraicGeometry.BaseChangeDimension
+import Mathlib.Tactic.FinCases
 
 /-! # Admissibility of integral compactification refinement diagrams
 
@@ -154,6 +146,149 @@ def Expression.refinementStepBounds (o : Operations l E) {B : Scheme.{u}} {I : T
   | .pull _ _ => False
   | .tensor _ _ => False
 
+private theorem tor_of_iso {W : Scheme.{u}} {A : Type u} [CommRing A]
+    {M N : proEtaleDerivedCategory W A} (e : M ≅ N) {a b : ℤ}
+    (h : HasProEtaleTorAmplitude W A N a b) : HasProEtaleTorAmplitude W A M a b := by
+  refine ⟨h.1, ?_⟩
+  rintro L P ⟨q⟩ f hf hP V i hi
+  exact h.2 L P ⟨q ≪≫ e⟩ f hf hP V i hi
+
+private theorem tor_mono {W : Scheme.{u}} {A : Type u} [CommRing A]
+    {M : proEtaleDerivedCategory W A} {a b B : ℤ} (hb : b ≤ B)
+    (h : HasProEtaleTorAmplitude W A M a b) : HasProEtaleTorAmplitude W A M a B := by
+  refine ⟨h.1.trans hb, ?_⟩
+  intro L P hL f hf hP V i hi
+  exact h.2 L P hL f hf hP V i (hi.imp_right (lt_of_le_of_lt hb))
+
+private theorem dimension_bound {k : Type u} [Field k]
+    (W : Over (Spec (CommRingCat.of k)))
+    [LocallyOfFiniteType W.hom] [QuasiCompact W.hom] :
+    ∃ d : ℕ, topologicalKrullDim W.left ≤ (d : WithBot ℕ∞) := by
+  obtain ⟨d, hd⟩ := exists_topologicalKrullDim_le_of_isPullback W.hom
+  exact ⟨d, hd k (𝟙 _) (𝟙 _) W.hom (IsPullback.of_horiz_isIso ⟨by simp⟩)⟩
+
+private theorem support_of_tor (D : FiniteFieldDatum.{u}) (hl : l ≠ D.p)
+    (W : Over (Spec (CommRingCat.of D.k))) (n : ℕ)
+    (M : proEtaleDerivedCategory W.left (Padic.coefficientExtensionRing l E (n + 1)))
+    (hc : intrinsicFiniteTorsionConstructible l E (n + 1) (Nat.succ_pos n) W.left M)
+    {a b : ℤ} (ht : HasProEtaleTorAmplitude W.left
+      (Padic.coefficientExtensionRing l E (n + 1)) M a b) :
+    proEtaleCohomologicalSupport M ⊆ Set.Icc a b := by
+  let (x : W.left) : Invertible (l : W.left.residueField x) :=
+    (show IsUnit (l : W.left.residueField x) from by
+      simpa only [map_natCast] using (finiteFieldDatumPrimeUnit D l hl).map
+        (W.hom.residueFieldAlgebraMap x)).invertible
+  obtain ⟨P, _, hz, ⟨eP⟩⟩ :=
+    (finiteCoefficient_torAmplitude_iff_flatModel D l hl E (n + 1) (Nat.succ_pos n)
+      W.left M hc a b ht.1).1 ht
+  intro i hi
+  by_contra h
+  apply hi
+  have hout : i < a ∨ b < i := by
+    simpa only [Set.mem_Icc, not_and_or, not_le] using h
+  exact ((HomologicalComplex.ExactAt.of_isZero (hz i hout)).isZero_homology).of_iso
+    ((DerivedCategory.homologyFunctor _ i).mapIso eP ≪≫
+      (DerivedCategory.homologyFunctorFactors _ i).app P)
+
+private theorem open_estimate (D : FiniteFieldDatum.{u}) (hl : l ≠ D.p)
+    (o : Operations l E) {U V : Over (Spec (CommRingCat.of D.k))}
+    [LocallyOfFiniteType U.hom] [QuasiCompact U.hom]
+    [LocallyOfFiniteType V.hom] [QuasiCompact V.hom]
+    (j : U ⟶ V) [IsOpenImmersion j.left]
+    (M : System l E U.left) (hM : Good l E U.left M) :
+    refinementOpenEstimate l E o j.left M := by
+  let : U.left.Over (Spec (.of D.k)) := ⟨U.hom⟩
+  let : V.left.Over (Spec (.of D.k)) := ⟨V.hom⟩
+  let : j.left.IsOver (Spec (.of D.k)) := ⟨j.w⟩
+  have : LocallyOfFiniteType (U.left ↘ Spec (.of D.k)) := ‹LocallyOfFiniteType U.hom›
+  have : QuasiCompact (U.left ↘ Spec (.of D.k)) := ‹QuasiCompact U.hom›
+  have : LocallyOfFiniteType (V.left ↘ Spec (.of D.k)) := ‹LocallyOfFiniteType V.hom›
+  have : QuasiCompact (V.left ↘ Spec (.of D.k)) := ‹QuasiCompact V.hom›
+  intro a b ht n
+  obtain ⟨c, d, t, v, _, _, hb⟩ := hM.2.1
+  have h := finiteStageDerivedExtensionByZero_constructibleFiniteTor
+    D l hl E (n + 1) (Nat.succ_pos n) j.left
+    ((coefficientSequenceDerivedEvaluation l E U.left n).obj M)
+    (hb n).1 ⟨a, b, ht n⟩
+  exact tor_of_iso (((o.openEvaluation j.left).evaluation n).app M) (h.2.2 a b (ht n))
+
+private theorem proper_estimate (D : FiniteFieldDatum.{u}) (hl : l ≠ D.p)
+    (o : Operations l E) {U V : Over (Spec (CommRingCat.of D.k))}
+    [LocallyOfFiniteType U.hom] [QuasiCompact U.hom]
+    [LocallyOfFiniteType V.hom] [QuasiCompact V.hom]
+    (p : U ⟶ V) [IsProper p.left]
+    (M : System l E U.left) (hM : Good l E U.left M) :
+    refinementProperEstimate l E o p.left M := by
+  intro d hd a b ht n
+  obtain ⟨c, v, t, w, _, _, hb⟩ := hM.2.1
+  have h := ProEtale.finiteCoefficientDirectImage_boundedConstructible_torAmplitude
+    D l hl E (n + 1) (Nat.succ_pos n) U V p d hd a b
+    ⟨(hb n).1, a, b, ht n⟩ (ht n)
+  exact tor_of_iso (((o.evaluation p.left).evaluation n).app M) h.2
+
+private theorem geometric_root {B : Scheme.{u}} {I : Type u} {X : I → Over B}
+    {W : Over B} (e : Expression B I X W) (h : e.geometric) :
+    LocallyOfFiniteType W.hom ∧ QuasiCompact W.hom := by
+  cases e <;> exact ⟨h.1, h.2.1⟩
+
+private theorem word_interval (D : FiniteFieldDatum.{u}) (hl : l ≠ D.p)
+    (o : Operations l E) (R : Realizations l E D o)
+    {I : Type u} [Finite I] {X : I → Over (Spec (CommRingCat.of D.k))}
+    {W : Over (Spec (CommRingCat.of D.k))} (e : Expression _ I X W)
+    (ge : e.geometric) (he : e.isSupportWord) (K : ∀ i, Integral l E (X i).left)
+    (hK : ∀ i, sfIntegralConstructible l E (X i).left (K i)) (a b : ℤ) (hab : a ≤ b)
+    (ht : ∀ i, refinementTorInterval l E (X i).left
+      ((calculus l E (X i).left).reduction.obj (K i)) a b) :
+    ∃ B : ℤ, a ≤ B ∧
+      refinementTorInterval l E W.left
+        (e.systemObj l E o ((inputReduction l E X).obj K)) a B ∧
+      e.refinementStepBounds l E o ((inputReduction l E X).obj K) := by
+  induction e with
+  | var i => exact ⟨b, hab, ht i, trivial⟩
+  | pull f e ih => exact False.elim he
+  | tensor e t ihe iht => exact False.elim he
+  | @push U V f hp e ih =>
+    obtain ⟨B, hB, htor, _⟩ := ih ge.2.2 he
+    have : IsProper f.left := hp
+    have : LocallyOfFiniteType U.hom := (geometric_root e ge.2.2).1
+    have : QuasiCompact U.hom := (geometric_root e ge.2.2).2
+    have : LocallyOfFiniteType V.hom := ge.1
+    have : QuasiCompact V.hom := ge.2.1
+    obtain ⟨d, hd⟩ := dimension_bound U
+    have hg := (completedShriekIntegralBounds l E D hl o R e ge.2.2 he K hK).1.2
+    have hs := proper_estimate l E D hl o f _ (e.admissibleGood l E o _ hg)
+    exact ⟨B + 2 * (d : ℤ), by omega, hs d hd a B htor, hs⟩
+  | @shriek U V j hj hq e ih =>
+    obtain ⟨B, hB, htor, _⟩ := ih ge.2.2 he
+    have : IsOpenImmersion j.left := hj
+    have : LocallyOfFiniteType U.hom := (geometric_root e ge.2.2).1
+    have : QuasiCompact U.hom := (geometric_root e ge.2.2).2
+    have : LocallyOfFiniteType V.hom := ge.1
+    have : QuasiCompact V.hom := ge.2.1
+    have hg := (completedShriekIntegralBounds l E D hl o R e ge.2.2 he K hK).1.2
+    have hs := open_estimate l E D hl o j _ (e.admissibleGood l E o _ hg)
+    exact ⟨B, hB, hs a B htor, hs⟩
+  | @compactSupport U V f c e ih =>
+    have ge' := ge.2.2.2.2.2
+    obtain ⟨B, hB, htor, _⟩ := ih ge' he
+    have : LocallyOfFiniteType U.hom := (geometric_root e ge').1
+    have : QuasiCompact U.hom := (geometric_root e ge').2
+    have : LocallyOfFiniteType V.hom := ge.1
+    have : QuasiCompact V.hom := ge.2.1
+    have : LocallyOfFiniteType (compactAmbient (f := f) c).hom :=
+      inferInstanceAs (LocallyOfFiniteType (c.g ≫ V.hom))
+    have : QuasiCompact (compactAmbient (f := f) c).hom :=
+      inferInstanceAs (QuasiCompact (c.g ≫ V.hom))
+    have : IsOpenImmersion (compactOpen (f := f) c).left := c.isOpenImmersion
+    have : IsProper (compactProper (f := f) c).left := c.isProper
+    obtain ⟨d, hd⟩ := dimension_bound (compactAmbient (f := f) c)
+    have hg := (completedShriekIntegralBounds l E D hl o R
+      (.compactSupport f c e) ge he K hK).1.2
+    have hs := open_estimate l E D hl o (compactOpen (f := f) c) _
+      (e.admissibleGood l E o _ hg.2.1)
+    have hp := proper_estimate l E D hl o (compactProper (f := f) c) _ hg.2.2
+    exact ⟨B + 2 * (d : ℤ), by omega, hp d hd a B (hs a B htor), hs, hp⟩
+
 /-- Integral admissibility, sharp local bounds, common bounds over the entire finite
 diagram, and its specified whole-system reduction identifications.
 Source: blueprint exceptional inverse image, extracted old step 9; Stacks 09B1,
@@ -234,6 +369,55 @@ theorem integralRefinementDiagramAdmissibility
             (calculus l E (refinementDiagramWords f c r s hq q).1.left).adjunction.counit.app
               ((refinementDiagramWords f c r s hq q).2.systemObj l E o
                 ((inputReduction l E (fun _ : ULift.{u} Unit ↦ X)).obj (fun _ ↦ K)))) := by
-  sorry
+  classical
+  have (i : Fin 3) : LocallyOfFiniteType (compactAmbient (f := f) (c i)).hom :=
+    inferInstanceAs (LocallyOfFiniteType ((c i).g ≫ Y.hom))
+  have (i : Fin 3) : QuasiCompact (compactAmbient (f := f) (c i)).hom :=
+    inferInstanceAs (QuasiCompact ((c i).g ≫ Y.hom))
+  have ge (q : Fin 18) : (refinementDiagramWords f c r s hq q).2.geometric := by
+    fin_cases q <;> dsimp [refinementDiagramWords, Expression.geometric]
+    all_goals repeat' apply And.intro
+    all_goals first | trivial | infer_instance
+  have hw (q : Fin 18) : (refinementDiagramWords f c r s hq q).2.isSupportWord := by
+    fin_cases q <;> trivial
+  have hd (q : Fin 18) := geometric_root _ (ge q)
+  have hdims (q : Fin 18) : ∃ d : ℕ,
+      topologicalKrullDim (refinementDiagramWords f c r s hq q).1.left ≤
+        (d : WithBot ℕ∞) := by
+    have := (hd q).1
+    have := (hd q).2
+    exact dimension_bound _
+  choose ds hds using hdims
+  have hdom (q : Fin 18) := completedShriekIntegralBounds l E D _hl o R
+    (refinementDiagramWords f c r s hq q).2 (ge q) (hw q) (fun _ ↦ K) (fun _ ↦ hK)
+  have hinput : ∀ i : ULift.{u} Unit, refinementTorInterval l E X.left
+      ((calculus l E X.left).reduction.obj K) a b := by
+    intro i n
+    exact tor_of_iso (((calculus l E X.left).reductionEvaluation n).app K) (hTor n)
+  have hwords (q : Fin 18) := word_interval l E D _hl o R
+    (refinementDiagramWords f c r s hq q).2 (ge q) (hw q) (fun _ ↦ K) (fun _ ↦ hK)
+    a b hab hinput
+  choose Bs hBs using hwords
+  obtain ⟨B, hB⟩ := (Set.finite_range Bs).bddAbove
+  have hle (q : Fin 18) : Bs q ≤ B := hB (Set.mem_range_self q)
+  refine ⟨⟨Finset.univ.sup ds, fun q ↦ (hds q).trans ?_⟩,
+    ⟨B, (hBs 0).1.trans (hle 0), ?_⟩, fun q ↦ (hBs q).2.2, ?_⟩
+  · exact_mod_cast Finset.le_sup (Finset.mem_univ q)
+  · intro q n
+    have ht : refinementTorInterval l E
+        (refinementDiagramWords f c r s hq q).1.left
+        ((refinementDiagramWords f c r s hq q).2.systemObj l E o
+          ((inputReduction l E (fun _ : ULift.{u} Unit ↦ X)).obj (fun _ ↦ K))) a B :=
+      fun n ↦ tor_mono (hle q) ((hBs q).2.1 n)
+    have hg := (refinementDiagramWords f c r s hq q).2.admissibleGood l E o _
+      (hdom q).1.2
+    obtain ⟨v, w, t, z, _, _, hb⟩ := hg.2.1
+    exact ⟨support_of_tor l E D _hl _ n _ (hb n).1 (ht n), ht⟩
+  · intro q
+    refine ⟨ge q, (hdom q).1, (hdom q).2, ?_⟩
+    have hn := R.normalization (refinementDiagramWords f c r s hq q).2 (ge q)
+      ⟨(fun _ ↦ K), (hdom q).1⟩
+    rw [← hn, ← Category.assoc, ← Functor.map_comp]
+    simp
 
 end WeilConjectures.IntegralSystemRealization

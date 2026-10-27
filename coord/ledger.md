@@ -19752,3 +19752,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 18:06 L: merged deliver/H7/Sheaf.Paper.CompactSupportQuotientRawInput (stage 3; reviewer PASS; first push; landing 20261027T180641-L-3886242 (interface); batch 20261027T180444; modules 1; new nodes 0)
 - 18:06 L: merged deliver/H8/Sheaf.Paper.CompactSupportQuotientRawOutputIdentity (stage 3; reviewer PASS; first push; landing 20261027T180643-L-3886453 (interface); batch 20261027T180444; modules 1; new nodes 0)
 - 18:06 L: merged deliver/H9/Sheaf.SixFunctors.FiniteDualizingCoefficientNormalization (stage 3; reviewer PASS; first push; landing 20261027T180644-L-3886679 (interface); batch 20261027T180444; modules 3; new nodes 2)
+- 18:06 L: merged deliver/J1/Sheaf.SixFunctors.IntegralRefinementDiagramAdmissibility (stage 3; reviewer PASS; first push; landing 20261027T180645-L-3886940 (proof); batch 20261027T180444; modules 1; new nodes 0)
