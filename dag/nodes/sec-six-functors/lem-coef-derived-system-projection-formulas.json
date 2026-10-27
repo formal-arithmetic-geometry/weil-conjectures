@@ -1,0 +1,193 @@
+{
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "kind": "statement",
+ "status": "split",
+ "mathlib_match": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CoefDerivedSystemEvaluationCalculus",
+  "date": "2026-10-27",
+  "group": "C2"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "derived adjunction coefficient systems evaluation internal Hom enriched limit",
+   "results": {
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CategoryTheory.MonoidalClosed.FunctorCategory.adj",
+     "CategoryTheory.Enriched.FunctorCategory.isLimitConeFunctorEnrichedHom",
+     "CategoryTheory.Enriched.FunctorCategory.isLimitConeFunctorEnrichedHom.fac",
+     "CategoryTheory.Enriched.FunctorCategory.isLimitConeFunctorEnrichedHom.lift",
+     "CategoryTheory.Functor.functorCategoryClosed",
+     "CategoryTheory.Enriched.FunctorCategory.enrichedHomπ",
+     "CategoryTheory.MonoidalClosed.FunctorCategory.homEquiv",
+     "CategoryTheory.evaluationAdjunctionLeft"
+    ]
+   },
+   "date": "2026-10-27",
+   "verdict": "No exact Mathlib statement for the normalized coefficient resolution or its transported projection equations; the existing project sequence, sections and closed-adjunction declarations are used."
+  },
+  {
+   "tool": "grep",
+   "query": "coefficientDerivedSystemEvaluationCalculus|coefficientEnrichedAdjunctionMap",
+   "results": {
+    "n_hits": 0,
+    "note": "",
+    "top": []
+   },
+   "date": "2026-10-27",
+   "verdict": "No exact Mathlib statement for the normalized coefficient resolution or its transported projection equations; the existing project sequence, sections and closed-adjunction declarations are used."
+  },
+  {
+   "tool": "leansearch",
+   "query": "coherent derived coefficient systems normalized tensor Hom sequence site total limit projection",
+   "results": {
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "HomologicalComplex.instHasLimit",
+     "CategoryTheory.ShortComplex.isLimitOfIsLimitπ",
+     "CochainComplex.HomComplex.Cochain.InductionUp.limitSequence_eqUpTo",
+     "CochainComplex.HomComplex.Cochain.InductionUp.limitSequence",
+     "CategoryTheory.coherentTopology.epi_π_app_zero_of_epi",
+     "CategoryTheory.coherentTopology.isLocallySurjective_π_app_zero_of_isLocallySurjective_map",
+     "CochainComplex.isIso_homologyπ₀",
+     "CategoryTheory.ShortComplex.instEpiHomologyπ"
+    ]
+   },
+   "date": "2026-10-27",
+   "verdict": "No exact Mathlib statement for the normalized coefficient resolution or its transported projection equations; the existing project sequence, sections and closed-adjunction declarations are used."
+  }
+ ],
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "id": "lem-coef-derived-system-projection-formulas",
+ "title": "Transport of actual enriched coefficient projections and their degree-zero action",
+ "statement": "Fix a prime $\\ell$, a finite extension $E/\\mathbf Q_\\ell$ and a scheme $W$, with the same positive finite quotient sheaves $B_n$, completed coefficient sheaf A, ordinary derived system category, normalized objects, actual total limit L and finite derived scalar extensions $T_n$ as defined in [def-weil-l-adic-coefficient-extension, def-pc-scheme, def-weil-completed-integral-coefficients, def-coef-ringed-sequence-site, def-coef-normalized-dvr-tower, def-coef-derived-system-calculus-data]. Let S be a CoefficientDerivedSystemCalculus, D a CoefficientDerivedSystemResolutionCoherence for S, and H : CoefficientDerivedSystemProjectionModels S D [def-coef-derived-system-projection-models]. Write $\\mathcal R\\dashv L$ for S's adjunction, $\\rho_n:e_n\\mathcal R\\cong T_n$ for its reduction-evaluation comparison, $\\pi_n:L N\\to\\operatorname{Res}_n e_nN$ for the actual total-limit projection, and $\\gamma_{P,N}$ for S's specified enriched adjunct followed by derived sections and its global-limit comparison. For every integral derived P, normalized derived system N and n, the actual nth mapping-limit projection of $\\gamma_{P,N}$, followed by S's finite global-Hom fiber identification, is $R\\operatorname{Hom}_A(P,\\pi_n)$ followed by derived scalar-adjunction, D's scalar-sections comparison and the first-variable transport by $\\rho_n(P)$. This is precisely CoefficientGammaProjection S D of [def-coef-derived-system-calculus-data], with all maps fixed there. Its degree-zero action under the recorded natural additive identifications of $H^0R\\operatorname{Hom}$ with derived morphisms [def-coef-hom-zero-cycle-class] sends any $h:P\\to L N$ to\n$$\\rho_n(P)\\,;T_n(h)\\,;\\rho_n(LN)^{-1}\\,;e_n(\\epsilon_N):e_n\\mathcal R P\\longrightarrow e_nN.$$\nHere $\\epsilon_N$ is S's counit and semicolons denote composition in the displayed order. This is CoefficientHomProjection S for H-zero of coefficientGammaZeroMap itself. There is no assertion that a calculus exists, that beta is invertible, or that integral Hom commutes with finite scalar extension.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 07A6 (lemma-adjoint), 08JA (lemma-section-RHom-over-U), 0941 (lemma-derived-limit-is-ok), 0D6E (lemma-derived-pushforward-composition); the existing enrichedSequenceProjectionFormula and its final normalized H-zero clause, specialized to the actual coefficient data. The specialization and universal-comparison transports are agent-formulated."
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-pc-scheme",
+  "def-weil-pbc-proetale-site",
+  "def-weil-size-convention",
+  "def-weil-completed-integral-coefficients",
+  "def-weil-sheaf-of-modules-category",
+  "def-pc-sheaf-restrict-scalars",
+  "def-weil-abstract-derived-category",
+  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+  "def-coef-normalized-dvr-tower",
+  "def-weil-integral-reduction-tower",
+  "lem-pc-kflat-resolution",
+  "def-pur-derived-internal-hom",
+  "def-pc-kflat-complex",
+  "def-pc-tensor-complex-sheaves",
+  "lem-pur-derived-change-of-rings",
+  "lem-pur-rhom-global-sections",
+  "lem-weil-derived-scalar-extension-restriction-adjunction",
+  "def-coef-hom-representative-evaluation",
+  "def-coef-hom-zero-cycle-class",
+  "def-coef-ringed-sequence-site",
+  "def-coef-ringed-tensor-hom-model",
+  "def-coef-derived-system-calculus-data",
+  "def-coef-derived-system-projection-models"
+ ],
+ "proof": [
+  {
+   "text": "Transport S and D to the actual sequence-site and strict-system presentations using their identity-on-sections equivalence. Tensor comparison representative normalizations give the scalar model assumptions of the enriched sequence projection theorem; unit_projection and reductionTensor_evaluation give its unit and tensor compatibility equations.",
+   "uses": [
+    "lem-pur-system-ringed-sequence-site",
+    "lem-coef-semilinear-derived-sections",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the enriched sequence projection formula. Its two inverse Hom bijections uniquely identify the evaluated enriched projection with the finite scalar internal-Hom adjunct after Hom of pi_n. Universal right-derived comparison units identify its global-limit and finite sections comparisons with D.globalLimit_model, D.globalEvaluation_model and D.scalarSections_model. The transported equality is exactly CoefficientGammaProjection. Use H.sections_projection for the ordinary sections/limit projection after internal Hom; arbitrary finite sections comparisons without this normalization would not suffice.",
+   "uses": [
+    "lem-coef-enriched-sequence-projection-formula",
+    "lem-coef-sequence-sections-limit-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the final H-zero clause of the same theorem. The recorded cocycle-class normalizations and D ordinary/derived scalar section equations fix both endpoint transports. Rewrite the scalar adjunct of pi_n with counit_projection, and use naturality of rho_n on h. The result is rho_n(P);T_n(h);rho_n(LN) inverse;e_n(epsilon_N), the actual coefficientGammaZeroMap formula. H.scalar_hom_zero fixes the finite enriched comparison on H-zero. Naturality of the recorded H-zero Hom identifications handles Hom of pi_n and the first-variable reduction transport.",
+   "uses": [
+    "lem-coef-enriched-sequence-projection-formula"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-enriched-sequence-projection-formula",
+  "lem-coef-semilinear-derived-sections",
+  "lem-coef-sequence-sections-limit-comparison",
+  "lem-pur-system-ringed-sequence-site",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 07A6 (lemma-adjoint), 08JA (lemma-section-RHom-over-U), 0941 (lemma-derived-limit-is-ok), 0D6E (lemma-derived-pushforward-composition); the existing enrichedSequenceProjectionFormula and its final normalized H-zero clause, specialized to the actual coefficient data. The specialization and universal-comparison transports are agent-formulated."
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-coef-integral-exceptional-adjoint",
+   "place": "Proof paragraph 2: the first and last mapping-complex comparisons, specifically their actual finite projections and degree-zero adjunct formula.",
+   "via": [
+    "lem-coef-derived-system-evaluation-calculus"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CoefficientDerivedSystemProjectionFormulas",
+  "file": "lean/Sheaf/Paper/CoefficientDerivedSystemProjectionFormulas.lean",
+  "declaration": "WeilConjectures.coefficientDerivedSystemProjectionFormulas",
+  "declarations": [
+   "WeilConjectures.coefficientDerivedSystemProjectionFormulas"
+  ],
+  "statement": "theorem coefficientDerivedSystemProjectionFormulas (S : CoefficientDerivedSystemCalculus l E W) (D : CoefficientDerivedSystemResolutionCoherence l E W S) (H : CoefficientDerivedSystemProjectionModels l E W S D) : CoefficientGammaProjection l E W S D ∧ CoefficientHomProjection l E W S",
+  "branch": "sheaf-dag",
+  "by": "C2",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-d5e63",
+  "group": "C2",
+  "result": "fix",
+  "landing": "20261027T180505-L-3866562",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-d5e63",
+  "group": "C2",
+  "result": "fix",
+  "landing": "20261027T180505-L-3866562",
+  "kind": "interface",
+  "note": "independent cc review: delivered item/Data/ResolutionModels/ProjectionFormulas vs clone original (verbatim prefix move + public re-export, statement unchanged); nodes vs Lean; 107 direct importers compiled against delivered set (all OK); axioms clean"
+ }
+}

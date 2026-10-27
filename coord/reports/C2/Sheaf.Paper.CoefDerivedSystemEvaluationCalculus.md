@@ -1,104 +1,143 @@
 ## What changed
 
-Prove `WeilConjectures.coefficientEvaluationTensorIso_exists` without changing its
-statement. A new proof-only import, `Sheaf.Paper.CoefficientTotalTensorEvaluation`,
-specializes the new `Sheaf.Paper.SemilinearTotalTensorEvaluation` theorem. It provides the ordinary total-complex evaluation comparison and its uniqueness on
-pure tensor generators. Its proof uses the existing ordinary evaluation tensor
-comparison, evaluation/coextension adjunction, signed total comparison, coproduct
-summand equation, and pure-generator extensionality. The coefficient theorem is
-its specialization to the actual coefficient ring sequence and actual section
-transport. The evaluation functor equality is recorded explicitly; the generic
-interface requires only preservation of zero morphisms. The coefficient module
-specializes the transport to the actual `eqToHom` of the recorded equality of
-abelian section objects, proved heterogeneously equal to the identity by equality
-elimination. After the local unfolding improvements, keeping that specialization
-in the assigned module still exceeded the 60-second limit. The assigned theorem applies the already specialized theorem with explicit
-instance and universe arguments. It uses the library's existing kernel-checked
-assignment pattern: build the application from elaborated local variables and
-let the kernel check conversion to the goal, including the existing
-section-transport definition. This avoids repeating a slow elaborator conversion
-and changes no trust setting. Backward definitional-equality search is disabled
-for this application and the subsequent interface block.
-No existing definition or statement is changed.
+Reduced the unchanged existence theorem `WeilConjectures.coefficientDerivedSystemEvaluationCalculus`
+to two genuine intermediate assertions and proved the categorical assembly in Lean.
 
-All original declaration signatures, definition bodies and public imports are
-retained. The existing scalar prefix is moved verbatim into the new
-`Sheaf.Paper.CoefficientSystemScalarCalculus`, and the original module publicly
-re-exports it. After local unfolding improvements the monolithic file still took
-62–73 seconds, so this is the permitted performance split, with no mathematical
-interface change. Local proof settings from the prefix are replayed for the
-remaining original declarations. Three existing definition-node attachments and
-the two original declaration inventories keep the moved names as re-exported declarations (review fix). Asynchronous elaboration is disabled in this module:
-the original source exceeded 60 seconds with it enabled, while serialized
-elaboration compiled the same interfaces in 55.7 seconds during development.
-The local irreducibility settings in the new module affect only its own proofs.
-The new module compiled cleanly through `lcompile.py` in 47.3 seconds after the
-local irreducibility improvements; the coefficient specialization compiled in
-27.3 seconds.
+- Extracted the 65 existing declarations preceding the theorem, verbatim in signature,
+  attributes, visibility and body, into `Sheaf.Paper.CoefficientDerivedSystemEvaluationData`.
+  The original module publicly re-exports them and retains all original public imports.
+  This separates the interface from its existence proof and avoids an import cycle.
+  No existing module other than the assigned item is edited.
+- Proved `coefficientClosedEnriched_isIso` and `coefficientClosedEnriched_naturality`.
+  The private identification proof expands the five Hom bijections of
+  `CategoryTheory.ClosedScalarHom.iso` and identifies its inverse with the actual
+  evaluation-defined enriched adjunct. It cancels the tensor comparison and uses the
+  two adjunction counit identities. This works for every tensor-preserving left adjoint.
+- Added the real propositional definition `CoefficientDerivedSystemProjectionModels`.
+  Its first clause concerns ordinary derived sections and total-limit projections,
+  before internal Hom. Its second clause normalizes the finite scalar enriched adjunct
+  on H-zero, before any system limit. Neither clause asserts a gamma identity or
+  chooses data from existence.
+- Split the remaining construction into `coefficientDerivedSystemResolutionModels`
+  (normalized fibers, global comparison, resolution and these two model equations)
+  and `coefficientDerivedSystemProjectionFormulas` (enriched gamma and Hom-zero
+  projection identities for such models). Each has its own module, source, complete
+  argument in words and DAG node. They are strictly different parts of the argument.
+- The final proof explicitly constructs S from F and kappa, supplies enriched
+  invertibility by the proved generic calculation, and combines the projection lemma
+  with finite enriched invertibility. It proves gamma naturality by applying integral
+  sections to enriched naturality and then naturality of kappa. A private, fully proved
+  categorical calculation proves the tensor-parameter composition equation by
+  adjunction naturality, tensor-comparison naturality and tensor functoriality.
+
+Validation: all four delivery modules compile in import order with `lcompile.py`.
+The extracted data file took 39.3 seconds, projection lemma 2.3 seconds, resolution
+lemma 2.5 seconds, and final theorem 3.4 seconds. No transparency restriction or
+compile-time limit was disabled. The server baseline item compiled in 36.9 seconds.
+The 65 extracted declarations were compared against the current server source by
+keyword, signature, body, visibility and attributes: no differences.
+All 59 direct importers from the current server source were checked: 57 compile within
+60 seconds against the delivered set.
+Two unchanged consumers exceed 60 seconds in both the delivered set and isolated
+compiles against the original item:
+
+| Consumer | Delivery | Original item |
+| --- | ---: | ---: |
+| `Sheaf.Algebra.Homology.FlatScalarEvaluationModel` | 65.8 s | 65.7 s |
+| `Sheaf.Paper.DerivedAutomorphismHomEvaluation` | 64.3 s | 65.8 s |
+
+These are pre-existing timeouts, not forced adaptations; their sources are not
+included in the packet. The independent reader must assess them. Every temporary
+consumer source copy was verified unchanged and removed after these checks.
+There are no consumer type errors and no adapted consumer files in the packet.
+
+The node graph was checked with the delivered nodes overlaid: no new dependency
+cycle or missing dependency. All delivered Lean lines have at most 100 characters.
+The two existing definition-node owners now point to the extracted interface;
+their mathematical statements are unchanged.
 
 ## Proved and sorry left
 
-Closed one of the item's two original holes:
-`WeilConjectures.coefficientEvaluationTensorIso_exists`
-(`lem-coef-derived-system-evaluation-calculus`).
+One original hole closed, by a decomposition:
 
-The remaining hole is
-`WeilConjectures.coefficientDerivedSystemEvaluationCalculus`
-(`lem-coef-derived-system-evaluation-calculus`), the final simultaneous assembly.
-Its statement and body are untouched. No holes are added or split off.
+- `WeilConjectures.coefficientDerivedSystemEvaluationCalculus` — its entire body is
+  now a compiling Lean proof from the two intermediate declarations. Its signature,
+  universes and conclusion are unchanged.
 
-The new theorems
-`WeilConjectures.semilinearTotalTensorEvaluation_existsUnique` and
-`WeilConjectures.coefficientTotalTensorEvaluation_existsUnique`, and all private
-helpers, are proved. This is a proof of the ordinary evaluation hole, not a decomposition into new
-unproved statements.
+Two holes added and left, each as a whole named public theorem `:= by sorry`:
+
+- `WeilConjectures.coefficientDerivedSystemResolutionModels` in
+  `Sheaf.Paper.CoefficientDerivedSystemResolutionModels`.
+- `WeilConjectures.coefficientDerivedSystemProjectionFormulas` in
+  `Sheaf.Paper.CoefficientDerivedSystemProjectionFormulas`.
+
+There are no other direct holes in the four delivered modules. In particular the
+interface, new normalization predicate, generic enriched proofs, naturality assembly
+and parameter-composition proof have none. This is a decomposition of one upper hole
+into two lower holes, not a completed proof of the existence theorem from permitted
+axioms: direct holes change 1 to 2, net minus one. Earlier auxiliary bodies in the
+starting item were already proved and are not counted as new closures.
 
 ## No longer needed
 
-None. All original public imports and planned dependencies of the unfinished final
-assembly are retained. No source-library declaration, module, or unit route is
-removed. The scalar prefix is relocated and re-exported, not pruned. Exploratory proof imports were replaced by the single import of the
-new coefficient comparison theorem; they were not imports of the delivered baseline.
+The final proof does not need these three direct proof dependencies from the old plan:
+
+- `lem-coef-closed-adjunction-enriched-isomorphism`, module
+  `Sheaf.CategoryTheory.ClosedAdjunctionEnrichedIsomorphism`: use the already proved
+  five-Hom-bijection comparison and identify the actual map with its inverse instead.
+- `lem-coef-closed-adjunction-naturality`, module
+  `Sheaf.CategoryTheory.ClosedAdjunctionComparison`: naturality is that of the inverse
+  comparison itself and then of the sections/limit comparison.
+- `lem-coef-monoidal-adjunction-parameter-composition`, module
+  `Sheaf.CategoryTheory.TensorParameterComposition`: the elementary categorical
+  calculation is proved locally, with no new assumption or hole.
+
+They are removed from this node's proof route; they may remain needed by other
+modules or by the generic projection theory. No module is withdrawn and no global
+pruning claim is made. Other original construction dependencies remain on the two
+split nodes. All original public imports are retained for compatibility; existing
+private imports needed by representative proofs move with those proofs to the data
+module. The final assembly has only the data public import and the two new proof
+imports in addition to that preserved public interface. No upstream declaration,
+public import or proof is removed.
 
 ## Where the brief, the DAG or earlier work was wrong
 
-The retained Z7 route note describes four holes and an old/new HomComplex import
-collision. The current source has two holes, after the intervening repairs, and
-its imports load successfully against the current published environment. The
-ordinary evaluation proof follows the existing DAG's total-chain-comparison
-route, with the generator formula and uniqueness now formalized explicitly.
+The old import-environment note describes an earlier state. A fresh compilation of
+the current item succeeds and the HomComplex owner collision does not recur.
+The current server item has one direct hole, not the four retained in that old note.
+The initial sandbox had no retained proof or report; the accepted scalar-prefix
+split was already part of the server source and was preserved.
 
-The comparison works for arbitrary unbounded complexes, at every natural level,
-including zero, and for zero sheaves and the empty site; its construction uses
-coproduct preservation and ordinary tensor comparisons, with no K-flatness or
-normalization hypothesis. Section transport is required to be heterogeneously
-equal to the original section, so the generic statement admits no arbitrary
-change of normalization.
+A consumer-only compilation initially lacked an unpublished scalar-calculus object
+while preparing an upstream dependency. Compiling the delivery and consumers in one
+ordered set resolves that artifact issue; it is distinct from the timing issue above.
+
+The local shared snapshot changed while this session was running and temporarily
+showed an older item and no scalar-calculus module. Current source and importer
+records were therefore read from the server. Its item still has the scalar-calculus
+split and the single final hole. No archived module was withdrawn or restored.
+
+An initial, undelivered draft of the projection lemma was too general: arbitrary
+resolution data alone do not fix the sections-evaluation comparison or finite
+closed Hom-zero normalization. Rescaling those unspecified comparisons can change
+the asserted projection. The delivered version requires the two explicit
+ProjectionModels equations, constructed by the first lemma from normalized units
+and cocycle-class evaluation. These are genuine earlier steps, rather than the
+gamma assertion restated as a premise. The original theorem is not weakened.
 
 ## New nodes
 
-`lem-coef-semilinear-total-tensor-evaluation`, in
-`dag/nodes/sec-six-functors/lem-coef-semilinear-total-tensor-evaluation.json`,
-records the fully proved generic ordinary total-tensor comparison and
-pure-generator uniqueness. It is an auxiliary part of the existing calculus proof step 3, in
-the same unit, and introduces no new unproved dependency. The existing calculus
-node's proof, proof dependencies and proof origin record this specialization.
-`lem-coef-actual-total-tensor-evaluation`, in
-`dag/nodes/sec-six-functors/lem-coef-actual-total-tensor-evaluation.json`, records
-the fully proved specialization to the actual coefficient sequence. Its explicit
-functor equality and instance argument avoid inference through different
-presentations of the same evaluation functor. It is separated only after the
-local unfolding improvements, so that each delivered file meets the compile
-limit. Neither auxiliary node leaves a proof hole.
+- `def-coef-derived-system-projection-models`: the two real normalization equations,
+  declared in `Sheaf.Paper.CoefficientDerivedSystemEvaluationData`.
+- `lem-coef-derived-system-resolution-models`: normalized model construction, declared
+  in `Sheaf.Paper.CoefficientDerivedSystemResolutionModels`.
+- `lem-coef-derived-system-projection-formulas`: enriched and degree-zero projection
+  transport, declared in `Sheaf.Paper.CoefficientDerivedSystemProjectionFormulas`.
 
-The ownership and re-export record is
-`coord/changes/C2-coefficient-scalar-foundation-split.md`; it lists every direct
-importer and current claim holder. No importer needs an adaptation because all
-exported names, signatures, data bodies and attributes are preserved.
-
-All four delivered modules compiled in import order through `lcompile.py`:
-scalar foundation 25.3 s, generic total evaluation 4.6 s, coefficient specialization
-36.0 s, and assigned module 60.2 s (accepted by the compiler tool).
+All three include source pointers, the current unit and blueprint ancestor, actual
+Mathlib searches, and accurate Lean attachments. The two new theorem nodes include
+complete numbered proofs in words. No unit statement or unit proof step is bypassed.
 
 ## Second reading by C2
 

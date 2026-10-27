@@ -42,32 +42,6 @@
  ],
  "proof": [
   {
-   "text": "Apply [lem-coef-sequence-projection-derived-adjunction] and [lem-coef-sequence-pushforward-limit-projections] to $A=\\widehat R_W$ and the quotient tower. They give the functor $\\mathcal R_W$, its one-K-flat representative model, $\\mathcal L_W$, the actual unit/counit projections and triangle identities.",
-   "uses": [
-    "lem-coef-sequence-projection-derived-adjunction",
-    "lem-coef-sequence-pushforward-limit-projections"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 0941 (section-derived-limits before lemma-derived-limit-is-ok), 06YY (lemma-derived-base-change) and 07A6 (lemma-adjoint); application to the ringed sequence projection."
-   }
-  },
-  {
-   "text": "Evaluations jointly detect isomorphisms by [lem-pur-system-level-left-extension]. Evaluation is ringed inverse image by [lem-pur-system-evaluation-topos], so tensor evaluates componentwise. By [lem-weil-pbc-ringed-topoi-derived-tensor-pullback], reductions satisfy $$(Q\\otimes_A B_m)\\otimes_{B_m}B_n\\cong Q\\otimes_A B_n,$$ via $(x\\otimes b)\\otimes c\\mapsto x\\otimes bc$, inverse $x\\otimes c\\mapsto(x\\otimes1)\\otimes c$. The theorem preserves flat-term K-flatness, so these compute derived reductions and their cocycle: $\\mathcal R_WP$ is normalized.",
-   "uses": [
-    "lem-pur-system-level-left-extension",
-    "lem-pur-system-evaluation-topos",
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-    "lem-pur-system-ringed-sequence-site"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 07A4 and 0941; evaluation and iterated tensor on a common K-flat representative."
-   }
-  },
-  {
    "text": "For the auxiliary representative calculations, assemble the actual scalar-derived pair from its recorded ordinary and derived adjunctions using [lem-coef-actual-scalar-derived-pair]. Apply [lem-coef-prescribed-scalar-tensor-comparison] for the ordinary scalar tensor isomorphism with its pure-generator formula and uniqueness. For evaluation, apply [lem-coef-actual-total-tensor-evaluation] to the actual coefficient ring sequence and its identity-on-underlying-sections transport. This inverts the semilinear total chain comparison and proves both its pure-generator formula and uniqueness without any flatness assumption. For arbitrary K-flat evaluation lift each acyclic finite test complex by [lem-coef-semilinear-evaluation-acyclic-lift], apply system K-flatness and exact evaluation, and transport through the ordinary total-tensor evaluation isomorphism.",
    "uses": [
     "lem-coef-actual-scalar-derived-pair",
@@ -79,72 +53,47 @@
    "elementary": false
   },
   {
-   "text": "Use the closed structure [lem-sf-ringed-derived-closed-symmetric-monoidal] on the sequence site and define $\\mathcal I_W(M,N)=H_B(M,N)$. The fiber identifications and actual scalar-extension transitions, carrying system evaluation to level evaluation, are [lem-coef-semilinear-derived-sections]. Apply [lem-coef-ringed-pullback-hom-evaluation-comparison] to $p$ to obtain $\\beta$, its finite formula and evaluation/transpose/composition identities as system maps.",
+   "text": "Apply lem-coef-derived-system-resolution-models to obtain normalized fibers F, a global-limit comparison kappa and its resolution coherence D and its ordinary-projection/finite-Hom-zero normalization H. Construct S explicitly with these data. Its enriched_isIso field is the proved coefficientClosedEnriched_isIso, identified with the inverse of ClosedScalarHom.iso by applying the five Hom bijections to evaluation; no existence witness is chosen in a definition.",
    "uses": [
-    "lem-sf-ringed-derived-closed-symmetric-monoidal",
-    "lem-coef-semilinear-derived-sections",
-    "lem-coef-ringed-pullback-hom-evaluation-comparison",
-    "lem-pur-system-ringed-sequence-site"
+    "lem-coef-derived-system-resolution-models",
+    "lem-sfb-closed-scalar-hom-comparison"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 08J9 (lemma-internal-hom), 07A4 (lemma-pullback-tensor-product) and 0941 (sequence site); agent finite-prefix Yoneda computation and transition calculation, original calculus steps 9-10."
-   }
+   "elementary": false
   },
   {
-   "text": "Define $\\mathcal H_W=G\\mathcal I_W$ using [lem-coef-sequence-global-sections-evaluation]. Its evaluations are the finite global mapping complexes. Use [lem-coef-sequence-sections-limit-comparison] for the two-order total-sections comparison. Apply [lem-coef-closed-adjunction-enriched-isomorphism] to $F=\\mathcal R_W$, $G=\\mathcal L_W$ and their tensor comparison. Its $b=H_B(1,e_N)\\beta$ gives $\\delta:H_A(P,\\mathcal L_WN)\\cong\\mathcal L_WH_B(\\mathcal R_WP,N)$. Taking derived sections and the preceding comparison defines $\\gamma$. The actual projection and degree-zero formula are [lem-coef-enriched-sequence-projection-formula].",
+   "text": "Apply lem-coef-derived-system-projection-formulas to S, D and H. This supplies exactly the gamma projection and actual Hom-zero projection fields, without changing any chosen map.",
    "uses": [
-    "lem-coef-sequence-sections-limit-comparison",
-    "lem-coef-closed-adjunction-enriched-isomorphism",
-    "lem-coef-enriched-sequence-projection-formula",
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-    "lem-coef-sequence-global-sections-evaluation"
+    "lem-coef-derived-system-projection-formulas"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 07A6 (lemma-adjoint) and 0D6E (lemma-derived-pushforward-composition); agent uncurrying of the enriched finite projection, original calculus step 14. No integral Hom/tensor base-change isomorphism is used."
-   }
+   "elementary": false
   },
   {
-   "text": "Naturality is [lem-coef-closed-adjunction-naturality]. For composition apply [lem-coef-monoidal-adjunction-parameter-composition] with $K=H_B(N,N\\prime)$, $T=H_A(P,\\mathcal L_WN)$, $S=\\mathcal L_WK$, $f=\\mathrm{ev}_{P,\\mathcal L_WN}$ and $g=\\mathrm{ev}_{N,N\\prime}(e_K\\otimes1)$. Its right side is successive system evaluation, its left side evaluation after $\\mathcal L_W$. Closed transposition and derived sections give the composition identity for $\\gamma$. The unit/counit specializations use $e_{\\mathcal R_WP}\\mathcal R_Wu_P=1$ and $\\mathcal L_We_Nu_{\\mathcal L_WN}=1$ from step 1. This proves all required compatibilities.",
+   "text": "For each finite scalar adjunction apply coefficientClosedEnriched_isIso to the actual finite tensor comparison, proving finite_enriched_isIso. Identify the coefficient enriched map with the inverse ClosedScalarHom comparison: expand the five-bijection formula, cancel the tensor comparison, and use the scalar and closed adjunction counit identities. Naturality of that inverse comparison gives coefficientClosedEnriched_naturality. Apply integral sections and then naturality of kappa to prove the full gamma_naturality square.",
    "uses": [
-    "lem-coef-closed-adjunction-naturality",
-    "lem-coef-monoidal-adjunction-parameter-composition"
+    "lem-sfb-closed-scalar-hom-comparison"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Agent assembly of the previously reviewed categorical coherence steps 15-17."
-   }
+   "elementary": false
+  },
+  {
+   "text": "Prove composition directly by left/right naturality of the reduction adjunction Hom bijection. Its inverse sends f to reduction(f) followed by the counit. Naturality of the tensor comparison at (identity,f), followed by tensor functoriality, equates the two expressions. This is exactly the tensorLimitMap defined as the counit mate. Package these proofs together with D and the two projection identities into CoefficientDerivedSystemCoherence.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
   "lem-coef-actual-scalar-derived-pair",
   "lem-coef-actual-total-tensor-evaluation",
-  "lem-coef-closed-adjunction-enriched-isomorphism",
-  "lem-coef-closed-adjunction-naturality",
-  "lem-coef-enriched-sequence-projection-formula",
-  "lem-coef-monoidal-adjunction-parameter-composition",
+  "lem-coef-derived-system-projection-formulas",
+  "lem-coef-derived-system-resolution-models",
   "lem-coef-prescribed-scalar-tensor-comparison",
-  "lem-coef-ringed-pullback-hom-evaluation-comparison",
   "lem-coef-semilinear-derived-sections",
   "lem-coef-semilinear-evaluation-acyclic-lift",
-  "lem-coef-sequence-global-sections-evaluation",
-  "lem-coef-sequence-projection-derived-adjunction",
-  "lem-coef-sequence-pushforward-limit-projections",
-  "lem-coef-sequence-sections-limit-comparison",
-  "lem-pur-system-evaluation-topos",
-  "lem-pur-system-level-left-extension",
-  "lem-pur-system-ringed-sequence-site",
-  "lem-sf-ringed-derived-closed-symmetric-monoidal",
-  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+  "lem-sfb-closed-scalar-hom-comparison"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Human-requested finer split, 2026-10-21. Same sequence-site, finite-prefix and enriched-adjunction route as the reviewed proof; seven extracted generic lemmas and existing sequence/closed-structure results assemble the unchanged statement. B3 adds explicit auxiliary scalar-generator and all-acyclic-test K-flat evaluation arguments; the ordinary tensor-evaluation comparison and final calculus assembly remain unproved in this partial delivery. J6 repair of returned adf7546a9e3: all 92 original declaration headers, structure field signatures and public imports are retained. All 154 existing compiled declaration and field types, 92 universe-parameter lists and 15 exported attributes agree with source. Twelve standalone item-local definitions name the existing adjunction, quotient transformation, localized counit, three generic equation constructors, three tensor-model isomorphisms, two mapped complex transformations and the original unique-comparison choice. No structure field is renamed or aliased. Nine full predicate equations and ten constructor/comparison bodies agree with their original formulas by rfl; the scalar-sections formula supplies its existing additive zero-map proof explicitly. Its sections functor is named separately at each level, and unused local monoidal instances are removed from the K-flat preservation proof. Restriction composition uses Functor.ext_of_iso and the existing normalizedDVRRestrictionCompIso from the already listed normalized-tower dependency. Both global comparison bodies and all shared total-tensor, inverse-limit and change-of-rings definitions remain unchanged. The two original holes remain; none is added, moved or closed. The proof route and dependencies of the calculus assembly remain unchanged. C2, 2026-10-27: coefficientEvaluationTensorIso_exists is proved from the fully proved generic ordinary total-tensor evaluation comparison and its coefficient specialization. The generic comparison uses the existing evaluation/coextension adjunction, signed total chain comparison, summand equations and pure-generator extensionality. The coefficient specialization uses the actual functor equality, explicit zero-morphism preservation and eqToHom transport for the recorded abelian section equality; equality elimination proves the transport is heterogeneously the identity. The assigned theorem unfolds only coefficientEvaluationSection and applies the specialized result. Local irreducibility reduces generic evaluation unfolding; after these improvements the coefficient specialization is placed in a separate proved module to keep every file within 60 seconds. Existing signatures, definitions and public imports are unchanged; asynchronous elaboration is disabled locally. One of the two original holes is closed, none is added, and the final calculus assembly remains open. After local unfolding improvements, extract the existing scalar prefix verbatim to CoefficientSystemScalarCalculus and publicly re-export it, as permitted by the session compile-limit brief. Existing definition attachments record the new owner; declaration signatures, bodies and attributes are preserved. The completed evaluation proof applies the specialized theorem by a direct kernel-checked proof term built from the exact local arguments, avoiding the expensive repeated elaborator conversion."
+  "place": "C2, 2026-10-27: Lean assembly of the unchanged statement from two genuine intermediate construction/projection lemmas. The actual enriched adjunct is identified with the inverse five-Hom-bijection comparison, proving invertibility and naturality without new holes. The final proof constructs S, proves finite enriched invertibility, gamma naturality by applying sections and the global comparison naturality, and parameter composition by adjunction naturality and tensor functoriality. The remaining normalized resolution construction and actual finite/H-zero projection transports are the two named split-off theorems; this is a decomposition, not a net proof. Existing interfaces move verbatim to CoefficientDerivedSystemEvaluationData to avoid a proof import cycle; the original module publicly re-exports them. The resolution theorem also supplies the two explicit ordinary-projection and finite scalar Hom-zero normalization equations; arbitrary unnormalized sections-evaluation or closed comparison data are not assumed to satisfy gamma projection."
  },
  "mathlib_searches": [
   {
@@ -489,7 +438,9 @@
    "WeilConjectures.coefficientOrdinaryQuotientNaturalTransformation",
    "WeilConjectures.coefficientOrdinaryScalarAdjunction",
    "WeilConjectures.coefficientSystemTensorModelIso",
-   "WeilConjectures.coefficientUniqueComparisonChoice"
+   "WeilConjectures.coefficientUniqueComparisonChoice",
+   "WeilConjectures.coefficientClosedEnriched_isIso",
+   "WeilConjectures.coefficientClosedEnriched_naturality"
   ],
   "file": "lean/Sheaf/Paper/CoefDerivedSystemEvaluationCalculus.lean",
   "statement": "theorem coefficientDerivedSystemEvaluationCalculus : ∃ S : CoefficientDerivedSystemCalculus l E W, Nonempty (CoefficientDerivedSystemCoherence l E W S)",
@@ -497,7 +448,7 @@
   "by": "N0",
   "date": "2026-10-17",
   "existing": false,
-  "note": "Repair of returned head 24d3ed97d8f8, H3 finding 2: fiber_transition explicitly identifies the actual internal-Hom transition-adjoint under fiberHom at m and n with the evaluation-defined finite scalar-extension comparison followed by RHom(alpha_M inverse, alpha_N). The finite quotient uses recorded derived change of rings, with normalized ordinary/derived adjunction units and a tensor comparison pinned on K-flat representatives by pure-tensor chain formulas. Earlier tensor/Hom and gamma normalizations retained; statement unchanged. Performance packaging: CoefficientFiberTransition contains the identical transition equation; CoefficientScalarTensorGenerators and coefficientIntegralScalarUnitSection package the identical integral scalar pure-tensor normalization without repeatedly expanding the adjunction unit. CoefficientGlobalLimitModel likewise packages the unchanged resolution equation to avoid repeating exact-localization terms in generated structure declarations. J6 repair of returned adf7546a9e3: all 92 original declaration headers, structure field signatures and public imports are retained. All 154 existing compiled declaration and field types, 92 universe-parameter lists and 15 exported attributes agree with source. Twelve standalone item-local definitions name the existing adjunction, quotient transformation, localized counit, three generic equation constructors, three tensor-model isomorphisms, two mapped complex transformations and the original unique-comparison choice. No structure field is renamed or aliased. Nine full predicate equations and ten constructor/comparison bodies agree with their original formulas by rfl; the scalar-sections formula supplies its existing additive zero-map proof explicitly. Its sections functor is named separately at each level, and unused local monoidal instances are removed from the K-flat preservation proof. Restriction composition uses Functor.ext_of_iso and the existing normalizedDVRRestrictionCompIso from the already listed normalized-tower dependency. Both global comparison bodies and all shared total-tensor, inverse-limit and change-of-rings definitions remain unchanged. The two original holes remain; none is added, moved or closed. The proof route and dependencies of the calculus assembly remain unchanged. C2, 2026-10-27: the scalar-foundation prefix (coefficientTowerSections through coefficientScalarTensorIso) is declared verbatim in Sheaf.Paper.CoefficientSystemScalarCalculus and publicly re-exported by this module; its names stay listed here as re-exported declarations of this node."
+  "note": "Repair of returned head 24d3ed97d8f8, H3 finding 2: fiber_transition explicitly identifies the actual internal-Hom transition-adjoint under fiberHom at m and n with the evaluation-defined finite scalar-extension comparison followed by RHom(alpha_M inverse, alpha_N). The finite quotient uses recorded derived change of rings, with normalized ordinary/derived adjunction units and a tensor comparison pinned on K-flat representatives by pure-tensor chain formulas. Earlier tensor/Hom and gamma normalizations retained; statement unchanged. Performance packaging: CoefficientFiberTransition contains the identical transition equation; CoefficientScalarTensorGenerators and coefficientIntegralScalarUnitSection package the identical integral scalar pure-tensor normalization without repeatedly expanding the adjunction unit. CoefficientGlobalLimitModel likewise packages the unchanged resolution equation to avoid repeating exact-localization terms in generated structure declarations. J6 repair of returned adf7546a9e3: all 92 original declaration headers, structure field signatures and public imports are retained. All 154 existing compiled declaration and field types, 92 universe-parameter lists and 15 exported attributes agree with source. Twelve standalone item-local definitions name the existing adjunction, quotient transformation, localized counit, three generic equation constructors, three tensor-model isomorphisms, two mapped complex transformations and the original unique-comparison choice. No structure field is renamed or aliased. Nine full predicate equations and ten constructor/comparison bodies agree with their original formulas by rfl; the scalar-sections formula supplies its existing additive zero-map proof explicitly. Its sections functor is named separately at each level, and unused local monoidal instances are removed from the K-flat preservation proof. Restriction composition uses Functor.ext_of_iso and the existing normalizedDVRRestrictionCompIso from the already listed normalized-tower dependency. Both global comparison bodies and all shared total-tensor, inverse-limit and change-of-rings definitions remain unchanged. The two original holes remain; none is added, moved or closed. The proof route and dependencies of the calculus assembly remain unchanged. C2, 2026-10-27: the scalar-foundation prefix (coefficientTowerSections through coefficientScalarTensorIso) is declared verbatim in Sheaf.Paper.CoefficientSystemScalarCalculus and publicly re-exported by this module; its names stay listed here as re-exported declarations of this node. C2, 2026-10-27: all remaining interface declarations and representative proofs move verbatim to Sheaf.Paper.CoefficientDerivedSystemEvaluationData, publicly re-exported here. The final theorem is a complete proof from two new strictly smaller construction/projection lemmas and the proved closed-adjunction comparison. Their two sorry bodies are reported as a decomposition. The new generic enriched invertibility and naturality lemmas are fully proved."
  },
  "reviewed_lean": {
   "date": "2026-10-17",
@@ -510,11 +461,11 @@
  "reviewed_proof": {
   "date": "2026-10-27",
   "by": "L",
-  "reviewer": "C-39893",
+  "reviewer": "C-d5e63",
   "group": "C2",
   "result": "fix",
-  "landing": "20261027T134955-L-3651497",
+  "landing": "20261027T180505-L-3866562",
   "kind": "interface",
-  "note": "independent cc review: delivered 4 modules vs clone original (verbatim prefix split + 1 hole proved, statement unchanged); all 107 direct importers compiled against the delivered set (104 OK, 3 slow pre-existing, equal time on published); axioms clean; nodes vs Lean"
+  "note": "independent cc review: delivered item/Data/ResolutionModels/ProjectionFormulas vs clone original (verbatim prefix move + public re-export, statement unchanged); nodes vs Lean; 107 direct importers compiled against delivered set (all OK); axioms clean"
  }
 }
