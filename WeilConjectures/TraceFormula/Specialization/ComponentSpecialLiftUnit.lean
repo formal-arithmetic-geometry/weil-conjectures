@@ -22,10 +22,10 @@ homeomorphism, so by topological invariance the unit of `L r^* ⊣ R r_*` is an 
 
 This theorem has its own module, which no other module needs. Writing the `.olean` of a module
 runs Lean's library-suggestion extensions (`symbolFrequency`, `sineQuaNon`) over the statement of
-every theorem. The statement of `isIso_unit_componentSpecialLift` is very large (every `Dᵇc` in it
-repeats the specialized complex `(specialization …).obj K` of the special correspondence), and this
-takes minutes, independently of the proof. In its own module, it is not on the path of the modules
-importing `ComponentSpecialFibre`.
+every theorem, at a cost proportional to the unshared size of the statement. This statement stays
+small because the specialized correspondence is stated over the named complex
+`Correspondence.specialComplex` rather than `(specialization …).obj K`, which would otherwise be
+repeated inside every `Dᵇc` of the statement.
 
 -/
 
