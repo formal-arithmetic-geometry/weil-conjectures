@@ -1032,33 +1032,59 @@ theorem systemRefinement_id (X Y : CondensedERealization.Base k)
   apply NatTrans.ext
   funext M
   exact systemRefinement_id_component l E k X Y f c M
-/-- Refinement composition holds before evaluation and before total limit.
-Source: blueprint proof Step 15; Stacks 07A7 and 0F7B
+/-- The component equation underlying refinement composition.
+Source: Stacks 07A7 and 0F7B; the component form is the strict-system calculation.
 (blueprint: lem-pur-compact-support-condensed-realization).
-Proof: paste the two clopen-section open squares. Their original-open unit is the
-unit of the composite square; the two-stage and composite transposes agree by the
-proper adjunction triangles. The proper compositors satisfy their mate cocycle,
-so uniqueness in the open Hom bijection gives the full-system equality. -/
+Proof: paste the two clopen-section open squares and use the proper compositor
+cocycle; this is the component calculation before natural-transformation extensionality. -/
+theorem systemRefinement_comp_component (X Y : CondensedERealization.Base k)
+    (f : X.scheme ⟶ Y.scheme) [f.IsOver (Spec (.of k))]
+    {c d e : Compactification f} (r : c.Refinement d) (s : d.Refinement e)
+    (M : coefficientSequenceDerived.{u, u} l E X.scheme) :
+    (systemRefinement l E k X Y f (r.comp s)).app M =
+      (systemRefinement l E k X Y f s ≫
+        systemRefinement l E k X Y f r).app M := by
+  sorry
+
+/-- Refinement composition holds before evaluation and before total limit.
+Source: blueprint Step 15; Stacks 07A7 and 0F7B
+(blueprint: lem-pur-compact-support-condensed-realization).
+Proof: the component calculation is natural in the system object, so extensionality
+packages it as equality of natural transformations. -/
 theorem systemRefinement_comp (X Y : CondensedERealization.Base k)
     (f : X.scheme ⟶ Y.scheme) [f.IsOver (Spec (.of k))]
     {c d e : Compactification f} (r : c.Refinement d) (s : d.Refinement e) :
     systemRefinement l E k X Y f (r.comp s) =
       systemRefinement l E k X Y f s ≫ systemRefinement l E k X Y f r := by
+  apply NatTrans.ext
+  funext M
+  exact systemRefinement_comp_component l E k X Y f r s M
+
+/-- The component invertibility underlying closure refinement.
+Source: blueprint Steps 15--16; finite-coefficient descent through the closure.
+(blueprint: lem-pur-compact-support-condensed-realization).
+Proof: descend the component to a common finite coefficient field and transport
+invertibility through the condensed coefficient comparison. -/
+theorem omegaRefinement_isIso_component (X Y : CondensedERealization.Base k)
+    (f : X.scheme ⟶ Y.scheme) [f.IsOver (Spec (.of k))]
+    {c d : Compactification f} (r : c.Refinement d)
+    (K : BoundedConstructible
+      (condensedRingObj (Profinite.padicAlgClRingObj.{u} l) X.scheme)) :
+    IsIso ((fieldRefinement (Profinite.padicAlgClRingObj.{u} l) r).app K) := by
   sorry
 
 /-- Closure refinement is invertible on exactly the bounded constructible domain.
 Source: blueprint proof Steps 15--16; finite-coefficient descent
 (blueprint: lem-pur-compact-support-condensed-realization).
-Proof: descend the input and the refinement diagram to one finite coefficient field.
-The finite refinement square agrees with the intrinsic clopen-section mate on the
-whole system. Proper continuity and exact open extension identify its closure scalar
-extension with the displayed original closure refinement. Scalar extension preserves
-its inverse, proving invertibility independently of the descent choice. -/
+Proof: apply the component invertibility theorem at every bounded constructible
+object and use the standard functor-category isomorphism criterion. -/
 theorem omegaRefinement_isIso (X Y : CondensedERealization.Base k)
     (f : X.scheme ⟶ Y.scheme) [f.IsOver (Spec (.of k))]
     {c d : Compactification f} (r : c.Refinement d) :
     IsIso (fieldRefinement (Profinite.padicAlgClRingObj.{u} l) r) := by
-  sorry
+  rw [NatTrans.isIso_iff_isIso_app]
+  intro K
+  exact omegaRefinement_isIso_component l k X Y f r K
 
 end WeilConjectures.CompactSupportCondensedRealization
 

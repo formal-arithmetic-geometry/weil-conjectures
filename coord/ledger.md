@@ -20056,3 +20056,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 21:01 L: merged deliver/P3/Sheaf.AlgebraicGeometry.ProEtaleClopenStructuralData (stage 3; reviewer PASS; first push; landing 20261027T210154-L-1667076 (interface); batch 20261027T205736; modules 3; new nodes 2)
 - 21:01 L: merged deliver/P3/Sheaf.Paper.FiniteQuotientLayerLocalComplexCore (stage 3; reviewer PASS; first push; landing 20261027T210155-L-1667419 (interface); batch 20261027T205736; modules 3; new nodes 2; change records: coord/changes/P3-finite-quotient-layer-tensor-complex.md)
 - 21:01 L: merged deliver/P3/Sheaf.Paper.OpenScalarCounitSquare (stage 3; reviewer PASS; first push; landing 20261027T210157-L-1667862 (interface); batch 20261027T205736; modules 2; new nodes 1)
+- 21:01 L: merged deliver/P6/Sheaf.Paper.CompactSupportCondensedRealization (stage 3; reviewer PASS; first push; landing 20261027T210158-L-1668167 (proof); batch 20261027T205736; modules 1; new nodes 2)

@@ -1,0 +1,99 @@
+{
+ "id": "lem-pur-compact-support-condensed-realization-system-refinement-comp-component",
+ "kind": "statement",
+ "title": "Component of compact-support system refinement composition",
+ "statement": "theorem systemRefinement_comp_component (X Y : CondensedERealization.Base k) (f : X.scheme ⟶ Y.scheme) [f.IsOver (Spec (.of k))] {c d e : Compactification f} (r : c.Refinement d) (s : d.Refinement e) (M : coefficientSequenceDerived.{u, u} l E X.scheme) : (systemRefinement l E k X Y f (r.comp s)).app M = (systemRefinement l E k X Y f s ≫ systemRefinement l E k X Y f r).app M",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Composition of normalized proper/open mates; Stacks Tags 07A7 and 0F7B"
+ },
+ "stmt_deps": [],
+ "proof": [
+  {
+   "text": "Expand both pasting words at M. The two gamma mates compose by the proper/open mate cocycle, while the sComp and associator factors cancel by compositor associativity. This is the component equality used to obtain the natural-transformation equation by extensionality.",
+   "uses": [
+    "lem-sf-semilinear-proper-open-mate-pasting"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-semilinear-proper-open-mate-pasting"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Composition of normalized proper/open mates; Stacks Tags 07A7 and 0F7B"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "Component of compact-support system refinement composition",
+   "results": "No existing specialized declaration; the component statement is isolated here.",
+   "date": "2026-10-28",
+   "verdict": "new split"
+  },
+  {
+   "tool": "loogle",
+   "query": "natural transformation component equality",
+   "results": "No direct match for this project-specific construction.",
+   "date": "2026-10-28",
+   "verdict": "new split"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Component of compact-support system refinement composition",
+   "results": "No direct match for this project-specific construction.",
+   "date": "2026-10-28",
+   "verdict": "new split"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CompactSupportCondensedRealization",
+  "date": "2026-10-28",
+  "group": "P6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-compact-support-condensed-realization",
+   "place": "Composition of normalized proper/open mates; Stacks Tags 07A7 and 0F7B",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-purity-transport",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CompactSupportCondensedRealization",
+  "file": "lean/Sheaf/Paper/CompactSupportCondensedRealization.lean",
+  "declaration": "WeilConjectures.CompactSupportCondensedRealization.systemRefinement_comp_component",
+  "statement": "theorem systemRefinement_comp_component (X Y : CondensedERealization.Base k) (f : X.scheme ⟶ Y.scheme) [f.IsOver (Spec (.of k))] {c d e : Compactification f} (r : c.Refinement d) (s : d.Refinement e) (M : coefficientSequenceDerived.{u, u} l E X.scheme) : (systemRefinement l E k X Y f (r.comp s)).app M = (systemRefinement l E k X Y f s ≫ systemRefinement l E k X Y f r).app M",
+  "branch": "sheaf-dag",
+  "by": "P6",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P6",
+  "result": "pass",
+  "landing": "20261027T210158-L-1668167",
+  "kind": "proof",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P6",
+  "result": "pass",
+  "landing": "20261027T210158-L-1668167",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
