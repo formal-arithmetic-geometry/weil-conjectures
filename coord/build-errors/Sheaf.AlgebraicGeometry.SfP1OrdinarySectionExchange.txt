@@ -1,0 +1,27 @@
+# global build 2026-10-27T14:48:01Z of 6db8f8a0f6: Sheaf.AlgebraicGeometry.SfP1OrdinarySectionExchange failed
+error: Sheaf/AlgebraicGeometry/SfP1OrdinarySectionExchange.lean:88:2: `simp` made no progress
+
+Note: The target expression is not type-correct under the `implicit` transparency level, which may have triggered the failure. This is usually caused by unfolding of semireducible definitions in prior tactic steps. Use `set_option linter.tacticCheckInstances true` to investigate the source of the issue.
+Full error:
+  Application type mismatch: The argument
+    constantSingleSectionUnits (ModuleCat A) (pullback.diagonal (ProjectiveLine S ↘ S))
+      (projectiveLineDiagonalProjection S a) (MonoidalCategoryStruct.tensorUnit (ModuleCat A))
+  has type
+    (DerivedCategory.singleFunctor (Sheaf (ProjectiveLine S).smallEtaleTopology (ModuleCat A)) 0).obj
+        ((constantSheaf (ProjectiveLine S).smallEtaleTopology (ModuleCat A)).obj
+          (MonoidalCategoryStruct.tensorUnit (ModuleCat A))) ⟶
+      (projectiveLineDiagonalProjection S a)_*[ModuleCat A].rightDerivedFunctor.obj
+        ((pullback.diagonal (ProjectiveLine S ↘ S))_*[ModuleCat A].rightDerivedFunctor.obj
+          ((DerivedCategory.singleFunctor (Sheaf (ProjectiveLine S).smallEtaleTopology (ModuleCat A)) 0).obj
+            ((constantSheaf (ProjectiveLine S).smallEtaleTopology (ModuleCat A)).obj
+              (MonoidalCategoryStruct.tensorUnit (ModuleCat A)))))
+  but is expected to have type
+    ordinaryFiniteUnit A (ProjectiveLine S) ⟶
+      (ordinaryFinitePushforward A (projectiveLineDiagonalProjection S a)).obj
+        ((ordinaryFinitePushforward A (pullback.diagonal (ProjectiveLine S ↘ S))).obj
+          (ordinaryFiniteUnit A (ProjectiveLine S)))
+  in the application
+    (ordinaryFinitePullback A i.hom).map
+      (constantSingleSectionUnits (ModuleCat A) (pullback.diagonal (ProjectiveLine S ↘ S))
+        (projectiveLineDiagonalProjection S a) (MonoidalCategoryStruct.tensorUnit (ModuleCat A)))
+error: Lean exited with code 1

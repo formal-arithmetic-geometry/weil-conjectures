@@ -1,0 +1,299 @@
+/-
+Copyright (c) 2026 The SHEAF contributors. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: SHEAF group Q16
+-/
+module
+
+public import Sheaf.Paper.RationalRealizationPullbackComparison
+public import Sheaf.Paper.PbcActualRingedExchange
+import Sheaf.SixFunctors.RingedDerivedMonoidalComparisons
+import Sheaf.Paper.ConstantCompletionEquivalence
+import Sheaf.CategoryTheory.ReflectedCompositorUnitNormalization
+import Sheaf.Paper.WeilCompletedTensorReflector
+import Sheaf.Paper.RingedPushforwardCompletion
+import Sheaf.Paper.RingedTopoiCanonicalTensorPullbackOfUniverses
+
+/-! # Composition and identity of normalized rational pullback
+
+Source: Bhatt--Scholze, Remark 6.8.15, p. 62; Stacks Tags 03CB, 0D6D, 07A4 and 099N
+(blueprint: lem-per-rational-pullback-composition-coherence).
+The ordinary maps are fixed on sheafified tensor generators and derived computation
+counits. Completed maps retain the published strict quotient-tower units; their raw
+rationalizations retain all fraction arrows.
+-/
+
+@[expose] public noncomputable section
+set_option autoImplicit false
+set_option synthInstance.maxSize 4096
+set_option backward.isDefEq.respectTransparency false
+universe u
+open CategoryTheory CategoryTheory.Functor CategoryTheory.Limits Opposite
+namespace AlgebraicGeometry.Scheme
+
+attribute [local irreducible] Functor.sheafPullbackConstruction.sheafPullback
+  proEtaleRingInverseImageComp LocallyRingedSpace.comp PresheafedSpace.comp
+
+
+variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
+  [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
+
+/-- The tensor-unit section of ordinary rational pullback on a pulled-back chart.
+Source: BS Remark 6.8.15; Stacks 03D2
+(blueprint: lem-per-rational-pullback-composition-coherence). -/
+def rationalCoherenceUnit {S T : Scheme.{u}} (g : S ⟶ T)
+    (c : (proEtaleSheafInverseImage g CommRingCat.{u + 1}).obj
+      (rationalCoefficientSheaf l T E) ⟶ rationalCoefficientSheaf l S E)
+    (M : pbcModules T (rationalCoefficientSheaf l T E))
+    (V : T.ProEt) (m : M.val.obj (op V)) :
+    ((rationalPullModule l E g c).obj M).val.obj
+      (op ((proEtaleBaseChange g).obj V)) :=
+  pbcTensorSection c
+    ((proEtaleRingModulePullback g (rationalCoefficientSheaf l T E)
+      ((proEtaleSheafInverseImage g CommRingCat.{u + 1}).obj
+        (rationalCoefficientSheaf l T E)) (Iso.refl _)).obj M)
+    (op ((proEtaleBaseChange g).obj V)) 1
+    (proEtaleRingModuleUnitSection g (rationalCoefficientSheaf l T E)
+      ((proEtaleSheafInverseImage g CommRingCat.{u + 1}).obj
+        (rationalCoefficientSheaf l T E)) (Iso.refl _) M V m)
+
+/-- Pull a rational coefficient section through the ring adjunction unit and structure map.
+Source: BS Remark 6.8.15; Stacks 03D2
+(blueprint: lem-per-rational-pullback-composition-coherence). -/
+def rationalCoherenceScalar {S T : Scheme.{u}} (g : S ⟶ T)
+    (c : (proEtaleSheafInverseImage g CommRingCat.{u + 1}).obj
+      (rationalCoefficientSheaf l T E) ⟶ rationalCoefficientSheaf l S E)
+    (V : T.ProEt) (e : (rationalCoefficientSheaf l T E).obj.obj (op V)) :
+    (rationalCoefficientSheaf l S E).obj.obj (op ((proEtaleBaseChange g).obj V)) :=
+  c.hom.app (op ((proEtaleBaseChange g).obj V))
+    (((proEtaleSheafAdjunction g CommRingCat.{u + 1}).unit.app
+      (rationalCoefficientSheaf l T E)).hom.app (op V) e)
+
+/-- Scalar multiplication on the rational module at a chart, with explicit section types.
+Source: BS Remark 6.8.15, balanced tensor formulas
+(blueprint: lem-per-rational-pullback-composition-coherence). -/
+def rationalCoherenceSmul (T : Scheme.{u})
+    (M : pbcModules T (rationalCoefficientSheaf l T E)) (V : T.ProEtᵒᵖ)
+    (e : (rationalCoefficientSheaf l T E).obj.obj V) (m : M.val.obj V) : M.val.obj V :=
+  e • m
+
+attribute [irreducible] rationalCoherenceUnit rationalCoherenceScalar rationalCoherenceSmul
+
+variable {X Y Z : Scheme.{u}} [IsNoetherian X] [IsNoetherian Y] [IsNoetherian Z]
+  [Fact (∃ n : ℕ, topologicalKrullDim X ≤ n)]
+  [Fact (∃ n : ℕ, topologicalKrullDim Y ≤ n)]
+  [Fact (∃ n : ℕ, topologicalKrullDim Z ≤ n)]
+  [Fact (∀ x : X, IsUnit (l : X.presheaf.stalk x))]
+  [Fact (∀ y : Y, IsUnit (l : Y.presheaf.stalk y))]
+  [Fact (∀ z : Z, IsUnit (l : Z.presheaf.stalk z))]
+
+set_option maxHeartbeats 800000 in
+-- Tensor-generator coordinates unfold nested inverse-image and scalar-extension sections.
+/-- The composition equation with all specified ordinary, completed and raw maps.
+The module formula uses generators on base-changed charts; sheafification and balancing
+extend it to local tensors. Derived normalization fixes the ambient comparison itself.
+Source: BS Remark 6.8.15; Stacks 03CB, 0D6D, 07A4, 099N
+(blueprint: lem-per-rational-pullback-composition-coherence). -/
+def HasRationalPullbackCompositionCoherence (g : Y ⟶ X) (h : Z ⟶ Y)
+    (sX : RationalModuleRealization l E X) (sY : RationalModuleRealization l E Y)
+    (sZ : RationalModuleRealization l E Z)
+    (ag : RationalRealizationPullbackComparison l E g sY sX)
+    (ah : RationalRealizationPullbackComparison l E h sZ sY)
+    (ac : RationalRealizationPullbackComparison l E (h ≫ g) sZ sX) : Prop :=
+  (∀ n : ℕ,
+  completedFiniteCoefficientMap (h ≫ g) (pbcIntegralDatum l E) n =
+    (proEtaleRingInverseImageComp h g).hom.app
+        ((pbcAdicRings X (pbcIntegralDatum l E)).obj (op n)) ≫
+      (proEtaleSheafInverseImage h CommRingCat.{u + 1}).map
+        (completedFiniteCoefficientMap g (pbcIntegralDatum l E) n) ≫
+      completedFiniteCoefficientMap h (pbcIntegralDatum l E) n) ∧
+  (completedCoefficientMap (h ≫ g) (pbcIntegralDatum l E) =
+  (proEtaleRingInverseImageComp h g).hom.app (pbcAdicCompletion X (pbcIntegralDatum l E)) ≫
+    (proEtaleSheafInverseImage h CommRingCat.{u + 1}).map
+      (completedCoefficientMap g (pbcIntegralDatum l E)) ≫
+    completedCoefficientMap h (pbcIntegralDatum l E)) ∧
+  (∀ n : ℕ,
+  (proEtaleRingInverseImageComp h g).hom.app (pbcAdicCompletion X (pbcIntegralDatum l E)) ≫
+      (proEtaleSheafInverseImage h CommRingCat.{u + 1}).map
+        (completedCoefficientMap g (pbcIntegralDatum l E)) ≫
+      completedCoefficientMap h (pbcIntegralDatum l E) ≫
+      pbcAdicProjection Z (pbcIntegralDatum l E) n =
+    completedCoefficientComponent (h ≫ g) (pbcIntegralDatum l E) n) ∧
+  (ac.rationalCoefficient =
+  (proEtaleRingInverseImageComp h g).hom.app (rationalCoefficientSheaf l X E) ≫
+    (proEtaleSheafInverseImage h CommRingCat.{u + 1}).map ag.rationalCoefficient ≫
+    ah.rationalCoefficient) ∧
+  ∃ (moduleComp : rationalPullModule l E g ag.rationalCoefficient ⋙
+    rationalPullModule l E h ah.rationalCoefficient ≅
+  rationalPullModule l E (h ≫ g) ac.rationalCoefficient),
+  (∀ (M : pbcModules X (rationalCoefficientSheaf l X E)) (V : X.ProEt)
+    (m : M.val.obj (op V))
+    (e' : (rationalCoefficientSheaf l Y E).obj.obj (op ((proEtaleBaseChange g).obj V)))
+    (e'' : (rationalCoefficientSheaf l Z E).obj.obj
+      (op ((proEtaleBaseChange h).obj ((proEtaleBaseChange g).obj V)))),
+  (moduleComp.hom.app M).val.app
+      (op ((proEtaleBaseChange h).obj ((proEtaleBaseChange g).obj V)))
+    (rationalCoherenceSmul l E Z
+      ((rationalPullModule l E h ah.rationalCoefficient).obj
+        ((rationalPullModule l E g ag.rationalCoefficient).obj M))
+      (op ((proEtaleBaseChange h).obj ((proEtaleBaseChange g).obj V))) e''
+      (rationalCoherenceUnit l E h ah.rationalCoefficient
+        ((rationalPullModule l E g ag.rationalCoefficient).obj M)
+        ((proEtaleBaseChange g).obj V)
+        (rationalCoherenceSmul l E Y
+          ((rationalPullModule l E g ag.rationalCoefficient).obj M)
+          (op ((proEtaleBaseChange g).obj V)) e'
+          (rationalCoherenceUnit l E g ag.rationalCoefficient M V m)))) =
+    rationalCoherenceSmul l E Z
+      ((rationalPullModule l E (h ≫ g) ac.rationalCoefficient).obj M)
+      (op ((proEtaleBaseChange h).obj ((proEtaleBaseChange g).obj V)))
+      (e'' * rationalCoherenceScalar l E h ah.rationalCoefficient
+        ((proEtaleBaseChange g).obj V) e')
+      (((rationalPullModule l E (h ≫ g) ac.rationalCoefficient).obj M).val.map
+        ((MorphismProperty.Over.pullbackComp h g).inv.app V).op
+          (rationalCoherenceUnit l E (h ≫ g) ac.rationalCoefficient M V m))) ∧
+  ∃ (ambientComp : rationalPullDerived l E g ag.rationalCoefficient ⋙
+    rationalPullDerived l E h ah.rationalCoefficient ≅
+  rationalPullDerived l E (h ≫ g) ac.rationalCoefficient),
+  (∀ P : CochainComplex (pbcModules X (rationalCoefficientSheaf l X E)) ℤ,
+  ambientComp.hom.app (DerivedCategory.Q.obj P) ≫
+      rationalPullComplexCounit l E (h ≫ g) ac.rationalCoefficient P =
+    (rationalPullDerived l E h ah.rationalCoefficient).map
+        (rationalPullComplexCounit l E g ag.rationalCoefficient P) ≫
+      rationalPullComplexCounit l E h ah.rationalCoefficient
+        (((rationalPullModule l E g ag.rationalCoefficient).mapHomologicalComplex
+          (.up ℤ)).obj P) ≫
+      DerivedCategory.Q.map
+        ((NatIso.mapHomologicalComplex moduleComp (.up ℤ)).hom.app P)) ∧
+  ∃ (integralComp : ag.integral.completedFunctor l E ⋙ ah.integral.completedFunctor l E ≅
+  ac.integral.completedFunctor l E),
+  (∀ K : PbcBoundedConstructibleComplete X (pbcIntegralDatum l E),
+  (pbcActualDerivedPull h (pbcIntegralDatum l E)).map
+      ((pbcActualStrictCompletedPullUnit (pbcIntegralDatum l E) g).app K.obj) ≫
+    (pbcActualStrictCompletedPullUnit (pbcIntegralDatum l E) h).app
+      ((ag.integral.completedFunctor l E).obj K).obj ≫
+    (integralComp.hom.app K).hom =
+  (pbcActualDerivedPullCompIso h g (pbcIntegralDatum l E)).inv.app K.obj ≫
+    (pbcActualStrictCompletedPullUnit (pbcIntegralDatum l E) (h ≫ g)).app K.obj) ∧
+  ∃ (rawComp : ag.rawPull ⋙ ah.rawPull ≅ ac.rawPull),
+  (∀ K : PbcBoundedConstructibleComplete X (pbcIntegralDatum l E),
+  rawComp.hom.app
+      ((pbcRationalization X (pbcIntegralDatum l E) (pbcUniformizer l E)).obj K) =
+    eqToHom (congrArg ah.rawPull.obj (ag.raw_objects K)) ≫
+      eqToHom (ah.raw_objects ((ag.integral.completedFunctor l E).obj K)) ≫
+      (pbcRationalization Z (pbcIntegralDatum l E) (pbcUniformizer l E)).map
+        (integralComp.hom.app K) ≫ eqToHom (ac.raw_objects K).symm) ∧
+  (whiskerRight rawComp.hom sZ.J ≫ ac.alpha.hom =
+  whiskerLeft ag.rawPull ah.alpha.hom ≫
+    whiskerRight ag.alpha.hom (rationalPullDerived l E h ah.rationalCoefficient) ≫
+    whiskerLeft sX.J ambientComp.hom)
+
+/-- Identity normalization, including the ordinary tensor formula and the raw natural equation.
+Source: BS Remark 6.8.15; Stacks 0D6D, 099N
+(blueprint: lem-per-rational-pullback-composition-coherence). -/
+def HasRationalPullbackIdentityCoherence (sX : RationalModuleRealization l E X)
+    (a : RationalRealizationPullbackComparison l E (𝟙 X) sX sX) : Prop :=
+  (∀ n : ℕ,
+  completedFiniteCoefficientMap (𝟙 X) (pbcIntegralDatum l E) n =
+    (proEtaleRingInverseImageId X).hom.app
+      ((pbcAdicRings X (pbcIntegralDatum l E)).obj (op n))) ∧
+  (completedCoefficientMap (𝟙 X) (pbcIntegralDatum l E) =
+  (proEtaleRingInverseImageId X).hom.app
+    (pbcAdicCompletion X (pbcIntegralDatum l E))) ∧
+  (a.rationalCoefficient =
+  (proEtaleRingInverseImageId X).hom.app
+    (rationalCoefficientSheaf l X E)) ∧
+  ∃ (moduleId : rationalPullModule l E (𝟙 X) a.rationalCoefficient ≅ 𝟭 _),
+  (∀ (M : pbcModules X (rationalCoefficientSheaf l X E)) (V : X.ProEt)
+    (m : M.val.obj (op V))
+    (e : (rationalCoefficientSheaf l X E).obj.obj (op ((proEtaleBaseChange (𝟙 X)).obj V))),
+  (moduleId.hom.app M).val.app (op ((proEtaleBaseChange (𝟙 X)).obj V))
+      (rationalCoherenceSmul l E X
+        ((rationalPullModule l E (𝟙 X) a.rationalCoefficient).obj M)
+        (op ((proEtaleBaseChange (𝟙 X)).obj V)) e
+        (rationalCoherenceUnit l E (𝟙 X) a.rationalCoefficient M V m)) =
+    rationalCoherenceSmul l E X M (op ((proEtaleBaseChange (𝟙 X)).obj V)) e
+      (M.val.map ((MorphismProperty.Over.pullbackId _ _ X).hom.app V).op m)) ∧
+  ∃ (ambientId : rationalPullDerived l E (𝟙 X) a.rationalCoefficient ≅ 𝟭 _),
+  (∀ P : CochainComplex (pbcModules X (rationalCoefficientSheaf l X E)) ℤ,
+  ambientId.hom.app (DerivedCategory.Q.obj P) =
+    rationalPullComplexCounit l E (𝟙 X) a.rationalCoefficient P ≫
+      DerivedCategory.Q.map
+        ((NatIso.mapHomologicalComplex moduleId (.up ℤ) ≪≫
+          Functor.mapHomologicalComplexIdIso _ (.up ℤ)).hom.app P)) ∧
+  ∃ (integralId : a.integral.completedFunctor l E ≅ 𝟭 _),
+  (∀ K : PbcBoundedConstructibleComplete X (pbcIntegralDatum l E),
+  (pbcActualStrictCompletedPullUnit (pbcIntegralDatum l E) (𝟙 X)).app K.obj ≫
+    (integralId.hom.app K).hom =
+      (pbcActualDerivedPullIdIso (pbcIntegralDatum l E) X).hom.app K.obj) ∧
+  ∃ (rawId : a.rawPull ≅ 𝟭 _),
+  (∀ K : PbcBoundedConstructibleComplete X (pbcIntegralDatum l E),
+  rawId.hom.app
+      ((pbcRationalization X (pbcIntegralDatum l E) (pbcUniformizer l E)).obj K) =
+    eqToHom (a.raw_objects K) ≫
+      (pbcRationalization X (pbcIntegralDatum l E) (pbcUniformizer l E)).map
+        (integralId.hom.app K)) ∧
+  (a.alpha.hom ≫ whiskerLeft sX.J ambientId.hom = whiskerRight rawId.hom sX.J)
+
+attribute [irreducible] HasRationalPullbackCompositionCoherence
+  HasRationalPullbackIdentityCoherence
+
+/-- The specified realization comparisons commute with composition of scheme morphisms.
+Source: BS Remark 6.8.15, p. 62; Stacks 03CB, 0D6D, 07A4 and 099N
+(blueprint: lem-per-rational-pullback-composition-coherence).
+
+Proof (the eight steps of the node):
+1. Compute finite constant pullback on a section a. Both composite maps return a.
+They commute with quotient transitions. Test the two completed coefficient maps
+against every finite projection; limit projections are jointly monic.
+2. Use lem-sfb-ringed-derived-monoidal-comparisons and localization inverse-image
+coherence. On flat-term K-flat representatives balanced tensor flattening sends
+e'' tensor e' tensor k to e'' d_h(e') tensor k. Its inverse inserts one. Both
+ordinary realization routes send e'' tensor b' tensor k to e'' iota(c_h(b')) tensor k.
+These maps commute with restrictions and differentials and therefore descend.
+3. Use lem-weil-pbc-ringed-koszul-completion-reflector and the constant/completed
+equivalence, retaining the quotient-tower unit. Ringed pushforward preserves complete
+objects since it carries the ideal generator to the same constant scalar. Reflection
+and ordinary adjunction give completed pullback adjunctions on full complete categories.
+4. Apply lem-sbc-reflected-compositor-unit-normalization to the canonical right
+composition comparison. Transport through the unit-compatible strict-tower comparison.
+This gives completion_units and fixes the completed compositor, before inverting units.
+5. The realization pullback comparison makes each specified gamma invertible on
+integral objects. Cancel those units: the completed compositor is precisely the
+conjugate of the ordinary compositor by gamma, including their naturality.
+6. Expand alpha as F(gamma inverse) followed by ordinary flattening. Naturality of
+the h flattening at gamma_g inverse, the ordinary tensor equation of step 2, and
+the unit equation of step 4 show that both displayed natural transformations agree.
+7. The identity case removes one in the tensor formula. The reflector identity
+satisfies completed_identity gamma_id = ordinary_identity, giving the same calculation.
+8. Every map preserves constant uniformizer scalars. Multiply integral naturality
+by varpi^(-n) to descend every fraction f/varpi^n. Objects of raw rationalization
+are integral objects, so the equations hold on that entire category. -/
+theorem rationalPullbackCompositionCoherence (g : Y ⟶ X) (h : Z ⟶ Y)
+    (sX : RationalModuleRealization l E X) (sY : RationalModuleRealization l E Y)
+    (sZ : RationalModuleRealization l E Z)
+    (ag : RationalRealizationPullbackComparison l E g sY sX)
+    (ah : RationalRealizationPullbackComparison l E h sZ sY)
+    (ac : RationalRealizationPullbackComparison l E (h ≫ g) sZ sX) :
+    (HasRationalPullbackCompositionCoherence l E g h sX sY sZ ag ah ac) := by
+  sorry
+
+/-- The specified realization comparison agrees with the ambient identity pullback.
+Source: BS Remark 6.8.15, p. 62; Stacks 0D6D and 099N
+(blueprint: lem-per-rational-pullback-composition-coherence).
+
+Proof: specialize the eight-step argument above to the identity. Finite constant
+sections are unchanged, so every finite projection fixes the integral identity;
+localization fixes its rational version. Balanced tensor multiplication removes one,
+and the derived counit equation retains that map. The reflector universal property
+fixes the completed identity by completion_units. Cancel the invertible specified
+gamma, use alpha_normalization, and descend integral naturality to every raw fraction
+by the unchanged uniformizer denominator. This gives the equality of natural
+transformations identity, with no full-faithfulness assumption on realization. -/
+theorem rationalPullbackIdentityCoherence
+    (sX : RationalModuleRealization l E X)
+    (a : RationalRealizationPullbackComparison l E (𝟙 X) sX sX) :
+    (HasRationalPullbackIdentityCoherence l E sX a) := by
+  sorry
+
+end AlgebraicGeometry.Scheme
