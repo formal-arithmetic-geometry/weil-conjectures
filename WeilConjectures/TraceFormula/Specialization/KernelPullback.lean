@@ -7,6 +7,7 @@ module
 
 public import Mathlib.CategoryTheory.Monoidal.Closed.Basic
 public import Mathlib.CategoryTheory.Monoidal.Functor
+public import WeilConjectures.CategoryTheory.Monoidal.Closed.ExceptionalHom
 
 /-!
 
@@ -35,7 +36,12 @@ This file proves both for abstract monoidal categories and lax monoidal functors
   `S_C(τ_c) ≫ 𝔥_c = β_c ≫ c_s^!(𝔥) ≫ τ_{c_s}`, from the compatibility of `β_c` with the
   projection formula (blueprint `det-nearby-exceptional-tensor` (2));
 * `CategoryTheory.map_externalDuality_comp_eq`: the displayed identity;
-* `CategoryTheory.name_comp_eq_of_section`: the section of the specialized coefficient.
+* `CategoryTheory.curry_comp_eq_of_section`: the section of the specialized coefficient.
+
+For the concrete exchange `RHom(c^* M, c^! N) ≅ c^! RHom(M, N)` of
+`CategoryTheory.Verdier.exceptionalHomMap`, `CategoryTheory.Verdier.uncurry_inv_exceptionalHomMap`
+identifies its inverse with the mate `τ_c` of `c^!(ev) ∘ t_c`, for the map
+`t_c = CategoryTheory.Verdier.exceptionalTensorMap`.
 
 -/
 
@@ -157,3 +163,40 @@ theorem curry_comp_eq_of_section [MonoidalClosed CC] [MonoidalClosed CC']
     map_externalDuality_comp_eq β h τ τ' hc hX lamK lamK' ρ h₁]
 
 end CategoryTheory
+
+namespace CategoryTheory.Verdier
+
+open MonoidalClosed
+
+variable {C D : Type*} [Category C] [MonoidalCategory C] [Category D] [MonoidalCategory D]
+  [BraidedCategory C] [BraidedCategory D] {F : D ⥤ C} {P : C ⥤ D} {S : D ⥤ C} (adj' : P ⊣ S)
+  (pf : curriedTensorInsertFunctor₁ P ⟶
+    curriedTensorPost P ⋙ (Functor.whiskeringLeft D C D).obj F)
+
+/-- The map `t : F M ⊗ S N ⟶ S (M ⊗ N)`, i.e. `c^* M ⊗ c^! N ⟶ c^!(M ⊗ N)`, the mate of the
+inverse projection formula followed by the exceptional counit (blueprint
+`det-nearby-exceptional-tensor`). -/
+noncomputable def exceptionalTensorMap (M N : D) [IsIso (leftProjection pf M (S.obj N))] :
+    F.obj M ⊗ S.obj N ⟶ S.obj (M ⊗ N) :=
+  adj'.homEquiv _ _ (inv (leftProjection pf M (S.obj N)) ≫ M ◁ adj'.counit.app N)
+
+variable [MonoidalClosed C] [MonoidalClosed D]
+
+/-- The inverse `τ : c^! RHom(M, N) ⟶ RHom(c^* M, c^! N)` of the exceptional internal hom exchange
+is the mate of `c^!(ev) ∘ t`. -/
+theorem uncurry_inv_exceptionalHomMap (M N : D) [∀ T, IsIso ((pf.app T).app M)] :
+    haveI := isIso_exceptionalHomMap_of_isIso adj' pf M N
+    uncurry (inv (exceptionalHomMap adj' pf M N)) =
+      exceptionalTensorMap adj' pf M ((ihom M).obj N) ≫ S.map ((ihom.ev M).app N) := by
+  have := isIso_exceptionalHomMap_of_isIso adj' pf M N
+  have key : curry (exceptionalTensorMap adj' pf M ((ihom M).obj N) ≫
+      S.map ((ihom.ev M).app N)) ≫ exceptionalHomMap adj' pf M N = 𝟙 _ := by
+    rw [exceptionalHomMap_comp_eq adj' pf M N, uncurry_curry,
+      Adjunction.homEquiv_naturality_right_symm,
+      exceptionalTensorMap, Equiv.symm_apply_apply, Category.assoc, IsIso.hom_inv_id_assoc,
+      curry_natural_left,
+      ← uncurry_id_eq_ev, curry_uncurry, Category.comp_id, Adjunction.homEquiv_unit,
+      Adjunction.right_triangle_components]
+  rw [← IsIso.eq_inv_of_inv_hom_id key, uncurry_curry]
+
+end CategoryTheory.Verdier
