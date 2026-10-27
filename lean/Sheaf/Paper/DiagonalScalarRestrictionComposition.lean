@@ -12,6 +12,7 @@ import all Sheaf.CategoryTheory.DiagramRingRestrictionPushforward
 import all Sheaf.CategoryTheory.CompactSupportIdentityCalculus
 import Sheaf.CategoryTheory.RingedToposDerivedPushforwardComposition
 import all WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Monoidal
+import Sheaf.UpstreamExtra.WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Monoidal
 
 /-! # Composition of normalized scalar/direct-image mates
 
@@ -269,7 +270,7 @@ private theorem restriction_acyclic
   -- Exactness suffices here; do not use global preservation of K-flat complexes.
   let : L.PreservesKFlatQuasiIso :=
     { quasiIso_map := fun _ _ _ ↦ inferInstance }
-  have : L.PreservesFlat := CondensedRing.upperStarPreservesFlat Λ f
+  have : L.PreservesFlat := CondensedRing.upperStar_preservesFlat Λ f
   let UI := (U.mapHomologicalComplex (.up ℤ)).obj I
   obtain ⟨J, hJ, j, _, hj⟩ :=
     CategoryTheory.Abelian.HasKInjectiveResolutions.exists_isKInjective UI
