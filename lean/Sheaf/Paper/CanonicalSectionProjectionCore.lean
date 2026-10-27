@@ -5,6 +5,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import Sheaf.Paper.RationalP1DiagonalTensor
+import Sheaf.Paper.CanonicalSectionProjectionCoreCoherence
 
 /-! # Section/projection coherence before supported-source transport -/
 
@@ -59,6 +60,9 @@ theorem canonical_section_projection_core
             (by unfold secondProjection; exact pullback.diagonal_snd _))
           (unit Λ (ProjectiveLine Y)) (singleUnitIso Λ (ProjectiveLine Y)) M) =
       (pushSectionIso Λ Y).hom.app M := by
-  sorry
+  apply (cancel_mono ((pushSectionIso Λ Y).inv.app M)).1
+  simp only [Category.assoc, Iso.hom_inv_id_app]
+  simpa only [Category.assoc, Functor.id_obj] using
+    canonical_section_projection_core_coherence Λ Y M
 
 end AlgebraicGeometry.ProEtale.RationalP1

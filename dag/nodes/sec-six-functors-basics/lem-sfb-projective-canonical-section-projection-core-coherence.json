@@ -1,0 +1,112 @@
+{
+ "id": "lem-sfb-projective-canonical-section-projection-core-coherence",
+ "kind": "lemma",
+ "title": "Categorical cancellation form of section projection coherence",
+ "status": "split",
+ "stmt_deps": [
+  "def-sfb-projective-diagonal-composition",
+  "def-sfb-projective-diagonal-pullback",
+  "def-sfb-section-tensor-comparison"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-p1-adjunction-rational/sk-prop-p1-adjunction-rational-triangle.proof.md",
+  "place": "Second identity, categorical cancellation after postcomposition by the inverse canonical comparison."
+ },
+ "proof": [
+  {
+   "text": "Apply the section case of ringed projection/composition coherence to the closed diagonal and second projection, transport it through the fixed internal-module comparison, and evaluate on the regular coefficient. Postcompose by the inverse of pushSectionIso.",
+   "uses": [
+    "def-sfb-projective-diagonal-composition",
+    "def-sfb-projective-diagonal-pullback",
+    "def-sfb-section-tensor-comparison"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-projective-diagonal-composition",
+  "def-sfb-projective-diagonal-pullback",
+  "def-sfb-section-tensor-comparison"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "D7",
+  "date": "2026-10-28",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-p1-adjunction-rational/sk-prop-p1-adjunction-rational-triangle.proof.md",
+  "place": "Categorical cancellation step of the second identity."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "section projection composition coherence",
+   "results": "No exact concrete declaration; the generic categorical cancellation API is in Sheaf.CategoryTheory.SectionProjectionUnit.",
+   "date": "2026-10-28",
+   "verdict": "Split the categorical cancellation step."
+  },
+  {
+   "tool": "loogle",
+   "query": "Adjunction.section_projection_unit_iso",
+   "results": "The generic unit cancellation theorem matches the abstract step but requires concrete module comparison transport.",
+   "date": "2026-10-28",
+   "verdict": "Retain the concrete coherence statement."
+  },
+  {
+   "tool": "leansearch",
+   "query": "derived section projection canonical comparison inverse",
+   "results": "No exact project theorem found.",
+   "date": "2026-10-28",
+   "verdict": "Use the split coherence statement."
+  }
+ ],
+ "mathlib_match": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CanonicalSectionProjectionCore",
+  "date": "2026-10-28",
+  "group": "D7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sfb-projective-canonical-section-projection-core",
+   "place": "Categorical cancellation after inverse canonical comparison",
+   "via": [
+    "lem-sfb-projective-canonical-section-projection-core"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-p1-adjunction-rational",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CanonicalSectionProjectionCoreCoherence",
+  "file": "lean/Sheaf/Paper/CanonicalSectionProjectionCoreCoherence.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.RationalP1.canonical_section_projection_core_coherence",
+  "statement": "theorem canonical_section_projection_core_coherence\n    (Y : Scheme.{u})\n    (M : DerivedCategory (Modules Λ (ProjectiveLine Y))) :\n    ((ρ_ M).inv ≫\n      (M ◁ ((singleUnitIso Λ (ProjectiveLine Y)).inv ≫\n        (pushSectionIso Λ Y).hom.app (unit Λ (ProjectiveLine Y)))) ≫\n      projectionMap Λ (secondProjection Y) M\n        ((moduleObjectDerivedPushforward Λ (diagonalImmersion Y)).obj\n          (unit Λ (ProjectiveLine Y))) ≫\n      (moduleObjectDerivedPushforward Λ (secondProjection Y)).map\n        (sectionTensorMap Λ (diagonalImmersion Y) (secondProjection Y)\n          (pullSectionIso Λ Y (secondProjection Y)\n            (by unfold secondProjection; exact pullback.diagonal_snd _))\n          (unit Λ (ProjectiveLine Y)) (singleUnitIso Λ (ProjectiveLine Y)) M)) ≫\n      (pushSectionIso Λ Y).inv.app M = 𝟙 _",
+  "branch": "sheaf-dag",
+  "by": "D7",
+  "date": "2026-10-28"
+ },
+ "statement": "theorem canonical_section_projection_core_coherence\n    (Y : Scheme.{u})\n    (M : DerivedCategory (Modules Λ (ProjectiveLine Y))) :\n    ((ρ_ M).inv ≫\n      (M ◁ ((singleUnitIso Λ (ProjectiveLine Y)).inv ≫\n        (pushSectionIso Λ Y).hom.app (unit Λ (ProjectiveLine Y)))) ≫\n      projectionMap Λ (secondProjection Y) M\n        ((moduleObjectDerivedPushforward Λ (diagonalImmersion Y)).obj\n          (unit Λ (ProjectiveLine Y))) ≫\n      (moduleObjectDerivedPushforward Λ (secondProjection Y)).map\n        (sectionTensorMap Λ (diagonalImmersion Y) (secondProjection Y)\n          (pullSectionIso Λ Y (secondProjection Y)\n            (by unfold secondProjection; exact pullback.diagonal_snd _))\n          (unit Λ (ProjectiveLine Y)) (singleUnitIso Λ (ProjectiveLine Y)) M)) ≫\n      (pushSectionIso Λ Y).inv.app M = 𝟙 _",
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D7",
+  "result": "pass",
+  "landing": "20261027T233900-L-4130801",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D7",
+  "result": "pass",
+  "landing": "20261027T233900-L-4130801",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
