@@ -8,6 +8,8 @@ module
 public import Sheaf.Paper.FiniteQuotientCoefficientLayerData
 public import Sheaf.Paper.FiniteCoefficientLocalHomologyModels
 public import Sheaf.Paper.FiniteQuotientLayerTensorComplex
+import Sheaf.Paper.FiniteQuotientLayerTensorDerivedHomologyComparison
+import Sheaf.Paper.FiniteQuotientLayerTensorModelHomologyIdentification
 
 /-! # The homology comparison for the explicit ideal-layer tensor complex
 
@@ -79,6 +81,10 @@ theorem finiteQuotient_layer_tensor_homology_comparison
         (SheafOfModules.overFunctor _ ((toProEt X).obj Z)).obj
           ((finiteCoefficientConstantFunctor X (A ⧸ d.ideal ^ (n + 1 + 1))
             (φ (n + 1))).obj ((finiteQuotientLayerTensorComplex d.ideal n P).homology q))) := by
-  sorry
+  intro q
+  obtain ⟨e₁⟩ :=
+    finiteQuotient_layer_tensor_derived_homology_comparison X d φ hφ hcompat M b n Z P hPb hP e q
+  obtain ⟨e₂⟩ := finiteQuotient_layer_tensor_model_homology_identification X d φ n Z P q
+  exact ⟨e₁ ≪≫ e₂⟩
 
 end AlgebraicGeometry.Scheme

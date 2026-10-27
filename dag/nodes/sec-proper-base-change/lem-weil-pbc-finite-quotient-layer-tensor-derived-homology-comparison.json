@@ -1,0 +1,121 @@
+{
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 094I and Tag 06YU, derived tensor and chartwise homology comparison"
+ },
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 094I and Tag 06YU"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "bounded projective complex tensor module derived tensor computes ordinary tensor and preserves bounds",
+   "results": "Generic HomologicalComplex tensor and totalization declarations; no coefficient-layer chartwise comparison.",
+   "date": "2026-10-28",
+   "verdict": "No exact match; use the existing tensor functor API."
+  },
+  {
+   "tool": "loogle",
+   "query": "Ideal.powQuotPowSuccLinearEquivMapMkPowSuccPow",
+   "results": "Found the algebraic ideal-power quotient equivalence in Mathlib.RingTheory.Ideal.Quotient.Operations. It does not include the complex or sheaf comparison.",
+   "date": "2026-10-28",
+   "verdict": "Reuse the ideal-power quotient equivalence in the explicit construction."
+  },
+  {
+   "tool": "grep",
+   "query": "powQuotPowSucc|quotient.*smul.*[Mm]odule|module.*smul.*[Qq]uotient",
+   "results": "Mathlib supplies Module.isTorsionBySet_quotient_ideal_smul and the quotient module instance; local rg also found Ideal.Quotient.factor_ker. No project declaration computes the explicit ideal-layer tensor complex.",
+   "date": "2026-10-28",
+   "verdict": "Reuse these algebraic definitions and equivalences; no duplicate complex comparison."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A bounded above complex of projective modules is K flat and tensoring its constant realization with an ideal quotient computes derived tensor",
+   "results": "Module.Flat.of_projective, CochainComplex.isKProjective_of_projective, and generic tensor exactness lemmas. No comparison for the project-specific coefficient layer.",
+   "date": "2026-10-28",
+   "verdict": "No exact sheaf-derived comparison."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-finite-quotient-layer-tensor-homology-comparison",
+   "place": "Derived homology comparison split at the two interfaces",
+   "via": []
+  },
+  "same_as": []
+ },
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteQuotientLayerTensorHomologyComparison",
+  "date": "2026-10-28",
+  "group": "K1"
+ },
+ "id": "lem-weil-pbc-finite-quotient-layer-tensor-derived-homology-comparison",
+ "kind": "statement",
+ "title": "Derived chart homology comparison for the finite quotient layer",
+ "statement": "The chartwise homology of the actual finite quotient layer is isomorphic to the chartwise homology of the derived constant realization of the explicit tensor complex, under the supplied residue-model comparison. The ordinary algebraic homology identification is a separate statement.",
+ "stmt_deps": [
+  "def-weil-pbc-finite-quotient-layer-tensor-complex",
+  "def-weil-pbc-finite-quotient-coefficient-layer-data",
+  "def-weil-pbc-finite-perfect-quotient-model-data",
+  "def-weil-pbc-site-derived-tensor-descent",
+  "def-weil-pbc-ringed-derived-restriction",
+  "def-weil-pbc-finite-coefficient-local-homology-models"
+ ],
+ "proof": [
+  {
+   "text": "Apply the balancing identity for the ideal-power kernel and derived tensor descent to the supplied residue-model isomorphism. Exact slice restriction and the derived homology functor transport the resulting derived isomorphism to the chartwise homology comparison.",
+   "uses": [
+    "lem-weil-pbc-site-derived-tensor-descent",
+    "def-weil-pbc-ringed-derived-restriction",
+    "def-weil-pbc-finite-perfect-quotient-model-data"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-site-derived-tensor-descent",
+  "def-weil-pbc-ringed-derived-restriction",
+  "def-weil-pbc-finite-perfect-quotient-model-data"
+ ],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FiniteQuotientLayerTensorDerivedHomologyComparison",
+  "file": "lean/Sheaf/Paper/FiniteQuotientLayerTensorDerivedHomologyComparison.lean",
+  "declaration": "AlgebraicGeometry.Scheme.finiteQuotient_layer_tensor_derived_homology_comparison",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.finiteQuotient_layer_tensor_derived_homology_comparison"
+  ],
+  "statement": "theorem finiteQuotient_layer_tensor_derived_homology_comparison\n    (X : Scheme.{t})\n    {A : Type t} [CommRing A] (d : AdicCoefficientDatum A)\n    [∀ n : ℕ, (koszulConstantFunctor X (A ⧸ d.ideal ^ (n + 1))).PreservesZeroMorphisms]\n    (φ : ∀ n : ℕ, adicConstantRing X (A ⧸ d.ideal ^ (n + 1)) ⟶\n      completedAdicFiniteCommRing X d n)\n    (hφ : ∀ n : ℕ, IsIso (φ n))\n    (hcompat : FinitePerfectModelsCompatible X d φ)\n    (M : DerivedCategory (CompletedAdicModules X d))\n    (b : ℤ) (n : ℕ) (Z : X.Etale)\n    (P : CochainComplex (ModuleCat.{t} (A ⧸ d.ideal ^ (0 + 1))) ℤ)\n    (hPb : P.IsStrictlyLE b)\n    (hP : ∀ i : ℤ, Module.Projective (A ⧸ d.ideal ^ (0 + 1)) (P.X i))\n    (e : Nonempty\n      (ringedSiteDerivedRestrictionOfUniverses (completedAdicFiniteRing X d 0)\n          ((toProEt X).obj Z) ((completedAdicQuotientReduction X d 0).obj M) ≅\n        ringedSiteDerivedRestrictionOfUniverses (completedAdicFiniteRing X d 0)\n          ((toProEt X).obj Z) ((completedAdicDerivedChange X (φ 0)).obj\n            (DerivedCategory.Q.obj (finiteModelConstantComplex X _ P))))) :\n    ∀ q : ℤ, Nonempty\n      ((SheafOfModules.overFunctor _ ((toProEt X).obj Z)).obj\n          ((DerivedCategory.homologyFunctor _ q).obj\n            (finiteQuotientLayerObject X d M n)) ≅\n        (SheafOfModules.overFunctor _ ((toProEt X).obj Z)).obj\n          ((DerivedCategory.homologyFunctor _ q).obj\n            ((completedAdicDerivedChange X (φ (n + 1))).obj\n              (DerivedCategory.Q.obj\n                (finiteModelConstantComplex X _\n                  (finiteQuotientLayerTensorComplex d.ideal n P))))))",
+  "branch": "sheaf-dag",
+  "by": "K1",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K1",
+  "result": "pass",
+  "landing": "20261027T234029-L-4166733",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K1",
+  "result": "pass",
+  "landing": "20261027T234029-L-4166733",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
