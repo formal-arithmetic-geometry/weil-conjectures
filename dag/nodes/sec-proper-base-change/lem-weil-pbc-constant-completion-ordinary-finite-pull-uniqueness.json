@@ -1,0 +1,88 @@
+{
+ "kind": "statement",
+ "status": "split",
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "created": {
+  "item": "Sheaf.Paper.ConstantCompletionOrdinaryFinitePull",
+  "by": "worker",
+  "date": "2026-10-27",
+  "group": "H3"
+ },
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YY and 099L; decomposition of the ordinary finite pullback comparison."
+ },
+ "mathlib_match": null,
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H3",
+  "result": "pass",
+  "landing": "20261027T180635-L-3885093",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": null,
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H3",
+  "result": "pass",
+  "landing": "20261027T180635-L-3885093",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ },
+ "mathlib_searches": [],
+ "tool_uses": [],
+ "lean_audit": null,
+ "split_report": null,
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-constant-completion-equivalence",
+   "place": "Ordinary finite pullback comparison decomposition.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YY and 099L (ordinary finite pullback comparison)."
+ },
+ "stmt_deps": [
+  "lem-weil-pbc-constant-completion-equivalence"
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-constant-completion-equivalence"
+ ],
+ "id": "lem-weil-pbc-constant-completion-ordinary-finite-pull-uniqueness",
+ "title": "Uniqueness of normalized ordinary finite pullback",
+ "statement": "theorem ordinaryFinitePull_unique (J : GrothendieckTopology C) (A : Type u) [CommRing A] (I : Ideal A) (n : ℕ) (e e' : pull F (constantMap F A) ⋙ change (quotient J' A I n) ≅ change (quotient J A I n) ⋙ pull F (constantMap F (A ⧸ I ^ (n + 1)))) (he : ∀ M : Mod (constant J A), pullInsertion F (constantMap F A) M ≫ insertion (quotient J' A I n) ((pull F (constantMap F A)).obj M) ≫ (underlying (finite J' A I n)).map (e.hom.app M) = L.map (insertion (quotient J A I n) M) ≫ pullInsertion F (constantMap F (A ⧸ I ^ (n + 1))) ((change (quotient J A I n)).obj M)) (he' : ∀ M : Mod (constant J A), pullInsertion F (constantMap F A) M ≫ insertion (quotient J' A I n) ((pull F (constantMap F A)).obj M) ≫ (underlying (finite J' A I n)).map (e'.hom.app M) = L.map (insertion (quotient J A I n) M) ≫ pullInsertion F (constantMap F (A ⧸ I ^ (n + 1))) ((change (quotient J A I n)).obj M)) : e = e' ",
+ "proof": [
+  {
+   "text": "Use the tensor hom extensionality theorem: scalar-extension morphisms are determined on sheafified pure tensors. The two equations agree on the insertion generators, hence the natural isomorphisms are equal.",
+   "uses": [
+    "lem-weil-pbc-constant-completion-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YY and 099L (ordinary finite pullback comparison)."
+   }
+  }
+ ],
+ "lean": {
+  "module": "Sheaf.Paper.ConstantCompletionOrdinaryFinitePullUniqueness",
+  "declaration": "CategoryTheory.ConstantCompletion.ordinaryFinitePull_unique",
+  "file": "lean/Sheaf/Paper/ConstantCompletionOrdinaryFinitePullUniqueness.lean",
+  "statement": "theorem ordinaryFinitePull_unique\n    (A : Type u) [CommRing A] (I : Ideal A) (n : ℕ)\n    (e e' : pull F (constantMap F A) ⋙ change (quotient J' A I n) ≅\n        change (quotient J A I n) ⋙ pull F (constantMap F (A ⧸ I ^ (n + 1))))\n    (he : ∀ M : Mod (constant J A),\n      pullInsertion F (constantMap F A) M ≫\n          insertion (quotient J' A I n) ((pull F (constantMap F A)).obj M) ≫\n          (underlying (finite J' A I n)).map (e.hom.app M) =\n        L.map (insertion (quotient J A I n) M) ≫\n          pullInsertion F (constantMap F (A ⧸ I ^ (n + 1)))\n            ((change (quotient J A I n)).obj M))\n    (he' : ∀ M : Mod (constant J A),\n      pullInsertion F (constantMap F A) M ≫\n          insertion (quotient J' A I n) ((pull F (constantMap F A)).obj M) ≫\n          (underlying (finite J' A I n)).map (e'.hom.app M) =\n        L.map (insertion (quotient J A I n) M) ≫\n          pullInsertion F (constantMap F (A ⧸ I ^ (n + 1)))\n            ((change (quotient J A I n)).obj M)) : e = e'",
+  "branch": "sheaf-dag",
+  "by": "H3",
+  "date": "2026-10-27",
+  "existing": false
+ }
+}

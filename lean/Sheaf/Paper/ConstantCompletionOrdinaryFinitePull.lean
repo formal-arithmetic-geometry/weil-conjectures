@@ -55,6 +55,8 @@ import Sheaf.Algebra.Homology.KFlatIndependentCoefficients
 import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
 import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFromResolvingClass
 public import Sheaf.Paper.ConstantCompletionDerivedPull
+import Sheaf.Paper.ConstantCompletionOrdinaryFinitePullExistence
+import Sheaf.Paper.ConstantCompletionOrdinaryFinitePullUniqueness
 
 /-!
 # Constant coefficient completion: OrdinaryFinitePull
@@ -119,6 +121,9 @@ theorem ordinaryFinitePull_existsUnique (A : Type u) [CommRing A] (I : Ideal A) 
           L.map (insertion (quotient J A I n) M) ≫
             pullInsertion F (constantMap F (A ⧸ I ^ (n + 1)))
               ((change (quotient J A I n)).obj M) := by
-  sorry
+  obtain ⟨e, he⟩ := ordinaryFinitePull_exists (J := J) (F := F) (V := V) (adj := adj) A I n
+  refine ⟨e, he, ?_⟩
+  intro e' he'
+  exact (ordinaryFinitePull_unique (J := J) (F := F) (V := V) (adj := adj) A I n e e' he he').symm
 
 end CategoryTheory.ConstantCompletion
