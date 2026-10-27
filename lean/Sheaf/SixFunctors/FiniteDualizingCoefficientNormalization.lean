@@ -89,6 +89,8 @@ theorem finiteDualizing_compact_normalization :
         (finiteDualizingQuotient_comp l E hrm hmn)).hom.app
           (Etale.constantComplex (finiteDualizingCoeff l E r) (Spec (.of D.k))) ≫
         (Etale.ExceptionalCoefficients.unitIso (finiteDualizingQuotient l E
-          (hmn.trans hrm)) (Spec (.of D.k))).hom) := by sorry
+          (hmn.trans hrm)) (Spec (.of D.k))).hom) := by
+  obtain ⟨h1, h2, h3⟩ := finiteDualizing_quotient_normalization l E D X
+  exact ⟨finiteDualizing_compact_support_identity l E D X, h1, h2, h3⟩
 
 end WeilConjectures
