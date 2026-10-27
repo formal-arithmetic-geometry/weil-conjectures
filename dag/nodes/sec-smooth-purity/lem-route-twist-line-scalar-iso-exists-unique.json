@@ -1,0 +1,60 @@
+{
+ "id": "lem-route-twist-line-scalar-iso-exists-unique",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-frobenius-coefficient-twists",
+   "via": [
+    "lem-pur-twist-frobenius-scalar"
+   ],
+   "place": "provisional: the Lean of lem-pur-twist-frobenius-scalar (its declaration uses) uses WeilConjectures.twistLineScalarIso_existsUnique (route sorry with no node, tools/route_nodes.py 2026-10-28)"
+  },
+  "same_as": null
+ },
+ "kind": "statement",
+ "title": "Scalar extension of each line is the target line, with the specified map.",
+ "statement": "PROVISIONAL (machine-made from the Lean declaration; stage 1 writes it in words): Scalar extension of each line is the target line, with the specified map. Source: blueprint order 1505 (blueprint: def-coefficient-twists-detailed). Proof: extend the semilinear map by balancing, sending s tensor x to s times c(x). On a trivializing cover this is multiplication R_L tensor R_E to R_L and has inverse z to z tensor one. Glue the local inverses. Pure tensors generate locally, so the displayed formula uniquely determines the isomorphism, also at zero.\n\nLean (WeilConjectures.twistLineScalarIso_existsUnique):\n```lean\ntheorem twistLineScalarIso_existsUnique (m : ℤ) :\n    ∃! c : (integralOrdinaryScalar ℓ E L ι S).obj (integralTwistLine ℓ E S m) ≅\n        integralTwistLine ℓ L S m,\n      ∀ (U : S.ProEtᵒᵖ) (s : (completedIntegralCommRingSheafUnrestricted ℓ L S).obj.obj U)\n        (x : (integralTwistLine ℓ E S m).val.obj U),\n        c.hom.val.app U\n            (integralOrdinaryTensorSection ℓ E L ι S _ U s x) =\n          s • (@id ((integralTwistLine ℓ L S m).val.obj U)\n            ((twistScalarMaps ℓ E S L ι m).val.app U x))\n```",
+ "source": {
+  "document": "literature/deligne-weil-II_PMIHES-1980-52.pdf",
+  "place": "lem-pur-twist-frobenius-scalar: the Lean of this node (its declaration uses) reaches WeilConjectures.twistLineScalarIso_existsUnique, a sorry on the sorry route of batch5 with no node; Lean: SHEAF file lean/Sheaf/Paper/CoefficientTwistsDetailed.lean, declaration WeilConjectures.twistLineScalarIso_existsUnique (module Sheaf.Paper.CoefficientTwistsDetailed, lines 509-524, proof `sorry`)"
+ },
+ "stmt_deps": [],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "grep -rlw 'twistLineScalarIso_existsUnique' lean/.lake/packages/mathlib/Mathlib/",
+   "results": "none",
+   "date": "2026-10-28",
+   "verdict": "no match",
+   "note": "name grep by tools/route_nodes.py only; the stage-1 worker adds LeanSearch / Loogle / LeanFinder searches"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "maintainer",
+  "item": "lem-pur-twist-frobenius-scalar",
+  "date": "2026-10-28",
+  "tool": "tools/route_nodes.py",
+  "why": "PROVISIONAL: sorried declaration on the sorry route (local/sorry-route.json) with no DAG node, recorded automatically after the route recompute (the human, 2026-10-23: every proof-related upstream sorry gets a node, and a node without a written proof goes to stage 1). The statement is only the Lean signature and docstring: the stage-1 worker writes it in words with [node] citations and stmt_deps, does the Mathlib searches (LeanSearch, Loogle or LeanFinder, local grep), fills blueprint.same_as, and splits it"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-purity-conv",
+ "lean": {
+  "existing": true,
+  "module": "Sheaf.Paper.CoefficientTwistsDetailed",
+  "file": "lean/Sheaf/Paper/CoefficientTwistsDetailed.lean",
+  "declaration": "WeilConjectures.twistLineScalarIso_existsUnique",
+  "declarations": [
+   "WeilConjectures.twistLineScalarIso_existsUnique"
+  ],
+  "statement": "theorem twistLineScalarIso_existsUnique (m : ℤ) :\n    ∃! c : (integralOrdinaryScalar ℓ E L ι S).obj (integralTwistLine ℓ E S m) ≅\n        integralTwistLine ℓ L S m,\n      ∀ (U : S.ProEtᵒᵖ) (s : (completedIntegralCommRingSheafUnrestricted ℓ L S).obj.obj U)\n        (x : (integralTwistLine ℓ E S m).val.obj U),\n        c.hom.val.app U\n            (integralOrdinaryTensorSection ℓ E L ι S _ U s x) =\n          s • (@id ((integralTwistLine ℓ L S m).val.obj U)\n            ((twistScalarMaps ℓ E S L ι m).val.app U x)) := by\n  sorry",
+  "by": "maintainer",
+  "date": "2026-10-28",
+  "note": "SHEAF declaration attached as it stands, proof still `sorry`; recorded by tools/route_nodes.py"
+ }
+}
