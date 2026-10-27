@@ -6,6 +6,8 @@ Authors: SHEAF group T3
 module
 
 public import Sheaf.Paper.FinitePerfectAdicConstantCohomology
+import Sheaf.Paper.FinitePerfectAdicLiftedTransitionTranspose
+import Sheaf.RingTheory.DerivedModuleScalarAdjunction
 
 /-! # Universality of the lifted algebraic transition
 
@@ -15,6 +17,7 @@ Source: Stacks Project, Tags 06YY and 09C6.
 
 @[expose] public noncomputable section
 set_option autoImplicit false
+set_option linter.style.haveILetI false
 universe t
 open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.Scheme
@@ -35,6 +38,24 @@ theorem finitePerfectAdicLiftedTransition_universal
     (T : FinitePerfectAdicAlgebraTower d) (n : ℕ) :
     Nonempty (StructuredArrow.IsUniversal (StructuredArrow.mk
       (finitePerfectAdicLiftedTransition T n))) := by
-  sorry
+  let q : ULift.{t + 1} (A ⧸ d.ideal ^ (n + 1 + 1)) →+*
+      ULift.{t + 1} (A ⧸ d.ideal ^ (n + 1)) :=
+    RingHom.ulift (Ideal.Quotient.factorPowSucc d.ideal (n + 1))
+  let F : DerivedCategory (ModuleCat.{t + 1}
+      (ULift.{t + 1} (A ⧸ d.ideal ^ (n + 1)))) ⥤
+      DerivedCategory (ModuleCat.{t + 1}
+        (ULift.{t + 1} (A ⧸ d.ideal ^ (n + 1 + 1)))) :=
+    normalizationModuleRestrict q
+  letI : F.IsRightAdjoint :=
+    ModuleCat.derivedRestrictScalars_isRightAdjoint.{t + 1, 0} q
+  let adj : F.leftAdjoint ⊣ F := Adjunction.ofIsRightAdjoint F
+  haveI : IsIso ((adj.homEquiv _ _).symm (finitePerfectAdicLiftedTransition T n)) :=
+    finitePerfectAdicLiftedTransition_transpose_isIso T n adj
+  let e := asIso ((adj.homEquiv _ _).symm (finitePerfectAdicLiftedTransition T n))
+  have he : adj.unit.app _ ≫ F.map e.hom = finitePerfectAdicLiftedTransition T n := by
+    simpa [e] using (adj.homEquiv_unit _ _ e.hom).symm.trans
+      ((adj.homEquiv _ _).apply_symm_apply (finitePerfectAdicLiftedTransition T n))
+  exact ⟨(mkInitialOfLeftAdjoint _ adj _).ofIso
+    (StructuredArrow.isoMk e he)⟩
 
 end AlgebraicGeometry.Scheme
