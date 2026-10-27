@@ -68,7 +68,7 @@ theorem strictTateTensorTower_lift
               (pbcModules T (pbcAdicCompletion T (datum.{u} ell)))).obj (op n))
             (-(2 * (d : ℤ)))).inv.app (strictTower T ell d) := by
   obtain ⟨M, q, h⟩ := strictTateTensorTower_data T ell hT d
-  refine ⟨M, q, h, ?_⟩
-  exact strictTateTensorTower_evaluation T ell hT d M q h
+  obtain ⟨q', hq'⟩ := strictTateTensorTower_evaluation T ell hT d M q h
+  exact ⟨M, q', h, hq'⟩
 
 end AlgebraicGeometry.Scheme.PurityIntegralTower

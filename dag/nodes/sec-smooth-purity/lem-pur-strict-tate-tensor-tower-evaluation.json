@@ -2,7 +2,7 @@
  "id": "lem-pur-strict-tate-tensor-tower-evaluation",
  "kind": "statement",
  "title": "Strict Tate quotient tower evaluation identity",
- "statement": "For a Noetherian scheme T, a prime ell invertible on T, d natural, an AdicTower M for datum ell, level isomorphisms q_n from M.level n to the single complex in degree -2d of quotientLine T ell n d, and h : M.tower = strictDerivedTower T ell d, the restriction/evaluation composite after q_n inverse equals the displayed restriction/single followed by inverse evaluation/single map at every n.",
+ "statement": "For a Noetherian scheme T, a prime ell invertible on T, d natural, an AdicTower M for datum ell, initial level isomorphisms q_n from M.level n to the single complex in degree -2d of quotientLine T ell n d, and h : M.tower = strictDerivedTower T ell d, there exist level isomorphisms q′_n with the same sources and targets for which the restriction/evaluation composite after q′_n inverse equals restriction/single followed by inverse evaluation/single at every n. The initial isomorphisms need not themselves satisfy this normalization. Use [def-pur-condensed-tate-integral-tower-data], [def-weil-pbc-adic-coefficient-datum], and [def-weil-pbc-bounded-constructible-tower].",
  "source": {
   "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-purity-transport/_section.md",
   "place": "Steps 2--3: strict ordinary quotient tower lift"
@@ -14,24 +14,46 @@
  ],
  "proof": [
   {
-   "text": "Exact restriction and evaluation of a single complex identify the level evaluation with the ordinary quotient projection. Substituting the strict tower equality h rewrites the final evaluation map, and functoriality of the single-complex comparison yields the displayed equation for each n.",
+   "text": "Use the existing pbcCompletedScalar map, determined by its compatible constant residues, and its projection formula. Each quotient map is surjective, so local constant representatives show that every completed-coefficient projection is locally surjective. Scalar restriction is fully faithful on ordinary quotient-module sheaves, by lifting module homomorphisms through locally lifted scalars.",
    "uses": [
     "def-pur-condensed-tate-integral-tower-data",
-    "lem-pur-site-restriction-module-adjunction-exact"
+    "def-weil-pbc-adic-coefficient-datum",
+    "def-weil-pbc-adic-lisse-module",
+    "def-weil-pbc-bounded-constructible-tower",
+    "def-weil-pbc-rational-category"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The single-complex functor is fully faithful in every degree. Its exact scalar-restriction comparison identifies single followed by derived restriction with ordinary restriction followed by single. Thus this composite is fully faithful on the quotient line.",
+   "uses": [
+    "lem-weil-pbc-derived-single-fully-faithful"
    ],
    "elementary": false
+  },
+  {
+   "text": "At each level compare the given evaluation transported along h with the canonical restriction/single and evaluation/single comparison. Lift their discrepancy, an automorphism of the restricted single quotient line, through the fully faithful composite. Postcompose q_n with the single of the lifted ordinary automorphism. Its inverse cancels the discrepancy. Choice collects these corrected identifications at all n.",
+   "uses": [
+    "def-pur-condensed-tate-integral-tower-data",
+    "def-weil-pbc-bounded-constructible-tower"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
   "def-pur-condensed-tate-integral-tower-data",
-  "lem-pur-site-restriction-module-adjunction-exact"
+  "def-weil-pbc-adic-coefficient-datum",
+  "def-weil-pbc-adic-lisse-module",
+  "def-weil-pbc-bounded-constructible-tower",
+  "def-weil-pbc-rational-category",
+  "lem-weil-pbc-derived-single-fully-faithful"
  ],
  "proof_origin": {
   "by": "agent",
-  "group": "C3",
+  "group": "D3",
   "date": "2026-10-28",
   "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-purity-transport/_section.md",
-  "place": "Steps 2--3: strict ordinary quotient tower lift"
+  "place": "Steps 2--3: choose quotient-linear level identifications normalized by strict tower evaluation; full faithfulness on single complexes"
  },
  "mathlib_searches": [
   {
@@ -64,9 +86,9 @@
   "module": "Sheaf.Paper.StrictTateTensorTowerLiftEvaluation",
   "file": "lean/Sheaf/Paper/StrictTateTensorTowerLiftEvaluation.lean",
   "declaration": "AlgebraicGeometry.Scheme.PurityIntegralTower.strictTateTensorTower_evaluation",
-  "statement": "theorem strictTateTensorTower_evaluation (T : Scheme.{u}) [IsNoetherian T] (ell : ℕ) [Fact ell.Prime] (hT : IsUnit (ell : Γ(T, ⊤))) (d : ℕ) (M : AdicTower T (datum.{u} ell)) (q : ∀ n : ℕ, M.level n ≅ (_root_.DerivedCategory.singleFunctor _ (-(2 * (d : ℤ)))).obj (quotientLine T ell n d)) (h : M.tower = strictDerivedTower T ell d) : ∀ n : ℕ, (pbcDerivedRestrict (pbcAdicProjection T (datum.{u} ell) n)).map (q n).inv ≫ (M.evaluation n).hom ≫ (pbcTowerEvaluation T (pbcAdicCompletion T (datum.{u} ell)) n).map (eqToHom h) = (Functor.mapDerivedCategorySingleFunctor (pbcRestrict (pbcAdicProjection T (datum.{u} ell) n)) (-(2 * (d : ℤ)))).hom.app (quotientLine T ell n d) ≫ (Functor.mapDerivedCategorySingleFunctor ((CategoryTheory.evaluation ℕᵒᵖ (pbcModules T (pbcAdicCompletion T (datum.{u} ell)))).obj (op n)) (-(2 * (d : ℤ)))).inv.app (strictTower T ell d)",
+  "statement": "theorem strictTateTensorTower_evaluation\n    (T : Scheme.{u}) [IsNoetherian T] (ell : ℕ) [Fact ell.Prime]\n    (_hT : IsUnit (ell : Γ(T, ⊤))) (d : ℕ)\n    (M : AdicTower T (datum.{u} ell))\n    (q : ∀ n : ℕ, M.level n ≅\n      (_root_.DerivedCategory.singleFunctor _ (-(2 * (d : ℤ)))).obj\n        (quotientLine T ell n d))\n    (h : M.tower = strictDerivedTower T ell d) :\n    ∃ q' : ∀ n : ℕ, M.level n ≅\n        (_root_.DerivedCategory.singleFunctor _ (-(2 * (d : ℤ)))).obj\n          (quotientLine T ell n d),\n      ∀ n : ℕ,\n        (pbcDerivedRestrict (pbcAdicProjection T (datum.{u} ell) n)).map (q' n).inv ≫\n          (M.evaluation n).hom ≫\n          (pbcTowerEvaluation T (pbcAdicCompletion T (datum.{u} ell)) n).map\n            (eqToHom h) =\n        (Functor.mapDerivedCategorySingleFunctor\n          (pbcRestrict (pbcAdicProjection T (datum.{u} ell) n))\n          (-(2 * (d : ℤ)))).hom.app (quotientLine T ell n d) ≫\n        (Functor.mapDerivedCategorySingleFunctor\n          ((CategoryTheory.evaluation ℕᵒᵖ\n            (pbcModules T (pbcAdicCompletion T (datum.{u} ell)))).obj (op n))\n          (-(2 * (d : ℤ)))).inv.app (strictTower T ell d)",
   "branch": "sheaf-dag",
-  "by": "C3",
+  "by": "D3",
   "date": "2026-10-28"
  },
  "blueprint": {
@@ -93,11 +115,42 @@
  "reviewed_proof": {
   "date": "2026-10-27",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "C3",
-  "result": "pass",
-  "landing": "20261027T205824-L-1621301",
+  "reviewer": "C-12247",
+  "group": "D3",
+  "result": "fix",
+  "landing": "20261027T233850-L-4126027",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent cc review: strictTateTensorTower_evaluation existential repair (old ∀q statement false via -1 automorphism) against node statement/statement_change, the change record and the unchanged existential parent lift; parent adaptation diffed against clone (2 forced proof lines, signature identical); axioms clean (propext, Classical.choice, Quot.sound)"
+ },
+ "statement_change": {
+  "date": "2026-10-28",
+  "by": "D3 stage 3",
+  "old_statement": "For a Noetherian scheme T, a prime ell invertible on T, d natural, an AdicTower M for datum ell, level isomorphisms q_n from M.level n to the single complex in degree -2d of quotientLine T ell n d, and h : M.tower = strictDerivedTower T ell d, the restriction/evaluation composite after q_n inverse equals the displayed restriction/single followed by inverse evaluation/single map at every n.",
+  "what": "The old statement was false for arbitrary q: postcomposing one q_n with a nontrivial automorphism changes the left side without changing M, h or the right side. For instance multiplication by -1 on the rank-one d=0 quotient at an odd prime does so. The repaired statement chooses corrected q′_n and proves their required normalization, preserving the existential parent theorem verbatim.",
+  "source": {
+   "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-purity-transport/_section.md",
+   "place": "Steps 2--3: strict ordinary quotient tower lift"
+  },
+  "citers": [
+   {
+    "id": "lem-pur-strict-tate-tensor-tower-lift",
+    "holds": true,
+    "note": "The parent needs existence of normalized level identifications, not normalization of every q. Its proof is adapted in this delivery to use the q′ produced here, preserving its signature."
+   }
+  ],
+  "old_proof": [
+   {
+    "text": "Exact restriction and evaluation of a single complex identify the level evaluation with the ordinary quotient projection. Substituting the strict tower equality h rewrites the final evaluation map, and functoriality of the single-complex comparison yields the displayed equation for each n.",
+    "uses": [
+     "def-pur-condensed-tate-integral-tower-data",
+     "lem-pur-site-restriction-module-adjunction-exact"
+    ],
+    "elementary": false
+   }
+  ],
+  "old_proof_deps": [
+   "def-pur-condensed-tate-integral-tower-data",
+   "lem-pur-site-restriction-module-adjunction-exact"
+  ]
  }
 }
