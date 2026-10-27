@@ -8329,6 +8329,7 @@ public import WeilConjectures.CategoryTheory.Monoidal.EndTensorUnit
 public import WeilConjectures.CategoryTheory.Monoidal.ExceptionalProjection
 public import WeilConjectures.CategoryTheory.Monoidal.ExceptionalTensorMap
 public import WeilConjectures.CategoryTheory.Monoidal.ExceptionalTensorMapBaseChange
+public import WeilConjectures.CategoryTheory.Monoidal.FullSubcategoryUnitor
 public import WeilConjectures.CategoryTheory.Monoidal.Instances.CochainComplex
 public import WeilConjectures.CategoryTheory.Monoidal.Instances.DerivedCategory
 public import WeilConjectures.CategoryTheory.Monoidal.Instances.DerivedCategoryBraided
