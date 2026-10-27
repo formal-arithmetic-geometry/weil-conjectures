@@ -66,49 +66,36 @@
   "place": "Tag 07A4, lemma-pullback-tensor-product; sites-modules.tex Tag 03EL; BS Definition 3.4.10 and Lemma 6.5.5; original tensor descent step 1."
  },
  "proof_origin": {
-  "by": "agent",
+  "by": "worker",
+  "group": "Y2",
+  "date": "2026-10-28",
   "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-  "place": "Definition 3.4.10, Lemma 6.5.5; Stacks 07A4 and 03EL. Agent-written specialization to the actual native coefficient map."
+  "place": "Definition 3.4.10 and Lemma 6.5.5; scalar-extension comparison and K-flat descent are isolated in the new core statement."
  },
  "proof": [
   {
-   "text": "Apply constructibleTensorCompletion to the coefficient field E and X. Package its ordinary tensor, K-flat comparison, quotient augmentation and descended map as ConstructibleTensorCompletionPresentation. The pure-section normalization, zero shifted Roos coordinate, representative square and constructible invertibility are exactly its four clauses.",
+   "text": "Obtain the normalized ordinary tensor-completion presentation from constructibleTensorCompletionPresentation for the finite coefficient field E and X.",
    "uses": [
     "lem-fix-constructible-tensor-completion"
    ],
    "elementary": false
   },
   {
-   "text": "Apply the ordinary cochain scalar tensor comparison to coefficientMap. On each bidegree it sends s tensor (x tensor y) to (s tensor x) tensor (1 tensor y). The inverse multiplies the two coefficient scalars. Balancing proves these maps inverse; distributivity over direct sums gives the total-complex isomorphism. The tensor differential shows that it is a chain map with the recorded signs.",
+   "text": "Apply completed_tensor_finite_model_core to this fixed presentation. Its fields provide the balanced scalar comparison, pure-section normalization, K-flat preservation, ordinary derived comparison, and representative counit equation.",
    "uses": [
-    "lem-pur-cochain-pullback-tensor-coherence"
+    "new-sf-adic-completed-tensor-finite-model-core"
    ],
    "elementary": false
   },
   {
-   "text": "Scalar extension carries K-flat complexes to K-flat complexes: tensor an acyclic native-coefficient test complex with the extension, use the balanced associator to identify this with the original complex tensored with the restricted test complex, and use exactness of restriction of scalars. This proves kflat for every integral good complex.",
-   "uses": [
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Descend the cochain comparison on the two good-complex localizations. Compose with the supplied native K-flat model isomorphism, using the universal scalar counits. Their naturality gives precisely tensorFiniteRepresentative. Both sides invert quasi-isomorphisms in each variable, so two-variable localization supplies a natural isomorphism on the entire derived categories. The comparison retains the cochain pure-section equation of step 2.",
-   "uses": [
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Insert this comparison, the completion presentation and the K-flat proofs into CompletedTensorFiniteModel. No common-stage functor, tensorator or constraint coherence is constructed in this lemma.",
+   "text": "Package the presentation and the five core fields into CompletedTensorFiniteModel.",
    "uses": [],
    "elementary": true
   }
  ],
  "proof_deps": [
   "lem-fix-constructible-tensor-completion",
-  "lem-pur-cochain-pullback-tensor-coherence",
-  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+  "new-sf-adic-completed-tensor-finite-model-core"
  ],
  "lean": {
   "existing": false,
@@ -136,11 +123,11 @@
  "reviewed_proof": {
   "date": "2026-10-27",
   "by": "L",
-  "reviewer": "C-990c7",
-  "group": "Q2",
-  "result": "fix",
-  "landing": "20261027T180734-L-3896912",
+  "reviewer": "COMPILER",
+  "group": "Y2",
+  "result": "pass",
+  "landing": "20261027T210314-L-1686855",
   "kind": "interface",
-  "note": "independent cc review: item proof + 3 new modules/nodes + change record against clone sheaf-dag item, item node, importer AdicQbarConstructibleRealization (compiled OK in sandbox) and the upstream normalization definitions"
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

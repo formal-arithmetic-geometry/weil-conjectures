@@ -6,6 +6,8 @@ Authors: SHEAF group Q2
 module
 
 public import Sheaf.Paper.AdicCompletedTensorFiniteModels
+import Sheaf.Paper.AdicCompletedTensorFiniteModelCore
+import Sheaf.Paper.RationalRealizationTensorComparison
 
 /-! # Normalized finite tensor comparison for native realization
 
@@ -62,6 +64,18 @@ theorem completed_tensor_finite_model
     (models : CoefficientTensorModels.{u + 1, u + 1, u}
       (ProEt.topology X) (ring l X R) closed)
     (E : AlgebraicallyClosedCoefficients.Index l (PadicAlgCl l)) :
-    Nonempty (CompletedTensorFiniteModel l X R closed models E) := by sorry
+    Nonempty (CompletedTensorFiniteModel l X R closed models E) := by
+  classical
+  let F := AlgebraicallyClosedCoefficients.Coefficient.{u} l (PadicAlgCl l) E
+  obtain ⟨completion⟩ :=
+    WeilConjectures.constructibleTensorCompletionPresentation l F X
+  obtain ⟨core⟩ := completed_tensor_finite_model_core l X R closed models E completion
+  exact ⟨{
+    completion := completion
+    balance := core.balance
+    balance_sections := core.balance_sections
+    kflat := core.kflat
+    ordinary := core.ordinary
+    representative := core.representative }⟩
 
 end WeilConjectures.AdicQbarRealization

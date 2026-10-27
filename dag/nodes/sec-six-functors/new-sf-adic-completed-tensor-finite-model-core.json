@@ -1,0 +1,127 @@
+{
+ "id": "new-sf-adic-completed-tensor-finite-model-core",
+ "kind": "lemma",
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.AdicCompletedTensorFiniteModelExistence",
+  "date": "2026-10-28",
+  "group": "Y2"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sf-adic-completed-tensor-finite-model",
+   "place": "Proof steps 2--4: ordinary scalar tensor comparison, K-flat preservation, and descent through good-complex localizations.",
+   "via": [
+    "lem-sf-adic-completed-tensor-finite-model"
+   ]
+  },
+  "same_as": []
+ },
+ "title": "Core normalized scalar-extension data for one finite completed tensor model",
+ "statement": "For the data in lem-sf-adic-completed-tensor-finite-model and a fixed ConstructibleTensorCompletionPresentation completion, there exists a CompletedTensorFiniteModelCore l X R closed models E completion carrying the balanced scalar comparison, pure-section normalization, K-flat preservation, ordinary derived comparison, and representative counit equation. The completion presentation itself is not part of this core.",
+ "stmt_deps": [
+  "def-sf-adic-completed-tensor-finite-models",
+  "def-sf-native-adic-realization-data",
+  "lem-fix-constructible-tensor-completion"
+ ],
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Definition 3.4.10 and Lemma 6.5.5; the scalar-extension and K-flat descent portion of the finite-model construction."
+ },
+ "proof": [
+  {
+   "text": "Construct the balanced cochain tensor comparison from the canonical scalar-extension tensor map and verify its pure-section formula.",
+   "uses": [
+    "lem-pur-cochain-pullback-tensor-coherence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Transport K-flat good complexes across scalar extension and descend the comparison through the two good-complex localizations.",
+   "uses": [
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Combine the comparison with the fixed completion presentation and its representative counits.",
+   "uses": [
+    "lem-fix-constructible-tensor-completion"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-cochain-pullback-tensor-coherence",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-fix-constructible-tensor-completion"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "Y2",
+  "date": "2026-10-28",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Definition 3.4.10 and Lemma 6.5.5."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "completed tensor scalar extension K-flat",
+   "results": "No direct match in Mathlib.",
+   "date": "2026-10-28",
+   "verdict": "No match."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsKFlatIndependentCoefficients\"",
+   "results": "No direct match for the full sheaf-theoretic statement.",
+   "date": "2026-10-28",
+   "verdict": "No match."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "normalized finite completed tensor model",
+   "results": "No direct match.",
+   "date": "2026-10-28",
+   "verdict": "No match."
+  }
+ ],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.AdicCompletedTensorFiniteModelCore",
+  "file": "lean/Sheaf/Paper/AdicCompletedTensorFiniteModelCore.lean",
+  "declaration": "WeilConjectures.AdicQbarRealization.completed_tensor_finite_model_core",
+  "declarations": [
+   "WeilConjectures.AdicQbarRealization.CompletedTensorFiniteModelCore",
+   "WeilConjectures.AdicQbarRealization.completed_tensor_finite_model_core"
+  ],
+  "statement": "theorem completed_tensor_finite_model_core\n    (l : ℕ) [Fact l.Prime] (X : Scheme.{u})\n    [CompactSpace X] [QuasiSeparatedSpace X]\n    (R : LocallyFiniteAdicRealization.Realization l X)\n    [∀ x : X, Invertible (l : X.residueField x)]\n    (closed : CoefficientClosedStructure (ambientHom l X R))\n    (models : CoefficientTensorModels.{u + 1, u + 1, u}\n      (ProEt.topology X) (ring l X R) closed)\n    (E : AlgebraicallyClosedCoefficients.Index l (PadicAlgCl l))\n    (completion : ConstructibleTensorCompletionPresentation l\n      (AlgebraicallyClosedCoefficients.Coefficient.{u} l (PadicAlgCl l) E) X) :\n    Nonempty (CompletedTensorFiniteModelCore l X R closed models E completion)",
+  "branch": "sheaf-dag",
+  "by": "Y2",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y2",
+  "result": "pass",
+  "landing": "20261027T210314-L-1686855",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y2",
+  "result": "pass",
+  "landing": "20261027T210314-L-1686855",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
