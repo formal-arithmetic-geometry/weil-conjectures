@@ -6,6 +6,7 @@ Authors: SHEAF group T1
 module
 
 public import Sheaf.Paper.SfQbarLocalizationFiniteData
+import Sheaf.Paper.SfQbarLocalizationFiniteTail
 
 /-! # Normalized finite localization coefficient compatibility
 
@@ -43,36 +44,55 @@ variable (D : FiniteFieldDatum.{u}) (hl : l ≠ D.p)
 Source: algebraically closed-stage localization proof, steps 1--2 and the finite
 normalizations in step 5 (blueprint: lem-sf-qbar-localization-finite-coherence).
 
-Proof: take the rational localization package at each finite coefficient field.
-Use its open compact-support functor for the compactification (j,id), and its
-ordinary closed direct image. Restrict the canonical pullback scalar comparison
-to the two immersions and identify the stage transitions by
-operationStageTransitionIso. Its tower law follows from balanced tensor
-associativity, and its identity law from multiplication of the coefficient unit.
-The compact-support coefficient action is the localized integral tensor-unit
-mate; its tower and unit equations are the compact-support scalar equations.
-For closed direct image take the adjunction mate of the inverse pullback
-comparison. Finite free scalar extension makes this mate invertible. The mate
-counit equation and adjunction injectivity prove its tower and unit equations.
-All finite shifts are the normalized rational localization shifts. The ringed
-scalar/pullback and compact-support scalar shift normalization lemmas give
-the actual integral comparison squares. Compute the
-coefficient maps degreewise on resolving complexes: scalar factors have degree
-zero, so shifting multiplies both differentials by the same sign. Localization
-then preserves each shift square, using the shift equations in the rational
-exact-functor records. Scalar shift tower transport supplies the repeated-field
-and coefficient-unit cases. The normalized integral units and counits,
-and hence their localized rational maps, obey the coefficient mate equations.
-These equations are precisely the compatibility conditions for the four
-StageSystem.Morphism.Hom families in the conclusion. The normalized finite
-adjunctions commute with shifts because their integral maps are degree zero.
-This constructs only finite data and its coefficient laws; it makes no claim
-about the descended category or arbitrary common-stage morphisms.
+Proof: obtain the finite operation package from
+`sfQbarLocalizationFiniteBase_exists`. For that fixed package, obtain the
+remaining exact, shift, adjunction, mate, unit and counit fields from
+`sfQbarLocalizationFiniteTail_exists`. The two records have disjoint field
+sets whose concatenation is exactly `SfQbarLocalizationFiniteData`; assemble
+them field by field. The two existence results isolate the finite operation
+construction from its coherence verification and make no claim about the
+descended category or arbitrary common-stage morphisms.
 -/
 theorem sfQbarLocalizationFiniteCoherence
     (hij : Set.range i.base = (Set.range j.base)ᶜ) :
     Nonempty (SfQbarLocalizationFiniteData l Ω D hl i j) := by
-  sorry
+  obtain ⟨B⟩ := sfQbarLocalizationFiniteBase_exists l Ω D hl i j hij
+  obtain ⟨T⟩ := sfQbarLocalizationFiniteTail_exists l Ω D hl i j hij B
+  exact ⟨{
+    finiteLocalization := B.finiteLocalization
+    openAction := B.openAction
+    closedAction := B.closedAction
+    closedAction_finite := B.closedAction_finite
+    openPull := B.openPull
+    closedPull := B.closedPull
+    openPull_finite := B.openPull_finite
+    closedPull_finite := B.closedPull_finite
+    openPull_beta := B.openPull_beta
+    closedPull_beta := B.closedPull_beta
+    openExact := T.openExact
+    closedExact := T.closedExact
+    openPullExact := T.openPullExact
+    closedPullExact := T.closedPullExact
+    finiteOpenAdjunction := T.finiteOpenAdjunction
+    finiteClosedAdjunction := T.finiteClosedAdjunction
+    finiteOpenAdjunction_normalization := T.finiteOpenAdjunction_normalization
+    finiteClosedAdjunction_normalization := T.finiteClosedAdjunction_normalization
+    closedAction_beta := T.closedAction_beta
+    openShift_finite := T.openShift_finite
+    closedShift_finite := T.closedShift_finite
+    openPullShift_finite := T.openPullShift_finite
+    closedPullShift_finite := T.closedPullShift_finite
+    finiteOpenAdjunction_shift := T.finiteOpenAdjunction_shift
+    finiteClosedAdjunction_shift := T.finiteClosedAdjunction_shift
+    openUnit := T.openUnit
+    openCounit := T.openCounit
+    closedUnit := T.closedUnit
+    closedCounit := T.closedCounit
+    openUnit_finite := T.openUnit_finite
+    openCounit_finite := T.openCounit_finite
+    closedUnit_finite := T.closedUnit_finite
+    closedCounit_finite := T.closedCounit_finite
+  }⟩
 
 end Descent
 end WeilConjectures
