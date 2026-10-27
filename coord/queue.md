@@ -1,8 +1,8 @@
 # Work queue
 
-264 items; claim with `tools/claim.py next <group> [--stage N]`.
+267 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Rework: quarantined by the upstream sync (4 clusters, 745 modules)
+## Rework: quarantined by the upstream sync (4 clusters, 717 modules)
 
 Priority over every queue (the human, 2026-10-20; tools/rework.py, coord/rework.tsv). One item per cluster: its root (a quarantined module importing no other quarantined one) and the quarantined modules importing it; fix the root, then the dependents as far as possible, deliver every module that compiles.
 
@@ -33,7 +33,7 @@ Blocked by rework (not in the queue until the rework items they depend on are fi
 
 Not open yet: 1137 nodes that below a finished node, not needed, 2 nodes that wait for a statement dependency (bottom-up), 1 nodes that wait for stage 1 (statement downstream not grounded).
 
-## Stage 3: modules to prove (253)
+## Stage 3: modules to prove (256)
 
 On the sorry route of an open batch, or below a route sorry of one (the human, 2026-10-18: provable as soon as every dependency is stated, whatever the depth); route first, then nearest to a route sorry.
 
@@ -198,6 +198,9 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.Paper.NormalizedIntegralScalarUnitUnderlyingBridge` | - | 1 | proof | route |
 | `Sheaf.Paper.NormalizedScalarAssociatorIntegralTransportCore` | - | 1 | proof | route |
 | `Sheaf.Paper.PodReindexingHomCoefficientDescent` | - | 21 | proof | route |
+| `Sheaf.Paper.ProjectionFiniteBaseChangeDiamondEquality` | - | 1 | proof | route |
+| `Sheaf.Paper.ProjectionFiniteBaseChangeLeftRouteExpansion` | - | 1 | proof | route |
+| `Sheaf.Paper.ProjectionFiniteBaseChangeRightLeftPath` | - | 1 | proof | route |
 | `Sheaf.Paper.ProjectiveSupportedSourceNormalization` | - | 1 | proof | route |
 | `Sheaf.Paper.ProperBaseChangeAdmissibleGenerators` | - | 1 | proof | route |
 | `Sheaf.Paper.QcqsCompactSupportNativeTowerComparison` | - | 1 | proof | route |
