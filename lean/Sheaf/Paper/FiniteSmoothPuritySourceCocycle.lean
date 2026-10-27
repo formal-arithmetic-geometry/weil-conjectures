@@ -4,6 +4,8 @@ Released under Apache 2.0 license as described in the file LICENSE.
 -/
 module
 public import Sheaf.Paper.FiniteSmoothCoefficientArrows
+import Sheaf.Paper.FiniteSmoothPuritySourceTensorComposition
+import Sheaf.Paper.FiniteSmoothOrdinaryTwistCocycle
 @[expose] public noncomputable section
 set_option autoImplicit false
 universe u
@@ -59,5 +61,10 @@ theorem puritySourceCocycle
       (finiteLambda ell hmr f d (twists r m (hn.trans hnm) hmr))
       (finiteLambda ell hnm f d (twists m n hn hnm))
       (finiteLambda ell (hnm.trans hmr) f d (twists r n hn (hnm.trans hmr))) K := by
-  sorry
+  intro r m n hn hnm hmr K hK
+  have htwist := ordinaryTwistCocycle ell f d hY twists
+  have hstruct := finiteSourceTensorComposition ell f d twists htwist hpull
+  have h := hstruct r m n hn hnm hmr K
+  with_unfolding_all
+    exact h
 end AlgebraicGeometry.Etale.FiniteSmoothPurity
