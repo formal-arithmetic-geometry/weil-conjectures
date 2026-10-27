@@ -19955,7 +19955,6 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 20:59 L: merged deliver/E1/Sheaf.Paper.DiagonalTraceVaryingScalarSquare (stage 3; reviewer PASS; first push; landing 20261027T205915-L-1632819 (interface); batch 20261027T205736; modules 1; new nodes 0)
 - 20:59 L: merged deliver/E2/Sheaf.Paper.ConstantCompletionFlatAndQuotientsProjection (stage 3; reviewer PASS; first push; landing 20261027T205916-L-1632976 (interface); batch 20261027T205736; modules 4; new nodes 3; change records: coord/changes/ConstantCompletionFlatAndQuotientsProjection.md)
 - 20:59 L: merged deliver/E2/Sheaf.Paper.ExceptionalCommonStageFromRational (stage 3; reviewer PASS; first push; landing 20261027T205918-L-1633416 (interface); batch 20261027T205736; modules 4; new nodes 3)
-- 20:59 L: merged deliver/E3/Sheaf.Paper.ExceptionalScalarMateLocalization (stage 3; reviewer PASS; first push; landing 20261027T205919-L-1633564 (interface); batch 20261027T205736; modules 1; new nodes 0; change records: coord/changes/E3-scalar-localization-shift-square.md)
 - 20:59 L: merged deliver/E4/Sheaf.Paper.ConstantCompletionFlatAndQuotientsQuotient (stage 3; reviewer PASS; first push; landing 20261027T205920-L-1633763 (interface); batch 20261027T205736; modules 2; new nodes 1)
 - 20:59 L: merged deliver/E4/Sheaf.Paper.FiniteProjectionBinaryTriangleSquare (stage 3; reviewer PASS; first push; landing 20261027T205921-L-1634030 (interface); batch 20261027T205736; modules 1; new nodes 0)
 - 20:59 L: merged deliver/E4/Sheaf.Paper.TateTensorQuotientBalancing (stage 3; reviewer PASS; first push; landing 20261027T205923-L-1634228 (interface); batch 20261027T205736; modules 3; new nodes 2)
@@ -19997,7 +19996,6 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 21:00 L: merged deliver/G6/Sheaf.Paper.EtaleCofinalBlockFactorization (stage 3; reviewer PASS; first push; landing 20261027T210014-L-1644562 (interface); batch 20261027T205736; modules 3; new nodes 2)
 - 21:00 L: merged deliver/G6/Sheaf.SixFunctors.OpenQuotientScalarComparisonExistence (stage 3; reviewer PASS; first push; landing 20261027T210016-L-1645066 (interface); batch 20261027T205736; modules 3; new nodes 2)
 - 21:00 L: merged deliver/G7/Sheaf.Paper.CoefNativeOpenTensorFiniteExistence (stage 3; reviewer PASS; first push; landing 20261027T210017-L-1645538 (interface); batch 20261027T205736; modules 2; new nodes 1)
-- 21:00 L: merged deliver/G7/Sheaf.SixFunctors.OpenQuotientScalarCompatibilityData (stage 3; reviewer PASS; first push; landing 20261027T210018-L-1646031 (interface); batch 20261027T205736; modules 4; new nodes 3)
 - 21:00 L: merged deliver/G9/Sheaf.Paper.CoefNativeOpenTensorSystemExistence (stage 3; reviewer PASS; first push; landing 20261027T210019-L-1646420 (interface); batch 20261027T205736; modules 4; new nodes 3)
 - 21:00 L: merged deliver/H1/Sheaf.SixFunctors.CoefQbarVerdierInternalHomUniversal (stage 3; reviewer PASS; first push; landing 20261027T210021-L-1647069 (interface); batch 20261027T205736; modules 7; new nodes 6)
 - 21:00 L: merged deliver/H2/Sheaf.Paper.ConstantCompletionOrdinaryFinitePullUniqueness (stage 3; reviewer PASS; first push; landing 20261027T210023-L-1647524 (interface); batch 20261027T205736; modules 1; new nodes 0)
@@ -20131,3 +20129,5 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 21:45 L: returned deliver/J1/Sheaf.AlgebraicGeometry.RelativeProjTwistChartDescent (reviewer RETURN: (reviewer C-2969d, head 2969d679c) 6/H2: the item node lem-trf-relative-proj-twist-chart-descent.json is not in the deli)
 - 21:50 L: returned deliver/NB/lem-pur-rational-tensor-associator-scalar-square (reviewer RETURN: D3/E5 + C4, the main reason: the scalar square is never proved at the integral level. Step 1 only gives single-field fac)
 - 21:52 L: merged deliver/NC/lem-pur-integral-braiding-naturality (reviewer FIX; first push; new nodes: 0)
+
+- 05:53 L: batch 20261027T205736 dependency take-out

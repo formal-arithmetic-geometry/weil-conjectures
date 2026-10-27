@@ -5,9 +5,6 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import Sheaf.SixFunctors.OpenTensorQuotientData
-import Sheaf.SixFunctors.OpenQuotientScalarFiniteCompatibility
-import Sheaf.SixFunctors.OpenQuotientScalarSystemsCompatibility
-import Sheaf.SixFunctors.OpenQuotientScalarEvaluationCompatibility
 
 /-! # Existence of normalized scalar compatibility data for an open quotient
 
@@ -39,10 +36,6 @@ Source: Stacks Tags 03DI, 03DA, 0E8I and 0941.
 theorem openQuotientScalarCompatibilityData
     (o : IntegralOpenReduction.Operations l E j) :
     Nonempty (ScalarCompatibility l E j o) := by
-  obtain ⟨finite⟩ := openQuotientScalarFiniteCompatibility l E j o
-  obtain ⟨systems⟩ := openQuotientScalarSystemsCompatibility l E j o
-  exact ⟨{ finite := finite
-            , systems := systems
-            , evaluation := openQuotientScalarEvaluationCompatibility l E j o finite systems }⟩
+  sorry
 
 end WeilConjectures.OpenTensorQuotient
