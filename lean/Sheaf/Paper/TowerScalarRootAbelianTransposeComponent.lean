@@ -7,6 +7,7 @@ module
 
 public import Sheaf.Paper.TowerRestrictedScalarAdjunction
 public import Sheaf.Paper.TowerClassPullback
+import Sheaf.Paper.TowerScalarRootAbelianTransposeCore
 
 /-! # Finite-level component of the scalar root abelian transpose -/
 
@@ -60,6 +61,15 @@ theorem scalarRoot_abelianTranspose_component
         (d.forgetIso.hom.app cY.rootModule ≫ cX.reduction.forget.F.map
           ((cX.scalar.ordinaryAdjunction.homEquiv _ _)
             (cX.scalar.model.E.map d.rootIso.hom)))).app n).hom.app U) x := by
-  sorry
+  simp only [Adjunction.comp_homEquiv]
+  simp only [Adjunction.homEquiv_unit, Functor.map_comp]
+  let w := scalarRootCoreSource l E f b g cY cX θ₁ n U x
+  have hw := hχ (lineModule l E cX) n.unop U w
+  have hcore := scalarRoot_abelianTranspose_core l E f b g cY cX d hk θ₁ n U x
+  apply eq_of_heq
+  exact hw.trans (by
+    simpa only [w, scalarRootCoreRight, Adjunction.homEquiv_unit,
+      Functor.map_comp] using hcore)
+
 
 end AlgebraicGeometry.ProEtale.SpTowerClasses

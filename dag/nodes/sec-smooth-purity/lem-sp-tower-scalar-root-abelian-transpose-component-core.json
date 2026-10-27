@@ -1,0 +1,119 @@
+{
+ "id": "lem-sp-tower-scalar-root-abelian-transpose-component-core",
+ "kind": "statement",
+ "title": "Chi-free core finite-level root normalization comparison",
+ "statement": "After expanding the scalar and abelian adjunction transposes to their units, the scalar-unit/geometric-transpose value at one finite level and pro-etale chart is HEq to the abelian-transpose value for the integral root comparison.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-classes.proof.md",
+  "place": "Paragraph (2), finite-level evaluation of the abelian transpose before assembling the tower map"
+ },
+ "stmt_deps": [
+  "def-sp-tower-class-pullback",
+  "def-sp-tower-class-systems",
+  "def-coef-semilinear-system-models",
+  "lem-sp-tower-restricted-scalar-adjunction",
+  "lem-sp-tower-integral-class-pullback"
+ ],
+ "proof": [
+  {
+   "text": "Evaluate the scalar unit as the sheafified pure tensor, evaluate the ordinary geometric transpose on that tensor, and use the normalized line comparison. The Kummer boundary square, hk, and d.kummer_roots identify its root with restrictRoot; LinePullback.normalization then gives the same finite Tate tensor as the abelian transpose after d.rootIso.",
+   "uses": [
+    "def-sp-tower-class-pullback",
+    "def-sp-tower-class-systems",
+    "def-coef-semilinear-system-models",
+    "lem-sp-tower-restricted-scalar-adjunction",
+    "lem-sp-tower-integral-class-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-classes.proof.md",
+    "place": "Paragraph (2), finite-level evaluation of the abelian transpose before assembling the tower map"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sp-tower-class-pullback",
+  "def-sp-tower-class-systems",
+  "def-coef-semilinear-system-models",
+  "lem-sp-tower-restricted-scalar-adjunction",
+  "lem-sp-tower-integral-class-pullback"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "J9",
+  "date": "2026-10-28",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-classes.proof.md",
+  "place": "Paragraph (2), finite-level evaluation of the abelian transpose before assembling the tower map"
+ },
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.TowerScalarRootAbelianTransposeComponent",
+  "date": "2026-10-28",
+  "group": "J9"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sp-tower-scalar-root-abelian-transpose-component",
+   "place": "Paragraph (2), finite-level evaluation of the abelian transpose before assembling the tower map",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sp-tower-geometric",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.TowerScalarRootAbelianTransposeCore",
+  "file": "lean/Sheaf/Paper/TowerScalarRootAbelianTransposeCore.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.SpTowerClasses.scalarRoot_abelianTranspose_core",
+  "statement": "theorem scalarRoot_abelianTranspose_core {X Y : Scheme.{u}} (f : X ⟶ Y) (b : SpTowerShriek.Base l E) (g : SpTowerShriek.Geometry l E b f) (cY : Chern l E Y) (cX : Chern l E X) (d : IntegralCoefficientPullback l E f cY cX) (hk : ∀ n : ℕ, d.kummer.τ₂.app (op n) = (unitsPull f).app (op n)) (θ₁ : LinePullback l E f g cY cX) (n : ℕᵒᵖ) (U : Y.ProEtᵒᵖ) (x : (((cY.reduction.forget.F.obj cY.rootModule).obj n).obj.obj U)) : HEq (scalarRootCoreSource l E f b g cY cX θ₁ n U x) (scalarRootCoreRight l E f cY cX d n U x)",
+  "branch": "sheaf-dag",
+  "by": "J9",
+  "date": "2026-10-28"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "componentwise evaluation of an adjunction homEquiv after the unit in additive sheaf categories",
+   "results": "Generic adjunction unit and homEquiv lemmas; no scalar-root/abelian transpose comparison.",
+   "date": "2026-10-28",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.homEquiv_unit",
+   "results": "The generic Adjunction.homEquiv_unit declaration and related unit identities.",
+   "date": "2026-10-28",
+   "verdict": "generic tool only"
+  },
+  {
+   "tool": "grep",
+   "query": "scalarRootCoreSource|scalarRootCoreRight|LinePullback.normalization",
+   "results": "No duplicate finite-level scalar-root/abelian comparison was found in the existing project sources.",
+   "date": "2026-10-28",
+   "verdict": "no exact match"
+  }
+ ],
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J9",
+  "result": "pass",
+  "landing": "20261027T234028-L-4166171",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J9",
+  "result": "pass",
+  "landing": "20261027T234028-L-4166171",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
