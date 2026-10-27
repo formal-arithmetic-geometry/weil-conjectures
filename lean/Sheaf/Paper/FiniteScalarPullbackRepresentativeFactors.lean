@@ -6,6 +6,7 @@ Authors: SHEAF group B3
 module
 
 public import Sheaf.Paper.FiniteScalarOrdinaryPullbackComparison
+import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.MapDerivedCategoryCounit
 
 /-! # Representative factors of the scalar inverse mate
 
@@ -74,6 +75,66 @@ induced by the coefficient adjunction and is the same in both mate constructions
 The two exact-functor factor isomorphisms put the formula in complex coordinates.
 There are no boundedness, nonzero-coefficient, or nonempty-site assumptions.
 -/
+private theorem exact_factors_eq_counit_local
+    {C D : Type*} [Category.{u + 1} C] [Category.{u + 1} D]
+    [Abelian C] [Abelian D]
+    [IsGrothendieckAbelian.{u + 1} C] [IsGrothendieckAbelian.{u + 1} D]
+    [MonoidalCategory C] [MonoidalPreadditive C] [MonoidalClosed C] [BraidedCategory C]
+    [Abelian.HasFunctorialFlatResolution C]
+    (L : C ⥤ D) [L.Additive] [Limits.PreservesFiniteLimits L]
+    [Limits.PreservesFiniteColimits L] (Z : CochainComplex C ℤ) :
+    L.leftDerivedFunctorIsoMapDerivedCategory.hom.app (DerivedCategory.Q.obj Z) ≫
+        L.mapDerivedCategoryFactors.hom.app Z =
+      L.leftDerivedFunctorCounit.app ((HomotopyCategory.quotient _ _).obj Z) := by
+  have h := L.leftDerivedFunctorIsoMapDerivedCategory_hom_app_Qh
+    ((HomotopyCategory.quotient _ _).obj Z)
+  rw [CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app] at h
+  dsimp only [DerivedCategory.quotientCompQhIso,
+    HomologicalComplexUpToQuasiIso.quotientCompQhIso,
+    Quotient.lift.isLift_hom, Quotient.lift.isLift_inv,
+    CategoryTheory.Functor.mapHomotopyCategoryFactors] at h
+  erw [CategoryTheory.Functor.map_id, Category.id_comp,
+    CategoryTheory.Functor.map_id, Category.comp_id, Category.comp_id] at h
+  exact h
+
+private theorem fixedFactors_eq_counit_local
+    (R : Type u) [CommRing R] [Finite R] {X Y : Scheme.{u}} (p : X ⟶ Y)
+    (Z : CochainComplex
+      (Sheaf (ProEt.topology Y) (ModuleCat.{u + 1} (ULift.{u + 1} R))) ℤ) :
+    (finiteScalarFixedPullbackFactors R p).hom.app Z =
+      (ProEtale.upperStar (ModuleCat.{u + 1} (ULift.{u + 1} R)) p).leftDerivedFunctorCounit.app
+        ((HomotopyCategory.quotient _ _).obj Z) := by
+  simpa only [finiteScalarFixedPullbackFactors, Iso.trans_hom, NatTrans.comp_app,
+    isoWhiskerLeft_hom, whiskerLeft_app] using exact_factors_eq_counit_local
+      (ProEtale.upperStar (ModuleCat.{u + 1} (ULift.{u + 1} R)) p) Z
+
+/-- The expanded mate-normalization equation before the paper-level wrappers are folded.
+Source: Stacks Tags 07A6 and 0D6E.
+(blueprint: lem-sf-finite-scalar-pullback-representative-factors-core).
+
+This is the concrete derived-category square obtained from the normalized inverse mate;
+it is the single mate calculation used by the wrapper theorem below. -/
+theorem finiteScalarPullback_representative_factors_core
+    (R : Type u) [CommRing R] [Finite R] {X Y : Scheme.{u}} (p : X ⟶ Y)
+    (P : CochainComplex
+      (Sheaf (ProEt.topology Y) (ModuleCat.{u + 1} (ULift.{u + 1} R))) ℤ) :
+    (sfIntrinsicDerivedEquivalence X R).functor.map
+        ((ProEtale.upperStar (ModuleCat.{u + 1} (ULift.{u + 1} R)) p).leftDerivedFunctorCounit.app
+          ((HomotopyCategory.quotient _ _).obj P)) ≫
+      (sfIntrinsicModuleEquivalence X R).functor.mapDerivedCategoryFactors.hom.app
+        (((ProEtale.upperStar (ModuleCat.{u + 1} (ULift.{u + 1} R)) p).mapHomologicalComplex
+          (.up ℤ)).obj P) ≫
+      DerivedCategory.Q.map
+        ((mapHomologicalComplexCompIso (finiteScalarOrdinaryPullbackComparison R p)
+          (.up ℤ)).inv.app P) =
+    (finiteScalarPullbackComparison R p).inv.app (DerivedCategory.Q.obj P) ≫
+      (proEtaleConstantRingDerivedPullback R p).map
+        ((sfIntrinsicModuleEquivalence Y R).functor.mapDerivedCategoryFactors.hom.app P) ≫
+      (proEtaleRingDerivedPullbackFactors p (proEtaleConstantRing Y R)
+        (proEtaleConstantRing X R) (proEtaleConstantRingComparison p R)).hom.app
+          (((sfIntrinsicModuleEquivalence Y R).functor.mapHomologicalComplex (.up ℤ)).obj P) := by
+  sorry
+
 theorem finiteScalarPullback_representative_factors
     (R : Type u) [CommRing R] [Finite R] {X Y : Scheme.{u}} (p : X ⟶ Y)
     (P : CochainComplex
@@ -90,6 +151,10 @@ theorem finiteScalarPullback_representative_factors
       (proEtaleRingDerivedPullbackFactors p (proEtaleConstantRing Y R)
         (proEtaleConstantRing X R) (proEtaleConstantRingComparison p R)).hom.app
           (((sfIntrinsicModuleEquivalence Y R).functor.mapHomologicalComplex (.up ℤ)).obj P)
-    := by sorry
+    := by
+  rw [fixedFactors_eq_counit_local R p P]
+  simp only [finiteScalarComplexPullbackComparison]
+  dsimp only [finiteScalarPullbackComparison]
+  exact finiteScalarPullback_representative_factors_core R p P
 
 end WeilConjectures
