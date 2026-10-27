@@ -39,15 +39,16 @@ subcategories `Dᵇc ⊆ Loc(Dᵇc)` (`CategoryTheory.Adjunction.isLeftAdjoint_o
 For `k` neither finite nor separably closed, `cd_ℓ(k)` may be infinite and the bounded
 constructible complexes need not be compact in `Loc(Dᵇc)`, so Brown representability does not
 apply. The case of `E̲` reduces to that of `𝒪̲_E` by inverting `ℓ`
-(`isLeftAdjoint_boundedConstructibleLowerStar_continuousMapRingObj_of_padicIntegersRingObj`).
+(`isLeftAdjoint_boundedConstructibleLowerStar_continuousMapRingObj_of_padicIntegersRingObj`), and
+the case of `ℚ̲̄_ℓ` to those of the `E̲` by the 2-colimit argument, in
+`WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ProperUpperShriekColimit`.
 
 ## Sorried input
 
 - For `k` neither finite nor separably closed:
-  `isLeftAdjoint_boundedConstructibleLowerStar_padicIntegersRingObj_of_not` and
-  `isLeftAdjoint_boundedConstructibleLowerStar_padicAlgClRingObj_of_not`. Following the
-  blueprint proofs, they need the étale `Rg^!` on the torsion levels and the derived limit of
-  pro-étale `𝒪̲_E`-complexes, respectively the `2`-colimit over the finite extensions `E`.
+  `isLeftAdjoint_boundedConstructibleLowerStar_padicIntegersRingObj_of_not`. Following the
+  blueprint proof, it needs the torsion-level `Rg^!` and the derived limit of pro-étale
+  `𝒪̲_E`-complexes.
 - The restriction theorems, blueprints `sk-thm-restriction` (for `E` and `ℚ̄_ℓ`) and
   `sk-thm-int-restriction` (for `𝒪_E`):
   `boundedConstructible_rightAdjoint_rightDerivedLowerShriekLocalizing_continuousMapRingObj`,
@@ -263,17 +264,6 @@ theorem isLeftAdjoint_boundedConstructibleLowerStar_continuousMapRingObj_of_not
     (ContinuousMapRingObj.boundedConstructibleLowerStar ℓ E g).IsLeftAdjoint :=
   have := isLeftAdjoint_boundedConstructibleLowerStar_padicIntegersRingObj_of_not ℓ g E.1 hk
   isLeftAdjoint_boundedConstructibleLowerStar_continuousMapRingObj_of_padicIntegersRingObj ℓ g E
-
-/-- Blueprint `lem-sfb-dc-proper-pushforward-left-adjoint-qlbar`, for `k` neither finite nor
-separably closed: for a proper morphism `g : Z ⟶ Y`, the derived pushforward
-`Rg_* : Dᵇc(Z)⟦ℚ̲̄_ℓ⟧ ⥤ Dᵇc(Y)⟦ℚ̲̄_ℓ⟧` is a left adjoint (SGA 4 XVIII, 3.1.4; SGA 4½,
-[Th. finitude]; Bhatt–Scholze, Section 6.8). The Brown representability argument of
-`isLeftAdjoint_boundedConstructibleLowerStar_padicAlgClRingObj_of_finite_or_isSepClosed` needs
-`cd_ℓ(k) < ∞`. -/
-theorem isLeftAdjoint_boundedConstructibleLowerStar_padicAlgClRingObj_of_not
-    (hk : ¬(Finite k ∨ IsSepClosed k)) :
-    (boundedConstructibleLowerStar ℓ g).IsLeftAdjoint :=
-  sorry
 
 end ProperLowerStar
 

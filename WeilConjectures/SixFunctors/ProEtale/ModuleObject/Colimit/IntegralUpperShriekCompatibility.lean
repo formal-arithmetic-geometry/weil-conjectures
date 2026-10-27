@@ -8,6 +8,7 @@ module
 public import WeilConjectures.CategoryTheory.DerivedCategory.RationalizationMate
 public import WeilConjectures.CategoryTheory.ModuleObjects.EllAdicIntegralModel
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.IntegralFlat
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.ToPadicAlgClCompatibility
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructibleAdditive
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperShriek
 
@@ -62,15 +63,6 @@ open Scheme
 
 variable (ℓ : ℕ) [Fact ℓ.Prime] (E : PadicAlgCl.FiniteIntermediateField ℓ)
   {k : Type u} [Field k] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)]
-
-omit [Fact (ringChar k).Prime] in
-/-- A scheme of finite type over a field is a noetherian topological space. -/
-lemma noetherianSpace_left_of_over (X : Over (Spec (.of k))) [LocallyOfFiniteType X.hom]
-    [QuasiCompact X.hom] : TopologicalSpace.NoetherianSpace X.left := by
-  have : IsLocallyNoetherian X.left := LocallyOfFiniteType.isLocallyNoetherian X.hom
-  have : CompactSpace X.left := QuasiCompact.compactSpace_of_compactSpace X.hom
-  have : IsNoetherian X.left := ⟨⟩
-  infer_instance
 
 /-! ### Zero morphisms -/
 

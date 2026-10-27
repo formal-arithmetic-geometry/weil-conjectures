@@ -120,7 +120,32 @@ structure LevelwiseLeftAdjoint (c : CategoryCocone C D) (c' : CategoryCocone C' 
 namespace LevelwiseLeftAdjoint
 
 variable {c : CategoryCocone C D} {c' : CategoryCocone C' D'} {F : D ⥤ D'}
-  (A : LevelwiseLeftAdjoint c c' F)
+
+/-- A `LevelwiseLeftAdjoint` from isomorphisms `γ h : L i ⋙ c'.T h ≅ c.T h ⋙ L j` (taking
+`β h = (γ h).inv`), with the compatibility in the form
+`α i = (c'.iso h)⁻¹ ≫ c'.Φ j (γ h) ≫ α j ≫ F (c.iso h)`. -/
+def ofIso (L : ∀ i, C i ⥤ C' i) (R : ∀ i, C' i ⥤ C i) (adj : ∀ i, L i ⊣ R i)
+    (α : ∀ i, L i ⋙ c'.Φ i ≅ c.Φ i ⋙ F)
+    (γ : ∀ {i j : I} (h : i ≤ j), L i ⋙ c'.T h ≅ c.T h ⋙ L j)
+    (hcocycle : ∀ {i j : I} (h : i ≤ j) (x : C i),
+      (α i).hom.app x = (c'.iso h).inv.app ((L i).obj x) ≫ (c'.Φ j).map ((γ h).hom.app x) ≫
+        (α j).hom.app ((c.T h).obj x) ≫ F.map ((c.iso h).hom.app x))
+    (hmate : ∀ {i j : I} (h : i ≤ j),
+      IsIso (mateEquiv (adj i) (adj j) (TwoSquare.mk _ _ _ _ (γ h).inv)).natTrans) :
+    LevelwiseLeftAdjoint c c' F where
+  L := L
+  R := R
+  adj := adj
+  α := α
+  β h := (γ h).inv
+  comm h x := by
+    rw [hcocycle h x, Iso.hom_inv_id_app_assoc, ← Functor.map_comp_assoc, Iso.inv_hom_id_app,
+      Functor.map_id, Category.id_comp]
+  isIso_mate h y := by
+    have := hmate h
+    exact NatIso.isIso_app_of_isIso _ y
+
+variable (A : LevelwiseLeftAdjoint c c' F)
 
 /-- The mate `R i ⋙ c.T h ⟶ c'.T h ⋙ R j` of `β h`. -/
 abbrev mate {i j : I} (h : i ≤ j) : A.R i ⋙ c.T h ⟶ c'.T h ⋙ A.R j :=
