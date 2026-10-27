@@ -87,6 +87,56 @@ lemma exceptionalProjectionMorphismOfCompactification_eq_adjunction
 
 end General
 
+section GenericIso
+
+variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
+  (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)]
+  {X Y : Over (Spec (.of k))}
+  [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom] [LocallyOfFiniteType Y.hom]
+  [QuasiCompact Y.hom] [IsSeparated Y.hom] {f : X ⟶ Y}
+
+/-- On the ambient derived category, the inverse of the composition isomorphism of the derived
+pullbacks on bounded constructible complexes is that of `leftDerivedUpperStarComp`. -/
+lemma ι_map_boundedConstructibleUpperStarComp_inv_app {Z : Over (Spec (.of k))}
+    [LocallyOfFiniteType Z.hom] [QuasiCompact Z.hom] [IsSeparated Z.hom] (i : X ⟶ Z) (g : Z ⟶ Y)
+    (B : Dᵇc(Y.left)⟦Λ⟧) :
+    (boundedConstructible _).ι.map ((boundedConstructibleUpperStarComp Λ ℓ i g).inv.app B) =
+      (leftDerivedUpperStarComp Λ i.left g.left).inv.app B.obj := by
+  simp only [boundedConstructibleUpperStarComp, boundedConstructibleUpperStarCompatibility,
+    ObjectProperty.liftCompιIso, Functor.FullyFaithful.preimageIso_inv, Iso.trans_inv,
+    Functor.FullyFaithful.whiskeringRight_preimage_app, NatTrans.comp_app, Iso.symm_inv,
+    Functor.isoWhiskerLeft_inv, Functor.isoWhiskerRight_inv, Functor.whiskerLeft_app,
+    Functor.whiskerRight_app, Iso.refl_hom, Iso.refl_inv, NatTrans.id_app,
+    Functor.associator_hom_app, Functor.associator_inv_app]
+  simp
+  erw [Category.id_comp]
+  erw [CategoryTheory.Functor.map_id]
+  exact Category.id_comp _
+
+/-- The composition isomorphism `Lf^* ≅ Lg^* ⋙ Li^*` along `f = i ≫ g` on bounded constructible
+complexes is that of the ambient derived categories. -/
+lemma ι_map_eqToIso_trans_boundedConstructibleUpperStarComp_inv_app {Z : Over (Spec (.of k))} [LocallyOfFiniteType Z.hom] [QuasiCompact Z.hom]
+    [IsSeparated Z.hom] (i : X ⟶ Z) (g : Z ⟶ Y) (w : i ≫ g = f) (B : Dᵇc(Y.left)⟦Λ⟧) :
+    (boundedConstructible _).ι.map
+      ((eqToIso (congrArg (boundedConstructibleUpperStar Λ ℓ) w.symm) ≪≫
+        boundedConstructibleUpperStarComp Λ ℓ i g).inv.app B) =
+      (eqToIso (congrArg (fun h : X ⟶ Y ↦ L((h.left)^*⟦Λ⟧)) w.symm) ≪≫
+        leftDerivedUpperStarComp Λ i.left g.left).inv.app B.obj := by
+  subst w
+  simp only [eqToIso_refl, Iso.refl_trans]
+  exact ι_map_boundedConstructibleUpperStarComp_inv_app Λ ℓ i g B
+
+/-- `leftDerivedUpperStarOverCompactificationIso` as an `eqToIso` followed by the composition
+isomorphism. -/
+lemma leftDerivedUpperStarOverCompactificationIso_eq (c : Compactification f.left) :
+    leftDerivedUpperStarOverCompactificationIso Λ c =
+      eqToIso (congrArg (fun h : X ⟶ Y ↦ L((h.left)^*⟦Λ⟧)) c.overI_overG.symm) ≪≫
+        leftDerivedUpperStarComp Λ c.overI.left c.overG.left :=
+  rfl
+
+
+end GenericIso
+
 variable (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).Prime]
   [Fact (ringChar k ≠ ℓ)]
 
@@ -162,29 +212,17 @@ variable {X Y : Over (Spec (.of k))}
   [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom] [LocallyOfFiniteType Y.hom]
   [QuasiCompact Y.hom] [IsSeparated Y.hom] {f : X ⟶ Y}
 
-/-- The composition isomorphism `Lf^* ≅ Lp^* ⋙ Li^*` of a compactification
-`c = (X ⟶[i] Z ⟶[p] Y)` of `f` on bounded constructible complexes. -/
-noncomputable def boundedConstructibleUpperStarCompactificationIso (c : Compactification f.left) :
-    boundedConstructibleUpperStar 𝐐 ℓ f ≅
-      boundedConstructibleUpperStar 𝐐 ℓ c.overG ⋙ boundedConstructibleUpperStar 𝐐 ℓ c.overI :=
-  eqToIso (by rw [c.overI_overG]) ≪≫ boundedConstructibleUpperStarComp _ ℓ c.overI c.overG
-
-/-- The composition isomorphism of a compactification on bounded constructible complexes is that
-of the ambient derived categories. -/
-lemma boundedConstructibleUpperStarCompactificationIso_inv_app_hom (c : Compactification f.left)
-    (B : Dᵇc(Y.left)⟦𝐐⟧) :
-    (boundedConstructible _).ι.map
-      ((boundedConstructibleUpperStarCompactificationIso ℓ c).inv.app B) =
-      (leftDerivedUpperStarOverCompactificationIso _ c).inv.app B.obj := by
-  sorry
-
 set_option profiler true in
 /-- **The exceptional projection morphism of a compactification on bounded constructible
 complexes**: for a compactification `c = (X ⟶[i] Z ⟶[p] Y)` of `f`, `PF^c_{K,B}` is the
 projection morphism of `Lp^* ⊣ Rp_*` at `i_! K`, followed by `Rp_*` of the inverse of the
 projection comparison of `i_! ⊣ Li^*` and of `Li^* Lp^* ≅ Lf^*`. -/
 lemma homMk_exceptionalProjectionMorphismOfCompactification_eq (c : Compactification f.left)
-    (K : Dᵇc(X.left)⟦𝐐⟧) (B : Dᵇc(Y.left)⟦𝐐⟧) :
+    (K : Dᵇc(X.left)⟦𝐐⟧) (B : Dᵇc(Y.left)⟦𝐐⟧)
+    (ε : (boundedConstructibleUpperStar _ ℓ c.overI).obj
+      ((boundedConstructibleUpperStar _ ℓ c.overG).obj B) ⟶ (boundedConstructibleUpperStar _ ℓ f).obj B)
+    (hε : (boundedConstructible _).ι.map ε =
+      (leftDerivedUpperStarOverCompactificationIso _ c).inv.app B.obj) :
     ObjectProperty.homMk
         (X := (boundedConstructibleLowerShriekOfCompactification ℓ c).obj K ⊗ B)
         (Y := (boundedConstructibleLowerShriekOfCompactification ℓ c).obj
@@ -197,7 +235,7 @@ lemma homMk_exceptionalProjectionMorphismOfCompactification_eq (c : Compactifica
               c.overI).projectionComparison K
               ((boundedConstructibleUpperStar _ ℓ c.overG).obj B)) ≫
             (boundedConstructibleOpenImmersionLowerShriek _ ℓ c.overI).map
-              (K ◁ (boundedConstructibleUpperStarCompactificationIso ℓ c).inv.app B)) := by
+              (K ◁ ε)) := by
   refine (ObjectProperty.fullyFaithfulι (boundedConstructible _)).map_injective ?_
   conv_lhs => rw [ObjectProperty.ι_map, ObjectProperty.homMk_hom,
     exceptionalProjectionMorphismOfCompactification_eq_adjunction]
@@ -206,7 +244,7 @@ lemma homMk_exceptionalProjectionMorphismOfCompactification_eq (c : Compactifica
       ι_map_boundedConstructibleLowerStar_map, Functor.map_comp, Functor.map_inv]
     simp only [boundedConstructibleOpenImmersionProjectionComparison_hom]
     rw [ι_map_boundedConstructibleOpenImmersionLowerShriek_map]
-    simp only [ι_map_whiskerLeft, boundedConstructibleUpperStarCompactificationIso_inv_app_hom]
+    simp only [ι_map_whiskerLeft, hε]
   rfl
 
 end AlgebraicGeometry.ProEtale.CondensedRing
