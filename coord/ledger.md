@@ -19982,3 +19982,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 20:59 L: merged deliver/F8/Sheaf.Paper.ExceptionalProperOpenOriginProperties (stage 3; reviewer PASS; first push; landing 20261027T205952-L-1639461 (interface); batch 20261027T205736; modules 3; new nodes 2)
 - 20:59 L: merged deliver/F9/Sheaf.Paper.ExceptionalSiteOriginComparisonCore (stage 3; reviewer PASS; first push; landing 20261027T205953-L-1639841 (interface); batch 20261027T205736; modules 1; new nodes 0)
 - 20:59 L: merged deliver/F9/Sheaf.Paper.RationalRealizationTensorComparison (stage 3; reviewer FIX; first push; landing 20261027T205955-L-1640662 (interface); batch 20261027T205736; modules 3; new nodes 1)
+- 20:59 L: merged deliver/F9/Sheaf.SixFunctors.CoefQbarVerdierHomComparisonExtension (stage 3; reviewer PASS; first push; landing 20261027T205957-L-1640986 (interface); batch 20261027T205736; modules 2; new nodes 1)

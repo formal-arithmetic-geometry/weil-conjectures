@@ -5,6 +5,8 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import Sheaf.SixFunctors.CoefQbarVerdierHomComparisonComponents
+import Sheaf.SixFunctors.CoefQbarVerdierHomComparisonScalarPasting
+import Sheaf.SixFunctors.RationalHomScalarEvaluation
 
 /-! # Scalar square for the specified dual-to-Hom comparison
 
@@ -19,7 +21,7 @@ universe u v
 open CategoryTheory Opposite AlgebraicGeometry AlgebraicGeometry.Scheme
 
 namespace WeilConjectures.CoefQbarVerdier.HomComparison
-open AlgebraicallyClosedCoefficients (Index)
+open AlgebraicallyClosedCoefficients (Index Coefficient)
 open GeneralAlgebraicallyClosedCoefficients (inclusion stageSystem)
 
 variable (D : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (hl : l ≠ D.p)
@@ -59,6 +61,14 @@ theorem component_extension (B : Duality D l hl Ω X)
         (component l Ω X D hl B K).hom =
       (component l Ω X D hl B ((inclusion L).obj (K.toStage h))).hom ≫
         (homDual l Ω X B.omega (fun M ↦ allPairs l Ω X D hl B.finite M B.omega)).map
-          ((stageSystem l Ω X).isoToStage K h).hom.op := by sorry
+          ((stageSystem l Ω X).isoToStage K h).hom.op   := by
+  have hs := RationalOperations.rationalHom_scalar_evaluation D l hl X
+    (Coefficient.{u} l Ω K.stage)
+    (Coefficient.{u} l Ω L)
+    (AlgebraicallyClosedCoefficients.coefficientInclusion l Ω K.stage L h)
+    (B.finite.omega K.stage) (B.finite.omega L)
+    (B.finite.datum K.stage) (B.finite.datum L)
+    (B.finite.hom K.stage) (B.finite.hom L)
+  exact component_extension_of_scalar_compatibility D l hl Ω X B K L h hs
 
 end WeilConjectures.CoefQbarVerdier.HomComparison
