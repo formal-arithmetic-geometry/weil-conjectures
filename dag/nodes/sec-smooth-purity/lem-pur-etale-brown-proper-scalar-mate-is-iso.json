@@ -1,0 +1,89 @@
+{
+ "id": "lem-pur-etale-brown-proper-scalar-mate-is-iso",
+ "kind": "statement",
+ "title": "Invertibility of the proper Brown scalar mate",
+ "statement": "For the proper strict-etale Brown data and m≤n with finite source quotient ring, the normalized geometric mate of the derivedTensor comparison is an isomorphism of functors:\n```lean\nIsIso ((mateEquiv (B.level n).adjunction (B.level m).adjunction\n  (.mk _ _ _ _ (B.derivedTensor h).hom)).natTrans)\n```",
+ "source": {
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Construction 4.1, Constructions 5.14–5.15 and Lemma 5.16; Stacks 03CY, 06YY, 07A4 and 0GL6. The corresponding local step of lem-pur-etale-brown-level-comparisons."
+ },
+ "stmt_deps": [
+  "def-per-strict-etale-system-interfaces",
+  "def-pur-coefficient-system-image-data",
+  "def-pur-etale-brown-projection-realization"
+ ],
+ "proof": [
+  {
+   "step": 1,
+   "text": "Apply the finite-coefficient proper projection formula after restriction to ordinary scalars; the scalar pullback and direct-image comparisons are invertible, and exact restriction reflects isomorphisms.",
+   "uses": [
+    "lem-fix-etale-proper-coefficient-tensor-unit",
+    "lem-pur-etale-scalar-mate-projection"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-fix-etale-proper-coefficient-tensor-unit",
+  "lem-pur-etale-scalar-mate-projection"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Zheng Construction 4.1 and Constructions 5.14–5.15, Lemma 5.16",
+  "place": "The local realization/scalar step of lem-pur-etale-brown-level-comparisons, expanded using the recorded interfaces."
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.EtaleBrownProperScalarTransport",
+  "date": "2026-10-28",
+  "group": "D8"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-operations",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Local step of lem-pur-etale-brown-level-comparisons; the inherited created.item chain ends in a module name and has no imported blueprint ancestor.",
+   "via": [
+    "lem-pur-etale-brown-level-comparisons",
+    "lem-pur-etale-brown-geometric-comparisons",
+    "lem-pur-etale-system-brown-construction"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.EtaleBrownProperScalarMateIso",
+  "file": "lean/Sheaf/Paper/EtaleBrownProperScalarMateIso.lean",
+  "declaration": "AlgebraicGeometry.etaleBrownProperScalarMate_isIso",
+  "statement": "theorem etaleBrownProperScalarMate_isIso (O : Type (u + 1)) [CommRing O] (t : O) {V W : Scheme.{u}} (g : V ⟶ W) [IsProper g] (A : StrictEtaleOrdinaryImage O t g) (PW : StrictEtaleEvaluation W O t) (PV : StrictEtaleEvaluation V O t) (B : CoefficientSystemDerivedImage (J := W.smallEtaleTopology) (K := V.smallEtaleTopology) O t _ _ _ A PW PV) (RV : StrictEtaleBrownRealization O t V PV) (RW : StrictEtaleBrownRealization O t W PW) (rg : ∀ n, StrictEtaleBrownImageRealization O t g n A (B.level n) RV RW) {m n : ℕ} (h : m ≤ n) [Finite (strictEtaleBrownRing O t n)] : IsIso ((mateEquiv (B.level n).adjunction (B.level m).adjunction (.mk _ _ _ _ (B.derivedTensor h).hom)).natTrans)",
+  "branch": "sheaf-dag",
+  "by": "D8",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D8",
+  "result": "pass",
+  "landing": "20261027T205908-L-1630895",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D8",
+  "result": "pass",
+  "landing": "20261027T205908-L-1630895",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

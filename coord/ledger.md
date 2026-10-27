@@ -19947,3 +19947,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 20:59 L: merged deliver/D6/Sheaf.Paper.EtaleBrownLevelRealization (stage 3; reviewer PASS; first push; landing 20261027T205904-L-1629634 (interface); batch 20261027T205736; modules 3; new nodes 2)
 - 20:59 L: merged deliver/D7/Sheaf.Paper.EtaleBrownOpenScalarTransport (stage 3; reviewer PASS; first push; landing 20261027T205906-L-1630054 (interface); batch 20261027T205736; modules 3; new nodes 2)
 - 20:59 L: merged deliver/D7/Sheaf.Paper.NativeCompactSupportIntegralScalarMorphism (stage 3; reviewer PASS; first push; landing 20261027T205907-L-1630480 (interface); batch 20261027T205736; modules 3; new nodes 2)
+- 20:59 L: merged deliver/D8/Sheaf.Paper.EtaleBrownProperScalarTransport (stage 3; reviewer PASS; first push; landing 20261027T205908-L-1630895 (interface); batch 20261027T205736; modules 3; new nodes 2; change records: coord/changes/EtaleBrownProperScalarTransport.md)

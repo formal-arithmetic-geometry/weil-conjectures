@@ -6,6 +6,8 @@ Authors: SHEAF group M6
 module
 
 public import Sheaf.Paper.EtaleBrownProjectionRealization
+import Sheaf.Paper.EtaleBrownProperScalarMateIso
+import Sheaf.Paper.EtaleBrownProperScalarSquare
 
 /-! # Proper scalar mate in normalized realizations
 
@@ -20,6 +22,7 @@ set_option genSizeOfSpec false
 set_option genInjectivity false
 set_option genCtorIdx false
 set_option synthInstance.maxSize 4096
+set_option linter.style.haveILetI false
 universe u
 open CategoryTheory CategoryTheory.Limits CategoryTheory.Functor Opposite SheafOfModules
 namespace AlgebraicGeometry
@@ -69,6 +72,15 @@ theorem etaleBrownProperScalarTransport
           (Etale.scalarExtension (strictEtaleBrownRingMap O t h) W).map
             ((rg n).right.hom.app P) ≫
           (Etale.scalarMate (strictEtaleBrownRingMap O t h) g).app
-            ((RV.derived n).obj P) := by sorry
+            ((RV.derived n).obj P) := by
+  let q := (mateEquiv (B.level n).adjunction (B.level m).adjunction
+    (.mk _ _ _ _ (B.derivedTensor h).hom)).natTrans
+  letI : IsIso q := etaleBrownProperScalarMate_isIso O t g A PW PV B RV RW rg h
+  let p : (PV.scalar h).derived ⋙ (B.level m).direct ≅
+      (B.level n).direct ⋙ (PW.scalar h).derived := (asIso q).symm
+  refine ⟨p, ?_, ?_⟩
+  · exact rfl
+  · apply etaleBrownProperScalarSquare O t g A PW PV B RV RW rg h p
+    rfl
 
 end AlgebraicGeometry
