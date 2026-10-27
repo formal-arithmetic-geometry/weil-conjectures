@@ -1,0 +1,67 @@
+/-
+Copyright (c) 2026 The SHEAF contributors. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: SHEAF group H4
+-/
+module
+
+public import Sheaf.Paper.DiagonalCoefficientFiniteRealization
+public import Sheaf.Paper.DiagonalCoefficientUnitPush
+
+/-! # Finite realization of the coefficient-unit arrow
+
+Source: diagonal tower coefficient changes (1), the normalized finite push square.
+-/
+
+@[expose] public noncomputable section
+set_option autoImplicit false
+set_option Elab.async false
+set_option genSizeOf false
+set_option genInjectivity false
+set_option synthInstance.maxSize 4096
+universe u
+open CategoryTheory CategoryTheory.Limits Opposite
+open scoped CategoryTheory.Obj CategoryTheory.Functor
+namespace AlgebraicGeometry.ProEtale.DiagonalCoefficients
+
+attribute [local irreducible] Functor.mapDerivedCategory Functor.leftAdjoint
+  Functor.rightAdjoint FiniteRealization.derivedUnit
+
+/-- Finite realization preserves the canonical coefficient-unit adjunct.
+Source: diagonal tower coefficient changes (1), ordinary finite units and adjunction.
+(blueprint: lem-diagonal-finite-unit-push).
+
+Proof: the ordinary push-square equation identifies its underlying map with the
+ordinary direct image comparison. The finite realization unit is normalized by a
+unital coefficient-ring isomorphism, so the ordinary coefficient-unit adjunct is
+sent to the ordinary constant-coefficient unit adjunct. More explicitly, after
+the faithful underlying-sheaf functor, compare the maps on the coefficient-one
+section. The ordinary-square equation and the unital coefficient isomorphisms
+send this section to one on both sides. A morphism from the constant free
+rank-one module is determined by that section, giving the ordinary equality.
+Apply the single-object case of the full derived-unit normalization to the regular
+module. The canonical
+single comparisons cancel; hcanonical identifies the remaining supplied right
+derived unit with the canonical derived unit. The canonical derived adjunction
+unit formula then gives the adjunct of geoP1UnitPullback. This statement concerns
+only coefficient units: no Tate-line comparison, Chern class or trace occurs, and
+no nonzero-ring assumption is needed. -/
+theorem finite_unit_push
+    {R : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}} [MonObj R] [IsCommMonObj R]
+    {A : Type (u + 1)} [CommRing A] (Y : Scheme.{u})
+    (eY : FiniteRealization R A Y) (eP : FiniteRealization R A (ProjectiveLine Y))
+    (D : DiagonalRightDerived (CondensedRing.lowerStar R (ProjectiveLine Y ↘ Y)))
+    (D' : DiagonalRightDerived (lowerStar (ModuleCat.{u + 1} A) (ProjectiveLine Y ↘ Y)))
+    (hc : D'.R = geoP1Pushforward A (ProjectiveLine Y ↘ Y))
+    (hcanonical : IsCanonicalRightDerived
+      (lowerStar (ModuleCat.{u + 1} A) (ProjectiveLine Y ↘ Y)) D' hc)
+    (s : FinitePushSquare R A (ProjectiveLine Y ↘ Y) eP eY D D') :
+    let t := s.derived.iso.hom ≫
+      Functor.whiskerLeft eP.F.mapDerivedCategory (eqToIso hc).hom
+    eY.F.mapDerivedCategory.map (coefficientUnitPush R Y D) ≫
+        t.app (unit R (ProjectiveLine Y)) ≫
+        (geoP1Pushforward A (ProjectiveLine Y ↘ Y)).map eP.derivedUnit =
+      eY.derivedUnit ≫
+        finiteUnitAdjunct A Y := by sorry
+
+end AlgebraicGeometry.ProEtale.DiagonalCoefficients

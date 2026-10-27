@@ -5,10 +5,10 @@
   "place": "paragraph (1), applying coefficient extension to the positive section class; trace proof paragraph (1), its adjunction"
  },
  "proof_origin": {
-  "by": "D7",
+  "by": "H4",
   "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-coefficients.proof.md",
   "place": "paragraph (1), applying coefficient extension to the positive section class; trace proof paragraph (1), its adjunction",
-  "note": "Coherence for the canonical model adjunct, separated from local finite Kummer normalization. Canonical systemChern is retained to preserve its actual shift instance; no extra arbitrary-arrow generalization is needed."
+  "note": "Factor through canonical coefficient-unit arrows. The two scalar squares and generic single-object square are proved; only the first completed square and the finite unit square remain as strictly smaller obligations."
  },
  "mathlib_searches": [
   {
@@ -77,42 +77,24 @@
  ],
  "proof": [
   {
-   "text": "Use model.chernAdjoint as it occurs in systemChern. q_model=identity identifies the model Picard class with O(1). The ordinary section and full derived-unit normalizations identify the varying, completed and limit comparisons as adjunction mates. Restricting the completed adjunct of z gives the specified limit of systemChern. The two normalization equations, completeness and full faithfulness identify it with c.",
+   "text": "Apply completed_adjunct_square to the supplied normalized pair. This gives the first completed-realization square.",
    "uses": [
-    "def-sfb-diagonal-trace-presentation",
-    "def-sfb-diagonal-trace-coefficients",
-    "lem-sfb-diagonal-complete-scalar-restriction",
-    "lem-sfb-diagonal-completed-line-complete",
-    "def-sfb-diagonal-coefficient-reference"
+    "lem-diagonal-completed-adjunct-square"
    ],
    "elementary": false
   },
   {
-   "text": "Apply adjunction naturality to the two RestrictionSquare.mate transformations. Their defining mate equations and Endpoint.normalization identify coefficient and positive-line endpoints, also for the nonflat quotient. This transports any adjunct, without using a Chern class.",
+   "text": "Apply the proved abstract coefficient_adjunct_transport assembly theorem. Unfold the prescribed localFunctor, localUnitInv and localLine endpoints, and associate compositions to identify its localAdjunctArrow with the arrow in Transported.",
    "uses": [
-    "def-sfb-diagonal-coefficient-scalars"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "The finite ordinary normalization and common derived-unit equation identify the finite pushforward comparison as the finite adjunction mate. presentation.hcanonical fixes its canonical model. Compose the four equations and the endpoint composites to obtain exactly the displayed formula.",
-   "uses": [
-    "def-sfb-diagonal-coefficient-finite-realization",
-    "lem-diagonal-finite-trace-chern-criterion",
+    "lem-diagonal-coefficient-adjunct-assembly",
     "def-diagonal-uniformizer-local-endpoints"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "def-sfb-diagonal-trace-presentation",
-  "def-sfb-diagonal-trace-coefficients",
-  "lem-sfb-diagonal-complete-scalar-restriction",
-  "lem-sfb-diagonal-completed-line-complete",
-  "def-sfb-diagonal-coefficient-reference",
-  "def-sfb-diagonal-coefficient-scalars",
-  "def-sfb-diagonal-coefficient-finite-realization",
-  "lem-diagonal-finite-trace-chern-criterion",
+  "lem-diagonal-completed-adjunct-square",
+  "lem-diagonal-coefficient-adjunct-assembly",
   "def-diagonal-uniformizer-local-endpoints"
  ],
  "lean": {
@@ -142,9 +124,9 @@
   "date": "2026-10-27",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "D7",
+  "group": "H4",
   "result": "pass",
-  "landing": "20261027T123430-L-2297006",
+  "landing": "20261027T234001-L-4153531",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
