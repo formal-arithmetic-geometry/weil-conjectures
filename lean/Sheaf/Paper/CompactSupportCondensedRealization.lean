@@ -1,0 +1,1101 @@
+/-
+Copyright (c) 2026 The SHEAF contributors. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: SHEAF group NC
+-/
+module
+
+public import Sheaf.Paper.CondensedCompactSupportProjection
+public import Sheaf.Paper.CompactSupportCondensedRealizationSetup
+public import Sheaf.Paper.SemilinearCompactSupportCoefficientTransport
+public import Sheaf.Paper.CompactSupportReductionTower
+public import Sheaf.SixFunctors.SemilinearProperOpenMatePasting
+public import Sheaf.Paper.CoefDerivedSystemEvaluationCalculus
+public import Sheaf.Paper.SemilinearDerivedSections
+public import Sheaf.Paper.CondensedERealization
+public import Sheaf.Paper.IntegralScalarExtensionUniverses
+public import Sheaf.CategoryTheory.LocalizedModuleExactForSystems
+public import Sheaf.Paper.CondensedCoefficientComparisons
+public import Sheaf.Paper.CompletedCoefficientPresentationTransport
+public import Sheaf.Paper.IntegralCompactSupportCoefficientComparison
+public import Sheaf.Paper.BasicOperationsCoefficientReduction
+
+import Sheaf.Paper.OmegaProperCoefficientProjection
+import all WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.Compatibility
+import Sheaf.AlgebraicGeometry.BoundedConstructibleExtendScalars
+import WeilConjectures.ConstructibleSheaf.ProEtaleModule.IsoClosed
+import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.FiniteType
+
+/-! # Compact-support condensed realization
+
+Source: Bhatt--Scholze 6.7.2, 6.7.14--6.7.17, 6.8.14--6.8.15;
+blueprint sk-thm-purity-transport, Steps 2--3.
+(blueprint: lem-pur-compact-support-condensed-realization).
+
+## Main definitions and statements
+
+- `IntegralModel`, `alpha`: actual strict-tower reconstruction and its counit.
+- `condensedProjection`: the original proper/open scalar projection.
+- `FiniteComparison`: full-system and rationalized coefficient compatibility.
+- `systemRefinement`, `fieldRefinement`: unit-normalized refinement arrows.
+- `ComparisonFamily`, `compactSupport_condensedRealization`: simultaneous comparisons.
+-/
+
+@[expose] public noncomputable section
+set_option autoImplicit false
+set_option Elab.async false
+set_option linter.unusedSectionVars false
+
+set_option synthInstance.maxSize 4096
+set_option backward.isDefEq.respectTransparency true
+set_option backward.isDefEq.respectTransparency.types true
+set_option genSizeOf false
+set_option genSizeOfSpec false
+set_option genInjectivity false
+set_option genCtorIdx false
+attribute [-instance] WeilConjectures.integralOperationsSiteSmall
+attribute [-instance] WeilConjectures.integralOperationsAbSheafify
+attribute [-instance] WeilConjectures.integralOperationsAbLocallyBijective
+attribute [-instance] WeilConjectures.IntegralHom.derivedCategory
+
+attribute [local irreducible] HasDerivedCategory.standard
+  HasDerivedCategory.ofHasKInjectiveResolutions _root_.instCategoryDerivedCategory
+
+attribute [local irreducible] CategoryTheory.Sheaf.monoidalCategory
+  CategoryTheory.Mod.monoidalCategory
+attribute [local irreducible] CategoryTheory.Functor.leftDerivedFunctorIsoMapDerivedCategory
+  CategoryTheory.Functor.CommShift.ofIso CategoryTheory.Functor.leftDerivedFunctor
+  CategoryTheory.Functor.mapDerivedCategory CategoryTheory.Mod.extendScalars
+attribute [local irreducible] DerivedCategory.monoidalClosed
+  CategoryTheory.Mod.monoidalClosed AlgebraicGeometry.ProEtale.upperStarFromPoint
+
+attribute [local irreducible] WeilConjectures.integralCoefficientCommRingSheaf
+
+attribute [local irreducible] WeilConjectures.CompactSupportCondensedRealization.encodingScalarMap
+  WeilConjectures.CompactSupportCondensedRealization.IsIntegralScalarSquare
+
+universe u
+
+open CategoryTheory CategoryTheory.Limits Opposite
+open AlgebraicGeometry AlgebraicGeometry.Scheme AlgebraicGeometry.ProEtale
+open scoped CategoryTheory.Obj
+
+namespace WeilConjectures.CompactSupportCondensedRealization
+
+namespace CoefficientBasisProof
+
+open CategoryTheory.MonoidalCategory CategoryTheory.MonObj
+open Profinite
+
+private def basisRingPresheafMap {R S : Type u}
+    [Ring R] [TopologicalSpace R] [IsTopologicalRing R]
+    [Ring S] [TopologicalSpace S] [IsTopologicalRing S]
+    (a : R →+* S) (ha : Continuous a) :
+    continuousCoefficientRingPresheaf R ⟶ continuousCoefficientRingPresheaf S where
+  app U := RingCat.ofHom (ULift.ringEquiv.symm.toRingHom.comp
+    ((a.compLeftContinuous U.unop ha).comp ULift.ringEquiv.toRingHom))
+  naturality _ _ _ := rfl
+
+private def basisRingSheafMap {R S : Type u}
+    [Ring R] [TopologicalSpace R] [IsTopologicalRing R]
+    [Ring S] [TopologicalSpace S] [IsTopologicalRing S]
+    (a : R →+* S) (ha : Continuous a) :
+    continuousCoefficientRingSheaf R ⟶ continuousCoefficientRingSheaf S :=
+  ⟨basisRingPresheafMap a ha⟩
+
+private noncomputable def continuousAddHomPresheaf
+    {S T : Type u} [Ring S] [TopologicalSpace S] [IsTopologicalRing S]
+    [Ring T] [TopologicalSpace T] [IsTopologicalRing T]
+    (l : S →+ T) (hl : Continuous l) :
+    continuousCoefficientRingPresheaf S ⋙ forget₂ RingCat.{u + 1} Ab.{u + 1} ⟶
+      continuousCoefficientRingPresheaf T ⋙ forget₂ RingCat.{u + 1} Ab.{u + 1} where
+  app U := AddCommGrpCat.ofHom
+    { toFun f := ULift.up ⟨fun x ↦ l (f.down x), hl.comp f.down.continuous⟩
+      map_zero' := by
+        change ULift.up _ = ULift.up _
+        congr 1
+        ext x
+        exact map_zero l
+      map_add' f g := by
+        change ULift.up _ = ULift.up _
+        congr 1
+        ext x
+        exact map_add l _ _ }
+  naturality _ _ _ := rfl
+
+private noncomputable def continuousLinearPresheafHom
+    {R S : Type u} [CommRing R] [TopologicalSpace R] [IsTopologicalRing R]
+    [CommRing S] [TopologicalSpace S] [IsTopologicalRing S] [Algebra R S]
+    (ha : Continuous (algebraMap R S)) (l : S →ₗ[R] R) (hl : Continuous l) :
+    (Mod.comap (Functor.whiskerRight (basisRingPresheafMap
+      (algebraMap R S) ha) (forget₂ RingCat.{u + 1} Ab.{u + 1}))).obj
+      (Mod.regular (continuousCoefficientRingPresheaf S ⋙ forget₂ RingCat.{u + 1} Ab.{u + 1})) ⟶
+    Mod.regular (continuousCoefficientRingPresheaf R ⋙ forget₂ RingCat.{u + 1} Ab.{u + 1}) :=
+  Mod.homMk (continuousAddHomPresheaf l.toAddMonoidHom hl) (by
+    ext U : 2
+    apply AddCommGrpCat.hom_ext_toIntLinearMap
+    apply TensorProduct.ext'
+    intro r s
+    change ULift.up (⟨fun x ↦ l ((algebraMap R S (r.down x)) * s.down x), _⟩ :
+      C(U.unop, R)) = ULift.up _
+    congr 1
+    ext x
+    change l ((algebraMap R S (r.down x)) * s.down x) = r.down x * l (s.down x)
+    simpa only [Algebra.smul_def, Algebra.algebraMap_self, RingHom.id_apply] using
+      l.map_smul (r.down x) (s.down x))
+
+private noncomputable def continuousLinearPresheafHomFrom
+    {R S : Type u} [CommRing R] [TopologicalSpace R] [IsTopologicalRing R]
+    [CommRing S] [TopologicalSpace S] [IsTopologicalRing S] [Algebra R S]
+    (ha : Continuous (algebraMap R S)) (l : R →ₗ[R] S) (hl : Continuous l) :
+    Mod.regular (continuousCoefficientRingPresheaf R ⋙ forget₂ RingCat.{u + 1} Ab.{u + 1}) ⟶
+    (Mod.comap (Functor.whiskerRight (basisRingPresheafMap
+      (algebraMap R S) ha) (forget₂ RingCat.{u + 1} Ab.{u + 1}))).obj
+      (Mod.regular (continuousCoefficientRingPresheaf S ⋙ forget₂ RingCat.{u + 1} Ab.{u + 1})) :=
+  Mod.homMk (continuousAddHomPresheaf l.toAddMonoidHom hl) (by
+    ext U : 2
+    apply AddCommGrpCat.hom_ext_toIntLinearMap
+    apply TensorProduct.ext'
+    intro r s
+    change ULift.up _ = ULift.up _
+    congr 1
+    ext x
+    change l (r.down x * s.down x) = algebraMap R S (r.down x) * l (s.down x)
+    simpa only [Algebra.smul_def, Algebra.algebraMap_self, RingHom.id_apply] using
+      l.map_smul (r.down x) (s.down x))
+
+attribute [-instance] CategoryTheory.catToReflQuiver in
+private noncomputable def continuousBasisIso
+    {R S : Type u} [Field R] [TopologicalSpace R] [IsTopologicalRing R]
+    [Field S] [TopologicalSpace S] [IsTopologicalRing S] [Algebra R S]
+    (ha : Continuous (algebraMap R S)) (n : ℕ) (b : Module.Basis (Fin n) R S)
+    (hc : ∀ i, Continuous (b.coord i)) :
+    (Mod.comap (Functor.whiskerRight (basisRingPresheafMap
+      (algebraMap R S) ha) (forget₂ RingCat.{u + 1} Ab.{u + 1}))).obj
+      (Mod.regular (continuousCoefficientRingPresheaf S ⋙ forget₂ RingCat.{u + 1} Ab.{u + 1})) ≅
+    Mod.finiteFree
+      (continuousCoefficientRingPresheaf R ⋙ forget₂ RingCat.{u + 1} Ab.{u + 1}) n := by
+  let p (i : Fin n) := continuousLinearPresheafHom ha (b.coord i) (hc i)
+  let q (i : Fin n) := continuousLinearPresheafHomFrom ha
+    (LinearMap.toSpanSingleton R S (b i))
+    (by
+      change Continuous (fun r : R ↦ r • b i)
+      simp_rw [Algebra.smul_def]
+      exact ha.mul_const (b i))
+  refine
+    { hom := biproduct.lift p
+      inv := biproduct.desc q
+      hom_inv_id := ?_
+      inv_hom_id := ?_ }
+  · rw [biproduct.lift_desc]
+    apply Mod.hom_ext
+    change (Mod.forget _).map (∑ i, p i ≫ q i) = _
+    rw [Functor.map_sum]
+    apply NatTrans.ext
+    funext U
+    simp only [NatTrans.app_sum]
+    apply AddCommGrpCat.hom_ext
+    apply AddMonoidHom.ext
+    intro f
+    apply ULift.ext
+    apply ContinuousMap.ext
+    intro x
+    let ev : (AddCommGrpCat.of (ULift.{u + 1} C(U.unop, S)) ⟶
+        AddCommGrpCat.of (ULift.{u + 1} C(U.unop, S))) →+ S :=
+      { toFun g := (g.hom f).down x
+        map_zero' := rfl
+        map_add' _ _ := rfl }
+    change ev (∑ i, _) = f.down x
+    exact (map_sum ev _ _).trans (b.sum_repr (f.down x))
+  · apply biproduct.hom_ext
+    intro i
+    apply biproduct.hom_ext'
+    intro j
+    simp only [Category.assoc, biproduct.lift_π, biproduct.ι_desc_assoc,
+      Category.id_comp]
+    apply Mod.hom_ext
+    by_cases hij : j = i
+    · subst j
+      rw [biproduct.ι_π_self]
+      apply NatTrans.ext
+      funext U
+      apply AddCommGrpCat.hom_ext
+      apply AddMonoidHom.ext
+      intro f
+      change ULift.up _ = f
+      apply ULift.ext
+      apply ContinuousMap.ext
+      intro x
+      change b.coord i ((f.down x) • b i) = f.down x
+      simp
+    · rw [biproduct.ι_π_ne _ hij]
+      apply NatTrans.ext
+      funext U
+      apply AddCommGrpCat.hom_ext
+      apply AddMonoidHom.ext
+      intro f
+      change ULift.up _ = (0 : ULift.{u + 1} C(U.unop, R))
+      apply ULift.ext
+      apply ContinuousMap.ext
+      intro x
+      change b.coord i ((f.down x) • b j) = 0
+      simp [hij]
+
+attribute [-instance] CategoryTheory.catToReflQuiver in
+private noncomputable def continuousBasisSheafIso
+    {R S : Type u} [Field R] [TopologicalSpace R] [IsTopologicalRing R]
+    [Field S] [TopologicalSpace S] [IsTopologicalRing S] [Algebra R S]
+    (ha : Continuous (algebraMap R S)) (n : ℕ) (b : Module.Basis (Fin n) R S)
+    (hc : ∀ i, Continuous (b.coord i)) :
+    (Mod.comap ((sheafCompose (coherentTopology Profinite.{u})
+      (forget₂ RingCat.{u + 1} Ab.{u + 1})).map
+        (basisRingSheafMap (algebraMap R S) ha))).obj
+      (Mod.regular (continuousCoefficientRingObj S)) ≅
+      Mod.finiteFree (continuousCoefficientRingObj R) n := by
+  let a := Functor.whiskerRight (basisRingPresheafMap
+    (algebraMap R S) ha) (forget₂ RingCat.{u + 1} Ab.{u + 1})
+  let sh := presheafToSheaf (coherentTopology Profinite.{u}) Ab.{u + 1}
+  let r : sh.obj (continuousCoefficientRingPresheaf R ⋙
+      forget₂ RingCat.{u + 1} Ab.{u + 1}) ≅ continuousCoefficientRingObj R :=
+    Sheaf.sheafifyRingPresheafIso _ (continuousCoefficientRingSheaf R)
+  let s : sh.obj (continuousCoefficientRingPresheaf S ⋙
+      forget₂ RingCat.{u + 1} Ab.{u + 1}) ≅ continuousCoefficientRingObj S :=
+    Sheaf.sheafifyRingPresheafIso _ (continuousCoefficientRingSheaf S)
+  letI : IsMonHom r.hom := Sheaf.isMonHom_sheafifyRingPresheafIso_hom
+    (coherentTopology Profinite.{u}) (continuousCoefficientRingSheaf R)
+  letI : IsMonHom s.hom := Sheaf.isMonHom_sheafifyRingPresheafIso_hom
+    (coherentTopology Profinite.{u}) (continuousCoefficientRingSheaf S)
+  let a' := (sheafCompose (coherentTopology Profinite.{u})
+    (forget₂ RingCat.{u + 1} Ab.{u + 1})).map
+      (basisRingSheafMap (algebraMap R S) ha)
+  have hs : a' = r.inv ≫ sh.map a ≫ s.hom :=
+    Sheaf.sheafCompose_map_eq _ (basisRingSheafMap (algebraMap R S) ha)
+  have h : a' ≫ s.inv = r.inv ≫ sh.map a :=
+    (Iso.comp_inv_eq s).2 (hs.trans (Category.assoc r.inv (sh.map a) s.hom).symm)
+  with_reducible_and_instances
+    exact Mod.freeRestrictedRegularIsoOfRingIso
+      (R := sh.obj (continuousCoefficientRingPresheaf R ⋙
+        forget₂ RingCat.{u + 1} Ab.{u + 1}))
+      (S := sh.obj (continuousCoefficientRingPresheaf S ⋙
+        forget₂ RingCat.{u + 1} Ab.{u + 1}))
+      (R' := continuousCoefficientRingObj R) (S' := continuousCoefficientRingObj S)
+      (sh.map a) a' r s h n
+      (Mod.mapFreeRestrictedRegularIso sh a n (continuousBasisIso ha n b hc))
+
+
+end CoefficientBasisProof
+
+variable (l : ℕ) [Fact l.Prime]
+  (E F : Type u) [NormedField E] [NormedField F]
+  [NormedAlgebra ℚ_[l] E] [NormedAlgebra ℚ_[l] F]
+  [FiniteDimensional ℚ_[l] E] [FiniteDimensional ℚ_[l] F]
+  (i : E →ₐ[ℚ_[l]] F)
+
+
+/-- The actual finite condensed scalar functor.
+Source: blueprint proof Step 6
+(blueprint: lem-pur-compact-support-condensed-realization). -/
+abbrev fieldScalar (W : Scheme.{u}) :=
+  condensedScalar (fieldMap l E F i) W
+
+/-- The actual finite-valued algebraic-closure scalar functor.
+Source: blueprint proof Step 13
+(blueprint: lem-pur-compact-support-condensed-realization). -/
+abbrev omegaScalar (a : E →ₐ[ℚ_[l]] PadicAlgCl l) (W : Scheme.{u}) :=
+  condensedScalar (omegaMap l E a) W
+
+variable (k : Type u) [Field k] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ l)]
+
+attribute [local irreducible] latticeScalar
+
+/-- Simultaneous reconstruction and field realization for one coefficient field.
+The reduction and realization data are the recorded dependency data; the support
+functors retain the fixed geometric compactification.
+Source: blueprint proof Steps 1--5
+(blueprint: lem-pur-compact-support-condensed-realization). -/
+structure CoefficientData where
+  realization : CondensedERealization.Data l E k
+  reduction : ∀ W : Scheme.{u}, CoefficientDerivedSystemCalculus.{u, u} l E W
+  atCompactification : ∀ (X Y : CondensedERealization.Base k)
+    (f : X.scheme ⟶ Y.scheme) [f.IsOver (Spec (.of k))] (c : Compactification f),
+    RealizationAt l E k realization reduction X Y f c
+
+/-- The rationalized coefficient square, with exactly the specified scalar and realization
+maps. Packaging this equation keeps generated comparison-record declarations small.
+Source: blueprint proof Steps 7--12
+(blueprint: lem-pur-compact-support-condensed-realization). -/
+def IsFiniteRationalSquare (A : CoefficientData l E k) (B : CoefficientData l F k)
+    (X Y : CondensedERealization.Base k) (f : X.scheme ⟶ Y.scheme)
+    [f.IsOver (Spec (.of k))] (c : Compactification f)
+    (comparison :
+    integralSupport l E c A.reduction (A.atCompactification X Y f c).integral ⋙
+        integralScalar l E F i k Y ≅
+      integralScalar l E F i k X ⋙
+        integralSupport l F c B.reduction (B.atCompactification X Y f c).integral) : Prop :=
+  ∀ K : CondensedERealization.Integral l E X.scheme,
+    ((B.realization.atObject Y).realization.functor ⋙
+      (boundedConstructible (CondensedERealization.Coefficient F Y.scheme)).ι).map
+        ((pbcRationalization Y.scheme (pbcIntegralDatum l F) (pbcUniformizer l F)).map
+          (comparison.hom.app K)) ≫
+        (B.atCompactification X Y f c).realization.hom.app
+          (ScalarLocalization.mk ((integralScalar l E F i k X).obj K)) ≫
+        (CondensedRing.rightDerivedLowerShriekOfCompactification
+          (Profinite.continuousCoefficientRingObj F) c).map
+            ((latticeScalar l E F i k X
+              (A.realization.atObject X) (B.realization.atObject X)).hom.app K) =
+      (latticeScalar l E F i k Y
+        (A.realization.atObject Y) (B.realization.atObject Y)).hom.app
+          ((integralSupport l E c A.reduction
+            (A.atCompactification X Y f c).integral).obj K) ≫
+        (fieldScalar l E F i Y.scheme).map
+          ((A.atCompactification X Y f c).realization.hom.app (ScalarLocalization.mk K)) ≫
+        (condensedProjection (fieldMap l E F i) c).app
+          (((A.realization.atObject X).realization.functor.obj (ScalarLocalization.mk K)).obj)
+
+attribute [local irreducible] IsFiniteRationalSquare
+
+/-- The finite integral comparison, with its whole-system and rationalized squares.
+These equations fix its normalization by the actual coefficient projection mate.
+Source: blueprint proof Steps 7--12
+(blueprint: lem-pur-compact-support-condensed-realization). -/
+structure FiniteComparison (A : CoefficientData l E k) (B : CoefficientData l F k)
+    (X Y : CondensedERealization.Base k) (f : X.scheme ⟶ Y.scheme)
+    [f.IsOver (Spec (.of k))] (c : Compactification f) where
+  comparison :
+    integralSupport l E c A.reduction (A.atCompactification X Y f c).integral ⋙
+        integralScalar l E F i k Y ≅
+      integralScalar l E F i k X ⋙
+        integralSupport l F c B.reduction (B.atCompactification X Y f c).integral
+  reduction : IsIntegralScalarSquare l E F i k A.reduction B.reduction X Y c
+    (A.atCompactification X Y f c).integral
+    (B.atCompactification X Y f c).integral comparison
+  rationalization : IsFiniteRationalSquare l E F i k A B X Y f c comparison
+
+
+/-- Finite field extension preserves the indicated constructible subcategory.
+Source: blueprint proof Step 6; finite free coefficient extension
+(blueprint: lem-pur-compact-support-condensed-realization).
+Proof: finite extension is finite free and exact on modules. On each constructible
+stratum it carries a finite presentation to its scalar-extended presentation and
+commutes with the pro-etale trivialization. Exactness preserves the common finite
+cohomological bounds, giving the same bounded constructibility predicate. -/
+theorem fieldScalar_preserves (W : Scheme.{u}) (K : CondensedERealization.Constructible E W) :
+    boundedConstructible (CondensedERealization.Coefficient F W)
+      ((fieldScalar l E F i W).obj K.obj) := by
+  exact boundedConstructible_leftDerivedExtendScalars_obj _ _
+    (coefficientMap (fieldMap l E F i) W) K.obj K.property
+
+/-- Extension to the finite-valued closure preserves bounded constructibility.
+Source: blueprint proof Steps 13--14; finite-coefficient two-colimit
+(blueprint: lem-pur-compact-support-condensed-realization).
+Proof: scalar extension is the filtered colimit of finite free coefficient changes
+and hence exact. Scalar-extending each finite presentation on the same finite
+stratification preserves local finite presentation and the cohomological bounds.
+The coefficient ring is the finite-subfield-valued ring throughout. -/
+theorem omegaScalar_preserves (a : E →ₐ[ℚ_[l]] PadicAlgCl l) (W : Scheme.{u})
+    (K : CondensedERealization.Constructible E W) :
+    boundedConstructible (padicAlgClRingObj W l) ((omegaScalar l E a W).obj K.obj) := by
+  exact boundedConstructible_leftDerivedExtendScalars_obj _ _
+    (coefficientMap (omegaMap l E a) W) K.obj K.property
+
+/-- Finite projection is invertible on the indicated constructible domain.
+Source: blueprint proof Step 6
+(blueprint: lem-pur-compact-support-condensed-realization).
+Proof: finite extension coefficients are finite free. The proper comparison is its
+counit transpose and identifies with a finite direct-sum comparison. Paste it with
+the open tensor comparison, normalized by the open unit. Both are invertible. -/
+theorem finiteProjection_isIso (X Y : CondensedERealization.Base k)
+    (f : X.scheme ⟶ Y.scheme) [f.IsOver (Spec (.of k))] (c : Compactification f)
+    (K : CondensedERealization.Constructible E X.scheme) :
+    IsIso ((condensedProjection (fieldMap l E F i) c).app K.obj) := by
+  classical
+  let := i.toRingHom.toAlgebra
+  have : IsScalarTower ℚ_[l] E F := IsScalarTower.of_algebraMap_eq (fun x ↦ (i.commutes x).symm)
+  have : FiniteDimensional E F := Module.Finite.of_restrictScalars_finite ℚ_[l] E F
+  let b := Module.finBasis E F
+  have hb (j : Fin (Module.finrank E F)) : Continuous (b.coord j) :=
+    ((b.coord j).restrictScalars ℚ_[l]).continuous_of_finiteDimensional
+  let e := CoefficientBasisProof.continuousBasisSheafIso
+    (coefficientEmbedding_continuous l E F i) _ b hb
+  let R := Profinite.continuousCoefficientRingObj E
+  let : HasColimitsOfSize.{u + 1, u + 1}
+      (Mod (Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) R) :=
+    IsGrothendieckAbelian.hasColimits _
+  let : HasCoproducts.{u + 1}
+      (Mod (Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) R) :=
+    fun J ↦ HasColimitsOfShape.of_small.{u + 1, u + 1} _ (Discrete J)
+  let I := ULift.{u + 1} (Fin (Module.finrank E F))
+  let e' : (∐ fun _ : I ↦ Mod.regular R) ≅
+      (Mod.comap (fieldMap l E F i)).obj
+        (Mod.regular (Profinite.continuousCoefficientRingObj F)) :=
+    Sigma.reindex Equiv.ulift (fun _ : Fin (Module.finrank E F) ↦ Mod.regular R) ≪≫
+      (biproduct.isoCoproduct _).symm ≪≫ e.symm
+  have hp := CondensedRing.finitePush_of_pointCopower c.g _ _ (fieldMap l E F i) I e'
+  have : IsIso (condensedPushScalar (fieldMap l E F i) c.g) := hp
+  unfold condensedProjection pasteScalar
+  infer_instance
+
+/-- Closure projection is the same canonical map, on the bounded constructible domain.
+Source: blueprint proof Steps 13--14
+(blueprint: lem-pur-compact-support-condensed-realization).
+Proof: express the finite-valued closure coefficient as the filtered colimit of finite
+extensions containing the image of E. Use simultaneous coefficient complexes with a
+common lower bound. Exact open extension commutes with this colimit. Bounded-below
+qcqs proper-image continuity identifies the colimit of the finite projection maps
+with this precise counit transpose. Each finite projection is invertible.
+The formal combination applies the proper-factor comparison to extension by zero,
+then pastes it with the canonical open scalar isomorphism and the associators. -/
+theorem omegaProjection_isIso (a : E →ₐ[ℚ_[l]] PadicAlgCl l)
+    (X Y : CondensedERealization.Base k)
+    (f : X.scheme ⟶ Y.scheme) [f.IsOver (Spec (.of k))] (c : Compactification f)
+    (K : CondensedERealization.Constructible E X.scheme) :
+    IsIso ((condensedProjection (omegaMap l E a) c).app K.obj) := by
+  let f' := CondensedERealization.Base.map X Y f
+  have : LocallyOfFiniteType (c.overObj (f := f')).hom := by
+    change LocallyOfFiniteType (c.g ≫ Y.scheme ↘ Spec (.of k))
+    infer_instance
+  have : QuasiCompact (c.overObj (f := f')).hom := by
+    change QuasiCompact (c.g ≫ Y.scheme ↘ Spec (.of k))
+    infer_instance
+  have : IsSeparated (c.overObj (f := f')).hom := by
+    change IsSeparated (c.g ≫ Y.scheme ↘ Spec (.of k))
+    infer_instance
+  have : IsOpenImmersion (c.overI (f := f')).left := by
+    change IsOpenImmersion c.i
+    infer_instance
+  have hK := CondensedRing.boundedConstructible_openImmersionLowerShriek_obj
+    (Profinite.continuousCoefficientRingObj E) l (c.overI (f := f')) K.obj K.property
+  let K' : CondensedERealization.Constructible E c.Z := ⟨_, hK⟩
+  let : IsNoetherian c.Z := base_noetherian k ⟨c.Z⟩
+  have := base_noetherian k Y
+  have : IsIso ((condensedPushScalar (omegaMap l E a) c.g).app
+      ((CondensedRing.openImmersionLowerShriek
+        (Profinite.continuousCoefficientRingObj E) c.i).mapDerivedCategory.obj K.obj)) :=
+    omegaProperCoefficientProjection_isIso l E a c.g K'
+  unfold condensedProjection pasteScalar
+  dsimp only [NatTrans.comp_app, Functor.associator_hom_app,
+    Functor.associator_inv_app, Functor.whiskerLeft_app, Functor.whiskerRight_app]
+  simp only [Category.id_comp, Category.comp_id]
+  infer_instance
+
+/-- The original closure proper/open composite preserves bounded constructibility.
+Source: blueprint proof Step 14
+(blueprint: lem-pur-compact-support-condensed-realization).
+Proof: view the compactification as an open immersion and a proper map over Spec(k).
+The existing open-extension theorem preserves bounded constructibility for every
+coefficient ring. The existing direct-image theorem applies to the finite-valued
+algebraic-closure coefficient via its IsFinitenessCoefficient instance. Compose these
+two preservation statements for the actual original compactification functor. -/
+theorem omegaSupport_preserves (X Y : CondensedERealization.Base k)
+    (f : X.scheme ⟶ Y.scheme) [f.IsOver (Spec (.of k))] (c : Compactification f)
+    (K : DerivedCategory (Mod (Sheaf (ProEt.topology X.scheme) Ab.{u + 1})
+      (padicAlgClRingObj X.scheme l)))
+    (hK : boundedConstructible (padicAlgClRingObj X.scheme l) K) :
+    boundedConstructible (padicAlgClRingObj Y.scheme l)
+      ((CondensedRing.rightDerivedLowerShriekOfCompactification
+        (Profinite.padicAlgClRingObj.{u} l) c).obj K) := by
+  let f' := CondensedERealization.Base.map X Y f
+  have : LocallyOfFiniteType (c.overObj (f := f')).hom := by
+    change LocallyOfFiniteType (c.g ≫ Y.scheme ↘ Spec (.of k))
+    infer_instance
+  have : QuasiCompact (c.overObj (f := f')).hom := by
+    change QuasiCompact (c.g ≫ Y.scheme ↘ Spec (.of k))
+    infer_instance
+  have : IsSeparated (c.overObj (f := f')).hom := by
+    change IsSeparated (c.g ≫ Y.scheme ↘ Spec (.of k))
+    infer_instance
+  have : IsOpenImmersion (c.overI (f := f')).left := by
+    change IsOpenImmersion c.i
+    infer_instance
+  have : IsProper (c.overG (f := f')).left := by
+    change IsProper c.g
+    infer_instance
+  exact CondensedRing.boundedConstructible_rightDerivedLowerStar_obj
+    (Profinite.padicAlgClRingObj.{u} l) l (c.overG (f := f')) _
+    (CondensedRing.boundedConstructible_openImmersionLowerShriek_obj
+      (Profinite.padicAlgClRingObj.{u} l) l (c.overI (f := f')) K hK)
+
+end WeilConjectures.CompactSupportCondensedRealization
+
+
+
+
+
+namespace WeilConjectures.CompactSupportCondensedRealization
+
+variable (l : ℕ) [Fact l.Prime] (E : Type u) [NormedField E]
+  [NormedAlgebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
+  (k : Type u) [Field k] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ l)]
+
+
+/-- The compactification opens have the finiteness needed for the whole-system mate.
+Source: blueprint proof Step 15; finite-type over Noetherian schemes
+(blueprint: lem-pur-compact-support-condensed-realization).
+Proof: the middle scheme is proper over the Noetherian finite-type target, hence
+Noetherian. Every open immersion into a Noetherian scheme is quasi-compact. -/
+theorem compactification_open_quasiCompact (X Y : CondensedERealization.Base k)
+    (f : X.scheme ⟶ Y.scheme) [f.IsOver (Spec (.of k))] (c : Compactification f) :
+    QuasiCompact c.i := by
+  have := base_noetherian k X
+  infer_instance
+
+universe uA uB uC uD vA vB vC vD
+
+/-- Paste an open-unit transpose with the proper-image compositor in the functor category.
+Source: blueprint proof Step 15; Stacks 07A7 and 0F7B
+(blueprint: lem-pur-compact-support-condensed-realization). -/
+def pasteRefinement
+    {C : Type uA} {D : Type uB} {S : Type uC} {T : Type uD}
+    [Category.{vA} C] [Category.{vB} D] [Category.{vC} S] [Category.{vD} T]
+    (jd : C ⥤ S) (jc : C ⥤ D) (r : D ⥤ S) (g : S ⥤ T) (h : D ⥤ T)
+    (a : jd ⟶ jc ⋙ r) (b : r ⋙ g ≅ h) : jd ⋙ g ⟶ jc ⋙ h :=
+  Functor.whiskerRight a g ≫ (Functor.associator jc r g).hom ≫
+    Functor.whiskerLeft jc b.hom
+
+attribute [local semireducible] WeilConjectures.integralCoefficientCommRingSheaf
+
+set_option backward.isDefEq.respectTransparency true in
+set_option backward.isDefEq.respectTransparency.types true in
+/-- Whole-system refinement is the intrinsic proper/open mate, followed by the
+proper compositor. No levelwise arrows are assembled into a derived-system map.
+Source: blueprint proof Step 15; Stacks 0F7B
+(blueprint: lem-pur-compact-support-condensed-realization). -/
+def systemRefinement (X Y : CondensedERealization.Base k)
+    (f : X.scheme ⟶ Y.scheme) [f.IsOver (Spec (.of k))]
+    {c d : Compactification f} (r : c.Refinement d) :
+    systemSupport l E d ⟶ systemSupport l E c := by
+  letI := compactification_open_quasiCompact k X Y f c
+  letI := compactification_open_quasiCompact k X Y f d
+  unfold systemSupport
+  let transition :
+      SemilinearProperOpen.J (quotientRings l E) (quotientMaps l E) d.i ⟶
+        SemilinearProperOpen.J (quotientRings l E) (quotientMaps l E) c.i ⋙
+          SemilinearProperOpen.R (quotientRings l E) (quotientMaps l E) r.hom :=
+    (Functor.leftUnitor _).inv ≫
+      Functor.whiskerRight
+        (SemilinearProperOpen.sId (quotientRings l E) (quotientMaps l E) X.scheme).inv
+        (SemilinearProperOpen.J (quotientRings l E) (quotientMaps l E) d.i) ≫
+      SemilinearProperOpen.gamma (quotientRings l E) (quotientMaps l E)
+        c.i (𝟙 X.scheme) r.hom d.i (r.i_hom.trans (Category.id_comp _).symm)
+  let push :
+      SemilinearProperOpen.R (quotientRings l E) (quotientMaps l E) r.hom ⋙
+          SemilinearProperOpen.R (quotientRings l E) (quotientMaps l E) d.g ≅
+        SemilinearProperOpen.R (quotientRings l E) (quotientMaps l E) c.g :=
+    SemilinearProperOpen.sComp (quotientRings l E) (quotientMaps l E) r.hom d.g ≪≫
+      eqToIso (congrArg
+        (SemilinearProperOpen.R (quotientRings l E) (quotientMaps l E)) r.hom_g)
+  exact pasteRefinement
+    (SemilinearProperOpen.J (quotientRings l E) (quotientMaps l E) d.i)
+    (SemilinearProperOpen.J (quotientRings l E) (quotientMaps l E) c.i)
+    (SemilinearProperOpen.R (quotientRings l E) (quotientMaps l E) r.hom)
+    (SemilinearProperOpen.R (quotientRings l E) (quotientMaps l E) d.g)
+    (SemilinearProperOpen.R (quotientRings l E) (quotientMaps l E) c.g)
+    transition push
+
+attribute [local irreducible] WeilConjectures.integralCoefficientCommRingSheaf
+
+/-- The actual limit of the whole-system refinement, in the completed presentation.
+Source: blueprint proof Step 15
+(blueprint: lem-pur-compact-support-condensed-realization). -/
+def rawRefinement (A : CoefficientData l E k) (X Y : CondensedERealization.Base k)
+    (f : X.scheme ⟶ Y.scheme) [f.IsOver (Spec (.of k))]
+    {c d : Compactification f} (r : c.Refinement d) :
+    rawSupport l E d (A.reduction X.scheme) ⟶ rawSupport l E c (A.reduction X.scheme) :=
+  Functor.whiskerRight
+    (Functor.whiskerLeft ((purCoefficientModel l E X.scheme).functor ⋙
+      (A.reduction X.scheme).reduction) (systemRefinement l E k X Y f r))
+    (coefficientSequenceDerivedRestriction.{u, u} l E Y.scheme ⋙
+      coefficientConstantTowerLimit.{u, u} l E Y.scheme ⋙
+        (purCoefficientModel l E Y.scheme).inverse)
+
+/-- Restrict an actual natural transformation to a full subcategory of its target.
+Source: blueprint proof Step 15; Mathlib ObjectProperty.lift
+(blueprint: lem-pur-compact-support-condensed-realization). -/
+def liftSupportTransformation
+    {C : Type uA} {D : Type uB} [Category.{vA} C] [Category.{vB} D]
+    (P : ObjectProperty D) (F G : C ⥤ D)
+    (hF : ∀ K, P (F.obj K)) (hG : ∀ K, P (G.obj K)) (a : F ⟶ G) :
+    P.lift F hF ⟶ P.lift G hG where
+  app K := ObjectProperty.homMk (a.app K)
+  naturality _K _L v := ObjectProperty.hom_ext _ (a.naturality v)
+
+/-- Restriction of that actual limit map to the full integral categories.
+Source: blueprint proof Step 15
+(blueprint: lem-pur-compact-support-condensed-realization). -/
+def integralRefinement (A : CoefficientData l E k) (X Y : CondensedERealization.Base k)
+    (f : X.scheme ⟶ Y.scheme) [f.IsOver (Spec (.of k))]
+    {c d : Compactification f} (r : c.Refinement d) :
+    integralSupport l E d A.reduction (A.atCompactification X Y f d).integral ⟶
+      integralSupport l E c A.reduction (A.atCompactification X Y f c).integral :=
+  liftSupportTransformation
+    (PbcIsBoundedConstructibleComplete Y.scheme (pbcIntegralDatum l E))
+    (ObjectProperty.ι (PbcIsBoundedConstructibleComplete X.scheme (pbcIntegralDatum l E)) ⋙
+      rawSupport l E d (A.reduction X.scheme))
+    (ObjectProperty.ι (PbcIsBoundedConstructibleComplete X.scheme (pbcIntegralDatum l E)) ⋙
+      rawSupport l E c (A.reduction X.scheme))
+    (fun K ↦ (A.atCompactification X Y f d).integral.preserves K.obj K.property)
+    (fun K ↦ (A.atCompactification X Y f c).integral.preserves K.obj K.property)
+    (Functor.whiskerLeft
+      (ObjectProperty.ι (PbcIsBoundedConstructibleComplete X.scheme (pbcIntegralDatum l E)))
+      (rawRefinement l E k A X Y f r))
+
+/-- The refinement squares for reconstruction and field realization, before any
+coefficient extension is made. These are equations of the actual whole-system maps.
+Source: blueprint proof Steps 15--16
+(blueprint: lem-pur-compact-support-condensed-realization). -/
+structure RefinementCoherence (A : CoefficientData l E k)
+    (X Y : CondensedERealization.Base k) (f : X.scheme ⟶ Y.scheme)
+    [f.IsOver (Spec (.of k))] {c d : Compactification f} (r : c.Refinement d) : Prop where
+  invertible : IsIso (integralRefinement l E k A X Y f r)
+  field_invertible : IsIso (fieldRefinement (Profinite.continuousCoefficientRingObj E) r)
+  reduction : ∀ K : CondensedERealization.Integral l E X.scheme,
+    (integralReduction l E k Y (A.reduction Y.scheme)).map
+        ((integralRefinement l E k A X Y f r).app K) ≫
+        (alpha l E c A.reduction (A.atCompactification X Y f c).integral).app K =
+      (alpha l E d A.reduction (A.atCompactification X Y f d).integral).app K ≫
+        (systemRefinement l E k X Y f r).app
+          ((integralReduction l E k X (A.reduction X.scheme)).obj K)
+  realization : ∀ K : CondensedERealization.Integral l E X.scheme,
+    ((A.realization.atObject Y).realization.functor ⋙
+      (boundedConstructible (CondensedERealization.Coefficient E Y.scheme)).ι).map
+        ((pbcRationalization Y.scheme (pbcIntegralDatum l E) (pbcUniformizer l E)).map
+          ((integralRefinement l E k A X Y f r).app K)) ≫
+        (A.atCompactification X Y f c).realization.hom.app (ScalarLocalization.mk K) =
+      (A.atCompactification X Y f d).realization.hom.app (ScalarLocalization.mk K) ≫
+        (fieldRefinement (Profinite.continuousCoefficientRingObj E) r).app
+          ((A.realization.atObject X).realization.functor.obj (ScalarLocalization.mk K))
+
+end WeilConjectures.CompactSupportCondensedRealization
+
+namespace WeilConjectures.CompactSupportCondensedRealization
+
+variable (l : ℕ) [Fact l.Prime]
+  (E F G : Type u) [NormedField E] [NormedField F] [NormedField G]
+  [NormedAlgebra ℚ_[l] E] [NormedAlgebra ℚ_[l] F] [NormedAlgebra ℚ_[l] G]
+  [FiniteDimensional ℚ_[l] E] [FiniteDimensional ℚ_[l] F] [FiniteDimensional ℚ_[l] G]
+  (i : E →ₐ[ℚ_[l]] F) (j : F →ₐ[ℚ_[l]] G)
+  (k : Type u) [Field k] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ l)]
+
+/-- The inherited integral tensor associator is the published ambient tensor associator.
+Source: blueprint proof Steps 9--12; prop-weil-pbc-scalar-extension
+(blueprint: lem-pur-compact-support-condensed-realization). -/
+def integralScalarComp (T : CondensedERealization.Base k) :
+    integralScalar l E F i k T ⋙ integralScalar l F G j k T ≅
+      integralScalar l E G (j.comp i) k T :=
+  NatIso.ofComponents
+    (F := integralScalar l E F i k T ⋙ integralScalar l F G j k T)
+    (G := integralScalar l E G (j.comp i) k T)
+    (fun K ↦
+      ObjectProperty.isoMk _
+        (X := (integralScalar l E F i k T ⋙ integralScalar l F G j k T).obj K)
+        (Y := (integralScalar l E G (j.comp i) k T).obj K)
+        ((pbcAmbientScalarComp l E F G i j T.scheme).app K.obj))
+    (fun v ↦ by
+      ext
+      exact (pbcAmbientScalarComp l E F G i j T.scheme).hom.naturality v.hom)
+
+/-- The integral identity scalar comparison is the actual tensor unit.
+Source: blueprint proof Steps 9--12; prop-weil-pbc-scalar-extension
+(blueprint: lem-pur-compact-support-condensed-realization). -/
+def integralScalarId (T : CondensedERealization.Base k) :
+    integralScalar l E E (AlgHom.id ℚ_[l] E) k T ≅ 𝟭 _ :=
+  NatIso.ofComponents
+    (F := integralScalar l E E (AlgHom.id ℚ_[l] E) k T) (G := 𝟭 _)
+    (fun K ↦
+      ObjectProperty.isoMk _
+        (X := (integralScalar l E E (AlgHom.id ℚ_[l] E) k T).obj K) (Y := K)
+        ((pbcEmbeddingAmbientUnit l E T.scheme).app K.obj))
+    (fun v ↦ by
+      ext
+      exact (pbcEmbeddingAmbientUnit l E T.scheme).hom.naturality v.hom)
+
+end WeilConjectures.CompactSupportCondensedRealization
+
+namespace WeilConjectures.CompactSupportCondensedRealization
+
+variable (l : ℕ) [Fact l.Prime] (k : Type u) [Field k]
+  [Fact (ringChar k).Prime] [Fact (ringChar k ≠ l)]
+
+/-- The actual bounded constructible predicate is closed under all ambient shifts.
+Source: archived ProEtaleModule/DerivedCategory.lean, cohomological definition;
+blueprint proof Step 17 (blueprint: lem-pur-compact-support-condensed-realization).
+Proof: shifting reindexes the cohomology sheaves by an integer and translates the
+finite vanishing interval. The cohomology shift isomorphism preserves the existing
+local finite-presentation condition on every stratum, so constructibility is unchanged.
+This uses no kernel or extension closure assertion for arbitrary coefficient rings. -/
+theorem fieldConstructible_shiftStable (E : Type u) [NormedField E] (W : Scheme.{u}) :
+    (boundedConstructible (CondensedERealization.Coefficient E W)).IsStableUnderShift ℤ := by
+  refine ⟨fun n ↦ ⟨fun K hK ↦ ?_⟩⟩
+  exact ⟨DerivedCategory.TStructure.t.bounded.le_shift n K hK.1,
+    fun a ↦ IsConstructibleModuleObject.of_iso
+      (((DerivedCategory.homologyFunctor _ 0).shiftIso n a (n + a) rfl).app K).symm
+      (hK.2 (n + a))⟩
+
+attribute [local instance] fieldConstructible_shiftStable
+
+set_option cleanup.letToHave false in
+/-- Shift compatibility includes the universal coefficient counits and the
+scalar-extension normalization of the realization, fixing the induced comparisons.
+The rational shifts are exactly the recorded tensor-localization shifts.
+Source: blueprint proof Step 17; lem-weil-pbc-derived-adjunction-shift
+(blueprint: lem-pur-compact-support-condensed-realization). -/
+def shiftCoherentClauses (E : Type u) [NormedField E] [NormedAlgebra ℚ_[l] E]
+    [FiniteDimensional ℚ_[l] E] (A : CoefficientData l E k)
+    (X Y : CondensedERealization.Base k) (f : X.scheme ⟶ Y.scheme)
+    [f.IsOver (Spec (.of k))]
+    [IsNoetherian X.scheme] [IsNoetherian Y.scheme]
+    [Fact (∃ n : ℕ, topologicalKrullDim X.scheme ≤ n)]
+    [Fact (∃ n : ℕ, topologicalKrullDim Y.scheme ≤ n)]
+    [Fact (∀ x : X.scheme, IsUnit (l : X.scheme.presheaf.stalk x))]
+    [Fact (∀ y : Y.scheme, IsUnit (l : Y.scheme.presheaf.stalk y))]
+    [ObjectProperty.IsTriangulated
+      (PbcIsBoundedConstructibleComplete X.scheme (pbcIntegralDatum l E))]
+    [ObjectProperty.IsTriangulated
+      (PbcIsBoundedConstructibleComplete Y.scheme (pbcIntegralDatum l E))]
+    (c : Compactification f)
+    (sI : (integralSupport l E c A.reduction
+      (A.atCompactification X Y f c).integral).CommShift ℤ)
+    (sQ : (rationalSupport l E c A.reduction
+      (A.atCompactification X Y f c).integral).CommShift ℤ)
+    (sX : (A.realization.atObject X).realization.functor.CommShift ℤ)
+    (sY : (A.realization.atObject Y).realization.functor.CommShift ℤ)
+    (sRX : (A.reduction X.scheme).reduction.CommShift ℤ)
+    (sRY : (A.reduction Y.scheme).reduction.CommShift ℤ)
+    (sLX : (coefficientSequenceLimit l E X.scheme).CommShift ℤ)
+    (sLY : (coefficientSequenceLimit l E Y.scheme).CommShift ℤ)
+    (sPX : (purCoefficientModel l E X.scheme).functor.CommShift ℤ)
+    (sPY : (purCoefficientModel l E Y.scheme).functor.CommShift ℤ)
+    (sS : (systemSupport l E c).CommShift ℤ)
+    (sVX : (pbcRationalization X.scheme (pbcIntegralDatum l E)
+      (pbcUniformizer l E)).CommShift ℤ)
+    (sVY : (pbcRationalization Y.scheme (pbcIntegralDatum l E)
+      (pbcUniformizer l E)).CommShift ℤ) : Prop := by
+  let := (pbcRationalTriangulationData l E X.scheme
+    (base_dimension k X) (base_primeUnit l k X)).choose_spec.choose_spec.2.choose_spec.choose
+  let := (pbcRationalTriangulationData l E Y.scheme
+    (base_dimension k Y) (base_primeUnit l k Y)).choose_spec.choose_spec.2.choose_spec.choose
+  let := (A.realization.atObject X).encodingAdditive
+  let := (A.realization.atObject Y).encodingAdditive
+  let := (A.realization.atObject X).encodingInverseAdditive
+  let := (A.realization.atObject Y).encodingInverseAdditive
+  let := sI
+  let := sQ
+  let := sX
+  let := sY
+  let := sRX
+  let := sRY
+  let := sLX
+  let := sLY
+  let := sPX
+  let := sPY
+  let := sS
+  let := sVX
+  let := sVY
+  let : (reconstructedSystem l E c A.reduction
+      (A.atCompactification X Y f c).integral).CommShift ℤ := by
+    unfold reconstructedSystem
+    infer_instance
+  let : (CondensedERealization.moduleEncoding l E X.scheme
+      (A.realization.atObject X).sectionIso).mapDerivedCategory.functor.CommShift ℤ :=
+    inferInstanceAs ((CondensedERealization.moduleEncoding l E X.scheme
+      (A.realization.atObject X).sectionIso).functor.mapDerivedCategory.CommShift ℤ)
+  let : (CondensedERealization.moduleEncoding l E Y.scheme
+      (A.realization.atObject Y).sectionIso).mapDerivedCategory.functor.CommShift ℤ :=
+    inferInstanceAs ((CondensedERealization.moduleEncoding l E Y.scheme
+      (A.realization.atObject Y).sectionIso).functor.mapDerivedCategory.CommShift ℤ)
+  let I := integralSupport l E c A.reduction
+    (A.atCompactification X Y f c).integral
+  let Q := rationalSupport l E c A.reduction
+    (A.atCompactification X Y f c).integral
+  let hI : Prop := I.IsTriangulated
+  let hRX : Prop := NatTrans.CommShift (A.reduction X.scheme).adjunction.counit ℤ
+  let hRY : Prop := NatTrans.CommShift (A.reduction Y.scheme).adjunction.counit ℤ
+  let hLimit : Prop := NatTrans.CommShift
+    (limitPresentation l E c A.reduction (A.atCompactification X Y f c).integral).hom ℤ
+  let hAlpha : Prop := NatTrans.CommShift
+    (alpha l E c A.reduction (A.atCompactification X Y f c).integral) ℤ
+  let : ((A.realization.atObject Y).realization.functor ⋙
+      (boundedConstructible (CondensedERealization.Coefficient E Y.scheme)).ι).CommShift ℤ :=
+    Functor.CommShift.comp _ _
+  let : (rationalSupport l E c A.reduction
+      (A.atCompactification X Y f c).integral ⋙
+      (A.realization.atObject Y).realization.functor ⋙
+      (boundedConstructible (CondensedERealization.Coefficient E Y.scheme)).ι).CommShift ℤ :=
+    Functor.CommShift.comp _ _
+  let hSX : Prop := NatTrans.CommShift (A.realization.atObject X).scalarExtension.hom ℤ
+  let hSY : Prop := NatTrans.CommShift (A.realization.atObject Y).scalarExtension.hom ℤ
+  let hReal : Prop := NatTrans.CommShift (A.atCompactification X Y f c).realization.hom ℤ
+  exact hI ∧ hRX ∧ hRY ∧ hLimit ∧ hAlpha ∧ hSX ∧ hSY ∧ hReal ∧
+        ∀ (K : CondensedERealization.Integral l E X.scheme) (n : ℤ),
+          HEq ((Q.commShiftIso n).hom.app
+              (ScalarLocalization.mk K))
+            ((1 : Localization.Away (pbcUniformizer l E)) ⊗ₜ[PbcIntegralRing l E]
+              (I.commShiftIso n).hom.app K)
+
+attribute [local irreducible] shiftCoherentClauses
+
+
+/-- Shift structures of the support, realization, reduction and their constituent functors,
+with the stipulated counit and scalar comparison equations.
+Source: blueprint proof Step 17; Bhatt--Scholze 6.8.15
+(blueprint: lem-pur-compact-support-condensed-realization). -/
+structure ShiftCoherentWitness (E : Type u) [NormedField E] [NormedAlgebra ℚ_[l] E]
+    [FiniteDimensional ℚ_[l] E] (A : CoefficientData l E k)
+    (X Y : CondensedERealization.Base k) (f : X.scheme ⟶ Y.scheme)
+    [f.IsOver (Spec (.of k))]
+    [IsNoetherian X.scheme] [IsNoetherian Y.scheme]
+    [Fact (∃ n : ℕ, topologicalKrullDim X.scheme ≤ n)]
+    [Fact (∃ n : ℕ, topologicalKrullDim Y.scheme ≤ n)]
+    [Fact (∀ x : X.scheme, IsUnit (l : X.scheme.presheaf.stalk x))]
+    [Fact (∀ y : Y.scheme, IsUnit (l : Y.scheme.presheaf.stalk y))]
+    [ObjectProperty.IsTriangulated
+      (PbcIsBoundedConstructibleComplete X.scheme (pbcIntegralDatum l E))]
+    [ObjectProperty.IsTriangulated
+      (PbcIsBoundedConstructibleComplete Y.scheme (pbcIntegralDatum l E))]
+    (c : Compactification f) where
+  sI : (integralSupport l E c A.reduction
+      (A.atCompactification X Y f c).integral).CommShift ℤ
+  sQ : (rationalSupport l E c A.reduction
+      (A.atCompactification X Y f c).integral).CommShift ℤ
+  sX : (A.realization.atObject X).realization.functor.CommShift ℤ
+  sY : (A.realization.atObject Y).realization.functor.CommShift ℤ
+  sRX : (A.reduction X.scheme).reduction.CommShift ℤ
+  sRY : (A.reduction Y.scheme).reduction.CommShift ℤ
+  sLX : (coefficientSequenceLimit l E X.scheme).CommShift ℤ
+  sLY : (coefficientSequenceLimit l E Y.scheme).CommShift ℤ
+  sPX : (purCoefficientModel l E X.scheme).functor.CommShift ℤ
+  sPY : (purCoefficientModel l E Y.scheme).functor.CommShift ℤ
+  sS : (systemSupport l E c).CommShift ℤ
+  sVX : (pbcRationalization X.scheme (pbcIntegralDatum l E)
+    (pbcUniformizer l E)).CommShift ℤ
+  sVY : (pbcRationalization Y.scheme (pbcIntegralDatum l E)
+    (pbcUniformizer l E)).CommShift ℤ
+  clauses : shiftCoherentClauses l k E A X Y f c sI sQ sX sY sRX sRY
+    sLX sLY sPX sPY sS sVX sVY
+
+/-- Existence of compatible integral, rational, realization and reduction shifts.
+Source: blueprint proof Step 17; Bhatt--Scholze 6.8.15
+(blueprint: lem-pur-compact-support-condensed-realization). -/
+def IsShiftCoherent (E : Type u) [NormedField E] [NormedAlgebra ℚ_[l] E]
+    [FiniteDimensional ℚ_[l] E] (A : CoefficientData l E k)
+    (X Y : CondensedERealization.Base k) (f : X.scheme ⟶ Y.scheme)
+    [f.IsOver (Spec (.of k))] (c : Compactification f) : Prop :=
+  letI := base_noetherian k X
+  letI := base_noetherian k Y
+  letI : Fact (∃ n : ℕ, topologicalKrullDim X.scheme ≤ n) := ⟨base_dimension k X⟩
+  letI : Fact (∃ n : ℕ, topologicalKrullDim Y.scheme ≤ n) := ⟨base_dimension k Y⟩
+  letI : Fact (∀ x : X.scheme, IsUnit (l : X.scheme.presheaf.stalk x)) :=
+    ⟨base_primeUnit l k X⟩
+  letI : Fact (∀ y : Y.scheme, IsUnit (l : Y.scheme.presheaf.stalk y)) :=
+    ⟨base_primeUnit l k Y⟩
+  letI := pbcIntegralTriangulated l E X.scheme (base_dimension k X) (base_primeUnit l k X)
+  letI := pbcIntegralTriangulated l E Y.scheme (base_dimension k Y) (base_primeUnit l k Y)
+  Nonempty (ShiftCoherentWitness l k E A X Y f c)
+
+attribute [local irreducible] IsShiftCoherent
+
+/-- Simultaneous compact-support realizations and their specified finite-coefficient
+and refinement composition laws. All functors and refinement arrows used below were
+constructed above from the recorded dependency operations.
+Source: blueprint proof Steps 1--17
+(blueprint: lem-pur-compact-support-condensed-realization). -/
+structure ComparisonFamilyCore where
+  coefficient : ∀
+    (E : Type u) [NormedField E] [NormedAlgebra ℚ_[l] E]
+    [FiniteDimensional ℚ_[l] E], CoefficientData l E k
+  shifts : ∀
+    (E : Type u) [NormedField E] [NormedAlgebra ℚ_[l] E]
+    [FiniteDimensional ℚ_[l] E]
+    (X Y : CondensedERealization.Base k) (f : X.scheme ⟶ Y.scheme)
+    [f.IsOver (Spec (.of k))] (c : Compactification f),
+    IsShiftCoherent l k E (coefficient E) X Y f c
+  finite : ∀
+    (E : Type u) [NormedField E] [NormedAlgebra ℚ_[l] E]
+    [FiniteDimensional ℚ_[l] E]
+    (F : Type u) [NormedField F] [NormedAlgebra ℚ_[l] F]
+    [FiniteDimensional ℚ_[l] F]
+    (i : E →ₐ[ℚ_[l]] F)
+    (X Y : CondensedERealization.Base k) (f : X.scheme ⟶ Y.scheme)
+    [f.IsOver (Spec (.of k))] (c : Compactification f),
+    FiniteComparison l E F i k (coefficient E) (coefficient F) X Y f c
+  refinement : ∀
+    (E : Type u) [NormedField E] [NormedAlgebra ℚ_[l] E]
+    [FiniteDimensional ℚ_[l] E]
+    (X Y : CondensedERealization.Base k) (f : X.scheme ⟶ Y.scheme)
+    [f.IsOver (Spec (.of k))]
+    {c d : Compactification f} (r : c.Refinement d),
+    RefinementCoherence l E k (coefficient E) X Y f r
+
+/-- Scalar identity for the specified integral coefficient comparisons.
+Source: blueprint proof Steps 9--17
+(blueprint: lem-pur-compact-support-condensed-realization). -/
+def IsScalarIdentity (C : ComparisonFamilyCore l k) : Prop :=
+  ∀
+    (E : Type u) [NormedField E] [NormedAlgebra ℚ_[l] E]
+    [FiniteDimensional ℚ_[l] E]
+    (X Y : CondensedERealization.Base k) (f : X.scheme ⟶ Y.scheme)
+    [f.IsOver (Spec (.of k))] (c : Compactification f)
+    (K : CondensedERealization.Integral l E X.scheme),
+    (C.finite E E (AlgHom.id ℚ_[l] E) X Y f c).comparison.hom.app K ≫
+        (integralSupport l E c (C.coefficient E).reduction
+          ((C.coefficient E).atCompactification X Y f c).integral).map
+            ((integralScalarId l E k X).hom.app K) =
+      (integralScalarId l E k Y).hom.app
+        ((integralSupport l E c (C.coefficient E).reduction
+          ((C.coefficient E).atCompactification X Y f c).integral).obj K)
+
+/-- Scalar composition for the specified integral coefficient comparisons.
+Source: blueprint proof Steps 9--17
+(blueprint: lem-pur-compact-support-condensed-realization). -/
+def IsScalarComposition (C : ComparisonFamilyCore l k) : Prop :=
+  ∀
+    (E : Type u) [NormedField E] [NormedAlgebra ℚ_[l] E]
+    [FiniteDimensional ℚ_[l] E]
+    (F : Type u) [NormedField F] [NormedAlgebra ℚ_[l] F]
+    [FiniteDimensional ℚ_[l] F]
+    (G : Type u) [NormedField G] [NormedAlgebra ℚ_[l] G]
+    [FiniteDimensional ℚ_[l] G]
+    (i : E →ₐ[ℚ_[l]] F) (j : F →ₐ[ℚ_[l]] G)
+    (X Y : CondensedERealization.Base k) (f : X.scheme ⟶ Y.scheme)
+    [f.IsOver (Spec (.of k))] (c : Compactification f)
+    (K : CondensedERealization.Integral l E X.scheme),
+    (integralScalar l F G j k Y).map
+        ((C.finite E F i X Y f c).comparison.hom.app K) ≫
+        (C.finite F G j X Y f c).comparison.hom.app ((integralScalar l E F i k X).obj K) ≫
+        (integralSupport l G c (C.coefficient G).reduction
+          ((C.coefficient G).atCompactification X Y f c).integral).map
+            ((integralScalarComp l E F G i j k X).hom.app K) =
+      (integralScalarComp l E F G i j k Y).hom.app
+          ((integralSupport l E c (C.coefficient E).reduction
+            ((C.coefficient E).atCompactification X Y f c).integral).obj K) ≫
+        (C.finite E G (j.comp i) X Y f c).comparison.hom.app K
+
+/-- Scalar refinement for the specified integral coefficient comparisons.
+Source: blueprint proof Steps 9--17
+(blueprint: lem-pur-compact-support-condensed-realization). -/
+def IsScalarRefinement (C : ComparisonFamilyCore l k) : Prop :=
+  ∀
+    (E : Type u) [NormedField E] [NormedAlgebra ℚ_[l] E]
+    [FiniteDimensional ℚ_[l] E]
+    (F : Type u) [NormedField F] [NormedAlgebra ℚ_[l] F]
+    [FiniteDimensional ℚ_[l] F]
+    (i : E →ₐ[ℚ_[l]] F)
+    (X Y : CondensedERealization.Base k) (f : X.scheme ⟶ Y.scheme)
+    [f.IsOver (Spec (.of k))]
+    {c d : Compactification f} (r : c.Refinement d)
+    (K : CondensedERealization.Integral l E X.scheme),
+    (integralScalar l E F i k Y).map
+        ((integralRefinement l E k (C.coefficient E) X Y f r).app K) ≫
+        (C.finite E F i X Y f c).comparison.hom.app K =
+      (C.finite E F i X Y f d).comparison.hom.app K ≫
+        (integralRefinement l F k (C.coefficient F) X Y f r).app
+          ((integralScalar l E F i k X).obj K)
+
+attribute [local irreducible] IsScalarIdentity IsScalarComposition IsScalarRefinement
+
+/-- The simultaneous family with its identity, coefficient-tower and refinement equations.
+Source: blueprint proof Steps 1--17
+(blueprint: lem-pur-compact-support-condensed-realization). -/
+structure ComparisonFamily extends ComparisonFamilyCore l k where
+  scalar_identity : IsScalarIdentity l k toComparisonFamilyCore
+  scalar_composition : IsScalarComposition l k toComparisonFamilyCore
+  scalar_refinement : IsScalarRefinement l k toComparisonFamilyCore
+
+end WeilConjectures.CompactSupportCondensedRealization
+
+namespace WeilConjectures.CompactSupportCondensedRealization
+
+variable (l : ℕ) [Fact l.Prime] (E : Type u) [NormedField E]
+  [NormedAlgebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
+  (k : Type u) [Field k] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ l)]
+
+/-- Identity refinement is the identity on the full derived semilinear system.
+Source: blueprint proof Step 15; Stacks 0F7B
+(blueprint: lem-pur-compact-support-condensed-realization).
+Proof: the identity proper adjunction has identity unit and counit. The open
+restriction normalization is the original unit; its Hom bijection identifies the
+proper/open mate with the identity. The normalized proper compositor cancels it. -/
+theorem systemRefinement_id (X Y : CondensedERealization.Base k)
+    (f : X.scheme ⟶ Y.scheme) [f.IsOver (Spec (.of k))] (c : Compactification f) :
+    systemRefinement l E k X Y f (Compactification.Refinement.id c) = 𝟙 _ := by
+  sorry
+
+/-- Refinement composition holds before evaluation and before total limit.
+Source: blueprint proof Step 15; Stacks 07A7 and 0F7B
+(blueprint: lem-pur-compact-support-condensed-realization).
+Proof: paste the two clopen-section open squares. Their original-open unit is the
+unit of the composite square; the two-stage and composite transposes agree by the
+proper adjunction triangles. The proper compositors satisfy their mate cocycle,
+so uniqueness in the open Hom bijection gives the full-system equality. -/
+theorem systemRefinement_comp (X Y : CondensedERealization.Base k)
+    (f : X.scheme ⟶ Y.scheme) [f.IsOver (Spec (.of k))]
+    {c d e : Compactification f} (r : c.Refinement d) (s : d.Refinement e) :
+    systemRefinement l E k X Y f (r.comp s) =
+      systemRefinement l E k X Y f s ≫ systemRefinement l E k X Y f r := by
+  sorry
+
+/-- Closure refinement is invertible on exactly the bounded constructible domain.
+Source: blueprint proof Steps 15--16; finite-coefficient descent
+(blueprint: lem-pur-compact-support-condensed-realization).
+Proof: descend the input and the refinement diagram to one finite coefficient field.
+The finite refinement square agrees with the intrinsic clopen-section mate on the
+whole system. Proper continuity and exact open extension identify its closure scalar
+extension with the displayed original closure refinement. Scalar extension preserves
+its inverse, proving invertibility independently of the descent choice. -/
+theorem omegaRefinement_isIso (X Y : CondensedERealization.Base k)
+    (f : X.scheme ⟶ Y.scheme) [f.IsOver (Spec (.of k))]
+    {c d : Compactification f} (r : c.Refinement d) :
+    IsIso (fieldRefinement (Profinite.padicAlgClRingObj.{u} l) r) := by
+  sorry
+
+end WeilConjectures.CompactSupportCondensedRealization
+
+namespace WeilConjectures
+
+/-- Compact-support reconstruction and condensed coefficient realization.
+Source: blueprint sk-thm-purity-transport, Steps 2--3; Bhatt--Scholze 6.7.2,
+6.7.14--6.7.17 and 6.8.14--6.8.15
+(blueprint: lem-pur-compact-support-condensed-realization).
+Proof:
+1. Ordinary completed-coefficient proper/open support is bounded constructible and
+complete, by finite cohomological dimension, finite-level finiteness and strict-limit
+compatibility. Identify its reduction with the geometric full-system support through
+proper coefficient transpose and the unit-normalized open tensor comparison.
+2. Adjunction of reduction and total limit gives the unit comparison to the actual
+strict-tower limit. Normalized-system reconstruction makes it invertible. Its counit
+is alpha; the triangle identity identifies every evaluated component with the
+original total-limit projection, together with all transitions and scalar actions.
+3. Rationalize the inverse unit comparison, apply the coefficient-realization
+equivalence, then the proper comparison and the normalized open comparison. This
+constructs the natural isomorphism a without deriving the nonexact composite anew.
+4. For finite coefficient extension, the proper coefficient mate is a finite direct-
+sum comparison and the open factor is the exact scalar comparison. Their composite
+is the specified projection and is invertible on constructible inputs.
+5. Completed integral scalar extension is finite free; the canonical Roos and tensor
+comparison commutes with total limit. If t=u v^e, use the cofinal levels en on the
+larger ring. Do not identify t^n with v^n or assume flatness of the finite quotients.
+6. Prove the coefficient square on the whole strict system using the actual mates,
+then take its limit. The adjunction triangle identities give the alpha square. The
+canonical completed-to-field ring square and tensor counits give the rationalized
+square with a and the original condensed coefficient projection.
+7. Identity and successive coefficient comparisons satisfy the tensor cocycle by
+ordinary unit/counit pasting, then K-flat localization and strict Roos cofinality.
+8. For the finite-valued closure coefficient, descend objects and arrows to a common
+finite field. Bounded-below qcqs proper-image continuity and exact open extension
+identify the filtered colimit of the finite projections with the original closure
+projection. This proves invertibility and constructible preservation.
+9. For a proper compactification refinement, restriction over the open identifies a
+clopen section. Extension by zero is the input there and zero on the complement.
+This gives the intrinsic whole-system proper/open refinement and its identity and
+composition laws. Limits, alpha, a and coefficient changes commute with these same
+maps by the normalized mate squares; the same argument passes to the closure.
+10. All maps are natural in complexes and localized morphisms. Universal derived
+units and counits fix their shift comparisons; faithful inclusions and scalar
+localization preserve these equations and their zero and addition coherence.
+The dependencies used at these steps are exactly those in the node's proof plan. -/
+theorem compactSupport_condensedRealization (l : ℕ) [Fact l.Prime]
+    (k : Type u) [Field k] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ l)] :
+    Nonempty (CompactSupportCondensedRealization.ComparisonFamily l k) := by
+  sorry
+
+end WeilConjectures

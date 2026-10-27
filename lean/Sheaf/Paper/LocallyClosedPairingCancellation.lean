@@ -1,0 +1,52 @@
+/-
+Copyright (c) 2026 The SHEAF contributors. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: SHEAF group W3
+-/
+module
+public import Sheaf.Paper.InternalAdjunctionPairingChange
+public import Sheaf.Paper.EtaleLocallyClosedShriek
+public import Sheaf.Paper.NormalizedComparisonWord
+/-! # Cancellation of the locally closed pairing equation
+
+Source: thm-coef-finite-hom, proof paragraph 4.
+-/
+
+@[expose] public section
+set_option autoImplicit false
+universe u
+open CategoryTheory Limits Opposite
+namespace AlgebraicGeometry.Etale.CoefficientPairingChange
+attribute [local irreducible] derivedHom derivedTensor upperStar lowerStar
+attribute [local irreducible] internalAdjunction evaluationComparison
+  ordinaryComparison compactComparison etaleShriekLocallyClosedCoefficientMap
+/-- Cancellation of the inverse internal-adjunction factor in the pairing equation.
+Source: thm-coef-finite-hom, paragraph 4
+(blueprint: lem-coef-locally-closed-pairing-cancellation).
+Proof: expand `PairingChangeEquation`, reassociate, use functoriality of scalar extension,
+and rewrite `inv I ≫ I = 𝟙`. -/
+theorem pairingCancellation
+    {A B : Type (u + 1)} [CommRing A] [CommRing B] [Finite A] [Finite B]
+    {S Z X : Scheme.{u}} (φ : A →+* B) (g : Z ⟶ X) [IsClosedImmersion g]
+    (j : S ⟶ Z) [IsOpenImmersion j]
+    (L : DerivedCategoryModule A S) (M : DerivedCategoryModule A X)
+    [IsIso (internalAdjunction A g j L M)]
+    [IsIso (ordinaryComparison φ g j
+      (((derivedHom (ModuleCat A) S).obj (op L)).obj ((exceptional A g j).obj M)))]
+    [IsIso (evaluationComparison φ S L ((exceptional A g j).obj M))]
+    [IsIso (etaleShriekLocallyClosedCoefficientMap φ g j M)]
+    [IsIso (compactComparison φ g j L)]
+    (hp : PairingChangeEquation φ g j L M
+      (asIso (etaleShriekLocallyClosedCoefficientMap φ g j M))) :
+    MappedComparisonEquation (scalarExtension φ X) (star B g j)
+    (derivedHom (ModuleCat B) X) (internalAdjunction A g j L M)
+    (ordinaryComparison φ g j
+      (((derivedHom (ModuleCat A) S).obj (op L)).obj ((exceptional A g j).obj M)))
+    (evaluationComparison φ S L ((exceptional A g j).obj M))
+    (((derivedHom (ModuleCat B) S).obj (op ((scalarExtension φ S).obj L))).map
+      (etaleShriekLocallyClosedCoefficientMap φ g j M))
+    (compactComparison φ g j L) ((scalarExtension φ X).obj M)
+    (internalAdjunction B g j ((scalarExtension φ S).obj L) ((scalarExtension φ X).obj M))
+    (evaluationComparison φ X ((shriek A g j).obj L) M) := by
+  sorry
+end AlgebraicGeometry.Etale.CoefficientPairingChange
