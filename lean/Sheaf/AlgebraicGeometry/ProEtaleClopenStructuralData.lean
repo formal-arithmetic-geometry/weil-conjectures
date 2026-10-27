@@ -5,6 +5,8 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import Sheaf.AlgebraicGeometry.ProEtaleClopenTotalTensorKFlatDetectionData
+import Sheaf.AlgebraicGeometry.ProEtaleClopenStructuralComparison
+import Sheaf.AlgebraicGeometry.ProEtaleClopenStructuralCoproductAdjunction
 
 /-! Structural tensor comparison and adjunction data for finite clopen partitions.
 Source: Stacks Project, sites-modules.tex, Tag 0GMW; sites-cohomology.tex, Tag 0FPQ.
@@ -109,7 +111,8 @@ theorem clopen_structural_data
         ClopenData.clopenTensorModules.{t, u} R),
       Nonempty (e ⋙ ClopenData.clopenTensorRestriction.{t, u} (j i) R ≅ 𝟭 _) →
       (∀ k, k ≠ i → ∀ N, IsZero ((e ⋙ ClopenData.clopenTensorRestriction.{t, u} (j k) R).obj N)) →
-      Nonempty (ClopenData.clopenTensorRestriction.{t, u} (j i) R ⊣ e)) := by
-  sorry
+      Nonempty (ClopenData.clopenTensorRestriction.{t, u} (j i) R ⊣ e))  := by
+  exact ⟨clopen_structural_comparison X I Y j hdisjoint hcover R,
+    clopen_structural_coproduct_adjunction X I Y j hdisjoint hcover R⟩
 
 end AlgebraicGeometry.Scheme.ProEt

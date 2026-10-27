@@ -1,0 +1,103 @@
+{
+ "status": "split",
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-purity-conv",
+ "blueprint": {
+  "from": {
+   "node": "lem-pur-clopen-structural-data",
+   "place": "Strictly smaller clause split from the structural data target."
+  },
+  "same_as": [],
+  "is": null
+ },
+ "id": "lem-pur-clopen-structural-comparison",
+ "kind": "lemma",
+ "title": "Normalized clopen tensor and total comparison data",
+ "statement": "For each component of a finite disjoint clopen pro-etale cover, the restriction has a normalized braided tensor comparison and compatible pure-tensor, total-summand, differential, and Koszul-symmetry formulas.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 0GMW and 0FPQ: normalized pure tensors, total tensor summands, signed differential and symmetry."
+ },
+ "stmt_deps": [
+  "def-pur-clopen-total-tensor-data"
+ ],
+ "proof": [
+  {
+   "text": "The full comparison clause is retained as a named lower statement; it is the strictly smaller first conjunct of the parent structural-data theorem and is intended for the tensor universal-property construction.",
+   "uses": [
+    "def-pur-clopen-total-tensor-data"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pur-clopen-total-tensor-data"
+ ],
+ "proof_origin": {
+  "kind": "stage3",
+  "by": "P3",
+  "date": "2026-10-28",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 0GMW and 0FPQ: normalized pure tensors, total tensor summands, signed differential and symmetry."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "clopen structural tensor comparison finite partition",
+   "results": "No existing declaration states this project-specific clause.",
+   "date": "2026-10-28",
+   "verdict": "No match."
+  },
+  {
+   "tool": "loogle",
+   "query": "PreservesColimitsOfShape clopenTensorRestriction tensor comparison",
+   "results": "No matching declaration in Mathlib.",
+   "date": "2026-10-28",
+   "verdict": "No match."
+  },
+  {
+   "tool": "leansearch",
+   "query": "finite clopen pro-etale structural tensor adjunction",
+   "results": "No matching declaration in the source library or Mathlib.",
+   "date": "2026-10-28",
+   "verdict": "No match."
+  }
+ ],
+ "mathlib_match": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ProEtaleClopenStructuralData",
+  "date": "2026-10-28",
+  "group": "P3"
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ProEtaleClopenStructuralComparison",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProEtaleClopenStructuralComparison.lean",
+  "declaration": "AlgebraicGeometry.Scheme.ProEt.clopen_structural_comparison",
+  "statement": "theorem clopen_structural_comparison\n    (X : Scheme.{t}) (I : Type w) [Finite I] (Y : I → Scheme.{t})\n    (j : ∀ i, Y i ⟶ X) [∀ i, IsOpenImmersion (j i)] [∀ i, IsClosedImmersion (j i)]\n    (hdisjoint : Pairwise (fun i k ↦ Disjoint (Set.range (j i)) (Set.range (j k))))\n    (hcover : ∀ x : X, ∃ i, x ∈ Set.range (j i))\n    (R : Sheaf (topology X) CommRingCat.{max u (t + 1)}) :\n    (∀ i, ∃ (h : (ClopenData.clopenTensorRestriction.{t, u} (j i) R).Braided)\n      (b : coefficientTotalTensor.{u, t + 1, t} (topology X) R ⋙\n          ClopenData.clopenTensorComplexRestriction.{t, u} (j i) R ≅\n        ((ClopenData.clopenTensorComplexRestriction.{t, u} (j i) R).prod\n          (ClopenData.clopenTensorComplexRestriction.{t, u} (j i) R)) ⋙\n            coefficientTotalTensor.{u, t + 1, t} (topology (Y i))\n              ((ClopenData.clopenTensorRings.{t, u} (j i)).obj R)),\n      (∀ (F H : ClopenData.clopenTensorModules.{t, u} R) (U : (Y i).ProEt)\n        (x : F.val.obj (op ((MorphismProperty.Over.map ⊤\n          (inferInstance : WeaklyEtale (j i))).obj U)))\n        (y : H.val.obj (op ((MorphismProperty.Over.map ⊤\n          (inferInstance : WeaklyEtale (j i))).obj U))),\n        (ClopenData.clopenTensorComparison.{t, u} (j i) R h F H).hom.val.app (op U)\n          (ClopenData.clopenTensorPure.{t, u} R F H _ x y) =\n        ClopenData.clopenTensorPure.{t, u} ((ClopenData.clopenTensorRings.{t, u} (j i)).obj R)\n          ((ClopenData.clopenTensorRestriction.{t, u} (j i) R).obj F)\n          ((ClopenData.clopenTensorRestriction.{t, u} (j i) R).obj H) (op U) x y) ∧\n      (∀ (P Q : CochainComplex (ClopenData.clopenTensorModules.{t, u} R) ℤ)\n        (p q n : ℤ) (hpq : p + q = n),\n        (ClopenData.clopenTensorRestriction.{t, u} (j i) R).map\n            (ClopenData.clopenTotalTensorSummand.{t, u} R P Q p q n hpq) ≫ (b.hom.app (P, Q)).f n =\n          (ClopenData.clopenTensorComparison.{t, u} (j i) R h (P.X p) (Q.X q)).hom ≫\n            ClopenData.clopenTotalTensorSummand.{t, u}\n              ((ClopenData.clopenTensorRings.{t, u} (j i)).obj R)\n              ((ClopenData.clopenTensorComplexRestriction.{t, u} (j i) R).obj P)\n              ((ClopenData.clopenTensorComplexRestriction.{t, u} (j i) R).obj Q) p q n hpq) ∧\n      (∀ (P Q : CochainComplex (ClopenData.clopenTensorModules.{t, u} R) ℤ)\n        (p q n : ℤ) (hpq : p + q = n)\n        (hp : (p + 1) + q = n + 1) (hq : p + (q + 1) = n + 1),\n        (ClopenData.clopenTensorRestriction.{t, u} (j i) R).map\n            (ClopenData.clopenTotalTensorSummand.{t, u} R P Q p q n hpq ≫\n              ((coefficientTotalTensor.{u, t + 1, t} (topology X) R).obj\n                (P, Q)).d n (n + 1)) ≫\n              (b.hom.app (P, Q)).f (n + 1) =\n          (ClopenData.clopenTensorComparison.{t, u} (j i) R h (P.X p) (Q.X q)).hom ≫\n            (((ClopenData.clopenTensorRestriction.{t, u} (j i) R).map (P.d p (p + 1)) ▷\n                (ClopenData.clopenTensorRestriction.{t, u} (j i) R).obj (Q.X q)) ≫\n              ClopenData.clopenTotalTensorSummand.{t, u}\n              ((ClopenData.clopenTensorRings.{t, u} (j i)).obj R)\n                ((ClopenData.clopenTensorComplexRestriction.{t, u} (j i) R).obj P)\n                ((ClopenData.clopenTensorComplexRestriction.{t, u} (j i) R).obj Q)\n                (p + 1) q (n + 1) hp +\n            p.negOnePow •\n              (((ClopenData.clopenTensorRestriction.{t, u} (j i) R).obj (P.X p) ◁\n                (ClopenData.clopenTensorRestriction.{t, u} (j i) R).map (Q.d q (q + 1))) ≫\n              ClopenData.clopenTotalTensorSummand.{t, u}\n              ((ClopenData.clopenTensorRings.{t, u} (j i)).obj R)\n                ((ClopenData.clopenTensorComplexRestriction.{t, u} (j i) R).obj P)\n                ((ClopenData.clopenTensorComplexRestriction.{t, u} (j i) R).obj Q)\n                p (q + 1) (n + 1) hq))) ∧\n      (∀ (P Q : CochainComplex (ClopenData.clopenTensorModules.{t, u} R) ℤ)\n        (p q n : ℤ) (hqp : q + p = n),\n        (ClopenData.clopenTensorRestriction.{t, u} (j i) R).map\n            ((p * q).negOnePow • ((β_ (P.X p) (Q.X q)).hom ≫\n              ClopenData.clopenTotalTensorSummand.{t, u} R Q P q p n hqp)) ≫\n            (b.hom.app (Q, P)).f n =\n          (p * q).negOnePow •\n            ((ClopenData.clopenTensorComparison.{t, u} (j i) R h (P.X p) (Q.X q)).hom ≫\n              (β_ ((ClopenData.clopenTensorRestriction.{t, u} (j i) R).obj (P.X p))\n                ((ClopenData.clopenTensorRestriction.{t, u} (j i) R).obj (Q.X q))).hom ≫\n              ClopenData.clopenTotalTensorSummand.{t, u}\n              ((ClopenData.clopenTensorRings.{t, u} (j i)).obj R)\n                ((ClopenData.clopenTensorComplexRestriction.{t, u} (j i) R).obj Q)\n                ((ClopenData.clopenTensorComplexRestriction.{t, u} (j i) R).obj P)\n                q p n hqp)))",
+  "branch": "sheaf-dag",
+  "by": "P3",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P3",
+  "result": "pass",
+  "landing": "20261027T210154-L-1667076",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P3",
+  "result": "pass",
+  "landing": "20261027T210154-L-1667076",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
