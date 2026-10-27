@@ -19,10 +19,9 @@ Let `Λ` be a commutative condensed ring satisfying `ProEtale.CondensedRing.Tens
 complexes form a triangulated subcategory, on schemes with noetherian underlying space): for
 instance the field coefficients `E̲` and `ℚ̲̄_ℓ`. Let `T` be a scheme with noetherian underlying
 space such that the derived pushforwards `Rj_*` along the open immersions `j` into closed
-subschemes of
-`T` preserve bounded constructible complexes (Deligne's finiteness theorem, for `T` of finite type
-over a field in which `ℓ` is invertible). Then the bounded constructible complexes on `T` are
-stable under the derived internal hom `RHom(K, L)`
+subschemes of `T` preserve bounded constructible complexes (Deligne's finiteness theorem, for `T`
+of finite type over a field in which `ℓ` is invertible). Then the bounded constructible complexes
+on `T` are stable under the derived internal hom `RHom(K, L)`
 (`ProEtale.CondensedRing.boundedConstructible_ihom`, blueprint `lem-sfb-dc-hom-preserves` for the
 field coefficients).
 

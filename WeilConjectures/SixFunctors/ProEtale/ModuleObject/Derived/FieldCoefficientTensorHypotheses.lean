@@ -5,8 +5,7 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.CondensedFieldLfpLocalTriviality
-public import WeilConjectures.AlgebraicGeometry.CondensedQbarLfpLocalTriviality
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.LocallyFreeOfFinitelyPresentedField
 public import WeilConjectures.ConstructibleSheaf.ProEtaleModule.DerivedCategory
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructibleTensorObj
 
@@ -37,14 +36,15 @@ variable (ℓ : ℕ) [Fact ℓ.Prime]
 /-- The coefficient ring `ℚ̲̄_ℓ` satisfies `ProEtale.CondensedRing.TensorHypotheses`. -/
 theorem tensorHypotheses_padicAlgClRingObj :
     TensorHypotheses (Profinite.padicAlgClRingObj.{u} ℓ) where
-  isLocallyFree Z _ M hM := sorry
-  isTriangulated Z _ := inferInstance
+  isLocallyFree Z _ M hM := isLocallyFree_of_isLocallyFinitelyPresented_of_noetherianSpace ℓ Z hM
+  isTriangulated _ _ := inferInstance
 
 /-- The coefficient ring `E̲` of a finite subextension `E ⊆ ℚ̄_ℓ` of `ℚ_ℓ` satisfies
 `ProEtale.CondensedRing.TensorHypotheses`. -/
 theorem tensorHypotheses_continuousMapRingObj (E : PadicAlgCl.FiniteIntermediateField ℓ) :
     TensorHypotheses (Profinite.continuousMapRingObj.{u} E) where
-  isLocallyFree Z _ M hM := sorry
-  isTriangulated Z _ := inferInstance
+  isLocallyFree Z _ M hM :=
+    ContinuousMapRingObj.isLocallyFree_of_isLocallyFinitelyPresented ℓ E Z hM
+  isTriangulated _ _ := inferInstance
 
 end AlgebraicGeometry.ProEtale.CondensedRing
