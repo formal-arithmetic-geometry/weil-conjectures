@@ -1,8 +1,8 @@
 # Work queue
 
-235 items; claim with `tools/claim.py next <group> [--stage N]`.
+227 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Rework: quarantined by the upstream sync (1 clusters, 625 modules)
+## Rework: quarantined by the upstream sync (1 clusters, 119 modules)
 
 Priority over every queue (the human, 2026-10-20; tools/rework.py, coord/rework.tsv). One item per cluster: its root (a quarantined module importing no other quarantined one) and the quarantined modules importing it; fix the root, then the dependents as far as possible, deliver every module that compiles.
 
@@ -32,7 +32,7 @@ Blocked by rework (not in the queue until the rework items they depend on are fi
 
 Not open yet: 1133 nodes that below a finished node, not needed, 2 nodes that wait for a statement dependency (bottom-up).
 
-## Stage 3: modules to prove (223)
+## Stage 3: modules to prove (215)
 
 On the sorry route of an open batch, or below a route sorry of one (the human, 2026-10-18: provable as soon as every dependency is stated, whatever the depth); route first, then nearest to a route sorry.
 
@@ -66,11 +66,9 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.Paper.ConstantCompletionOrdinaryFinitePullUniqueness` | 9 | 1 | proof | route |
 | `Sheaf.Paper.IntegralScalarPullbackChainTowerComponent` | 9 | 1 | proof | route |
 | `Sheaf.Paper.PrimitiveQuotientScalarModelExistence` | 9 | 1 | proof | route |
+| `Sheaf.Paper.ProperBaseChangeAdmissibleGenerators` | 9 | 1 | proof | route |
 | `Sheaf.Paper.QuotientSectionPullTransport` | 9 | 2 | proof | route |
 | `Sheaf.Paper.RationalP1UnitCounit` | 10 | 1 | proof | route |
-| `Sheaf.SixFunctors.IntegralKernelFirstContraction` | 10 | 1 | proof | route |
-| `Sheaf.SixFunctors.IntegralKernelSecondContraction` | 10 | 1 | proof | route |
-| `Sheaf.SixFunctors.IntegralKernelUnitCounit` | 10 | 1 | proof | route |
 | `Sheaf.AlgebraicGeometry.EtaleCoordinateKunnethFactorizationTranspose` | 11 | 1 | proof | route |
 | `Sheaf.Paper.DiagonalTowerLimit` | 11 | 1 | proof | route |
 | `Sheaf.Paper.QuotientScalarSectionDerivedComparisonExistence` | 11 | 1 | proof | route |
@@ -89,15 +87,9 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.Paper.LisseFiniteQuotientEtaleOriginCore` | 12 | 1 | proof | route |
 | `Sheaf.Paper.LisseFiniteQuotientEtaleOriginTransport` | 12 | 1 | proof | route |
 | `Sheaf.Paper.LisseTowerEtaleNormalizationDescent` | 12 | 1 | proof | route |
-| `Sheaf.Paper.DiagonalQuotientClassPullback` | 13 | 1 | proof | route |
-| `Sheaf.Paper.DiagonalQuotientSourcePullback` | 13 | 1 | proof | route |
-| `Sheaf.Paper.DiagonalQuotientTracePullback` | 13 | 1 | proof | route |
-| `Sheaf.Paper.DiagonalScalarPullbackCompatibility` | 13 | 1 | proof | route |
 | `Sheaf.Paper.RationalP1UnitFactorization` | 13 | 1 | proof | route |
 | `Sheaf.Paper.CompletedAdicSliceScalarComparisonData` | 14 | 2 | proof | route |
 | `Sheaf.Paper.CompletedSupportedCoefficientTransport` | 14 | 1 | proof | route |
-| `Sheaf.Paper.DiagonalCompletedClassPullback` | 14 | 1 | proof | route |
-| `Sheaf.Paper.DiagonalCompletedTracePullback` | 14 | 1 | proof | route |
 | `Sheaf.Paper.DiagonalUniformizerScalarSquares` | 14 | 1 | proof | route |
 | `Sheaf.Paper.ExceptionalCommonStageFromRational` | 14 | 1 | proof | route |
 | `Sheaf.Paper.FiniteModelCoefficientTransport` | 14 | 1 | proof | route |
