@@ -1,0 +1,86 @@
+{
+ "id": "lem-pur-etale-brown-image-realization-inverse",
+ "kind": "statement",
+ "title": "Mate-normalized inverse image comparison",
+ "statement": "theorem etaleBrownImageRealization_inverse_exists\n    (O : Type (u + 1)) [CommRing O] (t : O)\n    {V W : Scheme.{u}} (g : V ⟶ W) (n : ℕ)\n    (A : StrictEtaleOrdinaryImage O t g)\n    (B : CoefficientDerivedImage (A.lift n).modules (A.right n) (A.levelAdj n))\n    {PV : StrictEtaleEvaluation V O t} {PW : StrictEtaleEvaluation W O t}\n    (RV : StrictEtaleBrownRealization O t V PV)\n    (RW : StrictEtaleBrownRealization O t W PW)\n    (ordinaryRight : A.right n ⋙ strictEtaleBrownConstant O t W n ≅\n      strictEtaleBrownConstant O t V n ⋙\n        Etale.lowerStar (ModuleCat.{u + 1} (strictEtaleBrownRing O t n)) g)\n    (right : B.direct ⋙ RW.derived n ≅ RV.derived n ⋙\n      (Etale.lowerStar (ModuleCat.{u + 1} (strictEtaleBrownRing O t n)) g).rightDerivedFunctor)\n    (hright :\n      letI := RV.val.ordinaryAdditive\n      letI := RW.val.ordinaryAdditive\n      ∀ K : CochainComplex (strictEtaleLevel V O t n) ℤ,\n        (RW.derived n).map (B.directUnit.app K) ≫\n            right.hom.app (DerivedCategory.Q.obj K) ≫\n            (Etale.lowerStar (ModuleCat.{u + 1} (strictEtaleBrownRing O t n))\n              g).rightDerivedFunctor.map ((RV.factors n).hom.app K) =\n          (RW.factors n).hom.app (((A.right n).mapHomologicalComplex (.up ℤ)).obj K) ≫\n            DerivedCategory.Q.map\n              ((NatTrans.mapHomologicalComplex ordinaryRight.hom (.up ℤ)).app K) ≫\n            strictEtaleBrownRightUnit O t g n\n              (((strictEtaleBrownConstant O t V n).mapHomologicalComplex\n                (.up ℤ)).obj K) :\n    ∃ inverse : RW.derived n ⋙\n        (Etale.upperStar (ModuleCat.{u + 1} (strictEtaleBrownRing O t n)) g).mapDerivedCategory ≅\n      B.inverse ⋙ RV.derived n,\n      (mateEquiv B.adjunction\n        (Etale.upperStarLowerStarAdjunction\n          (ModuleCat.{u + 1} (strictEtaleBrownRing O t n)) g).mapDerivedCategoryRightDerivedAdjunction\n        (.mk _ _ _ _ inverse.hom)).natTrans = right.hom",
+ "source": {
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Construction 5.15 and Lemma 5.16; the corresponding local existence step of the normalized image realization."
+ },
+ "stmt_deps": [
+  "def-per-strict-etale-system-interfaces",
+  "def-pur-coefficient-system-image-data",
+  "def-pur-etale-brown-projection-realization"
+ ],
+ "proof": [
+  {
+   "step": 1,
+   "text": "Take the inverse mate of the derived comparison along the published upper-star/lower-star adjunction and use equivalence of the supplied realizations to obtain an isomorphism. Its mate equation is precisely the final coherence clause.",
+   "uses": [
+    "lem-stage3-inverse-mate-equivalences"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-stage3-inverse-mate-equivalences"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Construction 5.15 and Lemma 5.16; the corresponding local existence step of the normalized image realization."
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.EtaleBrownImageRealization",
+  "date": "2026-10-28",
+  "group": "D5"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-operations",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-etale-brown-image-realization",
+   "via": [],
+   "place": "Strictly simpler construction substep split from the parent normalized image realization."
+  },
+  "same_as": []
+ },
+ "lean": {
+  "module": "Sheaf.Paper.EtaleBrownImageRealizationInverse",
+  "declaration": "AlgebraicGeometry.etaleBrownImageRealization_inverse_exists",
+  "declarations": [
+   "AlgebraicGeometry.etaleBrownImageRealization_inverse_exists"
+  ],
+  "file": "lean/Sheaf/Paper/EtaleBrownImageRealizationInverse.lean",
+  "statement": "theorem etaleBrownImageRealization_inverse_exists (O : Type (u + 1)) [CommRing O] (t : O) {V W : Scheme.{u}} (g : V ⟶ W) (n : ℕ) (A : StrictEtaleOrdinaryImage O t g) (B : CoefficientDerivedImage (A.lift n).modules (A.right n) (A.levelAdj n)) {PV : StrictEtaleEvaluation V O t} {PW : StrictEtaleEvaluation W O t} (RV : StrictEtaleBrownRealization O t V PV) (RW : StrictEtaleBrownRealization O t W PW) (ordinaryRight : A.right n ⋙ strictEtaleBrownConstant O t W n ≅ strictEtaleBrownConstant O t V n ⋙ Etale.lowerStar (ModuleCat.{u + 1} (strictEtaleBrownRing O t n)) g) (right : B.direct ⋙ RW.derived n ≅ RV.derived n ⋙ (Etale.lowerStar (ModuleCat.{u + 1} (strictEtaleBrownRing O t n)) g).rightDerivedFunctor) (hright : letI := RV.val.ordinaryAdditive letI := RW.val.ordinaryAdditive ∀ K : CochainComplex (strictEtaleLevel V O t n) ℤ, (RW.derived n).map (B.directUnit.app K) ≫ right.hom.app (DerivedCategory.Q.obj K) ≫ (Etale.lowerStar (ModuleCat.{u + 1} (strictEtaleBrownRing O t n)) g).rightDerivedFunctor.map ((RV.factors n).hom.app K) = (RW.factors n).hom.app (((A.right n).mapHomologicalComplex (.up ℤ)).obj K) ≫ DerivedCategory.Q.map ((NatTrans.mapHomologicalComplex ordinaryRight.hom (.up ℤ)).app K) ≫ strictEtaleBrownRightUnit O t g n (((strictEtaleBrownConstant O t V n).mapHomologicalComplex (.up ℤ)).obj K)) : ∃ inverse : RW.derived n ⋙ (Etale.upperStar (ModuleCat.{u + 1} (strictEtaleBrownRing O t n)) g).mapDerivedCategory ≅ B.inverse ⋙ RV.derived n, (mateEquiv B.adjunction (Etale.upperStarLowerStarAdjunction (ModuleCat (strictEtaleBrownRing O t n)) g).mapDerivedCategoryRightDerivedAdjunction (.mk _ _ _ _ inverse.hom)).natTrans = right.hom",
+  "branch": "sheaf-dag",
+  "by": "D5",
+  "date": "2026-10-28",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D5",
+  "result": "pass",
+  "landing": "20261027T205903-L-1629264",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D5",
+  "result": "pass",
+  "landing": "20261027T205903-L-1629264",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

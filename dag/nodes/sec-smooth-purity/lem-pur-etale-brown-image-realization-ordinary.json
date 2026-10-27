@@ -1,0 +1,86 @@
+{
+ "id": "lem-pur-etale-brown-image-realization-ordinary",
+ "kind": "statement",
+ "title": "Section-normalized ordinary image comparison",
+ "statement": "theorem etaleBrownImageRealization_ordinaryRight_exists\n    (O : Type (u + 1)) [CommRing O] (t : O)\n    {V W : Scheme.{u}} (g : V ⟶ W) (n : ℕ)\n    (A : StrictEtaleOrdinaryImage O t g)\n    {PV : StrictEtaleEvaluation V O t} {PW : StrictEtaleEvaluation W O t}\n    (RV : StrictEtaleBrownRealization O t V PV)\n    (RW : StrictEtaleBrownRealization O t W PW) :\n    ∃ ordinaryRight : A.right n ⋙ strictEtaleBrownConstant O t W n ≅\n        strictEtaleBrownConstant O t V n ⋙\n          Etale.lowerStar (ModuleCat.{u + 1} (strictEtaleBrownRing O t n)) g,\n      ∀ (M : strictEtaleLevel V O t n) (U : W.Etaleᵒᵖ)\n        (x : ((A.right n).obj M).val.obj U),\n        (ordinaryRight.hom.app M).hom.app U x =\n          ((A.rightUnderlying n).hom.app M).hom.app U x",
+ "source": {
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Construction 5.15 and Lemma 5.16; the corresponding local existence step of the normalized image realization."
+ },
+ "stmt_deps": [
+  "def-per-strict-etale-system-interfaces",
+  "def-pur-coefficient-system-image-data",
+  "def-pur-etale-brown-projection-realization"
+ ],
+ "proof": [
+  {
+   "step": 1,
+   "text": "Construct the ordinary comparison from the recorded rightUnderlying isomorphism and verify its section formula. This is strictly below the full subtype existence because it supplies only the ordinary field and one coherence clause.",
+   "uses": [
+    "lem-cbc-constant-ring-module-sheaves"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-cbc-constant-ring-module-sheaves"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Construction 5.15 and Lemma 5.16; the corresponding local existence step of the normalized image realization."
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.EtaleBrownImageRealization",
+  "date": "2026-10-28",
+  "group": "D5"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-operations",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-etale-brown-image-realization",
+   "via": [],
+   "place": "Strictly simpler construction substep split from the parent normalized image realization."
+  },
+  "same_as": []
+ },
+ "lean": {
+  "module": "Sheaf.Paper.EtaleBrownImageRealizationOrdinary",
+  "declaration": "AlgebraicGeometry.etaleBrownImageRealization_ordinaryRight_exists",
+  "declarations": [
+   "AlgebraicGeometry.etaleBrownImageRealization_ordinaryRight_exists"
+  ],
+  "file": "lean/Sheaf/Paper/EtaleBrownImageRealizationOrdinary.lean",
+  "statement": "theorem etaleBrownImageRealization_ordinaryRight_exists (O : Type (u + 1)) [CommRing O] (t : O) {V W : Scheme.{u}} (g : V ⟶ W) (n : ℕ) (A : StrictEtaleOrdinaryImage O t g) {PV : StrictEtaleEvaluation V O t} {PW : StrictEtaleEvaluation W O t} (RV : StrictEtaleBrownRealization O t V PV) (RW : StrictEtaleBrownRealization O t W PW) : ∃ ordinaryRight : A.right n ⋙ strictEtaleBrownConstant O t W n ≅ strictEtaleBrownConstant O t V n ⋙ Etale.lowerStar (ModuleCat.{u + 1} (strictEtaleBrownRing O t n)) g, ∀ (M : strictEtaleLevel V O t n) (U : W.Etaleᵒᵖ) (x : ((A.right n).obj M).val.obj U), (ordinaryRight.hom.app M).hom.app U x = ((A.rightUnderlying n).hom.app M).hom.app U x",
+  "branch": "sheaf-dag",
+  "by": "D5",
+  "date": "2026-10-28",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D5",
+  "result": "pass",
+  "landing": "20261027T205903-L-1629264",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D5",
+  "result": "pass",
+  "landing": "20261027T205903-L-1629264",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

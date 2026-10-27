@@ -6,6 +6,9 @@ Authors: SHEAF group M6
 module
 
 public import Sheaf.Paper.EtaleBrownProjectionRealization
+import Sheaf.Paper.EtaleBrownImageRealizationOrdinary
+import Sheaf.Paper.EtaleBrownImageRealizationDerived
+import Sheaf.Paper.EtaleBrownImageRealizationInverse
 
 /-! # Normalized realization of a geometric image
 
@@ -53,6 +56,14 @@ theorem etaleBrownImageRealization_exists
     {PV : StrictEtaleEvaluation V O t} {PW : StrictEtaleEvaluation W O t}
     (RV : StrictEtaleBrownRealization O t V PV)
     (RW : StrictEtaleBrownRealization O t W PW) :
-    Nonempty (StrictEtaleBrownImageRealization O t g n A B RV RW) := by sorry
+    Nonempty (StrictEtaleBrownImageRealization O t g n A B RV RW) := by
+  classical
+  obtain ⟨ordinaryRight, hordinary⟩ :=
+    etaleBrownImageRealization_ordinaryRight_exists O t g n A RV RW
+  obtain ⟨right, hright⟩ :=
+    etaleBrownImageRealization_right_exists O t g n A B RV RW ordinaryRight hordinary
+  obtain ⟨inverse, hinverse⟩ :=
+    etaleBrownImageRealization_inverse_exists O t g n A B RV RW ordinaryRight right hright
+  exact ⟨⟨⟨ordinaryRight, right, inverse⟩, hordinary, hright, hinverse⟩⟩
 
 end AlgebraicGeometry
