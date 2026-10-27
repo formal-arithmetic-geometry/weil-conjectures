@@ -202,7 +202,7 @@ theorem exceptionalProjection_baseChange (sq : IsPullback g' f' f g)
   rw [boundedConstructibleExceptionalProjection_app_app,
     boundedConstructibleExceptionalProjection_app_app,
     boundedConstructiblePullbackSquareComparison_inv_app] at h
-  simp only [Functor.map_comp, MonoidalCategory.whiskerLeft_comp, Category.assoc] at h ⊢
+  simp only [Functor.map_comp, MonoidalCategory.whiskerLeft_comp] at h ⊢
   exact h
 
 end BaseChange
