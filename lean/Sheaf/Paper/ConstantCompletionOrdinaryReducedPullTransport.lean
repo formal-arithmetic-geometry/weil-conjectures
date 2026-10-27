@@ -6,6 +6,7 @@ Authors: SHEAF group B4
 module
 
 public import Sheaf.Paper.ConstantCompletionDerivedPull
+import Sheaf.Paper.ConstantCompletionOrdinaryReducedPullTransportEquation
 
 /-! # Ordinary finite transport for constant-completion pullback
 
@@ -53,6 +54,11 @@ theorem ordinaryReducedPull_transport (A : Type u) [CommRing A] [IsNoetherianRin
         change (quotient J' A I n)) ≅ X),
       Functor.whiskerRight (ordinaryPullComparison F A I)
           (change (quotient J' A I n)) ≫ t.hom = s.hom := by
-  sorry
+  let X := change (projection J A I n) ⋙
+    pull F (constantMap F (A ⧸ I ^ (n + 1)))
+  obtain ⟨s⟩ := ordinaryReducedPull_sourceIso F A I n
+  obtain ⟨t⟩ := ordinaryReducedPull_targetIso F A I n
+  refine ⟨X, s, t, ?_⟩
+  exact ordinaryReducedPull_transport_eq F A I n s t
 
 end CategoryTheory.ConstantCompletion

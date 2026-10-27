@@ -1,0 +1,46 @@
+/-
+Copyright (c) 2026 The SHEAF contributors. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+-/
+module
+
+public import Sheaf.Paper.ConstantCompletionOrdinaryReducedPullSourceIso
+
+/-! # Target transport for ordinary finite reduction
+
+The target-side transport to the finite quotient model is isolated here.
+(blueprint: lem-weil-pbc-constant-completion-ordinary-reduced-pull-target-iso).
+-/
+
+@[expose] public noncomputable section
+set_option autoImplicit false
+
+universe u
+
+open CategoryTheory CategoryTheory.Limits
+open CategoryTheory.ConstantCompletion
+
+namespace CategoryTheory.ConstantCompletion
+
+variable {C C' : Type u} [SmallCategory C] [SmallCategory C']
+variable {J : GrothendieckTopology C} {J' : GrothendieckTopology C'}
+variable {L : Sheaf J (Type u) ⥤ Sheaf J' (Type u)} (F : InverseImageData L)
+variable (V : Sheaf J' (Type u) ⥤ Sheaf J (Type u)) (adj : L ⊣ V)
+variable [PreservesFiniteLimits L]
+
+/-- The target finite reduction has a transport to the same finite quotient model as
+the source reduction.  This is the target half of the common-quotient argument.
+Source: Stacks Project, sites-modules.tex, Tags 03EK, 03EL and 093M.
+Proof: use the second-site quotient identification, the projection equation for
+`completedMap`, and normalized scalar associativity for the inverse-image algebra.
+(blueprint: lem-weil-pbc-constant-completion-ordinary-reduced-pull-target-iso).
+-/
+theorem ordinaryReducedPull_targetIso (A : Type u) [CommRing A] [IsNoetherianRing A]
+    (I : Ideal A) (n : ℕ) :
+    Nonempty ((pull F (completedMap F A I) ⋙ res (coefficientMap J' A I) ⋙
+        change (quotient J' A I n)) ≅
+      (change (projection J A I n) ⋙
+        pull F (constantMap F (A ⧸ I ^ (n + 1))))) := by
+  sorry
+
+end CategoryTheory.ConstantCompletion
