@@ -6,11 +6,10 @@ Authors: SHEAF group Q85
 module
 
 public import Sheaf.AlgebraicGeometry.ProjScalarExtensionTwistData
-import WeilConjectures.AlgebraicGeometry.ModulePullbackAffineSections
-import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Tilde
-import WeilConjectures.Topology.GlueSheavesOfModules
-import WeilConjectures.AlgebraicGeometry.ModulePullbackTensor
-import WeilConjectures.AlgebraicGeometry.QuasiCoherentTensorProductAffineSections
+import Sheaf.AlgebraicGeometry.ProjScalarExtensionTwistIdentity
+import Sheaf.AlgebraicGeometry.ProjScalarExtensionTwistMultiplication
+import Sheaf.AlgebraicGeometry.ProjScalarExtensionTwistUniqueness
+import Sheaf.AlgebraicGeometry.ProjScalarExtensionTwistUnit
 
 /-! # ProjScalarExtensionTwistFractionLaws
 
@@ -89,6 +88,16 @@ theorem scalarExtension_twist_fraction_laws
 (∀ ι : ∀ j : ℤ, (tensorPullback (𝟙 (Proj 𝒜))).obj (twist 𝒜 j) ≅ twist 𝒜 j,
         IsScalarExtensionTwistComparison (GradedRingHom.id 𝒜) (𝟙 (Proj 𝒜)) ι →
         ∀ j : ℤ, ι j = (tensorPullbackSectionId (Proj 𝒜)).app (twist 𝒜 j)) := by
-  sorry
+  have _ := hρA
+  have _ := hρB
+  have _ := hβψ
+  have _ := hgraded
+  have _ := hpre
+  have _ := hchart
+  have huniq := scalarExtension_twist_uniqueness ψ r θ hθ
+  have hmul := scalarExtension_twist_multiplication ψ r θ hθ
+  have hunit := scalarExtension_twist_unit ψ r θ hθ
+  have hid := scalarExtension_twist_identity (𝒜 := 𝒜)
+  exact ⟨huniq, hmul, hunit, hid⟩
 
 end AlgebraicGeometry.Proj
