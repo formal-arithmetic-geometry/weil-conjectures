@@ -1,0 +1,130 @@
+{
+ "id": "lem-sf-locally-finite-adic-constructible-sheaf-small",
+ "kind": "statement",
+ "title": "Essential smallness of native constructible sheaves",
+ "statement": "Let $\\ell$ be prime and $X$ a Noetherian scheme. In the native internal-module category of [def-sf-native-weil-derived-framework], the property of adic constructible sheaves is essentially small in the site/coefficient universe of [def-weil-size-convention]. Explicitly, there is a family indexed by a type in that universe such that every sheaf which is locally stratified lisse is isomorphic to a member of the family. No derived objects or realization functor are involved.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
+  "place": "Native realization proof step 8, first sentence: count constructible cohomology sheaves, before any Postnikov argument."
+ },
+ "stmt_deps": [
+  "def-sf-native-weil-derived-framework",
+  "def-weil-size-convention"
+ ],
+ "proof": [
+  {
+   "text": "The normalized native encoding NativeEncoding.encoding l X (forget the restricted constant-field action and restrict scalars along the canonical coefficient isomorphism) is an equivalence onto module objects over the condensed algebraic-closure ring object R_X, hence full and faithful.",
+   "uses": [
+    "lem-sf-native-adic-encoding-ordinary-operations"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "On the Noetherian scheme X, encoding_constructible_iff says that a native module is constructible exactly when its encoding is a constructible R_X-module object. Hence the encoding restricts to a full and faithful functor from the full subcategory of native constructible modules to that of constructible R_X-module objects. The empty scheme and zero ranks are included in that statement.",
+   "uses": [
+    "lem-sf-native-adic-encoding-constructibility"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The constructible R_X-module objects are essentially small in universe u+1 by constructibleModuleObjects_essentiallySmall. A full and faithful functor into an essentially small category has essentially small source (essentiallySmall_of_fully_faithful), and the essential image of the full-subcategory inclusion contains every native constructible module, so the native property is essentially small in u+1. No derived objects are used.",
+   "uses": [
+    "lem-sfb-constructible-module-objects-essentially-small"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-native-adic-encoding-constructibility",
+  "lem-sf-native-adic-encoding-ordinary-operations",
+  "lem-sfb-constructible-module-objects-essentially-small"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Definitions 6.8.3 and 6.8.8; heart portion of step 8 of the native realization proof, proved in Lean by the reviewer of K3 12433ab5 through the native encoding and the constructible-module counting theorem (as in the G6 38c53fae review)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Construct a scalar compatible functor from constructible l adic complexes to derived modules over locally finite continuous coefficients, prove full faithfulness, essential image and essential smallness",
+   "results": "Actual search: 8 hits. CondensedSet.LocallyConstant.functorFullyFaithful; LightCondMod.LocallyConstant.fullyFaithfulFunctor; LightCondSet.LocallyConstant.functorFullyFaithful; CondensedMod.LocallyConstant.fullyFaithfulFunctor; CompHausLike.LocallyConstantModule.functorToPresheaves; CondensedMod.LocallyConstant.instFaithfulModuleCatFunctor; LightCondSet.LocallyConstant.instFaithfulFunctor; LightCondMod.LocallyConstant.instFaithfulModuleCatLightCondensedDiscrete. Local source search additionally found DerivedCategory.essentiallySmall_bounded_inf in WeilConjectures.CategoryTheory.DerivedCategory.BoundedEssentiallySmall; it handles the bounded-derived counting step, not construction or descent of the native functor, nor counting native constructible sheaves. Blueprint searches locally finite adic realization and essentially small bounded found no duplicate native statements.",
+   "date": "2026-10-28",
+   "verdict": "partial match: use the existing bounded-derived smallness theorem; no native comparison theorem in Mathlib"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "equivalence of bounded constructible l adic derived categories and derived modules over locally finite continuous coefficients",
+   "results": "Actual search: 8 hits. CondensedMod; Condensed.profiniteSolid; LightCondensed.instIsGrothendieckAbelianLightCondMod; CondensedMod.LocallyConstant.adjunction; CondensedMod.IsSolid; CondensedMod.LocallyConstant.functor; CondensedMod.LocallyConstant.functorIsoDiscrete; Condensed.profiniteFree. Local source search additionally found DerivedCategory.essentiallySmall_bounded_inf in WeilConjectures.CategoryTheory.DerivedCategory.BoundedEssentiallySmall; it handles the bounded-derived counting step, not construction or descent of the native functor, nor counting native constructible sheaves. Blueprint searches locally finite adic realization and essentially small bounded found no duplicate native statements.",
+   "date": "2026-10-28",
+   "verdict": "partial match: use the existing bounded-derived smallness theorem; no native comparison theorem in Mathlib"
+  },
+  {
+   "tool": "grep",
+   "query": "LocallyFiniteAdicRealization|boundedAdicConstructible.*EssentiallySmall",
+   "results": "Actual search: 0 hits. . Local source search additionally found DerivedCategory.essentiallySmall_bounded_inf in WeilConjectures.CategoryTheory.DerivedCategory.BoundedEssentiallySmall; it handles the bounded-derived counting step, not construction or descent of the native functor, nor counting native constructible sheaves. Blueprint searches locally finite adic realization and essentially small bounded found no duplicate native statements.",
+   "date": "2026-10-28",
+   "verdict": "partial match: use the existing bounded-derived smallness theorem; no native comparison theorem in Mathlib"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.LocallyFiniteAdicConstructibleRealization",
+  "group": "K3",
+  "date": "2026-10-28"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Native realization proof step 8, first sentence: count constructible cohomology sheaves, before any Postnikov argument.",
+   "via": [
+    "lem-sf-locally-finite-adic-constructible-realization",
+    "thm-sf-weil-compact-direct-image-right-adjoint"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.LocallyFiniteAdicConstructibleSheafSmall",
+  "declaration": "WeilConjectures.LocallyFiniteAdicRealization.nativeConstructibleSheaf_essentiallySmall",
+  "statement": "theorem nativeConstructibleSheaf_essentiallySmall (l : ℕ) [Fact l.Prime] (X : Scheme.{u}) [IsNoetherian X] : ObjectProperty.EssentiallySmall.{u + 1} (ProEtale.adicConstructibleSheaf l X)",
+  "branch": "sheaf-dag",
+  "by": "K3",
+  "date": "2026-10-28",
+  "file": "lean/Sheaf/Paper/LocallyFiniteAdicConstructibleSheafSmall.lean"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-12433",
+  "group": "K3",
+  "result": "fix",
+  "landing": "20261027T234035-L-4169620",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-12433",
+  "group": "K3",
+  "result": "fix",
+  "landing": "20261027T234035-L-4169620",
+  "kind": "interface",
+  "note": "independent cc review: K3 12433ab5 delivered modules/nodes vs clone (verbatim data move diffed), item node vs proof, sheaf-small hole vs G6 38c53fae proof of identical statement; 7 direct importers compiled in sandbox, all OK"
+ }
+}

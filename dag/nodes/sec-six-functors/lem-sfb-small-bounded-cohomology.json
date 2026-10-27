@@ -1,0 +1,117 @@
+{
+ "id": "lem-sfb-small-bounded-cohomology",
+ "kind": "statement",
+ "title": "Bounded derived objects with essentially small cohomology",
+ "statement": "Let $\\mathcal A$ be an abelian category with a chosen ordinary derived category $D(\\mathcal A)$, and let $w$ be a universe. Suppose $D(\\mathcal A)$ has $w$-small Hom sets. Let $P$ be an isomorphism-invariant property of objects of $\\mathcal A$ admitting a $w$-small family of representatives. Then the property of bounded objects $K$ of $D(\\mathcal A)$ such that $P(H^nK)$ for every integer $n$ admits a $w$-small family of representatives. No closure of $P$ under extensions, nor a zero-object hypothesis on $P$, is required. This uses the size convention of [def-weil-size-convention].",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
+  "place": "Native realization proof step 8, finite Postnikov counting, supplied by the already proved generic source theorem (lines 128--137)."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention"
+ ],
+ "proof": [
+  {
+   "text": "All shifts of degree-zero objects from a small family form a small family of single-cohomology objects. By induction, fixed finite iterated extensions of this family remain essentially small, using small Hom sets to bound connecting morphisms.",
+   "uses": [
+    "lem-sfb-small-triangulated-extension-classes"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For an object bounded in [a,a+d], split off top cohomology via the truncation triangle and induct on d. The case d=0 is the single-cohomology isomorphism. Isomorphism invariance transports P along these comparisons. Therefore every bounded object belongs to some finite iterated-extension family. The union over d in the natural numbers is a small family. This is the complete existing source proof, including the possibly empty class P.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-small-triangulated-extension-classes"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
+  "place": "Partition of the native realization obligation, proof steps 2--8, following Bhatt--Scholze Section 6.8; no change of the unit route."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Construct a scalar compatible functor from constructible l adic complexes to derived modules over locally finite continuous coefficients, prove full faithfulness, essential image and essential smallness",
+   "results": "Actual search: 8 hits. CondensedSet.LocallyConstant.functorFullyFaithful; LightCondMod.LocallyConstant.fullyFaithfulFunctor; LightCondSet.LocallyConstant.functorFullyFaithful; CondensedMod.LocallyConstant.fullyFaithfulFunctor; CompHausLike.LocallyConstantModule.functorToPresheaves; CondensedMod.LocallyConstant.instFaithfulModuleCatFunctor; LightCondSet.LocallyConstant.instFaithfulFunctor; LightCondMod.LocallyConstant.instFaithfulModuleCatLightCondensedDiscrete. Local source search additionally found DerivedCategory.essentiallySmall_bounded_inf in WeilConjectures.CategoryTheory.DerivedCategory.BoundedEssentiallySmall; it handles the bounded-derived counting step, not construction or descent of the native functor, nor counting native constructible sheaves. Blueprint searches locally finite adic realization and essentially small bounded found no duplicate native statements.",
+   "date": "2026-10-28",
+   "verdict": "partial match: use the existing bounded-derived smallness theorem; no native comparison theorem in Mathlib"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "equivalence of bounded constructible l adic derived categories and derived modules over locally finite continuous coefficients",
+   "results": "Actual search: 8 hits. CondensedMod; Condensed.profiniteSolid; LightCondensed.instIsGrothendieckAbelianLightCondMod; CondensedMod.LocallyConstant.adjunction; CondensedMod.IsSolid; CondensedMod.LocallyConstant.functor; CondensedMod.LocallyConstant.functorIsoDiscrete; Condensed.profiniteFree. Local source search additionally found DerivedCategory.essentiallySmall_bounded_inf in WeilConjectures.CategoryTheory.DerivedCategory.BoundedEssentiallySmall; it handles the bounded-derived counting step, not construction or descent of the native functor, nor counting native constructible sheaves. Blueprint searches locally finite adic realization and essentially small bounded found no duplicate native statements.",
+   "date": "2026-10-28",
+   "verdict": "partial match: use the existing bounded-derived smallness theorem; no native comparison theorem in Mathlib"
+  },
+  {
+   "tool": "grep",
+   "query": "LocallyFiniteAdicRealization|boundedAdicConstructible.*EssentiallySmall",
+   "results": "Actual search: 0 hits. . Local source search additionally found DerivedCategory.essentiallySmall_bounded_inf in WeilConjectures.CategoryTheory.DerivedCategory.BoundedEssentiallySmall; it handles the bounded-derived counting step, not construction or descent of the native functor, nor counting native constructible sheaves. Blueprint searches locally finite adic realization and essentially small bounded found no duplicate native statements.",
+   "date": "2026-10-28",
+   "verdict": "partial match: use the existing bounded-derived smallness theorem; no native comparison theorem in Mathlib"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.LocallyFiniteAdicConstructibleRealization",
+  "group": "K3",
+  "date": "2026-10-28"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Native realization proof step 8, finite Postnikov counting, supplied by the already proved generic source theorem (lines 128--137).",
+   "via": [
+    "lem-sf-locally-finite-adic-constructible-realization",
+    "thm-sf-weil-compact-direct-image-right-adjoint"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "existing": true,
+  "module": "WeilConjectures.CategoryTheory.DerivedCategory.BoundedEssentiallySmall",
+  "declaration": "DerivedCategory.essentiallySmall_bounded_inf",
+  "statement": "theorem essentiallySmall_bounded_inf [P.IsClosedUnderIsomorphisms] [ObjectProperty.EssentiallySmall.{w'} P] [LocallySmall.{w'} (DerivedCategory C)] : ObjectProperty.EssentiallySmall.{w'} (TStructure.t.bounded ⊓ fun K ↦ ∀ n, P ((homologyFunctor C n).obj K))",
+  "branch": "sheaf-dag",
+  "by": "K3",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-12433",
+  "group": "K3",
+  "result": "fix",
+  "landing": "20261027T234035-L-4169620",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-12433",
+  "group": "K3",
+  "result": "fix",
+  "landing": "20261027T234035-L-4169620",
+  "kind": "interface",
+  "note": "independent cc review: K3 12433ab5 delivered modules/nodes vs clone (verbatim data move diffed), item node vs proof, sheaf-small hole vs G6 38c53fae proof of identical statement; 7 direct importers compiled in sandbox, all OK"
+ }
+}

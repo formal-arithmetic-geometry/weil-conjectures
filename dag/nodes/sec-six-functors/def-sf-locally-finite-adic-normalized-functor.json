@@ -1,0 +1,106 @@
+{
+ "id": "def-sf-locally-finite-adic-normalized-functor",
+ "kind": "definition",
+ "title": "Native normalized common-field functor before descent",
+ "statement": "Fix a prime $\\ell$ and a scheme $X$. Use the native coefficient, its normalized coefficient presentations, and its section-module functor of [def-sf-locally-finite-adic-realization-data]. Use the raw common-stage source of [def-weil-algebraically-closed-coefficients, def-weil-rationalization-karoubi]. A normalized functor consists of a commutative native coefficient structure, additive finite-limit and finite-colimit preservation for sections, the specified normalized presentations for every finite field with equality of integral structural maps under extension, and an additive triangulated functor $J$ from that source to the ordinary native derived category, with integer-shift structure. Its integral comparison is a natural isomorphism from rationalization followed by stage inclusion, $J$ and derived sections to derived extension along the specified integral-to-native map. Require its common-field arrows to equal the canonical completion comparison followed by balanced derived tensor associativity, using the literal object transports and exactly the equation commonField of the realization-data node. There is no full-faithfulness, image, or essential-smallness requirement.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
+  "place": "Native realization proof steps 2--5: only the normalized functor and coefficient construction, before steps 6--8."
+ },
+ "stmt_deps": [
+  "def-sf-locally-finite-adic-realization-data",
+  "def-weil-algebraically-closed-coefficients",
+  "def-weil-rationalization-karoubi"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Construct a scalar compatible functor from constructible l adic complexes to derived modules over locally finite continuous coefficients, prove full faithfulness, essential image and essential smallness",
+   "results": "Actual search: 8 hits. CondensedSet.LocallyConstant.functorFullyFaithful; LightCondMod.LocallyConstant.fullyFaithfulFunctor; LightCondSet.LocallyConstant.functorFullyFaithful; CondensedMod.LocallyConstant.fullyFaithfulFunctor; CompHausLike.LocallyConstantModule.functorToPresheaves; CondensedMod.LocallyConstant.instFaithfulModuleCatFunctor; LightCondSet.LocallyConstant.instFaithfulFunctor; LightCondMod.LocallyConstant.instFaithfulModuleCatLightCondensedDiscrete. Local source search additionally found DerivedCategory.essentiallySmall_bounded_inf in WeilConjectures.CategoryTheory.DerivedCategory.BoundedEssentiallySmall; it handles the bounded-derived counting step, not construction or descent of the native functor, nor counting native constructible sheaves. Blueprint searches locally finite adic realization and essentially small bounded found no duplicate native statements.",
+   "date": "2026-10-28",
+   "verdict": "partial match: use the existing bounded-derived smallness theorem; no native comparison theorem in Mathlib"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "equivalence of bounded constructible l adic derived categories and derived modules over locally finite continuous coefficients",
+   "results": "Actual search: 8 hits. CondensedMod; Condensed.profiniteSolid; LightCondensed.instIsGrothendieckAbelianLightCondMod; CondensedMod.LocallyConstant.adjunction; CondensedMod.IsSolid; CondensedMod.LocallyConstant.functor; CondensedMod.LocallyConstant.functorIsoDiscrete; Condensed.profiniteFree. Local source search additionally found DerivedCategory.essentiallySmall_bounded_inf in WeilConjectures.CategoryTheory.DerivedCategory.BoundedEssentiallySmall; it handles the bounded-derived counting step, not construction or descent of the native functor, nor counting native constructible sheaves. Blueprint searches locally finite adic realization and essentially small bounded found no duplicate native statements.",
+   "date": "2026-10-28",
+   "verdict": "partial match: use the existing bounded-derived smallness theorem; no native comparison theorem in Mathlib"
+  },
+  {
+   "tool": "grep",
+   "query": "LocallyFiniteAdicRealization|boundedAdicConstructible.*EssentiallySmall",
+   "results": "Actual search: 0 hits. . Local source search additionally found DerivedCategory.essentiallySmall_bounded_inf in WeilConjectures.CategoryTheory.DerivedCategory.BoundedEssentiallySmall; it handles the bounded-derived counting step, not construction or descent of the native functor, nor counting native constructible sheaves. Blueprint searches locally finite adic realization and essentially small bounded found no duplicate native statements.",
+   "date": "2026-10-28",
+   "verdict": "partial match: use the existing bounded-derived smallness theorem; no native comparison theorem in Mathlib"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.LocallyFiniteAdicConstructibleRealization",
+  "group": "K3",
+  "date": "2026-10-28"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Native realization proof steps 2--5: only the normalized functor and coefficient construction, before steps 6--8.",
+   "via": [
+    "lem-sf-locally-finite-adic-constructible-realization",
+    "thm-sf-weil-compact-direct-image-right-adjoint"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.LocallyFiniteAdicNormalizedFunctorData",
+  "declaration": "WeilConjectures.LocallyFiniteAdicRealization.NormalizedFunctor",
+  "statement": "structure NormalizedFunctor extends FunctorData l X",
+  "branch": "sheaf-dag",
+  "by": "K3",
+  "date": "2026-10-28",
+  "file": "lean/Sheaf/Paper/LocallyFiniteAdicNormalizedFunctorData.lean",
+  "declarations": [
+   "WeilConjectures.LocallyFiniteAdicRealization.FunctorData",
+   "WeilConjectures.LocallyFiniteAdicRealization.FunctorData.commonField",
+   "WeilConjectures.LocallyFiniteAdicRealization.NormalizedFunctor"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-12433",
+  "group": "K3",
+  "result": "fix",
+  "landing": "20261027T234035-L-4169620",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-12433",
+  "group": "K3",
+  "result": "fix",
+  "landing": "20261027T234035-L-4169620",
+  "kind": "interface",
+  "note": "independent cc review: K3 12433ab5 delivered modules/nodes vs clone (verbatim data move diffed), item node vs proof, sheaf-small hole vs G6 38c53fae proof of identical statement; 7 direct importers compiled in sandbox, all OK"
+ }
+}

@@ -1,0 +1,166 @@
+{
+ "id": "lem-sf-locally-finite-adic-functor-descent",
+ "kind": "statement",
+ "title": "Derived Hom and object descent for a normalized native functor",
+ "statement": "Let $\\ell$ be prime and $X$ a Noetherian finite-dimensional scheme with $\\ell$ invertible in every local ring. Let $D$ be a normalized native functor of [def-sf-locally-finite-adic-normalized-functor]. For every two source objects $K,L$, its map from $\\operatorname{Hom}(K,L)$ to the full ambient derived $\\operatorname{Hom}(D.JK,D.JL)$ is bijective. For every native derived object $M$, bounded adic constructibility in the sense of [def-sf-native-weil-derived-framework] holds if and only if $M$ is isomorphic to $D.JA$ for some source object $A$. This proves properties of the given functor and does not construct its coefficient maps or comparisons.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
+  "place": "Native realization proof step 3 (constructibility comparison) and steps 6--7 (Hom and object descent)."
+ },
+ "stmt_deps": [
+  "def-sf-locally-finite-adic-normalized-functor",
+  "def-sf-native-weil-derived-framework"
+ ],
+ "proof": [
+  {
+   "text": "These ring identifications give equivalences of their module categories, preserving underlying sheaves, kernels and cokernels. The convention of $\\mathcal A_T$ takes $B_T$-module objects in sheaves of $\\underline\\Omega$-modules under $\\otimes_{\\underline\\Omega}$. Locally constant functions lie in $B_T$, so $\\underline\\Omega\\to B_T$ is a ring map; the unit axiom makes the given $\\underline\\Omega$-structure the restricted one, and every $B_T$-action factors through the epimorphism $B_T\\otimes M\\to B_T\\otimes_{\\underline\\Omega}M$. So these are the $B_T$-module objects in abelian sheaves. Internal modules and sectionwise module sheaves agree by [def-weil-pbc-internal-abelian-sheaf-module-equivalence]; transport along a coefficient isomorphism has the explicit inverse and tensor normalization of [lem-weil-sheaf-scalar-extension-ring-iso]. The induced exact equivalences act termwise on complexes and descend with their shifts and triangles by [lem-weil-pbc-exact-functor-derived-factorization]. Under them the condensed bounded constructible category $\\mathcal C_T^c(\\Omega)$ equals $\\mathcal C_T$: local finite presentation implies local finite freeness by [lem-weil-pbc-condensed-qbar-lfp-local-triviality], and a finite free module is the cokernel of $0\\to A^r$. The finite-$E$ version follows from [lem-weil-pbc-condensed-lfp-local-triviality]. These assertions apply on each Noetherian stratum. The local-on-$T$ stratifications defining $\\mathcal C_T$ can be made finite globally: choose a finite open subcover $U_1,\\ldots,U_m$ and partition $T$ into the locally closed pieces $U_i\\setminus\\bigcup_{j<i}U_j$. Pull each given stratification on $U_i$ to this piece by fiber products. These finitely many locally closed scheme strata cover $T$ disjointly and the local finite-free models restrict to them. Thus neither boundedness nor a global stratification condition changes in this comparison.",
+   "uses": [
+    "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+    "lem-weil-sheaf-scalar-extension-ring-iso",
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "lem-weil-pbc-condensed-qbar-lfp-local-triviality",
+    "lem-weil-pbc-condensed-lfp-local-triviality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Definitions 6.8.3, 6.8.6 and 6.8.8; coefficient transport; local-freeness comparison"
+   }
+  },
+  {
+   "text": "For an already given normalized functor D, its integral natural comparison determines its finite-stage restriction, after raw rationalization, as the usual finite-field realization followed by native extension. Its common-field equation makes the maps between these restrictions agree with the finite-stage completion and balanced scalar comparisons. Thus all Hom colimit transition maps used below coincide with D.J.map.",
+   "uses": [
+    "lem-per-continuous-rational-derived-realization",
+    "lem-fd-rational-coefficient-category-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Let $(E,K)$ and $(F,L)$ be two source objects. At every common finite $H\\supseteq E,F$, full faithfulness of $R_{T,H}$ identifies the Hom group between their $H$-extensions with the corresponding derived Hom group in $\\mathcal C_T^c(H)$. Step 5 identifies the transition maps in these systems. Taking their filtered colimit therefore identifies the source Hom set with the common-field Hom colimit for the condensed categories. By [prop-weil-pbc-qbar-condensed-two-colimit], this last colimit maps bijectively to the ambient derived Hom between their $B_T$-realizations. This is exactly the map induced by $J_T$, so $J_T$ is full and faithful. Replacing $L$ by $L[r]$ gives the same conclusion in every integer degree, not merely in the heart.",
+   "uses": [
+    "lem-per-continuous-rational-derived-realization",
+    "prop-weil-pbc-qbar-condensed-two-colimit",
+    "def-weil-algebraically-closed-coefficients"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 6.8.14(1),(2): full faithfulness; the existing condensed two-colimit supplies derived object/Hom descent"
+   }
+  },
+  {
+   "text": "Given $M\\in\\mathcal C_T$, view it as an object of $\\mathcal C_T^c(\\Omega)$ using steps 2–3. By [prop-weil-pbc-qbar-condensed-two-colimit], choose a finite $E$ and $M_E\\in\\mathcal C_T^c(E)$ with $B_T\\otimes^L_{E_T}M_E\\cong M$. By essential surjectivity of [lem-per-continuous-rational-derived-realization], choose $K_E\\in D^b_c(T,E)$ with $R_{T,E}K_E\\cong M_E$. Tensor transitivity of [lem-weil-pbc-condensed-flat-coefficient-calculus] now gives $J_T(E,K_E)\\cong M$. Hence $J_T$ is essentially surjective and, with step 6, an equivalence. Every source distinguished triangle is represented at one finite field by [def-weil-algebraically-closed-coefficients]. Its image is distinguished because $R_{T,E}$ and further derived scalar extension are triangulated by the cited statements. Conversely every morphism between target objects comes from a source morphism; its source cone realizes to an ambient cone. Thus $\\mathcal C_T$ has the inherited triangulated structure and $J_T$ is the asserted triangulated equivalence.",
+   "uses": [
+    "prop-weil-pbc-qbar-condensed-two-colimit",
+    "lem-per-continuous-rational-derived-realization",
+    "lem-weil-pbc-condensed-flat-coefficient-calculus",
+    "def-weil-algebraically-closed-coefficients"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 6.8.14(1),(2): essential surjectivity and exactness; raw common-stage triangles"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-algebraically-closed-coefficients",
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+  "lem-fd-rational-coefficient-category-comparison",
+  "lem-per-continuous-rational-derived-realization",
+  "lem-weil-pbc-condensed-flat-coefficient-calculus",
+  "lem-weil-pbc-condensed-lfp-local-triviality",
+  "lem-weil-pbc-condensed-qbar-lfp-local-triviality",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-weil-sheaf-scalar-extension-ring-iso",
+  "prop-weil-pbc-qbar-condensed-two-colimit"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
+  "place": "Partition of the native realization obligation, proof steps 2--8, following Bhatt--Scholze Section 6.8; no change of the unit route."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Construct a scalar compatible functor from constructible l adic complexes to derived modules over locally finite continuous coefficients, prove full faithfulness, essential image and essential smallness",
+   "results": "Actual search: 8 hits. CondensedSet.LocallyConstant.functorFullyFaithful; LightCondMod.LocallyConstant.fullyFaithfulFunctor; LightCondSet.LocallyConstant.functorFullyFaithful; CondensedMod.LocallyConstant.fullyFaithfulFunctor; CompHausLike.LocallyConstantModule.functorToPresheaves; CondensedMod.LocallyConstant.instFaithfulModuleCatFunctor; LightCondSet.LocallyConstant.instFaithfulFunctor; LightCondMod.LocallyConstant.instFaithfulModuleCatLightCondensedDiscrete. Local source search additionally found DerivedCategory.essentiallySmall_bounded_inf in WeilConjectures.CategoryTheory.DerivedCategory.BoundedEssentiallySmall; it handles the bounded-derived counting step, not construction or descent of the native functor, nor counting native constructible sheaves. Blueprint searches locally finite adic realization and essentially small bounded found no duplicate native statements.",
+   "date": "2026-10-28",
+   "verdict": "partial match: use the existing bounded-derived smallness theorem; no native comparison theorem in Mathlib"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "equivalence of bounded constructible l adic derived categories and derived modules over locally finite continuous coefficients",
+   "results": "Actual search: 8 hits. CondensedMod; Condensed.profiniteSolid; LightCondensed.instIsGrothendieckAbelianLightCondMod; CondensedMod.LocallyConstant.adjunction; CondensedMod.IsSolid; CondensedMod.LocallyConstant.functor; CondensedMod.LocallyConstant.functorIsoDiscrete; Condensed.profiniteFree. Local source search additionally found DerivedCategory.essentiallySmall_bounded_inf in WeilConjectures.CategoryTheory.DerivedCategory.BoundedEssentiallySmall; it handles the bounded-derived counting step, not construction or descent of the native functor, nor counting native constructible sheaves. Blueprint searches locally finite adic realization and essentially small bounded found no duplicate native statements.",
+   "date": "2026-10-28",
+   "verdict": "partial match: use the existing bounded-derived smallness theorem; no native comparison theorem in Mathlib"
+  },
+  {
+   "tool": "grep",
+   "query": "LocallyFiniteAdicRealization|boundedAdicConstructible.*EssentiallySmall",
+   "results": "Actual search: 0 hits. . Local source search additionally found DerivedCategory.essentiallySmall_bounded_inf in WeilConjectures.CategoryTheory.DerivedCategory.BoundedEssentiallySmall; it handles the bounded-derived counting step, not construction or descent of the native functor, nor counting native constructible sheaves. Blueprint searches locally finite adic realization and essentially small bounded found no duplicate native statements.",
+   "date": "2026-10-28",
+   "verdict": "partial match: use the existing bounded-derived smallness theorem; no native comparison theorem in Mathlib"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.LocallyFiniteAdicConstructibleRealization",
+  "group": "K3",
+  "date": "2026-10-28"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Native realization proof step 3 (constructibility comparison) and steps 6--7 (Hom and object descent).",
+   "via": [
+    "lem-sf-locally-finite-adic-constructible-realization",
+    "thm-sf-weil-compact-direct-image-right-adjoint"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.LocallyFiniteAdicFunctorDescent",
+  "declaration": "WeilConjectures.LocallyFiniteAdicRealization.normalizedFunctor_descent",
+  "statement": "theorem normalizedFunctor_descent (l : ℕ) [Fact l.Prime] (X : Scheme.{u}) [IsNoetherian X] [Fact (∃ n : ℕ, topologicalKrullDim X ≤ n)] [Fact (∀ x : X, IsUnit (l : X.presheaf.stalk x))] (D : NormalizedFunctor l X) : (∀ K L, Function.Bijective (D.J.map : (K ⟶ L) → (D.J.obj K ⟶ D.J.obj L))) ∧ (∀ K, ProEtale.DerivedCategory.boundedAdicConstructible l X K ↔ ∃ A, Nonempty (D.J.obj A ≅ K))",
+  "branch": "sheaf-dag",
+  "by": "K3",
+  "date": "2026-10-28",
+  "file": "lean/Sheaf/Paper/LocallyFiniteAdicFunctorDescent.lean"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-12433",
+  "group": "K3",
+  "result": "fix",
+  "landing": "20261027T234035-L-4169620",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-12433",
+  "group": "K3",
+  "result": "fix",
+  "landing": "20261027T234035-L-4169620",
+  "kind": "interface",
+  "note": "independent cc review: K3 12433ab5 delivered modules/nodes vs clone (verbatim data move diffed), item node vs proof, sheaf-small hole vs G6 38c53fae proof of identical statement; 7 direct importers compiled in sandbox, all OK"
+ }
+}
