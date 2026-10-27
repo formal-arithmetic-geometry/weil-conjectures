@@ -13543,6 +13543,7 @@ public import WeilConjectures.TraceFormula.Specialization.GenericDivisorTriangul
 public import WeilConjectures.TraceFormula.Specialization.GenericDivisorUnit
 public import WeilConjectures.TraceFormula.Specialization.GenericVanishing
 public import WeilConjectures.TraceFormula.Specialization.Integral
+public import WeilConjectures.TraceFormula.Specialization.KernelPullback
 public import WeilConjectures.TraceFormula.Specialization.NearbyCycles
 public import WeilConjectures.TraceFormula.Specialization.NearbyDuality
 public import WeilConjectures.TraceFormula.Specialization.NearbyDualityClosure
