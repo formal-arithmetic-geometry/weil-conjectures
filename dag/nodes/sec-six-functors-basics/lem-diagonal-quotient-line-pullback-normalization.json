@@ -1,0 +1,128 @@
+{
+ "id": "lem-diagonal-quotient-line-pullback-normalization",
+ "kind": "statement",
+ "title": "Quotient line endpoint coherence under scalar pullback",
+ "statement": "Fix prime l, E, π, n and f:X→S. Let e0 be an integral PullEndpoint normalized by spIntegralComparison. Let eS,eX be scalar Endpoints for the actual quotientLineMap at S,X. Let m satisfy QuotientPullMap and let e be a quotient PullEndpoint normalized by m. The comparison of [def-diagonal-scalar-pullback-comparison] on the shifted integral line, followed by derived quotient pullback of eS.shift and by e.shift, equals derived scalar extension of e0.shift followed by eX.shift. No diagram, diagonal class, supported source, or trace is assumed. Endpoints and quotient tensor normalization are as in [def-sfb-diagonal-coefficient-endpoints], [def-sfb-diagonal-coefficient-pullback-endpoints], and [def-sfb-diagonal-coefficient-family-pullback].",
+ "stmt_deps": [
+  "def-diagonal-scalar-pullback-comparison",
+  "def-sfb-diagonal-coefficient-endpoints",
+  "def-sfb-diagonal-coefficient-pullback-endpoints",
+  "def-sfb-diagonal-coefficient-family-pullback"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-coefficients.proof.md",
+  "place": "paragraph (3), coefficient functors commuting with geometric pullback; class-square endpoint normalization"
+ },
+ "proof": [
+  {
+   "text": "Transpose through the scalar adjunction. Endpoint normalization and the exact-single comparison reduce to the ordinary semilinear square. PullEndpoint normalization and QuotientPullMap identify this square after the epic pulled-back tensor quotient map. Cancel it and use faithfulness of module maps.",
+   "uses": [
+    "def-sfb-diagonal-coefficient-endpoints",
+    "def-sfb-diagonal-coefficient-pullback-endpoints",
+    "def-sfb-diagonal-coefficient-family-pullback"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The comparison is the scalar adjunction mate of the exact restriction/pullback comparison. Its compatibility with the adjunction shift structures, and naturality of shift comparisons, shifts the ordinary endpoint identity by two.",
+   "uses": [
+    "def-diagonal-scalar-pullback-comparison"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-diagonal-coefficient-endpoints",
+  "def-sfb-diagonal-coefficient-pullback-endpoints",
+  "def-sfb-diagonal-coefficient-family-pullback",
+  "def-diagonal-scalar-pullback-comparison"
+ ],
+ "proof_origin": {
+  "by": "R3",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-coefficients.proof.md",
+  "place": "paragraph (3), coefficient functors commuting with geometric pullback; class-square endpoint normalization",
+  "note": "Endpoint coherence isolated from the class-square argument; proof expanded in the matching Lean docstring."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "naturality of derived extension of scalars commuting with inverse image of sheaves",
+   "results": "Eight hits, including SheafOfModules.pullbackObjFreeIso_hom_naturality and pullback_map_ιFree_comp_pullbackObjFreeIso_hom. These concern free sheaves of modules, not the internal-module endpoints here.",
+   "date": "2026-10-28",
+   "verdict": "No matching diagonal or quotient endpoint theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatTrans.naturality",
+   "results": "CategoryTheory.NatTrans.naturality gives the generic square used for the final pasting argument. It does not identify normalized endpoints.",
+   "date": "2026-10-28",
+   "verdict": "Use naturality for the final diagram chase."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Naturality of adjunction mates with respect to normalized scalar extension and pullback maps",
+   "results": "Eight hits including Adjunction.unit_naturality, counit_naturality and homEquiv_naturality_right_square_iff.",
+   "date": "2026-10-28",
+   "verdict": "Generic adjunction APIs apply; no project-specific endpoint normalization is already stated."
+  },
+  {
+   "tool": "grep",
+   "query": "pullIsoOfComapIso; comapUpperStarIso; derivedPullIso; classPullback",
+   "results": "msearch grep returned no Mathlib hit. Local rg found CondensedRing.derivedComapUpperStarIso and the generic Adjunction.pushHomOfComapIso. CondensedRing.derivedPullIso requires a flat coefficient change, which cannot be assumed for quotients. No existing theorem identifies the two endpoint boundaries.",
+   "date": "2026-10-28",
+   "verdict": "Construct the scalar mate from exact restriction/pullback; separate its line and supported-source normalizations."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.DiagonalQuotientClassPullback",
+  "date": "2026-10-28",
+  "group": "R3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-prop-diagonal-tower-coefficients",
+   "place": "paragraph (3), coefficient functors commuting with geometric pullback; class-square endpoint normalization",
+   "via": [
+    "lem-diagonal-quotient-class-pullback",
+    "lem-diagonal-quotient-base-change"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-diagonal-tower",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.DiagonalQuotientLinePullbackNormalization",
+  "file": "lean/Sheaf/Paper/DiagonalQuotientLinePullbackNormalization.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.DiagonalCoefficients.diagonalQuotient_linePullbackNormalization",
+  "statement": "theorem diagonalQuotient_linePullbackNormalization\n    (l : ℕ) [Fact l.Prime] (E : PadicAlgCl.FiniteIntermediateField l)\n    (π : PadicAlgCl.integers l E) (n : ℕ)\n    {X S : Scheme.{u}} (f : X ⟶ S)\n    (e₀ : PullEndpoint (Profinite.padicIntegersRingObj.{u} l E.1) f\n      (spIntegralTwist S l E) (spIntegralTwist X l E) (spIntegralComparison f l E))\n    (eS : Endpoint (quotientMap l E π n) (spIntegralTwist S l E)\n      (quotientLine l E π n S) (quotientLineMap l E π n S))\n    (eX : Endpoint (quotientMap l E π n) (spIntegralTwist X l E)\n      (quotientLine l E π n X) (quotientLineMap l E π n X))\n    (m : (upperStar Ab.{u + 1} f).obj (quotientLine l E π n S).X ⟶\n      (quotientLine l E π n X).X)\n    (hm : QuotientPullMap l E π n f m)\n    (e : PullEndpoint\n      (Profinite.continuousMapRingObj.{u} (completedResidue l E π n)) f\n      (quotientLine l E π n S) (quotientLine l E π n X) m) :\n    ScalarPullbackEndpointSquare (quotientMap l E π n) f e₀ eS eX e",
+  "branch": "sheaf-dag",
+  "by": "R3",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R3",
+  "result": "pass",
+  "landing": "20261027T210215-L-1670829",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R3",
+  "result": "pass",
+  "landing": "20261027T210215-L-1670829",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

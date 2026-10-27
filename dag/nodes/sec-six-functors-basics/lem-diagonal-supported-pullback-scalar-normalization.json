@@ -1,0 +1,125 @@
+{
+ "id": "lem-diagonal-supported-pullback-scalar-normalization",
+ "kind": "statement",
+ "title": "Supported-source endpoint coherence under scalar pullback",
+ "statement": "For arbitrary commutative condensed coefficients a:R→T and g:Yprime→Y, take ordinary normalized SourcePullback data s0 over R and s over T, in the sense of [def-sfb-diagonal-coefficient-source-pullback]. Take scalar unit Endpoints at the two projective lines, and source Endpoints e,eprime whose semilinear maps are supportMap of those unit maps, as in [def-sfb-diagonal-coefficient-endpoints]. The component of [def-diagonal-scalar-pullback-comparison] at the degree-zero R-supported source, followed by T-pullback of e.iso.hom and the derived supported map from s, equals scalar extension of the derived supported map from s0 followed by eprime.iso.hom. There are no class arrows, diagrams, trace equations, noetherian assumptions, or quotient-specific assumptions.",
+ "stmt_deps": [
+  "def-diagonal-scalar-pullback-comparison",
+  "def-sfb-diagonal-coefficient-source-pullback",
+  "def-sfb-diagonal-coefficient-endpoints"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-coefficients.proof.md",
+  "place": "paragraph (3), coefficient functors commuting with geometric pullback; class-square endpoint normalization"
+ },
+ "proof": [
+  {
+   "text": "Transpose through scalar extension/restriction and use exact inverse-image single comparisons. Replace supported maps by sourcePullbackMap using supported_normalization, and scalar source maps by the prescribed supportMap using Endpoint normalization.",
+   "uses": [
+    "def-sfb-diagonal-coefficient-source-pullback",
+    "def-sfb-diagonal-coefficient-endpoints"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The remaining ordinary square is the compatibility of restriction with the diagonal exchange mate. Transpose by the diagonal adjunction: both composites are the same coefficient-unit map followed by the diagonal counit. Naturality of the coefficient map and triangle identities prove equality. Apply degree zero and transpose back using the scalar mate definition.",
+   "uses": [
+    "def-diagonal-scalar-pullback-comparison"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-diagonal-coefficient-source-pullback",
+  "def-sfb-diagonal-coefficient-endpoints",
+  "def-diagonal-scalar-pullback-comparison"
+ ],
+ "proof_origin": {
+  "by": "R3",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-coefficients.proof.md",
+  "place": "paragraph (3), coefficient functors commuting with geometric pullback; class-square endpoint normalization",
+  "note": "Endpoint coherence isolated from the class-square argument; proof expanded in the matching Lean docstring."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "naturality of derived extension of scalars commuting with inverse image of sheaves",
+   "results": "Eight hits, including SheafOfModules.pullbackObjFreeIso_hom_naturality and pullback_map_ιFree_comp_pullbackObjFreeIso_hom. These concern free sheaves of modules, not the internal-module endpoints here.",
+   "date": "2026-10-28",
+   "verdict": "No matching diagonal or quotient endpoint theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatTrans.naturality",
+   "results": "CategoryTheory.NatTrans.naturality gives the generic square used for the final pasting argument. It does not identify normalized endpoints.",
+   "date": "2026-10-28",
+   "verdict": "Use naturality for the final diagram chase."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Naturality of adjunction mates with respect to normalized scalar extension and pullback maps",
+   "results": "Eight hits including Adjunction.unit_naturality, counit_naturality and homEquiv_naturality_right_square_iff.",
+   "date": "2026-10-28",
+   "verdict": "Generic adjunction APIs apply; no project-specific endpoint normalization is already stated."
+  },
+  {
+   "tool": "grep",
+   "query": "pullIsoOfComapIso; comapUpperStarIso; derivedPullIso; classPullback",
+   "results": "msearch grep returned no Mathlib hit. Local rg found CondensedRing.derivedComapUpperStarIso and the generic Adjunction.pushHomOfComapIso. CondensedRing.derivedPullIso requires a flat coefficient change, which cannot be assumed for quotients. No existing theorem identifies the two endpoint boundaries.",
+   "date": "2026-10-28",
+   "verdict": "Construct the scalar mate from exact restriction/pullback; separate its line and supported-source normalizations."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.DiagonalQuotientClassPullback",
+  "date": "2026-10-28",
+  "group": "R3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-prop-diagonal-tower-coefficients",
+   "place": "paragraph (3), coefficient functors commuting with geometric pullback; class-square endpoint normalization",
+   "via": [
+    "lem-diagonal-quotient-class-pullback",
+    "lem-diagonal-quotient-base-change"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-diagonal-tower",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.DiagonalSupportedPullbackScalarNormalization",
+  "file": "lean/Sheaf/Paper/DiagonalSupportedPullbackScalarNormalization.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.DiagonalCoefficients.diagonalSupported_pullbackScalarNormalization",
+  "statement": "theorem diagonalSupported_pullbackScalarNormalization\n    {R T : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}\n    [MonObj R] [IsCommMonObj R] [MonObj T] [IsCommMonObj T]\n    (a : R ⟶ T) [IsMonHom a] {Y Y' : Scheme.{u}} (g : Y' ⟶ Y)\n    (L₀ : ∀ X : Scheme.{u}, Modules R X) (L : ∀ X : Scheme.{u}, Modules T X)\n    (m₀P : (upperStar Ab.{u + 1} (baseP g)).obj (L₀ (ProjectiveLine Y)).X ⟶\n      (L₀ (ProjectiveLine Y')).X)\n    (m₀W : (upperStar Ab.{u + 1} (baseW g)).obj (L₀ (diagonalSurface Y)).X ⟶\n      (L₀ (diagonalSurface Y')).X)\n    (mP : (upperStar Ab.{u + 1} (baseP g)).obj (L (ProjectiveLine Y)).X ⟶\n      (L (ProjectiveLine Y')).X)\n    (mW : (upperStar Ab.{u + 1} (baseW g)).obj (L (diagonalSurface Y)).X ⟶\n      (L (diagonalSurface Y')).X)\n    (s₀ : SourcePullback R g L₀ m₀P m₀W) (s : SourcePullback T g L mP mW)\n    (c : Endpoint a (Mod.regular (condensedRingObj R (ProjectiveLine Y)))\n      (Mod.regular (condensedRingObj T (ProjectiveLine Y)))\n      (coefficientMap a (ProjectiveLine Y)))\n    (c' : Endpoint a (Mod.regular (condensedRingObj R (ProjectiveLine Y')))\n      (Mod.regular (condensedRingObj T (ProjectiveLine Y')))\n      (coefficientMap a (ProjectiveLine Y')))\n    (e : Endpoint a (source R Y) (source T Y) (supportMap a Y c.semilinear.hom).hom)\n    (e' : Endpoint a (source R Y') (source T Y') (supportMap a Y' c'.semilinear.hom).hom) :\n    (scalarPullbackComparison a (baseW g)).app\n        ((DerivedCategory.singleFunctor (Modules R (diagonalSurface Y)) 0).obj (source R Y)) ≫\n      (derivedUpper T (baseW g)).map e.iso.hom ≫\n      (singlePullback T (baseW g) (source T Y)).hom ≫\n      (DerivedCategory.singleFunctor (Modules T (diagonalSurface Y')) 0).map s.supported.hom =\n    (derivedScalars a (diagonalSurface Y')).map\n      ((singlePullback R (baseW g) (source R Y)).hom ≫\n        (DerivedCategory.singleFunctor (Modules R (diagonalSurface Y')) 0).map\n          s₀.supported.hom) ≫ e'.iso.hom",
+  "branch": "sheaf-dag",
+  "by": "R3",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R3",
+  "result": "pass",
+  "landing": "20261027T210215-L-1670829",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R3",
+  "result": "pass",
+  "landing": "20261027T210215-L-1670829",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

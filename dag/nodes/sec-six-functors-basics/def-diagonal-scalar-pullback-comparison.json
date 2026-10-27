@@ -1,0 +1,105 @@
+{
+ "id": "def-diagonal-scalar-pullback-comparison",
+ "kind": "definition",
+ "title": "Scalar mate of exact restriction and geometric pullback",
+ "statement": "For a morphism a:R→T of commutative condensed rings and a scheme map f:X→S, use the exact restriction/pullback comparison CondensedRing.derivedComapUpperStarIso and the canonical identifications of exact inverse image with its left derived functor. This gives scalarRestrictionPullbackIso: Lf*_T followed by derived restriction at X is isomorphic to derived restriction at S followed by Lf*_R. Its scalar adjunction mate scalarPullbackComparison is a natural transformation Lf*_R followed by derived scalar extension at X → derived scalar extension at S followed by Lf*_T. No flatness or invertibility assertion is included. The derived coefficient and geometric functors are those of [def-sfb-diagonal-coefficient-endpoints] and [def-sfb-diagonal-coefficient-exchange]. ScalarPullbackEndpointSquare is the proposition that its component on a shifted degree-zero R-module, followed by geometric pullback of a scalar endpoint and the T-pullback endpoint, equals scalar extension of the R-pullback endpoint followed by the scalar endpoint on X. Its single field is this equation; the endpoint data are those of [def-sfb-diagonal-coefficient-pullback-endpoints].",
+ "stmt_deps": [
+  "def-sfb-diagonal-coefficient-endpoints",
+  "def-sfb-diagonal-coefficient-exchange",
+  "def-sfb-diagonal-coefficient-pullback-endpoints"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-coefficients.proof.md",
+  "place": "paragraph (3), coefficient functors commuting with geometric pullback; class-square endpoint normalization"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "naturality of derived extension of scalars commuting with inverse image of sheaves",
+   "results": "Eight hits, including SheafOfModules.pullbackObjFreeIso_hom_naturality and pullback_map_ιFree_comp_pullbackObjFreeIso_hom. These concern free sheaves of modules, not the internal-module endpoints here.",
+   "date": "2026-10-28",
+   "verdict": "No matching diagonal or quotient endpoint theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatTrans.naturality",
+   "results": "CategoryTheory.NatTrans.naturality gives the generic square used for the final pasting argument. It does not identify normalized endpoints.",
+   "date": "2026-10-28",
+   "verdict": "Use naturality for the final diagram chase."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Naturality of adjunction mates with respect to normalized scalar extension and pullback maps",
+   "results": "Eight hits including Adjunction.unit_naturality, counit_naturality and homEquiv_naturality_right_square_iff.",
+   "date": "2026-10-28",
+   "verdict": "Generic adjunction APIs apply; no project-specific endpoint normalization is already stated."
+  },
+  {
+   "tool": "grep",
+   "query": "pullIsoOfComapIso; comapUpperStarIso; derivedPullIso; classPullback",
+   "results": "msearch grep returned no Mathlib hit. Local rg found CondensedRing.derivedComapUpperStarIso and the generic Adjunction.pushHomOfComapIso. CondensedRing.derivedPullIso requires a flat coefficient change, which cannot be assumed for quotients. No existing theorem identifies the two endpoint boundaries.",
+   "date": "2026-10-28",
+   "verdict": "Construct the scalar mate from exact restriction/pullback; separate its line and supported-source normalizations."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.DiagonalQuotientClassPullback",
+  "date": "2026-10-28",
+  "group": "R3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-prop-diagonal-tower-coefficients",
+   "place": "paragraph (3), coefficient functors commuting with geometric pullback; class-square endpoint normalization",
+   "via": [
+    "lem-diagonal-quotient-class-pullback",
+    "lem-diagonal-quotient-base-change"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-diagonal-tower",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.DiagonalScalarPullbackComparison",
+  "file": "lean/Sheaf/Paper/DiagonalScalarPullbackComparison.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.DiagonalCoefficients.scalarPullbackComparison",
+  "statement": "def scalarPullbackComparison :\n    derivedUpper R f ⋙ derivedScalars a X ⟶ derivedScalars a S ⋙ derivedUpper T f",
+  "branch": "sheaf-dag",
+  "by": "R3",
+  "date": "2026-10-28",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.DiagonalCoefficients.scalarRestrictionPullbackIso",
+   "AlgebraicGeometry.ProEtale.DiagonalCoefficients.scalarPullbackComparison",
+   "AlgebraicGeometry.ProEtale.DiagonalCoefficients.ScalarPullbackEndpointSquare"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R3",
+  "result": "pass",
+  "landing": "20261027T210215-L-1670829",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R3",
+  "result": "pass",
+  "landing": "20261027T210215-L-1670829",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
