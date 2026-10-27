@@ -20247,3 +20247,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 23:39 L: merged deliver/E4/Sheaf.Paper.AmbientCoefficientPullbackIso (stage 3; reviewer PASS; first push; landing 20261027T233911-L-4133804 (interface); batch 20261027T233735; modules 3; new nodes 2)
 - 23:39 L: merged deliver/E4/Sheaf.Paper.IntegralHomComparisonIsIso (stage 3; reviewer PASS; first push; landing 20261027T233912-L-4134013 (interface); batch 20261027T233735; modules 3; new nodes 2)
 - 23:39 L: merged deliver/E4/Sheaf.Paper.TateTensorGeneratorIsIso (stage 3; reviewer PASS; first push; landing 20261027T233913-L-4134230 (interface); batch 20261027T233735; modules 2; new nodes 1)
+- 23:39 L: merged deliver/E4/Sheaf.SixFunctors.IntegralSystemProperOpenTransportPasting (stage 3; reviewer PASS; first push; landing 20261027T233914-L-4134403 (interface); batch 20261027T233735; modules 4; new nodes 3)

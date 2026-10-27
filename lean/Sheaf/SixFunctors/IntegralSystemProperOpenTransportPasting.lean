@@ -5,6 +5,9 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import Sheaf.SixFunctors.IntegralCompactificationRealizationData
+import Sheaf.SixFunctors.IntegralSystemProperOpenTransportPastingVertical
+import Sheaf.SixFunctors.IntegralSystemProperOpenTransportPastingHorizontal
+import Sheaf.SixFunctors.IntegralSystemProperOpenTransportPastingBaseChange
 
 /-! Pasting package for intrinsic proper/open coherence. -/
 
@@ -93,6 +96,10 @@ theorem integralSystemProperOpenTransportPasting (o : Operations l E) (c : Compo
       Operations.push l E o r ⋙ Operations.shriek l E o i ⟶
         Operations.shriek l E o k ⋙ Operations.push l E o p) :
     Nonempty (ProperOpenTransportPasting l E o c a gamma) := by
-  sorry
+  refine ⟨{
+    vertical := integralSystemProperOpenTransportPastingVertical l E o c a gamma
+    horizontal := integralSystemProperOpenTransportPastingHorizontal l E o c a gamma
+    baseChange := integralSystemProperOpenTransportPastingBaseChange l E o c a gamma
+  }⟩
 
 end WeilConjectures.IntegralSystemRealization

@@ -1,0 +1,91 @@
+{
+ "id": "lem-sf-integral-system-proper-open-transport-pasting-basechange",
+ "kind": "statement",
+ "title": "Base-change proper/open transport pasting",
+ "statement": "The basechange field of ProperOpenTransportPasting holds for the supplied proper/open gamma.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-compatibility/fix-prop-coherence.proof.md",
+  "place": "Pasting equations for transported proper/open gamma"
+ },
+ "stmt_deps": [
+  "def-sf-integral-system-operations",
+  "def-sf-integral-system-realization-data",
+  "lem-sf-semilinear-proper-open-mate-pasting"
+ ],
+ "proof": [
+  {
+   "text": "Transport the corresponding intrinsic mate-pasting equation through the canonical bridge. Naturality moves bridge maps to endpoints and adjacent inverse pairs cancel.",
+   "uses": [
+    "def-sf-integral-system-operations",
+    "def-sf-integral-system-realization-data",
+    "lem-sf-semilinear-proper-open-mate-pasting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-compatibility/fix-prop-coherence.proof.md",
+    "place": "Pasting equations for transported proper/open gamma"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sf-integral-system-operations",
+  "def-sf-integral-system-realization-data",
+  "lem-sf-semilinear-proper-open-mate-pasting"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-compatibility/fix-prop-coherence.proof.md",
+  "place": "Pasting equations for transported proper/open gamma"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.IntegralSystemProperOpenTransportPasting",
+  "date": "2026-10-28",
+  "group": "E4"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-compatibility",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sf-integral-system-proper-open-transport-pasting",
+   "place": "Base-change proper/open transport pasting",
+   "via": [
+    "lem-sf-integral-system-proper-open-transport-pasting"
+   ]
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.IntegralSystemProperOpenTransportPastingBaseChange",
+  "file": "lean/Sheaf/SixFunctors/IntegralSystemProperOpenTransportPastingBaseChange.lean",
+  "declaration": "WeilConjectures.IntegralSystemRealization.integralSystemProperOpenTransportPastingBaseChange",
+  "statement": "theorem integralSystemProperOpenTransportPastingBaseChange (o : Operations l E) (c : Compositors l E o) (a : OpenComparisons l E o c) (gamma : ∀ {U V W Z : Scheme.{u}} (k : U ⟶ V) (r : U ⟶ W) (p : V ⟶ Z) (i : W ⟶ Z) [IsOpenImmersion k] [IsOpenImmersion i] [QuasiCompact k] [QuasiCompact i] [IsProper r] [IsProper p] (_h : k ≫ p = r ≫ i), Operations.push l E o r ⋙ Operations.shriek l E o i ⟶ Operations.shriek l E o k ⋙ Operations.push l E o p) : ∀ {V W S T V₁ W₁ S₁ T₁ : Scheme.{u}} (k : V ⟶ W) (i : S ⟶ T) (r : V ⟶ S) (p : W ⟶ T) (k₁ : V₁ ⟶ W₁) (i₁ : S₁ ⟶ T₁) (r₁ : V₁ ⟶ S₁) (p₁ : W₁ ⟶ T₁) (aa : W₁ ⟶ W) (bb : T₁ ⟶ T) (cc : S₁ ⟶ S) (d : V₁ ⟶ V) [IsOpenImmersion k] [IsOpenImmersion i] [IsOpenImmersion k₁] [IsOpenImmersion i₁] [QuasiCompact k] [QuasiCompact i] [QuasiCompact k₁] [QuasiCompact i₁] [IsProper r] [IsProper p] [IsProper r₁] [IsProper p₁] (h : k ≫ p = r ≫ i) (h₁ : k₁ ≫ p₁ = r₁ ≫ i₁) (wk : d ≫ k = k₁ ≫ aa) (wi : cc ≫ i = i₁ ≫ bb) (wp : aa ≫ p = p₁ ≫ bb) (wr : d ≫ r = r₁ ≫ cc) (sk : IsPullback d k₁ k aa) (si : IsPullback cc i₁ i bb) (_sp : IsPullback aa p₁ p bb) (_sr : IsPullback d r₁ r cc) (M : System l E V), (pull l E bb).map ((gamma k r p i h).app M) ≫ (properExchange l E o c aa p₁ p bb wp).app ((Operations.shriek l E o k).obj M) ≫ (Operations.push l E o p₁).map ((a.beta d k₁ k aa wk sk).hom.app M) = (a.beta cc i₁ i bb wi si).hom.app ((Operations.push l E o r).obj M) ≫ (Operations.shriek l E o i₁).map ((properExchange l E o c d r₁ r cc wr).app M) ≫ (gamma k₁ r₁ p₁ i₁ h₁).app ((pull l E d).obj M)",
+  "branch": "sheaf-dag",
+  "by": "E4",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E4",
+  "result": "pass",
+  "landing": "20261027T233914-L-4134403",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E4",
+  "result": "pass",
+  "landing": "20261027T233914-L-4134403",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

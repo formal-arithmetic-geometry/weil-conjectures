@@ -1,0 +1,91 @@
+{
+ "id": "lem-sf-integral-system-proper-open-transport-pasting-vertical",
+ "kind": "statement",
+ "title": "Vertical proper/open transport pasting",
+ "statement": "The vertical field of ProperOpenTransportPasting holds for the supplied proper/open gamma.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-compatibility/fix-prop-coherence.proof.md",
+  "place": "Pasting equations for transported proper/open gamma"
+ },
+ "stmt_deps": [
+  "def-sf-integral-system-operations",
+  "def-sf-integral-system-realization-data",
+  "lem-sf-semilinear-proper-open-mate-pasting"
+ ],
+ "proof": [
+  {
+   "text": "Transport the corresponding intrinsic mate-pasting equation through the canonical bridge. Naturality moves bridge maps to endpoints and adjacent inverse pairs cancel.",
+   "uses": [
+    "def-sf-integral-system-operations",
+    "def-sf-integral-system-realization-data",
+    "lem-sf-semilinear-proper-open-mate-pasting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-compatibility/fix-prop-coherence.proof.md",
+    "place": "Pasting equations for transported proper/open gamma"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sf-integral-system-operations",
+  "def-sf-integral-system-realization-data",
+  "lem-sf-semilinear-proper-open-mate-pasting"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-compatibility/fix-prop-coherence.proof.md",
+  "place": "Pasting equations for transported proper/open gamma"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.IntegralSystemProperOpenTransportPasting",
+  "date": "2026-10-28",
+  "group": "E4"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-compatibility",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sf-integral-system-proper-open-transport-pasting",
+   "place": "Vertical proper/open transport pasting",
+   "via": [
+    "lem-sf-integral-system-proper-open-transport-pasting"
+   ]
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.IntegralSystemProperOpenTransportPastingVertical",
+  "file": "lean/Sheaf/SixFunctors/IntegralSystemProperOpenTransportPastingVertical.lean",
+  "declaration": "WeilConjectures.IntegralSystemRealization.integralSystemProperOpenTransportPastingVertical",
+  "statement": "theorem integralSystemProperOpenTransportPastingVertical (o : Operations l E) (c : Compositors l E o) (a : OpenComparisons l E o c) (gamma : ∀ {U V W Z : Scheme.{u}} (k : U ⟶ V) (r : U ⟶ W) (p : V ⟶ Z) (i : W ⟶ Z) [IsOpenImmersion k] [IsOpenImmersion i] [QuasiCompact k] [QuasiCompact i] [IsProper r] [IsProper p] (_h : k ≫ p = r ≫ i), Operations.push l E o r ⋙ Operations.shriek l E o i ⟶ Operations.shriek l E o k ⋙ Operations.push l E o p) : ∀ {A C E₀ B₀ D F : Scheme.{u}} (k : A ⟶ B₀) (i : C ⟶ D) (j : E₀ ⟶ F) (r₁ : A ⟶ C) (r₂ : C ⟶ E₀) (p₁ : B₀ ⟶ D) (p₂ : D ⟶ F) [IsOpenImmersion k] [IsOpenImmersion i] [IsOpenImmersion j] [QuasiCompact k] [QuasiCompact i] [QuasiCompact j] [IsProper r₁] [IsProper r₂] [IsProper p₁] [IsProper p₂] (h₁ : k ≫ p₁ = r₁ ≫ i) (h₂ : i ≫ p₂ = r₂ ≫ j) (h : k ≫ (p₁ ≫ p₂) = (r₁ ≫ r₂) ≫ j) (M : System l E A), (Operations.shriek l E o j).map ((c.pushComp l E r₁ r₂).hom.app M) ≫ (gamma k (r₁ ≫ r₂) (p₁ ≫ p₂) j h).app M ≫ (c.pushComp l E p₁ p₂).inv.app ((Operations.shriek l E o k).obj M) = (gamma i r₂ p₂ j h₂).app ((Operations.push l E o r₁).obj M) ≫ (Operations.push l E o p₂).map ((gamma k r₁ p₁ i h₁).app M)",
+  "branch": "sheaf-dag",
+  "by": "E4",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E4",
+  "result": "pass",
+  "landing": "20261027T233914-L-4134403",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E4",
+  "result": "pass",
+  "landing": "20261027T233914-L-4134403",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
