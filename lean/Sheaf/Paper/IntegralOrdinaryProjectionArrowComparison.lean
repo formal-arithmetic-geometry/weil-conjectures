@@ -31,7 +31,7 @@ attribute [local instance 10000] finiteProjection_groupW finiteProjection_groupS
   finiteProjection_inverseColimits finiteProjection_moduleGroth finiteProjection_modulePreadditive
   finiteProjection_moduleFlat finiteProjection_upperFlat
 
-/-- Finite reduction identifies the ordinary completed-coefficient projection arrow
+/- Finite reduction identifies the ordinary completed-coefficient projection arrow
 with the realized fixed-scalar finite projection arrow. This is a compatibility of
 specified maps, with no assertion that either projection is invertible and no
 constructibility hypothesis.
@@ -62,6 +62,56 @@ this realization square with the scalar square gives an isomorphism of arrows.
 Only the perfect coefficient quotient is used for the proper scalar comparison;
 the inputs can be unbounded and need not be complete. The argument includes the
 residue quotient, empty schemes, identity opens and zero objects. -/
+/-- Endpoint comparison data split from the finite reduction square.
+Source: the proper/open scalar comparison and constant-scalar realization in
+`lem-sf-ordinary-projection-reduction-arrow-comparison`. The source and target
+comparisons are constructed from the proper and open mate squares, and their
+compatibility is obtained by pasting those squares with the constant-scalar
+realization.
+(blueprint: lem-sf-ordinary-projection-endpoint-comparisons). -/
+theorem integralOrdinaryProjection_endpointComparisons
+    (l : ℕ) [Fact l.Prime]
+    (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
+    {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f)
+    (aX : ProEtaleTensorModel X ((PurCompactSupport.completed l E).ring X))
+    (aZ : ProEtaleTensorModel c.Z ((PurCompactSupport.completed l E).ring c.Z))
+    (aY : ProEtaleTensorModel Y ((PurCompactSupport.completed l E).ring Y))
+    (K : DerivedCategory (scalarReductionSource l E X))
+    (L : DerivedCategory (scalarReductionSource l E Y)) (n : ℕ) :
+    let A := Padic.coefficientExtensionRing l E (n + 1)
+    letI : Finite A := Padic.finite_coefficientExtensionRing l E (n + 1) (Nat.succ_pos n)
+    ∃ (s : (Arrow.mk ((scalarReductionDerivedExtension l E Y n).map
+      (((PurCompactSupport.projectionMap (PurCompactSupport.completed l E) c aX aZ aY
+        (PurCompactSupport.completedPull_comp l E c.i c.g)).app K).app L))).left ≅
+      (Arrow.mk ((sfIntrinsicDerivedEquivalence Y A).functor.map
+        (((ProEtale.projectionMapOfCompactification
+          (ModuleCat.{u + 1} (ULift.{u + 1, u} A)) c).app
+            ((sfIntrinsicDerivedEquivalence X A).inverse.obj
+              ((scalarReductionDerivedExtension l E X n).obj K))).app
+            ((sfIntrinsicDerivedEquivalence Y A).inverse.obj
+              ((scalarReductionDerivedExtension l E Y n).obj L))))).left)
+      (t : (Arrow.mk ((scalarReductionDerivedExtension l E Y n).map
+      (((PurCompactSupport.projectionMap (PurCompactSupport.completed l E) c aX aZ aY
+        (PurCompactSupport.completedPull_comp l E c.i c.g)).app K).app L))).right ≅
+      (Arrow.mk ((sfIntrinsicDerivedEquivalence Y A).functor.map
+        (((ProEtale.projectionMapOfCompactification
+          (ModuleCat.{u + 1} (ULift.{u + 1, u} A)) c).app
+            ((sfIntrinsicDerivedEquivalence X A).inverse.obj
+              ((scalarReductionDerivedExtension l E X n).obj K))).app
+            ((sfIntrinsicDerivedEquivalence Y A).inverse.obj
+              ((scalarReductionDerivedExtension l E Y n).obj L))))).right),
+      s.hom ≫ ((sfIntrinsicDerivedEquivalence Y A).functor.map
+        (((ProEtale.projectionMapOfCompactification
+          (ModuleCat.{u + 1} (ULift.{u + 1, u} A)) c).app
+            ((sfIntrinsicDerivedEquivalence X A).inverse.obj
+              ((scalarReductionDerivedExtension l E X n).obj K))).app
+            ((sfIntrinsicDerivedEquivalence Y A).inverse.obj
+              ((scalarReductionDerivedExtension l E Y n).obj L)))) =
+        ((scalarReductionDerivedExtension l E Y n).map
+      (((PurCompactSupport.projectionMap (PurCompactSupport.completed l E) c aX aZ aY
+        (PurCompactSupport.completedPull_comp l E c.i c.g)).app K).app L)) ≫ t.hom
+    := by sorry
+
 theorem integralOrdinaryProjection_reduction_arrowComparison
     (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
@@ -82,6 +132,8 @@ theorem integralOrdinaryProjection_reduction_arrowComparison
             ((sfIntrinsicDerivedEquivalence X A).inverse.obj
               ((scalarReductionDerivedExtension l E X n).obj K))).app
             ((sfIntrinsicDerivedEquivalence Y A).inverse.obj
-              ((scalarReductionDerivedExtension l E Y n).obj L))))) := by sorry
+              ((scalarReductionDerivedExtension l E Y n).obj L))))) := by
+  obtain ⟨s, t, h⟩ := integralOrdinaryProjection_endpointComparisons l E c aX aZ aY K L n
+  exact ⟨Arrow.isoMk s t h⟩
 
 end WeilConjectures

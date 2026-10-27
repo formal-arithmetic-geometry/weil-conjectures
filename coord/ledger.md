@@ -19706,3 +19706,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 18:05 L: merged deliver/E3/Sheaf.Paper.IdentityFactorFixedSupport (stage 3; reviewer PASS; first push; landing 20261027T180538-L-3873954 (interface); batch 20261027T180444; modules 1; new nodes 0)
 - 18:05 L: merged deliver/E4/Sheaf.AlgebraicGeometry.SymmetricProjGluedSections (stage 3; reviewer PASS; first push; landing 20261027T180539-L-3874322 (interface); batch 20261027T180444; modules 4; new nodes 3)
 - 18:05 L: merged deliver/E4/Sheaf.Paper.BoundedFlatCoefficientSiteSquare (stage 3; reviewer PASS; first push; landing 20261027T180540-L-3874699 (interface); batch 20261027T180444; modules 1; new nodes 0)
+- 18:05 L: merged deliver/E4/Sheaf.Paper.IntegralOrdinaryProjectionArrowComparison (stage 3; reviewer PASS; first push; landing 20261027T180543-L-3875298 (proof); batch 20261027T180444; modules 1; new nodes 1)
