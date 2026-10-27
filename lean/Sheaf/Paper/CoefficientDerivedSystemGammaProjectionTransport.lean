@@ -6,6 +6,7 @@ Authors: SHEAF group T4
 module
 
 public import Sheaf.Paper.CoefficientDerivedSystemEvaluationData
+import Sheaf.Paper.CoefficientDerivedSystemGammaProjectionTransportFinal
 
 /-! # Enriched coefficient gamma projection transport
 
@@ -18,6 +19,7 @@ the specialization of `enrichedSequenceProjectionFormula` to the coefficient cal
 set_option autoImplicit false
 set_option Elab.async false
 set_option backward.defeqAttrib.useBackward true
+set_option linter.style.multiGoal false
 attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall
 universe t u
 open CategoryTheory CategoryTheory.Limits Opposite AlgebraicGeometry
@@ -46,6 +48,53 @@ theorem coefficientDerivedSystemGammaProjectionTransport
     (D : CoefficientDerivedSystemResolutionCoherence l E W S)
     (H : CoefficientDerivedSystemProjectionModels l E W S D) :
     CoefficientGammaProjection l E W S D := by
-  sorry
+  intro P N hN n
+  have hP : IsNormalizedCoefficientSequence l E W (S.reduction.obj P) :=
+    S.reduction_normalized P
+  let f := S.fiberHom (S.reduction.obj P) N hP hN n
+  rw [CoefficientDerivedSystemCalculus.gamma]
+  rw [D.globalEvaluation_model]
+  dsimp only [Iso.trans_hom, Functor.mapIso_hom, NatTrans.comp_app]
+  simp only [Category.assoc]
+  simp only [coefficientSequenceGlobalHom]
+  have hs := H.sections_projection
+    ((coefficientSequenceInternalHom l E W).obj (op (S.reduction.obj P), N)) n
+  have hs' : S.globalLimit.hom.app
+      ((coefficientSequenceInternalHom l E W).obj (op (S.reduction.obj P), N)) ≫
+      (coefficientMappingProjection n).app
+        ((coefficientSequenceInternalHom l E W ⋙ coefficientSequenceDerivedRestriction l E W ⋙
+          (coefficientTowerSections l E W).rightDerivedFunctor).obj (op (S.reduction.obj P), N)) ≫
+      (D.systemSectionsEvaluation n).hom.app
+        ((coefficientSequenceInternalHom l E W).obj (op (S.reduction.obj P), N)) =
+    (coefficientIntegralSections l E W).map
+        ((coefficientSequenceProjection l E W n).app
+          ((coefficientSequenceInternalHom l E W).obj (op (S.reduction.obj P), N))) ≫
+      (D.scalarSections n).hom.app
+        ((coefficientSequenceDerivedEvaluation l E W n).obj
+          ((coefficientSequenceInternalHom l E W).obj (op (S.reduction.obj P), N))) := by
+    simpa only [Functor.comp_obj] using hs
+  have hs'' := congrArg (fun z ↦ z ≫
+        (coefficientFiniteSections l E W n).map f.hom) hs'
+  have hs''' := congrArg (fun f ↦
+      (coefficientIntegralSections l E W).map
+        (@asIso _ _ _ _ (coefficientEnrichedAdjunctionMap S.integralClosed
+          S.systemClosed S.reduction S.adjunction S.reductionTensor P N)
+          (S.enriched_isIso P N hN)).hom ≫ f) hs''
+  calc
+    _ = (coefficientIntegralSections l E W).map
+          (@asIso _ _ _ _ (coefficientEnrichedAdjunctionMap S.integralClosed
+            S.systemClosed S.reduction S.adjunction S.reductionTensor P N)
+            (S.enriched_isIso P N hN)).hom ≫
+        (coefficientIntegralSections l E W).map
+          ((coefficientSequenceProjection l E W n).app
+            ((coefficientSequenceInternalHom l E W).obj (op (S.reduction.obj P), N))) ≫
+        (D.scalarSections n).hom.app
+          ((coefficientSequenceDerivedEvaluation l E W n).obj
+            ((coefficientSequenceInternalHom l E W).obj (op (S.reduction.obj P), N))) ≫
+        (coefficientFiniteSections l E W n).map f.hom := by
+      simpa only [Category.assoc, f, Iso.app_hom] using hs'''
+    _ = _ := coefficientDerivedSystemGammaProjectionTransport_final
+      l E W S D H P N hN n
+
 
 end WeilConjectures
