@@ -1,0 +1,132 @@
+{
+ "id": "lem-sf-common-rationalization-object-surjective",
+ "kind": "statement",
+ "title": "Literal integral representatives for the common coefficient rationalization",
+ "statement": "Let l be prime, Ω an algebraic closure of Padic l, D a finite-field datum, hl:l≠D.p, T a D.k-scheme (with no separatedness or finite-type requirement), and E a FieldStage. The object map of rationalization l Ω E T [def-sf-constructible-exceptional-coefficient-construction-data] is surjective. Residue Tor [lem-coef-integral-residue-tor] identifies the constructible integral objects with the finite-Tor integral objects; integralRepresentative [lem-sf-integral-adjunction-raw-localization] applied to the underlying object gives a literal preimage, not merely an isomorphic preimage.",
+ "stmt_deps": [
+  "def-sf-constructible-exceptional-coefficient-construction-data",
+  "def-sf-integral-adjunction-raw-localization-data"
+ ],
+ "source": {
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Construction 6.2, the raw rational coefficient category retains the integral objects; Construction 6.6 uses these representatives."
+ },
+ "proof": [
+  {
+   "text": "The base-field unit makes l invertible in every residue field of T. Residue Tor therefore identifies the integral constructible and finite-Tor predicates. Apply integralRepresentative to the underlying integral object of a rational object. It changes only a proof of membership; raw rationalization retains this object and proof irrelevance gives literal equality. This constructs a preimage for every rational object.",
+   "uses": [
+    "lem-coef-integral-residue-tor",
+    "lem-sf-integral-adjunction-raw-localization"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-integral-residue-tor",
+  "lem-sf-integral-adjunction-raw-localization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Construction 6.2, raw objects; representative calculation used in lem-sf-rational-common-exact-shifts step 1."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Scalar localization is surjective on objects because it retains the original objects",
+   "results": [
+    "IsLocalizedModule.mk'_surjective",
+    "IsLocalizedModule.fromLocalizedModule.surj",
+    "IsLocalization.mk'_surjective",
+    "CategoryTheory.Localization.essSurj",
+    "IsLocalizedModule.map_surjective",
+    "RingHom.surjective_localizationPreserves",
+    "IsLocalization.mapₐ_surjective_of_surjective",
+    "IsLocalization.Away.mapₐ_surjective_of_surjective"
+   ],
+   "date": "2026-10-28",
+   "verdict": "Localization.essSurj supplies essential surjectivity only. Literal surjectivity here follows directly from the recorded raw object construction and residue Tor. "
+  },
+  {
+   "tool": "loogle",
+   "query": "Function.Surjective Functor.obj",
+   "results": [],
+   "date": "2026-10-28",
+   "verdict": "Localization.essSurj supplies essential surjectivity only. Literal surjectivity here follows directly from the recorded raw object construction and residue Tor. loogle: Unknown constant `Functor.obj`"
+  },
+  {
+   "tool": "grep",
+   "query": "ScalarLocalization.localization_obj|integralRepresentative",
+   "results": [],
+   "date": "2026-10-28",
+   "verdict": "Localization.essSurj supplies essential surjectivity only. Literal surjectivity here follows directly from the recorded raw object construction and residue Tor. "
+  },
+  {
+   "tool": "leansearch",
+   "query": "Scalar localization retains the objects of its source category",
+   "results": [
+    "Module.FinitePresentation.isLocalizedModule_mapExtendScalars",
+    "ModuleCat.localizedModule_functor",
+    "IsSMulRegular.of_isLocalization",
+    "instIsScalarTowerAtPrimeLocalizationAlgebraMapSubmonoidPrimeComplFractionRing",
+    "IsLocalizedModule.of_restrictScalars",
+    "instIsScalarTowerAtPrimeFractionRing_1",
+    "CategoryTheory.Localization.instLinearLocalization",
+    "LinearMap.extendScalarsOfIsLocalization_apply"
+   ],
+   "date": "2026-10-28",
+   "verdict": "Generic localization and shift results do not state this project-specific coefficient comparison. The object representative itself is constructed directly when applicable."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ExceptionalRationalCommonExactness",
+  "date": "2026-10-28",
+  "group": "Y3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Construction 6.2, raw object representatives; helper for the endpoint shift normalization in Construction 6.6.",
+   "via": [
+    "lem-sf-rational-common-exact-shifts"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-compatibility",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ExceptionalRationalCommonShiftTransport",
+  "file": "lean/Sheaf/Paper/ExceptionalRationalCommonShiftTransport.lean",
+  "declaration": "WeilConjectures.ConstructibleExceptionalCoefficients.commonRationalizationSurjective",
+  "statement": "theorem commonRationalizationSurjective (T : Scheme.{max u v})\n    [T.Over (Spec (.of D.k))] (E : FieldStage.{max u v} l) :\n    Function.Surjective (rationalization.{u, v} l Ω E T).obj",
+  "branch": "sheaf-dag",
+  "by": "Y3",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y3",
+  "result": "pass",
+  "landing": "20261027T234403-L-122010",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y3",
+  "result": "pass",
+  "landing": "20261027T234403-L-122010",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

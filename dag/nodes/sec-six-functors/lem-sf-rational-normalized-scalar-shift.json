@@ -1,0 +1,167 @@
+{
+ "id": "lem-sf-rational-normalized-scalar-shift",
+ "kind": "statement",
+ "title": "The rational scalar shift square after canonical localization normalization",
+ "statement": "Fix a prime l, an algebraic closure Ω of Padic l, a finite-field datum D with l ≠ D.p, finite-type quasi-compact D.k-schemes X and Y, and a separated finite-type quasi-compact D.k-morphism f:X→Y. Let A be RingStageAssembly [def-sf-ring-stage-assembly-data], P be RationalStageAssembly over A [lem-sf-rational-stage-localization], and c a compactification of f. For every finite subextension i of Ω choose an integer CommShift structure s_i on the supplied rational left operation F_i=(P.operation c (commonField i)).F. Assume the original localization comparison (P.localization c (commonField i)).q commutes with shifts when using A.operation.leftShift, the canonical integralRationalizationShift at X and Y [lem-sf-integral-adjunction-raw-localization], and s_i. Then for every enlargement h:i≤j the actual stage-system comparison (rationalCommonLeft A P c).β h [lem-sf-rational-common-scalar-coherence] commutes with shifts s_i and s_j and the canonical shifts on the published scalar transitions [def-weil-algebraically-closed-coefficients]. The statement is one finite scalar comparison square; it constructs no shift, exactness, adjunction, or comparison on a pair functor.",
+ "stmt_deps": [
+  "def-sf-ring-stage-assembly-data",
+  "lem-sf-rational-stage-localization",
+  "lem-sf-integral-adjunction-raw-localization",
+  "lem-sf-rational-common-scalar-coherence",
+  "def-weil-algebraically-closed-coefficients"
+ ],
+ "source": {
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Constructions 6.2 and 6.6; lem-sf-rational-common-exact-shifts proof step 2, the scalar enlargement square after canonical rational normalization only."
+ },
+ "proof": [
+  {
+   "text": "For a fixed enlargement take the two integral scalar functors of A. Their shift-compatible ambient realizations, and the full integral inclusions, identify their shift maps with the canonical completed scalar shift maps. The supplied integral counit comparison qShift then gives the normalized integral scalar shift square. This step concerns only the two integral stages and one coefficient inclusion.",
+   "uses": [
+    "def-sf-ring-stage-assembly-data"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Precompose the rational scalar square with rationalization at i. Use hs at both finite fields to replace the rational operation shift maps by the localized integral operation shift maps. P.scalar_normalized gives the scalar q components on integral representatives and P.action gives the maps on localized integral arrows. The canonical scalar transition shift is induced by the same completed scalar comparison, so both sides become the localization of the integral square from step 1.",
+   "uses": [
+    "lem-sf-rational-stage-localization",
+    "lem-sf-integral-adjunction-raw-localization",
+    "def-weil-algebraically-closed-coefficients"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Residue Tor identifies every rational object with an integral finite-Tor representative. Rationalization is a localization, hence precomposition on natural transformations is faithful. Cancel its invertible shift comparison to recover the desired square. commonStageTransition_eq and commonComparisonCast identify this comparison with the published β. Zero, negative and repeated-stage shifts follow from the integer CommShift equations already retained in the same square.",
+   "uses": [
+    "lem-coef-integral-residue-tor",
+    "lem-sf-integral-adjunction-raw-localization",
+    "lem-sf-rational-common-scalar-coherence"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sf-ring-stage-assembly-data",
+  "def-weil-algebraically-closed-coefficients",
+  "lem-coef-integral-residue-tor",
+  "lem-sf-integral-adjunction-raw-localization",
+  "lem-sf-rational-common-scalar-coherence",
+  "lem-sf-rational-stage-localization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Construction 6.6, finite scalar shift compatibility in proof step 2 of lem-sf-rational-common-exact-shifts; the localization argument follows Construction 6.2."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A natural transformation commutes with shifts if its precomposition with a localization functor commutes with shifts",
+   "results": [
+    "CategoryTheory.NatTrans.commShift_iso_hom_of_localization",
+    "CategoryTheory.Functor.commShiftOfLocalization",
+    "CategoryTheory.LocalizerMorphism.commShift",
+    "CategoryTheory.LocalizerMorphism.instCommShiftLocalizedFunctor",
+    "CategoryTheory.Functor.commShiftOfLocalization_iso_hom_app",
+    "CategoryTheory.LocalizerMorphism.natTransCommShift_hom",
+    "CategoryTheory.Functor.CommShift.localized",
+    "CategoryTheory.MorphismProperty.commShift_Q'"
+   ],
+   "date": "2026-10-28",
+   "verdict": "These generic localization and shift APIs support the argument, but none states the normalized scalar comparison square for the supplied geometric records."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatTrans.commShift_iso_hom_of_localization",
+   "results": [
+    "CategoryTheory.NatTrans.commShift_iso_hom_of_localization"
+   ],
+   "date": "2026-10-28",
+   "verdict": "These generic localization and shift APIs support the argument, but none states the normalized scalar comparison square for the supplied geometric records."
+  },
+  {
+   "tool": "grep",
+   "query": "commShiftOfLocalization|CommShift.ofComp|isTriangulated_of_iso",
+   "results": [
+    "Mathlib/CategoryTheory/ObjectProperty/Shift.lean",
+    "Mathlib/CategoryTheory/ObjectProperty/Shift.lean",
+    "Mathlib/CategoryTheory/Triangulated/Functor.lean",
+    "Mathlib/CategoryTheory/Triangulated/Functor.lean",
+    "Mathlib/CategoryTheory/Triangulated/Functor.lean",
+    "Mathlib/CategoryTheory/Shift/Localization.lean",
+    "Mathlib/CategoryTheory/Shift/Localization.lean",
+    "Mathlib/CategoryTheory/Shift/Localization.lean"
+   ],
+   "date": "2026-10-28",
+   "verdict": "These generic localization and shift APIs support the argument, but none states the normalized scalar comparison square for the supplied geometric records."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A natural transformation commuting with shifts after precomposition with a localization functor commutes with shifts",
+   "results": [
+    "CategoryTheory.LocalizerMorphism.natTransCommShift_hom",
+    "CategoryTheory.NatTrans.shift_app_comm",
+    "CategoryTheory.NatTrans.CommShiftCore.shift_app_comm",
+    "CategoryTheory.Functor.commShiftOfLocalization.congr_simp",
+    "CategoryTheory.NatTrans.CommShift.of_core",
+    "CategoryTheory.Functor.commShiftOfLocalization.iso.congr_simp",
+    "CategoryTheory.NatTrans.shift_comm",
+    "CategoryTheory.Functor.commShiftOfLocalization.iso_hom_app"
+   ],
+   "date": "2026-10-28",
+   "verdict": "Generic localization and shift results do not state this project-specific coefficient comparison. The object representative itself is constructed directly when applicable."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ExceptionalRationalCommonExactness",
+  "date": "2026-10-28",
+  "group": "Y3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "lem-sf-rational-common-exact-shifts, proof step 2: normalized finite rational shifts obey the scalar enlargement square.",
+   "via": [
+    "lem-sf-rational-common-exact-shifts"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-compatibility",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ExceptionalRationalNormalizedScalarShift",
+  "file": "lean/Sheaf/Paper/ExceptionalRationalNormalizedScalarShift.lean",
+  "declaration": "WeilConjectures.ConstructibleExceptionalCoefficients.rational_common_normalized_scalar_shift",
+  "statement": "theorem rational_common_normalized_scalar_shift\n    (c : Compactification f)\n    (s : ∀ i : AlgebraicallyClosedCoefficients.Index l Ω,\n      ((rationalCommonLeft A P c).Φ i).CommShift ℤ)\n    (hs : ∀ i : AlgebraicallyClosedCoefficients.Index l Ω,\n      let E := commonField.{u, v} l Ω i\n      letI : HasShift (C.{u, v} l Ω X (.integral E)) ℤ := shift l Ω X (.integral E)\n      letI : HasShift (C.{u, v} l Ω Y (.integral E)) ℤ := shift l Ω Y (.integral E)\n      letI : (A.operation c (.integral E)).F.CommShift ℤ :=\n        (A.operation c (.integral E)).leftShift\n      letI := integralRationalizationShift.{u, v} l Ω E X\n      letI := integralRationalizationShift.{u, v} l Ω E Y\n      letI : (P.operation c E).F.CommShift ℤ := s i\n      (P.localization c E).q.hom.CommShift ℤ) :\n    ∀ {i j : AlgebraicallyClosedCoefficients.Index l Ω} (h : i ≤ j),\n      letI := s i\n      letI := s j\n      ((rationalCommonLeft A P c).β h).hom.CommShift ℤ",
+  "branch": "sheaf-dag",
+  "by": "Y3",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y3",
+  "result": "pass",
+  "landing": "20261027T234403-L-122010",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y3",
+  "result": "pass",
+  "landing": "20261027T234403-L-122010",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
