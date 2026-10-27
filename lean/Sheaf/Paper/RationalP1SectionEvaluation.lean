@@ -118,6 +118,37 @@ attribute [local irreducible] coefficient line diagram secondLineComparison
 
 set_option maxHeartbeats 800000 in
 -- Elaborate the native projection and the two canonical direct-image paths.
+/-- The section/projection paste before the terminal unitors.
+Source: the first identity in the rational projective-line triangle proof, with the
+terminal unitors omitted (blueprint: lem-sfb-rational-p1-section-evaluation-core).
+Proof: path-comparison naturality moves the kernel insertion across the path change;
+projectionMap naturality cancels the specified inverse first projection. The diagonal
+section identity leaves the normalized supported arrow followed by the native
+functional. -/
+theorem first_section_tensor_evaluation_core
+    (l : ℕ) [Fact l.Prime] (c : Option (PadicAlgCl.FiniteIntermediateField l))
+    (Y : Scheme.{u})
+    (L : ∀ X : Scheme.{u}, Modules (coefficient l c).X X)
+    (d : Diagram (coefficient l c).X Y L)
+    (M : DerivedCategory (Modules (coefficient l c).X (ProjectiveLine Y)))
+    (N : DerivedCategory (Modules (coefficient l c).X (diagonalSurface Y)))
+    (α : (DerivedCategory.singleFunctor (Modules (coefficient l c).X (diagonalSurface Y)) 0).obj
+      (source (coefficient l c).X Y) ⟶ N)
+    (t : d.R₁.R.obj N ⟶ unit (coefficient l c).X (ProjectiveLine Y))
+    (hp : IsIso (projectionMap (coefficient l c).X (firstProjection Y) M N)) :
+    (moduleObjectDerivedPushforward (coefficient l c).X (ProjectiveLine Y ↘ Y)).map
+        (firstKernelInsertion (coefficient l c).X Y M N α) ≫
+      (firstPathComparison (coefficient l c).X Y).hom.app
+        ((moduleObjectDerivedPullback (coefficient l c).X (firstProjection Y)).obj M ⊗ N) ≫
+      (moduleObjectDerivedPushforward (coefficient l c).X (ProjectiveLine Y ↘ Y)).map
+        (@inv _ _ _ _ (projectionMap (coefficient l c).X (firstProjection Y) M N) hp) ≫
+      (moduleObjectDerivedPushforward (coefficient l c).X (ProjectiveLine Y ↘ Y)).map
+        (M ◁ firstNativeFunctional (coefficient l c).X Y L d N t) =
+    (moduleObjectDerivedPushforward (coefficient l c).X (ProjectiveLine Y ↘ Y)).map (ρ_ M).inv ≫
+      (moduleObjectDerivedPushforward (coefficient l c).X (ProjectiveLine Y ↘ Y)).map
+        (M ◁ ((singleUnitIso (coefficient l c).X (ProjectiveLine Y)).inv ≫
+          d.support₁.hom ≫ d.R₁.R.map α ≫ t)) := by sorry
+
 /-- The section calculation with an arbitrary kernel arrow and an arbitrary functional.
 It uses neither a Tate pullback comparison nor a trace base-change equation. In particular,
 no integration equation for `d` is used.
