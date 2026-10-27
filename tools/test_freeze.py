@@ -31,6 +31,7 @@ with tempfile.TemporaryDirectory(prefix="freeze-test-") as d:
     git(R, "init", "-q")
     git(R, "config", "user.email", "t@t"); git(R, "config", "user.name", "t")
     rework.ROOT, rework.QDIR, rework.FILE = R, R / "quarantine", R / "coord" / "rework.tsv"
+    rework.TRIED = R / "local" / "rework-tried.json"
     freeze.ROOT, freeze.STATE, freeze.LAST = R, R / "local/batch/freeze.json", R / "local/builds/last.json"
     freeze.CLAIMS, freeze.SIGNAL, freeze.LOG = R / "coord/claims", R / "cc1/FREEZE", R / "cc1/freeze.log"
     os.environ["SHEAF_FREEZE_BLOCKED"] = "2"
@@ -57,7 +58,10 @@ with tempfile.TemporaryDirectory(prefix="freeze-test-") as d:
 
     rs = freeze.roots(now=1793145600)
     check("roots", [(r["module"], r["kind"], r["waiting"], r["claimant"], r["claim_age"]) for r in rs],
-          [("Sheaf.Root", "error", 2, "G3", "2.0h")])
+          [("Sheaf.Root", "restorable", 2, "G3", "2.0h")])
+    import hashlib
+    put(R, "local/rework-tried.json", json.dumps({"Sheaf.Root": hashlib.sha1(texts["Sheaf.Root"].encode()).hexdigest()}))
+    check("root confirmed unfixed", [r["kind"] for r in freeze.roots(now=1793145600)], ["unfixed error"])
 
     # filter: only rework items (and maintainer groups) pass
     cands = [{"group": "Q1", "item": "Sheaf.Root"}, {"group": "Q2", "item": "Sheaf.Other"},

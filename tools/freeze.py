@@ -102,12 +102,19 @@ def roots(rows: dict | None = None, now: float | None = None) -> list[dict]:
     rows = rework.load() if rows is None else rows
     now = time.time() if now is None else now
     out = []
+    try:
+        back, seeds = rework.cluster_set(rows)     # what the cluster restore puts back, the confirmed unfixed roots
+        back = set(back)
+    except Exception:  # noqa: BLE001
+        back, seeds = set(), set()
     for c in rework.clusters(rows):
         m = c["item"]
         cause = rows[m].get("cause") or ""
+        err = cause.startswith("error:") or "does not compile alone" in cause
         cl = _read(CLAIMS / f"{m}.lock") or {}
         out.append({"module": m, "waiting": c["waiting"],
-                    "kind": "error" if cause.startswith("error:") or "does not compile alone" in cause else "import",
+                    "kind": ("unfixed error" if m in seeds else "restorable" if m in back
+                             else "error" if err else "import"),
                     "claimant": cl.get("who") or "unclaimed", "claim_age": _age(cl.get("t"), now) if cl else "-",
                     "age": _age(_epoch(rows[m].get("time") or ""), now)})
     return out
@@ -116,7 +123,8 @@ def roots(rows: dict | None = None, now: float | None = None) -> list[dict]:
 def signal_line(st: dict, n: int, rs: list[dict], unrowed: int) -> str:
     parts = [f"{r['module']} ({r['kind']} root, {r['waiting']} waiting, claim {r['claimant']} {r['claim_age']}, "
              f"quarantined {r['age']})" for r in rs]
-    return (f"since {st.get('since')} | blocked {n} > {limit()} (tools/rework.py blocked_count; {unrowed} without a rework row)"
+    return (f"since {st.get('since')} | blocked {n} > {limit()} (tools/rework.py blocked_count; {unrowed} without a rework row;"
+            " restorable: the cluster restore puts it back, unfixed error: its quarantined text failed)"
             f" | {len(rs)} root(s): " + ("; ".join(parts) or "none") + "\n")
 
 
