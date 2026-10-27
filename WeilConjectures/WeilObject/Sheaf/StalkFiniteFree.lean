@@ -5,6 +5,7 @@ Authors: Claude
 -/
 module
 
+public import WeilConjectures.Mathlib.FieldTheory.IsSepClosed
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructible
 public import WeilConjectures.TraceFormula.CategoricalTraceExact
 public import WeilConjectures.WeilObject.Sheaf.Stalk
@@ -48,13 +49,6 @@ open scoped CategoryTheory.Obj
 namespace AlgebraicGeometry.ProEtale.CondensedRing
 
 open Scheme
-
-/-- A separably closed field is separably closed for the field structure
-`(Field.toIsField K).toField` recovered from its ring structure. -/
-theorem _root_.IsField.isSepClosed_toField {K : Type*} [hK : Field K] [hs : IsSepClosed K] :
-    letI := (Field.toIsField K).toField; IsSepClosed K :=
-  @IsSepClosed.mk K (Field.toIsField K).toField fun p hp ↦
-    @IsSepClosed.splits_of_separable K hK hs p hp
 
 variable (ℓ : ℕ) [Fact ℓ.Prime] {Ω : Type u} [instΩ : CommRing Ω] (hΩ : IsField Ω)
   (hsep : letI := hΩ.toField; IsSepClosed Ω)

@@ -6,7 +6,7 @@ Authors: Claude
 module
 
 public import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
-public import Mathlib.FieldTheory.IsSepClosed
+public import WeilConjectures.Mathlib.FieldTheory.IsSepClosed
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.HomologySequence
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.HomologyZero
 public import WeilConjectures.SixFunctors.NearbyCycles.BoundedConstructible
@@ -215,8 +215,7 @@ theorem boundedConstructible_traitNearby_singleFunctor_obj
   set Λ := Profinite.padicAlgClRingObj ℓ
   have hfp : Mod.IsFinitelyPresented (condensedRingObj Λ (Spec (.of (traitGenericField k')))) M :=
     (isFinitelyPresented_upperStar_of_isConstructibleModuleObject Λ (Field.toIsField _)
-      (@IsSepClosed.mk _ (Field.toIsField _).toField fun p hp ↦
-        @IsSepClosed.splits_of_separable (traitGenericField k') _ inferInstance p hp) hM
+      IsField.isSepClosed_toField hM
       (𝟙 _)).of_iso ((upperStarId Λ _).app M)
   have hGE : ((R((traitGenericPoint k')_*⟦Λ⟧)).obj
       ((DerivedCategory.singleFunctor _ 0).obj M)).IsGE 0 :=
