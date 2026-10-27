@@ -43,7 +43,6 @@ blueprint sk-thm-purity-transport, Steps 2--3.
 
 @[expose] public noncomputable section
 set_option autoImplicit false
-set_option Elab.async false
 set_option linter.unusedSectionVars false
 
 set_option synthInstance.maxSize 4096
@@ -1009,6 +1008,18 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [NormedField E]
   [NormedAlgebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
   (k : Type u) [Field k] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ l)]
 
+/-- The identity refinement component is the identity on every system object.
+Source: Stacks 0F7B; this is the component calculation for the identity mate.
+(blueprint: lem-pur-compact-support-condensed-realization).
+(blueprint: lem-pur-compact-support-condensed-realization-system-refinement-id-component).
+Proof: expand the normalized proper/open mate, apply the identity equation for
+`SemilinearProperOpen.gamma`, and cancel the identity and composition isomorphisms. -/
+theorem systemRefinement_id_component (X Y : CondensedERealization.Base k)
+    (f : X.scheme ⟶ Y.scheme) [f.IsOver (Spec (.of k))] (c : Compactification f)
+    (M : coefficientSequenceDerived.{u, u} l E X.scheme) :
+    (systemRefinement l E k X Y f (Compactification.Refinement.id c)).app M = 𝟙 _ := by
+  sorry
+
 /-- Identity refinement is the identity on the full derived semilinear system.
 Source: blueprint proof Step 15; Stacks 0F7B
 (blueprint: lem-pur-compact-support-condensed-realization).
@@ -1018,8 +1029,9 @@ proper/open mate with the identity. The normalized proper compositor cancels it.
 theorem systemRefinement_id (X Y : CondensedERealization.Base k)
     (f : X.scheme ⟶ Y.scheme) [f.IsOver (Spec (.of k))] (c : Compactification f) :
     systemRefinement l E k X Y f (Compactification.Refinement.id c) = 𝟙 _ := by
-  sorry
-
+  apply NatTrans.ext
+  funext M
+  exact systemRefinement_id_component l E k X Y f c M
 /-- Refinement composition holds before evaluation and before total limit.
 Source: blueprint proof Step 15; Stacks 07A7 and 0F7B
 (blueprint: lem-pur-compact-support-condensed-realization).
