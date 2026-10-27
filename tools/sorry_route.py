@@ -156,7 +156,9 @@ def build_commit():
     return r.stdout.strip() or None
 
 
-HOLD_MODULES, HOLD_FRACTION = 100, 0.05
+# 2026-10-27 23:10: hold disabled. The route also feeds the queue; holding it during the frequent cluster quarantines
+# kept new modules (e.g. the 22:00 ConstantCompletion split) off the queue for hours. Reports mark such hours invalid.
+HOLD_MODULES, HOLD_FRACTION = 10**9, 2.0
 
 
 def quarantine_hold(commit):
