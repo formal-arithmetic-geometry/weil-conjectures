@@ -6,6 +6,7 @@ Authors: SHEAF group E5
 module
 
 public import Sheaf.Paper.TowerScalarFiniteBoundaryData
+import Sheaf.Paper.ScalarFiniteBoundaryComposition
 
 /-! # Finite evaluation of scalar extension of an arbitrary integral arrow -/
 
@@ -61,6 +62,12 @@ transports. This argument works for every integral arrow f, independently of
 its construction or any Kummer normalization. Empty schemes, zero coefficient
 rings, and f equal to zero satisfy exactly the same formulas. The remaining
 composition identity is isolated in the proof plan for subsequent completion. -/
+private theorem finiteBoundaryEquality_of_composition {D : Type u} [Category D]
+    {X X' Y Y' : D} (q : X ⟶ X') (r : Y ⟶ Y')
+    {a : X' ⟶ Y'} {beta : X ⟶ Y}
+    (h : q ≫ a = beta ≫ r) : finiteBoundaryEquality q r a beta := by
+  exact ⟨a, beta, HEq.rfl, HEq.rfl, h⟩
+
 theorem scalarFiniteBoundary (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
     {T : Scheme.{u}} (c : Chern l E T)
@@ -71,7 +78,11 @@ theorem scalarFiniteBoundary (l : ℕ) [Fact l.Prime]
       ((DerivedCategory.singleFunctor (Systems T (Rrings l T)) 0).obj
         c.rootModule)⟦(2 : ℤ)⟧) (n : ℕ) :
     ScalarFiniteBoundary l E c f n := by
-  sorry
+  refine ⟨?_⟩
+  dsimp [ScalarFiniteBoundary]
+  exact finiteBoundaryEquality_of_composition _ _
+    (scalarFiniteBoundary_composition l E c hc f n)
+
 
 end AlgebraicGeometry.ProEtale.SpTowerClasses
 

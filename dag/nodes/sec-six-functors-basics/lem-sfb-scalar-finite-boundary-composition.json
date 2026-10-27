@@ -1,0 +1,133 @@
+{
+ "id": "lem-sfb-scalar-finite-boundary-composition",
+ "kind": "statement",
+ "title": "Concrete scalar finite boundary composition identity",
+ "statement": "For prime $\\ell$, a finite coefficient field $E$, Chern data $c$ satisfying its scalar-unit normalization, an arbitrary integral arrow $f$ and level $n$, the composite of the finite quotient with the evaluated and forgotten scalar arrow equals the underlying integral arrow evaluation followed by the shifted finite root map. The equality is taken in the derived category of diagonal abelian sheaves, with the displayed degree-two shift.",
+ "stmt_deps": [
+  "def-sp-tower-class-chern",
+  "def-sp-tower-class-reduction",
+  "def-sp-tower-class-finite",
+  "def-sp-tower-class-systems",
+  "def-sp-tower-class-diagonal",
+  "def-sfb-tower-underlying-arrow",
+  "def-sfb-scalar-chern-arrow"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-classes.proof.md",
+  "place": "clause (2), evaluation and scalar-extension calculation; the concrete composition identity before finiteBoundaryEquality packaging"
+ },
+ "proof": [
+  {
+   "text": "Transpose scalarChernArrow through the normalized derived scalar adjunction and use naturality of its universal counit to identify its finite evaluation with the ordinary scalar unit applied to the underlying integral arrow. The scalar-unit normalization supplies scalarGenerator at the source.",
+   "uses": [
+    "def-coef-semilinear-system-models",
+    "def-sp-tower-class-chern",
+    "def-sp-tower-class-reduction",
+    "def-sfb-scalar-chern-arrow"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply exact finite evaluation and restriction of scalars. The section, restriction and morphism equations of the recorded Forget structure identify the resulting maps. Uniqueness of finiteQuotient from its integer-section equation identifies the source composite, while the pure-tensor equation of lineEvaluation and uniqueness of finiteRootMap identify the target composite. Naturality of the single and shift comparisons gives the displayed equality.",
+   "uses": [
+    "def-sp-tower-class-finite",
+    "def-sp-tower-class-systems",
+    "def-sp-tower-class-diagonal",
+    "def-sfb-tower-underlying-arrow"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-coef-semilinear-system-models",
+  "def-sp-tower-class-chern",
+  "def-sp-tower-class-reduction",
+  "def-sp-tower-class-finite",
+  "def-sp-tower-class-systems",
+  "def-sp-tower-class-diagonal",
+  "def-sfb-tower-underlying-arrow",
+  "def-sfb-scalar-chern-arrow"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-classes.proof.md",
+  "place": "clause (2), scalar extension and exact finite evaluation"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "finite evaluation of a derived scalar extension arrow equals evaluation of the ordinary scalar unit",
+   "results": "No exact specialized result; generic adjunction naturality only.",
+   "date": "2026-10-28",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.homEquiv_naturality_right",
+   "results": "Generic adjunction naturality; no finite tower evaluation identity.",
+   "date": "2026-10-28",
+   "verdict": "Ingredient only."
+  },
+  {
+   "tool": "grep",
+   "query": "finiteBoundaryEquality|scalarChernArrow|forgetEvaluatedArrow",
+   "results": "Only the construction modules and this new statement; no existing composition theorem.",
+   "date": "2026-10-28",
+   "verdict": "No existing match."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.TowerScalarFiniteBoundary",
+  "date": "2026-10-28",
+  "group": "S4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sfb-tower-scalar-finite-boundary",
+   "place": "proof: the scalar-evaluation composition identity",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-diagonal-tower",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ScalarFiniteBoundaryComposition",
+  "file": "lean/Sheaf/Paper/ScalarFiniteBoundaryComposition.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.SpTowerClasses.scalarFiniteBoundary_composition",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.SpTowerClasses.scalarFiniteBoundary_eval",
+   "AlgebraicGeometry.ProEtale.SpTowerClasses.scalarFiniteBoundary_integral",
+   "AlgebraicGeometry.ProEtale.SpTowerClasses.scalarFiniteBoundary_composition"
+  ],
+  "statement": "theorem scalarFiniteBoundary_composition (l : ℕ) [Fact l.Prime]\n    (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]\n    {T : Scheme.{u}} (c : Chern l E T)\n    (hc : unitNormalization c.scalar.T\n      (SemilinearSections.res.{u + 1, u, u + 1} (coefficientSystemMap l E T))\n      c.scalar.adjunction c.scalarUnit (scalarGenerator l E T))\n    (f : unit T (Rrings l T) ⟶\n      ((DerivedCategory.singleFunctor (Systems T (Rrings l T)) 0).obj\n        c.rootModule)⟦(2 : ℤ)⟧) (n : ℕ) :\n    (DerivedCategory.singleFunctor (DiagonalAb T) 0).map (finiteQuotient l E T n) ≫\n        scalarFiniteBoundary_eval l E c f n =\n      scalarFiniteBoundary_integral l E c f n ≫\n        (DerivedCategory.singleFunctor (DiagonalAb T) 0).map\n          (finiteRootMap l E T n)⟦(2 : ℤ)⟧' ",
+  "branch": "sheaf-dag",
+  "by": "S4",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S4",
+  "result": "pass",
+  "landing": "20261027T210230-L-1676314",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S4",
+  "result": "pass",
+  "landing": "20261027T210230-L-1676314",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

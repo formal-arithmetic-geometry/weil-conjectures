@@ -18,44 +18,20 @@
  },
  "proof": [
   {
-   "text": "For the derived scalar model, choose a K-flat resolution of the single root module. Apply ScalarData.transpose_model there and use naturality of the universal counit to cancel the resolution isomorphism. Thus the adjunct of lineComparison is the ordinary scalar unit on the root module. The specified canonical shift structure is the adjunction-induced one: the representative unit formulas and uniqueness of adjunctions identify the supplied normalized scalar adjunction with the canonical one. Consequently this adjunct identity also holds after shifting by two.",
+   "text": "Apply scalarFiniteBoundary_composition to obtain the concrete composite identity for the evaluated scalar arrow and the underlying integral arrow. Package the two displayed arrows as the witnesses in finiteBoundaryEquality; their endpoint types coincide definitionally, so HEq.rfl supplies both transports. Wrap this equality in the required Fact.",
    "uses": [
-    "def-coef-semilinear-system-models",
-    "def-sp-tower-class-chern"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Use naturality of that adjunction on an arbitrary f. The scalar-unit normalization replaces the source adjunct by scalarGenerator. The resulting underlying equation is f followed by the ordinary scalar unit, with all exact-single and shift comparisons retained. Apply exact finite evaluation and forgetting to this equation.",
-   "uses": [
-    "def-sp-tower-class-reduction",
-    "def-coef-semilinear-system-models",
-    "def-sp-tower-class-finite"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "The section, restriction and morphism equalities of the recorded Forget functor give the natural additive evaluation comparison. The evaluated composite of integerGenerator with scalarGenerator sends every constant integer k to k times one, so finiteQuotient uniqueness fixes the source map. The ordinary scalar unit sends every root section to one tensor that section, and lineEvaluation has the same pure-tensor formula; finiteRootMap uniqueness fixes the target map. Substitute these maps into the evaluated equation and record the exact-single endpoint transports with HEq. This proves the conclusion without using any Kummer boundary or assumptions on f beyond its type.",
-   "uses": [
-    "def-sp-tower-class-systems",
-    "def-sp-tower-class-diagonal",
-    "def-sp-tower-class-finite"
+    "lem-sfb-scalar-finite-boundary-composition"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "def-coef-semilinear-system-models",
-  "def-sp-tower-class-chern",
-  "def-sp-tower-class-reduction",
-  "def-sp-tower-class-finite",
-  "def-sp-tower-class-systems",
-  "def-sp-tower-class-diagonal"
+  "lem-sfb-scalar-finite-boundary-composition"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-classes.proof.md",
-  "place": "clause (2), extension of scalars and exact finite evaluation; steps 2--3 of lem-sfb-normalized-chern-finite-boundary"
+  "place": "clause (2), finiteBoundaryEquality packaging after the scalar-evaluation composition identity"
  },
  "mathlib_searches": [
   {
@@ -134,17 +110,11 @@
  "reviewed_proof": {
   "date": "2026-10-27",
   "by": "L",
-  "reviewer": "AUTO",
-  "group": "S9",
+  "reviewer": "COMPILER",
+  "group": "S4",
   "result": "pass",
-  "landing": "20261027T180814-L-3903567",
-  "kind": "proof",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
-  "sorry_before": [
-   "AlgebraicGeometry.ProEtale.SpTowerClasses.scalarFiniteBoundary"
-  ],
-  "sorry_after": [
-   "AlgebraicGeometry.ProEtale.SpTowerClasses.scalarFiniteBoundary"
-  ]
+  "landing": "20261027T210230-L-1676314",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
