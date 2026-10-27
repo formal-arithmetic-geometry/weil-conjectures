@@ -6,6 +6,9 @@ Authors: SHEAF group K5
 module
 
 public import Sheaf.Paper.FiniteQuotientCoefficientLayerData
+import Sheaf.Paper.FiniteQuotientCoefficientLayerTriangleCore
+import Mathlib.Algebra.Homology.DerivedCategory.ShortExact
+import Sheaf.Paper.AdicCoefficientFiltration
 
 /-! # The actual coefficient-layer triangle
 Source: Stacks Project, Tag 0942.
@@ -47,6 +50,13 @@ theorem finiteQuotient_coefficient_layer_triangle
       T ∈ distTriang _ ∧
       Nonempty (T.obj₁ ≅ finiteQuotientLayerObject X d M n) ∧
       Nonempty (T.obj₂ ≅ (completedAdicQuotientReduction X d (n + 1)).obj M) ∧
-      Nonempty (T.obj₃ ≅ finiteQuotientPreviousObject X d M n) := by sorry
+      Nonempty (T.obj₃ ≅ finiteQuotientPreviousObject X d M n) := by
+  obtain ⟨S, hS, ⟨e₁⟩, ⟨e₂⟩, ⟨e₃⟩⟩ :=
+    finiteQuotient_coefficient_layer_core X d M n
+  let T := DerivedCategory.triangleOfSES hS
+  refine ⟨T, DerivedCategory.triangleOfSES_distinguished hS, ?_, ?_, ?_⟩
+  · exact ⟨e₁.symm⟩
+  · exact ⟨e₂.symm⟩
+  · exact ⟨e₃.symm⟩
 
 end AlgebraicGeometry.Scheme
