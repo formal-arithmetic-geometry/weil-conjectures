@@ -5,6 +5,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import Sheaf.Paper.CondensedTateIntegralTowerData
+import Sheaf.Paper.TateTensorGeneratorIsIso
 
 /-! Ordinary projection-normalized quotients of the integral Tate tensor.
 
@@ -18,8 +19,30 @@ set_option synthInstance.maxSize 2048
 universe u
 open CategoryTheory CategoryTheory.Limits Opposite AlgebraicGeometry
 open CategoryTheory.MonoidalCategory
+open scoped ChangeOfRings
 open AlgebraicGeometry.Etale.FiniteSmoothPurity
 namespace AlgebraicGeometry.Scheme.PurityIntegralTower
+
+private theorem pbcTensorSection_mul (T : Scheme.{u})
+    {R S : Sheaf (ProEt.topology T) CommRingCat.{u + 1}} (φ : R ⟶ S)
+    (M : pbcModules T R) (U : T.ProEtᵒᵖ) (r z : S.obj.obj U) (x : M.val.obj U) :
+    pbcTensorSection φ M U (r * z) x = r • pbcTensorSection φ M U z x := by
+  change completedAdicChangeTensor T φ M U (r * z) x =
+    r • completedAdicChangeTensor T φ M U z x
+  let η := ((PresheafOfModules.sheafificationAdjunction.{u + 1}
+    (R := (sheafCompose (ProEt.topology T)
+      (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj S)
+    (𝟙 _)).unit.app (SheafOfModules.changeOfRingsPresheaf.{u, u + 1, u + 1} φ M)).app U
+  let e := eqToHom ((completedAdicChangeData T φ).choose_spec.choose M).symm
+  change e.val.app U (η ((r * z) ⊗ₜ[R.obj.obj U, (φ.hom.app U).hom] x)) =
+    r • e.val.app U (η (z ⊗ₜ[R.obj.obj U, (φ.hom.app U).hom] x))
+  clear_value e η
+  have ht := ModuleCat.ExtendScalars.smul_tmul (φ.hom.app U).hom r z x
+  have hη := η.hom.map_smul r (z ⊗ₜ[R.obj.obj U, (φ.hom.app U).hom] x)
+  have he := (e.val.app U).hom.map_smul r
+    (η (z ⊗ₜ[R.obj.obj U, (φ.hom.app U).hom] x))
+  exact (congrArg (fun w ↦ e.val.app U (η w)) ht.symm).trans
+    ((congrArg (fun w ↦ e.val.app U w) hη).trans he)
 
 /-- At a single finite level, ordinary scalar extension of the actual ordered integral
 root tensor is the realized finite root tensor, with its prescribed generator formula.
@@ -48,6 +71,16 @@ theorem tateTensorQuotient_balancing
     (T : Scheme.{u}) [IsNoetherian T] (ell : ℕ) [Fact ell.Prime]
     (hT : IsUnit (ell : Γ(T, ⊤))) (n d : ℕ) :
     ∃ b : (realization T ell n).obj (finiteSheaf T ell n d) ≅ quotientLine T ell n d,
-      ProjectionBalanced T ell n d b := by sorry
+      ProjectionBalanced T ell n d b := by
+  obtain ⟨f, hf⟩ := tateTensorQuotient_generator_map T ell hT n d
+  let := tateTensorQuotient_generator_isIso T ell hT n d f hf
+  let b := asIso f
+  refine ⟨b, ?_⟩
+  intro U W v a t z x hx
+  have hgen := hf U W v a z x hx
+  rw [map_smul]
+  simp only [one_smul] at hgen
+  change t • f.val.app W _ = _
+  rw [hgen, pbcTensorSection_mul]
 
 end AlgebraicGeometry.Scheme.PurityIntegralTower
