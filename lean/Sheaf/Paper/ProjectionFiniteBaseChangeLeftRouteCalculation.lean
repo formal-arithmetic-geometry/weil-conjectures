@@ -6,6 +6,7 @@ Authors: SHEAF group G1
 module
 
 public import Sheaf.Paper.ProjectionFiniteBaseChangeCoordinates
+import Sheaf.Paper.ProjectionFiniteBaseChangeLeftRouteExpansion
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -64,6 +65,8 @@ theorem sixFunctorProjectionFinite_left_route_calculation
     I.map (sixFunctorProjectionFiniteLeftPath S Q K L) ≫ target.hom =
       source.hom ≫ R'.functor.map
         (FiniteProjectionExchange.diamondLeft A Q.square Q.compactification
-          (RX.inverse.obj K.obj) (RY.inverse.obj L.obj)) := by sorry
+          (RX.inverse.obj K.obj) (RY.inverse.obj L.obj)) := by
+  simpa [sixFunctorProjectionFiniteLeftPath] using
+    (sixFunctorProjectionFinite_left_route_expansion S Q K L)
 
 end WeilConjectures

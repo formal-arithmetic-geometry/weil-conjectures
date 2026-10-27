@@ -1,0 +1,107 @@
+{
+ "id": "lem-sf-finite-base-change-left-route-expansion",
+ "kind": "statement",
+ "title": "Expansion of the left finite projection base-change route",
+ "statement": "The explicit finite pull/exchange/support composite for the left route, after source and target endpoint comparisons, equals realization of the fixed-scalar diamondLeft.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-prop-sf-pf-coherence/prop-sf-pf-coherence.proof.md",
+  "place": "Base-change paragraph: first route, source-comparison and support-comparison expansion"
+ },
+ "stmt_deps": [
+  "def-sf-finite-base-change-realization-paths",
+  "def-sf-constructible-projection-mates",
+  "def-sf-operation-stages"
+ ],
+ "proof": [
+  {
+   "text": "Unfold the finite left path, source and target comparisons and the conjugated projection component. Naturality of pullRealization and supportRealization moves the coefficient comparison maps through the finite pull and support functors. The equivalence unit/counit triangle identities cancel the intermediate coefficient maps, and finite pull-composition normalization rewrites the two restricted pullback compositors. The surviving composite is the fixed-scalar diamondLeft realization.",
+   "uses": [
+    "def-sf-finite-base-change-realization-paths",
+    "def-sf-constructible-projection-mates",
+    "def-sf-operation-stages"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sf-finite-base-change-realization-paths",
+  "def-sf-constructible-projection-mates",
+  "def-sf-operation-stages"
+ ],
+ "proof_origin": {
+  "by": "F6 stage 3",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-prop-sf-pf-coherence/prop-sf-pf-coherence.proof.md",
+  "place": "Base-change paragraph: first route expansion"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "naturality and triangle identities for equivalence transported categorical composites",
+   "results": "No specialized finite projection match; use the recorded realization comparison maps.",
+   "date": "2026-10-28",
+   "verdict": "No direct Mathlib theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.map_comp_assoc Iso.hom_inv_id_app",
+   "results": "Generic functoriality and iso cancellation lemmas.",
+   "date": "2026-10-28",
+   "verdict": "Applicable to the expansion."
+  },
+  {
+   "tool": "grep",
+   "query": "pullRealization supportRealization finitePullCompositionNormalization",
+   "results": "Existing definitions in ConstructibleProjectionMates and ProjectionFiniteBaseChangeCoordinates.",
+   "date": "2026-10-28",
+   "verdict": "Reuse existing APIs."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ProjectionFiniteBaseChangeLeftRouteCalculation",
+  "date": "2026-10-28",
+  "group": "F6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sf-finite-base-change-left-route-calculation",
+   "place": "Base-change paragraph: first route calculation",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ProjectionFiniteBaseChangeLeftRouteExpansion",
+  "file": "lean/Sheaf/Paper/ProjectionFiniteBaseChangeLeftRouteExpansion.lean",
+  "declaration": "WeilConjectures.sixFunctorProjectionFinite_left_route_expansion",
+  "statement": "theorem sixFunctorProjectionFinite_left_route_expansion\n    (S : SixFunctorDatum D C E n hn) (Q : SixFunctorCompactifiedSquare D)\n    (K : sixFunctorFiniteCategory D C E n hn Q.X)\n    (L : finiteTorConstructibleCategory C.l E n hn Q.Y.obj.left) :\n    letI := Padic.finite_coefficientExtensionRing C.l E n hn\n    let A := ULift.{u + 1} (Padic.coefficientExtensionRing C.l E n)\n    let RX := CompactSupportFiniteProjection.realization\n      (C := C) (E := E) (n := n) (hn := hn) Q.X\n    let RY := CompactSupportFiniteProjection.realization\n      (C := C) (E := E) (n := n) (hn := hn) Q.Y\n    let R' := CompactSupportFiniteProjection.realization\n      (C := C) (E := E) (n := n) (hn := hn) Q.Y'\n    let I := (intrinsicFiniteTorsionConstructible C.l E n hn Q.Y'.obj.left).ι\n    let source := sixFunctorProjectionFiniteSquareSource S Q K L\n    let target := sixFunctorProjectionFiniteSquareTarget S Q K L\n    I.map ((S.finite.pull Q.g).map\n      (CompactSupportFiniteProjection.component S.toSixFunctorFiniteOperations\n        Q.f Q.compactification K L)) ≫\n      I.map (sixFunctorProjectionFiniteExchange S Q\n        (((CompactSupportFiniteProjection.partialTensor\n          S.toSixFunctorFiniteOperations Q.X).obj K).obj\n          ((CompactSupportFiniteProjection.torPull\n            S.toSixFunctorFiniteOperations Q.f).obj L))) ≫\n      I.map ((S.finite.support Q.f' (Q.compactification.ofIsPullback Q.square)).map\n        ((sixFunctorProjectionFiniteMu S Q.g' K\n            ((CompactSupportFiniteProjection.torPull\n              S.toSixFunctorFiniteOperations Q.f).obj L)).hom ≫\n          ((CompactSupportFiniteProjection.partialTensor\n              S.toSixFunctorFiniteOperations Q.X').obj\n            ((S.finite.pull Q.g').obj K)).map\n            ((CompactSupportFiniteProjection.torPullComposition\n              S.toSixFunctorFiniteOperations Q.g' Q.f L).inv ≫\n              ObjectProperty.homMk (eqToHom (congrArg\n                (fun f ↦ ((CompactSupportFiniteProjection.torPull\n                  S.toSixFunctorFiniteOperations f).obj L).obj) Q.squareComm)) ≫\n              (CompactSupportFiniteProjection.torPullComposition\n                S.toSixFunctorFiniteOperations Q.f' Q.g L).hom))) ≫\n      target.hom =\n      source.hom ≫ R'.functor.map\n        (FiniteProjectionExchange.diamondLeft A Q.square Q.compactification\n          (RX.inverse.obj K.obj) (RY.inverse.obj L.obj))",
+  "branch": "sheaf-dag",
+  "by": "F6",
+  "date": "2026-10-28"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-pf-coherence",
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F6",
+  "result": "pass",
+  "landing": "20261027T205947-L-1638222",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F6",
+  "result": "pass",
+  "landing": "20261027T205947-L-1638222",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
