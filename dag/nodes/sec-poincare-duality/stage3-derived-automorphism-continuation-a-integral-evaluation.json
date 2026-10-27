@@ -1,0 +1,114 @@
+{
+ "kind": "statement",
+ "status": "split",
+ "import_flags": [],
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-poincare-duality/sk-lem-finite/prop-pod-dual-tate-data-compatibility.proof.md",
+  "place": "Steps 8--11: integral pullback Hom comparison"
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "naturality evaluation transpose invertibility of a derived pullback internal Hom comparison",
+   "results": "No project-specific completed comparison found; use the declared integral construction.",
+   "date": "2026-10-28",
+   "verdict": "Use project declarations."
+  },
+  {
+   "tool": "loogle",
+   "query": "PodPartialHomCompatibility",
+   "results": "No Mathlib declaration for the project structure.",
+   "date": "2026-10-28",
+   "verdict": "Use project declarations."
+  },
+  {
+   "tool": "grep",
+   "query": "podIntegralHomComparison field laws",
+   "results": "The item is the only declaration; split field statements are required.",
+   "date": "2026-10-28",
+   "verdict": "New strict component statements."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.DerivedAutomorphismHomEvaluationContinuationA",
+  "date": "2026-10-28",
+  "group": "B4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pod-derived-automorphism-hom-evaluation",
+   "place": "integral compatibility field",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-poincare-duality",
+ "unit": "sk-def-weil",
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-scheme-morphism-properties",
+  "def-sf-finite-rational-derived-operations",
+  "def-pur-completed-pullback-tensor-construction",
+  "def-sf-adic-closed-reindexing-maps",
+  "def-pod-partial-closed-interfaces",
+  "lem-pod-reindexing-hom-coefficient-descent"
+ ],
+ "proof_origin": "Stage-3 decomposition of podIntegralHomComparison_laws (lem-pod-derived-automorphism-hom-evaluation, steps 8--11): its evaluation field. The formal argument is that of Stacks 0GMX: the comparison is a transpose and evaluation is the inverse transpose of the identity.",
+ "proof_deps": [
+  "def-pod-partial-closed-interfaces",
+  "def-sf-adic-closed-reindexing-maps"
+ ],
+ "id": "stage3-derived-automorphism-continuation-a-integral-evaluation",
+ "title": "The integral comparison evaluation square.",
+ "statement": "Let $\\ell$ be prime, $E/\\mathbf Q_\\ell$ finite [def-weil-l-adic-coefficient-extension], and $g:X\\xrightarrow{\\sim}Y$ an isomorphism of schemes on which $\\ell$ is invertible [def-weil-scheme-morphism-properties]. Write $F=Lg^*$, $T$ and $H$ for the integral constructible pullback, tensor and internal Hom on its permitted Hom pairs [def-sf-finite-rational-derived-operations], $\\mu_{L,M}:F(T(L,M))\\cong T(FL,FM)$ for the canonical integral pullback-tensor comparison [def-pur-completed-pullback-tensor-construction], and $c_P:F H(P)\\to H(FP)$ for the evaluation-defined comparison between the completed integral partial closed data on $Y$ and $X$, $c_P=\\operatorname{tr}_X(\\mu^{-1}\\circ F(\\mathrm{ev}_P))$ [def-sf-adic-closed-reindexing-maps, def-pod-partial-closed-interfaces]; a permitted pair $P=(M,N)$ pulls back to a permitted pair $FP$ [lem-pod-reindexing-hom-coefficient-descent]. Then for every permitted pair $P=(M,N)$ on $Y$, $\\mathrm{ev}_{FP}\\circ T(c_P,1)\\circ\\mu_{H(P),M}=F(\\mathrm{ev}_P)$.",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.PodIntegralHomComparisonEvaluation",
+  "file": "lean/Sheaf/Paper/PodIntegralHomComparisonEvaluation.lean",
+  "declaration": "WeilConjectures.podIntegralHomComparison_evaluation",
+  "statement": "theorem podIntegralHomComparison_evaluation :\n    ∀ P : (constructibleIntegralHomPairs l E Y).FullSubcategory,\n      (canonicalIntegralPullbackTensor l E g\n          ((constructibleIntegralHom l E Y).obj P) P.obj.1.unop).hom ≫\n        (constructibleIntegralTensor l E X).map\n          (Prod.mkHom (podPartialHomComparison (podIntegralClosed l E Y) (podIntegralClosed l E X)\n      (constructibleIntegralPullback l E g) (podIntegralPairs_pullback l E g)\n        (canonicalIntegralPullbackTensor l E g) P) (𝟙 _)) ≫\n        (podIntegralClosed l E X).evaluation\n          ((podPairPullback (constructibleIntegralPullback l E g)\n            (constructibleIntegralHomPairs l E Y) (constructibleIntegralHomPairs l E X)\n            (podIntegralPairs_pullback l E g)).obj P) =\n      (constructibleIntegralPullback l E g).map\n        ((podIntegralClosed l E Y).evaluation P)",
+  "branch": "sheaf-dag",
+  "by": "B4",
+  "date": "2026-10-28"
+ },
+ "proof": [
+  {
+   "text": "For any $f:L\\to H(Q)$, parameter naturality of the transposition of partial closed data [def-pod-partial-closed-interfaces] gives $\\operatorname{tr}(\\mathrm{ev}_Q\\circ T(f,1))=f\\circ\\operatorname{tr}(\\mathrm{ev}_Q)=f$, since $\\mathrm{ev}_Q=\\operatorname{tr}^{-1}(1)$; hence $\\mathrm{ev}_Q\\circ T(f,1)=\\operatorname{tr}^{-1}(f)$.",
+   "uses": [
+    "def-pod-partial-closed-interfaces"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply this on $X$ to $f=c_P$, which by definition is $\\operatorname{tr}_X(\\mu^{-1}\\circ F(\\mathrm{ev}_P))$ [def-sf-adic-closed-reindexing-maps]: $\\mathrm{ev}_{FP}\\circ T(c_P,1)=\\mu^{-1}\\circ F(\\mathrm{ev}_P)$. Precomposing with $\\mu$ cancels $\\mu^{-1}$.",
+   "uses": [
+    "def-sf-adic-closed-reindexing-maps",
+    "def-pod-partial-closed-interfaces"
+   ],
+   "elementary": true
+  }
+ ],
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-2db09",
+  "group": "B4",
+  "result": "fix",
+  "landing": "20261027T233800-L-4114267",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-2db09",
+  "group": "B4",
+  "result": "fix",
+  "landing": "20261027T233800-L-4114267",
+  "kind": "interface",
+  "note": "independent cc review: Base module vs clone ContinuationA prefix (verbatim move, public re-export); 4 hole statements vs PodPartialHomCompatibility fields; new nodes vs Lean and DAG owners; ContinuationB importer compiled against corrected set"
+ }
+}

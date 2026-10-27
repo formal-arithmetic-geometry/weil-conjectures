@@ -37,6 +37,12 @@ import Sheaf.Paper.SfDerivedCompleteLegacyComparison
 
 public import Sheaf.Paper.DerivedAutomorphismHomEvaluationBase
 
+public import Sheaf.Paper.DerivedAutomorphismHomEvaluationContinuationABase
+import Sheaf.Paper.PodIntegralHomComparisonIsIso
+import Sheaf.Paper.PodIntegralHomComparisonNaturality
+import Sheaf.Paper.PodIntegralHomComparisonEvaluation
+import Sheaf.Paper.PodIntegralHomComparisonTranspose
+
 /-! # Internal Hom and evaluation under coefficient-site isomorphisms
 
 Source: Stacks Project, Modules on Sites, Tag 0GMX; the derived and completed
@@ -80,145 +86,6 @@ attribute [local irreducible] AlgebraicGeometry.Scheme.residueField
   HasDerivedCategory.standard
 attribute [-instance] isoReductionAbSheafify isoReductionAbBijective isoReductionSiteSmall
 
-private def podClosedTransposeAdditive
-    {D : Type a} [Category.{b} D] [Preadditive D] [HasZeroObject D]
-    [HasBinaryProducts D] {H : Dᵒᵖ × D ⥤ D}
-    (S : CoefficientClosedStructure H) (L M N : D) :
-    (S.tensor.obj (L, M) ⟶ N) ≃+ (L ⟶ H.obj (op M, N)) := by
-  let := S.monoidal
-  have : (Prod.sectR (op M) D ⋙ H).IsRightAdjoint := (S.adjunction M).isRightAdjoint
-  have : (Prod.sectR (op M) D ⋙ H).Additive :=
-    Functor.additive_of_preserves_binary_products _
-  have : (MonoidalCategory.tensorRight M).Additive := (S.adjunction M).left_adjoint_additive
-  exact (S.adjunction M).homAddEquiv L N
-
-/-- Partial closed data are determined by their transposition equivalences.
-Source: Stacks 08J9; the structure of def-pod-partial-closed-interfaces.
-Proof: the naturality field is a proposition, so two structures with equal
-transpose families (by function extensionality) are equal.
-(blueprint: stage3-derived-automorphism-continuation-a). -/
-theorem podPartialClosed_ext
-    {C : Type a} [Category.{b} C] [Preadditive C]
-    {T : C × C ⥤ C} {J : ObjectProperty (Cᵒᵖ × C)} {H : J.FullSubcategory ⥤ C}
-    (S S' : PodPartialClosed T J H)
-    (h : ∀ L P, S.transpose L P = S'.transpose L P) : S = S' := by
-  cases S with
-  | mk tr hn =>
-    cases S' with
-    | mk tr' hn' =>
-      have he : tr = tr' := funext (fun L ↦ funext (fun P ↦ h L P))
-      cases he
-      rfl
-
-section IntegralClosed
-variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
-  [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (W : Scheme.{u})
-  [∀ w : W, Invertible (l : W.residueField w)]
-
-/-- The actual ordinary-to-completed tensor unit: reduction's adjunction unit,
-its tensor comparison, and the inverse of the recorded Roos realization.
-Source: node proof step 10, Stacks 099B
-(blueprint: lem-pod-derived-automorphism-hom-evaluation). -/
-def podCompletedTensorUnit (M N : DerivedCategory (integralTowerModules l E W)) :
-    (pullbackTensorCalculus l E W).integralClosed.tensor.obj (M, N) ⟶
-      (integralCompletedTensor l E W).obj (M, N) :=
-  (pullbackTensorCalculus l E W).adjunction.unit.app _ ≫
-    (coefficientSequenceLimit l E W).map
-      ((pullbackTensorCalculus l E W).reductionTensor.hom.app (M, N)) ≫
-    (pullbackTensorIntegralTensorModel l E W).inv.app (M, N)
-
-/-- The completed closed adjunction is uniquely normalized by ordinary evaluation
-precomposed with the actual completion unit. No perfectness assumption is imposed.
-Source: node proof steps 10--11, Stacks 099B, 0A0E.
-Proof: the constant/completed coefficient equivalence identifies quotient-tower
-completion with the Koszul reflector, preserving the unit. Maps from the completed
-tensor into the complete target N are therefore exactly maps from the ordinary
-tensor. Compose this bijection with ordinary tensor-Hom transposition. The Hom
-object is constructible by the pair condition, so full-subcategory Hom is unchanged.
-Both bijections are additive and natural. The equation fixes every transpose,
-hence fixes the partial closed data uniquely.
-(blueprint: lem-pod-derived-automorphism-hom-evaluation). -/
-theorem podIntegralClosed_existsUnique :
-    ∃! S : PodPartialClosed (constructibleIntegralTensor l E W)
-        (constructibleIntegralHomPairs l E W) (constructibleIntegralHom l E W),
-      ∀ (L : sfIntegralConstructibleCategory l E W)
-        (P : (constructibleIntegralHomPairs l E W).FullSubcategory)
-        (f : (constructibleIntegralTensor l E W).obj (L, P.obj.1.unop) ⟶ P.obj.2),
-        HEq ((S.transpose L P f).hom)
-          ((pullbackTensorCalculus l E W).integralClosed.transpose L.obj P.obj.1.unop.obj
-            P.obj.2.obj (podCompletedTensorUnit l E W L.obj P.obj.1.unop.obj ≫ f.hom)) := by
-  let S := (pullbackTensorCalculus l E W).integralClosed
-  let η : S.tensor ⟶ integralCompletedTensor l E W :=
-    (Functor.rightUnitor _).inv ≫
-      Functor.whiskerLeft _ (pullbackTensorCalculus l E W).adjunction.unit ≫
-      (Functor.associator _ _ _).inv ≫
-      Functor.whiskerRight (pullbackTensorCalculus l E W).reductionTensor.hom
-        (coefficientSequenceLimit l E W) ≫
-      (pullbackTensorIntegralTensorModel l E W).inv
-  let tr (L : sfIntegralConstructibleCategory l E W)
-      (P : (constructibleIntegralHomPairs l E W).FullSubcategory) :
-      ((constructibleIntegralTensor l E W).obj (L, P.obj.1.unop) ⟶ P.obj.2) ≃+
-        (L ⟶ (constructibleIntegralHom l E W).obj P) :=
-    (InducedCategory.homAddEquiv).trans
-      ((AddEquiv.ofBijective
-        ({ toFun := fun f ↦ podCompletedTensorUnit l E W L.obj P.obj.1.unop.obj ≫ f
-           map_zero' := by simp
-           map_add' := fun f g ↦ by simp only [Preadditive.comp_add] } :
-          ((integralCompletedTensor l E W).obj (L.obj, P.obj.1.unop.obj) ⟶ P.obj.2.obj) →+
-            (S.tensor.obj (L.obj, P.obj.1.unop.obj) ⟶ P.obj.2.obj))
-        (PodCompletedReflection.precompose_bijective l E W L P.obj.1.unop P.obj.2)).trans
-          ((podClosedTransposeAdditive S L.obj P.obj.1.unop.obj P.obj.2.obj).trans
-            (show (L.obj ⟶ ((constructibleIntegralHom l E W).obj P).obj) ≃+
-                (L ⟶ (constructibleIntegralHom l E W).obj P) from
-              (InducedCategory.homAddEquiv (X := L)
-                (Y := (constructibleIntegralHom l E W).obj P)).symm)))
-  have htr (L : sfIntegralConstructibleCategory l E W)
-      (P : (constructibleIntegralHomPairs l E W).FullSubcategory)
-      (f : (constructibleIntegralTensor l E W).obj (L, P.obj.1.unop) ⟶ P.obj.2) :
-      (tr L P f).hom = S.transpose L.obj P.obj.1.unop.obj P.obj.2.obj
-        (podCompletedTensorUnit l E W L.obj P.obj.1.unop.obj ≫ f.hom) := rfl
-  let R : PodPartialClosed (constructibleIntegralTensor l E W)
-      (constructibleIntegralHomPairs l E W) (constructibleIntegralHom l E W) := {
-    transpose := tr
-    parameter_naturality := by
-      intro L L' P f h
-      apply ObjectProperty.hom_ext
-      change (tr L' P ((constructibleIntegralTensor l E W).map
-        (Prod.mkHom f (𝟙 P.obj.1.unop)) ≫ h)).hom = f.hom ≫ (tr L P h).hom
-      rw [htr, htr]
-      have hn : S.tensor.map (Prod.mkHom f.hom (𝟙 P.obj.1.unop.obj)) ≫
-          podCompletedTensorUnit l E W L.obj P.obj.1.unop.obj =
-        podCompletedTensorUnit l E W L'.obj P.obj.1.unop.obj ≫
-          (integralCompletedTensor l E W).map (Prod.mkHom f.hom (𝟙 _)) := by
-        simpa [η, podCompletedTensorUnit, S, CoefficientClosedStructure.tensor,
-          Category.assoc] using η.naturality (Prod.mkHom f.hom (𝟙 P.obj.1.unop.obj))
-      change S.transpose _ _ _ (podCompletedTensorUnit l E W L'.obj _ ≫
-        ((integralCompletedTensor l E W).map (Prod.mkHom f.hom (𝟙 _)) ≫ h.hom)) = _
-      erw [← Category.assoc, ← hn, Category.assoc]
-      let := S.monoidal
-      change (S.adjunction P.obj.1.unop.obj).homEquiv _ _
-        (S.tensor.map (Prod.mkHom f.hom (𝟙 _)) ≫
-          podCompletedTensorUnit l E W L.obj P.obj.1.unop.obj ≫ h.hom) =
-        f.hom ≫ (S.adjunction P.obj.1.unop.obj).homEquiv _ _
-          (podCompletedTensorUnit l E W L.obj P.obj.1.unop.obj ≫ h.hom)
-      simpa only [CoefficientClosedStructure.tensor, MonoidalCategory.tensor,
-        MonoidalCategory.tensorHom_id, MonoidalCategory.tensorRight,
-        MonoidalCategory.curriedTensor, Functor.flip] using
-        (S.adjunction P.obj.1.unop.obj).homEquiv_naturality_left f.hom
-          (podCompletedTensorUnit l E W L.obj P.obj.1.unop.obj ≫ h.hom) }
-  refine ⟨R, fun L P f ↦ HEq.rfl, ?_⟩
-  intro R' hR'
-  apply podPartialClosed_ext
-  intro L P
-  apply AddEquiv.ext
-  intro f
-  apply ObjectProperty.hom_ext
-  exact eq_of_heq (hR' L P f)
-
-/-- Completed transposition with its unique ordinary-unit normalization.
-Source: Stacks 099B (blueprint: lem-pod-derived-automorphism-hom-evaluation). -/
-def podIntegralClosed := (podIntegralClosed_existsUnique l E W).exists.choose
-end IntegralClosed
 
 section IntegralTransport
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
@@ -227,42 +94,22 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [∀ x : X, Invertible (l : X.residueField x)]
   [∀ y : Y, Invertible (l : Y.residueField y)]
 
-/-- The Hom-constructible domain is preserved by isomorphism pullback.
-Source: node proof steps 3, 8, 11.
-Proof: exact sectionwise reindexing preserves K-injectives, hence the ambient
-Hom complex. Its canonical completion-unit comparison identifies reindexing
-with the recorded tower pullback on complete inputs. The source Hom is
-constructible by hypothesis, and pullback preserves constructibility.
-(blueprint: lem-pod-derived-automorphism-hom-evaluation). -/
-theorem podIntegralPairs_pullback
-    (P : (constructibleIntegralHomPairs l E Y).FullSubcategory) :
-    constructibleIntegralHomPairs l E X
-      (((constructibleIntegralPullback l E g).op.prod
-        (constructibleIntegralPullback l E g)).obj P.obj) := by
-  exact PodCoefficientDescent.integral_pair_permitted l E g P
-
-/-- The integral comparison is the transpose of completed pullback of evaluation.
-Source: node proof steps 10--11, Stacks 0GMX
-(blueprint: lem-pod-derived-automorphism-hom-evaluation). -/
-def podIntegralHomComparison :=
-  podPartialHomComparison (podIntegralClosed l E Y) (podIntegralClosed l E X)
-    (constructibleIntegralPullback l E g) (podIntegralPairs_pullback l E g)
-      (canonicalIntegralPullbackTensor l E g)
-
 /-- Integral invertibility, naturality, evaluation and every transpose, using
 completed tensor and exactly the stated Hom-constructible domain.
 Source: node proof steps 8--11.
-Proof: reindex the completed-ring Hom complex. The canonical unit and the two
-Roos-coordinate comparisons identify this map with tower-defined pullback.
-Precompose evaluation with the ordinary-to-completed tensor unit; the equation
-is the ordinary Hom-complex evaluation equation. The reflector's Hom bijection
-then gives the completed equation. Currying proves transposition and naturality.
+Proof: the four fields are `podIntegralHomComparison_isIso`,
+`podIntegralHomComparison_naturality`, `podIntegralHomComparison_evaluation` and
+`podIntegralHomComparison_transpose`.
 (blueprint: lem-pod-derived-automorphism-hom-evaluation). -/
 theorem podIntegralHomComparison_laws :
     PodPartialHomCompatibility (podIntegralClosed l E Y) (podIntegralClosed l E X)
       (constructibleIntegralPullback l E g) (podIntegralPairs_pullback l E g)
         (canonicalIntegralPullbackTensor l E g) := by
-  sorry
+  refine { isIso := ?_, naturality := ?_, evaluation := ?_, transpose := ?_ }
+  · exact podIntegralHomComparison_isIso l E g
+  · exact podIntegralHomComparison_naturality l E g
+  · exact podIntegralHomComparison_evaluation l E g
+  · exact podIntegralHomComparison_transpose l E g
 end IntegralTransport
 
 section RationalClosed
