@@ -14,7 +14,7 @@ An additive functor preserves the property that an object is a direct summand of
 sum of copies of another object. The quasi-inverse of an additive equivalence is additive
 (`CategoryTheory.Functor.additive_inv`). For an additive functor `G`, the image of a morphism
 out of a finite biproduct is an isomorphism if and only if the morphism out of the biproduct of
-the images is one (`CategoryTheory.Functor.isIso_map_biproductDesc`).
+the images is one (`CategoryTheory.Functor.isIso_map_biproduct_desc_iff`).
 -/
 
 @[expose] public section
@@ -92,6 +92,29 @@ lemma Functor.isIso_biproductDesc_map (F : C ⥤ D) [F.Additive] {X Y : C} (φ :
   infer_instance
 
 
+/-- If an additive functor carries the components of a morphism out of a finite biproduct to
+the components of a morphism which is an isomorphism, it carries the morphism to an
+isomorphism. -/
+lemma Functor.isIso_map_biproductDesc (F : C ⥤ D) [F.Additive] {X Y : C} (φ : ι → (X ⟶ Y))
+    [HasFiniteBiproducts D] [IsIso (biproduct.desc fun i ↦ F.map (φ i))] :
+    IsIso (F.map (biproduct.desc φ)) := by
+  have hc : IsIso (biproduct.desc (fun i ↦ F.map (biproduct.ι (fun _ : ι ↦ X) i))) := by
+    have : biproduct.desc (fun i ↦ F.map (biproduct.ι (fun _ : ι ↦ X) i)) =
+        (F.mapBiproduct fun _ : ι ↦ X).inv := by
+      ext i
+      simp [Functor.mapBiproduct]
+    rw [this]
+    infer_instance
+  have h : (biproduct.desc fun i ↦ F.map (φ i)) =
+      biproduct.desc (fun i ↦ F.map (biproduct.ι (fun _ : ι ↦ X) i)) ≫
+        F.map (biproduct.desc φ) := by
+    ext i
+    simp [← F.map_comp]
+  have : IsIso (biproduct.desc (fun i ↦ F.map (biproduct.ι (fun _ : ι ↦ X) i)) ≫
+      F.map (biproduct.desc φ)) := h ▸ inferInstance
+  exact IsIso.of_isIso_comp_left
+    (biproduct.desc (fun i ↦ F.map (biproduct.ι (fun _ : ι ↦ X) i))) _
+
 /-- The property that a morphism `⨁ X ⟶ Y` out of a biproduct of copies of `X`, given by maps
 `φ i : X ⟶ Y`, is an isomorphism is invariant under isomorphisms of `X` and `Y` compatible with
 the maps. -/
@@ -119,7 +142,7 @@ variable {C D : Type*} [Category* C] [Category* D] [Preadditive C] [Preadditive 
 /-- For an additive functor `G`, the image `G (⨁ f) ⟶ G Y` of the morphism out of a biproduct
 with components `g j` is an isomorphism if and only if the morphism `⨁ G (f j) ⟶ G Y` with
 components `G (g j)` is. -/
-lemma isIso_map_biproductDesc :
+lemma isIso_map_biproduct_desc_iff :
     IsIso (G.map (biproduct.desc g)) ↔ IsIso (biproduct.desc fun j ↦ G.map (g j)) := by
   have := Fintype.ofFinite J
   have h : (biproduct.desc fun j ↦ G.map (g j)) =

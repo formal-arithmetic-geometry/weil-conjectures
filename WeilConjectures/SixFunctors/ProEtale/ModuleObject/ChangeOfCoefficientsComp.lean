@@ -26,7 +26,7 @@ of the restrictions of scalars, so by `Adjunction.pushHomOfComapIso_app_eq_comp`
 the isomorphisms `Rf_* ⋙ D(Res) ≅ D(Res) ⋙ Rf_*` (`ProEtale.CondensedRing.derivedComapLowerStarIso`)
 compose (`ProEtale.CondensedRing.derivedComapLowerStarIso_hom_app_comp`). These are the right
 derived isomorphisms of the strict isomorphisms `ProEtale.CondensedRing.comapLowerStarIso`, which
-compose on the nose (`ProEtale.CondensedRing.comapLowerStarIso_hom_app_of_comp_eq`), and the derived
+compose on the nose (`ProEtale.CondensedRing.comapLowerStarIso_hom_app_comp`), and the derived
 isomorphisms compose by `Functor.rightDerivedFunctorCommIso_hom_app_comp`.
 -/
 
@@ -68,7 +68,7 @@ variable {X Y : Scheme.{u}} (f : X ⟶ Y)
 omit [IsCommMonObj Λ] [IsCommMonObj Λ'] [IsCommMonObj Λ''] in
 /-- The isomorphisms `f_* ⋙ Res ≅ Res ⋙ f_*` compose: the one for `c = a ≫ b` is the composite of
 those for `a` and `b`. All of them are the identity on the underlying sheaves. -/
-lemma comapLowerStarIso_hom_app_of_comp_eq (hc : a ≫ b = c)
+lemma comapLowerStarIso_hom_app_comp (hc : a ≫ b = c)
     (K : Mod (Sheaf (ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ'' X)) :
     (comapLowerStarIso c f).hom.app K =
       (comapCoefficientMapCompIso a b c hc Y).inv.app ((f)_*⟦Λ''⟧.obj K) ≫
@@ -110,7 +110,7 @@ theorem derivedComapLowerStarIso_hom_app_comp (hc : a ≫ b = c)
           (coefficientMap_comp_eq a b c hc X)).hom.app K) :=
   Functor.rightDerivedFunctorCommIso_hom_app_comp (comapLowerStarIso a f) (comapLowerStarIso b f)
     (comapLowerStarIso c f) (comapCoefficientMapCompIso a b c hc X)
-    (comapCoefficientMapCompIso a b c hc Y) (comapLowerStarIso_hom_app_of_comp_eq a b c f hc) K
+    (comapCoefficientMapCompIso a b c hc Y) (comapLowerStarIso_hom_app_comp a b c f hc) K
 
 
 /-- **(Push) is compatible with the composition of coefficient changes.** For `c = a ≫ b`, the

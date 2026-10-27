@@ -83,6 +83,13 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).
   [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom]
   (j : U ⟶ X) [IsOpenImmersion j.left]
 
+/-- For an open immersion `j`, the derived pushforward `Rj_*` is fully faithful on bounded
+constructible complexes: the counit `Lj^* Rj_* ⟶ 𝟭` is an isomorphism (`ℚ̄_ℓ`-coefficient). -/
+instance isIso_counit_boundedConstructibleUpperStarLowerStarAdjunction_of_isOpenImmersion :
+    IsIso (boundedConstructibleUpperStarLowerStarAdjunction ℓ j).counit :=
+  isIso_counit_of_isOpenImmersion_of_lowerStarCompatibility _ j.left _
+    (boundedConstructibleLowerStarCompatibility ℓ j)
+
 namespace ContinuousMapRingObj
 
 /-- For an open immersion `j`, the counit `Lj^* Rj_* ⟶ 𝟭` on bounded constructible complexes is

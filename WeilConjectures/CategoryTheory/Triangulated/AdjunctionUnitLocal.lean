@@ -7,6 +7,7 @@ module
 
 public import Mathlib.CategoryTheory.Shift.Adjunction
 public import Mathlib.CategoryTheory.Triangulated.Functor
+public import WeilConjectures.Mathlib.CategoryTheory.Adjunction.Basic
 
 /-!
 # Objects local for an adjunction between pretriangulated categories
@@ -24,8 +25,6 @@ coefficients:
   two-out-of-three property in distinguished triangles;
 * `CategoryTheory.Adjunction.isIso_unit_app_iff_of_iso_obj`: locality is invariant under
   isomorphism;
-* `CategoryTheory.Adjunction.isIso_unit_app_obj_of_isIso_counit_app`: if the counit is invertible
-  at `M`, then `R M` is local;
 * `CategoryTheory.Adjunction.isZero_of_isIso_unit_app`: a local object killed by `L` is zero;
 * `CategoryTheory.Adjunction.isIso_unit_app_of_isIso_unit_app_map`: locality descends along a
   triangulated functor reflecting zero objects and commuting with the adjunctions.
@@ -60,15 +59,6 @@ lemma isIso_unit_app_iff_of_iso_obj {X Y : C} (e : X ≅ Y) :
       rw [← h]
       infer_instance
     exact IsIso.of_isIso_comp_right _ (R.map (L.map e.hom))
-
-/-- If the counit at `M` is an isomorphism, then `R M` is local: the unit at `R M` is a section of
-`R` of the counit, by the triangle identity. -/
-instance isIso_unit_app_obj_of_isIso_counit_app (M : D) [IsIso (adj.counit.app M)] :
-    IsIso (adj.unit.app (R.obj M)) := by
-  have : IsIso (adj.unit.app (R.obj M) ≫ R.map (adj.counit.app M)) := by
-    rw [adj.right_triangle_components M]
-    exact IsIso.id _
-  exact IsIso.of_isIso_comp_right _ (R.map (adj.counit.app M))
 
 /-- If the counit is invertible at `L X`, then `L` inverts the unit at `X`. -/
 instance isIso_map_unit_app_of_isIso_counit_app (X : C) [IsIso (adj.counit.app (L.obj X))] :

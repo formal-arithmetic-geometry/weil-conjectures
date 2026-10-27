@@ -243,7 +243,7 @@ theorem isIso_biproductDesc_mapDerivedCategoryAdjunction_unit {ι : Type} [Finit
             ((𝐆).mapHomologicalComplex _).map (c i • 𝟙 _))) := by
         rw [e]
         exact h (K.X n)
-      exact (Functor.isIso_map_biproductDesc (HomologicalComplex.eval _ _ n) _).2 this
+      exact Functor.isIso_map_biproductDesc (HomologicalComplex.eval _ _ n) _
     exact HomologicalComplex.Hom.isIso_of_components _
   -- the statement on the image of a complex
   have hQ (K : CochainComplex (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} R)) ℤ) :

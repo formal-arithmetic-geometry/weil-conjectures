@@ -75,7 +75,7 @@ lemma boundedConstructibleUpperStarIntegersModPowReductionIso_hom_app_hom
 
 /-- **Restriction of scalars commutes with the pullback on bounded constructible complexes**:
 `Res_Y ⋙ Lp^* ≅ Lp^* ⋙ Res_X`, the restriction of
-`ProEtale.CondensedRing.derivedComapLeftDerivedUpperStarIso` along the inclusions. -/
+`ProEtale.CondensedRing.derivedComapLeftDerivedUpperStarIsoOfLevelwise` along the inclusions. -/
 noncomputable def boundedConstructibleRestrictionUpperStarIso :
     boundedConstructibleIntegersModPowRestriction hY ⋙
         boundedConstructibleUpperStar (Profinite.padicIntegersRingObj ℓ E) ℓ p ≅
@@ -83,19 +83,22 @@ noncomputable def boundedConstructibleRestrictionUpperStarIso :
         boundedConstructibleIntegersModPowRestriction hX :=
   NatIso.ofComponents
     (fun K ↦ ObjectProperty.isoMk _
-      ((derivedComapLeftDerivedUpperStarIso (Profinite.padicIntegersRingObjToIntegersModPow ℓ E n)
+      ((derivedComapLeftDerivedUpperStarIsoOfLevelwise
+           (Profinite.padicIntegersRingObjToIntegersModPow ℓ E n)
         p.left).app K.obj))
     (fun f ↦ (ObjectProperty.fullyFaithfulι _).map_injective
-      ((derivedComapLeftDerivedUpperStarIso (Profinite.padicIntegersRingObjToIntegersModPow ℓ E n)
+      ((derivedComapLeftDerivedUpperStarIsoOfLevelwise
+           (Profinite.padicIntegersRingObjToIntegersModPow ℓ E n)
         p.left).hom.naturality f.hom))
 
 omit [Algebra ℚ_[ℓ] E] [IsScalarTower ℚ_[ℓ] E (PadicAlgCl ℓ)] [FiniteDimensional ℚ_[ℓ] E] in
 /-- The restricted commutation of `Res` with the pullback is, on the underlying complexes,
-`ProEtale.CondensedRing.derivedComapLeftDerivedUpperStarIso`. -/
+`ProEtale.CondensedRing.derivedComapLeftDerivedUpperStarIsoOfLevelwise`. -/
 lemma boundedConstructibleRestrictionUpperStarIso_hom_app_hom
     (K : Dᵇc(Y.left)⟦Profinite.integersModPowRingObj ℓ E n⟧) :
     ((boundedConstructibleRestrictionUpperStarIso hX hY p).hom.app K).hom =
-      (derivedComapLeftDerivedUpperStarIso (Profinite.padicIntegersRingObjToIntegersModPow ℓ E n)
+      (derivedComapLeftDerivedUpperStarIsoOfLevelwise
+          (Profinite.padicIntegersRingObjToIntegersModPow ℓ E n)
         p.left).hom.app K.obj :=
   rfl
 
@@ -131,7 +134,6 @@ lemma boundedConstructibleUnitCompatible (hη : IntegersModPowPullUnitCompatible
   have h := hη M.obj
   exact h
 
-set_option maxHeartbeats 1000000 in -- the hypothesis `hδ` is stated with the unbounded commutation
 /-- **The connecting morphisms commute with the pullback on bounded constructible complexes**,
 given that they do on the full derived categories. -/
 lemma boundedConstructibleδCompatible (hδ : IntegersModPowPullδCompatible ℓ E n p.left)

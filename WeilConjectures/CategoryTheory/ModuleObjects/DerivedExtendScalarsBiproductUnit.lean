@@ -52,7 +52,7 @@ lemma isIso_biproductDesc_unit_smul_complex
   have (n : ℤ) : IsIso ((biproduct.desc fun i : Fin d ↦
       ((extendRestrictAdjunction φ).mapHomologicalComplex (ComplexShape.up ℤ)).unit.app M ≫
         ((comap φ).mapHomologicalComplex (ComplexShape.up ℤ)).map (b i • 𝟙 _)).f n) := by
-    refine ((HomologicalComplex.eval _ _ n).isIso_map_biproductDesc _).2 ?_
+    refine ((HomologicalComplex.eval _ _ n).isIso_map_biproduct_desc_iff _).2 ?_
     simp only [HomologicalComplex.eval_map, HomologicalComplex.comp_f,
       Adjunction.mapHomologicalComplex_unit_app_f, Functor.mapHomologicalComplex_map_f,
       HomologicalComplex.smul_f_apply, HomologicalComplex.id_f]
@@ -122,7 +122,7 @@ theorem isIso_biproductDesc_derivedUnit_smul
     rw [reassoc_of% hcomm, hsmul]
     erw [hnat, reassoc_of% hfac]
     rfl
-  rw [← isIso_comp_right_iff _ c, key, ← Functor.isIso_map_biproductDesc]
+  rw [← isIso_comp_right_iff _ c, key, ← Functor.isIso_map_biproduct_desc_iff]
   exact @Functor.map_isIso _ _ _ _ _ _ (q ⋙ DerivedCategory.Qh) _
     (isIso_biproductDesc_unit_smul_complex φ b hb M)
 

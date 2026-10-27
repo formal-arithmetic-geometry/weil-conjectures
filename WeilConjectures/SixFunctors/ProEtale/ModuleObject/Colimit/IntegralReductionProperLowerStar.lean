@@ -6,7 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.CategoryTheory.Adjunction.ExchangeRestrict
-public import WeilConjectures.CategoryTheory.Adjunction.ExchangeRightPaste
+public import WeilConjectures.CategoryTheory.Adjunction.ExchangeRightMate
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.IntegralReductionClosedLowerStar
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.IntegralReductionTriangleNatural
 
@@ -76,7 +76,7 @@ theorem isIso_boundedConstructibleLowerStarIntegersModPowReduction_of_isIso
   have hK : IsIso ((Adjunction.exchangeRight (derivedUpperStarLowerStarAdjunction _ d.left)
       (derivedUpperStarLowerStarAdjunction _ d.left)
       (integersModPowReductionUpperStarIso ℓ E n d.left).symm).app K.obj) := by
-    rw [Adjunction.exchangeRight_eq_mateEquiv]
+    rw [← Adjunction.mateEquiv_eq_exchangeRight]
     exact (NatTrans.isIso_iff_isIso_app _).1 h K.obj
   have := Adjunction.isIso_exchangeRight_restrictFullyFaithful_app
     (derivedUpperStarLowerStarAdjunction _ d.left) (derivedUpperStarLowerStarAdjunction _ d.left)
@@ -85,8 +85,8 @@ theorem isIso_boundedConstructibleLowerStarIntegersModPowReduction_of_isIso
     (fun K ↦ IntegersModPowRingObj.boundedConstructible_rightDerivedLowerStar_obj ℓ E n d K) _ _
     (boundedConstructibleUpperStarIntegersModPowReductionIso ℓ E n d).symm
     (boundedConstructibleUpperStarIntegersModPowReductionIso_inv_app_hom ℓ E n d) K hK
-  rw [Adjunction.exchangeRight_eq_mateEquiv] at this
-  rw [boundedConstructibleLowerStarIntegersModPowReduction]
+  rw [boundedConstructibleLowerStarIntegersModPowReduction, ← Iso.symm_hom,
+    Adjunction.mateEquiv_eq_exchangeRight]
   exact this
 
 /-- **Reduction modulo `ℓⁿ` commutes with the pushforward on bounded constructible complexes**
