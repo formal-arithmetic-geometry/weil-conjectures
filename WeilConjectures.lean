@@ -213,6 +213,7 @@ public import WeilConjectures.Algebra.Homology.BaseTensorOrdinaryDegreeIso
 public import WeilConjectures.Algebra.Homology.BaseTensorOrdinaryIso
 public import WeilConjectures.Algebra.Homology.BaseTensorUnitCohomologyModel
 public import WeilConjectures.Algebra.Homology.BifunctorHomComplex
+public import WeilConjectures.Algebra.Homology.BifunctorHomCone
 public import WeilConjectures.Algebra.Homology.BifunctorLinear
 public import WeilConjectures.Algebra.Homology.BifunctorMappingConeNaturality
 public import WeilConjectures.Algebra.Homology.BifunctorSingleComparison
@@ -14088,6 +14089,8 @@ public import WeilConjectures.WeilSheaf.CurveTopCohomology
 public import WeilConjectures.WeilSheaf.Defs
 public import WeilConjectures.WeilSheaf.DenseOpen
 public import WeilConjectures.WeilSheaf.DerivedHom
+public import WeilConjectures.WeilSheaf.DerivedHomPrecomposition
+public import WeilConjectures.WeilSheaf.DerivedHomSingleResolution
 public import WeilConjectures.WeilSheaf.DerivedHomTriangulated
 public import WeilConjectures.WeilSheaf.DirectImageRestriction
 public import WeilConjectures.WeilSheaf.DirectImageStalk
