@@ -1,0 +1,160 @@
+{
+ "id": "lem-weil-pbc-lisse-finite-level-etale-descent",
+ "kind": "statement",
+ "title": "Descent and geometric Isom stalks for one finite coefficient level",
+ "statement": "Let X,Y be schemes, g:Y→X, d an adic coefficient datum on A, U in Y.ProEt, and n a nonnegative integer. Let N be an actual derived module over the nth finite coefficient ring on X and E a bounded algebraic B_n-complex with finite module cohomology [def-weil-pbc-lisse-tower-etale-descent-data]. Suppose there is a pro-etale covering sieve of U on each of whose members the actual pullback of N is isomorphic to constantAdicQuotientRealization(E). There exists an etale B_n-complex D on U.left with bounded finite locally constant cohomology, inhabited geometric stalks of the local derived Isom sheaf from constant(E) to D, and an isomorphism from the explicit lisseTowerFixedRealization of comparisonUpperStar(D) to the actual pullback of N. There is no tower, transition, scalar normalization, restriction-square or simultaneous-marking assertion.",
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tags 099Z and 09B1, bounded-below classical comparison; Tag 099Y, finite local systems; Tag 09BV, local Isom torsors; derived base change of Tag 06YY."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-lisse-tower-etale-descent-data",
+  "def-weil-pbc-derived-local-isomorphism-sheaf",
+  "def-weil-pbc-adic-coefficient-datum",
+  "def-weil-pbc-bounded-constructible-tower",
+  "lem-weil-pbc-constant-adic-quotient-scalar-comparison",
+  "def-weil-pbc-derived-normalization-arrows",
+  "def-constructible-finite-locally-constant",
+  "def-weil-derived-cohomology-sheaves"
+ ],
+ "proof": [
+  {
+   "text": "Use the explicit fixed-realization equivalence to encode the pulled actual N in fixed B_n-module sheaves. Local markings give bounded finite locally constant cohomology by exactness of the scalar and constant realizations.",
+   "uses": [
+    "def-weil-pbc-lisse-tower-etale-descent-data",
+    "lem-weil-pbc-comparison-pullback"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Finite pro-etale local systems descend to etale local systems. Hence the encoded complex is bounded-below classical. The comparison unit and classical derived equivalence give its etale preimage D and the actual comparison. Exact faithful comparison reflects the bounds and finite local constancy.",
+   "uses": [
+    "thm-weil-pbc-site-comparison",
+    "det-pe-classical-derived-equivalence",
+    "lem-sf-proetale-locally-constant-origin",
+    "lem-weil-pbc-comparison-finite-local-constancy-reflection"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the four bounded finite-lisse Hom comparisons and their inverse-pair equalizer description of Isom to constant(E) and D. The separate local markings give local sections after pro-etale comparison, hence an epimorphism from the pulled Isom sheaf to the terminal sheaf. Faithful comparison reflects epimorphisms. Thus the etale Isom sheaf is locally inhabited and every geometric stalk is inhabited. No assertion that the Isom sheaf itself is finite locally constant is needed. Empty bases have no such stalks.",
+   "uses": [
+    "lem-weil-pbc-derived-hom-sheaf-comparison-lisse",
+    "lem-weil-pbc-derived-isom-comparison-from-hom",
+    "thm-weil-pbc-site-comparison"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-lisse-tower-etale-descent-data",
+  "lem-weil-pbc-comparison-pullback",
+  "thm-weil-pbc-site-comparison",
+  "det-pe-classical-derived-equivalence",
+  "lem-sf-proetale-locally-constant-origin",
+  "lem-weil-pbc-comparison-finite-local-constancy-reflection",
+  "lem-weil-pbc-derived-hom-sheaf-comparison-lisse",
+  "lem-weil-pbc-derived-isom-comparison-from-hom"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tags 099Z and 09B1, bounded-below classical comparison; Tag 099Y, finite local systems; Tag 09BV, local Isom torsors; derived base change of Tag 06YY."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Bounded finite locally constant derived proetale module sheaves descend to etale complexes with compatible scalar restriction",
+   "results": "8 hits: CondensedMod.ofSheafProfinite, LightCondMod.ofSheafLightProfinite, LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat, Condensed.profiniteSolid, CompHausLike.LocallyConstantModule.functor, Condensed.isColimitLocallyConstantPresheaf_desc_apply, CondensedMod.ofSheafCompHaus, LightCondMod.LocallyConstant.functorToPresheaves. No matching fixed-realization descent or coefficient-normalization theorem.",
+   "date": "2026-10-27",
+   "verdict": "no exact match; use the recorded comparison and scalar-restriction APIs"
+  },
+  {
+   "tool": "loogle",
+   "query": "Functor.IsEquivalence",
+   "results": "loogle: unknown identifier 'Functor.IsEquivalence'. No matching fixed-realization descent or coefficient-normalization theorem.",
+   "date": "2026-10-27",
+   "verdict": "no exact match; use the recorded comparison and scalar-restriction APIs"
+  },
+  {
+   "tool": "grep",
+   "query": "proetale|classical.*derived",
+   "results": "10 hits: Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/Proetale.lean, Mathlib/AlgebraicGeometry/Sites/Proetale.lean, Mathlib/AlgebraicGeometry/Sites/Proetale.lean. No matching fixed-realization descent or coefficient-normalization theorem.",
+   "date": "2026-10-27",
+   "verdict": "no exact match; use the recorded comparison and scalar-restriction APIs"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A bounded complex of pro-etale finite modules which is locally algebraic descends to an etale complex with finite locally constant cohomology",
+   "results": "8 hits: Algebra.Etale.finitePresentation, Algebra.Etale.formallyEtale, RingHom.Etale, Algebra.Etale.comp, Algebra.FormallyEtale.subsingleton_h1Cotangent, Algebra.Etale.exists_subalgebra_fg, Algebra.FormallyEtale.instFormallySmooth, Algebra.instEtaleOfIsStandardEtale. No matching fixed-realization descent or coefficient-normalization theorem.",
+   "date": "2026-10-27",
+   "verdict": "no exact match; use the recorded comparison and scalar-restriction APIs"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.StructuredArrow.IsUniversal",
+   "results": "12 hits: CategoryTheory.StructuredArrow.IsUniversal, CategoryTheory.StructuredArrow.IsUniversal.desc, CategoryTheory.StructuredArrow.IsUniversal.uniq, CategoryTheory.StructuredArrow.IsUniversal.hom_desc, CategoryTheory.StructuredArrow.IsUniversal.fac, CategoryTheory.StructuredArrow.IsUniversal.existsUnique, CategoryTheory.StructuredArrow.IsUniversal.fac_assoc, CategoryTheory.StructuredArrow.IsUniversal.hom_ext. No matching fixed-realization descent or coefficient-normalization theorem.",
+   "date": "2026-10-27",
+   "verdict": "no exact match; use the recorded comparison and scalar-restriction APIs"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.LisseTowerEtaleDescent",
+  "date": "2026-10-27",
+  "group": "Q4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-amplification-proper",
+   "place": "Descent and geometric Isom stalks for one finite coefficient level; the separate finite-level and normalization steps of lem-weil-pbc-lisse-tower-etale-descent.",
+   "via": [
+    "lem-weil-pbc-lisse-tower-etale-descent",
+    "lem-weil-pbc-lisse-tower-compatible-stalk-markings",
+    "lem-weil-pbc-lisse-tower-constant-stalk-models",
+    "lem-weil-pbc-lisse-tower-constant-algebraic-reduction-diagram",
+    "lem-weil-pbc-lisse-tower-local-algebraic-reduction-diagram",
+    "lem-weil-pbc-lisse-tower-algebraic-derived-presentation",
+    "lem-weil-pbc-lisse-normalized-tower-local-models",
+    "lem-weil-pbc-normalized-constructible-local-effectivity",
+    "lem-weil-pbc-lisse-tower-isomorphism-sections"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.LisseFiniteLevelEtaleDescent",
+  "file": "lean/Sheaf/Paper/LisseFiniteLevelEtaleDescent.lean",
+  "declaration": "AlgebraicGeometry.Scheme.lisse_finite_level_etale_descent",
+  "statement": "theorem lisse_finite_level_etale_descent\n    (X Y : Scheme.{u}) (g : Y ⟶ X)\n    {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A)\n    (U : Y.ProEt) (n : ℕ)\n    (N : DerivedCategory (pbcModules X ((pbcAdicRings X d).obj (op n))))\n    (E : DerivedCategory (ModuleCat.{u + 1} (lisseTowerEtaleRing d n)))\n    (hbounded : ∃ a b : ℤ, ∀ q : ℤ, q < a ∨ b < q →\n      IsZero ((DerivedCategory.homologyFunctor _ q).obj E))\n    (hfinite : ∀ q : ℤ, Module.Finite (lisseTowerEtaleRing d n)\n      ((DerivedCategory.homologyFunctor\n        (ModuleCat.{u + 1} (lisseTowerEtaleRing d n)) q).obj E))\n    (hmodels : ∃ T : Sieve U, T ∈ ProEt.topology Y U ∧\n      ∀ (W : Y.ProEt) (w : W ⟶ U), T w →\n        Nonempty ((constantAdicQuotientRealization (W.hom ≫ g) d n).obj E ≅\n          (adicTowerPullback (W.hom ≫ g)\n            ((pbcAdicRings X d).obj (op n))).obj N)) :\n    ∃ D : DerivedCategory\n        (Sheaf U.left.smallEtaleTopology (ModuleCat.{u + 1} (lisseTowerEtaleRing d n))),\n      (∃ a b : ℤ, ∀ q : ℤ, q < a ∨ b < q →\n        IsZero ((DerivedCategory.homologyFunctor _ q).obj D)) ∧\n      (∀ q : ℤ, IsFiniteLocallyConstantSheaf\n        ((DerivedCategory.homologyFunctor _ q).obj D)) ∧\n      (∀ (Ω : Type u) [Field Ω] [IsSepClosed Ω] (x : Spec (.of Ω) ⟶ U.left),\n        Nonempty ((pointSmallEtale x).sheafFiber.obj (derivedLocalIsomorphismSheaf\n          ((normalizationConstant U.left.smallEtaleTopology).obj E) D))) ∧\n      Nonempty ((lisseTowerFixedRealization (U.hom ≫ g) d n).obj\n        ((ProEtale.comparisonUpperStar\n          (ModuleCat.{u + 1} (lisseTowerEtaleRing d n)) U.left).mapDerivedCategory.obj D) ≅\n        (adicTowerPullback (U.hom ≫ g) ((pbcAdicRings X d).obj (op n))).obj N)",
+  "branch": "sheaf-dag",
+  "by": "Q4",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-ef6eb",
+  "group": "Q4",
+  "result": "fix",
+  "landing": "20261027T180743-L-3897846",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-ef6eb",
+  "group": "Q4",
+  "result": "fix",
+  "landing": "20261027T180743-L-3897846",
+  "kind": "interface",
+  "note": "independent cc review: item proof (signature unchanged) against its node; verbatim moved block in LisseTowerEtaleDescentData against the published item module; two new sorry statements against their nodes and sources; importer LisseTowerIsomorphismSections compiled OK against delivered modules"
+ }
+}

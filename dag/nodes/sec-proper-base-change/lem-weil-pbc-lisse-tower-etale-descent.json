@@ -18,57 +18,36 @@
   "lem-weil-pbc-constant-adic-quotient-scalar-comparison",
   "def-weil-pbc-derived-local-isomorphism-sheaf",
   "lem-weil-pbc-constant-adic-restricted-tower-maps",
-  "def-weil-pbc-etale-isomorphism-normalization-arrow"
+  "def-weil-pbc-etale-isomorphism-normalization-arrow",
+  "def-weil-pbc-lisse-tower-etale-descent-data"
  ],
  "proof": [
   {
-   "text": "Identify each completion quotient with A/I^(n+1) using finite generation of the ideal. Localize at U. Convert the actual ringed coefficient realization into fixed-ring module sheaves, and use the separate local algebraic markings to give bounded classical cohomology with finite locally constant values. Classical bounded-below descent provides etale D_n and exactness reflects its bounds and finite local constancy.",
+   "text": "At each n apply one-level descent to M.level n and K_n. Choose the descended levels and their boundedness, finite-local-constancy, geometric Isom-stalk and actual-comparison witnesses independently in n.",
    "uses": [
-    "def-weil-pbc-proetale-modules",
-    "det-pe-classical-derived-equivalence",
-    "lem-weil-pbc-comparison-pullback"
+    "lem-weil-pbc-lisse-finite-level-etale-descent"
    ],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "Use full faithfulness to descend the actual normalization arrows to delta_n. The coefficient restriction interchange is the mate of sectionwise restriction; its left mate identifies derived scalar extension. Thus invertibility of M.normalization proves universality of delta_n. This argument concerns the actual tower alone and uses no source transition maps. Restriction to each etale object has the same invertible scalar-extension mate, giving local universality. The exact constant realization on each etale object gives local universality of any universal algebraic source arrow. Naturality and associativity of these canonical coefficient mates show that restriction preserves every supplied normalization square; this is the restriction_square field, which constructs no reduced isomorphism.",
+   "text": "Apply normalization descent to these fixed etale levels and their actual comparisons. This uses boundedness but no local markings or stalk assertions.",
    "uses": [
-    "thm-weil-pbc-site-comparison",
-    "def-weil-pbc-bounded-constructible-tower",
-    "lem-weil-pbc-comparison-pullback"
+    "lem-weil-pbc-lisse-tower-etale-normalization-descent"
    ],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "The comparison map on derived Isom sheaves is invertible for bounded finite locally constant complexes: apply the four Hom comparisons and the inverse-pair equalizer. The supplied separate pro-etale local markings give local sections of the comparison Isom sheaf, so its geometric stalks are nonempty. This gives only separate nonempty stalks, not compatible sections.",
+   "text": "Assemble the original descent record. For restriction_square, apply the proved generic normalizationSquareTransport to the canonical etale coefficient mate, the two local restriction compositors, and the constant and actual coherence equations. The transported conjugates are exactly localIsomorphismMap. Copy the remaining normalization/realization fields and the independently obtained level/stalk fields.",
    "uses": [
-    "lem-weil-pbc-derived-hom-sheaf-comparison-lisse",
-    "lem-weil-pbc-derived-isom-comparison-from-hom",
-    "lem-weil-pbc-finite-ring-derived-local-constancy"
+    "def-weil-pbc-etale-universal-normalization"
    ],
-   "elementary": false
-  },
-  {
-   "text": "Define realization by canonical finite-coefficient realization and inverse image along W.left to V.left. Use the descended comparison isomorphisms for actual, and the exact constant and completion-quotient comparisons for model at every algebraic E. Pasting the coefficient restriction mates gives scalar. On the actual normalization arrow, mate pasting is the definition of adicTowerRestrictedTransition, yielding actual_normalized. On constant sections the coefficient comparison is the identity, giving model_normalized for every algebraic arrow k after exact localization, with the displayed restriction compositors. These constructions take place before Isom reduction or section evaluation.",
-   "uses": [
-    "lem-weil-pbc-constant-adic-quotient-scalar-comparison",
-    "lem-weil-pbc-comparison-pullback",
-    "lem-weil-pbc-constant-adic-restricted-tower-maps"
-   ],
-   "elementary": false
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-proetale-modules",
-  "det-pe-classical-derived-equivalence",
-  "lem-weil-pbc-comparison-pullback",
-  "thm-weil-pbc-site-comparison",
-  "def-weil-pbc-bounded-constructible-tower",
-  "lem-weil-pbc-derived-hom-sheaf-comparison-lisse",
-  "lem-weil-pbc-derived-isom-comparison-from-hom",
-  "lem-weil-pbc-finite-ring-derived-local-constancy",
-  "lem-weil-pbc-constant-adic-quotient-scalar-comparison",
-  "lem-weil-pbc-constant-adic-restricted-tower-maps"
+  "lem-weil-pbc-lisse-finite-level-etale-descent",
+  "lem-weil-pbc-lisse-tower-etale-normalization-descent",
+  "def-weil-pbc-etale-universal-normalization"
  ],
  "proof_origin": {
   "by": "agent",
@@ -139,11 +118,6 @@
   "file": "lean/Sheaf/Paper/LisseTowerEtaleDescent.lean",
   "declaration": "AlgebraicGeometry.Scheme.lisse_tower_etale_descent",
   "declarations": [
-   "AlgebraicGeometry.Scheme.lisseTowerEtaleRing",
-   "AlgebraicGeometry.Scheme.lisseTowerEtaleQuotient",
-   "AlgebraicGeometry.Scheme.lisseTowerAlgebraForget",
-   "AlgebraicGeometry.Scheme.lisseTowerAlgebraArrow",
-   "AlgebraicGeometry.Scheme.LisseTowerEtaleDescent",
    "AlgebraicGeometry.Scheme.lisse_tower_etale_descent"
   ],
   "statement": "theorem lisse_tower_etale_descent\n    (X Y : Scheme.{u}) (g : Y ⟶ X)\n    {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A) (M : AdicTower X d)\n    (U : Y.ProEt)\n    (K : ∀ n : ℕ, DerivedCategory (ModuleCat.{u + 1}\n      (AdicCompletion d.ideal A ⧸\n        (d.ideal.map (algebraMap A (AdicCompletion d.ideal A))) ^ (n + 1))))\n    (hbounded : ∀ n : ℕ, ∃ a b : ℤ, ∀ q : ℤ, (q < a ∨ b < q) →\n      IsZero ((DerivedCategory.homologyFunctor _ q).obj (K n)))\n    (hfinite : ∀ (n : ℕ) (q : ℤ), Module.Finite\n      (AdicCompletion d.ideal A ⧸\n          (d.ideal.map (algebraMap A (AdicCompletion d.ideal A))) ^ (n + 1))\n      ((DerivedCategory.homologyFunctor\n        (ModuleCat.{u + 1} (AdicCompletion d.ideal A ⧸\n          (d.ideal.map (algebraMap A (AdicCompletion d.ideal A))) ^ (n + 1))) q).obj (K n)))\n    (hmodels : ∀ n : ℕ, ∃ T : Sieve U, T ∈ ProEt.topology Y U ∧\n      ∀ (W : Y.ProEt) (w : W ⟶ U), T w →\n        Nonempty ((constantAdicQuotientRealization (W.hom ≫ g) d n).obj (K n) ≅\n          (adicTowerPullback (W.hom ≫ g)\n            ((pbcAdicRings X d).obj (op n))).obj (M.level n))) :\n    Nonempty (LisseTowerEtaleDescent X Y g d M U K)",
@@ -164,11 +138,11 @@
  "reviewed_proof": {
   "date": "2026-10-27",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "F9",
-  "result": "pass",
-  "landing": "20261027T112343-L-1574877",
+  "reviewer": "C-ef6eb",
+  "group": "Q4",
+  "result": "fix",
+  "landing": "20261027T180743-L-3897846",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent cc review: item proof (signature unchanged) against its node; verbatim moved block in LisseTowerEtaleDescentData against the published item module; two new sorry statements against their nodes and sources; importer LisseTowerIsomorphismSections compiled OK against delivered modules"
  }
 }
