@@ -8,6 +8,8 @@ module
 public import Sheaf.Paper.CoefDerivedSystemEvaluationCalculus
 public import Sheaf.Paper.IntegralComparisonSequenceSystems
 public import Sheaf.Paper.SfDerivedDirectImage
+import Sheaf.Paper.SystemDirectImageRoosExistence
+import Sheaf.Paper.SystemDirectImageRoosEvaluation
 
 /-! # Projection-compatible Roos presentation of system direct image
 
@@ -17,6 +19,7 @@ Source: Zheng, Construction 4.1 and Lemma 4.10; Stacks Project, Tag 0941.
 @[expose] public noncomputable section
 set_option autoImplicit false
 set_option synthInstance.maxSize 4096
+set_option linter.style.haveILetI false
 universe u
 open CategoryTheory CategoryTheory.Limits AlgebraicGeometry
 namespace WeilConjectures
@@ -60,6 +63,11 @@ theorem systemDirectImage_roosPresentation
             sfFiniteDerivedDirectImage l E f K n,
             ∀ n : ℕ, (coefficientSequenceProjection l E Y n).app N ≫
                 (coefficientFiniteDerivedRestriction l E Y n).map (a n).hom =
-              e.hom ≫ L.projection ≫ Pi.π (sfDirectImageTerm l E f K) n := by sorry
+              e.hom ≫ L.projection ≫ Pi.π (sfDirectImageTerm l E f K) n := by
+  dsimp
+  obtain ⟨hprod, L, e, _⟩ := systemDirectImage_roosExistence l E f S K
+  letI := hprod
+  obtain ⟨a, ha⟩ := systemDirectImage_roosEvaluation l E f S K L e
+  exact ⟨hprod, L, e, a, ha⟩
 
 end WeilConjectures

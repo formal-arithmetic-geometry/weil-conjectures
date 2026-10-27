@@ -1,0 +1,112 @@
+{
+ "id": "stage3-weil-system-direct-image-roos-existence",
+ "kind": "statement",
+ "title": "Existence of a direct-image Roos object",
+ "statement": "For the actual additive system direct image and a normalized reduction of an arbitrary derived object, there exist a product of the finite direct-image terms, a SfIntegralDirectImage Roos triangle, and an isomorphism from the total derived coefficient limit to its Roos object.",
+ "stmt_deps": [
+  "def-trf-integral-comparison-sequence-systems",
+  "def-coef-ringed-sequence-site",
+  "lem-coef-derived-system-evaluation-calculus",
+  "def-weil-derived-direct-image"
+ ],
+ "source": {
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Construction 4.1, printed p. 21; Lemma 4.10, printed pp. 23--24; Stacks Tag 0941."
+ },
+ "proof": [
+  {
+   "text": "Choose one K-injective representative of the reduced object. Apply the project derived tower-limit theorem to the sectionwise direct image, and transport its product and triangle through the canonical finite restriction/direct-image comparisons. The resulting transition is the recorded sfDirectImageTransition.",
+   "uses": [
+    "lem-coef-derived-system-evaluation-calculus",
+    "stage3-pur-canonical-tower-roos-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+    "place": "Construction 4.1, printed p. 21; Lemma 4.10, printed pp. 23--24; Stacks Tag 0941."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-derived-system-evaluation-calculus",
+  "stage3-pur-canonical-tower-roos-comparison"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Construction 4.1, printed p. 21; Lemma 4.10, printed pp. 23--24; Stacks Tag 0941."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "derived direct image tower Roos existence",
+   "results": "No exact specialized match; use the project derived tower limit theorem.",
+   "date": "2026-10-27",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "loogle",
+   "query": "IsDerivedLimitTriangle",
+   "results": "Generic derived limit triangle APIs only.",
+   "date": "2026-10-27",
+   "verdict": "Ingredient only."
+  },
+  {
+   "tool": "grep",
+   "query": "systemDirectImage_roos",
+   "results": "No prior declaration.",
+   "date": "2026-10-27",
+   "verdict": "New interface required."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.SystemDirectImageRoosPresentation",
+  "date": "2026-10-27",
+  "group": "B8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-system-direct-image-roos-presentation",
+   "place": "strictly smaller decomposition of the direct-image Roos comparison",
+   "via": [
+    "lem-weil-system-direct-image-roos-presentation"
+   ]
+  }
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-rf-shriek-preservation",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.SystemDirectImageRoosExistence",
+  "file": "lean/Sheaf/Paper/SystemDirectImageRoosExistence.lean",
+  "declaration": "WeilConjectures.systemDirectImage_roosExistence",
+  "statement": "theorem systemDirectImage_roosExistence\n    {X Y : Scheme.{u}} (f : X ⟶ Y)\n    [(integralComparisonSequenceDirectImage l E f).Additive]\n    [Abelian.HasKInjectiveResolutions (coefficientSequenceModules l E X)]\n    (S : CoefficientDerivedSystemCalculus l E X)\n    (K : DerivedCategory (scalarReductionSource l E X)) :\n    let N := (integralComparisonSequenceDirectImage l E f).rightDerivedFunctor.obj\n      (S.reduction.obj K)\n    ∃ hprod : HasProduct (sfDirectImageTerm l E f K),\n      ∃ L : @SfIntegralDirectImage l _ E _ _ _ X Y f K hprod,\n        ∃ e : ((coefficientSequenceLimit l E Y).obj N ≅ L.obj), True",
+  "branch": "sheaf-dag",
+  "by": "B8",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B8",
+  "result": "pass",
+  "landing": "20261027T180459-L-3865023",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B8",
+  "result": "pass",
+  "landing": "20261027T180459-L-3865023",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
