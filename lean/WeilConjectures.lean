@@ -12759,3 +12759,12 @@ public import WeilConjectures.TraceFormula.OpenPieceCoherence
 public import WeilConjectures.TraceFormula.RelativeFrobeniusComparison
 public import WeilConjectures.TraceFormula.RelativeFrobeniusIterate
 public import WeilConjectures.SmoothPurity.Defs
+public import WeilConjectures.PoincareDuality.Poincare
+public import WeilConjectures.TraceFormula.BorelMoore
+public import WeilConjectures.TraceFormula.Correspondence
+public import WeilConjectures.TraceFormula.CorrespondencePair
+public import WeilConjectures.TraceFormula.CurvePieces
+public import WeilConjectures.TraceFormula.Dualizing
+public import WeilConjectures.TraceFormula.KunnethVerdier
+public import WeilConjectures.TraceFormula.Product
+public import WeilConjectures.TraceFormula.ProperPushforward
