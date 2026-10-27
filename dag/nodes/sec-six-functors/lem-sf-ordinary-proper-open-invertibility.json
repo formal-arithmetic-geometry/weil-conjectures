@@ -12,35 +12,42 @@
  ],
  "proof": [
   {
-   "text": "Factor k through the pullback of i along p. The lift is open by cancellation and proper by cancellation against the separated p; thus it is clopen. The canonical restriction comparison identifies i* Rp* k! with Rr* by Cartesian base change, the clopen equality of extension and direct image, and composition.",
+   "text": "Apply the existing general proper/open square support theorem to the intrinsic finite-coefficient module categories. Transfer its supported object to constant-module sheaves using the specified derived realization and direct-image comparisons. Support is membership in the essential image of fully faithful open extension, so this transfer gives invertibility of the actual open counit without identifying chosen adjunction structures. For a finite ring in universe u+1, first shrink it into universe u, then lift it back; the resulting ring equivalence induces equivalences of sheaf and derived categories commuting with direct image and open extension. Direct image commutes with coefficient restriction on the nose, and K-injective descent gives its derived comparison.",
    "uses": [
+    "lem-sf-proper-open-square-derived-support",
+    "def-sp-finite-intrinsic-direct-adjunction",
     "lem-sf-proper-open-projection-mate"
    ],
    "elementary": false
   },
   {
-   "text": "Proper/open support makes the open counit invertible on Rp* k!M. For sheaves use the Cartesian proper/open comparison; resolve bounded-below inputs by injectives and use open/proper acyclicity. For arbitrary inputs pass along the lower Postnikov tower, using exact countable products and product preservation, exactly as in the existing derived support proof.",
+   "text": "Let s:U→V×_Z W be the canonical clopen lift, with projections b and q. Take beta to be the prescribed Cartesian open comparison, d:J_s J_b≅J_k the prescribed open composition, and e:P_r≅P_q P_s the prescribed pullback composition. Let t:J_s≅R_s be the inverse closed-range comparison. Define delta:R_s R_q≅R_r directly as the adjunction conjugate of e. The categorical adjunct comparison built from beta,d,t,delta is therefore an isomorphism.",
    "uses": [
-    "lem-sp-proper-open-derived-support"
+    "lem-sf-proper-open-projection-mate",
+    "def-sf-semilinear-proper-open-comparisons"
    ],
    "elementary": false
   },
   {
-   "text": "Transpose the prescribed clopen-projection mate under the open adjunction. The clopen unit-counit identity makes its transpose the inverse restriction comparison. The inverse Hom bijection therefore expresses the mate as open extension of that inverse followed by the supported open counit. Both factors are isomorphisms; conclude componentwise and then for the natural transformation.",
+   "text": "The prescribed alpha is definitionally the beta/projector/compositor word. Its clopen projector is the proper unit followed by t inverse. Naturality of t cancels t inverse against t, leaving the unit of the composite proper adjunction. The generic categorical adjunct-comparison identity then says that the open adjunct of properOpenMate composed with the comparison of the preceding step is identity. Cancel this isomorphism and invert the open Hom equivalence: every mate component is open extension of the inverse comparison followed by the supported counit from Step 1. Both factors are invertible. Componentwise invertibility makes the natural transformation invertible.",
    "uses": [
-    "lem-sf-proper-open-projection-mate"
+    "lem-sf-proper-open-projection-mate",
+    "def-sf-semilinear-proper-open-comparisons",
+    "lem-sf-proper-open-square-derived-support"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
+  "lem-sf-proper-open-square-derived-support",
+  "def-sp-finite-intrinsic-direct-adjunction",
   "lem-sf-proper-open-projection-mate",
-  "lem-sp-proper-open-derived-support"
+  "def-sf-semilinear-proper-open-comparisons"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/more-etale.tex",
-  "place": "Proper/open support and the composition/refinement counit calculation"
+  "place": "Tag 0F7B, lemma-shriek-proper-and-open; the existing pro-etale square-support theorem and generic categorical clopen adjunct calculation, specialized by C8 on 2026-10-28"
  },
  "mathlib_searches": [
   {
@@ -124,13 +131,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-25",
+  "date": "2026-10-27",
   "by": "L",
-  "reviewer": "C-78e02",
-  "group": "U7",
-  "result": "fix",
-  "landing": "20261025T144152-L-1203649",
-  "kind": "interface",
-  "note": "independent cc review: Item statement byte-identical to the clone; the 13 moved component declarations are verbatim in CompositionProjectionData (diff); ordinaryProperOpenMateIsIso checked against properOpenMate (Stacks 0F7B, non-Cartesian square, clopen lift); the contraction is the component conjunct of TriangleLaws; all 10 direct importers compile against the delivery; #print axioms has sorryAx only via the two new statements and existing upstream sorries"
+  "reviewer": "COMPILER",
+  "group": "C8",
+  "result": "pass",
+  "landing": "20261027T233837-L-4122484",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
