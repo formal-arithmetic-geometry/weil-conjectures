@@ -20163,3 +20163,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 22:59 L: merged deliver/NB/lem-pur-rational-tensor-associator-scalar-square (reviewer FIX; after a return; new nodes: 3)
 - 23:09 L: returned deliver/NA/lem-route-twist-scalar-maps-exists-unique (reviewer RETURN: I read the item in full (there are no new nodes), all six cited statements, the Lean at CoefficientTwistsDetailed.lean:4)
 - 23:10 L: returned deliver/B4/Sheaf.Paper.ExceptionalDerivedSiteRealization (reviewer RETURN: (reviewer C-2977e, head 2977e4cd4) 2b/A: unforced split on a stale base — the published module already carries the root-)
+- 23:11 L: merged deliver/NB/lem-route-twist-line-scalar-iso-exists-unique (reviewer FIX; first push; new nodes: 0)
