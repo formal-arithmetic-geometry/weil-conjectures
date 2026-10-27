@@ -1,0 +1,98 @@
+{
+ "kind": "statement",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemma 6.8.2 and Section 6.8; original finite-comparison plan, step 2"
+ },
+ "stmt_deps": [
+  "def-sf-locally-finite-adic-compact-support-data",
+  "def-sf-locally-finite-adic-realization-data",
+  "def-pur-integral-compact-support-coefficient-data",
+  "def-weil-l-adic-coefficient-extension"
+ ],
+ "proof": [
+  {
+   "text": "Construct the maps by finite quotient realization and verify their inverse-image square and normalized presentation formulas.",
+   "uses": [
+    "def-sf-locally-finite-adic-compact-support-data",
+    "def-sf-locally-finite-adic-realization-data",
+    "def-pur-integral-compact-support-coefficient-data"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 6.8.2 and Section 6.8; original finite-comparison plan, step 2"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sf-locally-finite-adic-compact-support-data",
+  "def-sf-locally-finite-adic-realization-data",
+  "def-pur-integral-compact-support-coefficient-data"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemma 6.8.2 and Section 6.8; construction step split from lem-sf-native-completed-coefficient-change",
+  "group": "D9"
+ },
+ "mathlib_searches": [],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.NativeCompletedCoefficientChange",
+  "date": "2026-10-28",
+  "group": "D9"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sf-native-completed-coefficient-change",
+   "place": "Lemma 6.8.2 and Section 6.8; construction substep",
+   "via": [
+    "lem-sf-native-completed-coefficient-change"
+   ]
+  },
+  "same_as": []
+ },
+ "mathlib_match": null,
+ "merged_into": null,
+ "id": "lem-sf-native-completed-coefficient-change-data",
+ "title": "Pullback-compatible completed-to-native coefficient maps",
+ "statement": "Fix a prime ℓ, a finite-dimensional coefficient field E over Q_ℓ with an embedding into the algebraic closure, and a NativeGeometry. There exist a family of ring maps from the completed integral coefficient system to the native coefficient system, compatible with inverse image along every scheme morphism, together with a normalized CoefficientPresentation at every scheme representing each map.",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.NativeCompletedCoefficientChangeData",
+  "file": "lean/Sheaf/Paper/NativeCompletedCoefficientChangeData.lean",
+  "declaration": "WeilConjectures.LocallyFiniteAdicCompactSupport.native_completed_coefficient_change_data",
+  "declarations": [
+   "WeilConjectures.LocallyFiniteAdicCompactSupport.native_completed_coefficient_change_data"
+  ],
+  "statement": "theorem native_completed_coefficient_change_data [G : NativeGeometry.{u} l]\n    (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]\n    (i : E →ₐ[Padic l] PadicAlgCl l) :\n    ∃ (m : ∀ T : Scheme.{u},\n        (PurCompactSupport.completed l E).ring T ⟶ (nativeCoefficients l).ring T)\n      (C : ∀ T : Scheme.{u}, CoefficientPresentation l T E i),\n      (∀ {U V : Scheme.{u}} (g : U ⟶ V),\n        ((PurCompactSupport.completed l E).pull g).hom ≫ m U =\n          (proEtaleSheafInverseImage g CommRingCat.{u + 1}).map (m V) ≫\n            ((nativeCoefficients l).pull g).hom) ∧\n      (∀ T : Scheme.{u}, m T = (C T).integralMap l T)",
+  "branch": "sheaf-dag",
+  "by": "D9",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D9",
+  "result": "pass",
+  "landing": "20261027T205912-L-1632109",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D9",
+  "result": "pass",
+  "landing": "20261027T205912-L-1632109",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

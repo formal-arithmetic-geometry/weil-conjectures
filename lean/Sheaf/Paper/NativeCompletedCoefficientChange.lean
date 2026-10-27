@@ -6,6 +6,8 @@ Authors: SHEAF group N3
 module
 
 public import Sheaf.Paper.LocallyFiniteAdicCompactSupportData
+import Sheaf.Paper.NativeCompletedCoefficientChangeData
+import Sheaf.Paper.CoefficientPresentationIntegralMapIndependence
 
 /-! # Integral scalar-mate steps for native compact support -/
 
@@ -47,6 +49,15 @@ theorem native_completed_coefficient_change [G : NativeGeometry.{u} l]
     (i : E →ₐ[Padic l] PadicAlgCl l) :
     ∃ a : PurCompactSupport.Change (PurCompactSupport.completed l E) (nativeCoefficients l),
       ∀ (T : Scheme.{u}) (C : CoefficientPresentation l T E i),
-        a.map T = C.integralMap l T := by sorry
+        a.map T = C.integralMap l T := by
+  obtain ⟨m, C₀, hsquare, hC⟩ := native_completed_coefficient_change_data l E i
+  let a : PurCompactSupport.Change (PurCompactSupport.completed l E) (nativeCoefficients l) :=
+    { map := m
+      square := hsquare }
+  refine ⟨a, ?_⟩
+  intro T C
+  change m T = C.integralMap l T
+  rw [hC T]
+  exact coefficientPresentation_integralMap_eq l E i T (C₀ T) C 
 
 end WeilConjectures.LocallyFiniteAdicCompactSupport
