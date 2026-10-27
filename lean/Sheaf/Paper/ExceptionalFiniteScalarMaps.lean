@@ -6,6 +6,8 @@ Authors: SHEAF group Q79
 module
 
 public import Sheaf.Paper.ExceptionalFiniteScalarMatesData
+import Sheaf.Paper.ExceptionalFiniteScalarMapsCore
+import Sheaf.Paper.ExceptionalFiniteScalarMapsEtale
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -54,7 +56,18 @@ theorem finiteScalarMaps_exists
     (scalarX : Scalar l E L n m a X) (scalarY : Scalar l E L n m a Y)
     (source : Operation l E n c) (target : Operation l L m c) :
     Nonempty (ConstructionMaps l E L n m a c scalarX scalarY source target) := by
-  sorry
+  obtain ⟨core⟩ :=
+    finiteScalarMapsCore_exists D l _hl E L n m a f c scalarX scalarY source target
+  obtain ⟨etale⟩ := finiteScalarMapsEtale_exists D l _hl E L n m a f c
+  exact ⟨{
+    q := core.q
+    b := core.b
+    q_normalized := core.q_normalized
+    counit := core.counit
+    qShift := core.qShift
+    bShift := core.bShift
+    etale := etale
+  }⟩
 
 
 end WeilConjectures.ExceptionalFiniteScalar
