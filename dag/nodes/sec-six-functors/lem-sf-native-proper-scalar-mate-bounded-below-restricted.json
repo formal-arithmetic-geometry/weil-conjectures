@@ -1,0 +1,122 @@
+{
+ "id": "lem-sf-native-proper-scalar-mate-bounded-below-restricted",
+ "kind": "lemma",
+ "title": "Restricted native proper scalar mate on bounded-below complexes",
+ "statement": "Fix a prime l and normalized native inverse-image data NativeRings. Let E be a finite unlifted coefficient index in the algebraic closure and a the compatible completed-to-native coefficient Change whose maps equal every normalized integralMap. For a proper morphism g:U to V and a bounded-below derived module M over the completed ring on U, the image under derived restriction along a.map V of the component (properComparison(a,g))_M is invertible.",
+ "stmt_deps": [
+  "def-sf-locally-finite-adic-compact-support-data",
+  "def-weil-algebraically-closed-coefficients",
+  "def-pur-integral-compact-support-coefficient-data",
+  "def-sf-locally-finite-adic-realization-data",
+  "def-pur-finite-compact-support-scalar-data"
+ ],
+ "proof": [
+  {
+   "text": "Identify the completed coefficient ring with its normalized continuous finite-quotient presentation and transport the proper scalar comparison through the internal and section module equivalences. The localized comparison and the bounded proper push comparison are invertible; pasting their scalar-adjunction mates with the normalized coefficient square gives the displayed restricted component.",
+   "uses": [
+    "lem-weil-pbc-continuous-coefficient-realizations",
+    "lem-sf-locally-finite-coefficient-ring-realization",
+    "lem-sfb-internal-module-operations-transport",
+    "lem-sfb-localized-direct-image-comparison",
+    "lem-weil-pbc-condensed-qbar-bounded-push",
+    "lem-sfb-pasted-mates-counit-normalization"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-continuous-coefficient-realizations",
+  "lem-sf-locally-finite-coefficient-ring-realization",
+  "lem-sfb-internal-module-operations-transport",
+  "lem-sfb-localized-direct-image-comparison",
+  "lem-weil-pbc-condensed-qbar-bounded-push",
+  "lem-sfb-pasted-mates-counit-normalization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "M2",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Remark 6.8.15; proper factors in the original scalar-mate plan steps 3--4; Hemo--Richarz--Scholbach, Lemma 5.3(1)."
+ },
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Remark 6.8.15; proper factors in the original scalar-mate plan steps 3--4; Hemo--Richarz--Scholbach, Lemma 5.3(1)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "pbcDerivedRestrict properComparison IsIso",
+   "results": "No exact existing theorem; restriction reflection is available from proEtaleRingRestrictScalars_properties.",
+   "date": "2026-10-28",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "loogle",
+   "query": "IsIso (F.map f) isIso_of_reflects_iso",
+   "results": "CategoryTheory.isIso_of_reflects_iso",
+   "date": "2026-10-28",
+   "verdict": "Generic reflection lemma only; no proper scalar comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "restricted proper scalar mate bounded below",
+   "results": "No exact match; existing localized and algebraic-closure push comparisons are the lower ingredients.",
+   "date": "2026-10-28",
+   "verdict": "No exact match."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.NativeProperScalarMateBoundedBelow",
+  "date": "2026-10-28",
+  "group": "M2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sf-native-proper-scalar-mate-bounded-below",
+   "place": "Restricted comparison used to prove the native proper scalar mate",
+   "via": [
+    "lem-sf-native-proper-scalar-mate-bounded-below"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean_audit": "none",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.NativeProperScalarMateBoundedBelowRestricted",
+  "file": "lean/Sheaf/Paper/NativeProperScalarMateBoundedBelowRestricted.lean",
+  "declaration": "WeilConjectures.LocallyFiniteAdicCompactSupport.native_proper_scalar_mate_bounded_below_restricted",
+  "declarations": [
+   "WeilConjectures.LocallyFiniteAdicCompactSupport.native_proper_scalar_mate_bounded_below_restricted"
+  ],
+  "statement": "theorem native_proper_scalar_mate_bounded_below_restricted\n    (l : ℕ) [Fact l.Prime] [N : NativeRings.{u} l]\n    (E : Index l (PadicAlgCl l))\n    (a : PurCompactSupport.Change (PurCompactSupport.completed l\n      (Coefficient.{u} l (PadicAlgCl l) E)) (nativeCoefficients l))\n    (ha : ∀ (T : Scheme.{u})\n      (C : CoefficientPresentation l T (Coefficient.{u} l (PadicAlgCl l) E) (embedding l E)),\n      a.map T = C.integralMap l T)\n    {U V : Scheme.{u}} (g : U ⟶ V) [IsProper g]\n    (M : DerivedCategory (pbcModules U\n      ((PurCompactSupport.completed l (Coefficient.{u} l (PadicAlgCl l) E)).ring U)))\n    (hM : DerivedCategory.TStructure.t.plus M) :\n    IsIso ((pbcDerivedRestrict (a.map V)).map\n      ((PurCompactSupport.properComparison a g).app M))",
+  "branch": "sheaf-dag",
+  "by": "M2",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M2",
+  "result": "pass",
+  "landing": "20261027T234059-L-4185109",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M2",
+  "result": "pass",
+  "landing": "20261027T234059-L-4185109",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

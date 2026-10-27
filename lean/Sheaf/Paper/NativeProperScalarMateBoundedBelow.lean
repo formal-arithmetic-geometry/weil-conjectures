@@ -6,6 +6,7 @@ Authors: SHEAF group D8
 module
 
 public import Sheaf.Paper.LocallyFiniteAdicCompactSupportData
+import Sheaf.Paper.NativeProperScalarMateBoundedBelowRestricted
 
 /-! # The bounded-below completed-to-native proper scalar mate -/
 
@@ -14,6 +15,7 @@ set_option autoImplicit false
 set_option backward.isDefEq.respectTransparency true
 set_option backward.isDefEq.respectTransparency.types true
 set_option synthInstance.maxSize 2048
+set_option linter.style.haveILetI false
 attribute [local irreducible] HasDerivedCategory.standard
 
 universe u
@@ -61,6 +63,24 @@ theorem native_proper_scalar_mate_bounded_below
     (M : DerivedCategory (pbcModules U
       ((PurCompactSupport.completed l (Coefficient.{u} l (PadicAlgCl l) E)).ring U)))
     (hM : DerivedCategory.TStructure.t.plus M) :
-    IsIso ((PurCompactSupport.properComparison a g).app M) := by sorry
+    IsIso ((PurCompactSupport.properComparison a g).app M) := by
+  have hrestricted := native_proper_scalar_mate_bounded_below_restricted
+    l E a ha g M hM
+  let F := pbcRestrict (a.map V)
+  have hF : F.ReflectsIsomorphisms :=
+    (proEtaleRingRestrictScalars_properties (a.map V)).2.2
+  haveI : F.ReflectsIsomorphisms := hF
+  haveI : F.mapDerivedCategory.ReflectsIsomorphisms := by
+    refine ⟨fun {X Y} f hf => ?_⟩
+    rw [DerivedCategory.isIso_iff]
+    intro q
+    have hq : IsIso (F.map ((DerivedCategory.homologyFunctor _ q).map f)) := by
+      have := (NatIso.isIso_map_iff (F.mapDerivedCategoryHomologyFunctorIso q) f).2
+        (by rw [Functor.comp_map]; infer_instance)
+      exact this
+    exact isIso_of_reflects_iso _ F
+  haveI : IsIso (F.mapDerivedCategory.map
+      ((PurCompactSupport.properComparison a g).app M)) := hrestricted
+  exact isIso_of_reflects_iso _ F.mapDerivedCategory
 
 end WeilConjectures.LocallyFiniteAdicCompactSupport
