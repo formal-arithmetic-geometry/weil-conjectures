@@ -1,0 +1,113 @@
+{
+ "id": "lem-pur-normalized-vector-purity-scalar-source-core",
+ "kind": "statement",
+ "title": "Core source-map and mate compatibility for normalized vector purity",
+ "statement": "Under the hypotheses of fixed-witness normalized vector scalar compatibility, for every constructible finite-Tor input or the coefficient unit, the prescribed scalar source map is invertible and the scalar extension of the source purity component followed by the published exceptional mate equals the prescribed source map followed by the target purity component.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/cor-pur-vector-bundle-purity.proof.md",
+  "place": "paragraph 2, normalized transpose and assembly step 5"
+ },
+ "stmt_deps": [
+  "def-pur-vector-purity-finite-reduction",
+  "def-pur-vector-purity-normalization"
+ ],
+ "proof": [
+  {
+   "text": "Identify the ordered scalar tensor and pullback comparison with the prescribed source map by the pure-root generator equations and the normalized scalar Tate-line comparison; all factors are invertible.",
+   "uses": [
+    "lem-pur-vector-trace-scalar-descent",
+    "lem-pur-etale-compact-scalar-coherence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply scalar trace descent to the vector integration counit and transpose under the Brown adjunction; normalized counit equations identify the transpose with the published mate map and adjunction injectivity gives the compatibility equation.",
+   "uses": [
+    "lem-pur-integration-transpose-scalar-mate"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-vector-trace-scalar-descent",
+  "lem-pur-etale-compact-scalar-coherence",
+  "lem-pur-integration-transpose-scalar-mate"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/cor-pur-vector-bundle-purity.proof.md",
+  "place": "paragraph 2, normalized transpose and assembly step 5"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "scalar source map compatibility with normalized purity mate",
+   "results": "No exact Mathlib match; this is project-specific compact-support scalar compatibility.",
+   "date": "2026-10-28",
+   "verdict": "No match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsIso scalar compact support mate normalized purity",
+   "results": "No exact match.",
+   "date": "2026-10-28",
+   "verdict": "No match"
+  },
+  {
+   "tool": "grep",
+   "query": "scalar_source_compatibility_core purityScalarSourceMap mateMap",
+   "results": "The parent module is the only project declaration; proof dependencies are imported project declarations.",
+   "date": "2026-10-28",
+   "verdict": "Existing project declarations used."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.NormalizedVectorPurityScalarCompatibility",
+  "date": "2026-10-28",
+  "group": "T1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-normalized-vector-purity-scalar-compatibility",
+   "place": "proof paragraph 2, normalized transpose and assembly step 5",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-an",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.NormalizedVectorPurityScalarCore",
+  "file": "lean/Sheaf/Paper/NormalizedVectorPurityScalarCore.lean",
+  "declaration": "WeilConjectures.PurityFiniteSetting.scalar_source_compatibility_core",
+  "branch": "sheaf-dag",
+  "by": "T1",
+  "date": "2026-10-28",
+  "statement": "theorem scalar_source_compatibility_core (A : Type (u + 1)) [CommRing A] [Finite A] (N : ℕ) (hN : 0 < N) (hA : (N : A) = 0) (B : Scheme.{u}) [IsNoetherian B] (hB : IsUnit (N : Γ(B, ⊤))) (d : ℕ) (F : B.Modules) [F.IsFiniteLocallyFreeOfRank d] [HasCompactification (VectorBundleZeroSection.π B d F)] (γ : VectorPurityGamma A N hA B d F) (hn : VectorPurityGammaNormalized A N hN hA B hB d F γ) (hγ : ∀ K : Etale.DerivedCategoryModule A B, IsIso (γ.app K)) (A' : Type (u + 1)) [CommRing A'] [Finite A'] (φ : A →+* A') (hA' : (N : A') = 0) (c : (Etale.purityScalarSheaf φ B).obj (Scheme.finiteEtaleTateLine B N A hA) ≅ Scheme.finiteEtaleTateLine B N A' hA') (γm : VectorPurityGamma A' N hA' B d F) (hnm : VectorPurityGammaNormalized A' N hN hA' B hB d F γm) (hγm : ∀ K : Etale.DerivedCategoryModule A' B, IsIso (γm.app K)) (hc : PurityScalarLineNormalization φ N hA hA' B c) : ∀ K : Etale.DerivedCategoryModule A B, (Etale.DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} A) B K ∨ K = 𝟙_ _) → IsIso (purityScalarSourceMap φ N hA hA' B d F c K) ∧ (Etale.purityScalarExtension φ (VectorBundleZeroSection.scheme B d F)).map (γ.app K) ≫ Etale.ExceptionalCoefficients.mateMap φ (VectorBundleZeroSection.π B d F) K = purityScalarSourceMap φ N hA hA' B d F c K ≫ γm.app ((Etale.purityScalarExtension φ B).obj K)"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T1",
+  "result": "pass",
+  "landing": "20261027T210232-L-1677227",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T1",
+  "result": "pass",
+  "landing": "20261027T210232-L-1677227",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

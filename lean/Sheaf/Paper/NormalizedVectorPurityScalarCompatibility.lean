@@ -5,6 +5,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import Sheaf.Paper.VectorPurityFiniteReduction
+import Sheaf.Paper.NormalizedVectorPurityScalarCore
 
 /-! # Fixed-witness scalar compatibility for normalized vector purity.
 
@@ -15,6 +16,7 @@ assembly in `NormalizedVectorPurityScalarReduction`.
 @[expose] public noncomputable section
 set_option autoImplicit false
 set_option synthInstance.maxSize 2048
+set_option linter.style.haveILetI false
 universe u
 open CategoryTheory CategoryTheory.Limits CategoryTheory.MonoidalCategory AlgebraicGeometry
 namespace WeilConjectures.PurityFiniteSetting
@@ -67,6 +69,40 @@ theorem scalarReduction_compatibility_of_witnesses
           Etale.ExceptionalCoefficients.mateMap φ (VectorBundleZeroSection.π B d F) K =
         purityScalarSourceMap φ N hA hA' B d F c K ≫
           γm.app ((Etale.purityScalarExtension φ B).obj K) := by
-  sorry
+  letI := (Etale.vectorIntegration_geometry B d F).1
+  letI := (Etale.vectorIntegration_geometry B d F).2.1
+  letI := (Etale.vectorIntegration_geometry B d F).2.2
+  intro K hK
+  have hcore := scalar_source_compatibility_core A N hN hA B hB d F γ hn hγ
+    A' φ hA' c γm hnm hγm hc K hK
+  letI : IsIso (purityScalarSourceMap φ N hA hA' B d F c K) := hcore.1
+  refine ⟨hcore.1, ?_, ?_, hcore.2⟩
+  · have hgeom := Etale.etaleCompactScalarCoherence φ
+      (VectorBundleZeroSection.π B d F)
+      (HasCompactification.compactification (VectorBundleZeroSection.π B d F))
+    exact hgeom.1 ((RfUpper A (VectorBundleZeroSection.π B d F)).obj K)
+  · have hgeom := Etale.etaleCompactScalarCoherence φ
+      (VectorBundleZeroSection.π B d F)
+      (HasCompactification.compactification (VectorBundleZeroSection.π B d F))
+    have hq := hgeom.1 ((RfUpper A (VectorBundleZeroSection.π B d F)).obj K)
+    letI : IsIso (Etale.ExceptionalCoefficients.compactSupportMap φ
+        (HasCompactification.compactification (VectorBundleZeroSection.π B d F))
+        ((RfUpper A (VectorBundleZeroSection.π B d F)).obj K)) := hq
+    letI : IsIso ((Etale.purityScalarExtension φ
+        (VectorBundleZeroSection.scheme B d F)).map (γ.app K)) := by
+      infer_instance
+    letI : IsIso (γm.app ((Etale.purityScalarExtension φ B).obj K)) := hγm _
+    have hi : IsIso (purityScalarSourceMap φ N hA hA' B d F c K ≫
+        γm.app ((Etale.purityScalarExtension φ B).obj K)) := by
+      infer_instance
+    have hleft : IsIso ((Etale.purityScalarExtension φ
+        (VectorBundleZeroSection.scheme B d F)).map (γ.app K) ≫
+        Etale.ExceptionalCoefficients.mateMap φ (VectorBundleZeroSection.π B d F) K) := by
+      rw [hcore.2]
+      infer_instance
+    exact IsIso.of_isIso_comp_left
+      ((Etale.purityScalarExtension φ (VectorBundleZeroSection.scheme B d F)).map
+        (γ.app K))
+      (Etale.ExceptionalCoefficients.mateMap φ (VectorBundleZeroSection.π B d F) K)
 
 end WeilConjectures.PurityFiniteSetting
