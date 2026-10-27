@@ -1,0 +1,111 @@
+{
+ "stmt_deps": [
+  "def-sf-open-tensor-quotient-data"
+ ],
+ "proof_deps": [
+  "def-sf-open-tensor-quotient-data"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03DI, 03DJ, 0E8I and 0941; identity on extension summands and coefficient-system assembly."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "open extension scalar restriction coefficient quotient compatibility",
+   "results": "No direct match; only generic scalar restriction and adjunction APIs.",
+   "date": "2026-10-28",
+   "verdict": "no direct match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "strict open extension scalar restriction system evaluation",
+   "results": "No direct match; generic semilinear system evaluation results only.",
+   "date": "2026-10-28",
+   "verdict": "no direct match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Functor.mapHomologicalComplex scalarRestriction extension",
+   "results": "Generic functor and complex maps only.",
+   "date": "2026-10-28",
+   "verdict": "no direct match"
+  },
+  {
+   "tool": "grep",
+   "query": "ScalarCompatibility finite systems evaluation",
+   "results": "The structure is defined in OpenTensorQuotientData; no proved field theorem was found.",
+   "date": "2026-10-28",
+   "verdict": "no direct match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.OpenQuotientScalarCompatibilityData",
+  "date": "2026-10-28",
+  "group": "G7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sf-open-quotient-scalar-unit-compatibility",
+   "place": "strict scalar quotient-tower construction"
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-pf-coherence",
+ "id": "lem-sf-open-quotient-scalar-finite-compatibility",
+ "kind": "statement",
+ "title": "Finite scalar compatibility for an open quotient",
+ "statement": "For an integral open operation o on j:U→X, there is a family of isomorphisms, one for every n,\nfiniteExtension l E j o n ⋙ scalarReductionRestriction l E X n ≅\nscalarReductionRestriction l E U n ⋙ IntegralOpenReduction.extension l E j o.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03DI and 0E8I; identity on extension-by-zero summands and scalar projection equations."
+ },
+ "proof": [
+  {
+   "text": "At each finite coefficient level, identify the two functors on extension-by-zero generators by the\nidentity on the summand section. The scalar projection equations of o make this identification linear,\nand sheafification and the open adjunction extend it uniquely and naturally to an isomorphism.",
+   "uses": [
+    "def-sf-open-tensor-quotient-data"
+   ],
+   "elementary": false
+  }
+ ],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.OpenQuotientScalarFiniteCompatibility",
+  "file": "lean/Sheaf/SixFunctors/OpenQuotientScalarFiniteCompatibility.lean",
+  "declaration": "WeilConjectures.OpenTensorQuotient.openQuotientScalarFiniteCompatibility",
+  "declarations": [
+   "WeilConjectures.OpenTensorQuotient.openQuotientScalarFiniteCompatibility"
+  ],
+  "statement": "theorem openQuotientScalarFiniteCompatibility\n    (o : IntegralOpenReduction.Operations l E j) :\n    Nonempty (∀ n : ℕ,\n      IntegralOpenReduction.finiteExtension l E j o n ⋙ scalarReductionRestriction l E X n ≅\n        scalarReductionRestriction l E U n ⋙ IntegralOpenReduction.extension l E j o)",
+  "branch": "sheaf-dag",
+  "by": "G7",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G7",
+  "result": "pass",
+  "landing": "20261027T210018-L-1646031",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G7",
+  "result": "pass",
+  "landing": "20261027T210018-L-1646031",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
