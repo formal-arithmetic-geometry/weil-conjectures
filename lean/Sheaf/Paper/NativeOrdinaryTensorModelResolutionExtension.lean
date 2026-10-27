@@ -6,7 +6,8 @@ Authors: SHEAF group E7
 module
 
 public import Sheaf.Paper.NativeWeilClosedModels
-import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
+import Sheaf.Paper.NativeOrdinaryTensorModelResolutionData
+import Sheaf.Paper.NativeOrdinaryTensorModelResolutionNaturality
 
 /-! # Extension of ordinary tensor models through K-flat resolutions
 
@@ -17,6 +18,7 @@ Source: Stacks 06YS, 06YU, 0FPT; blueprint step 1 of
 
 @[expose] public section
 set_option autoImplicit false
+set_option linter.unusedVariables false
 universe u
 open CategoryTheory CategoryTheory.Limits Opposite WeilConjectures
 namespace AlgebraicGeometry.ProEtaleWeilSheaf
@@ -84,6 +86,16 @@ theorem native_ordinary_tensor_model_resolution_extension
           (extendedModel P Q hP).hom ≫ DerivedCategory.Q.map
             (HomologicalComplex.mapBifunctorMap f g
               (ordinaryTensorBifunctor l Y) (.up ℤ))) := by
-  sorry
+  classical
+  obtain ⟨extendedModel, hext, htransport, hresolution⟩ :=
+    native_ordinary_tensor_model_resolution_data l Y H R S model hkflat
+  refine ⟨extendedModel, ?_, ?_⟩
+  · intro P Q I hP hQ hI φ
+    obtain ⟨ψ, hψ, hmodel⟩ := hnormalization P Q I hP hQ hI φ
+    refine ⟨ψ, hψ, ?_⟩
+    rw [hext P Q hP hQ]
+    exact hmodel
+  · exact native_ordinary_tensor_model_resolution_naturality
+      l Y H R S model extendedModel htransport hresolution hkflat
 
 end AlgebraicGeometry.ProEtaleWeilSheaf

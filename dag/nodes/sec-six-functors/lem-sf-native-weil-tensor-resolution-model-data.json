@@ -1,0 +1,118 @@
+{
+ "id": "lem-sf-native-weil-tensor-resolution-model-data",
+ "kind": "statement",
+ "title": "Resolution transport data for ordinary tensor models",
+ "statement": "Resolution transport data for the ordinary tensor model.",
+ "stmt_deps": [
+  "def-sf-native-weil-closed-models"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
+  "place": "Native tensor transport, geometric tensor part of step 1; K-flat replacement extension."
+ },
+ "proof": [
+  {
+   "text": "Choose the degreewise-epimorphic K-flat resolution of each second complex from lem-pc-kflat-resolution and tensor its augmentation with a K-flat first complex.",
+   "uses": [
+    "lem-pc-kflat-resolution"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the resulting localized quasi-isomorphism to define the transported model, prove the displayed resolution transport equation, and compare two resolutions on K-flat second inputs using hkflat.",
+   "uses": [
+    "lem-pc-kflat-resolution"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Construct common K-flat roofs for maps of second complexes; their augmentation homotopies give the stated resolution-lift clause.",
+   "uses": [
+    "lem-pc-kflat-resolution"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-kflat-resolution"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "J6",
+  "date": "2026-10-28",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
+  "place": "Native tensor transport, geometric tensor part of step 1; K-flat replacement extension."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "K-flat resolution transports a normalized derived tensor model to arbitrary second complexes",
+   "results": "Eight hits were Tor and generic monoidal tensor declarations; none matches the specified native ordinary model extension.",
+   "date": "2026-10-28",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "loogle",
+   "query": "QuasiIso tensor model naturality",
+   "results": "No hits; the query parser reports unknown identifier `tensor`.",
+   "date": "2026-10-28",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "grep",
+   "query": "exists_isKFlatResolutionIndependentCoefficients.*NativeOrdinary",
+   "results": "No matches in the Sheaf or WeilConjectures trees.",
+   "date": "2026-10-28",
+   "verdict": "The specialized transport statement is new."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.NativeOrdinaryTensorModelResolutionExtension",
+  "date": "2026-10-28",
+  "group": "J6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sf-native-weil-tensor-ringed-derived-square-ordinary-resolution-extension",
+   "place": "Strict extension component of the ordinary derived-square assertion",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.NativeOrdinaryTensorModelResolutionData",
+  "file": "lean/Sheaf/Paper/NativeOrdinaryTensorModelResolutionData.lean",
+  "declaration": "AlgebraicGeometry.ProEtaleWeilSheaf.native_ordinary_tensor_model_resolution_data",
+  "statement": "theorem native_ordinary_tensor_model_resolution_data (l : ℕ) [Fact l.Prime] (Y : Scheme.{u}) (H : (DerivedCategory (ProEtale.AdicSheaf l Y))ᵒᵖ × DerivedCategory (ProEtale.AdicSheaf l Y) ⥤ DerivedCategory (ProEtale.AdicSheaf l Y)) (R : NativeHomRepresentatives (ordinaryIhomBifunctor l Y) H) (S : CoefficientClosedStructure H) (model : ∀ (P Q : CochainComplex (ProEtale.AdicSheaf l Y) ℤ) (_ : NativeOrdinaryKFlat l Y P), S.tensor.obj (DerivedCategory.Q.obj Q, DerivedCategory.Q.obj P) ≅ DerivedCategory.Q.obj (ordinaryTensorTotal l Y P Q)) (hkflat : ∀ (P Q P' Q' : CochainComplex (ProEtale.AdicSheaf l Y) ℤ) (hP : NativeOrdinaryKFlat l Y P) (hP' : NativeOrdinaryKFlat l Y P') (hQ : NativeOrdinaryKFlat l Y Q) (hQ' : NativeOrdinaryKFlat l Y Q') (f : P ⟶ P') (g : Q ⟶ Q'), S.tensor.map (X := (DerivedCategory.Q.obj Q, DerivedCategory.Q.obj P)) (Y := (DerivedCategory.Q.obj Q', DerivedCategory.Q.obj P')) (Prod.mkHom (DerivedCategory.Q.map g) (DerivedCategory.Q.map f)) ≫ (model P' Q' hP').hom = (model P Q hP).hom ≫ DerivedCategory.Q.map (HomologicalComplex.mapBifunctorMap f g (ordinaryTensorBifunctor l Y) (.up ℤ))) : ∃ extendedModel : ∀ (P Q : CochainComplex (ProEtale.AdicSheaf l Y) ℤ) (_ : NativeOrdinaryKFlat l Y P), S.tensor.obj (DerivedCategory.Q.obj Q, DerivedCategory.Q.obj P) ≅ DerivedCategory.Q.obj (ordinaryTensorTotal l Y P Q), (∀ (P Q : CochainComplex (ProEtale.AdicSheaf l Y) ℤ) (hP : NativeOrdinaryKFlat l Y P) (hQ : NativeOrdinaryKFlat l Y Q), extendedModel P Q hP = model P Q hP) ∧ (∀ (P Q K : CochainComplex (ProEtale.AdicSheaf l Y) ℤ) (hP : NativeOrdinaryKFlat l Y P) (hK : NativeOrdinaryKFlat l Y K) (q : K ⟶ Q) (hq : QuasiIso q), S.tensor.map (X := (DerivedCategory.Q.obj K, DerivedCategory.Q.obj P)) (Y := (DerivedCategory.Q.obj Q, DerivedCategory.Q.obj P)) (Prod.mkHom (DerivedCategory.Q.map q) (𝟙 _)) ≫ (extendedModel P Q hP).hom = (model P K hP).hom ≫ DerivedCategory.Q.map (HomologicalComplex.mapBifunctorMap (𝟙 P) q (ordinaryTensorBifunctor l Y) (.up ℤ))) ∧ (∀ (Q Q' : CochainComplex (ProEtale.AdicSheaf l Y) ℤ) (g : Q ⟶ Q'), ∃ (K K' : CochainComplex (ProEtale.AdicSheaf l Y) ℤ) (hK : NativeOrdinaryKFlat l Y K) (hK' : NativeOrdinaryKFlat l Y K') (q : K ⟶ Q) (q' : K' ⟶ Q') (u : K ⟶ K'), QuasiIso q ∧ QuasiIso q' ∧ Nonempty (Homotopy (u ≫ q') (q ≫ g)))",
+  "branch": "sheaf-dag",
+  "by": "J6",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J6",
+  "result": "pass",
+  "landing": "20261027T234023-L-4163300",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J6",
+  "result": "pass",
+  "landing": "20261027T234023-L-4163300",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
