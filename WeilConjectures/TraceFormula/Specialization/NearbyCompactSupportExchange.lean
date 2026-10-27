@@ -71,6 +71,9 @@ namespace Compactification
 
 variable (C : h.Compactification)
 
+omit [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)] [LocallyOfFiniteType Y.hom]
+  [QuasiCompact Y.hom] [IsSeparated Y.hom] [LocallyOfFiniteType Y'.hom] [QuasiCompact Y'.hom]
+  [IsSeparated Y'.hom] in
 /-- The proper exchange `χ_a : Ψ_S Ra_* ⟶ Ra'_* Ψ_P` of the structure morphism of a
 compactification is invertible on bounded constructible complexes
 (`NearbyCyclesModel.IsTraitModelOfBase.isIso_pushforwardExchange_app_ambient`). -/

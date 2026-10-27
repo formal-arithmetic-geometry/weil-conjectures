@@ -71,9 +71,8 @@ lemma compactSupportExchange_comp_eq_aux {ΨN : DN ⥤ DN'} {Ψ₁ : D₁ ⥤ D�
   have nconj := conj'.inv.naturality (ν₃.app K)
   simp only [Functor.comp_obj, Functor.comp_map] at nχ nconj
   simp only [Functor.map_comp, Category.assoc]
-  rw [← Ψs.map_comp_assoc (conj.inv.app _),
-    Iso.inv_hom_id_app,
-    CategoryTheory.Functor.map_id, Category.id_comp, reassoc_of% nχ, reassoc_of% hχ₁, ← R₁'.map_comp_assoc,
+  rw [← Ψs.map_comp_assoc (conj.inv.app _), Iso.inv_hom_id_app, CategoryTheory.Functor.map_id,
+    Category.id_comp, reassoc_of% nχ, reassoc_of% hχ₁, ← R₁'.map_comp_assoc,
     ← R₁'.map_comp_assoc, Category.assoc, hE, R₁'.map_comp, Category.assoc, ← nconj]
 
 
