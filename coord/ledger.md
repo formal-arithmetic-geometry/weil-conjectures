@@ -19765,3 +19765,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 18:07 L: merged deliver/K4/Sheaf.Paper.QuotientSectionTensorTransportCondition (stage 3; reviewer PASS; first push; landing 20261027T180700-L-3890686 (interface); batch 20261027T180444; modules 3; new nodes 2)
 - 18:07 L: merged deliver/K5/Sheaf.Paper.EtaleQuotientTensorProjection (stage 3; reviewer PASS; first push; landing 20261027T180701-L-3890999 (interface); batch 20261027T180444; modules 2; new nodes 1)
 - 18:07 L: merged deliver/K6/Sheaf.Paper.PodReindexingCompletedEvaluationReflection (stage 3; reviewer PASS; first push; landing 20261027T180703-L-3891229 (interface); batch 20261027T180444; modules 4; new nodes 3)
+- 18:07 L: merged deliver/K7/Sheaf.Paper.NormalizedScalarAssociatorLocalizationTransport (stage 3; reviewer PASS; first push; landing 20261027T180704-L-3891379 (interface); batch 20261027T180444; modules 2; new nodes 1)
