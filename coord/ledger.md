@@ -20426,3 +20426,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 23:43 L: merged deliver/V2/Sheaf.Paper.CompactSupportSystemRealizationNormalization (stage 3; reviewer PASS; first push; landing 20261027T234333-L-104567 (proof); batch 20261027T233735; modules 1; new nodes 2)
 - 23:43 L: merged deliver/V2/Sheaf.Paper.IntegralPullbackReductionAugmentationDescent (stage 3; reviewer PASS; first push; landing 20261027T234334-L-105416 (proof); batch 20261027T233735; modules 1; new nodes 0)
 - 23:43 L: merged deliver/V2/Sheaf.SixFunctors.IntegralDualizingMappingLimitGlobal (stage 3; reviewer PASS; first push; landing 20261027T234335-L-106453 (interface); batch 20261027T233735; modules 5; new nodes 5)
+- 23:43 L: merged deliver/V3/Sheaf.Paper.IntegralPointTransportTowerPowers (stage 3; reviewer PASS; first push; landing 20261027T234337-L-107039 (proof); batch 20261027T233735; modules 1; new nodes 1)

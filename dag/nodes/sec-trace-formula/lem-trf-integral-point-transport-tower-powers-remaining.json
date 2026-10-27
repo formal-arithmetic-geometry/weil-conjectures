@@ -1,0 +1,119 @@
+{
+ "id": "lem-trf-integral-point-transport-tower-powers-remaining",
+ "kind": "statement",
+ "title": "Remaining whole-system transport power and realization identities",
+ "statement": "The remaining clauses of whole-system point transport: power compatibility, finite evaluation, normalized realization, naturality, compositor compatibility, Frobenius normalization, and reduction realization.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-weil/prop-trf-rational-frobenius-integral-model.proof.md",
+  "place": "Assembly steps 2--6, after the naturality and constructibility clauses proved directly in the parent assembly."
+ },
+ "stmt_deps": [
+  "lem-trf-point-integral-restriction-natural",
+  "lem-trf-ordinary-quotient-pullback-tower-comparison",
+  "lem-trf-point-system-transport-descent",
+  "lem-trf-point-system-power-roos-coherence",
+  "lem-trf-point-system-roos-transport",
+  "lem-weil-isomorphism-derived-pullback-comparison-normalization",
+  "lem-trf-integral-inverse-image-comparison-composition",
+  "lem-coef-derived-system-evaluation-calculus"
+ ],
+ "proof": [
+  {
+   "text": "Apply the whole-system transport descent, power Roos coherence, normalized Roos transport, and the specified integral comparison lemmas. The finite evaluation and realization equations are obtained by the normalized comparison identities; Frobenius and reduction specializations follow from the defining unique section maps and completion counit. This is the unresolved middle and final portion of the blueprint assembly.",
+   "uses": [
+    "lem-trf-point-system-transport-descent",
+    "lem-trf-point-system-power-roos-coherence",
+    "lem-trf-point-system-roos-transport",
+    "lem-weil-isomorphism-derived-pullback-comparison-normalization",
+    "lem-trf-integral-inverse-image-comparison-composition",
+    "lem-coef-derived-system-evaluation-calculus"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-point-system-transport-descent",
+  "lem-trf-point-system-power-roos-coherence",
+  "lem-trf-point-system-roos-transport",
+  "lem-weil-isomorphism-derived-pullback-comparison-normalization",
+  "lem-trf-integral-inverse-image-comparison-composition",
+  "lem-coef-derived-system-evaluation-calculus"
+ ],
+ "proof_origin": {
+  "by": "V3 stage 3 decomposition",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-weil/prop-trf-rational-frobenius-integral-model.proof.md",
+  "place": "Assembly steps 2--6"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "integralPointTransportTowerPowers_remaining",
+   "results": "No existing declaration; the clauses are specific to the whole-system transport construction.",
+   "date": "2026-10-28",
+   "verdict": "No existing match."
+  },
+  {
+   "tool": "loogle",
+   "query": "whole system Frobenius transport derived limit realization",
+   "results": "No specialized match.",
+   "date": "2026-10-28",
+   "verdict": "No Mathlib match."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "normalized derived limit Frobenius point transport naturality",
+   "results": "No specialized match.",
+   "date": "2026-10-28",
+   "verdict": "No Mathlib match."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralPointTransportTowerPowers",
+  "date": "2026-10-28",
+  "group": "V3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-trf-integral-point-transport-tower-powers",
+   "place": "Assembly steps 2--6",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-thm-trace-transport",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.IntegralPointTransportTowerPowers",
+  "file": "lean/Sheaf/Paper/IntegralPointTransportTowerPowers.lean",
+  "declaration": "WeilConjectures.integralPointTransportTowerPowers_remaining",
+  "statement": "theorem integralPointTransportTowerPowers_remaining (D : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (hl : l ≠ D.p) (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] : (∀ (m : ℕ), 1 ≤ m → ∀ C : coefficientSequenceDerived l E (Spec (.of D.k)), (IntegralPointTransportTower.transport D l E (m + 1)).app C = (IntegralPointTransportTower.transport D l E m).app C ≫ (IntegralPointTransportTower.transport D l E 1).app ((IntegralPointTransportTower.pullback D l E m).obj C) ≫ (IntegralPointTransportTower.sections D l E).map ((IntegralPointTransportTower.compositor D l E m).hom.app C)) ∧ (∀ (r n : ℕ) (C : coefficientSequenceDerived l E (Spec (.of D.k))), intrinsicFiniteTorsionConstructible l E (n + 1) (Nat.succ_le_succ (Nat.zero_le n)) (Spec (.of D.k)) ((coefficientSequenceDerivedEvaluation l E (Spec (.of D.k)) n).obj C) → (IntegralPointTransportTower.moduleEvaluation l E n).map ((IntegralPointTransportTower.transport D l E r).app C) ≫ (IntegralPointTransportTower.sectionsEvaluation D l E n).hom.app ((IntegralPointTransportTower.pullback D l E r).obj C) ≫ (IntegralPointTransportTower.finiteSections D l E n).map ((IntegralPointTransportTower.evaluationComparison D l E r n).hom.app C) = (IntegralPointTransportTower.sectionsEvaluation D l E n).hom.app C ≫ (ModuleCat.restrictScalars.{u + 1, u + 1, u + 1} (pointReductionQuotient l E n)).mapDerivedCategory.map (pointPowerTransportFinite D l hl E r n ((coefficientSequenceDerivedEvaluation l E (Spec (.of D.k)) n).obj C))) ∧ (∀ (r : ℕ) (C : coefficientSequenceDerived l E (Spec (.of D.k))) (hC : sfIntegralConstructible l E (Spec (.of D.k)) ((coefficientSequenceLimit l E (Spec (.of D.k))).obj C)), (IntegralPointTransportTower.moduleLimit l E).map ((IntegralPointTransportTower.transport D l E r).app C) ≫ (IntegralPointTransportTower.zeta D l E).hom.app ((IntegralPointTransportTower.pullback D l E r).obj C) = (IntegralPointTransportTower.zeta D l E).hom.app C ≫ IntegralPointTransportTower.iota D l E hl r ((coefficientSequenceLimit l E (Spec (.of D.k))).obj C) ≫ (pointFibreIntegralAmbient D l E).map (IntegralPointTransportTower.nu D l E hl r C hC).hom) ∧ (∀ (r : ℕ) (C C' : coefficientSequenceDerived l E (Spec (.of D.k))) (f : C ⟶ C') (hC : sfIntegralConstructible l E (Spec (.of D.k)) ((coefficientSequenceLimit l E (Spec (.of D.k))).obj C)) (hC' : sfIntegralConstructible l E (Spec (.of D.k)) ((coefficientSequenceLimit l E (Spec (.of D.k))).obj C')), (integralDerivedPullback l E ((pointFrobeniusAut D) ^ r).hom).map ((coefficientSequenceLimit l E (Spec (.of D.k))).map f) ≫ (IntegralPointTransportTower.nu D l E hl r C' hC').hom = (IntegralPointTransportTower.nu D l E hl r C hC).hom ≫ (coefficientSequenceLimit l E (Spec (.of D.k))).map ((IntegralPointTransportTower.pullback D l E r).map f)) ∧ (∀ (B : IntegralComparisonSystem.{u} l) (m : ℕ), 1 ≤ m → ∀ (C : coefficientSequenceDerived l E (Spec (.of D.k))) (hC : sfIntegralConstructible l E (Spec (.of D.k)) ((coefficientSequenceLimit l E (Spec (.of D.k))).obj C)), (IntegralPointTransportTower.nu D l E hl (m + 1) C hC).hom = (IntegralPointTransportTower.integralCompositor D l E hl B m ((coefficientSequenceLimit l E (Spec (.of D.k))).obj C) hC).hom ≫ (integralDerivedPullback l E (pointFrobeniusAut D).hom).map (IntegralPointTransportTower.nu D l E hl m C hC).hom ≫ (IntegralPointTransportTower.nu D l E hl 1 ((IntegralPointTransportTower.pullback D l E m).obj C) (IntegralPointTransportTower.pullbackLimitConstructible D l E hl m C hC)).hom ≫ (coefficientSequenceLimit l E (Spec (.of D.k))).map ((IntegralPointTransportTower.compositor D l E m).hom.app C)) ∧ (∀ (K : CochainComplex (integralTowerModules l E (Spec (.of D.k))) ℤ), HEq (IntegralPointTransportTower.integralSigma D l E 1 K) (frobeniusPointIntegralSigma D l E K)) ∧ (∀ (N : DerivedCategory (integralTowerModules l E (Spec (.of D.k)))), HEq (IntegralPointTransportTower.iota D l E hl 1 N) (frobeniusPointTransportIntegral D l hl E N)) ∧ (∀ (B : IntegralComparisonSystem.{u} l) (r : ℕ) (N : DerivedCategory (integralTowerModules l E (Spec (.of D.k)))) (hN : sfIntegralConstructible l E (Spec (.of D.k)) N), (pointFibreIntegralAmbient D l E).map (IntegralPointTransportTower.reductionComparison D l E B N hN).hom ≫ IntegralPointTransportTower.realizedTransport D l E hl r (((B.coefficient E).system (Spec (.of D.k))).reduction.obj N) (IntegralPointTransportTower.reductionLimitConstructible D l E B N hN) ≫ (pointFibreIntegralAmbient D l E).map ((integralDerivedPullback l E ((pointFrobeniusAut D) ^ r).hom).map (IntegralPointTransportTower.reductionComparison D l E B N hN).inv) = IntegralPointTransportTower.iota D l E hl r N)",
+  "branch": "sheaf-dag",
+  "by": "V3",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V3",
+  "result": "pass",
+  "landing": "20261027T234337-L-107039",
+  "kind": "proof",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V3",
+  "result": "pass",
+  "landing": "20261027T234337-L-107039",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

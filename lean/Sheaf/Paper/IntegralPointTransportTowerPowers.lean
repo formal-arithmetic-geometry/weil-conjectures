@@ -484,6 +484,93 @@ def Laws (hl : l ≠ D.p) : Prop :=
 
 end IntegralPointTransportTower
 
+/-- Remaining power, evaluation, realization, naturality, and reduction clauses assembled from the
+unresolved whole-system transport steps. Source: the proof plan for the ten steps
+(blueprint: lem-trf-integral-point-transport-tower-powers). -/
+theorem integralPointTransportTowerPowers_remaining
+    (D : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (hl : l ≠ D.p)
+    (E : Type u) [Field E] [Algebra ℚ_[l] E]
+    [FiniteDimensional ℚ_[l] E] :
+    (∀ (m : ℕ), 1 ≤ m → ∀ C : coefficientSequenceDerived l E (Spec (.of D.k)),
+      (IntegralPointTransportTower.transport D l E (m + 1)).app C =
+        (IntegralPointTransportTower.transport D l E m).app C ≫
+          (IntegralPointTransportTower.transport D l E 1).app
+            ((IntegralPointTransportTower.pullback D l E m).obj C) ≫
+          (IntegralPointTransportTower.sections D l E).map
+            ((IntegralPointTransportTower.compositor D l E m).hom.app C)) ∧
+    (∀ (r n : ℕ) (C : coefficientSequenceDerived l E (Spec (.of D.k))),
+      intrinsicFiniteTorsionConstructible l E (n + 1)
+        (Nat.succ_le_succ (Nat.zero_le n)) (Spec (.of D.k))
+        ((coefficientSequenceDerivedEvaluation l E (Spec (.of D.k)) n).obj C) →
+      (IntegralPointTransportTower.moduleEvaluation l E n).map
+          ((IntegralPointTransportTower.transport D l E r).app C) ≫
+        (IntegralPointTransportTower.sectionsEvaluation D l E n).hom.app
+          ((IntegralPointTransportTower.pullback D l E r).obj C) ≫
+        (IntegralPointTransportTower.finiteSections D l E n).map
+          ((IntegralPointTransportTower.evaluationComparison D l E r n).hom.app C) =
+      (IntegralPointTransportTower.sectionsEvaluation D l E n).hom.app C ≫
+        (ModuleCat.restrictScalars.{u + 1, u + 1, u + 1}
+          (pointReductionQuotient l E n)).mapDerivedCategory.map
+        (pointPowerTransportFinite D l hl E r n
+          ((coefficientSequenceDerivedEvaluation l E (Spec (.of D.k)) n).obj C))) ∧
+    (∀ (r : ℕ) (C : coefficientSequenceDerived l E (Spec (.of D.k)))
+      (hC : sfIntegralConstructible l E (Spec (.of D.k))
+        ((coefficientSequenceLimit l E (Spec (.of D.k))).obj C)),
+      (IntegralPointTransportTower.moduleLimit l E).map
+          ((IntegralPointTransportTower.transport D l E r).app C) ≫
+        (IntegralPointTransportTower.zeta D l E).hom.app
+          ((IntegralPointTransportTower.pullback D l E r).obj C) =
+      (IntegralPointTransportTower.zeta D l E).hom.app C ≫
+        IntegralPointTransportTower.iota D l E hl r
+          ((coefficientSequenceLimit l E (Spec (.of D.k))).obj C) ≫
+        (pointFibreIntegralAmbient D l E).map
+          (IntegralPointTransportTower.nu D l E hl r C hC).hom) ∧
+    (∀ (r : ℕ) (C C' : coefficientSequenceDerived l E (Spec (.of D.k))) (f : C ⟶ C')
+      (hC : sfIntegralConstructible l E (Spec (.of D.k))
+        ((coefficientSequenceLimit l E (Spec (.of D.k))).obj C))
+      (hC' : sfIntegralConstructible l E (Spec (.of D.k))
+        ((coefficientSequenceLimit l E (Spec (.of D.k))).obj C')),
+      (integralDerivedPullback l E ((pointFrobeniusAut D) ^ r).hom).map
+          ((coefficientSequenceLimit l E (Spec (.of D.k))).map f) ≫
+        (IntegralPointTransportTower.nu D l E hl r C' hC').hom =
+      (IntegralPointTransportTower.nu D l E hl r C hC).hom ≫
+        (coefficientSequenceLimit l E (Spec (.of D.k))).map
+          ((IntegralPointTransportTower.pullback D l E r).map f)) ∧
+    (∀ (B : IntegralComparisonSystem.{u} l) (m : ℕ), 1 ≤ m →
+      ∀ (C : coefficientSequenceDerived l E (Spec (.of D.k)))
+        (hC : sfIntegralConstructible l E (Spec (.of D.k))
+          ((coefficientSequenceLimit l E (Spec (.of D.k))).obj C)),
+      (IntegralPointTransportTower.nu D l E hl (m + 1) C hC).hom =
+        (IntegralPointTransportTower.integralCompositor D l E hl B m
+          ((coefficientSequenceLimit l E (Spec (.of D.k))).obj C) hC).hom ≫
+        (integralDerivedPullback l E (pointFrobeniusAut D).hom).map
+          (IntegralPointTransportTower.nu D l E hl m C hC).hom ≫
+        (IntegralPointTransportTower.nu D l E hl 1
+          ((IntegralPointTransportTower.pullback D l E m).obj C)
+          (IntegralPointTransportTower.pullbackLimitConstructible D l E hl m C hC)).hom ≫
+        (coefficientSequenceLimit l E (Spec (.of D.k))).map
+          ((IntegralPointTransportTower.compositor D l E m).hom.app C)) ∧
+    (∀ (K : CochainComplex (integralTowerModules l E (Spec (.of D.k))) ℤ),
+      HEq (IntegralPointTransportTower.integralSigma D l E 1 K)
+        (frobeniusPointIntegralSigma D l E K)) ∧
+    (∀ (N : DerivedCategory (integralTowerModules l E (Spec (.of D.k)))),
+      HEq (IntegralPointTransportTower.iota D l E hl 1 N)
+        (frobeniusPointTransportIntegral D l hl E N)) ∧
+    (∀ (B : IntegralComparisonSystem.{u} l) (r : ℕ)
+      (N : DerivedCategory (integralTowerModules l E (Spec (.of D.k))))
+      (hN : sfIntegralConstructible l E (Spec (.of D.k)) N),
+      (pointFibreIntegralAmbient D l E).map
+          (IntegralPointTransportTower.reductionComparison D l E B N hN).hom ≫
+        IntegralPointTransportTower.realizedTransport D l E hl r
+          (((B.coefficient E).system (Spec (.of D.k))).reduction.obj N)
+          (IntegralPointTransportTower.reductionLimitConstructible D l E B N hN) ≫
+        (pointFibreIntegralAmbient D l E).map
+          ((integralDerivedPullback l E ((pointFrobeniusAut D) ^ r).hom).map
+            (IntegralPointTransportTower.reductionComparison D l E B N hN).inv) =
+      IntegralPointTransportTower.iota D l E hl r N) := by
+  sorry
+
+
 /-- Whole-system point transport, its powers, and its integral realization.
 
 Source: the complete prerequisite to clause (3) of
@@ -650,6 +737,16 @@ theorem integralPointTransportTowerPowers
     (E : Type u) [Field E] [Algebra ℚ_[l] E]
     [FiniteDimensional ℚ_[l] E] :
     IntegralPointTransportTower.Laws D l E hl := by
-  sorry
+  refine ⟨?_, ?_⟩
+  · intro r C C' f
+    exact (IntegralPointTransportTower.transport D l E r).naturality f
+  · obtain ⟨hpow, heval, hreal, hnu, hcomp, hsigma, hiota, hred⟩ :=
+      integralPointTransportTowerPowers_remaining D l hl E
+    exact ⟨hpow, heval, IntegralPointTransportTower.kappa_isIso D l E hl,
+      hreal, hnu, (fun r N hN => by
+        let := frobeniusPointPrimeInvertible D l hl
+        exact (integralOperations_preserve_constructible l E
+          ((pointFrobeniusAut D) ^ r).hom).1 N hN |>.1), hcomp, hsigma, hiota, hred⟩
+
 
 end WeilConjectures

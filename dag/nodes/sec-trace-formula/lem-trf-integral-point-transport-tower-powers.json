@@ -30,154 +30,25 @@
  ],
  "proof": [
   {
-   "text": "For integralSigma_existsUnique, take the uniquely section-normalized natural transformation of lem-trf-point-integral-restriction-natural and apply its components in each complex degree. Its naturality for each differential is exactly the chain-map equation. Its section formula gives the prescribed sigma, and degreewise section extensionality gives uniqueness, including r=0.",
-   "uses": [
-    "lem-trf-point-integral-restriction-natural"
-   ],
+   "text": "Naturality is the naturality field of the constructed transport natural transformation.",
+   "uses": [],
    "elementary": true
   },
   {
-   "text": "For the ordinary finite evaluation comparison, take the inverse of the adjunction mate constructed in [lem-trf-ordinary-quotient-pullback-tower-comparison]. Its inverseEvaluation_inv_unit identity is exactly the stated formula on sequence pullback generators. If another natural isomorphism has this formula, precompose with the mate and apply the finite pullback adjunction hom-set bijection. The two adjuncts agree on every section, so injectivity and cancellation prove uniqueness.",
+   "text": "Assemble the direct kappa and constructibility clauses with the remaining power, evaluation, realization, compositor, normalization and reduction clauses stated in the split intermediate theorem.",
    "uses": [
-    "lem-trf-ordinary-quotient-pullback-tower-comparison"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "lean/Sheaf/Paper/OrdinaryQuotientPullbackTowerComparison.lean",
-    "place": "OrdinaryTowerProof.inverseEvaluation, inverseEvaluation_unit and inverseEvaluation_inv_unit; finite-evaluation part of the inherited prerequisite, original steps 1-2."
-   }
-  },
-  {
-   "text": "For inverseLimitComparison_existsUnique, use the completed-module inverse-image equivalence obtained by site reindexing [lem-weil-proetale-isomorphism-inverse-image] and transport through the specified coefficient isomorphism; reuse the proved private sectionwiseModules_equivalence declaration from [lem-weil-isomorphism-scalar-quotient-chain-squares] and its componentwise equivalence on strict towers. Localize both equivalences. Take the adjunction mate of constantInverseComparison under the specified constant-tower/total-limit adjunction. This mate is invertible: on hom sets from an inverse-image object, the induced map is the composite of the two fully faithful functor hom-set bijections, the adjunction bijections and precomposition with the constant-tower comparison. Essential surjectivity extends this to every source object, and Yoneda proves invertibility. Whisker this mate by coefficientSequenceDerivedRestriction, then compose with derivedRestrictionComparison followed by total limit. Counit naturality and the mate counit equation give the displayed normalization. The adjunction hom-set bijection proves uniqueness of every component, hence of the natural isomorphism. No individual derived evaluations are used.",
-   "uses": [
-    "lem-weil-isomorphism-scalar-quotient-chain-squares",
-    "def-trf-integral-comparison-realization-models",
-    "def-weil-inverse-image-pullback-comparison",
-    "lem-weil-proetale-isomorphism-inverse-image"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "lean/Sheaf/Paper/IntegralPointTransportTowerPowers.lean",
-    "place": "inverseLimitComparison_existsUnique; the entire-counit normalization specified in original proof step 5; categorical mate argument by E3."
-   }
-  },
-  {
-   "text": "For ordinaryTransport_existsUnique, take the natural linear restriction map on completed modules from lem-trf-point-integral-restriction-natural and keep it abstract via its section formula. Whisker it termwise on towers and then compose with restrictionComparison followed by tower sections. Naturality on tower arrows is the ordinary naturality of module restriction. The recorded coefficientSequenceRestriction identity and cast_map show that section restriction commutes with the restriction-of-scalars casts. The defining generator equation for restrictionComparison therefore gives sectionTransport. Every section is the cast of an original system section, so that equation also proves uniqueness. This works at r=0 and uses no constructibility.",
-   "uses": [
-    "lem-trf-point-integral-restriction-natural",
-    "lem-trf-ordinary-quotient-pullback-tower-comparison",
-    "def-trf-integral-comparison-realization-models",
-    "lem-trf-integral-point-restriction-comparison"
-   ],
-   "elementary": true
-  },
-  {
-   "text": "For sectionsLimitComparison_existsUnique, take the mate of constantSectionsComparison under the two specified constant-tower/total-limit adjunctions. The exact product-preserving sections functor makes this actual mate invertible by lem-trf-exact-product-tower-limit-mate. Whisker by coefficientSequenceDerivedRestriction. The mate counit equation is precisely the required normalization, and injectivity of the adjunction hom-set bijection proves uniqueness componentwise. The separate general mate lemma is proved by normalized Roos comparison on injective-term resolutions.",
-   "uses": [
-    "lem-trf-exact-product-tower-limit-mate",
-    "lem-weil-point-proetale-sections-exact",
-    "def-trf-integral-comparison-realization-models"
+    "lem-trf-integral-point-transport-tower-powers-remaining"
    ],
    "elementary": false
-  },
-  {
-   "text": "Apply [lem-trf-point-system-transport-descent]. It constructs the specified $I_{r,C}$ before localization with the actual semilinear transitions, identifies its finite evaluations, and gives naturality for every derived system morphism.",
-   "uses": [
-    "lem-trf-point-system-transport-descent"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-weil/prop-trf-rational-frobenius-integral-model.proof.md",
-    "place": "Assembly step 1; clause (3), whole-system integral transport"
-   }
-  },
-  {
-   "text": "Apply [lem-trf-point-system-power-roos-coherence] to obtain the stated power law with the specified $t_m$, and retain its identity $a_{m+1}d_m=\\mathcal L_s(t_m)a_{1,G_mC}F_1(a_m)$ for the normalized whole-limit comparisons.",
-   "uses": [
-    "lem-trf-point-system-power-roos-coherence"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-weil/prop-trf-rational-frobenius-integral-model.proof.md",
-    "place": "Assembly step 2; clause (3), whole-system integral transport"
-   }
-  },
-  {
-   "text": "By [lem-trf-point-system-roos-transport], the actual cone-normalized maps $a_r,\\zeta$ are natural and satisfy $\\zeta_{G_rC}R\\lim(I_r)=\\Gamma(s,a_r)\\sigma_{r,N}\\zeta_C$ for $N=\\mathcal L_sC$, without assumptions on $C$ or $N$.",
-   "uses": [
-    "lem-trf-point-system-roos-transport"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-weil/prop-trf-rational-frobenius-integral-model.proof.md",
-    "place": "Assembly step 3; clause (3), whole-system integral transport"
-   }
-  },
-  {
-   "text": "Now suppose $N\\in D^b_c(s,R)$. Its derived completeness [def-weil-derived-complete-integral-detailed] makes the actual $\\kappa^{(r)}_N$ invertible by [lem-weil-isomorphism-derived-pullback-comparison-normalization], naturally with the specified zero-shifted-coordinate completion augmentation. Put $\\nu_r=a_r(\\kappa^{(r)}_N)^{-1}$. The defining recipe [def-weil-frobenius-point-transport] gives $\\iota_N^{(r)}=\\Gamma(s,\\kappa^{(r)}_N)\\sigma_{r,N}$. Cancellation in step 3 proves precisely the asserted realization identity and its naturality.",
-   "uses": [
-    "def-weil-derived-complete-integral-detailed",
-    "lem-weil-isomorphism-derived-pullback-comparison-normalization",
-    "def-weil-frobenius-point-transport"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-weil/prop-trf-rational-frobenius-integral-model.proof.md",
-    "place": "Assembly step 4; clause (3), whole-system integral transport"
-   }
-  },
-  {
-   "text": "The object $P_mN$ is constructible by [lem-weil-isomorphism-derived-pullback]; hence so is $\\mathcal L_sG_mC\\cong P_mN$. With the specified $c^E$ of [lem-trf-integral-pullback-comparison-realization], [lem-trf-integral-inverse-image-comparison-composition] gives $c^E_m\\kappa^{(m+1)}_Nd_m=\\kappa^{(1)}_{P_mN}F_1(\\kappa^{(m)}_N)$. Naturality of $\\kappa^{(1)}$ at $\\nu_m$, inversion of this equality, and step 2 yield\n$$\\mathcal L_s(t_m)\\nu_{1,G_mC}P_1(\\nu_m)c^E_m=\\mathcal L_s(t_m)a_{1,G_mC}F_1(a_m)d_m^{-1}(\\kappa^{(m+1)}_N)^{-1}=a_{m+1}(\\kappa^{(m+1)}_N)^{-1}=\\nu_{m+1}.$$\nThis proves compositor compatibility for these actual whole-cone maps.",
-   "uses": [
-    "lem-weil-isomorphism-derived-pullback",
-    "lem-trf-integral-pullback-comparison-realization",
-    "lem-trf-integral-inverse-image-comparison-composition"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-weil/prop-trf-rational-frobenius-integral-model.proof.md",
-    "place": "Assembly step 5; Global powers, compatibility with composition"
-   }
-  },
-  {
-   "text": "For $N_0\\in D^b_c(s,R)$ and $C=\\mathcal R_sN_0$, [lem-coef-derived-system-evaluation-calculus] supplies the simultaneous quotient system, and the $L=E$ completion isomorphism of [lem-weil-finite-free-completed-scalar-comparison] identifies its limit with $N_0$ by the actual quotient augmentation. Steps 1 and 4 give the reduction-tower specialization for every power. Any finite-output system with constructible limit satisfies step 4 directly. No reconstruction of $C$, normalization, or finite Tor-amplitude was used.",
-   "uses": [
-    "lem-coef-derived-system-evaluation-calculus",
-    "lem-weil-finite-free-completed-scalar-comparison"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-weil/prop-trf-rational-frobenius-integral-model.proof.md",
-    "place": "Assembly step 6; clause (3), whole-system integral transport"
-   }
   }
  ],
  "proof_deps": [
-  "lem-trf-point-integral-restriction-natural",
-  "lem-trf-ordinary-quotient-pullback-tower-comparison",
-  "lem-weil-isomorphism-scalar-quotient-chain-squares",
-  "def-trf-integral-comparison-realization-models",
-  "def-weil-inverse-image-pullback-comparison",
-  "lem-weil-proetale-isomorphism-inverse-image",
-  "lem-trf-integral-point-restriction-comparison",
-  "lem-trf-exact-product-tower-limit-mate",
-  "lem-weil-point-proetale-sections-exact",
-  "lem-trf-point-system-transport-descent",
-  "lem-trf-point-system-power-roos-coherence",
-  "lem-trf-point-system-roos-transport",
-  "def-weil-derived-complete-integral-detailed",
-  "lem-weil-isomorphism-derived-pullback-comparison-normalization",
-  "def-weil-frobenius-point-transport",
-  "lem-weil-isomorphism-derived-pullback",
-  "lem-trf-integral-pullback-comparison-realization",
-  "lem-trf-integral-inverse-image-comparison-composition",
-  "lem-coef-derived-system-evaluation-calculus",
-  "lem-weil-finite-free-completed-scalar-comparison"
+  "lem-trf-integral-point-transport-tower-powers-remaining"
  ],
  "proof_origin": {
-  "by": "agent",
+  "by": "V3 stage 3 decomposition",
   "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-weil/prop-trf-rational-frobenius-integral-model.proof.md",
-  "place": "Prerequisite to clause (3); short assembly of the three extracted point-system lemmas and the existing specified completion/composition comparisons. D9 supplies the integral-sigma and ordinary-evaluation subproofs explicitly from normalized restriction and the finite pullback adjunction; the remaining assembly statements are unchanged. E3 proves the inverse-limit comparison existence and uniqueness directly by the mate of the constant-tower comparison; the remaining proof plan and holes are retained. D3 constructs ordinaryTransport from the existing restriction comparison and reduces the exact-sections comparison to invertibility of the canonical total-limit mate; the remaining restriction-comparison and Laws proofs are unchanged. The self-contained comparison declarations, including the unchanged original restrictionComparison_existsUnique hole, are reexported from IntegralPointTransportComparisons to satisfy per-file compilation. No new unproved declaration is introduced by this file split."
+  "place": "Assembly of the parent theorem from direct clauses and the remaining-clause split"
  },
  "mathlib_searches": [
   {
@@ -407,11 +278,11 @@
  "reviewed_proof": {
   "date": "2026-10-27",
   "by": "L",
-  "reviewer": "C-2a140",
-  "group": "D3",
-  "result": "fix",
-  "landing": "20261027T021306-L-2753286",
-  "kind": "interface",
-  "note": "independent cc review: moved comparison block vs clone item file (verbatim apart from the two proofs and the order), 4 delivered modules + 3 direct importers compiled in sandbox (all OK), axioms of the proved declarations, item/new node JSON vs Lean"
+  "reviewer": "COMPILER",
+  "group": "V3",
+  "result": "pass",
+  "landing": "20261027T234337-L-107039",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
