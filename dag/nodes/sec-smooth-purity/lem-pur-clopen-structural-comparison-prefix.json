@@ -1,0 +1,103 @@
+{
+ "status": "split",
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-purity-conv",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 0GMW and 0FPQ: normalized pure tensors, total tensor summands, and signed coherence."
+ },
+ "mathlib_match": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ProEtaleClopenStructuralComparison",
+  "date": "2026-10-28",
+  "group": "P2"
+ },
+ "id": "lem-pur-clopen-structural-comparison-prefix",
+ "kind": "lemma",
+ "title": "Normalized clopen tensor comparison through the differential clause",
+ "blueprint": {
+  "from": {
+   "node": "lem-pur-clopen-structural-comparison",
+   "place": "Strictly smaller prefix retaining the common braided and total comparison witness."
+  },
+  "same_as": [],
+  "is": null
+ },
+ "statement": "For each component of a finite disjoint clopen pro-etale cover, there are a braided restriction and total comparison satisfying the pure-tensor, total-summand, and differential formulas.",
+ "stmt_deps": [
+  "def-pur-clopen-total-tensor-data"
+ ],
+ "proof": [
+  {
+   "text": "Construct the normalized restriction tensorator from the clopen gluing equivalence and verify the pure-tensor, total-summand, and differential identities on local generators; the signed differential formula is the two-summand calculation.",
+   "uses": [
+    "def-pur-clopen-total-tensor-data"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pur-clopen-total-tensor-data"
+ ],
+ "proof_origin": {
+  "kind": "stage3",
+  "by": "P2",
+  "date": "2026-10-28",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 0GMW and 0FPQ: normalized pure tensors and total summands."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "clopen structural comparison pure tensor total summand differential",
+   "results": "No existing declaration states this project-specific prefix.",
+   "date": "2026-10-28",
+   "verdict": "No match."
+  },
+  {
+   "tool": "loogle",
+   "query": "clopenTensorRestriction clopenTotalTensorSummand differential",
+   "results": "No matching declaration in Mathlib.",
+   "date": "2026-10-28",
+   "verdict": "No match."
+  },
+  {
+   "tool": "leansearch",
+   "query": "finite clopen pro-etale tensor comparison differential",
+   "results": "No matching declaration in the source library or Mathlib.",
+   "date": "2026-10-28",
+   "verdict": "No match."
+  }
+ ],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ProEtaleClopenStructuralComparisonPrefix",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProEtaleClopenStructuralComparisonPrefix.lean",
+  "declaration": "AlgebraicGeometry.Scheme.ProEt.clopen_structural_comparison_prefix",
+  "statement": "theorem clopen_structural_comparison_prefix\n    (X : Scheme.{t}) (I : Type w) [Finite I] (Y : I → Scheme.{t})\n    (j : ∀ i, Y i ⟶ X) [∀ i, IsOpenImmersion (j i)] [∀ i, IsClosedImmersion (j i)]\n    (hdisjoint : Pairwise (fun i k ↦ Disjoint (Set.range (j i)) (Set.range (j k))))\n    (hcover : ∀ x : X, ∃ i, x ∈ Set.range (j i))\n    (R : Sheaf (topology X) CommRingCat.{max u (t + 1)}) :\n    ∀ i, ∃ (h : (ClopenData.clopenTensorRestriction.{t, u} (j i) R).Braided)\n      (b : coefficientTotalTensor.{u, t + 1, t} (topology X) R ⋙\n          ClopenData.clopenTensorComplexRestriction.{t, u} (j i) R ≅\n        ((ClopenData.clopenTensorComplexRestriction.{t, u} (j i) R).prod\n          (ClopenData.clopenTensorComplexRestriction.{t, u} (j i) R)) ⋙\n            coefficientTotalTensor.{u, t + 1, t} (topology (Y i))\n              ((ClopenData.clopenTensorRings.{t, u} (j i)).obj R)),\n      clopenStructuralPrefix i h b",
+  "branch": "sheaf-dag",
+  "by": "P2",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P2",
+  "result": "pass",
+  "landing": "20261027T234128-L-6719",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P2",
+  "result": "pass",
+  "landing": "20261027T234128-L-6719",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

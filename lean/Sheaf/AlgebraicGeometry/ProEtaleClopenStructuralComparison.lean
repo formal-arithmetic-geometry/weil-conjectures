@@ -5,6 +5,8 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import Sheaf.AlgebraicGeometry.ProEtaleClopenTotalTensorKFlatDetectionData
+import Sheaf.AlgebraicGeometry.ProEtaleClopenStructuralComparisonPrefix
+import Sheaf.AlgebraicGeometry.ProEtaleClopenStructuralComparisonSymmetry
 
 /-! Split structural comparison data for finite clopen restriction.
 Source: Stacks Project, sites-modules.tex, Tag 0GMW; sites-cohomology.tex, Tag 0FPQ.
@@ -93,6 +95,9 @@ theorem clopen_structural_comparison
                 ((ClopenData.clopenTensorComplexRestriction.{t, u} (j i) R).obj Q)
                 ((ClopenData.clopenTensorComplexRestriction.{t, u} (j i) R).obj P)
                 q p n hqp))) := by
-  sorry
+  intro i
+  obtain ⟨h, b, hp⟩ := clopen_structural_comparison_prefix X I Y j hdisjoint hcover R i
+  refine ⟨h, b, hp.1, hp.2.1, hp.2.2, ?_⟩
+  exact clopen_structural_comparison_symmetry X I Y j hdisjoint hcover R i h b hp
 
 end AlgebraicGeometry.Scheme.ProEt

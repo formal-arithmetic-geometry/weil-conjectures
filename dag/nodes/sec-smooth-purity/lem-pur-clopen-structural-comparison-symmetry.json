@@ -1,0 +1,103 @@
+{
+ "status": "split",
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-purity-conv",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 0GMW and 0FPQ: normalized pure tensors, total tensor summands, and signed coherence."
+ },
+ "mathlib_match": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ProEtaleClopenStructuralComparison",
+  "date": "2026-10-28",
+  "group": "P2"
+ },
+ "id": "lem-pur-clopen-structural-comparison-symmetry",
+ "kind": "lemma",
+ "title": "Signed symmetry completion for normalized clopen tensor comparison",
+ "blueprint": {
+  "from": {
+   "node": "lem-pur-clopen-structural-comparison",
+   "place": "Strictly smaller final clause completing the prefix comparison."
+  },
+  "same_as": [],
+  "is": null
+ },
+ "statement": "Given the normalized prefix comparison witness on a component, its total comparison satisfies the signed Koszul symmetry formula.",
+ "stmt_deps": [
+  "lem-pur-clopen-structural-comparison-prefix"
+ ],
+ "proof": [
+  {
+   "text": "Compare the two routes around the tensor-symmetry square on each total-tensor summand. Braided coherence contributes the sign (-1)^(pq), and the prefix pure-tensor and summand identities identify both routes with the chosen total comparison.",
+   "uses": [
+    "lem-pur-clopen-structural-comparison-prefix"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-clopen-structural-comparison-prefix"
+ ],
+ "proof_origin": {
+  "kind": "stage3",
+  "by": "P2",
+  "date": "2026-10-28",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0FPQ: signed symmetry of total tensor."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "signed Koszul symmetry clopen total tensor comparison",
+   "results": "No existing declaration states this project-specific clause.",
+   "date": "2026-10-28",
+   "verdict": "No match."
+  },
+  {
+   "tool": "loogle",
+   "query": "negOnePow beta totalTensorSummand restriction",
+   "results": "No matching declaration in Mathlib.",
+   "date": "2026-10-28",
+   "verdict": "No match."
+  },
+  {
+   "tool": "leansearch",
+   "query": "braided total tensor summand symmetry formula",
+   "results": "No matching declaration in the source library or Mathlib.",
+   "date": "2026-10-28",
+   "verdict": "No match."
+  }
+ ],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ProEtaleClopenStructuralComparisonSymmetry",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProEtaleClopenStructuralComparisonSymmetry.lean",
+  "declaration": "AlgebraicGeometry.Scheme.ProEt.clopen_structural_comparison_symmetry",
+  "statement": "theorem clopen_structural_comparison_symmetry\n    (X : Scheme.{t}) (I : Type w) [Finite I] (Y : I → Scheme.{t})\n    (j : ∀ i, Y i ⟶ X) [∀ i, IsOpenImmersion (j i)] [∀ i, IsClosedImmersion (j i)]\n    (hdisjoint : Pairwise (fun i k ↦ Disjoint (Set.range (j i)) (Set.range (j k))))\n    (hcover : ∀ x : X, ∃ i, x ∈ Set.range (j i))\n    (R : Sheaf (topology X) CommRingCat.{max u (t + 1)})\n    (i : I) (h : (ClopenData.clopenTensorRestriction.{t, u} (j i) R).Braided)\n    (b : coefficientTotalTensor.{u, t + 1, t} (topology X) R ⋙\n          ClopenData.clopenTensorComplexRestriction.{t, u} (j i) R ≅\n        ((ClopenData.clopenTensorComplexRestriction.{t, u} (j i) R).prod\n          (ClopenData.clopenTensorComplexRestriction.{t, u} (j i) R)) ⋙\n            coefficientTotalTensor.{u, t + 1, t} (topology (Y i))\n              ((ClopenData.clopenTensorRings.{t, u} (j i)).obj R))\n    (_hp : clopenStructuralPrefix i h b) :\n    ∀ (P Q : CochainComplex (ClopenData.clopenTensorModules.{t, u} R) ℤ)\n      (p q n : ℤ) (hqp : q + p = n),\n        (ClopenData.clopenTensorRestriction.{t, u} (j i) R).map\n            ((p * q).negOnePow • ((β_ (P.X p) (Q.X q)).hom ≫\n              ClopenData.clopenTotalTensorSummand.{t, u} R Q P q p n hqp)) ≫\n            (b.hom.app (Q, P)).f n =\n          (p * q).negOnePow •\n            ((ClopenData.clopenTensorComparison.{t, u} (j i) R h (P.X p) (Q.X q)).hom ≫\n              (β_ ((ClopenData.clopenTensorRestriction.{t, u} (j i) R).obj (P.X p))\n                ((ClopenData.clopenTensorRestriction.{t, u} (j i) R).obj (Q.X q))).hom ≫\n              ClopenData.clopenTotalTensorSummand.{t, u}\n              ((ClopenData.clopenTensorRings.{t, u} (j i)).obj R)\n                ((ClopenData.clopenTensorComplexRestriction.{t, u} (j i) R).obj Q)\n                ((ClopenData.clopenTensorComplexRestriction.{t, u} (j i) R).obj P)\n                q p n hqp)",
+  "branch": "sheaf-dag",
+  "by": "P2",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P2",
+  "result": "pass",
+  "landing": "20261027T234128-L-6719",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P2",
+  "result": "pass",
+  "landing": "20261027T234128-L-6719",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
