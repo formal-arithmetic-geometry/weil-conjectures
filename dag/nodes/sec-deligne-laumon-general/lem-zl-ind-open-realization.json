@@ -16,42 +16,45 @@
  },
  "proof": [
   {
-   "text": "For the identity-proper compactification, the projection-normalized completed realization identifies the integral operation with exact extension by zero. At each positive quotient it is precisely the ordinary open extension. Its open unit and counit commute with coefficient extension, so raw rationalization and common-stage descent give the same adjunction and preserve the standard heart. No absolute separatedness enters this local open construction.",
+   "text": "Retain the literal object formula in the proved construction of commonStageOpenHeartAdjunction. Take the coherent rational pullback stage morphism. At each coefficient field, rationalAdjunction supplies the finite compact-support left adjoint and its fully faithful unit; rational_standard supplies preservation of the standard classes. The normalized scalar isomorphisms put the target of each left mate in the essential image, so these actual mates are invertible. Use the proved StageLeftAdjunction.family, familyUnit, familyCounit and descendStageAdjunction helpers to descend this adjunction. The uniqueness specification identifies its right functor with the recorded common-stage pullback. The finite_eq clause of S identifies the descended functor H and S pointwise on literal output objects. Standard-class witnesses descend through the inclusion comparison, so H preserves the heart. Restrict H and its adjunction along the fully faithful heart inclusions. No absolute separatedness hypothesis is used.",
    "uses": [
-    "def-weil-compact-support-coefficient-action",
+    "lem-zl-common-stage-open-heart-adjunction",
+    "lem-sf-rational-direct-image-coefficient-compatibility",
+    "lem-weil-compact-support-normalized-scalar-isomorphisms",
     "def-weil-constructible-heart",
-    "def-weil-integral-rational-qbar-compact-support",
-    "lem-sf-integral-open-reduction-comparison",
-    "lem-cbc-completed-extension-zero-comparison",
-    "sk-lem-sf-open-ctf",
-    "lem-fix-operation-reduction"
+    "def-weil-compact-support-coefficient-action"
    ],
    "elementary": false
   },
   {
-   "text": "Transport the heart adjunction through AsSmall and extend by filtered colimits. The Yoneda Kan unit identifies the extension on represented objects. The fixed-pair adjunction uses the left mate of the prescribed Frobenius pullback square, hence uniqueness of left adjoints identifies it with the specified ind open extension. Full faithfulness identifies any represented G with this heart extension; applying the heart inclusion gives the stated iso. The zero object, empty open, identity open and arbitrary representatives are covered.",
+   "text": "Transport the restricted adjunction through AsSmall and use the proved zlIndMap_adjunction helper to extend it to ind-categories. The ind-Frobenius functors are equivalences. The inverse mate of the prescribed ind-pullback square is therefore invertible. Lift this adjunction to IsoAlgebra using its mate equation. Uniqueness of left adjoints identifies this fixed-pair extension with zlIndWeilOpenShriek.",
+   "uses": [
+    "def-zl-weil-ind-sheaf-category"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Compose the given representing isomorphism e with the preceding uniqueness isomorphism, and forget Frobenius. The Yoneda Kan unit identifies the resulting ind-extension of the represented input with Yoneda of the small heart extension. Fully faithful Yoneda reflects this isomorphism. Apply AsSmall.down and the heart inclusion, then use the recorded literal carrier equalities of zlWeilSmallPairs on F and G to obtain G.carrier isomorphic to H(F.carrier). Compose with the literal object equality H(F.carrier)=S.functor(F.carrier). This uses no separate representability assertion and includes zero objects and empty and identity opens.",
    "uses": [
     "def-zl-weil-ind-sheaf-category",
     "def-weil-weil-sheaf-complex"
    ],
-   "elementary": false
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-weil-compact-support-coefficient-action",
+  "lem-zl-common-stage-open-heart-adjunction",
+  "lem-sf-rational-direct-image-coefficient-compatibility",
+  "lem-weil-compact-support-normalized-scalar-isomorphisms",
   "def-weil-constructible-heart",
-  "def-weil-integral-rational-qbar-compact-support",
-  "lem-sf-integral-open-reduction-comparison",
-  "lem-cbc-completed-extension-zero-comparison",
-  "sk-lem-sf-open-ctf",
-  "lem-fix-operation-reduction",
+  "def-weil-compact-support-coefficient-action",
   "def-zl-weil-ind-sheaf-category",
   "def-weil-weil-sheaf-complex"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "SGA 4, XVII, §5.1; Bhatt–Scholze, Definition 6.7.6 and Lemma 6.7.7",
-  "place": "Exact extension by zero, the open adjunction, and normalized completed coefficient realization."
+  "place": "P9: retain the literal object formula in the existing proved common-stage descent, then restrict to hearts, extend adjunctions to ind-objects and fixed pairs, and reflect the representing isomorphism through fully faithful Yoneda. No new unproved statement."
  },
  "mathlib_match": null,
  "mathlib_searches": [
@@ -119,12 +122,12 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-25",
+  "date": "2026-10-27",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "E3",
+  "group": "P9",
   "result": "pass",
-  "landing": "20261025T041146-L-1034267",
+  "landing": "20261027T180732-L-3896598",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
