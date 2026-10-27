@@ -58,7 +58,7 @@ namespace CategoryTheory
 namespace Mod
 
 variable {C : Type u} [Category.{v} C] [MonoidalCategory C] [Abelian C] [MonoidalPreadditive C]
-  {R : C} [MonObj R] [PreservesFiniteColimits (tensorLeft R)]
+  {R : C} [MonObj R] [PreservesFiniteColimits (MonoidalCategory.tensorLeft R)]
 
 /-- The finite free module `Rⁿ` is projective when the regular module is: a morphism out of
 `Rⁿ` lifts summand by summand. -/
