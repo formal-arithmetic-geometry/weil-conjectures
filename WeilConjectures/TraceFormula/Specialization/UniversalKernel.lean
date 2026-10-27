@@ -117,6 +117,129 @@ lemma kunneth_retraction_aux {C D : Type*} [Category C] [Category D] [MonoidalCa
   rw [e, Ψ.map_comp, reassoc_of% h, ← hnat]
   simp only [Category.assoc, tensorHom_comp_tensorHom_assoc, hcA, hcB]
 
+/-- Naturality of `(α_ _ _ _).inv ≫ (β ▷ _) ≫ (α_ _ _ _).hom : A ⊗ (B ⊗ C) ⟶ B ⊗ (A ⊗ C)`. -/
+@[reassoc]
+theorem whiskerRight_whiskerLeft_braiding_comp {C : Type*} [Category C] [MonoidalCategory C]
+    [BraidedCategory C] {A A' B B' Z Z' E : C} (a : A' ⟶ A) (b : B' ⟶ B) (c : Z' ⟶ Z)
+    (f : A ⊗ Z ⟶ E) :
+    a ▷ (B' ⊗ Z') ≫ A ◁ (b ⊗ₘ c) ≫ (α_ _ _ _).inv ≫ ((β_ _ _).hom ▷ _) ≫ (α_ _ _ _).hom ≫
+        B ◁ f =
+      (α_ _ _ _).inv ≫ ((β_ _ _).hom ▷ _) ≫ (α_ _ _ _).hom ≫ (b ⊗ₘ ((a ⊗ₘ c) ≫ f)) := by
+  rw [← tensorHom_def_assoc, associator_inv_naturality_assoc, ← tensorHom_id, ← tensorHom_id,
+    tensorHom_comp_tensorHom_assoc, BraidedCategory.braiding_naturality, Category.comp_id,
+    ← Category.id_comp c, ← tensorHom_comp_tensorHom_assoc, associator_naturality_assoc,
+    Category.id_comp, tensorHom_id, tensorHom_comp_whiskerLeft]
+
+/-- For a lax monoidal functor `F` compatible with the braidings, the lax tensor maps
+`F X ⊗ (F Y ⊗ F Z) ⟶ F (X ⊗ (Y ⊗ Z))` commute with the exchange of the first two factors
+`(α_ _ _ _).inv ≫ (β ▷ _) ≫ (α_ _ _ _).hom`. -/
+theorem Functor.LaxMonoidal.μ_comp_map_braiding_exchange {CP CP' : Type*}
+    [Category CP] [Category CP']
+    [MonoidalCategory CP] [MonoidalCategory CP'] [BraidedCategory CP] [BraidedCategory CP']
+    {SP : CP ⥤ CP'} [SP.LaxMonoidal]
+    (hbr : ∀ X Y : CP, Functor.LaxMonoidal.μ SP X Y ≫ SP.map (β_ X Y).hom =
+      (β_ _ _).hom ≫ Functor.LaxMonoidal.μ SP Y X) (X Y Z : CP) :
+    SP.obj X ◁ Functor.LaxMonoidal.μ SP Y Z ≫ Functor.LaxMonoidal.μ SP X (Y ⊗ Z) ≫
+        SP.map ((α_ _ _ _).inv ≫ ((β_ X Y).hom ▷ Z) ≫ (α_ _ _ _).hom) =
+      (α_ _ _ _).inv ≫ ((β_ _ _).hom ▷ _) ≫ (α_ _ _ _).hom ≫
+        SP.obj Y ◁ Functor.LaxMonoidal.μ SP X Z ≫ Functor.LaxMonoidal.μ SP Y (X ⊗ Z) := by
+  have h1 := Functor.LaxMonoidal.associativity SP X Y Z
+  have h2 := Functor.LaxMonoidal.associativity SP Y X Z
+  rw [← cancel_epi (α_ (SP.obj X) (SP.obj Y) (SP.obj Z)).hom, ← reassoc_of% h1, SP.map_comp,
+    SP.map_comp, ← SP.map_comp_assoc, Iso.hom_inv_id, SP.map_id, Category.id_comp,
+    ← Functor.LaxMonoidal.μ_natural_left_assoc, ← comp_whiskerRight_assoc, hbr,
+    comp_whiskerRight_assoc, h2, Iso.hom_inv_id_assoc]
+
+/-- **The first identity of the universal kernel, reduced to a pairing** (blueprint
+`det-tf-sp-universal-kernel`, `𝔥 S(λ_K) = λ_{K'} ρ`): for a lax monoidal `S_P`, the map
+`𝔥 : S_P RHom(A, B) ⟶ RHom(A', B')` adjoint to `(a ⊗ 1) ≫ μ ≫ S_P(ev) ≫ b` and
+`λ_K : P ⟶ RHom(A, B)`, `λ_{K'} : P' ⟶ RHom(A', B')`, the identity holds as soon as the adjoint
+pairings agree: `(a ⊗ 1) ≫ μ ≫ S_P(λ_K^♭) ≫ b = (1 ⊗ ρ) ≫ λ_{K'}^♭`. -/
+theorem map_comp_eq_comp_of_pairing {CP CP' : Type*} [Category CP] [Category CP']
+    [MonoidalCategory CP] [MonoidalCategory CP'] [MonoidalClosed CP] [MonoidalClosed CP']
+    {SP : CP ⥤ CP'} [SP.LaxMonoidal] {A B P : CP} {A' B' P' : CP'} (a : A' ⟶ SP.obj A)
+    (b : SP.obj B ⟶ B') (lamK : P ⟶ (ihom A).obj B) (lamK' : P' ⟶ (ihom A').obj B')
+    (h : SP.obj ((ihom A).obj B) ⟶ (ihom A').obj B')
+    (hh : MonoidalClosed.uncurry h = a ▷ SP.obj ((ihom A).obj B) ≫
+      Functor.LaxMonoidal.μ SP A ((ihom A).obj B) ≫ SP.map ((ihom.ev A).app B) ≫ b)
+    (ρ : SP.obj P ⟶ P')
+    (hpair : a ▷ SP.obj P ≫ Functor.LaxMonoidal.μ SP A P ≫
+      SP.map (MonoidalClosed.uncurry lamK) ≫ b =
+      A' ◁ ρ ≫ MonoidalClosed.uncurry lamK') :
+    SP.map lamK ≫ h = ρ ≫ lamK' := by
+  apply MonoidalClosed.uncurry_injective
+  rw [MonoidalClosed.uncurry_natural_left, MonoidalClosed.uncurry_natural_left, hh, ← hpair,
+    whisker_exchange_assoc, Functor.LaxMonoidal.μ_natural_right_assoc, ← SP.map_comp_assoc,
+    ← MonoidalClosed.uncurry_eq]
+
+/-- **The pairing identity of the universal kernel**, abstractly (the computation behind the first
+identity of blueprint `det-tf-sp-universal-kernel`): for the Künneth–Verdier pairings
+`p_K : p₂^* K ⊗ (p₁^* K ⊗ p₂^* D K) ⟶ p₁^! K` (the symmetry, `μ` of `p₂^*`, `p₂^*(ev)` and the
+exceptional Künneth map `κ`) and its special analogue, `Π = (α_{p₁} ⊗ α_{p₂}) ≫ μ` and
+`ρ = Π⁻¹ ≫ (1 ⊠ δ_K)`, the pairing is specialized:
+`(α_{p₂} ⊗ 1) ≫ μ ≫ S_P(p_K) ≫ β_{p₁} = (1 ⊗ ρ) ≫ p_{K'}`, given the definition of `δ_K`,
+the monoidality of `α_{p₂}`, the compatibility `hκ` of `κ` with the exchanges and the symmetry
+of `S_P`. -/
+theorem pairing_specialization_eq {CX CX' CP CP' : Type*} [Category CX] [Category CX']
+    [Category CP] [Category CP'] [MonoidalCategory CX] [MonoidalCategory CX']
+    [MonoidalClosed CX'] [MonoidalCategory CP] [MonoidalCategory CP'] [BraidedCategory CP]
+    [BraidedCategory CP'] {SX : CX ⥤ CX'} [SX.LaxMonoidal] {SP : CP ⥤ CP'} [SP.LaxMonoidal]
+    {L₁ L₂ R₁ : CX ⥤ CP} {L₁' L₂' R₁' : CX' ⥤ CP'}
+    (α₁ : SX ⋙ L₁' ⟶ L₁ ⋙ SP) (α₂ : SX ⋙ L₂' ⟶ L₂ ⋙ SP) (β₁ : R₁ ⋙ SP ⟶ SX ⋙ R₁')
+    {K DK ω : CX} {ω' : CX'} (ev : K ⊗ DK ⟶ ω) (θ : SX.obj ω ⟶ ω')
+    (μ₂ : L₂.obj K ⊗ L₂.obj DK ⟶ L₂.obj (K ⊗ DK))
+    (μ₂' : ∀ X Y : CX', L₂'.obj X ⊗ L₂'.obj Y ⟶ L₂'.obj (X ⊗ Y))
+    (hμ₂' : ∀ {Y Y' : CX'} (g : Y ⟶ Y'), L₂'.obj (SX.obj K) ◁ L₂'.map g ≫
+      μ₂' (SX.obj K) Y' = μ₂' (SX.obj K) Y ≫ L₂'.map (SX.obj K ◁ g))
+    (κ : L₁.obj K ⊗ L₂.obj ω ⟶ R₁.obj K)
+    (κ' : L₁'.obj (SX.obj K) ⊗ L₂'.obj ω' ⟶ R₁'.obj (SX.obj K))
+    (δ : SX.obj DK ⟶ (ihom (SX.obj K)).obj ω')
+    (hδ : SX.obj K ◁ δ ≫ (ihom.ev (SX.obj K)).app ω' =
+      Functor.LaxMonoidal.μ SX K DK ≫ SX.map ev ≫ θ)
+    (hα₂ : (α₂.app K ⊗ₘ α₂.app DK) ≫ Functor.LaxMonoidal.μ SP _ _ ≫ SP.map μ₂ =
+      μ₂' _ _ ≫ L₂'.map (Functor.LaxMonoidal.μ SX K DK) ≫ α₂.app (K ⊗ DK))
+    (hκ : (α₁.app K ⊗ₘ α₂.app ω) ≫ Functor.LaxMonoidal.μ SP _ _ ≫ SP.map κ ≫ β₁.app K =
+      L₁'.obj (SX.obj K) ◁ L₂'.map θ ≫ κ')
+    (hbr : ∀ X Y : CP, Functor.LaxMonoidal.μ SP X Y ≫ SP.map (β_ X Y).hom =
+      (β_ _ _).hom ≫ Functor.LaxMonoidal.μ SP Y X)
+    (Km : L₁'.obj (SX.obj K) ⊗ L₂'.obj (SX.obj DK) ⟶ SP.obj (L₁.obj K ⊗ L₂.obj DK))
+    (hKm : Km = (α₁.app K ⊗ₘ α₂.app DK) ≫ Functor.LaxMonoidal.μ SP _ _) [IsIso Km] :
+    α₂.app K ▷ SP.obj (L₁.obj K ⊗ L₂.obj DK) ≫ Functor.LaxMonoidal.μ SP _ _ ≫
+        SP.map ((α_ _ _ _).inv ≫ ((β_ _ _).hom ▷ _) ≫ (α_ _ _ _).hom ≫ (_ ◁ μ₂) ≫
+          (_ ◁ L₂.map ev) ≫ κ) ≫ β₁.app K =
+      L₂'.obj (SX.obj K) ◁ (inv Km ≫ L₁'.obj (SX.obj K) ◁ L₂'.map δ) ≫
+        ((α_ _ _ _).inv ≫ ((β_ _ _).hom ▷ _) ≫ (α_ _ _ _).hom ≫ (_ ◁ μ₂' _ _) ≫
+          (_ ◁ L₂'.map ((ihom.ev (SX.obj K)).app ω')) ≫ κ') := by
+  rw [← cancel_epi (L₂'.obj (SX.obj K) ◁ Km), ← whiskerLeft_comp_assoc _ Km,
+    IsIso.hom_inv_id_assoc]
+  have hR : L₂'.obj (SX.obj K) ◁ L₁'.obj (SX.obj K) ◁ L₂'.map δ ≫ (α_ _ _ _).inv ≫
+      ((β_ _ _).hom ▷ _) ≫ (α_ _ _ _).hom ≫ (_ ◁ μ₂' _ _) ≫
+      (_ ◁ L₂'.map ((ihom.ev (SX.obj K)).app ω')) ≫ κ' =
+      (α_ _ _ _).inv ≫ ((β_ _ _).hom ▷ _) ≫ (α_ _ _ _).hom ≫
+      L₁'.obj (SX.obj K) ◁ (μ₂' _ _ ≫ L₂'.map (Functor.LaxMonoidal.μ SX K DK) ≫
+        L₂'.map (SX.map ev)) ≫ L₁'.obj (SX.obj K) ◁ L₂'.map θ ≫ κ' := by
+    rw [associator_inv_naturality_right_assoc, whisker_exchange_assoc,
+      associator_naturality_right_assoc, ← whiskerLeft_comp_assoc, ← whiskerLeft_comp_assoc,
+      ← whiskerLeft_comp_assoc, hμ₂' δ, Category.assoc, ← L₂'.map_comp, hδ]
+    simp
+  rw [hR, ← hκ]
+  subst hKm
+  have hn := α₂.naturality ev
+  dsimp at hn
+  rw [← whiskerLeft_comp_assoc, whiskerLeft_comp_tensorHom_assoc, Category.assoc, Category.assoc,
+    hn, ← reassoc_of% hα₂]
+  simp only [Functor.map_comp, Category.assoc, whiskerLeft_comp]
+  rw [whisker_exchange_assoc, whisker_exchange_assoc]
+  dsimp only [Functor.comp_obj]
+  have hc :=
+    Functor.LaxMonoidal.μ_comp_map_braiding_exchange hbr (L₂.obj K) (L₁.obj K) (L₂.obj DK)
+  simp only [Functor.map_comp] at hc
+  rw [reassoc_of% hc, ← Functor.LaxMonoidal.μ_natural_right_assoc,
+    ← Functor.LaxMonoidal.μ_natural_right_assoc, ← whiskerLeft_comp_assoc,
+    ← whiskerLeft_comp_assoc,
+    whiskerRight_whiskerLeft_braiding_comp_assoc]
+  simp
+
 variable [MonoidalCategory CX] [MonoidalCategory CX'] [MonoidalClosed CX']
 
 /-- **The restriction of `ρ` to the diagonal**, abstractly: let `Km = Π : Q' ⟶ S_P P` be invertible,
