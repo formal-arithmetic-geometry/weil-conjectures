@@ -6,6 +6,7 @@ Authors: SHEAF group F8
 module
 
 public import Sheaf.Paper.ConstantAdicQuotientScalarComparison
+import Sheaf.Paper.ConstantAdicQuotientModelExtensionIso
 
 /-! # Scalar reduction of two supplied constant quotient models
 
@@ -70,6 +71,30 @@ theorem constantAdicQuotient_model_reduction
           (ModuleCat.restrictScalars.{u + 1, u + 1, u + 1} (Ideal.Quotient.factor
             (Ideal.pow_le_pow_right (I := d.ideal.map
               (algebraMap A (AdicCompletion d.ideal A)))
-              (Nat.le_succ (n + 1))))).mapDerivedCategory.map k) := by sorry
+              (Nat.le_succ (n + 1))))).mapDerivedCategory.map k) := by
+  let q := Ideal.Quotient.factor
+    (Ideal.pow_le_pow_right (I := d.ideal.map
+      (algebraMap A (AdicCompletion d.ideal A))) (Nat.le_succ (n + 1)))
+  let adj := CategoryTheory.ConstantScalarRealization.moduleDerivedAdjunction q
+  obtain ⟨i⟩ := constantAdicQuotient_model_extension_iso X Y g d M n W _w E' E e' e
+  let t : E' ⟶ (ModuleCat.restrictScalars q).mapDerivedCategory.obj E :=
+    (adj.homEquiv E' E) i.hom
+  refine ⟨t, ?_⟩
+  intro N
+  have hJ : Function.Bijective (fun k : E ⟶ N ↦ i.hom ≫ k) := by
+    refine ⟨?_, ?_⟩
+    · intro k l h
+      have h' := congrArg (fun z ↦ i.inv ≫ z) h
+      simpa using h'
+    · intro h
+      refine ⟨i.inv ≫ h, ?_⟩
+      simp
+  have hh := (adj.homEquiv E' N).bijective.comp hJ
+  have he : (fun k : E ⟶ N ↦ t ≫ (ModuleCat.restrictScalars q).mapDerivedCategory.map k) =
+      (adj.homEquiv E' N) ∘ (fun k ↦ i.hom ≫ k) := by
+    funext k
+    exact (adj.homEquiv_naturality_right i.hom k).symm
+  rw [he]
+  exact hh
 
 end AlgebraicGeometry.Scheme
