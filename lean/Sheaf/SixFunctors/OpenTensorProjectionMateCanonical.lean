@@ -72,6 +72,12 @@ resolving-pair theorem. Source: Stacks 0GL1, 07A4 and 06YS--06YT.
 (blueprint: lem-sf-open-tensor-projection-mate-canonical).
 Proof: compute the adjunct on each signed total summand from the ordinary inverse,
 the restriction comparison, and the two summand formulas, then localize. -/
+-- STATEMENT-DISPUTED: `ambientModel` and `openModel` are arbitrary one-flat
+-- comparison families in this theorem. No naturality or agreement with the
+-- simultaneous models is assumed, so changing one component by a nontrivial
+-- automorphism changes the right-hand side without changing the left-hand side.
+-- The missing `ambientBoth`/`openBoth` and naturality hypotheses occur only in
+-- the downstream resolving/descent statements.
 theorem openTensorProjection_mate_canonical
     (D : OpenTensorCochainData.{c, v, r} J R J' R' F G adj H sectionPull)
     (restriction : A.tensor ⋙ G.mapDerivedCategory ≅
