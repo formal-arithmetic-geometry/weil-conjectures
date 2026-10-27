@@ -102,6 +102,11 @@ private theorem supportLocalizationComparison
   exact (cancel_mono (a.hom.app J)).mp ((he' J).trans (he J).symm)
 
 namespace WeilConjectures
+
+-- Since build 2026-10-28 another derived-category instance of the strict levels is in scope here;
+-- keep the ones this module was written against.
+attribute [local instance 5000] AlgebraicGeometry.strictEtaleSystemDerived
+  AlgebraicGeometry.strictEtaleLevelDerived
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
   {X Y : Scheme.{u}} (g : X ⟶ Y)

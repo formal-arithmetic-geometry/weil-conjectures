@@ -22,6 +22,11 @@ universe u
 open CategoryTheory CategoryTheory.Functor CategoryTheory.Limits Opposite
   AlgebraicGeometry SheafOfModules
 namespace WeilConjectures
+
+-- Since build 2026-10-28 another derived-category instance of the strict levels is in scope here;
+-- keep the ones this module was written against.
+attribute [local instance 5000] AlgebraicGeometry.strictEtaleSystemDerived
+  AlgebraicGeometry.strictEtaleLevelDerived
 private theorem localizationSquare
     {C D T : Type*} [Category C] [Category D] [Category T]
     (L : C ⥤ D) (S : MorphismProperty C) [L.IsLocalization S]
