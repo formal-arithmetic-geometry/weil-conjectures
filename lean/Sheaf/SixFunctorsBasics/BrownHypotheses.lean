@@ -1,6 +1,7 @@
 module
 
 public import Sheaf.Paper.LocalizingAdmissibleCoefficients
+public import Sheaf.Paper.FiniteFieldFiber
 public import WeilConjectures.CategoryTheory.CompactObject
 public import WeilConjectures.CategoryTheory.WeakTriangulatedGenerator
 public import Mathlib.CategoryTheory.Idempotents.Basic
@@ -10,7 +11,10 @@ public import Mathlib.CategoryTheory.Triangulated.Generators
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructible
 import all Sheaf.SixFunctors.BrownHypothesesSmall
 import Sheaf.SixFunctorsBasics.BrownHypothesesStructural
+import Sheaf.SixFunctorsBasics.BrownHypothesesArbitraryFieldCompactness
 import Sheaf.Paper.IntegralConstructibleCompactness
+import Sheaf.Paper.CondensedCoefficientIsoConstructible
+import all Sheaf.Paper.BrownHypothesesGeneration
 import Sheaf.Paper.LocalizingClosureCtfEqualsBc
 import Mathlib.CategoryTheory.Triangulated.Orthogonal
 import WeilConjectures.CategoryTheory.CompactObjectsThick
@@ -1079,6 +1083,182 @@ theorem not_brownHypothesesFor_padicIntegers_of_unbounded_categorical_ext
   exact he ((hd N q hq).elim e 0)
 
 
+open scoped CategoryTheory.Obj in
+/-- Compactness in a Brown bundle transports across a coefficient-ring isomorphism. -/
+private theorem compactness_of_brown_coefficientIso
+    {Λ Λ' : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
+    [MonObj Λ] [MonObj Λ'] [IsCommMonObj Λ] [IsCommMonObj Λ']
+    (e : Mon.mk Λ ≅ Mon.mk Λ') (X : Scheme.{u}) (hB : BrownHypothesesFor Λ' X) :
+    ∃ hSums : HasCoproducts.{u + 1} (localizingClosureProEtale Λ X).FullSubcategory,
+      letI := hSums
+      ∀ K : (localizingClosureProEtale Λ X).FullSubcategory,
+        (constantModelBoundedConstructible Λ X K.obj ∧
+          DerivedCategory.finiteTorAmplitude _ K.obj) → IsCompactObject K := by
+  classical
+  obtain ⟨_, _, _, _, hcop', hc'⟩ := (brownHypothesesFor_iff Λ' X).mp hB
+  let _ := hcop'
+  have hc (C : ConstantModelConstructibleFiniteTor Λ' X) (I : Type (u + 1))
+      (F : I → DerivedCategory
+        (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ' X)))
+      [HasCoproduct F] (hF : ∀ i, localizingClosureProEtale Λ' X (F i)) :
+      Function.Bijective (DirectSum.toAddMonoid
+        (fun i ↦ Preadditive.rightComp C.obj (Sigma.ι F i))) := by
+    let S' := constantModelBoundedConstructible Λ' X ⊓
+      fun K ↦ DerivedCategory.finiteTorAmplitude _ K
+    have hC : localizingClosureProEtale Λ' X C.obj :=
+      fun _ _ hSP ↦ hSP _ C.property
+    exact WeilConjectures.ambientCompactness_of_full (localizingClosureProEtale Λ' X)
+      ⟨C.obj, hC⟩ (hc' _ C.property) I F hF
+      (WeilConjectures.localizingClosure_coproduct Λ' X S' I F hF)
+  obtain ⟨_, htri, hiso, _, hcop, _⟩ := brownHypotheses_structural Λ X
+  let L := localizingClosureProEtale Λ X
+  let _ := htri
+  let _ := hiso
+  let _ := hcop
+  have hclosed (I : Type (u + 2)) : L.IsClosedUnderColimitsOfShape (Discrete I) := by
+    constructor
+    rintro K ⟨c⟩ P hP hS
+    let _ := hP.2.1
+    let _ : HasColimit c.diag := ⟨_, c.isColimit⟩
+    exact P.prop_of_iso ((colimit.isColimit c.diag).coconePointUniqueUpToIso c.isColimit)
+      (hP.2.2 c.diag inferInstance (fun i ↦ c.prop_diag_obj (Discrete.mk i) P hP hS))
+  let _ := (localizingClosure_exists Λ X
+    (constantModelBoundedConstructible Λ X ⊓ DerivedCategory.finiteTorAmplitude _)).1
+  refine ⟨hcop, ?_⟩
+  intro K hK I F
+  have _ := hclosed (ULift.{u + 2} I)
+  have _ : L.IsClosedUnderColimitsOfShape (Discrete I) :=
+    ObjectProperty.IsClosedUnderColimitsOfShape.of_equivalence
+      (Discrete.equivalence Equiv.ulift)
+  exact WeilConjectures.compactness_of_fullyFaithful L.ι K I F
+    (WeilConjectures.compactness_coefficientIso e X
+      (constantModelCtf_coefficientIso e X) hc ⟨K.obj, hK⟩ I
+      (fun i ↦ (F i).obj) (fun i ↦ (F i).property))
+
+
+/-- One direction of coefficient transport, with the coefficient instances fixed. -/
+private theorem brownHypothesesFor_of_coefficientIso
+    {Λ Λ' : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
+    [MonObj Λ] [MonObj Λ'] [IsCommMonObj Λ] [IsCommMonObj Λ']
+    (e : Mon.mk Λ ≅ Mon.mk Λ') (X : Scheme.{u}) (hB : BrownHypothesesFor Λ' X) :
+    BrownHypothesesFor Λ X := by
+  let S := constantModelBoundedConstructible Λ X ⊓
+    fun K ↦ DerivedCategory.finiteTorAmplitude _ K
+  let S' := constantModelBoundedConstructible Λ' X ⊓
+    fun K ↦ DerivedCategory.finiteTorAmplitude _ K
+  obtain ⟨ht, hi, hr, hs, _, _⟩ := (brownHypothesesFor_iff Λ' X).mp hB
+  let q : condensedRingObj Λ X ≅ condensedRingObj Λ' X :=
+    (upperStarFromPoint X).mapIso ((Mon.forget _).mapIso e)
+  have _ : IsMonHom q.hom :=
+    inferInstanceAs (IsMonHom ((upperStarFromPoint X).map e.hom.hom))
+  have _ : IsMonHom q.inv :=
+    inferInstanceAs (IsMonHom ((upperStarFromPoint X).map e.inv.hom))
+  let H : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X) ≌
+      Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ' X) :=
+    Equivalence.mk (Mod.comap q.inv) (Mod.comap q.hom)
+      ((Mod.comapId _).symm ≪≫ Mod.comapCongr q.hom_inv_id.symm ≪≫
+        Mod.comapComp q.hom q.inv)
+      ((Mod.comapComp q.inv q.hom).symm ≪≫ Mod.comapCongr q.inv_hom_id ≪≫ Mod.comapId _)
+  have _ : H.functor.Additive :=
+    inferInstanceAs ((Mod.comap (D := Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) q.inv).Additive)
+  have _ : H.inverse.Additive :=
+    inferInstanceAs ((Mod.comap (D := Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) q.hom).Additive)
+  let d := H.mapDerivedCategory
+  let _ : H.functor.mapDerivedCategory.CommShift ℤ := inferInstance
+  let _ : H.functor.mapDerivedCategory.IsTriangulated := inferInstance
+  have hiS : S.IsClosedUnderIsomorphisms := by
+    let _ := (constantModelConstructibleFiniteTor_wellDefined Λ X).2.1
+    dsimp only [S]
+    infer_instance
+  let _ := hiS
+  have hp : S'.inverseImage d.functor = S := by
+    funext K
+    apply propext
+    constructor
+    · intro hK
+      have hInv : S (d.inverse.obj (d.functor.obj K)) :=
+        constantModelCtf_coefficientIso e.symm X ⟨d.functor.obj K, hK⟩
+      exact S.prop_of_iso (d.unitIso.app K).symm hInv
+    · intro hK
+      exact constantModelCtf_coefficientIso e X ⟨K, hK⟩
+  let _ : S'.IsTriangulated := ht
+  let _ : S'.IsClosedUnderIsomorphisms := hi
+  let _ : S'.IsStableUnderRetracts := hr
+  have htS : S.IsTriangulated := by
+    rw [← hp]
+    change (S'.inverseImage H.functor.mapDerivedCategory).IsTriangulated
+    infer_instance
+  have hrS : S.IsStableUnderRetracts := by
+    rw [← hp]
+    exact ⟨fun r hK ↦ S'.prop_of_retract (r.map d.functor) hK⟩
+  have hsS : ObjectProperty.EssentiallySmall.{u + 1} S := by
+    obtain ⟨J, hJ, ⟨eJ⟩⟩ := (ObjectProperty.exists_equivalence_iff S').mpr hs
+    exact (ObjectProperty.exists_equivalence_iff S).mp
+      ⟨J, hJ, ⟨(d.congrFullSubcategory hp).trans eJ⟩⟩
+  obtain ⟨hcop, hc⟩ := compactness_of_brown_coefficientIso e X hB
+  exact (brownHypothesesFor_iff Λ X).mpr ⟨htS, hiS, hrS, hsS, hcop, hc⟩
+
+open scoped CategoryTheory.Obj in
+/-- Brown's bundle is invariant under isomorphisms of commutative condensed rings.
+No admissibility, Noetherian, finite-type, or field hypothesis is required.
+
+Source: blueprint latest, sk-lem-brown-hypotheses.proof.md, paragraphs 1--2,
+and sk-lem-brown-hypotheses-generation.proof.md, coefficient identifications.
+(blueprint: lem-sfb-brown-coefficient-iso-invariance).
+
+Proof: scalar restriction along the inverse ring isomorphism is an exact monoidal
+equivalence. Its derived functor preserves and reflects constructibility, boundedness,
+and finite Tor amplitude. Consequently Dctf is the inverse image of Dctf for the other
+coefficient. Triangulation and closure under retracts pull back along this functor;
+the induced equivalence of full subcategories transports essential smallness.
+Compactness transports by the canonical direct-sum Hom-map comparisons in the ambient
+derived categories and their localizing full subcategories. The objectwise Brown
+criterion supplies generation and the other structural clauses. Repeat with the inverse
+ring isomorphism for the converse. No arbitrary-field compactness assertion is used. -/
+theorem brownHypothesesFor_coefficientIso_iff
+    {Λ Λ' : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
+    [MonObj Λ] [MonObj Λ'] [IsCommMonObj Λ] [IsCommMonObj Λ']
+    (e : Mon.mk Λ ≅ Mon.mk Λ') (X : Scheme.{u}) :
+    BrownHypothesesFor Λ X ↔ BrownHypothesesFor Λ' X := by
+  exact ⟨fun hB ↦ @brownHypothesesFor_of_coefficientIso Λ' Λ _ _ _ _ e.symm X hB,
+    fun hB ↦ @brownHypothesesFor_of_coefficientIso Λ Λ' _ _ _ _ e X hB⟩
+
+
+-- Unfold coefficient admissibility only where its cases are used.
+attribute [local irreducible] IsLocalizingAdmissibleCoefficient
+
+/-- Brown's hypotheses for the geometric field of a finite-field datum, using the
+project's admissibility predicate and an explicit structure morphism.
+
+Source: blueprint latest, sk-lem-brown-hypotheses.proof.md, paragraphs 1--2,
+with the field hypothesis of det-brown-hypotheses-generation.
+(blueprint: lem-sfb-brown-finite-field-admissible).
+
+Proof: install the structure morphism as the scheme-over instance. Finite type
+makes X compact and locally Noetherian. Admissible-coefficient smallness supplies
+thickness and essential smallness. Choose a small skeleton once and apply the
+finite-field compactness theorem directly to these representatives. The representative
+Brown criterion transports compactness to every constructible finite-Tor object and
+supplies generation. All finite-field hypotheses remain explicit. -/
+theorem brownHypotheses_of_finiteFieldDatum
+    (D : WeilConjectures.FiniteFieldDatum.{u}) (ℓ : ℕ) [Fact ℓ.Prime]
+    (hℓ : ℓ ≠ D.p) {X : Scheme.{u}} (aX : X ⟶ Spec (.of D.k))
+    [IsSeparated aX] [LocallyOfFiniteType aX] [QuasiCompact aX]
+    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
+    [MonObj Λ] [IsCommMonObj Λ]
+    (hΛ : IsLocalizingAdmissibleCoefficient ℓ Λ) :
+    BrownHypothesesFor Λ X := by
+  let _ : X.Over (Spec (.of D.k)) := ⟨aX⟩
+  let _ : IsSeparated (X ↘ Spec (.of D.k)) := ‹IsSeparated aX›
+  let _ : LocallyOfFiniteType (X ↘ Spec (.of D.k)) := ‹LocallyOfFiniteType aX›
+  let _ : QuasiCompact (X ↘ Spec (.of D.k)) := ‹QuasiCompact aX›
+  let _ : CompactSpace X := QuasiCompact.compactSpace_of_compactSpace aX
+  let _ : IsLocallyNoetherian X := LocallyOfFiniteType.isLocallyNoetherian aX
+  obtain ⟨_, _, _, _, hSums, _⟩ := brownHypotheses_structural Λ X
+  exact (brownHypothesesFor_iff_compact_of_noetherian ℓ X Λ hΛ).mpr
+    ⟨hSums, brownHypotheses_finiteField_object_compactness D ℓ hℓ X Λ hΛ hSums⟩
+
+
 -- STATEMENT-DISPUTED: The arbitrary-field compactness assertion lacks a finiteness
 -- hypothesis on the base field. The finite/rational compactness dependencies require
 -- FiniteFieldDatum; the integral one requires an Ext bound. Finite type over an arbitrary
@@ -1093,7 +1273,7 @@ theorem not_brownHypothesesFor_padicIntegers_of_unbounded_categorical_ext
 -- Generation itself is proved without this finiteness assumption by the helpers above.
 -- The supplied compactness theorem specifically uses D.k, the algebraic closure of a
 -- finite field. Its algebraic-closure coefficient is finite-subextension-valued.
--- The supported geometric finite-field Brown bundle is proved in BrownHypothesesFiniteField;
+-- The supported six-case geometric finite-field Brown bundle is proved above;
 -- its proof does not assert the original arbitrary-field claim.
 
 /-- Brown representability hypotheses for a separated finite-type scheme in positive

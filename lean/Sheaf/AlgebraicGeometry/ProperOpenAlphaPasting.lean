@@ -210,10 +210,13 @@ theorem alpha_vertical_beforeDerivation {A C E B₀ D F : Scheme.{u}}
     simpa only [alphaVerticalPasted, alphaVerticalOuter, NatTrans.comp_app,
       Functor.whiskerLeft_app, Functor.whiskerRight_app, Functor.associator_hom_app,
       Functor.associator_inv_app, Category.id_comp, Category.comp_id,
-      Category.assoc] using
+      Functor.map_id, Category.assoc] using
       singleAlpha_vertical B k i j r₁ r₂ p₁ p₂ h₁ h₂ h M
   refine ⟨hm, ?_, ?_, ?_, vertical_derived B k i j r₁ r₂ p₁ p₂ h₁ h₂ h⟩
-  all_goals rw [hm]
+  · exact congrArg (fun t ↦ NatTrans.mapHomologicalComplex t (.up ℤ)) hm
+  · exact congrArg (fun t ↦ (Functor.whiskeringRight ℕᵒᵖ _ _).map t) hm
+  · exact congrArg (fun t ↦ NatTrans.mapHomologicalComplex
+      ((Functor.whiskeringRight ℕᵒᵖ _ _).map t) (.up ℤ)) hm
 
 /-- Intrinsic alpha obeys horiz pasting at the four specified levels.
 Source: Stacks, Tag 0F7D, and the underived strict-tower refinement, proof steps 1--7
@@ -273,10 +276,13 @@ theorem alpha_horizontal_beforeDerivation {A C E B₀ D F : Scheme.{u}}
     simpa only [alphaHorizontalOuter, alphaHorizontalPasted, NatTrans.comp_app,
       Functor.whiskerLeft_app, Functor.whiskerRight_app, Functor.associator_hom_app,
       Functor.associator_inv_app, Category.id_comp, Category.comp_id,
-      Category.assoc] using
+      Functor.map_id, Category.assoc] using
       singleAlpha_horizontal B k l i j r p q h₁ h₂ h M
   refine ⟨hm, ?_, ?_, ?_, horizontal_derived B k l i j r p q h₁ h₂ h⟩
-  all_goals rw [hm]
+  · exact congrArg (fun t ↦ NatTrans.mapHomologicalComplex t (.up ℤ)) hm
+  · exact congrArg (fun t ↦ (Functor.whiskeringRight ℕᵒᵖ _ _).map t) hm
+  · exact congrArg (fun t ↦ NatTrans.mapHomologicalComplex
+      ((Functor.whiskeringRight ℕᵒᵖ _ _).map t) (.up ℤ)) hm
 
 /-- Intrinsic alpha obeys cube pasting at the four specified levels.
 Source: Stacks, Tag 0F7F, and the underived strict-tower refinement, proof steps 1--7
@@ -344,9 +350,12 @@ theorem alpha_baseChange_beforeDerivation {V W S T V₁ W₁ S₁ T₁ : Scheme.
     simpa only [alphaCubeOriginal, alphaCubeChanged, NatTrans.comp_app,
       Functor.whiskerLeft_app, Functor.whiskerRight_app, Functor.associator_hom_app,
       Functor.associator_inv_app, Category.id_comp, Category.comp_id,
-      Category.assoc] using
+      Functor.map_id, Category.assoc] using
       singleAlpha_baseChange B k i r p k₁ i₁ r₁ p₁ a b c d h h₁ wk wi wp wr sk si sp sr M
   refine ⟨hm, ?_, ?_, ?_, cube_derived B k i r p k₁ i₁ r₁ p₁ a b c d h h₁ wk wi wp wr sk si sp sr⟩
-  all_goals rw [hm]
+  · exact congrArg (fun t ↦ NatTrans.mapHomologicalComplex t (.up ℤ)) hm
+  · exact congrArg (fun t ↦ (Functor.whiskeringRight ℕᵒᵖ _ _).map t) hm
+  · exact congrArg (fun t ↦ NatTrans.mapHomologicalComplex
+      ((Functor.whiskeringRight ℕᵒᵖ _ _).map t) (.up ℤ)) hm
 
 end AlgebraicGeometry.ProEtale.StrictTower

@@ -28,10 +28,6 @@ transitions and Roos maps are those of the recorded operation constructions.
 -/
 
 @[expose] public noncomputable section
--- Avoid scanning the large specified comparison types for unused finite instances.
--- Kernel checking and the mathematical declarations are unchanged.
-set_option linter.unusedDecidableInType false
-set_option linter.unusedFintypeInType false
 set_option autoImplicit false
 set_option synthInstance.maxSize 4096
 set_option backward.isDefEq.respectTransparency false
@@ -626,7 +622,6 @@ attribute [local irreducible] TensorComparison ScalarComparison
   integralOperationsTensorTowerFunctor integralScalarTowerFunctor
   restriction goodRestriction
 
-set_option backward.isDefEq.respectTransparency true in
 /-- Strict tensor and scalar-extension towers, their normalized derived comparisons,
 coefficient units and quotient maps, for arbitrary unbounded derived inputs.
 Source: Bhatt--Scholze, Definition 3.4.10, Lemma 3.4.12(4), Proposition 3.5.1(3)

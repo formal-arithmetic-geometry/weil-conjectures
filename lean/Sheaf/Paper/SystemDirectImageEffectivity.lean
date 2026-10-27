@@ -7,7 +7,6 @@ module
 
 public import Sheaf.Paper.IntegralComparisonSystemData
 public import Sheaf.Paper.SfIntegralDirectImageConstructible
-import Sheaf.Paper.SystemDirectImageRoosPresentation
 
 /-! # Effectivity of whole-system direct image of a coherent reduction
 
@@ -23,22 +22,6 @@ namespace WeilConjectures
 
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
-
-private theorem transpose_isIso_of_projection_iso
-    {A B : Type*} [Category A] [Category B]
-    {F : A ⥤ B} {G : B ⥤ A} (adj : F ⊣ G)
-    {U V : A} {M N : B} (e : U ≅ V) (a : M ≅ N)
-    (p : U ⟶ G.obj M) (q : V ⟶ G.obj N)
-    (h : p ≫ G.map a.hom = e.hom ≫ q)
-    (hq : IsIso ((adj.homEquiv V N).symm q)) :
-    IsIso ((adj.homEquiv U M).symm p) := by
-  have hh := congrArg ((adj.homEquiv U N).symm) h
-  rw [adj.homEquiv_naturality_right_symm, adj.homEquiv_naturality_left_symm] at hh
-  let := hq
-  have : IsIso ((adj.homEquiv U M).symm p ≫ a.hom) := by
-    rw [hh]
-    infer_instance
-  exact IsIso.of_isIso_comp_right _ a.hom
 
 /-- Direct image of one coherent quotient system is effective for reconstruction.
 This concerns the actual whole-system counit, before any pullback or source comparison.
@@ -72,34 +55,6 @@ theorem systemDirectImage_effective
     (D : IntegralComparisonCoefficientData l E) (K : sfIntegralConstructibleCategory l E X) :
     IsIso ((D.system Y).adjunction.counit.app
       ((integralComparisonSequenceDirectImage l E f).rightDerivedFunctor.obj
-        ((D.system X).reduction.obj K.obj))) := by
-  let N := (integralComparisonSequenceDirectImage l E f).rightDerivedFunctor.obj
-    ((D.system X).reduction.obj K.obj)
-  obtain ⟨hp, L, e, a, ha⟩ := systemDirectImage_roosPresentation l E f (D.system X) K.obj
-  let := hp
-  have hred := ((sfIntegralDirectImage_constructible K₀ l hl E f K.obj K.property).2.1 L).2.2.1
-  apply ((D.system Y).isIso_iff_evaluations _).2
-  intro n
-  let adj := coefficientFiniteAdjunction l E Y n
-  have hi := transpose_isIso_of_projection_iso adj e (a n)
-    ((coefficientSequenceProjection l E Y n).app N)
-    (L.projection ≫ Pi.π (sfDirectImageTerm l E f K.obj) n) (ha n) (hred n)
-  have hq : ((D.system Y).reductionEvaluation n).inv.app
-        ((coefficientSequenceLimit l E Y).obj N) ≫
-      (coefficientSequenceDerivedEvaluation l E Y n).map
-        ((D.system Y).adjunction.counit.app N) =
-      (adj.homEquiv _ _).symm ((coefficientSequenceProjection l E Y n).app N) := by
-    apply (adj.homEquiv _ _).injective
-    exact ((D.system Y).counit_projection N n).trans
-      ((adj.homEquiv _ _).apply_symm_apply _).symm
-  have : IsIso (((D.system Y).reductionEvaluation n).inv.app
-        ((coefficientSequenceLimit l E Y).obj N) ≫
-      (coefficientSequenceDerivedEvaluation l E Y n).map
-        ((D.system Y).adjunction.counit.app N)) := by
-    rw [hq]
-    exact hi
-  exact IsIso.of_isIso_comp_left
-    (((D.system Y).reductionEvaluation n).inv.app
-      ((coefficientSequenceLimit l E Y).obj N)) _
+        ((D.system X).reduction.obj K.obj))) := by sorry
 
 end WeilConjectures

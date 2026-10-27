@@ -74,4 +74,5 @@ theorem finiteScalarTensorRealization_Y_representative
           (.up ℤ)).obj P, finiteScalarPreservesRepresentatives Y R P hP⟩,
          ⟨((sfIntrinsicModuleEquivalence Y R).functor.mapHomologicalComplex
           (.up ℤ)).obj Q, finiteScalarPreservesRepresentatives Y R Q hQ⟩) := by sorry
+
 end WeilConjectures

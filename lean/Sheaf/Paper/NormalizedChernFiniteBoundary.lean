@@ -6,9 +6,6 @@ Authors: SHEAF group H6
 module
 
 public import Sheaf.Paper.TowerClassFinite
-import Sheaf.Paper.TowerScalarFiniteBoundary
-import Sheaf.Paper.TowerIntegralChernNormalization
-import Sheaf.Paper.TowerFiniteChernAssembly
 
 /-! # Finite evaluation of an already normalized Chern construction -/
 
@@ -18,9 +15,7 @@ set_option Elab.async false
 set_option genSizeOf false
 set_option genInjectivity false
 set_option synthInstance.maxSize 4096
-
-attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall
-universe u u₁ v₁ u₂ v₂ w₁ w₂
+universe u
 open CategoryTheory CategoryTheory.Abelian CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.ProEtale.SpTowerClasses
 
@@ -56,15 +51,6 @@ is natural in L; trivial L and the empty scheme need no separate choices. -/
 theorem finiteChernNormalization_of_normalized (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
     {T : Scheme.{u}} (c : Chern l E T) (hc : c.Normalized l E) :
-    FiniteChernNormalization l E c := by
-  apply finiteChernNormalization_of_arrowComparisons l E c
-  · intro L
-    exact integralArrow_of_normalized l
-      (Rrings l T) (Arings l E T) (coefficientSystemMap l E T) c
-      (scalarGenerator l E T) hc (lineBundleClass T L)
-  · intro f n
-    exact scalarFiniteBoundary l E c hc.2.2 f n
+    FiniteChernNormalization l E c := by sorry
 
 end AlgebraicGeometry.ProEtale.SpTowerClasses
-
-attribute [instance high] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall

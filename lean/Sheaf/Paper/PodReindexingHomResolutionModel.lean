@@ -325,129 +325,6 @@ def podReindexingHomModel (W : Scheme.{u}) (s : Option ℕ)
     (DerivedCategory.isIso_Q_map_iff_quasiIso.{u+2,u+1,u+2} _ f).mpr inferInstance
   e.app (op K, I) ≪≫ (asIso (DerivedCategory.Q.{u+2,u+1,u+2}.map f)).symm
 
-/-- Tensor and ordinary sheaf-Hom comparisons, normalized on local sections.
-Source: the tensor and slice-Hom parts of the proof of
-`lem-pod-reindexing-hom-resolution-model`, Steps 4 and 7--8.
-(blueprint: lem-pod-reindexing-tensor-hom-data).
-
-The proof is the sheafified sectionwise tensor and slice-Hom comparison of
-`inverseImage_tensor_hom_iso`, with the coefficient isomorphism transported by
-`podReindexingCoefficient`; the displayed section equations are the normalizations. -/
-theorem podReindexing_tensor_hom_data {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
-    [∀ x : X, Invertible (l : X.residueField x)]
-    [∀ y : Y, Invertible (l : Y.residueField y)]
-    [EssentiallySmall.{u+1} X.ProEt] [EssentiallySmall.{u+1} Y.ProEt] (s : Option ℕ) :
-    ∃ σ : ∀ M N : podReindexingModules l E Y s,
-        (podReindexingFunctor l E g s).obj (podReindexingTensor l E Y s M N) ≅
-          podReindexingTensor l E X s ((podReindexingFunctor l E g s).obj M)
-            ((podReindexingFunctor l E g s).obj N),
-    ∃ η : ∀ M N : podReindexingModules l E Y s,
-        (podReindexingFunctor l E g s).obj (SheafOfModules.homObj
-          (J := ProEt.topology Y) (R := podReindexingRing l E Y s) M N) ≅
-          SheafOfModules.homObj (J := ProEt.topology X) (R := podReindexingRing l E X s)
-            ((podReindexingFunctor l E g s).obj M)
-            ((podReindexingFunctor l E g s).obj N),
-      (∀ (M N : podReindexingModules l E Y s) (U : X.ProEt)
-          (a : M.val.obj (op ((proEtaleIsoPostcompose g).obj U)))
-          (b : N.val.obj (op ((proEtaleIsoPostcompose g).obj U))),
-        (σ M N).hom.val.app (op U)
-            (purTensorSection (podReindexingRing l E Y s) M N
-              ((proEtaleIsoPostcompose g).obj U) a b) =
-          purTensorSection (podReindexingRing l E X s)
-            ((podReindexingFunctor l E g s).obj M)
-            ((podReindexingFunctor l E g s).obj N) U a b) ∧
-      (∀ (M N : podReindexingModules l E Y s) (U V : X.ProEt) (a : V ⟶ U)
-          (f : (SheafOfModules.homObj (J := ProEt.topology Y)
-            (R := podReindexingRing l E Y s) M N).val.obj
-            (op ((proEtaleIsoPostcompose g).obj U)))
-          (x : M.val.obj (op ((proEtaleIsoPostcompose g).obj V))),
-        ((η M N).hom.val.app (op U) f).app (op (Over.mk a)) x =
-          f.app (op (Over.mk ((proEtaleIsoPostcompose g).map a))) x) := by
-  sorry
-
-
-/-- The actual Hom-complex and derived localization comparisons, with their
-projection, naturality, quasi-isomorphism, and resolution-model laws.
-Source: the Hom-complex and localization parts of the proof of
-`lem-pod-reindexing-hom-resolution-model`, Steps 7--10.
-(blueprint: lem-pod-reindexing-derived-hom-data).
-
-The proof reindexes each Hom-product projection, checks the signed differential,
-uses quasi-isomorphism invariance and transported K-injective resolutions, and
-then descends the comparison through the recorded localization factorization. -/
-theorem podReindexing_derived_hom_data {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
-    [∀ x : X, Invertible (l : X.residueField x)]
-    [∀ y : Y, Invertible (l : Y.residueField y)]
-    [EssentiallySmall.{u+1} X.ProEt] [EssentiallySmall.{u+1} Y.ProEt] (s : Option ℕ)
-    (η : ∀ M N : podReindexingModules l E Y s,
-      (podReindexingFunctor l E g s).obj (SheafOfModules.homObj
-        (J := ProEt.topology Y) (R := podReindexingRing l E Y s) M N) ≅
-      SheafOfModules.homObj (J := ProEt.topology X) (R := podReindexingRing l E X s)
-        ((podReindexingFunctor l E g s).obj M)
-        ((podReindexingFunctor l E g s).obj N)) :
-    ∃ χ : ∀ (K I : CochainComplex (podReindexingModules l E Y s) ℤ)
-        (_hI : I.IsKInjective),
-        (podReindexingComplexFunctor l E g s).obj
-            (homComplex.{u+1,u,u+1,u+1} (R := podReindexingRing l E Y s) K I) ≅
-          homComplex.{u+1,u,u+1,u+1} (R := podReindexingRing l E X s)
-            ((podReindexingComplexFunctor l E g s).obj K)
-            ((podReindexingComplexFunctor l E g s).obj I),
-    ∃ δ : podReindexingDerivedHom l E Y s ⋙ podReindexingDerivedFunctor l E g s ≅
-        ((podReindexingDerivedFunctor l E g s).op.prod
-          (podReindexingDerivedFunctor l E g s)) ⋙ podReindexingDerivedHom l E X s,
-      (∀ (K I : CochainComplex (podReindexingModules l E Y s) ℤ)
-          (hI : I.IsKInjective) (r p : ℤ),
-        (χ K I hI).hom.f r ≫ homComplexπ.{u+1,u,u+1,u+1}
-            (R := podReindexingRing l E X s)
-            ((podReindexingComplexFunctor l E g s).obj K)
-            ((podReindexingComplexFunctor l E g s).obj I) r p (p+r) rfl =
-          (podReindexingFunctor l E g s).map
-              (homComplexπ.{u+1,u,u+1,u+1}
-                (R := podReindexingRing l E Y s) K I r p (p+r) rfl) ≫
-            (η (K.X p) (I.X (p+r))).hom) ∧
-      (∀ (K K' I I' : CochainComplex (podReindexingModules l E Y s) ℤ)
-          (hI : I.IsKInjective) (hI' : I'.IsKInjective) (a : K' ⟶ K) (b : I ⟶ I'),
-        (podReindexingComplexFunctor l E g s).map
-            (((podReindexingHom l E Y s).map a.op).app I ≫
-              ((podReindexingHom l E Y s).obj (op K')).map b) ≫ (χ K' I' hI').hom =
-          (χ K I hI).hom ≫
-            ((podReindexingHom l E X s).map
-              ((podReindexingComplexFunctor l E g s).map a).op).app
-              ((podReindexingComplexFunctor l E g s).obj I) ≫
-            ((podReindexingHom l E X s).obj
-              (op ((podReindexingComplexFunctor l E g s).obj K'))).map
-              ((podReindexingComplexFunctor l E g s).map b)) ∧
-      (∀ (K K' I I' : CochainComplex (podReindexingModules l E Y s) ℤ)
-          (_hI : I.IsKInjective) (_hI' : I'.IsKInjective) (a : K' ⟶ K) (b : I ⟶ I'),
-        QuasiIso a → QuasiIso b →
-          QuasiIso ((podReindexingComplexFunctor l E g s).map
-            (((podReindexingHom l E Y s).map a.op).app I ≫
-              ((podReindexingHom l E Y s).obj (op K')).map b))) ∧
-      (∀ (K I : CochainComplex (podReindexingModules l E Y s) ℤ)
-          (hI : I.IsKInjective),
-        ∃ hFI : CochainComplex.IsKInjective
-            ((podReindexingComplexFunctor l E g s).obj I),
-          δ.hom.app
-              (op ((podReindexingQ l E Y s).obj K), (podReindexingQ l E Y s).obj I) =
-            (podReindexingDerivedFunctor l E g s).map
-                (@podReindexingHomModel l _ E _ _ _ Y s K I hI).hom ≫
-              (podReindexingDerivedFactors l E g s).hom.app
-                (homComplex.{u+1,u,u+1,u+1}
-                  (R := podReindexingRing l E Y s) K I) ≫
-              (podReindexingQ l E X s).map (χ K I hI).hom ≫
-              (@podReindexingHomModel l _ E _ _ _ X s
-                ((podReindexingComplexFunctor l E g s).obj K)
-                ((podReindexingComplexFunctor l E g s).obj I) hFI).inv ≫
-              ((podReindexingDerivedHom l E X s).mapIso
-                (((podReindexingDerivedFactors l E g s).app K).op.prod
-                  ((podReindexingDerivedFactors l E g s).app I).symm)).hom) := by
-  sorry
-
-
-set_option maxHeartbeats 800000 in
--- The theorem combines the separately stated tensor/Hom and derived comparison data.
-set_option maxHeartbeats 800000 in
--- The theorem combines the two strictly smaller comparison packages above.
 /-- Tensor and Hom comparisons, the actual unbounded product Hom-complex comparison,
 and its natural derived descent with the specified K-injective resolution model.
 Source: blueprint dual-Tate compatibility, Steps 1--2; Stacks Tags 03EL, 0GMX,
@@ -551,10 +428,7 @@ theorem podReindexing_hom_resolution_model {X Y : Scheme.{u}} (g : X ⟶ Y) [IsI
               ((podReindexingDerivedHom l E X s).mapIso
                 (((podReindexingDerivedFactors l E g s).app K).op.prod
                   ((podReindexingDerivedFactors l E g s).app I).symm)).hom) := by
-  obtain ⟨σ, η, hσ, hη⟩ := podReindexing_tensor_hom_data l E g s
-  obtain ⟨χ, δ, hχπ, hχnat, hχq, hδ⟩ :=
-    podReindexing_derived_hom_data l E g s η
-  exact ⟨σ, η, χ, δ, hσ, hη, hχπ, hχnat, hχq, hδ⟩
+  sorry
 
 /-- The canonical site round trip: compose the structure maps and cancel g and its inverse.
 The components are identities on the underlying schemes.

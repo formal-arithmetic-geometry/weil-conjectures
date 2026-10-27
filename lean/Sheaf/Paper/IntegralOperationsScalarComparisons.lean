@@ -9,15 +9,10 @@ public import Sheaf.Paper.IntegralOperationsScalarExtension
 public import Sheaf.Paper.CoefDerivedSystemEvaluationCalculus
 public import Sheaf.Paper.IntegralOperationsScalarComparisonModels
 
-import Sheaf.Paper.NormalizedIntegralScalarPullbackComparison
+import all Sheaf.Paper.IntegralScalarPullbackChainProperties
 import Sheaf.Paper.NormalizedIntegralScalarTensorComparison
 
-import Sheaf.CategoryTheory.FunctorSquareTowerDescent
-import all Sheaf.Paper.IntegralScalarPullbackTowerRepresentatives
-import Sheaf.Paper.IntegralScalarPullbackNormalizedTower
-import Sheaf.Paper.IntegralScalarTensorNormalizedTower
-import Sheaf.Paper.IntegralScalarOrdinaryTensorChainTower
-import Sheaf.Paper.IntegralScalarOrdinaryTensorTowerRepresentatives
+import Sheaf.CategoryTheory.FunctorSquareRepresentativeDescent
 import all Sheaf.Paper.IntegralScalarExtension
 import Sheaf.Paper.CompletedIntegralFiniteFree
 import Sheaf.Paper.NormalizedIntegralScalarCompletion
@@ -89,6 +84,14 @@ attribute [local irreducible] integralOperationsPullbackComplexFunctor
 attribute [local irreducible] constantSheaf limit
   integralDerivedPullback integralCompletedTensor integralScalarExtension
 
+section ScalarPullbackOrdinaryDescent
+
+attribute [local semireducible] integralOperationsPullbackComplexFunctor
+  integralOperationsPullbackTowerFunctor
+attribute [local implicit_reducible] integralOperationsPullbackOnGood
+  integralOperationsGoodLocalization integralOperationsPullbackComplexFunctor
+  integralOperationsPullbackTowerFunctor
+
 /-- The ordinary scalar/pullback comparison is the localization of scalarPullbackChain.
 Source: Stacks 07A4, 099N (blueprint: lem-pur-integral-operations-scalar-extension).
 Proof: the prescribed level generator maps are natural and commute with strict
@@ -103,8 +106,70 @@ theorem scalarPullbackOrdinary_existsUnique {X Y : AlgebraicGeometry.Scheme.{u}}
     ∃! α : integralDerivedPullback l E f ⋙ integralOrdinaryDerivedScalar l E L ι X ≅
       integralOrdinaryDerivedScalar l E L ι Y ⋙ integralDerivedPullback l L f,
       scalarPullbackOrdinaryNormalization l E L ι f α := by
-  exact normalizedIntegralScalarPullbackComparison l E L ι f
+  let I := (integralOperationsGoodComplex l E Y).ι
+  let q := integralOperationsGoodLocalization l E Y
+  let V := (HomologicalComplex.quasiIso (integralTowerModules l E Y) (.up ℤ)).inverseImage I
+  let : q.IsLocalization V := integralOperationsGoodLocalization_isLocalization l E Y
+  let F := integralOrdinaryDerivedScalar l E L ι X
+  let G := integralOrdinaryDerivedScalar l E L ι Y
+  let S := (integralOrdinaryScalar l E L ι Y).mapHomologicalComplex (.up ℤ)
+  let SX := (integralOrdinaryScalar l E L ι X).mapHomologicalComplex (.up ℤ)
+  let k := (integralOperationsGoodComplex l L Y).lift (I ⋙ S)
+    (fun P ↦ scalarGood l E L ι Y P)
+  let p := integralOperationsGoodLocalization l L Y
+  let t := I ⋙ integralOperationsPullbackComplexFunctor l E f
+  let s := (integralOperationsGoodComplex l L Y).ι ⋙
+    integralOperationsPullbackComplexFunctor l L f
+  let eδ : t ⋙ SX ⋙ DerivedCategory.Q ≅ k ⋙ s ⋙ DerivedCategory.Q :=
+    NatIso.ofComponents (fun P ↦ by
+      let := scalarPullbackChainQuasiIso l E L ι f P
+      exact asIso (DerivedCategory.Q.map (scalarPullbackChain l E L ι f P.obj)))
+      (by
+        intro P Q a
+        simpa only [Functor.comp_map,
+          Functor.map_comp, I, SX, asIso_hom, ObjectProperty.ι_map,
+          integralOperationsPullbackOnGood, k, ObjectProperty.lift, t, s,
+          ObjectProperty.homMk_hom, Functor.comp_obj, ObjectProperty.ι_obj] using
+          congrArg (fun z ↦ DerivedCategory.Q.map z)
+            (scalarPullbackChain_naturality l E L ι f a.hom))
+  let r : q ⋙ integralDerivedPullback l E f ≅ t ⋙ DerivedCategory.Q :=
+    NatIso.ofComponents (fun P ↦ (integralDerivedPullbackComparison l E f).app P)
+      (by
+        intro P Q a
+        simpa only [Functor.comp_map, integralOperationsPullbackOnGood, t, I,
+          ObjectProperty.ι_map, Iso.app_hom] using
+          (integralDerivedPullbackComparison l E f).hom.naturality a)
+  let r' : p ⋙ integralDerivedPullback l L f ≅ s ⋙ DerivedCategory.Q :=
+    NatIso.ofComponents (fun P ↦ (integralDerivedPullbackComparison l L f).app P)
+      (by
+        intro P Q a
+        simpa only [Functor.comp_map, integralOperationsPullbackOnGood, s,
+          ObjectProperty.ι_map, Iso.app_hom] using
+          (integralDerivedPullbackComparison l L f).hom.naturality a)
+  let η : q ⋙ G ≅ k ⋙ p :=
+    NatIso.ofComponents
+      (fun P ↦ (integralOrdinaryScalar l E L ι Y).mapDerivedCategoryFactors.app P.obj)
+      (by
+        intro P Q a
+        simpa only [Functor.comp_map, I, q, p, G, S,
+          integralOperationsGoodLocalization, k, ObjectProperty.lift,
+          ObjectProperty.ι_map, ObjectProperty.homMk_hom, Iso.app_hom,
+          Functor.comp_obj, ObjectProperty.ι_obj] using
+          (integralOrdinaryScalar l E L ι Y).mapDerivedCategoryFactors.hom.naturality a.hom)
+  change ∃! α : integralDerivedPullback l E f ⋙ F ≅ G ⋙ integralDerivedPullback l L f,
+    ∀ P : (integralOperationsGoodComplex l E Y).FullSubcategory,
+      F.map (r.hom.app P) ≫
+          (integralOrdinaryScalar l E L ι X).mapDerivedCategoryFactors.hom.app (t.obj P) ≫
+          eδ.hom.app P =
+        α.hom.app (q.obj P) ≫ (integralDerivedPullback l L f).map (η.hom.app P) ≫
+          r'.hom.app (k.obj P)
+  exact functorSquareRepresentativeDescent q p k t s _ _
+    (integralDerivedPullback l E f) (integralDerivedPullback l L f) SX F G
+    (Localization.fullyFaithfulWhiskeringLeft q V
+      (DerivedCategory (integralTowerModules l L X)))
+    r r' (integralOrdinaryScalar l E L ι X).mapDerivedCategoryFactors η eδ
 
+end ScalarPullbackOrdinaryDescent
 
 /-- The canonical localized scalar/pullback comparison.
 Source: Stacks 07A4 (blueprint: lem-pur-integral-operations-scalar-extension). -/
@@ -575,291 +640,6 @@ theorem scalarHomOrdinary_naturality (W : AlgebraicGeometry.Scheme.{u})
     (scalarIntegralClosed l L W) (integralOrdinaryDerivedScalar l E L ι W)
     (scalarClosedTensor l E L ι W) M N M' N' a b
 
-section ScalarTowerDescent
-
-attribute [local irreducible] integralOrdinaryScalarComp integralOrdinaryDerivedScalarComp
-attribute [local implicit_reducible] goodScalar
-  integralOperationsPullbackOnGood integralOperationsTensorOnGood
-  integralOperationsGoodLocalization
-
-attribute [local irreducible] goodScalarComparison
-
-private theorem pullbackNormalized {X Y : AlgebraicGeometry.Scheme.{u}} (f : X ⟶ Y) :
-    scalarPullbackOrdinaryNormalization l E L ι f (scalarPullbackOrdinary l E L ι f) := by
-  unfold scalarPullbackOrdinary
-  exact (scalarPullbackOrdinary_existsUnique l E L ι f).exists.choose_spec
-
-private theorem tensorNormalized (W : AlgebraicGeometry.Scheme.{u}) :
-    ∀ P Q : (integralOperationsGoodComplex l E W).FullSubcategory,
-        (integralOrdinaryDerivedScalar l E L ι W).map
-            ((integralCompletedTensorComparison l E W).hom.app (P, Q)) ≫
-          (integralOrdinaryScalar l E L ι W).mapDerivedCategoryFactors.hom.app
-            ((integralOperationsTensorComplexFunctor l E W).obj (P.obj, Q.obj)) ≫
-          DerivedCategory.Q.map (scalarTensorChain l E L ι W P.obj Q.obj) =
-        (scalarTensorOrdinary l E L ι W).hom.app
-          (DerivedCategory.Q.obj P.obj, DerivedCategory.Q.obj Q.obj) ≫
-          (integralCompletedTensor l L W).map
-            (CategoryTheory.Prod.mkHom
-              ((integralOrdinaryScalar l E L ι W).mapDerivedCategoryFactors.hom.app P.obj)
-              ((integralOrdinaryScalar l E L ι W).mapDerivedCategoryFactors.hom.app Q.obj)) ≫
-          (integralCompletedTensorComparison l L W).hom.app
-            (⟨_, scalarGood l E L ι W P⟩, ⟨_, scalarGood l E L ι W Q⟩) := by
-  exact (scalarTensorOrdinary_existsUnique l E L ι W).exists.choose_spec
-
-attribute [local irreducible] scalarPullbackOrdinary scalarTensorOrdinary
-
-private theorem pullback_tower
-    (F : Type u) [Field F] [Algebra ℚ_[l] F] [FiniteDimensional ℚ_[l] F]
-    (j : L →ₐ[ℚ_[l]] F) {X Y : AlgebraicGeometry.Scheme.{u}} (f : X ⟶ Y) :
-    ∀ K : DerivedCategory (integralTowerModules l E Y),
-      (integralOrdinaryDerivedScalar l L F j X).map
-          ((scalarPullbackOrdinary l E L ι f).hom.app K) ≫
-        (scalarPullbackOrdinary l L F j f).hom.app
-          ((integralOrdinaryDerivedScalar l E L ι Y).obj K) ≫
-        (integralDerivedPullback l F f).map
-          ((integralOrdinaryDerivedScalarComp l E L ι Y F j).hom.app K) =
-      (integralOrdinaryDerivedScalarComp l E L ι X F j).hom.app
-          ((integralDerivedPullback l E f).obj K) ≫
-        (scalarPullbackOrdinary l E F (j.comp ι) f).hom.app K := by
-  exact integralScalarPullbackNormalizedTower l E L ι F j f
-    (scalarPullbackOrdinary l E L ι f)
-    (scalarPullbackOrdinary l L F j f)
-    (scalarPullbackOrdinary l E F (j.comp ι) f)
-    (pullbackNormalized l E L ι f)
-    (pullbackNormalized l L F j f)
-    (pullbackNormalized l E F (j.comp ι) f)
-
-private theorem tensor_tower
-    (F : Type u) [Field F] [Algebra ℚ_[l] F] [FiniteDimensional ℚ_[l] F]
-    (j : L →ₐ[ℚ_[l]] F) (W : AlgebraicGeometry.Scheme.{u}) :
-    ∀ M N : DerivedCategory (integralTowerModules l E W),
-      (integralOrdinaryDerivedScalar l L F j W).map
-          ((scalarTensorOrdinary l E L ι W).hom.app (M, N)) ≫
-        (scalarTensorOrdinary l L F j W).hom.app
-          ((integralOrdinaryDerivedScalar l E L ι W).obj M,
-            (integralOrdinaryDerivedScalar l E L ι W).obj N) ≫
-        (integralCompletedTensor l F W).map (CategoryTheory.Prod.mkHom
-          ((integralOrdinaryDerivedScalarComp l E L ι W F j).hom.app M)
-          ((integralOrdinaryDerivedScalarComp l E L ι W F j).hom.app N)) =
-      (integralOrdinaryDerivedScalarComp l E L ι W F j).hom.app
-          ((integralCompletedTensor l E W).obj (M, N)) ≫
-        (scalarTensorOrdinary l E F (j.comp ι) W).hom.app (M, N) := by
-  exact integralScalarTensorNormalizedTower l E L ι F j W
-    (scalarTensorOrdinary l E L ι W)
-    (scalarTensorOrdinary l L F j W)
-    (scalarTensorOrdinary l E F (j.comp ι) W)
-    (tensorNormalized l E L ι W)
-    (tensorNormalized l L F j W)
-    (tensorNormalized l E F (j.comp ι) W)
-
-private abbrev ordinaryTensorComplex (W : AlgebraicGeometry.Scheme.{u}) :=
-  coefficientTotalTensor.{u, u + 1, u} (AlgebraicGeometry.Scheme.ProEt.topology W)
-    (completedIntegralCommRingSheafUnrestricted l E W)
-
-private def closedTensorRep (W : AlgebraicGeometry.Scheme.{u}) :
-    (integralOperationsGoodLocalization l E W).prod
-        (integralOperationsGoodLocalization l E W) ⋙ (scalarIntegralClosed l E W).tensor ≅
-      ((integralOperationsGoodComplex l E W).ι.prod
-        (integralOperationsGoodComplex l E W).ι) ⋙
-          ordinaryTensorComplex l E W ⋙ DerivedCategory.Q := by
-  let k := ObjectProperty.ιOfLE
-    (P := integralOperationsGoodComplex l E W)
-    (P' := CochainComplex.IsKFlatIndependentCoefficients
-      (J := AlgebraicGeometry.Scheme.ProEt.topology W)
-      (R := completedIntegralCommRingSheafUnrestricted l E W)) (fun _ h ↦ h.1)
-  with_unfolding_all
-    exact (Functor.isoWhiskerLeft (k.prod k) (scalarIntegralModels l E W).comparison).symm
-
-private def closedTensorSquare (W : AlgebraicGeometry.Scheme.{u})
-    (P : (integralOperationsGoodComplex l E W).FullSubcategory ×
-      (integralOperationsGoodComplex l E W).FullSubcategory) :
-    (integralOrdinaryDerivedScalar l E L ι W).obj (DerivedCategory.Q.obj
-        ((ordinaryTensorComplex l E W).obj (P.1.obj, P.2.obj))) ⟶
-      DerivedCategory.Q.obj ((ordinaryTensorComplex l L W).obj
-        (((integralOrdinaryScalar l E L ι W).mapHomologicalComplex (.up ℤ)).obj P.1.obj,
-          ((integralOrdinaryScalar l E L ι W).mapHomologicalComplex (.up ℤ)).obj P.2.obj)) :=
-  (integralOrdinaryScalar l E L ι W).mapDerivedCategoryFactors.hom.app
-      ((ordinaryTensorComplex l E W).obj (P.1.obj, P.2.obj)) ≫
-    DerivedCategory.Q.map ((scalarOrdinaryTensorChain l E L ι W).hom.app
-      (P.1.obj, P.2.obj))
-
-private theorem inverseSquare
-    {C D : Type*} [Category C] [Category D] (G : C ⥤ D)
-    {A B : C} (r : A ≅ B) {X Y : D} (s : X ≅ Y)
-    (a : G.obj A ⟶ X) (b : G.obj B ⟶ Y)
-    (h : G.map r.hom ≫ b = a ≫ s.hom) :
-    G.map r.inv ≫ a = b ≫ s.inv := by
-  apply (cancel_mono s.hom).mp
-  simp only [Category.assoc, s.inv_hom_id, Category.comp_id]
-  rw [← h, ← Category.assoc, ← G.map_comp, r.inv_hom_id, G.map_id, Category.id_comp]
-
-private theorem closedTensorSquare_normalization (W : AlgebraicGeometry.Scheme.{u})
-    (P : (integralOperationsGoodComplex l E W).FullSubcategory ×
-      (integralOperationsGoodComplex l E W).FullSubcategory) :
-    (integralOrdinaryDerivedScalar l E L ι W).map ((closedTensorRep l E W).hom.app P) ≫
-        (closedTensorSquare l E L ι W) P =
-      (scalarClosedTensor l E L ι W).hom.app
-          (DerivedCategory.Q.obj P.1.obj, DerivedCategory.Q.obj P.2.obj) ≫
-        (scalarIntegralClosed l L W).tensor.map (CategoryTheory.Prod.mkHom
-          ((goodScalarComparison l E L ι W).hom.app P.1)
-          ((goodScalarComparison l E L ι W).hom.app P.2)) ≫
-        (closedTensorRep l L W).hom.app
-          (((goodScalar l E L ι W).prod (goodScalar l E L ι W)).obj P) := by
-  let r := (scalarIntegralModels l E W).iso _ _ _ _ _ P.1.property.1 P.2.property.1
-  let r' := (scalarIntegralModels l L W).iso _ _ _ _ _
-    (scalarGood l E L ι W P.1).1 (scalarGood l E L ι W P.2).1
-  change (integralOrdinaryDerivedScalar l E L ι W).map r.inv ≫
-      (integralOrdinaryScalar l E L ι W).mapDerivedCategoryFactors.hom.app _ ≫
-        DerivedCategory.Q.map ((scalarOrdinaryTensorChain l E L ι W).hom.app
-          (P.1.obj, P.2.obj)) = _ ≫ _ ≫ r'.inv
-  simp only [goodScalarComparison_hom_app]
-  have h := inverseSquare (integralOrdinaryDerivedScalar l E L ι W) r r'
-    ((integralOrdinaryScalar l E L ι W).mapDerivedCategoryFactors.hom.app
-        ((ordinaryTensorComplex l E W).obj (P.1.obj, P.2.obj)) ≫
-      DerivedCategory.Q.map ((scalarOrdinaryTensorChain l E L ι W).hom.app
-        (P.1.obj, P.2.obj)))
-    ((scalarClosedTensor l E L ι W).hom.app
-        (DerivedCategory.Q.obj P.1.obj, DerivedCategory.Q.obj P.2.obj) ≫
-      (scalarIntegralClosed l L W).tensor.map (CategoryTheory.Prod.mkHom
-        ((integralOrdinaryScalar l E L ι W).mapDerivedCategoryFactors.hom.app P.1.obj)
-        ((integralOrdinaryScalar l E L ι W).mapDerivedCategoryFactors.hom.app P.2.obj)))
-    (((scalarClosedTensor_existsUnique l E L ι W).exists.choose_spec P.1 P.2).trans
-      (Category.assoc _ _ _).symm)
-  exact h.trans (Category.assoc _ _ _)
-
-
-private theorem closedTensorSquare_tower
-    (F : Type u) [Field F] [Algebra ℚ_[l] F] [FiniteDimensional ℚ_[l] F]
-    (j : L →ₐ[ℚ_[l]] F) (W : AlgebraicGeometry.Scheme.{u})
-    (P : (integralOperationsGoodComplex l E W).FullSubcategory ×
-      (integralOperationsGoodComplex l E W).FullSubcategory) :
-    (integralOrdinaryDerivedScalar l L F j W).map ((closedTensorSquare l E L ι W) P) ≫
-      (closedTensorSquare l L F j W)
-        (((goodScalar l E L ι W).prod (goodScalar l E L ι W)).obj P) ≫
-      (((integralOperationsGoodComplex l F W).ι.prod
-        (integralOperationsGoodComplex l F W).ι) ⋙
-        ordinaryTensorComplex l F W ⋙ DerivedCategory.Q).map
-        ((NatIso.prod (goodScalarComp l E L ι F j W)
-          (goodScalarComp l E L ι F j W)).hom.app P) =
-    (integralOrdinaryDerivedScalarComp l E L ι W F j).hom.app
-        (DerivedCategory.Q.obj
-          ((ordinaryTensorComplex l E W).obj (P.1.obj, P.2.obj))) ≫
-      (closedTensorSquare l E F (j.comp ι) W) P := by
-  simp only [closedTensorSquare, Category.assoc]
-  change (integralOrdinaryDerivedScalar l L F j W).map
-      ((integralOrdinaryScalar l E L ι W).mapDerivedCategoryFactors.hom.app
-          ((coefficientTotalTensor.{u, u + 1, u} (AlgebraicGeometry.Scheme.ProEt.topology W)
-          (completedIntegralCommRingSheafUnrestricted l E W)).obj (P.1.obj, P.2.obj)) ≫
-        DerivedCategory.Q.map ((scalarOrdinaryTensorChain l E L ι W).hom.app
-          (P.1.obj, P.2.obj))) ≫
-      (integralOrdinaryScalar l L F j W).mapDerivedCategoryFactors.hom.app
-        ((coefficientTotalTensor.{u, u + 1, u} (AlgebraicGeometry.Scheme.ProEt.topology W)
-          (completedIntegralCommRingSheafUnrestricted l L W)).obj
-            (((integralOrdinaryScalar l E L ι W).mapHomologicalComplex (.up ℤ)).obj P.1.obj,
-              ((integralOrdinaryScalar l E L ι W).mapHomologicalComplex (.up ℤ)).obj P.2.obj)) ≫
-      DerivedCategory.Q.map ((scalarOrdinaryTensorChain l L F j W).hom.app
-        (((integralOrdinaryScalar l E L ι W).mapHomologicalComplex (.up ℤ)).obj P.1.obj,
-          ((integralOrdinaryScalar l E L ι W).mapHomologicalComplex (.up ℤ)).obj P.2.obj)) ≫
-      DerivedCategory.Q.map ((coefficientTotalTensor.{u, u + 1, u}
-        (AlgebraicGeometry.Scheme.ProEt.topology W)
-          (completedIntegralCommRingSheafUnrestricted l F W)).map
-        (CategoryTheory.Prod.mkHom
-          ((NatIso.mapHomologicalComplex (integralOrdinaryScalarComp l E L ι W F j)
-            (.up ℤ)).hom.app P.1.obj)
-          ((NatIso.mapHomologicalComplex (integralOrdinaryScalarComp l E L ι W F j)
-            (.up ℤ)).hom.app P.2.obj))) =
-    (integralOrdinaryDerivedScalarComp l E L ι W F j).hom.app
-        (DerivedCategory.Q.obj ((coefficientTotalTensor.{u, u + 1, u}
-          (AlgebraicGeometry.Scheme.ProEt.topology W)
-          (completedIntegralCommRingSheafUnrestricted l E W)).obj (P.1.obj, P.2.obj))) ≫
-      (integralOrdinaryScalar l E F (j.comp ι) W).mapDerivedCategoryFactors.hom.app
-        ((coefficientTotalTensor.{u, u + 1, u} (AlgebraicGeometry.Scheme.ProEt.topology W)
-          (completedIntegralCommRingSheafUnrestricted l E W)).obj (P.1.obj, P.2.obj)) ≫
-      DerivedCategory.Q.map ((scalarOrdinaryTensorChain l E F (j.comp ι) W).hom.app
-        (P.1.obj, P.2.obj))
-  apply integralScalarOrdinaryTensorTowerOnRepresentatives l E L ι F j W
-    (scalarOrdinaryTensorChain l E L ι W) (scalarOrdinaryTensorChain l L F j W)
-    (scalarOrdinaryTensorChain l E F (j.comp ι) W) P.1.obj P.2.obj
-  change ((integralOrdinaryScalar l L F j W).mapHomologicalComplex (.up ℤ)).map
-        (((normalizedIntegralOrdinaryTensorChain l E L ι W).exists.choose).hom.app
-          (P.1.obj, P.2.obj)) ≫
-      ((normalizedIntegralOrdinaryTensorChain l L F j W).exists.choose).hom.app
-        (((integralOrdinaryScalar l E L ι W).mapHomologicalComplex (.up ℤ)).obj P.1.obj,
-          ((integralOrdinaryScalar l E L ι W).mapHomologicalComplex (.up ℤ)).obj P.2.obj) ≫
-      (coefficientTotalTensor.{u, u + 1, u} (AlgebraicGeometry.Scheme.ProEt.topology W)
-        (completedIntegralCommRingSheafUnrestricted l F W)).map (CategoryTheory.Prod.mkHom
-        ((NatIso.mapHomologicalComplex (integralOrdinaryScalarComp l E L ι W F j)
-          (.up ℤ)).hom.app P.1.obj)
-        ((NatIso.mapHomologicalComplex (integralOrdinaryScalarComp l E L ι W F j)
-          (.up ℤ)).hom.app P.2.obj)) =
-    (NatIso.mapHomologicalComplex (integralOrdinaryScalarComp l E L ι W F j)
-      (.up ℤ)).hom.app
-        ((coefficientTotalTensor.{u, u + 1, u} (AlgebraicGeometry.Scheme.ProEt.topology W)
-          (completedIntegralCommRingSheafUnrestricted l E W)).obj (P.1.obj, P.2.obj)) ≫
-      ((normalizedIntegralOrdinaryTensorChain l E F (j.comp ι) W).exists.choose).hom.app
-        (P.1.obj, P.2.obj)
-  exact integralScalarOrdinaryTensorChainTower l E L ι F j W P.1.obj P.2.obj
-
-private theorem closedTensor_tower
-    (F : Type u) [Field F] [Algebra ℚ_[l] F] [FiniteDimensional ℚ_[l] F]
-    (j : L →ₐ[ℚ_[l]] F) (W : AlgebraicGeometry.Scheme.{u}) :
-    ∀ M N : DerivedCategory (integralTowerModules l E W),
-      (integralOrdinaryDerivedScalar l L F j W).map
-          ((scalarClosedTensor l E L ι W).hom.app (M, N)) ≫
-        (scalarClosedTensor l L F j W).hom.app
-          ((integralOrdinaryDerivedScalar l E L ι W).obj M,
-            (integralOrdinaryDerivedScalar l E L ι W).obj N) ≫
-        ((scalarIntegralClosed l F W).tensor).map (CategoryTheory.Prod.mkHom
-          ((integralOrdinaryDerivedScalarComp l E L ι W F j).hom.app M)
-          ((integralOrdinaryDerivedScalarComp l E L ι W F j).hom.app N)) =
-      (integralOrdinaryDerivedScalarComp l E L ι W F j).hom.app
-          (((scalarIntegralClosed l E W).tensor).obj (M, N)) ≫
-        (scalarClosedTensor l E F (j.comp ι) W).hom.app (M, N) := by
-  let q := integralOperationsGoodLocalization l E W
-  let V := (HomologicalComplex.quasiIso (integralTowerModules l E W) (.up ℤ)).inverseImage
-    (integralOperationsGoodComplex l E W).ι
-  let : q.IsLocalization V := integralOperationsGoodLocalization_isLocalization l E W
-  have hh := functorSquareTowerDescent (q.prod q)
-    ((integralOperationsGoodLocalization l L W).prod (integralOperationsGoodLocalization l L W))
-    ((integralOperationsGoodLocalization l F W).prod (integralOperationsGoodLocalization l F W))
-    ((goodScalar l E L ι W).prod (goodScalar l E L ι W))
-    ((goodScalar l L F j W).prod (goodScalar l L F j W))
-    ((goodScalar l E F (j.comp ι) W).prod (goodScalar l E F (j.comp ι) W))
-    (NatIso.prod (goodScalarComp l E L ι F j W) (goodScalarComp l E L ι F j W))
-    ((integralOrdinaryDerivedScalar l E L ι W).prod (integralOrdinaryDerivedScalar l E L ι W))
-    ((integralOrdinaryDerivedScalar l L F j W).prod (integralOrdinaryDerivedScalar l L F j W))
-    ((integralOrdinaryDerivedScalar l E F (j.comp ι) W).prod
-      (integralOrdinaryDerivedScalar l E F (j.comp ι) W))
-    (NatIso.prod (integralOrdinaryDerivedScalarComp l E L ι W F j)
-      (integralOrdinaryDerivedScalarComp l E L ι W F j))
-    (integralOrdinaryDerivedScalar l E L ι W) (integralOrdinaryDerivedScalar l L F j W)
-    (integralOrdinaryDerivedScalar l E F (j.comp ι) W)
-    (integralOrdinaryDerivedScalarComp l E L ι W F j)
-    ((scalarIntegralClosed l E W).tensor) ((scalarIntegralClosed l L W).tensor)
-    ((scalarIntegralClosed l F W).tensor) _ _ _
-    (closedTensorRep l E W) (closedTensorRep l L W) (closedTensorRep l F W)
-    (NatIso.prod (goodScalarComparison l E L ι W) (goodScalarComparison l E L ι W))
-    (NatIso.prod (goodScalarComparison l L F j W) (goodScalarComparison l L F j W))
-    (NatIso.prod (goodScalarComparison l E F (j.comp ι) W)
-      (goodScalarComparison l E F (j.comp ι) W))
-    (closedTensorSquare l E L ι W) (closedTensorSquare l L F j W)
-    (closedTensorSquare l E F (j.comp ι) W)
-    (scalarClosedTensor l E L ι W) (scalarClosedTensor l L F j W)
-    (scalarClosedTensor l E F (j.comp ι) W)
-    (Localization.fullyFaithfulWhiskeringLeft (q.prod q) (V.prod V) _).faithful
-    (closedTensorSquare_normalization l E L ι W)
-    (closedTensorSquare_normalization l L F j W)
-    (closedTensorSquare_normalization l E F (j.comp ι) W)
-    (fun P ↦ by
-      apply CategoryTheory.Prod.hom_ext
-      · exact goodScalarComp_factors l E L ι F j W P.1
-      · exact goodScalarComp_factors l E L ι F j W P.2)
-    (closedTensorSquare_tower l E L ι F j W)
-  intro M N
-  exact hh (M, N)
-
-end ScalarTowerDescent
-
 /-- The prescribed comparisons commute with coefficient towers before completion.
 Conjugation by scalarCompletion gives the completed tower identities, with the
 same completed scalar associators as the recorded scalar-extension composition.
@@ -911,16 +691,7 @@ theorem scalarOperationsOrdinary_tower
       (integralOrdinaryDerivedScalarComp l E L ι W F j).hom.app
           ((integralDerivedInternalHom l E W).obj (op M, N)) ≫
         scalarHomOrdinary l E F (j.comp ι) W M N) := by
-  refine ⟨pullback_tower l E L ι F j f, tensor_tower l E L ι F j W, ?_⟩
-  intro M N
-  exact CategoryTheory.scalarBaseChangeHom_tower (scalarIntegralClosed l E W)
-    (scalarIntegralClosed l L W) (scalarIntegralClosed l F W)
-    (integralOrdinaryDerivedScalar l E L ι W) (integralOrdinaryDerivedScalar l L F j W)
-    (integralOrdinaryDerivedScalar l E F (j.comp ι) W)
-    (scalarClosedTensor l E L ι W) (scalarClosedTensor l L F j W)
-    (scalarClosedTensor l E F (j.comp ι) W)
-    (integralOrdinaryDerivedScalarComp l E L ι W F j)
-    (closedTensor_tower l E L ι F j W) M N
+  sorry
 
 private theorem unit_of_idempotent
     {A : Type a} [Category.{b} A] {B : Type a'} [Category.{b'} B]

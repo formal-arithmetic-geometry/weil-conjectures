@@ -62,17 +62,6 @@ attribute [local irreducible] AlgebraicGeometry.Scheme.sfIntrinsicDerivedEquival
   AlgebraicGeometry.Scheme.sfIntrinsicExtensionByZero
   AlgebraicGeometry.Scheme.sfIntrinsicPullback
 
--- Keep the published fixed-coefficient instances for the completed support objects.
-attribute [-instance] AlgebraicGeometry.Scheme.ProEt.ClopenMonoidalDescent.modulesAbelian
-  AlgebraicGeometry.Scheme.ProEt.ClopenMonoidalDescent.hasDerived
-  AlgebraicGeometry.Scheme.ProEt.ClopenMonoidalDescent.monoidal
-  AlgebraicGeometry.Scheme.ProEt.ClopenMonoidalDescent.symmetric
-  AlgebraicGeometry.Scheme.ProEt.ClopenScalar.derived
-  AlgebraicGeometry.Scheme.ProEt.ClopenLocalization.modulesAbelian
-  AlgebraicGeometry.Scheme.ProEt.ClopenLocalization.hasDerived
-  AlgebraicGeometry.Scheme.ProEt.ClopenLocalization.sheafify
-  AlgebraicGeometry.Scheme.ProEt.ClopenLocalization.locallyBijective
-
 universe u w
 open CategoryTheory CategoryTheory.Limits AlgebraicGeometry
 namespace WeilConjectures.PurityFiniteSetting

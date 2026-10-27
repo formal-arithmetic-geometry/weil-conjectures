@@ -44,8 +44,6 @@ completion unit. The final equation uses the recorded canonical point tensorator
 
 @[expose] public noncomputable section
 set_option autoImplicit false
-set_option Elab.async false
-attribute [local instance 5000] CategoryTheory.HasSheafify.isRightAdjoint
 set_option synthInstance.maxSize 4096
 attribute [local irreducible] HasDerivedCategory.standard
   HasDerivedCategory.ofIsGrothendieckAbelian SheafOfModules.monoidalCategory

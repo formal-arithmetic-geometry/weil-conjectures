@@ -69,7 +69,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 Source: blueprint coefficient convention (blueprint: def-sp-tower-shriek-data). -/
 abbrev B (T : Scheme.{u}) (n : ℕ) :
     Sheaf (Scheme.ProEt.topology T) CommRingCat.{u + 1} :=
-  Scheme.proEtaleConstantRing T (R l E n)
+  (spCoefficientCommRings.{u, u} l E T).obj (op n)
 
 /-- The actual adjacent quotient map, not a chosen ring map.
 Source: blueprint coefficient convention (blueprint: def-sp-tower-shriek-data). -/
@@ -161,72 +161,6 @@ attribute [instance] Base.finite Base.kinjective
 Source: blueprint clause (2) (blueprint: def-sp-tower-shriek-data). -/
 abbrev tensor (b : Base l E) (T : Scheme.{u}) := (b.calculus T).closed.tensor
 
-/-- Horizontal compatibility expressed for a supplied family of finite adjunctions.
-Keeping these adjunctions as parameters avoids unfolding their sheafification models
-while checking the formula. The auxiliary section y and its HEq premise express
-the unchanged carrier of coefficient restriction without unfolding its scalar action.
-Source: actual termwise inverse image (blueprint: def-sp-tower-shriek-data). -/
-@[irreducible] def OrdinaryUnitTransitionModel {X Y : Scheme.{u}}
-    (P : ∀ n : ℕ, SemilinearSections.Mod.{u + 1, u, u + 1}
-      (Scheme.ProEt.topology Y) (B l E Y n) ⥤
-        SemilinearSections.Mod.{u + 1, u, u + 1}
-          (Scheme.ProEt.topology X) (B l E X n))
-    (Q : ∀ n : ℕ, SemilinearSections.Mod.{u + 1, u, u + 1}
-      (Scheme.ProEt.topology X) (B l E X n) ⥤
-        SemilinearSections.Mod.{u + 1, u, u + 1}
-          (Scheme.ProEt.topology Y) (B l E Y n))
-    (adj : ∀ n : ℕ, P n ⊣ Q n)
-    (EY : ∀ n : ℕ, S l E Y ⥤ SemilinearSections.Mod.{u + 1, u, u + 1}
-      (Scheme.ProEt.topology Y) (B l E Y n))
-    (EX : ∀ n : ℕ, S l E X ⥤ SemilinearSections.Mod.{u + 1, u, u + 1}
-      (Scheme.ProEt.topology X) (B l E X n))
-    (RY : ∀ {m n : ℕ} (_h : n ≤ m),
-      SemilinearSections.Mod.{u + 1, u, u + 1}
-        (Scheme.ProEt.topology Y) (B l E Y n) ⥤
-      SemilinearSections.Mod.{u + 1, u, u + 1}
-        (Scheme.ProEt.topology Y) (B l E Y m))
-    (RX : ∀ {m n : ℕ} (_h : n ≤ m),
-      SemilinearSections.Mod.{u + 1, u, u + 1}
-        (Scheme.ProEt.topology X) (B l E X n) ⥤
-      SemilinearSections.Mod.{u + 1, u, u + 1}
-        (Scheme.ProEt.topology X) (B l E X m))
-    (tY : ∀ {m n : ℕ} (h : n ≤ m), EY m ⟶ EY n ⋙ RY h)
-    (tX : ∀ {m n : ℕ} (h : n ≤ m), EX m ⟶ EX n ⋙ RX h)
-    (F : S l E Y ⥤ S l E X)
-    (e : ∀ n : ℕ, F ⋙ EX n ≅ EY n ⋙ P n) : Prop :=
-  ∀ (M : S l E Y) {m n : ℕ} (h : n ≤ m)
-    (U : Y.ProEtᵒᵖ) (x : ((EY m).obj M).val.obj U)
-    (y : ((EY n).obj M).val.obj U),
-    HEq (((tY h).app M).val.app U x) y →
-    HEq ((((adj m).homEquiv _ _)
-      ((e m).inv.app M ≫ (tX h).app (F.obj M) ≫
-        (RX h).map ((e n).hom.app M))).val.app U x)
-      (((adj n).unit.app ((EY n).obj M)).val.app U y)
-
-/-- The horizontal compatibility of the actual constant-ring finite adjunction units.
-The generic formula is specialized to the specified finite functors and adjunctions,
-not to arbitrarily supplied underlying-sheaf identifications.
-Source: actual termwise inverse image (blueprint: def-sp-tower-shriek-data). -/
-@[irreducible] def OrdinaryUnitTransition {X Y : Scheme.{u}} (f : X ⟶ Y)
-    (F : S l E Y ⥤ S l E X)
-    (e : ∀ n : ℕ, F ⋙ ev l E X n ≅
-      ev l E Y n ⋙ proEtaleConstantRingPullback (R l E n) f) : Prop :=
-  OrdinaryUnitTransitionModel l E
-    (fun n ↦ proEtaleConstantRingPullback (R l E n) f)
-    (fun n ↦ proEtaleConstantRingPushforward (R l E n) f)
-    (fun n ↦ proEtaleConstantRingAdjunction (R l E n) f)
-    (ev l E Y) (ev l E X)
-    (fun h ↦ SemilinearSections.res.{u + 1, u, u + 1}
-      (SemilinearSections.coefficientMap.{u + 1, u, u + 1}
-        (Scheme.ProEt.topology Y) (B l E Y) (tau l E Y) h))
-    (fun h ↦ SemilinearSections.res.{u + 1, u, u + 1}
-      (SemilinearSections.coefficientMap.{u + 1, u, u + 1}
-        (Scheme.ProEt.topology X) (B l E X) (tau l E X) h))
-    (fun h ↦ SemilinearSections.transition.{u + 1, u, u + 1}
-      (Scheme.ProEt.topology Y) (B l E Y) (tau l E Y) h)
-    (fun h ↦ SemilinearSections.transition.{u + 1, u, u + 1}
-      (Scheme.ProEt.topology X) (B l E X) (tau l E X) h) F e
-
 /-- Geometric operations in the fixed constant-coefficient coordinates. The HEq fields
 are transports of the *specified* generic geometric calculus, whose units, counits,
 coefficient mates and signed K-flat tensor comparisons are normalized before evaluation.
@@ -295,9 +229,6 @@ structure Geometry (b : Base l E) {X Y : Scheme.{u}} (f : X ⟶ Y) where
     ev l E Y n ⋙ proEtaleConstantRingPullback (R l E n) f
   ordinaryPullEvaluation_eq : ∀ n : ℕ,
     HEq (ordinaryPullEvaluation n) (generic.ordinaryPullEvaluation n)
-  /-- The actual finite adjunction units commute with horizontal restrictions,
-  independently of the auxiliary generic underlying-sheaf comparisons. -/
-  ordinaryUnitTransition : OrdinaryUnitTransition l E f pull ordinaryPullEvaluation
   /-- Exact inverse-image evaluation. -/
   pullEvaluation : ∀ n : ℕ,
     pull.mapDerivedCategory ⋙ Ev l E X n ≅

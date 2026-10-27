@@ -7,8 +7,6 @@ module
 
 public import Sheaf.AlgebraicGeometry.ProjectiveBundleQuotientData
 public import WeilConjectures.AlgebraicGeometry.RelativeProj.BaseChange
-import Sheaf.AlgebraicGeometry.SymmetricProjQuotientPullbackLocalComparison
-import WeilConjectures.AlgebraicGeometry.Modules.FreeGeneratorIso
 
 /-! # Comparison of normalized quotient lines along a fixed Proj comparison
 
@@ -28,8 +26,6 @@ open scoped AlgebraicGeometry
 
 namespace AlgebraicGeometry.SymmetricProjTautologicalCharts
 
-open Scheme.Modules
-
 -- Match the finite-limit instance used by the normalized quotient definitions.
 attribute [local instance 2000] CategoryTheory.Abelian.hasFiniteLimits
 
@@ -37,35 +33,6 @@ attribute [local irreducible] Scheme.Modules.tensorPullback Scheme.Modules.tenso
   Scheme.Modules.tensorPullbackSectionComp Scheme.Modules.tensorPullbackSectionAdjunction
   Scheme.GradedAlgebraData.relProj Scheme.GradedAlgebraData.relProjι
   Scheme.GradedAlgebraData.PullbackData.relProjComparison
-
-private theorem iso_of_common_frame_coefficients {T : Scheme.{u}}
-    {M P Q : T.Modules} (q : M ⟶ P) (q' : M ⟶ Q) {ι : Type u}
-    (U : ι → T.Opens) (s : ∀ i, Γ(P, U i)) (t : ∀ i, Γ(Q, U i))
-    (hU : (⨆ i, U i) = ⊤) (hs : ∀ i, IsFreeGenerator (s i))
-    (ht : ∀ i, IsFreeGenerator (t i))
-    (hc : ∀ i j (V : T.Opens) (hi : V ≤ U i) (hj : V ≤ U j) (a c : Γ(T, V)),
-      a • P.presheaf.map (homOfLE hi).op (s i) =
-        c • P.presheaf.map (homOfLE hj).op (s j) →
-      a • Q.presheaf.map (homOfLE hi).op (t i) =
-        c • Q.presheaf.map (homOfLE hj).op (t j))
-    (hq : ∀ i (V : T.Opens) (hi : V ≤ U i) (m : Γ(M, V)),
-      ∃ c : Γ(T, V), q.app V m = c • P.presheaf.map (homOfLE hi).op (s i) ∧
-        q'.app V m = c • Q.presheaf.map (homOfLE hi).op (t i)) :
-    ∃ w : P ≅ Q, q ≫ w.hom = q' := by
-  let w := isoOfIsFreeGenerator hU hs ht hc
-  refine ⟨w, Scheme.Modules.hom_ext _ _ fun V ↦ ?_⟩
-  ext m
-  have hcover : V ≤ ⨆ i, U i ⊓ V := by
-    rw [← iSup_inf_eq, hU, top_inf_eq]
-  apply TopCat.Sheaf.eq_of_locally_eq' ⟨Q.presheaf, Q.isSheaf⟩
-    (fun i ↦ U i ⊓ V) V (fun _ ↦ homOfLE inf_le_right) hcover
-  intro i
-  rw [← Hom.app_presheaf_map, ← Hom.app_presheaf_map]
-  simp only [Hom.comp_app, ConcreteCategory.comp_apply]
-  obtain ⟨c, hcs, hct⟩ := hq i (U i ⊓ V) inf_le_left
-    (M.presheaf.map (homOfLE inf_le_right).op m)
-  rw [hcs, hct]
-  exact isoOfIsFreeGenerator_hom_app_smul hU hs ht hc i inf_le_left c
 
 /-- For fixed normalized quotients and a fixed generator-preserving graded pullback
 comparison, the quotient lines agree along its induced relative Proj map.
@@ -123,9 +90,6 @@ theorem quotient_comparison_of_normalized_pullbackData
         (Scheme.Modules.tensorPullbackSectionComp
           (SymmetricAlgebraSheaf.gradedAlgebraData
             ((Scheme.Modules.tensorPullback g).obj E)).relProjHom g).hom.app E ≫
-          D'.quotient := by
-  obtain ⟨ι, U, s, t, hU, hs, ht, hc, hq⟩ :=
-    exists_normalized_pullback_frame_atlas g E D D' b hb e
-  exact iso_of_common_frame_coefficients _ _ U s t hU hs ht hc hq
+          D'.quotient := by sorry
 
 end AlgebraicGeometry.SymmetricProjTautologicalCharts

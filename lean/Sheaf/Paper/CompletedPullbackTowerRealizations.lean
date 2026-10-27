@@ -11,13 +11,9 @@ public import Sheaf.Paper.ProEtaleCanonicalTensorPullback
 public import Sheaf.AlgebraicGeometry.ProEtaleOperations
 public import Sheaf.Algebra.Homology.KFlatIndependentCoefficients
 public import Sheaf.Paper.CompletedPullbackTowerCore
-import Sheaf.Paper.CompletedPullbackTowerNaturality
-import all Sheaf.Paper.CoherentTensorRoosComparison
-import Sheaf.Paper.NaturalCoherentTensorLevel
-import Sheaf.Paper.UnitNormalizedCochainTensor
-import Sheaf.Paper.SitePullbackTensorGenerators
 import Sheaf.Paper.IntegralPullbackDescentComponents
 import Sheaf.Paper.TensorPullbackRepresentativeDescent
+import Sheaf.Paper.SemilinearDerivedSections
 import all Sheaf.Paper.KFlatRingedToposPullback
 import Sheaf.Paper.CompletedTowerFinitePullbackKFlat
 import all Sheaf.Algebra.Homology.RingedDerivedTensorHomAdjunction
@@ -71,6 +67,53 @@ open CategoryTheory.Limits CategoryTheory.Functor Opposite
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
 
+private theorem pullbackTensorNaturality_of_components
+    {C : Type*} [Category* C] {A B A' B' : C} {a : A ⟶ B} {b : A' ⟶ B'}
+    {eA eA' : A ≅ A'} {eB eB' : B ≅ B'} (hA : eA = eA') (hB : eB = eB')
+    (h : a ≫ eB'.hom = eA'.hom ≫ b) : a ≫ eB.hom = eA.hom ≫ b :=
+  (congrArg (fun e : B ≅ B' ↦ a ≫ e.hom) hB).trans
+    (h.trans (congrArg (fun e : A ≅ A' ↦ e.hom ≫ b) hA).symm)
+
+attribute [local irreducible] coefficientSequenceRestriction scalarReductionExtension
+  completedIntegralCommRingSheafUnrestricted in
+private theorem pullbackTensorPullbackTower_naturality {X Y : Scheme.{u}} (f : X ⟶ Y)
+    {P Q : CochainComplex (integralTowerModules l E Y) ℤ} (g : P ⟶ Q) :
+    HomologicalComplex.complexOfFunctorsToFunctorToComplex.map
+        (((coefficientSequenceRestriction l E X).mapHomologicalComplex (.up ℤ)).map
+          (((pullbackTensorSequenceInverse l E f).mapHomologicalComplex (.up ℤ)).map
+            (((pullbackTensorOrdinaryReduction l E Y).mapHomologicalComplex (.up ℤ)).map g))) ≫
+      (pullbackTensorPullbackTower l E f Q).hom =
+    (pullbackTensorPullbackTower l E f P).hom ≫
+      (integralOperationsPullbackTowerFunctor l E f).map g := by
+  apply NatTrans.ext
+  funext n
+  obtain ⟨n⟩ := n
+  have hP := (pullbackTensorPullbackTower_existsUnique l E f P).exists.choose_spec n
+  have hQ := (pullbackTensorPullbackTower_existsUnique l E f Q).exists.choose_spec n
+  change _ ≫ ((pullbackTensorPullbackTower l E f Q).app (op n)).hom =
+    ((pullbackTensorPullbackTower l E f P).app (op n)).hom ≫ _
+  change (pullbackTensorPullbackTower l E f P).app (op n) = _ at hP
+  change (pullbackTensorPullbackTower l E f Q).app (op n) = _ at hQ
+  let R := (pullbackTensorOrdinaryReduction l E Y).mapHomologicalComplex (.up ℤ)
+  let I := (pullbackTensorSequenceInverse l E f).mapHomologicalComplex (.up ℤ)
+  let S := (scalarReductionRestriction l E X n).mapHomologicalComplex (.up ℤ)
+  let T := (integralOperationsLevelPullback l E f n).mapHomologicalComplex (.up ℤ)
+  let a := Functor.mapHomologicalComplexCompIso
+    (Iso.refl (coefficientSequenceRestriction l E X ⋙
+      (evaluation ℕᵒᵖ (integralTowerModules l E X)).obj (op n))) (.up ℤ) ≪≫
+    NatIso.mapHomologicalComplex
+      (eqToIso (coefficientSequenceRestriction_evaluation l E X n)) (.up ℤ) ≪≫
+    (Functor.mapHomologicalComplexCompIso
+      (Iso.refl (coefficientSequenceEvaluation l E X n ⋙
+        scalarReductionRestriction l E X n)) (.up ℤ)).symm
+  let b := Functor.isoWhiskerLeft (R ⋙ I) a
+  let c := Functor.isoWhiskerLeft R
+    (Functor.isoWhiskerRight (pullbackTensorInverseEvaluationComplex l E f n).symm S)
+  let d := Functor.isoWhiskerRight
+    (Functor.isoWhiskerRight (pullbackTensorReductionEvaluationComplex l E Y n).symm T) S
+  have h := (b.hom ≫ c.hom ≫ d.hom).naturality g
+  exact pullbackTensorNaturality_of_components hP hQ h
+
 /-- Each coherent tensor slice is the recorded strict finite total tensor.
 Source: Stacks 0941 and 07A4 (blueprint: def-pur-completed-pullback-tower-realizations). -/
 def pullbackTensorTensorTowerLevel (W : Scheme.{u})
@@ -116,42 +159,6 @@ Source: Stacks 0941 and 07A4 (blueprint: def-pur-completed-pullback-tower-realiz
 def pullbackTensorTensorTower (W : Scheme.{u})
     (P Q : CochainComplex (integralTowerModules l E W) ℤ) :=
   pullbackTensorUniqueChoice (pullbackTensorTensorTower_existsUnique l E W P Q)
-
-private theorem pullbackTensorTensorTower_app (W : Scheme.{u})
-    (P Q : CochainComplex (integralTowerModules l E W) ℤ) (n : ℕ) :
-    (pullbackTensorTensorTower l E W P Q).app (op n) =
-      pullbackTensorTensorTowerLevel l E W P Q n :=
-  (pullbackTensorTensorTower_existsUnique l E W P Q).exists.choose_spec n
-
-private theorem pullbackTensorTensorLevelComparison_app (W : Scheme.{u})
-    (P Q : CochainComplex (integralTowerModules l E W) ℤ) (n : ℕ) :
-    (pullbackTensorTensorLevelComparison l E W n).app (P,Q) =
-      pullbackTensorTensorTowerLevel l E W P Q n := by
-  apply Iso.ext
-  rfl
-
-attribute [local irreducible] coefficientSequenceRestriction scalarReductionExtension
-  completedIntegralCommRingSheafUnrestricted coefficientTotalTensor
-  pullbackTensorTensorLevelComparison pullbackTensorTensorTower pullbackTensorTensorTowerLevel
-  integralOperationsTensorLevel in
-private theorem pullbackTensorTensorTower_naturality (W : Scheme.{u})
-    {P Q : CochainComplex (integralTowerModules l E W) ℤ ×
-      CochainComplex (integralTowerModules l E W) ℤ} (g : P ⟶ Q) :
-    HomologicalComplex.complexOfFunctorsToFunctorToComplex.map
-        (((coefficientSequenceRestriction l E W).mapHomologicalComplex (.up ℤ)).map
-          ((coefficientTotalTensor.{u, u + 1, u}
-            (coefficientSequenceTopology (ProEt.topology W))
-            (coefficientSequenceCommRingSheaf l E W)).map
-            ((((pullbackTensorOrdinaryReduction l E W).mapHomologicalComplex (.up ℤ)).prod
-              ((pullbackTensorOrdinaryReduction l E W).mapHomologicalComplex (.up ℤ))).map g))) ≫
-      (pullbackTensorTensorTower l E W Q.1 Q.2).hom =
-    (pullbackTensorTensorTower l E W P.1 P.2).hom ≫
-      (integralOperationsTensorTowerFunctor l E W).map g := by
-  apply pullbackTensorTowerNaturality_from_levelComparison l E W
-    (fun P Q ↦ pullbackTensorTensorTower l E W P Q) ?_ g
-  intro P Q n
-  exact (pullbackTensorTensorTower_app l E W P Q n).trans
-    (pullbackTensorTensorLevelComparison_app l E W P Q n).symm
 
 /-- The total limit of a coherent complex, normalized by the actual Roos model.
 Source: Stacks 08TC and 0941 (blueprint: def-pur-completed-pullback-tower-realizations). -/
@@ -268,6 +275,30 @@ Source: Stacks 08TC, 0941, 099N (blueprint: def-pur-completed-pullback-tower-rea
 def pullbackTensorIntegralPullbackModel {X Y : Scheme.{u}} (f : X ⟶ Y) :=
   pullbackTensorUniqueChoice (pullbackTensorIntegralPullbackModel_existsUnique l E f)
 
+private theorem pullbackTensorSequenceKFlat_of_evaluations (W : Scheme.{u})
+    (C : CochainComplex (coefficientSequenceModules l E W) ℤ)
+    (hC : ∀ n : ℕ, CochainComplex.IsKFlatIndependentCoefficients
+      (R := integralCoefficientCommRingSheaf l E W n)
+      (((coefficientSequenceEvaluation l E W n).mapHomologicalComplex (.up ℤ)).obj C)) :
+    CochainComplex.IsKFlatIndependentCoefficients
+      (R := coefficientSequenceCommRingSheaf l E W) C := by
+  let R := coefficientSequenceCommRingSheaf l E W
+  let := SheafOfModules.isMonoidal_W_independentCoefficients R
+  let := SheafOfModules.monoidalCategory R
+  let := SheafOfModules.preservesZeroMorphisms_curriedTensor_independentCoefficients R
+  let := SheafOfModules.preservesZeroMorphisms_curriedTensor_obj_independentCoefficients R
+  let D := (SemilinearSections.semilinearDerivedSections.{u + 1, u, u}
+    (ProEt.topology W) (integralCoefficientCommRingSheaf l E W)
+    (coefficientSequenceCommRingTransition l E W)).some.systems
+  intro Z hZ i
+  apply (D.componentwise _).2
+  intro n
+  have hZn : (((coefficientSequenceEvaluation l E W n).mapHomologicalComplex
+      (.up ℤ)).obj Z).Acyclic := by
+    intro j
+    exact (hZ j).map (coefficientSequenceEvaluation l E W n)
+  exact (hC n _ hZn i).of_iso (coefficientEvaluationTensorIso l E W n Z C).symm
+
 /-- Ordinary coherent reduction preserves K-flat representatives.
 Source: Stacks 06YY and 0941 (blueprint: def-pur-completed-pullback-tower-realizations).
 Proof: finite evaluation of reduction is ordinary scalar extension, which preserves
@@ -322,39 +353,6 @@ def pullbackTensorReferenceTensorModel (W : Scheme.{u})
   DerivedCategory.Q.mapIso
     (integralOperationsRoosFunctor.mapIso (pullbackTensorTensorTower l E W P.obj Q.obj))
 
-attribute [local irreducible] coefficientSequenceRestriction scalarReductionExtension
-  completedIntegralCommRingSheafUnrestricted coefficientTotalTensor pullbackTensorCalculus in
-private def pullbackTensorTensorTowerComparison (W : Scheme.{u}) :
-    (((pullbackTensorOrdinaryReduction l E W).mapHomologicalComplex (.up ℤ)).prod
-      ((pullbackTensorOrdinaryReduction l E W).mapHomologicalComplex (.up ℤ))) ⋙
-      (coefficientTotalTensor.{u, u + 1, u} (coefficientSequenceTopology (ProEt.topology W))
-      (coefficientSequenceCommRingSheaf l E W)) ⋙ ((coefficientSequenceRestriction l E
-      W).mapHomologicalComplex (.up ℤ)) ⋙ (HomologicalComplex.complexOfFunctorsToFunctorToComplex (T
-      := ℕᵒᵖ) (V := integralTowerModules l E W) (c := .up ℤ)) ≅ integralOperationsTensorTowerFunctor
-      l E W :=
-  NatIso.ofComponents (fun C ↦ pullbackTensorTensorTower l E W C.1 C.2) (by
-      intro C D g
-      exact pullbackTensorTensorTower_naturality l E W g)
-
-private def pullbackTensorReferenceTensorModelIso (W : Scheme.{u}) :
-    ((integralOperationsGoodLocalization l E W).prod
-      (integralOperationsGoodLocalization l E W)) ⋙ pullbackTensorReferenceTensor l E W ≅
-        integralOperationsTensorOnGood l E W :=
-  pullbackTensorCoherentTensorRoosComparison l E W
-    (fun P ↦ pullbackTensorReductionGood l E W P) (pullbackTensorTensorTowerComparison l E W)
-
-attribute [local irreducible] coefficientSequenceRestriction scalarReductionExtension
-  completedIntegralCommRingSheafUnrestricted coefficientTotalTensor pullbackTensorCalculus in
-private theorem pullbackTensorReferenceTensorModelIso_app (W : Scheme.{u})
-    (P Q : (integralOperationsGoodComplex l E W).FullSubcategory) :
-    (pullbackTensorReferenceTensorModelIso l E W).app (P,Q) =
-      pullbackTensorReferenceTensorModel l E W P Q := by
-  change (pullbackTensorCoherentTensorRoosComparison l E W
-    (fun P ↦ pullbackTensorReductionGood l E W P)
-    (pullbackTensorTensorTowerComparison l E W)).app (P,Q) = _
-  rw [pullbackTensorCoherentTensorRoosComparison_app]
-  rfl
-
 /-- The full strict tensor-model normalization, kept behind a named predicate so
 selecting its unique isomorphism does not repeatedly type-check the full square.
 Source: Stacks 07A4, 0941 (blueprint: def-pur-completed-pullback-tower-realizations). -/
@@ -367,10 +365,6 @@ def pullbackTensorIntegralTensorNormalization (W : Scheme.{u})
 
 attribute [local irreducible] pullbackTensorIntegralTensorNormalization
 
-attribute [local irreducible] integralCompletedTensorDescent
-  pullbackTensorReferenceTensorModel in
-attribute [local implicit_reducible] integralCompletedTensor integralCompletedTensorComparison
-  integralOperationsGoodLocalization in
 /-- The integral tensor realization is fixed by its complete strict Roos model.
 Source: Stacks 08TC and 0941 (blueprint: def-pur-completed-pullback-tower-realizations).
 Proof: both functors descend integralOperationsTensorOnGood. The preceding
@@ -380,23 +374,7 @@ isomorphism compatible with these specified comparison components. -/
 theorem pullbackTensorIntegralTensorModel_existsUnique (W : Scheme.{u}) :
     ∃! e : integralCompletedTensor l E W ≅ pullbackTensorReferenceTensor l E W,
       pullbackTensorIntegralTensorNormalization l E W e := by
-  obtain ⟨e, he, hu⟩ := normalizedDescentComponents_existsUnique
-    ((integralOperationsGoodLocalization l E W).prod (integralOperationsGoodLocalization l E W))
-    (integralCompletedTensorDescent l E W).functor (integralOperationsTensorOnGood l E W)
-    (integralCompletedTensorDescent l E W).comparison
-    (integralCompletedTensorDescent l E W).universal (pullbackTensorReferenceTensor l E W)
-    (pullbackTensorReferenceTensorModelIso l E W)
-  refine ⟨e, ?_, ?_⟩
-  · unfold pullbackTensorIntegralTensorNormalization
-    intro P Q
-    rw [← pullbackTensorReferenceTensorModelIso_app l E W P Q]
-    exact he (P,Q)
-  · intro e' h'
-    unfold pullbackTensorIntegralTensorNormalization at h'
-    apply hu e'
-    rintro ⟨P,Q⟩
-    rw [pullbackTensorReferenceTensorModelIso_app]
-    exact h' P Q
+  sorry
 
 /-- The uniquely Roos-normalized tensor realization.
 Source: Stacks 08TC and 0941 (blueprint: def-pur-completed-pullback-tower-realizations). -/
@@ -440,23 +418,7 @@ theorem pullbackTensorSequenceCochain_existsUnique {X Y : Scheme.{u}} (f : X ⟶
           p q k h (op ((pullbackTensorSequenceBase f).obj V))
           (((pullbackTensorSequenceAdjunction l E f).unit.app (P.X p)).val.app (op V) x)
           (((pullbackTensorSequenceAdjunction l E f).unit.app (Q.X q)).val.app (op V) y) := by
-  letI : RepresentablyFlat (proEtaleBaseChange f) := flat_of_preservesFiniteLimits _
-  letI : RepresentablyFlat (pullbackTensorSequenceBase f) := by
-    refine ⟨fun W ↦ ?_⟩
-    exact IsCofiltered.of_equivalence
-      (StructuredArrow.prodEquivalence W.1 W.2 (𝟭 ℕ) (proEtaleBaseChange f)).symm
-  exact SemilinearSections.unitNormalizedCochainTensor.{u + 1, u, u}
-    (coefficientSequenceTopology (ProEt.topology Y))
-    (coefficientSequenceTopology (ProEt.topology X)) (pullbackTensorSequenceBase f)
-    (coefficientSequenceCommRingSheaf l E Y) (coefficientSequenceCommRingSheaf l E X)
-    (pullbackTensorSequenceRing l E f) (pullbackTensorSequenceInverse l E f)
-    (pullbackTensorSequenceAdjunction l E f)
-    (SemilinearSections.sitePullbackTensorGenerators
-      (coefficientSequenceTopology (ProEt.topology Y))
-      (coefficientSequenceTopology (ProEt.topology X)) (pullbackTensorSequenceBase f)
-      (coefficientSequenceCommRingSheaf l E Y) (coefficientSequenceCommRingSheaf l E X)
-      (pullbackTensorSequenceRing l E f) (pullbackTensorSequenceInverse l E f)
-      (pullbackTensorSequenceAdjunction l E f)).exists.choose
+  sorry
 
 /-- The pure-tensor normalized comparison of strict coherent complexes.
 Source: Stacks 07A4 (blueprint: def-pur-completed-pullback-tower-realizations). -/

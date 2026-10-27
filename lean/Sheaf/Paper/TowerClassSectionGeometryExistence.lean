@@ -21,7 +21,7 @@ set_option autoImplicit false
 set_option genSizeOf false
 set_option genInjectivity false
 set_option synthInstance.maxSize 4096
-universe u c v r
+universe u
 open CategoryTheory CategoryTheory.Limits Opposite WeilConjectures
 attribute [local irreducible] SemilinearSections.systemRing
   SemilinearSections.ringPresheaf SemilinearSections.rings
@@ -36,153 +36,6 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
 
 open SemilinearSections
-
-private theorem restriction_unit_general
-    {C : Type c} [Category.{v} C] (J : GrothendieckTopology C)
-    [EssentiallySmall.{max c v r} C]
-    (B : ℕ → Sheaf J CommRingCat.{max c v r}) (τ : ∀ n, B (n + 1) ⟶ B n)
-    {C' : Type c} [Category.{v} C'] [EssentiallySmall.{max c v r} C']
-    (J' : GrothendieckTopology C')
-    (uInv : Sheaf J (Type (max c v r)) ⥤ Sheaf J' (Type (max c v r)))
-    (uPush : Sheaf J' (Type (max c v r)) ⥤ Sheaf J (Type (max c v r)))
-    (adjSet : uInv ⊣ uPush)
-    (F : ℕ → Sheaf J' CommRingCat.{max c v r}) (σ : ∀ n, F (n + 1) ⟶ F n)
-    (I : ∀ n, SheafOfModules.AlgebraicInverseImage uInv (B n) (F n))
-    (P : OrdinaryInverseSystem.{c, v, r} J B τ J' uInv F σ I)
-    (V : ∀ n, SemilinearSections.Mod.{c, v, max c v r} J' (F n) ⥤
-      SemilinearSections.Mod.{c, v, max c v r} J (B n))
-    (a : ∀ n, (I n).modules ⊣ V n)
-    (eV : ∀ n, V n ⋙ SemilinearSections.underlying.{c, v, r} J (B n) ≅
-      SemilinearSections.underlying.{c, v, r} J' (F n) ⋙ uPush)
-    (ha : ∀ n (M : SemilinearSections.Mod.{c, v, max c v r} J (B n))
-      (N : SemilinearSections.Mod.{c, v, max c v r} J' (F n)) (k : (I n).modules.obj M ⟶ N),
-      (SemilinearSections.underlying.{c, v, r} J (B n)).map ((a n).homEquiv M N k) ≫
-          (eV n).hom.app N = adjSet.homEquiv _ _
-        ((I n).moduleUnderlying.inv.app M ≫ (SemilinearSections.underlying.{c, v, r} J' (F n)).map
-          k))
-    {m n : ℕ} (h : n ≤ m) (M : SemilinearSections.Mod.{c, v, max c v r} J (B m))
-    (N : SemilinearSections.Mod.{c, v, max c v r} J (B n))
-    (t : M ⟶ (SemilinearSections.res.{c, v, max c v r} (SemilinearSections.coefficientMap.{c, v, max
-      c v r} J B τ h)).obj N) :
-    (SemilinearSections.underlying.{c, v, r} J (B m)).map ((a m).homEquiv _ _
-        ((I m).modules.map t ≫ (P.restriction h).hom.app N)) ≫
-      (eV m).hom.app ((SemilinearSections.res.{c, v, max c v r}
-        (SemilinearSections.coefficientMap.{c, v, max c v r} J' F σ h)).obj ((I n).modules.obj N)) =
-    (SemilinearSections.underlying.{c, v, r} J (B m)).map t ≫
-      (SemilinearSections.underlying.{c, v, r} J (B n)).map ((a n).unit.app N) ≫
-        (eV n).hom.app ((I n).modules.obj N) := by
-  have hr : (I m).moduleUnderlying.inv.app
-        ((SemilinearSections.res.{c, v, max c v r} (SemilinearSections.coefficientMap.{c, v, max c v
-          r} J B τ h)).obj N) ≫
-      (SemilinearSections.underlying.{c, v, r} J' (F m)).map ((P.restriction h).hom.app N) =
-        (I n).moduleUnderlying.inv.app N := by
-    apply (cancel_mono ((I n).moduleUnderlying.hom.app N)).1
-    simp only [Category.assoc, P.restriction_underlying,
-      Iso.inv_hom_id_app]
-    rfl
-  have ht : (I m).moduleUnderlying.inv.app M ≫
-      (SemilinearSections.underlying.{c, v, r} J' (F m)).map
-        ((I m).modules.map t ≫ (P.restriction h).hom.app N) =
-      uInv.map ((SemilinearSections.underlying.{c, v, r} J (B m)).map t) ≫
-        (I n).moduleUnderlying.inv.app N := by
-    have hn := (I m).moduleUnderlying.inv.naturality t
-    dsimp only [Functor.comp_map] at hn
-    have hmap := congrArg (fun k ↦ (I m).moduleUnderlying.inv.app M ≫ k)
-      ((SemilinearSections.underlying.{c, v, r} J' (F m)).map_comp
-        ((I m).modules.map t) ((P.restriction h).hom.app N))
-    exact hmap.trans ((Category.assoc _ _ _).symm.trans
-      ((congrArg (fun k ↦ k ≫ (SemilinearSections.underlying.{c, v, r} J' (F m)).map
-        ((P.restriction h).hom.app N)) hn.symm).trans
-          ((Category.assoc _ _ _).trans
-            (congrArg (fun k ↦ uInv.map
-              ((SemilinearSections.underlying.{c, v, r} J (B m)).map t) ≫ k) hr))))
-  have hn := ha n N ((I n).modules.obj N) (𝟙 _)
-  simp only [Adjunction.homEquiv_id] at hn
-  have hh := ha m M
-    ((SemilinearSections.res.{c, v, max c v r}
-      (SemilinearSections.coefficientMap.{c, v, max c v r} J' F σ h)).obj
-        ((I n).modules.obj N))
-    ((I m).modules.map t ≫ (P.restriction h).hom.app N)
-  have htp := congrArg (fun k ↦ (adjSet.homEquiv _ _) k) ht
-  have hnat := adjSet.homEquiv_naturality_left
-    ((SemilinearSections.underlying.{c, v, r} J (B m)).map t)
-    ((I n).moduleUnderlying.inv.app N)
-  exact hh.trans (htp.trans (hnat.trans
-    (congrArg (fun k ↦ (SemilinearSections.underlying.{c, v, r} J (B m)).map t ≫ k)
-      hn.symm)))
-
-private theorem unit_point
-    {C : Type c} [Category.{v} C] (J : GrothendieckTopology C)
-    [EssentiallySmall.{max c v r} C]
-    (B : ℕ → Sheaf J CommRingCat.{max c v r}) (τ : ∀ n, B (n + 1) ⟶ B n)
-    {C' : Type c} [Category.{v} C'] [EssentiallySmall.{max c v r} C']
-    (J' : GrothendieckTopology C')
-    (uInv : Sheaf J (Type (max c v r)) ⥤ Sheaf J' (Type (max c v r)))
-    (uPush : Sheaf J' (Type (max c v r)) ⥤ Sheaf J (Type (max c v r)))
-    (adjSet : uInv ⊣ uPush)
-    (F : ℕ → Sheaf J' CommRingCat.{max c v r}) (σ : ∀ n, F (n + 1) ⟶ F n)
-    (I : ∀ n, SheafOfModules.AlgebraicInverseImage uInv (B n) (F n))
-    (P : OrdinaryInverseSystem.{c, v, r} J B τ J' uInv F σ I)
-    (V : ∀ n, SemilinearSections.Mod.{c, v, max c v r} J' (F n) ⥤
-      SemilinearSections.Mod.{c, v, max c v r} J (B n))
-    (a : ∀ n, (I n).modules ⊣ V n)
-    (eV : ∀ n, V n ⋙ SemilinearSections.underlying.{c, v, r} J (B n) ≅
-      SemilinearSections.underlying.{c, v, r} J' (F n) ⋙ uPush)
-    (ha' : ∀ n (M : SemilinearSections.Mod.{c, v, max c v r} J (B n))
-      (N : SemilinearSections.Mod.{c, v, max c v r} J' (F n)) (k : (I n).modules.obj M ⟶ N),
-      (SemilinearSections.underlying.{c, v, r} J (B n)).map ((a n).homEquiv M N k) ≫
-          (eV n).hom.app N = adjSet.homEquiv _ _
-        ((I n).moduleUnderlying.inv.app M ≫ (SemilinearSections.underlying.{c, v, r} J' (F n)).map
-          k))
-    (hV : ∀ n (N : SemilinearSections.Mod.{c, v, max c v r} J' (F n)) (U : Cᵒᵖ)
-      (x : ((V n).obj N).val.obj U),
-      HEq (((eV n).hom.app N).hom.app U x) x) :
-    ∀ (M : SemilinearSections.Systems.{c, v, max c v r} J B τ) {m n : ℕ} (h : n ≤ m)
-      (U : Cᵒᵖ)
-      (x : ((SemilinearSections.evaluation.{c, v, max c v r} J B τ m).obj M).val.obj U)
-      (y : ((SemilinearSections.evaluation.{c, v, max c v r} J B τ n).obj M).val.obj U),
-      HEq (((SemilinearSections.transition.{c, v, max c v r} J B τ h).app M).val.app U x) y →
-      HEq ((((a m).homEquiv _ _)
-        ((P.component m).inv.app M ≫
-          (SemilinearSections.transition.{c, v, max c v r} J' F σ h).app (P.pull.obj M) ≫
-          (SemilinearSections.res.{c, v, max c v r}
-            (SemilinearSections.coefficientMap.{c, v, max c v r} J' F σ h)).map
-              ((P.component n).hom.app M))).val.app U x)
-        (((a n).unit.app
-          ((SemilinearSections.evaluation.{c, v, max c v r} J B τ n).obj M)).val.app U y) := by
-  intro M m n h U x y hy
-  have hk : (P.component m).inv.app M ≫
-      (SemilinearSections.transition.{c, v, max c v r} J' F σ h).app (P.pull.obj M) ≫
-        (SemilinearSections.res.{c, v, max c v r}
-          (SemilinearSections.coefficientMap.{c, v, max c v r} J' F σ h)).map
-            ((P.component n).hom.app M) =
-      (I m).modules.map ((SemilinearSections.transition.{c, v, max c v r} J B τ h).app M) ≫
-        (P.restriction h).hom.app ((SemilinearSections.evaluation.{c, v, max c v r} J B τ n).obj
-          M) := by
-    have ht := congrArg (fun k ↦ (P.component m).inv.app M ≫ k)
-      (P.transition h M)
-    simpa only [Category.assoc, Iso.inv_hom_id_app_assoc] using ht
-  have ht := restriction_unit_general.{c, v, r}
-    J B τ J' uInv uPush adjSet F σ I P V a eV ha' h
-      ((SemilinearSections.evaluation.{c, v, max c v r} J B τ m).obj M)
-    ((SemilinearSections.evaluation.{c, v, max c v r} J B τ n).obj M)
-      ((SemilinearSections.transition.{c, v, max c v r} J B τ h).app M)
-  have hp := congrArg (fun k ↦ k.hom.app U x) ht
-  have hs := congrArg
-    (fun k ↦ (((a m).homEquiv _ _) k).val.app U x) hk
-  have hl := hV m _ U
-    ((((a m).homEquiv _ _)
-      ((I m).modules.map ((SemilinearSections.transition J B τ h).app M) ≫
-        (P.restriction h).hom.app
-          ((SemilinearSections.evaluation.{c, v, max c v r} J B τ n).obj M))).val.app U x)
-  have hr := hV n _ U
-    (((a n).unit.app ((SemilinearSections.evaluation.{c, v, max c v r} J B τ n).obj M)).val.app U
-      (((SemilinearSections.transition J
-        B τ h).app M).val.app U x))
-  have hy' := congrArg (fun z ↦ ((a n).unit.app
-    ((SemilinearSections.evaluation.{c, v, max c v r} J B τ n).obj M)).val.app U z) (eq_of_heq hy)
-  exact (heq_of_eq hs).trans (hl.symm.trans
-    ((heq_of_eq hp).trans (hr.trans (heq_of_eq hy'))))
 
 private theorem whisker_transport
     {A D K : Type*} [Category A] [Category D] [Category K]
@@ -219,47 +72,6 @@ private theorem unit_from_transpose
     eL.inv_hom_id_app M, CategoryTheory.Functor.map_id,
     Category.comp_id (adj.unit.app (U.obj M))]
 
-private theorem unitModel_transport
-    {X Y : Scheme.{u}} (F : SpTowerShriek.S l E Y ⥤ SpTowerShriek.S l E X)
-    (A A' : ∀ n : ℕ,
-      Σ L : SemilinearSections.Mod.{u + 1, u, u + 1}
-        (Scheme.ProEt.topology Y) (SpTowerShriek.B l E Y n) ⥤
-          SemilinearSections.Mod.{u + 1, u, u + 1}
-            (Scheme.ProEt.topology X) (SpTowerShriek.B l E X n),
-      Σ R : SemilinearSections.Mod.{u + 1, u, u + 1}
-        (Scheme.ProEt.topology X) (SpTowerShriek.B l E X n) ⥤
-          SemilinearSections.Mod.{u + 1, u, u + 1}
-            (Scheme.ProEt.topology Y) (SpTowerShriek.B l E Y n), L ⊣ R)
-    (h : A = A')
-    (e : ∀ n, F ⋙ SpTowerShriek.ev l E X n ≅
-      SpTowerShriek.ev l E Y n ⋙ (A n).1)
-    (hu : SpTowerShriek.OrdinaryUnitTransitionModel l E
-      (fun n ↦ (A n).1) (fun n ↦ (A n).2.1) (fun n ↦ (A n).2.2)
-      (SpTowerShriek.ev l E Y) (SpTowerShriek.ev l E X)
-      (fun h ↦ SemilinearSections.res (SemilinearSections.coefficientMap (Scheme.ProEt.topology Y)
-        (SpTowerShriek.B l E Y) (SpTowerShriek.tau l E Y) h))
-      (fun h ↦ SemilinearSections.res (SemilinearSections.coefficientMap (Scheme.ProEt.topology X)
-        (SpTowerShriek.B l E X) (SpTowerShriek.tau l E X) h))
-      (fun h ↦ SemilinearSections.transition (Scheme.ProEt.topology Y)
-        (SpTowerShriek.B l E Y) (SpTowerShriek.tau l E Y) h)
-      (fun h ↦ SemilinearSections.transition (Scheme.ProEt.topology X)
-        (SpTowerShriek.B l E X) (SpTowerShriek.tau l E X) h) F e) :
-    SpTowerShriek.OrdinaryUnitTransitionModel l E
-      (fun n ↦ (A' n).1) (fun n ↦ (A' n).2.1) (fun n ↦ (A' n).2.2)
-      (SpTowerShriek.ev l E Y) (SpTowerShriek.ev l E X)
-      (fun h ↦ SemilinearSections.res (SemilinearSections.coefficientMap (Scheme.ProEt.topology Y)
-        (SpTowerShriek.B l E Y) (SpTowerShriek.tau l E Y) h))
-      (fun h ↦ SemilinearSections.res (SemilinearSections.coefficientMap (Scheme.ProEt.topology X)
-        (SpTowerShriek.B l E X) (SpTowerShriek.tau l E X) h))
-      (fun h ↦ SemilinearSections.transition (Scheme.ProEt.topology Y)
-        (SpTowerShriek.B l E Y) (SpTowerShriek.tau l E Y) h)
-      (fun h ↦ SemilinearSections.transition (Scheme.ProEt.topology X)
-        (SpTowerShriek.B l E X) (SpTowerShriek.tau l E X) h) F
-      (fun n ↦ e n ≪≫ Functor.isoWhiskerLeft _
-        (eqToIso (congrArg (fun a ↦ (a n).1) h))) := by
-  subst A'
-  simpa only [eqToIso_refl, Functor.isoWhiskerLeft_refl, Iso.trans_refl] using hu
-
 set_option maxHeartbeats 1000000 in
 -- The geometry records require many dependent category and instance checks.
 /-- Choose geometry before constructing any coefficient-unit comparison.
@@ -284,10 +96,8 @@ calculi. Derive the ordinary adjunctions canonically; their unit and counit
 identities and ordinaryPullTransition give the transition and projection formulas.
 Transport the resulting generic Geometry to the constant quotient presentation,
 retaining the bundled level adjunctions and all evaluation comparisons. This
-produces SpTowerShriek.Geometry with the stated identity on sections. Its actual
-finite-unit transition law follows from the restriction-underlying identity and
-set-sheaf adjunction naturality. No coefficient-unit comparison is constructed.
-All constructions apply
+produces SpTowerShriek.Geometry with the stated identity on sections. No unit
+isomorphism or compatibility of unit maps is asserted. All constructions apply
 also to empty schemes and the positive coefficient level indexed by zero. -/
 theorem exists_sectionGeometry {X Y : Scheme.{u}} (f : X ⟶ Y) :
     ∃ b : SpTowerShriek.Base l E, ∃ g : SpTowerShriek.Geometry l E b f,
@@ -369,19 +179,6 @@ theorem exists_sectionGeometry {X Y : Scheme.{u}} (f : X ⟶ Y) :
       (D.homEquiv M (P.pull.obj M) (𝟙 _)) ≫ _ ≫ _ = _
     rw [← Category.assoc, D.homEquiv_component, ← (a n).homEquiv_naturality_right]
     simpa using (a n).homEquiv_id ((evaluation.{u + 1, u, u + 1} J B τ n).obj M)
-  have hmodel : SpTowerShriek.OrdinaryUnitTransitionModel l E
-      (fun n ↦ (I n).modules) V a
-      (SpTowerShriek.ev l E Y) (SpTowerShriek.ev l E X)
-      (fun h ↦ SemilinearSections.res.{u + 1, u, u + 1} (SemilinearSections.coefficientMap.{u + 1,
-        u, u + 1} J B τ h))
-      (fun h ↦ SemilinearSections.res.{u + 1, u, u + 1} (SemilinearSections.coefficientMap.{u + 1,
-        u, u + 1} J' F σ h))
-      (fun h ↦ SemilinearSections.transition.{u + 1, u, u + 1} J B τ h) (fun h ↦
-        SemilinearSections.transition.{u + 1, u, u + 1} J' F σ h)
-      P.pull P.component := by
-    unfold SpTowerShriek.OrdinaryUnitTransitionModel
-    exact unit_point.{u + 1, u, u + 1} J B τ J' uInv uPush adjSet F σ I P V a eV ha'
-      (fun _ _ _ _ ↦ HEq.rfl)
   let O : GeometryOrdinary.{u + 1, u, u + 1} J B τ J' uInv uPush adjSet :=
     { coefficients := F
       coefficientTransition := σ
@@ -464,9 +261,6 @@ theorem exists_sectionGeometry {X Y : Scheme.{u}} (f : X ⟶ Y) :
     derivedAdjunction_eq := HEq.rfl
     ordinaryPullEvaluation := fun n ↦ O.ordinaryPullEvaluation n ≪≫
       Functor.isoWhiskerLeft _ (eqToIso (hmodules n))
-    ordinaryUnitTransition := by
-      unfold SpTowerShriek.OrdinaryUnitTransition
-      exact unitModel_transport l E P.pull _ _ (funext hpackage) P.component hmodel
     ordinaryPullEvaluation_eq := fun n ↦
       whisker_transport (hmodules n) (O.ordinaryPullEvaluation n)
     pullEvaluation := fun n ↦ G.pullEvaluation n ≪≫

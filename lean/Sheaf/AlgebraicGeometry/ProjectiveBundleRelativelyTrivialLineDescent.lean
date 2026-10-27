@@ -7,7 +7,6 @@ module
 
 public import Sheaf.AlgebraicGeometry.ProjectiveBundleQuotientData
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
-import Sheaf.AlgebraicGeometry.ProjectiveBundleTrivialLineGluing
 
 /-!
 # Descent of relatively trivial modules on projective bundles

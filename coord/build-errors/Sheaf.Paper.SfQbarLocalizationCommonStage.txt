@@ -1,7 +1,49 @@
-# global build 2026-10-27T15:04:20Z of ef41adbe62: Sheaf.Paper.SfQbarLocalizationCommonStage failed
-error: Sheaf/Paper/SfQbarLocalizationCommonStage.lean: bad import 'Sheaf.Paper.QcqsCompactSupportRealization'
-error: Sheaf/Paper/SfQbarLocalizationCommonStage.lean: bad import 'Sheaf.Paper.CompactSupportCoefficientAction'
-error: Sheaf/Paper/SfQbarLocalizationCommonStage.lean: bad import 'Sheaf.Paper.SfRationalLocalizationOrthogonality'
-error: Sheaf/Paper/SfQbarLocalizationCommonStage.lean: bad import 'Sheaf.Paper.SfQbarLocalizationExactDescent'
-error: Sheaf/Paper/SfQbarLocalizationCommonStage.lean: bad import 'Sheaf.Paper.SfQbarLocalizationFiniteCoherence'
-error: Sheaf/Paper/SfQbarLocalizationCommonStage.lean: bad import 'Sheaf.Paper.SfCommonStageDirectImage'
+# global build 2026-10-27T16:13:33Z of 00fb42a26f: Sheaf.Paper.SfQbarLocalizationCommonStage failed
+error: Sheaf/Paper/SfQbarLocalizationCommonStage.lean:546:4: unsolved goals
+case py₁.right
+l : ℕ
+inst✝⁵ : Fact (Nat.Prime l)
+Ω : Type v
+inst✝⁴ : Field Ω
+inst✝³ : Algebra ℚ_[l] Ω
+inst✝² : IsAlgClosure ℚ_[l] Ω
+V W : Scheme
+f : V ⟶ W
+inst✝¹ : (x : ↥V) → Invertible ↑l
+inst✝ : (y : ↥W) → Invertible ↑l
+β :
+  {i j : Index l Ω} →
+    (h : i ≤ j) →
+      (fun E ↦ rationalDerivedPullback l (Coefficient l Ω E) f) i ⋙ (stageSystem l Ω V).T h ≅
+        (stageSystem l Ω W).T h ⋙ (fun E ↦ rationalDerivedPullback l (Coefficient l Ω E) f) j
+coh :
+  ∀ {i j k : Index l Ω} (h : i ≤ j) (h' : j ≤ k) (x : Stage l Ω W i),
+    ((stageSystem l Ω V).T h').map ((β h).hom.app x) ≫
+        (β h').hom.app (((stageSystem l Ω W).T h).obj x) ≫
+          ((fun E ↦ rationalDerivedPullback l (Coefficient l Ω E) f) k).map
+            (((stageSystem l Ω W).assoc h h').hom.app x) =
+      ((stageSystem l Ω V).assoc h h').hom.app (((fun E ↦ rationalDerivedPullback l (Coefficient l Ω E) f) i).obj x) ≫
+        (β ⋯).hom.app x
+hΦ :
+  ∀ (E : Index l Ω),
+    { Φ := fun E ↦ rationalDerivedPullback l (Coefficient l Ω E) f, β := β, coh := coh }.Φ E =
+      rationalDerivedPullback l (Coefficient l Ω E) f
+hβ :
+  ∀ (E L : Index l Ω) (h : E ≤ L) (K : Stage l Ω W E),
+    ({ Φ := fun E ↦ rationalDerivedPullback l (Coefficient l Ω E) f, β := β, coh := coh }.β h).app K ≍
+      commonStagePullbackComparison l Ω f { stage := E, obj := K } L h
+P Q : generalAlgebraicallyClosedConstructibleCategory l Ω W
+L : Index l Ω
+hP : P.stage ≤ L
+hQ : Q.stage ≤ L
+k : StageSystem.PairCategory.toStage P hP ⟶ StageSystem.PairCategory.toStage Q hQ
+hp : (β hP).hom.app P.obj = (commonStagePullbackComparison l Ω f { stage := P.stage, obj := P.obj } L hP).hom
+hq : (β hQ).inv.app Q.obj = (commonStagePullbackComparison l Ω f { stage := Q.stage, obj := Q.obj } L hQ).inv
+⊢ StageSystem.PairCategory.mkHom L hP hQ
+      ((commonStagePullbackComparison l Ω f { stage := P.stage, obj := P.obj } L hP).hom ≫
+        (rationalDerivedPullback l (Coefficient l Ω L) f).map k ≫
+          (commonStagePullbackComparison l Ω f { stage := Q.stage, obj := Q.obj } L hQ).inv) =
+    ofHom (commonStagePullbackObject l Ω f P) (commonStagePullbackObject l Ω f Q) L hP hQ
+      ((commonStagePullbackComparison l Ω f P L hP).hom ≫
+        (rationalDerivedPullback l (Coefficient l Ω L) f).map k ≫ (commonStagePullbackComparison l Ω f Q L hQ).inv)
+error: Lean exited with code 1

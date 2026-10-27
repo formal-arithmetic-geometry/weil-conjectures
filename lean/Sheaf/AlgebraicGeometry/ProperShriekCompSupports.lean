@@ -6,7 +6,6 @@ Authors: SHEAF group U3
 module
 
 public import Sheaf.AlgebraicGeometry.ProperSupportedKunnethRoute
-import Sheaf.AlgebraicGeometry.ProperShriekCompSupportsRaw
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekToLowerStar
 
 /-! # Proper forget supports and the specified compact-support compositor
@@ -23,17 +22,6 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Etale
 
 variable (A : Type (u + 1)) [CommRing A] [Finite A]
-
-private theorem properRouteCompIso_inv_app_eq {W X S : Scheme.{u}}
-    (p : W ⟶ X) (f : X ⟶ S) (h : W ⟶ S) (w : p ≫ f = h)
-    [IsProper p] [IsProper f] [IsProper h] (E : DerivedCategoryModule A W) :
-    (properRouteCompIso A p f h w).inv.app E =
-      (rightDerivedLowerShriekCompIso A p f).inv.app E ≫
-        (rightDerivedLowerShriekCongrIso A w).hom.app E := by
-  simp only [properRouteCompIso, Iso.trans_inv, Iso.symm_inv, NatTrans.comp_app]
-
-attribute [local irreducible] rightDerivedLowerShriekIsoRightDerivedLowerStar
-  rightDerivedLowerStarCompIsoOfComp rightDerivedLowerShriekCompIso properRouteCompIso
 
 /-- The specified compact-support compositor transports to the ordinary compositor.
 Source: blueprint latest, sec-six-functors-basics/sk-prop-geo-p1-adjunction/
@@ -68,7 +56,6 @@ theorem properShriekComp_comp_forgetSupports {W X S : Scheme.{u}}
           (ModuleCat.{u + 1} A) f).hom.app
             ((lowerStar (ModuleCat.{u + 1} A) p).rightDerivedFunctor.obj E) ≫
         (rightDerivedLowerStarCompIsoOfComp
-          (ModuleCat.{u + 1} A) p f h w).hom.app E := by
-  sorry
+          (ModuleCat.{u + 1} A) p f h w).hom.app E := by sorry
 
 end AlgebraicGeometry.Etale
