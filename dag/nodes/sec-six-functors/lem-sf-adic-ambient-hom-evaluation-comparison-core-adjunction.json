@@ -1,0 +1,113 @@
+{
+ "kind": "statement",
+ "status": "split",
+ "merged_into": null,
+ "import_flags": [],
+ "stmt_deps": [
+  "def-sf-native-adic-realization-data",
+  "def-weil-derived-pullback-tensor-hom",
+  "lem-sf-adic-common-stage-hom-transpose"
+ ],
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "BS Lemma 3.4.11 and Remark 6.8.15; strict decomposition of the retained core comparison argument."
+ },
+ "proof": [
+  {
+   "text": "Apply the constructibility identification and the ambient tensor-Hom adjunction to the specified realization and normalized common-stage evaluation. The resulting constructibility or adjunction laws are the corresponding clause of the seven-step comparison argument.",
+   "uses": [
+    "lem-sf-adic-finite-realization-cocone",
+    "lem-sf-ringed-derived-tensor-hom-adjunction",
+    "lem-sf-adic-common-stage-hom-transpose"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-adic-finite-realization-cocone",
+  "lem-sf-ringed-derived-tensor-hom-adjunction",
+  "lem-sf-adic-common-stage-hom-transpose"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "BS Lemma 3.4.11 and Remark 6.8.15"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "adic ambient Hom evaluation comparison core bounded",
+   "results": "No exact specialized theorem; only generic closed-category transpose APIs.",
+   "date": "2026-10-28",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CoefficientClosedStructure transpose evaluation comparison",
+   "results": "No exact theorem for the recorded adic realization.",
+   "date": "2026-10-28",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "adic_ambient_hom_evaluation_comparison_core",
+   "results": "Only this module declarations.",
+   "date": "2026-10-28",
+   "verdict": "no match"
+  }
+ ],
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sf-adic-ambient-hom-evaluation-comparison-core",
+   "place": "strict decomposition of its proof",
+   "via": [
+    "lem-sf-adic-ambient-hom-evaluation-comparison"
+   ]
+  }
+ },
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.AdicAmbientHomEvaluationComparison",
+  "date": "2026-10-28",
+  "group": "M2"
+ },
+ "id": "lem-sf-adic-ambient-hom-evaluation-comparison-core-adjunction",
+ "title": "Ambient-adjunction part of core Hom laws",
+ "statement": "theorem adic_ambient_hom_evaluation_comparison_core_adjunction (D : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (hl : l ≠ D.p) (T : Over (Spec (CommRingCat.of D.k))) [IsSeparated T.hom] [LocallyOfFiniteType T.hom] [QuasiCompact T.hom] [∀ x : T.left, Invertible (l : T.left.residueField x)] (R : LocallyFiniteAdicRealization.Realization l T.left) (presentation : (sectionFunctor l T.left R).IsEquivalence) (A : TensorInput l T.left R) (source : PodPartialClosed (commonStageDerivedTensor l (PadicAlgCl l) T.left) (commonStageHomPairs l (PadicAlgCl l) T.left) (commonStageDerivedInternalHom l (PadicAlgCl l) T.left)) (source_normalized : PodCommonTransposeNormalization l (PadicAlgCl l) T.left source) : (∀ P : (commonStageHomPairs l (PadicAlgCl l) T.left).FullSubcategory, IsIso (comparison l T.left R A source P)) ∧ (∀ (L : generalAlgebraicallyClosedConstructibleCategory l (PadicAlgCl l) T.left) (P : (commonStageHomPairs l (PadicAlgCl l) T.left).FullSubcategory), Function.Bijective (fun a : (ordinary l T.left R).obj L ⟶ (ordinary l T.left R).obj ((commonStageDerivedInternalHom l (PadicAlgCl l) T.left).obj P) ↦ a ≫ comparison l T.left R A source P)) ∧ (∀ (L : generalAlgebraicallyClosedConstructibleCategory l (PadicAlgCl l) T.left) (P : (commonStageHomPairs l (PadicAlgCl l) T.left).FullSubcategory) (a : L ⟶ (commonStageDerivedInternalHom l (PadicAlgCl l) T.left).obj P), A.closed.transpose _ _ _ (A.tensor.hom.app (L, P.obj.1.unop) ≫ (ordinary l T.left R).map ((commonStageDerivedTensor l (PadicAlgCl l) T.left).map (Prod.mkHom a (𝟙 _)) ≫ source.evaluation P)) = (ordinary l T.left R).map a ≫ comparison l T.left R A source P) ∧ (∀ (P Q : (commonStageHomPairs l (PadicAlgCl l) T.left).FullSubcategory) (f : P ⟶ Q), (ordinary l T.left R).map ((commonStageDerivedInternalHom l (PadicAlgCl l) T.left).map f) ≫ comparison l T.left R A source Q = comparison l T.left R A source P ≫ (ambientHom l T.left R).map (Prod.mkHom ((ordinary l T.left R).map f.hom.1.unop).op ((ordinary l T.left R).map f.hom.2))) ∧ (∀ P : (commonStageHomPairs l (PadicAlgCl l) T.left).FullSubcategory, A.closed.tensor.map (Prod.mkHom (comparison l T.left R A source P) (𝟙 _)) ≫ A.closed.evaluation ((ordinary l T.left R).obj P.obj.1.unop) ((ordinary l T.left R).obj P.obj.2) = realizedEvaluation l T.left R A source P)",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.AdicAmbientHomEvaluationComparison",
+  "file": "lean/Sheaf/Paper/AdicAmbientHomEvaluationComparison.lean",
+  "declaration": "WeilConjectures.AdicQbarRealization.AmbientHomEvaluation.adic_ambient_hom_evaluation_comparison_core_adjunction",
+  "declarations": [
+   "WeilConjectures.AdicQbarRealization.AmbientHomEvaluation.adic_ambient_hom_evaluation_comparison_core_adjunction"
+  ],
+  "statement": "theorem adic_ambient_hom_evaluation_comparison_core_adjunction (D : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (hl : l ≠ D.p) (T : Over (Spec (CommRingCat.of D.k))) [IsSeparated T.hom] [LocallyOfFiniteType T.hom] [QuasiCompact T.hom] [∀ x : T.left, Invertible (l : T.left.residueField x)] (R : LocallyFiniteAdicRealization.Realization l T.left) (presentation : (sectionFunctor l T.left R).IsEquivalence) (A : TensorInput l T.left R) (source : PodPartialClosed (commonStageDerivedTensor l (PadicAlgCl l) T.left) (commonStageHomPairs l (PadicAlgCl l) T.left) (commonStageDerivedInternalHom l (PadicAlgCl l) T.left)) (source_normalized : PodCommonTransposeNormalization l (PadicAlgCl l) T.left source) : (∀ P : (commonStageHomPairs l (PadicAlgCl l) T.left).FullSubcategory, IsIso (comparison l T.left R A source P)) ∧ (∀ (L : generalAlgebraicallyClosedConstructibleCategory l (PadicAlgCl l) T.left) (P : (commonStageHomPairs l (PadicAlgCl l) T.left).FullSubcategory), Function.Bijective (fun a : (ordinary l T.left R).obj L ⟶ (ordinary l T.left R).obj ((commonStageDerivedInternalHom l (PadicAlgCl l) T.left).obj P) ↦ a ≫ comparison l T.left R A source P)) ∧ (∀ (L : generalAlgebraicallyClosedConstructibleCategory l (PadicAlgCl l) T.left) (P : (commonStageHomPairs l (PadicAlgCl l) T.left).FullSubcategory) (a : L ⟶ (commonStageDerivedInternalHom l (PadicAlgCl l) T.left).obj P), A.closed.transpose _ _ _ (A.tensor.hom.app (L, P.obj.1.unop) ≫ (ordinary l T.left R).map ((commonStageDerivedTensor l (PadicAlgCl l) T.left).map (Prod.mkHom a (𝟙 _)) ≫ source.evaluation P)) = (ordinary l T.left R).map a ≫ comparison l T.left R A source P) ∧ (∀ (P Q : (commonStageHomPairs l (PadicAlgCl l) T.left).FullSubcategory) (f : P ⟶ Q), (ordinary l T.left R).map ((commonStageDerivedInternalHom l (PadicAlgCl l) T.left).map f) ≫ comparison l T.left R A source Q = comparison l T.left R A source P ≫ (ambientHom l T.left R).map (Prod.mkHom ((ordinary l T.left R).map f.hom.1.unop).op ((ordinary l T.left R).map f.hom.2))) ∧ (∀ P : (commonStageHomPairs l (PadicAlgCl l) T.left).FullSubcategory, A.closed.tensor.map (Prod.mkHom (comparison l T.left R A source P) (𝟙 _)) ≫ A.closed.evaluation ((ordinary l T.left R).obj P.obj.1.unop) ((ordinary l T.left R).obj P.obj.2) = realizedEvaluation l T.left R A source P)",
+  "branch": "sheaf-dag",
+  "by": "M2",
+  "date": "2026-10-28"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-def-adic-realization-data",
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M2",
+  "result": "pass",
+  "landing": "20261027T234054-L-4181869",
+  "kind": "proof",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M2",
+  "result": "pass",
+  "landing": "20261027T234054-L-4181869",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

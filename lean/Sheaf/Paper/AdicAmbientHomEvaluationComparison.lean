@@ -424,6 +424,85 @@ structure CoherenceLaws : Prop where
       (h : (commonStageHomObject l (PadicAlgCl l) X P).stage ≤ F),
     homTransition l X R P F F h h = 𝟙 _ ∧ ambientTransition l X R P F F h h = 𝟙 _
 
+/-- The constructibility part of the core comparison argument.
+
+The proof follows the first two steps of the retained argument: identify the ordinary
+section presentation with the locally finite constructible convention, then apply the
+ambient internal-Hom constructibility theorem to the permitted pair. The zero object and
+empty schemes are included by the same object-property argument.
+Source: BS Lemma 3.4.11 and Remark 6.8.15
+(blueprint: lem-sf-adic-ambient-hom-evaluation-comparison-core-bounded). -/
+theorem adic_ambient_hom_evaluation_comparison_core_bounded
+    (D : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (hl : l ≠ D.p)
+    (T : Over (Spec (CommRingCat.of D.k)))
+    [IsSeparated T.hom] [LocallyOfFiniteType T.hom] [QuasiCompact T.hom]
+    [∀ x : T.left, Invertible (l : T.left.residueField x)]
+    (R : LocallyFiniteAdicRealization.Realization l T.left)
+    (presentation : (sectionFunctor l T.left R).IsEquivalence)
+    (A : TensorInput l T.left R)
+    (source : PodPartialClosed (commonStageDerivedTensor l (PadicAlgCl l) T.left)
+      (commonStageHomPairs l (PadicAlgCl l) T.left)
+      (commonStageDerivedInternalHom l (PadicAlgCl l) T.left))
+    (source_normalized : PodCommonTransposeNormalization l (PadicAlgCl l) T.left source) :
+    ∀ P : (commonStageHomPairs l (PadicAlgCl l) T.left).FullSubcategory,
+      boundedConstructible l T.left R ((ambientHom l T.left R).obj
+        (op ((ordinary l T.left R).obj P.obj.1.unop),
+          (ordinary l T.left R).obj P.obj.2)) := by
+  sorry
+
+/-- The ambient-adjunction part of the core comparison argument.
+
+The proof applies the normalized transpose identity to the specified tensorator. The
+ambient adjunction and full faithfulness give the Hom bijection, and injectivity of
+transposition gives its transpose, pair naturality, and evaluation equation. The inverse
+of the comparison is then constructed from two constructible test objects, so no
+unstated detection hypothesis on arbitrary ambient objects is used.
+Source: BS Lemma 3.4.11 and Remark 6.8.15
+(blueprint: lem-sf-adic-ambient-hom-evaluation-comparison-core-adjunction). -/
+theorem adic_ambient_hom_evaluation_comparison_core_adjunction
+    (D : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (hl : l ≠ D.p)
+    (T : Over (Spec (CommRingCat.of D.k)))
+    [IsSeparated T.hom] [LocallyOfFiniteType T.hom] [QuasiCompact T.hom]
+    [∀ x : T.left, Invertible (l : T.left.residueField x)]
+    (R : LocallyFiniteAdicRealization.Realization l T.left)
+    (presentation : (sectionFunctor l T.left R).IsEquivalence)
+    (A : TensorInput l T.left R)
+    (source : PodPartialClosed (commonStageDerivedTensor l (PadicAlgCl l) T.left)
+      (commonStageHomPairs l (PadicAlgCl l) T.left)
+      (commonStageDerivedInternalHom l (PadicAlgCl l) T.left))
+    (source_normalized : PodCommonTransposeNormalization l (PadicAlgCl l) T.left source) :
+    (∀ P : (commonStageHomPairs l (PadicAlgCl l) T.left).FullSubcategory,
+      IsIso (comparison l T.left R A source P)) ∧
+    (∀ (L : generalAlgebraicallyClosedConstructibleCategory l (PadicAlgCl l) T.left)
+      (P : (commonStageHomPairs l (PadicAlgCl l) T.left).FullSubcategory),
+      Function.Bijective (fun a : (ordinary l T.left R).obj L ⟶
+        (ordinary l T.left R).obj
+          ((commonStageDerivedInternalHom l (PadicAlgCl l) T.left).obj P) ↦
+          a ≫ comparison l T.left R A source P)) ∧
+    (∀ (L : generalAlgebraicallyClosedConstructibleCategory l (PadicAlgCl l) T.left)
+      (P : (commonStageHomPairs l (PadicAlgCl l) T.left).FullSubcategory)
+      (a : L ⟶ (commonStageDerivedInternalHom l (PadicAlgCl l) T.left).obj P),
+      A.closed.transpose _ _ _
+          (A.tensor.hom.app (L, P.obj.1.unop) ≫
+            (ordinary l T.left R).map
+              ((commonStageDerivedTensor l (PadicAlgCl l) T.left).map
+                (Prod.mkHom a (𝟙 _)) ≫ source.evaluation P)) =
+        (ordinary l T.left R).map a ≫ comparison l T.left R A source P) ∧
+    (∀ (P Q : (commonStageHomPairs l (PadicAlgCl l) T.left).FullSubcategory)
+      (f : P ⟶ Q),
+      (ordinary l T.left R).map
+          ((commonStageDerivedInternalHom l (PadicAlgCl l) T.left).map f) ≫
+          comparison l T.left R A source Q =
+        comparison l T.left R A source P ≫ (ambientHom l T.left R).map
+          (Prod.mkHom ((ordinary l T.left R).map f.hom.1.unop).op
+            ((ordinary l T.left R).map f.hom.2))) ∧
+    (∀ P : (commonStageHomPairs l (PadicAlgCl l) T.left).FullSubcategory,
+      A.closed.tensor.map (Prod.mkHom (comparison l T.left R A source P) (𝟙 _)) ≫
+          A.closed.evaluation ((ordinary l T.left R).obj P.obj.1.unop)
+            ((ordinary l T.left R).obj P.obj.2) =
+        realizedEvaluation l T.left R A source P) := by
+  sorry
+
 /-- Construct the core comparison laws. This is the first, constructibility and
 ambient-adjunction half of the proof in the node. -/
 theorem adic_ambient_hom_evaluation_comparison_core
@@ -439,7 +518,17 @@ theorem adic_ambient_hom_evaluation_comparison_core
       (commonStageDerivedInternalHom l (PadicAlgCl l) T.left))
     (source_normalized : PodCommonTransposeNormalization l (PadicAlgCl l) T.left source) :
     CoreLaws l T.left R A source := by
-  sorry
+  have hb := adic_ambient_hom_evaluation_comparison_core_bounded D l hl T R presentation A
+    source source_normalized
+  have ha := adic_ambient_hom_evaluation_comparison_core_adjunction D l hl T R presentation A
+    source source_normalized
+  exact
+    { bounded := hb
+      isIso := ha.1
+      postcomposition := ha.2.1
+      transpose := ha.2.2.1
+      naturality := ha.2.2.2.1
+      evaluation := ha.2.2.2.2 }
 
 /-- Construct the finite-stage and coefficient tower laws. This is the second half
 of the seven-step argument in the node. -/
