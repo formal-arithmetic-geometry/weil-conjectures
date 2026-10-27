@@ -171,7 +171,9 @@ section DerivedUpperStar
 instance preservesHomology_mapMod_upperStar :
     ((f)^*[Ab.{u + 1}].mapMod (condensedRingObj Λ Y)).PreservesHomology := {}
 
-/-- Blueprint `lem-sfb-module-mapmod-pullback-kflat`: the pullback
+/-- Compatibility required from `sec-six-functors-basics` (to be proved there):
+blueprint `lem-sfb-module-mapmod-pullback-kflat`.
+Blueprint `lem-sfb-module-mapmod-pullback-kflat`: the pullback
 `mapMod(f^*) : Mod_{Λ_Y} ⥤ Mod_{f^* Λ_Y}` sends K-flat complexes to K-flat complexes. See the
 module docstring for the argument. -/
 instance preservesKFlatComplexes_mapMod_upperStar :

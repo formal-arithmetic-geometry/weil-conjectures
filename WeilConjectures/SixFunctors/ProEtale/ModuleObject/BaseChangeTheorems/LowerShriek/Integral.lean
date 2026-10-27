@@ -68,7 +68,9 @@ variable {X Y X' Y' : Over (Spec (.of k))}
   {f : X ⟶ Y} {g : Y' ⟶ Y} {f' : X' ⟶ Y'} {g' : X' ⟶ X}
 
 include k in
-/-- **The proper base change theorem** for bounded constructible `𝒪_E`-sheaves (blueprint
+/-- Compatibility required from `sec-six-functors-basics` (to be proved there):
+blueprint `sk-thm-sfb-proper-base-change`.
+**The proper base change theorem** for bounded constructible `𝒪_E`-sheaves (blueprint
 `sk-thm-sfb-proper-base-change`), `E ⊆ ℚ̄_ℓ` a finite subextension of `ℚ_ℓ`: for a cartesian
 square of schemes
 

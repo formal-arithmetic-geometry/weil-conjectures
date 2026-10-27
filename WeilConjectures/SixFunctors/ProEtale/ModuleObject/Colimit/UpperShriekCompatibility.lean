@@ -44,7 +44,9 @@ clause on `f^!` of blueprint `sk-prop-scalar-six` for the coefficient change `E 
   (`ProEtale.CondensedRing.boundedConstructibleUpperShriekOfCompactificationToPadicAlgCl_eq`), so
   it is an isomorphism as soon as the exchange `Rg^!_E ⋙ T_Z ⟶ T_Y ⋙ Rg^!_{ℚ̄_ℓ}` for the proper
   part `g` is one
-  (`ProEtale.CondensedRing.isIso_boundedConstructibleUpperShriekToPadicAlgCl_of_isIso`).
+  (`ProEtale.CondensedRing.isIso_boundedConstructibleUpperShriekToPadicAlgCl_of_isIso`). That it
+  is one, and hence that the exchange for `f^!` is an isomorphism, is proved in
+  `WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.UpperShriekCompatibilityProper`.
 
 -/
 
@@ -409,16 +411,6 @@ lemma isIso_boundedConstructibleUpperShriekToPadicAlgCl_of_isIso
     [IsIso (boundedConstructibleProperUpperShriekToPadicAlgCl ℓ E (compactificationOverField f))] :
     IsIso (boundedConstructibleUpperShriekToPadicAlgCl ℓ E f) :=
   isIso_boundedConstructibleUpperShriekOfCompactificationToPadicAlgCl ℓ E _
-
-/-- Compatibility required from `sec-six-functors-basics` (to be proved there): blueprint
-`det-prop-scalar-six-exceptional` (`sk-prop-scalar-six`), the clause on `f^!` for the coefficient
-change `E ⟶ ℚ̄_ℓ`. The canonical comparison `Rf^!_E ⋙ T_X ⟶ T_Y ⋙ Rf^!_{ℚ̄_ℓ}` (the mate of
-the lower-shriek comparison) is an isomorphism on bounded constructible complexes. Its open
-half is proved (`isIso_boundedConstructibleOpenImmersionUpperStarToPadicAlgCl`); the proper
-half is the content of the node. -/
-theorem isIso_boundedConstructibleUpperShriekToPadicAlgCl :
-    IsIso (boundedConstructibleUpperShriekToPadicAlgCl ℓ E f) :=
-  sorry
 
 end Shriek
 
