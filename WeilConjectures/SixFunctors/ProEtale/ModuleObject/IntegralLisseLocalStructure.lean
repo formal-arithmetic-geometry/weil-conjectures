@@ -9,6 +9,8 @@ public import WeilConjectures.ConstructibleSheaf.ProEtaleModule.Def
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.IntegralRegularEnd
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Defs
 
+import WeilConjectures.SixFunctors.ProEtale.ModuleObject.IntegralLisseLocalStructureAux
+
 /-!
 # Lisse `𝒪_E`-sheaves are locally constant
 
@@ -57,14 +59,32 @@ theorem exists_cover_iso_integralConstantModule (Z : Scheme.{u})
     (hϖ : IsLocalRing.maximalIdeal (PadicAlgCl.integers ℓ E) = Ideal.span {ϖ}) :
     ∃ 𝒰 : Scheme.Cover.{u} Scheme.proetalePrecoverage Z, ∀ i, ∃ (k r : ℕ) (e : Fin k → ℕ),
       Nonempty ((𝒰.f i)^*⟦Profinite.padicIntegersRingObj ℓ E⟧.obj M ≅
-        integralConstantModule ℓ E (𝒰.X i) ϖ k r e) :=
-  sorry
+        integralConstantModule ℓ E (𝒰.X i) ϖ k r e) := by
+  let := PadicAlgCl.normedFieldOfAlgebra ℓ E
+  let : NormedAlgebra ℚ_[ℓ] E :=
+    { norm_smul_le c x := by
+        change ‖algebraMap E (PadicAlgCl ℓ) (c • x)‖ ≤
+          ‖c‖ * ‖algebraMap E (PadicAlgCl ℓ) x‖
+        rw [Algebra.smul_def, map_mul, ← IsScalarTower.algebraMap_apply, norm_mul,
+          PadicAlgCl.norm_extends] }
+  have hϖ0 : ϖ ≠ 0 := fun h ↦ PadicAlgCl.maximalIdeal_integers_ne_bot ℓ E (by
+    rw [hϖ, h, Ideal.span_singleton_eq_bot])
+  -- Transport the result for the integral coefficient ring `integralCoeff ℓ E`, which agrees
+  -- with `𝒪̲_E` for the normed field structure restricted from `ℚ̄_ℓ`.
+  exact LfpLocallyConstModule.of_eq (Λ₂ := Profinite.padicIntegersRingObj ℓ E)
+    (σ₂ := fun n ↦ (Profinite.continuousMapConstRingHom.{u} (PadicAlgCl.integers ℓ E)
+      (ϖ ^ n)).hom) rfl HEq.rfl HEq.rfl
+    (lfpLocallyConstModule_integralCoeff ℓ E ϖ
+      (PadicAlgCl.exists_norm_eq_pow_of_maximalIdeal_eq_span ℓ E ϖ hϖ)
+      fun h ↦ hϖ0 (Subtype.ext h)) Z M hM
 
 /-- The pullback of a constant module `⊕ⱼ 𝒪_E/ϖ^{eⱼ} ⊕ 𝒪_E^r` is the constant module. -/
 theorem nonempty_upperStar_integralConstantModule_iso {W V : Scheme.{u}} (g : W ⟶ V)
     (ϖ : PadicAlgCl.integers ℓ E) (k r : ℕ) (e : Fin k → ℕ) :
     Nonempty ((g)^*⟦Profinite.padicIntegersRingObj ℓ E⟧.obj (integralConstantModule ℓ E V ϖ k r e) ≅
       integralConstantModule ℓ E W ϖ k r e) :=
-  sorry
+  let := PadicAlgCl.normedFieldOfAlgebra ℓ E
+  ⟨upperStarConstModuleIso (Profinite.padicIntegersRingObj ℓ E) g
+    (fun j ↦ (Profinite.continuousMapConstRingHom.{u} (PadicAlgCl.integers ℓ E) (ϖ ^ e j)).hom) r⟩
 
 end AlgebraicGeometry.ProEtale

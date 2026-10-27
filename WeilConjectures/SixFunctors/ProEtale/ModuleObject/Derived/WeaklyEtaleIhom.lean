@@ -8,6 +8,7 @@ module
 public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Closed.Basic
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Hom
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Monoidal
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.WeaklyEtaleProjection
 
 /-!
 # The derived pullback along a weakly étale morphism commutes with internal homs
@@ -45,6 +46,7 @@ theorem isIso_ihomComparison_leftDerivedUpperStar_of_weaklyEtale
     (M : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
       (condensedRingObj Λ X))) :
     IsIso (Functor.LaxMonoidal.ihomComparison L((g)^*⟦Λ⟧) M).natTrans :=
-  sorry
+  Functor.Monoidal.isIso_ihomComparison_of_isIso_projectionMap
+    (derivedWeaklyEtaleLowerShriekLeftDerivedUpperStarAdjunction Λ g) M
 
 end AlgebraicGeometry.ProEtale.CondensedRing
