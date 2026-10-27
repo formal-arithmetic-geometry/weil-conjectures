@@ -1,0 +1,121 @@
+{
+ "id": "lem-pur-strict-quotient-tensor-generator",
+ "kind": "statement",
+ "title": "Generators of the strict tensor tower after quotient transport",
+ "statement": "Fix a prime l, a finite extension E of Q_l and a scheme W. For arbitrary integral complexes P,Q and coefficient sequence complexes C,D, let a,b identify their reference ordinary reductions with C,D. Suppose evaluating a,b and then kappaC,kappaD gives the inverse reference finite evaluation [def-pur-completed-pullback-tower-realizations]. Restrict and evaluate the total tensor of a inverse and b inverse, and compose it with the reference strict tensor-tower comparison. This explicit strict tower isomorphism sends every local homogeneous tensor generator, in every pair of degrees and quotient level, to the finite total tensor generator of the sections evaluated and then mapped by kappaC,kappaD [def-pur-scalar-extension-tower-data]. No derived coherence or K-flatness is required for this ordinary calculation.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex; literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 03D7, 03EL, 06YY, 07A4 and 0941; step 3 of stage3-pur-scalar-tensor-model-normalization."
+ },
+ "stmt_deps": [
+  "def-pur-completed-pullback-tower-realizations",
+  "def-pur-scalar-extension-tower-data"
+ ],
+ "proof": [
+  {
+   "text": "Use naturality of restriction/evaluation and tensor evaluation to identify the level map with the finite total tensor of kappaC,kappaD. Cancel the evaluated strict isomorphisms using the assumed normalization equations.",
+   "uses": [
+    "def-pur-natural-coherent-tensor-level",
+    "lem-coef-evaluation-total-tensor-naturality",
+    "def-pur-completed-pullback-tower-realizations"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Restriction/evaluation preserves the represented section. The tensor evaluation comparison sends a homogeneous generator to the generator of the evaluated sections. Mapping the finite total tensor applies the two component maps to those sections, giving the asserted formula.",
+   "uses": [
+    "lem-trf-coherent-quotient-ordinary-lift",
+    "lem-coef-evaluation-total-tensor-naturality",
+    "lem-sfb-scalar-hom-tensor-coherence"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pur-natural-coherent-tensor-level",
+  "lem-coef-evaluation-total-tensor-naturality",
+  "def-pur-completed-pullback-tower-realizations",
+  "lem-trf-coherent-quotient-ordinary-lift",
+  "lem-sfb-scalar-hom-tensor-coherence"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex; literature/stacks-project/sites-cohomology.tex",
+  "place": "Compatibility calculation in the ordinary quotient/tensor model; proof as given in the Lean module docstring."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A whole-system coherent derived quotient presentation is induced by a strict isomorphism with ordinary quotient tensor reduction",
+   "results": "Eight general algebraic presentation and tensor-quotient results; none compares coherent sheaf-system presentations or normalizes the strict tensor tower.",
+   "date": "2026-10-28",
+   "verdict": "Use the existing project coherent quotient comparison and tensor evaluation naturality."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.unit_leftAdjointUniq_hom_app",
+   "results": "CategoryTheory.Adjunction.unit_leftAdjointUniq_hom_app.",
+   "date": "2026-10-28",
+   "verdict": "This transports the coherence equation; the strict quotient and tensor formulas still need proof."
+  },
+  {
+   "tool": "grep",
+   "query": "coherentReferenceQuotientComparison|strictQuotientTensorGenerator|pullbackTensorTensorTowerLevel",
+   "results": "No service hits. Local rg found pullbackTensorTensorTowerLevel and its normalized reference comparison, coherentQuotientModelComparison, and the private evaluation generator and restriction formulas.",
+   "date": "2026-10-28",
+   "verdict": "Reuse the existing formulas; prove only their compatibility in the required coordinates."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ScalarExtensionTensorModelNormalization",
+  "date": "2026-10-28",
+  "group": "Q4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-frobenius-coefficient-twists",
+   "place": "Tensor realization part of scalar-extension tower coherence, original proof step 8.",
+   "via": [
+    "lem-pur-scalar-extension-tower-coherence",
+    "stage3-pur-scalar-tensor-model-normalization"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-purity-conv",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.StrictQuotientTensorGenerator",
+  "file": "lean/Sheaf/Paper/StrictQuotientTensorGenerator.lean",
+  "declaration": "WeilConjectures.ScalarExtensionTower.strictQuotientTensorGenerator",
+  "statement": "theorem strictQuotientTensorGenerator (W : Scheme.{u})\n    (P Q : CochainComplex (integralTowerModules.{u, u} l E W) ℤ)\n    (C D : Complex l E W)\n    (a : (((pullbackTensorOrdinaryReduction l E W).mapHomologicalComplex (.up ℤ)).obj P) ≅ C)\n    (b : (((pullbackTensorOrdinaryReduction l E W).mapHomologicalComplex (.up ℤ)).obj Q) ≅ D)\n    (κC : ∀ n : ℕ,\n      ((coefficientSequenceEvaluation l E W n).mapHomologicalComplex (.up ℤ)).obj C ≅\n        (unrestrictedIntegralFiniteComplex l E W n).obj P)\n    (κD : ∀ n : ℕ,\n      ((coefficientSequenceEvaluation l E W n).mapHomologicalComplex (.up ℤ)).obj D ≅\n        (unrestrictedIntegralFiniteComplex l E W n).obj Q)\n    (ha : ∀ n : ℕ,\n      ((coefficientSequenceEvaluation l E W n).mapHomologicalComplex (.up ℤ)).mapIso a ≪≫\n        κC n = ((pullbackTensorReductionEvaluationComplex l E W n).app P).symm)\n    (hb : ∀ n : ℕ,\n      ((coefficientSequenceEvaluation l E W n).mapHomologicalComplex (.up ℤ)).mapIso b ≪≫\n        κD n = ((pullbackTensorReductionEvaluationComplex l E W n).app Q).symm) :\n    let F := (coefficientSequenceRestriction l E W).mapHomologicalComplex (.up ℤ) ⋙\n      HomologicalComplex.complexOfFunctorsToFunctorToComplex\n    let q := F.mapIso ((tensor l E W).mapIso (a.symm.prod b.symm)) ≪≫\n      pullbackTensorTensorTower l E W P Q\n    ∀ (n : ℕ) (p r : ℤ) (U : W.ProEtᵒᵖ)\n      (x : (C.X p).val.obj (op (n, U.unop)))\n      (y : (D.X r).val.obj (op (n, U.unop))),\n      ((q.hom.app (op n)).f (p + r)).val.app U\n        (integralComparisonRestrictedSection l E W\n          (((tensor l E W).obj (C, D)).X (p + r)) n U\n          (generator l E W C D p r (op (n, U.unop)) x y)) =\n        integralTensorGenerator l E W P Q n p r U\n          (((κC n).hom.f p).val.app U\n            (coefficientEvaluationSection l E W (C.X p) n U x))\n          (((κD n).hom.f r).val.app U\n            (coefficientEvaluationSection l E W (D.X r) n U y))",
+  "branch": "sheaf-dag",
+  "by": "Q4",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q4",
+  "result": "pass",
+  "landing": "20261027T234158-L-23204",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q4",
+  "result": "pass",
+  "landing": "20261027T234158-L-23204",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

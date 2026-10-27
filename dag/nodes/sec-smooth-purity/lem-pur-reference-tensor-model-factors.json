@@ -1,0 +1,105 @@
+{
+ "id": "lem-pur-reference-tensor-model-factors",
+ "kind": "statement",
+ "title": "Hom components of the four reference tensor-model factors",
+ "statement": "Fix a prime l, a finite extension E of Q_l, a scheme W and flat-term K-flat integral complexes P,Q. The hom of the fixed reference tensor-model isomorphism [def-pur-completed-pullback-tower-realizations] equals its four defining factors: total limit applied to the tensor of the reduction-model maps; total limit applied to the inverse representative system tensor model; the reference limit-to-Roos bridge; and localization of Roos applied to the strict tensor-tower map. The ordinary total tensor in the third factor is the actual coefficientTotalTensor, with its sequence-site universes. This is an equation of morphisms in the integral derived category.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 07A4 and 0941; component expansion of pullbackTensorReferenceTensorModel in def-pur-completed-pullback-tower-realizations."
+ },
+ "stmt_deps": [
+  "def-pur-completed-pullback-tower-realizations"
+ ],
+ "proof": [
+  {
+   "text": "Expand the four composed isomorphisms in pullbackTensorReferenceTensorModel. Iso.trans_hom, Functor.mapIso_hom, Iso.prod_hom, Iso.symm_hom and Iso.app_hom identify the four hom factors. The resulting expression is exactly the stated composite.",
+   "uses": [
+    "def-pur-completed-pullback-tower-realizations"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pur-completed-pullback-tower-realizations"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 07A4 and 0941; component expansion of pullbackTensorReferenceTensorModel in def-pur-completed-pullback-tower-realizations."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The hom component of a composite natural isomorphism equals the composite of its hom components",
+   "results": "Eight hits, including NatIso.trans_app, NatIso.hcomp_hom, Functor.mapIso_trans and whiskering composition formulas.",
+   "date": "2026-10-28",
+   "verdict": "The standard component formulas suffice to expand the project definition."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Iso.trans_hom",
+   "results": "CategoryTheory.Iso.trans_hom in Mathlib.CategoryTheory.Iso.",
+   "date": "2026-10-28",
+   "verdict": "Use this formula on the four defining isomorphisms."
+  },
+  {
+   "tool": "grep",
+   "query": "pullbackTensorReferenceTensorModel_hom|Iso.prod_hom|Functor.mapIso_hom",
+   "results": "Fifteen Mathlib uses of the component formulas, including CategoryTheory.Equivalence. Local source has the reference model definition but no public hom factor equation.",
+   "date": "2026-10-28",
+   "verdict": "State the project-specific component equation as a proved API lemma."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ScalarExtensionTensorModelNormalization",
+  "date": "2026-10-28",
+  "group": "Q4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-frobenius-coefficient-twists",
+   "place": "Tensor realization part of scalar-extension tower coherence, original proof step 8.",
+   "via": [
+    "lem-pur-scalar-extension-tower-coherence",
+    "stage3-pur-scalar-tensor-model-normalization"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-purity-conv",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ReferenceTensorModelFactors",
+  "file": "lean/Sheaf/Paper/ReferenceTensorModelFactors.lean",
+  "declaration": "WeilConjectures.pullbackTensorReferenceTensorModel_hom",
+  "statement": "theorem pullbackTensorReferenceTensorModel_hom (W : Scheme.{u})\n    (P Q : (integralOperationsGoodComplex l E W).FullSubcategory) :\n    let T := pullbackTensorCalculus l E W\n    let R := (pullbackTensorOrdinaryReduction l E W).mapHomologicalComplex (.up ℤ)\n    (pullbackTensorReferenceTensorModel l E W P Q).hom =\n      (coefficientSequenceLimit l E W).map\n        (T.systemClosed.tensor.map\n          (Prod.mkHom ((pullbackTensorReductionModel l E W).hom.app P)\n            ((pullbackTensorReductionModel l E W).hom.app Q))) ≫\n      (coefficientSequenceLimit l E W).map\n        (pullbackTensorSystemModel l E W (R.obj P.obj) (R.obj Q.obj)\n          (pullbackTensorReductionGood l E W P) (pullbackTensorReductionGood l E W Q)).inv ≫\n      (pullbackTensorLimitRoos l E W\n        ((coefficientTotalTensor.{u, u + 1, u}\n          (coefficientSequenceTopology (Scheme.ProEt.topology W))\n          (coefficientSequenceCommRingSheaf l E W)).obj (R.obj P.obj, R.obj Q.obj))).hom ≫\n      DerivedCategory.Q.map (integralOperationsRoosFunctor.map\n        (pullbackTensorTensorTower l E W P.obj Q.obj).hom)",
+  "branch": "sheaf-dag",
+  "by": "Q4",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q4",
+  "result": "pass",
+  "landing": "20261027T234158-L-23204",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q4",
+  "result": "pass",
+  "landing": "20261027T234158-L-23204",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

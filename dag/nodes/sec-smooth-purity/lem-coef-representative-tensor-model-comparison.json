@@ -1,0 +1,114 @@
+{
+ "id": "lem-coef-representative-tensor-model-comparison",
+ "kind": "statement",
+ "title": "Compatibility of normalized representative tensor models",
+ "statement": "Fix a prime l, a finite extension E of Q_l and a scheme W. Let S,T be coefficient derived system calculi [def-coef-derived-system-calculus-data] and C,D be K-flat complexes of modules over the coefficient sequence ring. The canonical transpose-preserving closed-tensor comparison from T to S [lem-coef-closed-tensor-comparison], followed by the inverse representative tensor model for S, equals the inverse representative tensor model for T. No termwise flatness, boundedness or residue-characteristic assumption is needed.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 0A90, 0A95 and 08J9; the representative tensor/closed comparison part of step 4 of stage3-pur-scalar-tensor-model-normalization."
+ },
+ "stmt_deps": [
+  "def-coef-derived-system-calculus-data",
+  "lem-coef-closed-tensor-comparison"
+ ],
+ "proof": [
+  {
+   "text": "Curry the identity of the ordinary total tensor. Apply coefficientTensorCurry_normalize in both closed structures: after mapping the identity and cancelling it, the two inverse representative tensor models are the uncurrying of the same derived Hom map.",
+   "uses": [
+    "lem-sf-coefficient-tensor-curry-normalization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the tensor-Hom transpose for T to the desired equation. The canonical closed comparison preserves the transpose. The inverse laws of the two Hom bijections and the preceding common uncurrying identify the two sides. Injectivity of transpose proves the equality.",
+   "uses": [
+    "lem-coef-closed-tensor-comparison"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-coefficient-tensor-curry-normalization",
+  "lem-coef-closed-tensor-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 0A90, 0A95 and 08J9; the representative tensor/closed comparison part of step 4 of stage3-pur-scalar-tensor-model-normalization."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "uniqueness of left adjoints compatibility of natural tensor comparison with derived tensor models",
+   "results": "Eight generic monoidal-adjunction results; no theorem relating the project representative tensor models.",
+   "date": "2026-10-28",
+   "verdict": "Combine project tensor curry normalization with the canonical closed comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.leftAdjointUniq",
+   "results": "Twelve results, including the unit and Hom-equivalence comparison equations and composition formulas.",
+   "date": "2026-10-28",
+   "verdict": "The canonical comparison is available; representative normalization is supplied by coefficientTensorCurry_normalize."
+  },
+  {
+   "tool": "grep",
+   "query": "coherentQuotientModelComparison|pullbackTensorIntegralTensorNormalization|comparison_transpose",
+   "results": "No service hits. Local rg found comparison_transpose and the project representative tensor curry normalization.",
+   "date": "2026-10-28",
+   "verdict": "Use those existing proved declarations; no new mathematical assumption is needed."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ScalarExtensionTensorModelNormalization",
+  "date": "2026-10-28",
+  "group": "Q4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-frobenius-coefficient-twists",
+   "place": "Tensor realization part of scalar-extension tower coherence, original proof step 8.",
+   "via": [
+    "lem-pur-scalar-extension-tower-coherence",
+    "stage3-pur-scalar-tensor-model-normalization"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-purity-conv",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CoefficientTensorModelComparison",
+  "file": "lean/Sheaf/Paper/CoefficientTensorModelComparison.lean",
+  "declaration": "WeilConjectures.coefficientTensorModelComparison",
+  "statement": "theorem coefficientTensorModelComparison (W : Scheme.{u})\n    (S T : CoefficientDerivedSystemCalculus.{u, u} l E W)\n    (C D : CochainComplex (coefficientSequenceModules.{u, u} l E W) ℤ)\n    (hC : CochainComplex.IsKFlatIndependentCoefficients.{u + 1, u, u + 1}\n      (R := coefficientSequenceCommRingSheaf.{u, u} l E W) C)\n    (hD : CochainComplex.IsKFlatIndependentCoefficients.{u + 1, u, u + 1}\n      (R := coefficientSequenceCommRingSheaf.{u, u} l E W) D) :\n    (CoefficientClosedStructure.comparison T.systemClosed S.systemClosed).hom.app\n        (DerivedCategory.Q.obj C, DerivedCategory.Q.obj D) ≫\n      (CoefficientTensorModels.iso.{u, u + 1, u, u + 2}\n        (coefficientSequenceTopology (Scheme.ProEt.topology W))\n        (coefficientSequenceCommRingSheaf.{u, u} l E W)\n        S.systemClosed S.systemTensorModel C D hC hD).inv =\n        (CoefficientTensorModels.iso.{u, u + 1, u, u + 2}\n        (coefficientSequenceTopology (Scheme.ProEt.topology W))\n        (coefficientSequenceCommRingSheaf.{u, u} l E W)\n        T.systemClosed T.systemTensorModel C D hC hD).inv",
+  "branch": "sheaf-dag",
+  "by": "Q4",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q4",
+  "result": "pass",
+  "landing": "20261027T234158-L-23204",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q4",
+  "result": "pass",
+  "landing": "20261027T234158-L-23204",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

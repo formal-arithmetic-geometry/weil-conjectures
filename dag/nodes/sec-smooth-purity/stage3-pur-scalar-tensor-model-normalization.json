@@ -17,49 +17,48 @@
  ],
  "proof": [
   {
-   "text": "Use the uniquely normalized reference tensor realization and its strict quotient/Roos factorization. Its defining comparison is a natural isomorphism on pairs of good representatives and fixes the actual tensor tower, not just evaluated objects.",
+   "text": "Apply coherentReferenceQuotientComparison to each whole-system coherent presentation. This produces ordinary quotient isomorphisms a,b with the prescribed evaluation normalization and the exact derived presentation equations.",
    "uses": [
-    "def-pur-completed-pullback-tower-realizations"
+    "lem-pur-coherent-reference-quotient-comparison"
    ],
    "elementary": false
   },
   {
-   "text": "Transport the input presentations through the left-adjoint comparison from the reference reduction to S.reduction. Its unit equation preserves the whole-system coherence predicate. The coherent quotient-model comparison identifies their derived comparisons with strict ordinary quotient isomorphisms whose finite identifications are precisely kappaC and kappaD.",
+   "text": "The strict tower map q is restriction/evaluation of the total tensor of a inverse and b inverse followed by the reference strict tower comparison. strictQuotientTensorGenerator proves its local formula.",
    "uses": [
-    "lem-trf-coherent-quotient-model-comparison",
-    "def-trf-integral-comparison-realization-models"
+    "lem-pur-strict-quotient-tensor-generator"
    ],
    "elementary": false
   },
   {
-   "text": "Tensor these strict quotient isomorphisms and compose with the reference strict tensor-tower comparison. On each homogeneous tensor generator the result is the tensor of the two specified quotient sections. Naturality of finite evaluation and every quotient transition proves that this is an isomorphism of strict towers.",
+   "text": "Apply coefficientTensorModelComparison, proved by currying the identity total tensor and using the canonical comparison transpose equation. Naturality of the inverse representative tensor model for the strict maps a,b combines the coherent derived presentation equations with the transported closed tensor comparison.",
    "uses": [
-    "def-pur-completed-pullback-tower-realizations",
-    "def-pur-scalar-extension-tower-data"
+    "lem-coef-representative-tensor-model-comparison"
    ],
    "elementary": false
   },
   {
-   "text": "The canonical comparison of closed tensors preserves the common tensor-Hom transpose. Its naturality and the two whole-system coherence equations identify the derived tensor-model factors with the strict tower map just constructed. Naturality and K-injective normalization of the Roos bridge give FiveStepEquation. The defining reference tensor normalization fixes its first factor to integralCompletedTensorComparison. This proves normalization of the explicitly transported realization, without any claim about arbitrary realizations or faithfulness of finite derived evaluations.",
+   "text": "The two ordinary-limit/Roos augmentations have identical first and second projections, hence agree by mapping-cocone uniqueness. K-injective normalization makes the reference Roos comparison equal the given one. Naturality of the resulting Roos bridge, cancellation of the tensor isomorphism and the reference completed tensor normalization prove the entire FiveStepEquation. A private generic categorical pasting lemma combines the three equations, avoiding repeated unfolding of the concrete derived-category composite.",
    "uses": [
-    "lem-coef-closed-tensor-comparison",
     "def-trf-integral-comparison-realization-models",
-    "def-pur-completed-pullback-tower-realizations"
+    "def-pur-completed-pullback-tower-realizations",
+    "lem-pur-reference-tensor-model-factors"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "def-pur-completed-pullback-tower-realizations",
-  "lem-trf-coherent-quotient-model-comparison",
+  "lem-pur-coherent-reference-quotient-comparison",
+  "lem-pur-strict-quotient-tensor-generator",
+  "lem-coef-representative-tensor-model-comparison",
   "def-trf-integral-comparison-realization-models",
-  "def-pur-scalar-extension-tower-data",
-  "lem-coef-closed-tensor-comparison"
+  "def-pur-completed-pullback-tower-realizations",
+  "lem-pur-reference-tensor-model-factors"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/sites-modules.tex; literature/stacks-project/sites-cohomology.tex",
-  "place": "Tags 03EL, 06YY, 07A4 and 0941; the original scalar tower tensor-realization step, using the existing uniquely strict-Roos-normalized reference tensor and canonical adjunction transport."
+  "place": "Tags 03EL, 06YY, 07A4 and 0941; original four-step route implemented using coherent reference quotient coordinates, tensor curry normalization, and uniqueness of the normalized Roos comparison."
  },
  "mathlib_match": null,
  "mathlib_searches": [
@@ -147,11 +146,11 @@
  "reviewed_proof": {
   "date": "2026-10-27",
   "by": "L",
-  "reviewer": "C-6d40f",
-  "group": "M3",
-  "result": "fix",
-  "landing": "20261027T210136-L-1662686",
+  "reviewer": "COMPILER",
+  "group": "Q4",
+  "result": "pass",
+  "landing": "20261027T234158-L-23204",
   "kind": "interface",
-  "note": "independent cc review: delivered item/RealizationData/caller/new module and node JSONs vs clone main; IsTensorModelNormalized repair vs main IsIntegralComparisonScalarNormalized (J5); new node stmt_deps vs owners of names in its statement"
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
