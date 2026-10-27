@@ -327,14 +327,16 @@ theorem pointNormalForm_hχ_aux {Ds Ds' DB DB' Cs Cs' CB CB' : Type*} [Category 
       χBa.app (ιB.obj N) ≫ RBa'.map (cSB.inv.app N) ≫ cRB'.inv.app (SB.obj N))
     (h : Rphg.obj (ιB.obj N) = RBa.obj (ιB.obj N))
     (h' : Rphg'.obj (ΨB.obj (ιB.obj N)) = RBa'.obj (ΨB.obj (ιB.obj N)))
-    (heq : χphg.app (ιB.obj N) ≫ eqToHom h' = Ψs.map (eqToHom h) ≫ χBa.app (ιB.obj N))
+    (h'' : (ΨB ⋙ Rphg').obj (ιB.obj N) = (ΨB ⋙ RBa').obj (ιB.obj N))
+    (heq : χphg.app (ιB.obj N) ≫ eqToHom h'' = Ψs.map (eqToHom h) ≫ χBa.app (ιB.obj N))
     (e_s : Rphg.obj (ιB.obj N) ⟶ ιs.obj (RB.obj N)) (hs : e_s ≫ cRB.hom.app N = eqToHom h)
     (e_t : Rphg'.obj (ιB'.obj (SB.obj N)) ⟶ ιs'.obj (RB'.obj (SB.obj N)))
     (ht : Rphg'.map (cSB.inv.app N) ≫ e_t =
       eqToHom h' ≫ RBa'.map (cSB.inv.app N) ≫ cRB'.inv.app (SB.obj N)) :
     χphg.app (ιB.obj N) ≫ Rphg'.map (cSB.inv.app N) ≫ e_t =
       Ψs.map e_s ≫ cT.inv.app (RB.obj N) ≫ ιs'.map (χB.app N) := by
-  rw [hmap, ht, reassoc_of% heq, Iso.inv_hom_id_app_assoc, ← Ψs.map_comp_assoc, hs]
+  rw [hmap, ht, show eqToHom h' = eqToHom h'' from rfl, reassoc_of% heq,
+    Iso.inv_hom_id_app_assoc, ← Ψs.map_comp_assoc, hs]
 
 end CategoryTheory
 

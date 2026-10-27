@@ -150,11 +150,8 @@ lemma pointRoute_left_eq (g : B ⟶ X) (u : X ⟶ Y) :
     ((g.left ≫ u.left) ≫ 𝟙 Y.left) ≫ (toPoint Y).left = (toPoint B).left := by
   rw [Category.comp_id, ← Over.comp_left, ← Over.comp_left, comp_toPoint]
 
-/-- **The source route of `ν_X` in normal form**: the identification
-`Ra_{X!} Rg_* ≅ Ra_{Y*} u_! Rg_* ⟶ Ra_{Y*} R(ug)_* ⟶ Ra_{Y*} R(𝟙 ∘ ug)_* ≅ R(a_B)_*` of
-`openPointExchangeAux_app_comp_aux_of_eq` (through `closedExtension`) is
-`Ra_{X!}((Rg_! ≅ Rg_*)⁻¹) ≫ (Ra_{B!} ≅ Ra_{X!} Rg_!)⁻¹ ≫ (Ra_{B!} ≅ Ra_{B*})`. -/
-theorem pointRoute_source_eq (g : B ⟶ X) (u : X ⟶ Y) [IsOpenImmersion u.left] [IsProper g.left]
+/-- `pointRoute_source_eq`, with the components at `N.obj`. -/
+private theorem pointRoute_source_eq_aux (g : B ⟶ X) (u : X ⟶ Y) [IsOpenImmersion u.left] [IsProper g.left]
     [IsProper (g ≫ u).left] [IsProper (toPoint Y).left] [IsProper ((g ≫ u) ≫ toPoint Y).left]
     [IsProper (g ≫ toPoint X).left] [IsProper (toPoint B).left] (N : Dᵇc(B.left)⟦Λℓ⟧) :
     (boundedConstructible _).ι.map ((boundedConstructibleLowerShriek ℓ (toPoint X)).map
@@ -208,6 +205,58 @@ theorem pointRoute_source_eq (g : B ⟶ X) (u : X ⟶ Y) [IsOpenImmersion u.left
   rw [hi, reassoc_of% hamb, hL, ← reassoc_of% hNF]
   simp only [ObjectProperty.ι_map, ObjectProperty.FullSubcategory.comp_hom, Category.assoc,
     ObjectProperty.FullSubcategory.hom_eqToHom, eqToHom_trans]
+
+
+set_option hygiene false in
+/-- The inclusion `ι : Dᵇc(X) ⥤ D(X)` on objects, with the instances of `boundedConstructible`. -/
+local notation "ιo[" X "]" =>
+  @CategoryTheory.Functor.obj (Dᵇc(X)⟦Λℓ⟧) _ _ _
+    (@CategoryTheory.ObjectProperty.ι _ _ (boundedConstructible (condensedRingObj Λℓ X)))
+
+set_option hygiene false in
+/-- The inclusion `ι : Dᵇc(X) ⥤ D(X)` on morphisms. -/
+local notation "ιm[" X "]" =>
+  @CategoryTheory.Functor.map (Dᵇc(X)⟦Λℓ⟧) _ _ _
+    (@CategoryTheory.ObjectProperty.ι _ _ (boundedConstructible (condensedRingObj Λℓ X))) _ _
+
+/-- **The source route of `ν_X` in normal form**: the identification
+`Ra_{X!} Rg_* ≅ Ra_{Y*} u_! Rg_* ⟶ Ra_{Y*} R(ug)_* ⟶ Ra_{Y*} R(𝟙 ∘ ug)_* ≅ R(a_B)_*` of
+`openPointExchangeAux_app_comp_aux_of_eq` (through `closedExtension`) is
+`Ra_{X!}((Rg_! ≅ Rg_*)⁻¹) ≫ (Ra_{B!} ≅ Ra_{X!} Rg_!)⁻¹ ≫ (Ra_{B!} ≅ Ra_{B*})`. The components are
+taken at `ι N` (with the instances of `boundedConstructible`), as in the hypotheses of
+`CategoryTheory.pointNormalForm_aux'`. -/
+theorem pointRoute_source_eq (g : B ⟶ X) (u : X ⟶ Y) [IsOpenImmersion u.left] [IsProper g.left]
+    [IsProper (g ≫ u).left] [IsProper (toPoint Y).left] [IsProper ((g ≫ u) ≫ toPoint Y).left]
+    [IsProper (g ≫ toPoint X).left] [IsProper (toPoint B).left] (N : Dᵇc(B.left)⟦Λℓ⟧) :
+    ιm[(point k).left] ((boundedConstructibleLowerShriek ℓ (toPoint X)).map
+        ((boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ g).inv.app N) ≫
+      (lowerShriekCompOfEq ℓ g (toPoint X) (comp_toPoint g)).inv.app N ≫
+      (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ (toPoint B)).hom.app N) =
+    (ιm[(point k).left] ((lowerShriekCompOfEq ℓ u (toPoint Y) (comp_toPoint u) ≪≫
+        Functor.isoWhiskerRight
+          (boundedConstructibleLowerShriekIsoOpenImmersionLowerShriek_padicAlgCl ℓ u) _).hom.app
+          ((boundedConstructibleLowerStar ℓ g).obj N) ≫
+        (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ (toPoint Y)).hom.app
+          ((boundedConstructibleOpenImmersionLowerShriek Λℓ ℓ u).obj
+            ((boundedConstructibleLowerStar ℓ g).obj N))) ≫
+      (boundedConstructibleLowerStarCompatibility ℓ (toPoint Y)).hom.app
+        ((boundedConstructibleOpenImmersionLowerShriek Λℓ ℓ u).obj
+          ((boundedConstructibleLowerStar ℓ g).obj N)) ≫
+      R(((toPoint Y).left)_*⟦Λℓ⟧).map
+        ((boundedConstructibleOpenImmersionLowerShriekCompatibility Λℓ ℓ u).hom.app
+          ((boundedConstructibleLowerStar ℓ g).obj N)) ≫
+      R(((toPoint Y).left)_*⟦Λℓ⟧).map (D((u.left)_!open⟦Λℓ⟧).map
+        ((boundedConstructibleLowerStarCompatibility ℓ g).hom.app N)) ≫
+      R(((toPoint Y).left)_*⟦Λℓ⟧).map ((closedExtension (openImmersionAdjunction ℓ u.left)
+        (rfl : g.left ≫ u.left = _)).app (ιo[B.left] N)) ≫
+      R(((toPoint Y).left)_*⟦Λℓ⟧).map ((closedExtension
+        (Adjunction.id.ofNatIsoRight (leftDerivedUpperStarId Λℓ Y.left).symm)
+        (rfl : (g.left ≫ u.left) ≫ 𝟙 Y.left = _)).app (ιo[B.left] N)) ≫
+      (lowerStarCompOfEq (Λ := Λℓ)
+        (rfl : ((g.left ≫ u.left) ≫ 𝟙 Y.left) ≫ (toPoint Y).left = _)).inv.app
+          (ιo[B.left] N)) ≫
+      eqToHom (by rw [pointRoute_left_eq]; rfl) :=
+  pointRoute_source_eq_aux ℓ g u N
 
 end Source
 
@@ -332,12 +381,8 @@ lemma pointRoute_target_left_eq (g : B ⟶ X) (u : X ⟶ Y) (h : Y ⟶ P) :
     ((g.left ≫ u.left) ≫ h.left) ≫ (toPoint P).left = (toPoint B).left := by
   rw [← Over.comp_left, ← Over.comp_left, ← Over.comp_left, comp_toPoint]
 
-/-- **The target route of `ν_X` in normal form**: the identification
-`Ra_{P*} h_! u_! Rg_* ⟶ Ra_{P*} h_! R(ug)_* ⟶ Ra_{P*} R(hug)_* ≅ R(a_B)_*` of
-`openPointExchangeAux_app_comp_aux_of_eq` (through `closedExtension`), preceded by
-`Ra_{P*} h_! u_! ≅ Ra_{X!}`, is `Ra_{X!}((Rg_! ≅ Rg_*)⁻¹) ≫ (Ra_{B!} ≅ Ra_{X!} Rg_!)⁻¹ ≫
-(Ra_{B!} ≅ Ra_{B*})`. -/
-theorem pointRoute_target_eq (g : B ⟶ X) (u : X ⟶ Y) (h : Y ⟶ P) [IsOpenImmersion u.left]
+/-- `pointRoute_target_eq`, with the components at `M.obj`. -/
+private theorem pointRoute_target_eq_aux (g : B ⟶ X) (u : X ⟶ Y) (h : Y ⟶ P) [IsOpenImmersion u.left]
     [IsOpenImmersion h.left] [IsProper g.left] [IsProper (g ≫ u).left] [IsProper (toPoint P).left]
     [IsProper (toPoint B).left] [IsProper ((g ≫ u) ≫ toPoint Y).left]
     [IsProper ((g ≫ u) ≫ h).left] [IsProper (((g ≫ u) ≫ h) ≫ toPoint P).left]
@@ -451,6 +496,70 @@ theorem pointRoute_target_eq (g : B ⟶ X) (u : X ⟶ Y) (h : Y ⟶ P) [IsOpenIm
   apply ObjectProperty.ι_map_comp_aux
   close_by_match_lhs CategoryTheory.Functor.map_eqToHom_comp_eqToHom
 
+
+set_option hygiene false in
+/-- The inclusion `ι : Dᵇc(X) ⥤ D(X)` on objects, with the instances of `boundedConstructible`. -/
+local notation "ιo[" X "]" =>
+  @CategoryTheory.Functor.obj (Dᵇc(X)⟦Λℓ⟧) _ _ _
+    (@CategoryTheory.ObjectProperty.ι _ _ (boundedConstructible (condensedRingObj Λℓ X)))
+
+set_option hygiene false in
+/-- The inclusion `ι : Dᵇc(X) ⥤ D(X)` on morphisms. -/
+local notation "ιm[" X "]" =>
+  @CategoryTheory.Functor.map (Dᵇc(X)⟦Λℓ⟧) _ _ _
+    (@CategoryTheory.ObjectProperty.ι _ _ (boundedConstructible (condensedRingObj Λℓ X))) _ _
+
+/-- **The target route of `ν_X` in normal form**: the identification
+`Ra_{P*} h_! u_! Rg_* ⟶ Ra_{P*} h_! R(ug)_* ⟶ Ra_{P*} R(hug)_* ≅ R(a_B)_*` of
+`openPointExchangeAux_app_comp_aux_of_eq` (through `closedExtension`), preceded by
+`Ra_{P*} h_! u_! ≅ Ra_{X!}`, is `Ra_{X!}((Rg_! ≅ Rg_*)⁻¹) ≫ (Ra_{B!} ≅ Ra_{X!} Rg_!)⁻¹ ≫
+(Ra_{B!} ≅ Ra_{B*})`. The components are taken at `ι M`, as in `pointRoute_source_eq`. -/
+theorem pointRoute_target_eq (g : B ⟶ X) (u : X ⟶ Y) (h : Y ⟶ P) [IsOpenImmersion u.left]
+    [IsOpenImmersion h.left] [IsProper g.left] [IsProper (g ≫ u).left] [IsProper (toPoint P).left]
+    [IsProper (toPoint B).left] [IsProper ((g ≫ u) ≫ toPoint Y).left]
+    [IsProper ((g ≫ u) ≫ h).left] [IsProper (((g ≫ u) ≫ h) ≫ toPoint P).left]
+    (M : Dᵇc(B.left)⟦Λℓ⟧) :
+    ιm[(point k).left]
+        ((boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ (toPoint P)).inv.app
+          ((boundedConstructibleOpenImmersionLowerShriek Λℓ ℓ h).obj
+            ((boundedConstructibleOpenImmersionLowerShriek Λℓ ℓ u).obj
+              ((boundedConstructibleLowerStar ℓ g).obj M))) ≫
+        (boundedConstructibleLowerShriek ℓ (toPoint P)).map
+          ((boundedConstructibleLowerShriekIsoOpenImmersionLowerShriek_padicAlgCl ℓ h).inv.app
+            ((boundedConstructibleOpenImmersionLowerShriek Λℓ ℓ u).obj
+              ((boundedConstructibleLowerStar ℓ g).obj M))) ≫
+        (lowerShriekCompOfEq ℓ h (toPoint P) (comp_toPoint h)).inv.app
+          ((boundedConstructibleOpenImmersionLowerShriek Λℓ ℓ u).obj
+            ((boundedConstructibleLowerStar ℓ g).obj M)) ≫
+        (lowerShriekCompOfEq ℓ u (toPoint Y) (comp_toPoint u) ≪≫ Functor.isoWhiskerRight
+          (boundedConstructibleLowerShriekIsoOpenImmersionLowerShriek_padicAlgCl ℓ u) _).inv.app
+            ((boundedConstructibleLowerStar ℓ g).obj M)) ≫
+      ιm[(point k).left] ((boundedConstructibleLowerShriek ℓ (toPoint X)).map
+          ((boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ g).inv.app M) ≫
+        (lowerShriekCompOfEq ℓ g (toPoint X) (comp_toPoint g)).inv.app M ≫
+        (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ (toPoint B)).hom.app M) =
+    (boundedConstructibleLowerStarCompatibility ℓ (toPoint P)).hom.app
+        ((boundedConstructibleOpenImmersionLowerShriek Λℓ ℓ h).obj
+          ((boundedConstructibleOpenImmersionLowerShriek Λℓ ℓ u).obj
+            ((boundedConstructibleLowerStar ℓ g).obj M))) ≫
+      R(((toPoint P).left)_*⟦Λℓ⟧).map
+        ((boundedConstructibleOpenImmersionLowerShriekCompatibility Λℓ ℓ h).hom.app
+          ((boundedConstructibleOpenImmersionLowerShriek Λℓ ℓ u).obj
+            ((boundedConstructibleLowerStar ℓ g).obj M)) ≫
+        D((h.left)_!open⟦Λℓ⟧).map
+          ((boundedConstructibleOpenImmersionLowerShriekCompatibility Λℓ ℓ u).hom.app
+            ((boundedConstructibleLowerStar ℓ g).obj M)) ≫
+        D((h.left)_!open⟦Λℓ⟧).map (D((u.left)_!open⟦Λℓ⟧).map
+          ((boundedConstructibleLowerStarCompatibility ℓ g).hom.app M)) ≫
+        D((h.left)_!open⟦Λℓ⟧).map ((closedExtension (openImmersionAdjunction ℓ u.left)
+          (rfl : g.left ≫ u.left = _)).app (ιo[B.left] M)) ≫
+        (closedExtension (openImmersionAdjunction ℓ h.left)
+          (rfl : (g.left ≫ u.left) ≫ h.left = _)).app (ιo[B.left] M)) ≫
+      (lowerStarCompOfEq (Λ := Λℓ)
+        (rfl : ((g.left ≫ u.left) ≫ h.left) ≫ (toPoint P).left = _)).inv.app (ιo[B.left] M) ≫
+      eqToHom (by rw [pointRoute_target_left_eq]; rfl) :=
+  pointRoute_target_eq_aux ℓ g u h M
+
 end Target
 
 section Exchange
@@ -468,7 +577,7 @@ variable {B S : Over (Spec (.of k))} [LocallyOfFiniteType B.hom] [QuasiCompact B
 /-- A transport into `Rf_*` followed by the (identity) compatibility isomorphism of `Rf_*`. -/
 lemma eqToHom_comp_lowerStarCompatibility_hom (f : B ⟶ S) {f₁ : B.left ⟶ S.left}
     (hf : f₁ = f.left) (N : Dᵇc(B.left)⟦Λℓ⟧) :
-    (eqToHom (by rw [hf]; rfl) : R((f₁)_*⟦Λℓ⟧).obj N.obj ⟶
+    (eqToHom (by rw [hf]; rfl) : R((f₁)_*⟦Λℓ⟧).obj (@CategoryTheory.Functor.obj (Dᵇc(B.left)⟦Λℓ⟧) _ _ _ (boundedConstructible _).ι N) ⟶
         (boundedConstructible _).ι.obj ((boundedConstructibleLowerStar ℓ f).obj N)) ≫
       (boundedConstructibleLowerStarCompatibility ℓ f).hom.app N = eqToHom (by subst hf; rfl) := by
   subst hf
@@ -478,8 +587,8 @@ lemma eqToHom_comp_lowerStarCompatibility_hom (f : B ⟶ S) {f₁ : B.left ⟶ S
 lemma map_comp_eqToHom_lowerStarCompatibility (f : B ⟶ S) {f₁ : B.left ⟶ S.left}
     (hf : f₁ = f.left) (K : Dᵇc(B.left)⟦Λℓ⟧)
     {E : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology B.left) Ab.{u + 1})
-      (condensedRingObj Λℓ B.left))} (c : E ⟶ K.obj) :
-    R((f₁)_*⟦Λℓ⟧).map c ≫ (eqToHom (by rw [hf]; rfl) : R((f₁)_*⟦Λℓ⟧).obj K.obj ⟶
+      (condensedRingObj Λℓ B.left))} (c : E ⟶ @CategoryTheory.Functor.obj (Dᵇc(B.left)⟦Λℓ⟧) _ _ _ (boundedConstructible _).ι K) :
+    R((f₁)_*⟦Λℓ⟧).map c ≫ (eqToHom (by rw [hf]; rfl) : R((f₁)_*⟦Λℓ⟧).obj (@CategoryTheory.Functor.obj (Dᵇc(B.left)⟦Λℓ⟧) _ _ _ (boundedConstructible _).ι K) ⟶
         (boundedConstructible _).ι.obj ((boundedConstructibleLowerStar ℓ f).obj K)) =
       eqToHom (by subst hf; rfl) ≫ R((f.left)_*⟦Λℓ⟧).map c ≫
         (boundedConstructibleLowerStarCompatibility ℓ f).inv.app K := by
@@ -487,6 +596,82 @@ lemma map_comp_eqToHom_lowerStarCompatibility (f : B ⟶ S) {f₁ : B.left ⟶ S
   simp [boundedConstructibleLowerStarCompatibility, ObjectProperty.liftCompιIso]
 
 end Exchange
+
+section ExchangeInclusion
+
+set_option hygiene false in
+/-- The coefficients `ℚ̄_ℓ`. -/
+local notation "Λℓ" => Profinite.padicAlgClRingObj ℓ
+
+set_option hygiene false in
+/-- The inclusion `ι : Dᵇc(X) ⥤ D(X)` on objects, with the instances of `boundedConstructible`. -/
+local notation "ιo[" X "]" =>
+  @CategoryTheory.Functor.obj (Dᵇc(X)⟦Λℓ⟧) _ _ _
+    (@CategoryTheory.ObjectProperty.ι _ _ (boundedConstructible (condensedRingObj Λℓ X)))
+
+set_option hygiene false in
+/-- The inclusion `ι : Dᵇc(X) ⥤ D(X)` on morphisms. -/
+local notation "ιm[" X "]" =>
+  @CategoryTheory.Functor.map (Dᵇc(X)⟦Λℓ⟧) _ _ _
+    (@CategoryTheory.ObjectProperty.ι _ _ (boundedConstructible (condensedRingObj Λℓ X))) _ _
+
+variable (ℓ : ℕ) [Fact ℓ.Prime] {k k' : Type u} [Field k]
+  [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)] [Field k'] [Fact (ringChar k').Prime]
+  [Fact (ringChar k' ≠ ℓ)]
+  {X Y : Over (Spec (.of k))} [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom]
+  [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] [IsSeparated Y.hom]
+  {X' Y' : Over (Spec (.of k'))} [LocallyOfFiniteType X'.hom] [QuasiCompact X'.hom]
+  [IsSeparated X'.hom] [LocallyOfFiniteType Y'.hom] [QuasiCompact Y'.hom] [IsSeparated Y'.hom]
+  {M : NearbyCyclesModel X.left X'.left} {N : NearbyCyclesModel Y.left Y'.left}
+  {f : X ⟶ Y} {f' : X' ⟶ Y'} (φ : M.Hom N f.left f'.left)
+  (hM : M.PreservesBoundedConstructible (Profinite.padicAlgClRingObj ℓ))
+  (hN : N.PreservesBoundedConstructible (Profinite.padicAlgClRingObj ℓ))
+
+/-- The components of `liftExchange χ` of any `χ : Rf_* ⋙ Ψ_N ⟶ Ψ_M ⋙ Rf'_*` are those of `χ`, through
+the (identity) compatibility isomorphisms; the components of `χ` are taken at `ι K`. -/
+theorem NearbyCyclesModel.ι_map_liftExchange_app
+    (χ : R((f.left)_*⟦Λℓ⟧) ⋙ N.nearbyCycles Λℓ ⟶ M.nearbyCycles Λℓ ⋙ R((f'.left)_*⟦Λℓ⟧))
+    (K : Dᵇc(X.left)⟦Λℓ⟧) :
+    ιm[Y'.left] ((NearbyCyclesModel.liftExchange χ
+        (fun K ↦ boundedConstructible_rightDerivedLowerStar_obj ℓ f K)
+        (fun K ↦ boundedConstructible_rightDerivedLowerStar_obj ℓ f' K)
+        (fun K ↦ hN K.obj K.property) (fun K ↦ hM K.obj K.property) :
+      boundedConstructibleLowerStar ℓ f ⋙ boundedConstructibleNearbyCycles hN ⟶
+        boundedConstructibleNearbyCycles hM ⋙ boundedConstructibleLowerStar ℓ f').app K) =
+      (NearbyCyclesModel.boundedConstructibleNearbyCyclesCompatibility hN).hom.app
+          ((boundedConstructibleLowerStar ℓ f).obj K) ≫
+        (N.nearbyCycles Λℓ).map ((boundedConstructibleLowerStarCompatibility ℓ f).hom.app K) ≫
+        χ.app (ιo[X.left] K) ≫
+        R((f'.left)_*⟦Λℓ⟧).map
+          ((NearbyCyclesModel.boundedConstructibleNearbyCyclesCompatibility hM).inv.app K) ≫
+        (boundedConstructibleLowerStarCompatibility ℓ f').inv.app
+          ((NearbyCyclesModel.boundedConstructibleNearbyCycles hM).obj K) := by
+  simp only [boundedConstructibleLowerStarCompatibility,
+    NearbyCyclesModel.boundedConstructibleNearbyCyclesCompatibility, ObjectProperty.liftCompιIso,
+    Iso.refl_hom, Iso.refl_inv, NatTrans.id_app]
+  erw [Category.id_comp, CategoryTheory.Functor.map_id, Category.id_comp,
+    CategoryTheory.Functor.map_id, Category.id_comp, Category.comp_id]
+  rfl
+
+/-- The pushforward exchange on `Dᵇc` is the ambient one, through the (identity) compatibility
+isomorphisms of the restricted functors with the inclusions; the ambient exchange is taken at
+`ι K` (compare `NearbyCyclesModel.Hom.boundedConstructiblePushforwardExchange_app_map`). -/
+theorem NearbyCyclesModel.Hom.ι_map_boundedConstructiblePushforwardExchange_app
+    (K : Dᵇc(X.left)⟦Λℓ⟧) :
+    ιm[Y'.left] ((φ.boundedConstructiblePushforwardExchange ℓ hM hN).app K) =
+      (NearbyCyclesModel.boundedConstructibleNearbyCyclesCompatibility hN).hom.app
+          ((boundedConstructibleLowerStar ℓ f).obj K) ≫
+        (N.nearbyCycles Λℓ).map ((boundedConstructibleLowerStarCompatibility ℓ f).hom.app K) ≫
+        (φ.pushforwardExchange Λℓ).app (ιo[X.left] K) ≫
+        R((f'.left)_*⟦Λℓ⟧).map
+          ((NearbyCyclesModel.boundedConstructibleNearbyCyclesCompatibility hM).inv.app K) ≫
+        (boundedConstructibleLowerStarCompatibility ℓ f').inv.app
+          ((NearbyCyclesModel.boundedConstructibleNearbyCycles hM).obj K) := by
+  rw [boundedConstructiblePushforwardExchange_eq_liftExchange]
+  exact NearbyCyclesModel.ι_map_liftExchange_app ℓ hM hN _ K
+
+
+end ExchangeInclusion
 
 section Deformation
 
@@ -558,10 +743,14 @@ lemma pointComponentCompModelHom_generic_eq :
 
 end Model
 
-/-- A morphism from a proper `S`-scheme to a separated one is proper. -/
-lemma isProper_left_of_isProper_hom {S : Scheme.{u}} {B Y : Over S} [IsProper B.hom]
+end AlgebraicGeometry.ProEtale.CondensedRing
+
+namespace AlgebraicGeometry
+
+/-- A morphism over `S` from a proper `S`-scheme to a separated `S`-scheme is proper. -/
+lemma isProper_left_of_isProper_of_isSeparated {S : Scheme.{u}} {B Y : Over S} [IsProper B.hom]
     [IsSeparated Y.hom] (f : B ⟶ Y) : IsProper f.left := by
   have : IsProper (f.left ≫ Y.hom) := by rw [Over.w f]; infer_instance
   exact IsProper.of_comp _ Y.hom
 
-end AlgebraicGeometry.ProEtale.CondensedRing
+end AlgebraicGeometry
