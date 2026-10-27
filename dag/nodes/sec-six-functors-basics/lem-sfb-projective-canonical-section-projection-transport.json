@@ -10,9 +10,44 @@
  "stmt_deps": [
   "lem-sfb-projective-canonical-section-projection-core"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For any scheme map g, form the coefficient naturality square of the native traceProjection. Paste naturality in the right variable of the braiding on the target of g, naturality in the coefficient variable of Adjunction.rightAdjointProjectionMap, and naturality in the left variable of the braiding on the source of g. Functor.map_comp combines the last two maps. This proves K tensor Rg_*(n) followed by the projection equals the projection followed by Rg_*(Lg^*K tensor n).",
+   "uses": [
+    "def-sfb-proetale-projection-exchange-maps",
+    "def-sfb-proetale-rational-localizing-projection-helpers",
+    "sk-def-sfb-module-derived-pushpull"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use projection_existsUnique.choose_spec to identify the fixed projection family with traceProjection. Unfold the fixed native tensor bundle under an abstract normalized-family variable, converting its heterogeneous normalization into ordinary equality. Replace both projection components in the coefficient naturality square using a generic commuting-square substitution lemma. This gives the same naturality square for the fixed projectionMap.",
+   "uses": [
+    "def-sfb-projective-diagonal-composition",
+    "def-sfb-projective-diagonal-pullback"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply coefficient naturality at the hom of supportedUnitIso, then compose with the direct image of the inverse tensored with the pullback factor and the sectionTensorMap. By Functor.map_comp and whiskerLeft_comp the adjacent hom/inv pair cancels. Finally expand whiskering of the initial coefficient composite and precompose with the inverse right unitor and the single-unit/section factors. The result is exactly the displayed equality. The core section/projection identity is not used in this coefficient transport calculation.",
+   "uses": [
+    "def-sfb-projective-diagonal-composition"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-proetale-projection-exchange-maps",
+  "def-sfb-proetale-rational-localizing-projection-helpers",
+  "sk-def-sfb-module-derived-pushpull",
+  "def-sfb-projective-diagonal-composition",
+  "def-sfb-projective-diagonal-pullback"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-p1-adjunction-rational/sk-prop-p1-adjunction-rational-triangle.proof.md",
+  "place": "Second identity, coefficient normalization; B6 formalization by braiding and adjunction-mate naturality followed by isomorphism cancellation."
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -89,9 +124,9 @@
   "date": "2026-10-27",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "D2",
+  "group": "B6",
   "result": "pass",
-  "landing": "20261027T205900-L-1628678",
+  "landing": "20261027T233807-L-4115910",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
