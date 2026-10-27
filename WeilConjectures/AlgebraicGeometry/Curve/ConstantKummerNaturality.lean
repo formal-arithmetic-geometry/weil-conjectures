@@ -17,7 +17,7 @@ import WeilConjectures.AlgebraicGeometry.Curve.KummerBaseChangeCompatibility
 /-!
 # Kummer naturality in primitive-root coordinates
 
-Source: blueprint sec-curve-estimates/sk-prop-ext-invariance,
+Source: blueprint sec-curve-estimates/sbc-thm-algebraically-closed-invariance,
 proof of thm-sc-constant-invariance, Kummer naturality in the proper and affine cases
 (blueprint: lem-sc-constant-kummer-naturality).
 -/
@@ -30,7 +30,7 @@ open CategoryTheory CategoryTheory.Limits AlgebraicGeometry.Scheme
 
 namespace AlgebraicGeometry
 
-/-- Source: blueprint sec-curve-estimates/sk-prop-ext-invariance,
+/-- Source: blueprint sec-curve-estimates/sbc-thm-algebraically-closed-invariance,
 proof of thm-sc-constant-invariance, Kummer naturality in the proper and affine cases
 (blueprint: lem-sc-constant-kummer-naturality).
 

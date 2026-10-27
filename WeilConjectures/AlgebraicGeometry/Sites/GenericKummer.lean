@@ -344,9 +344,9 @@ variable (hX : topologicalKrullDim X = 1) (hn : IsUnit (n : Γ(X, ⊤)))
   (c : Cofan fun x : {x : X // IsClosed ({x} : Set X)} ↦ X.pointConstantZMod n x.1)
   (hc : IsColimit c)
 
-/-- **The generic Kummer residue sheaf** (blueprint `lem-sc-generic-kummer-residues`). Let `X`
-be an integral regular noetherian scheme of dimension one, for instance a smooth connected curve
-over a field, with generic point `η : Spec k(X) ⟶ X`, and let `n` be invertible on `X`. Then
+/-- **The generic Kummer residue sheaf**. Let `X` be an integral regular noetherian scheme of
+dimension one, for instance a smooth connected curve over a field, with generic point
+`η : Spec k(X) ⟶ X`, and let `n` be invertible on `X`. Then
 
 ```
   R¹η_* μₙ ≅ ⨁_{x closed} i_{x*} ℤ/n,
@@ -376,13 +376,12 @@ def genericKummerResidueIso :
       (colimit.isColimit (Discrete.functor fun x : {x : X // coheight x = 1} ↦
         X.pointConstantInt x.1)) c hn hc)
 
-/-- **The generic Kummer residue isomorphism is given by valuations** (blueprint
-`lem-sc-generic-kummer-residues`). Composed with the Kummer coboundary
-`η_* 𝔾ₘ ⟶ R¹η_* μₙ` (`AlgebraicGeometry.Scheme.genericKummerδ`, precomposed with
-`η_* η^* 𝔾ₘ ≅ η_* 𝔾ₘ`), the isomorphism `AlgebraicGeometry.Scheme.genericKummerResidueIso` is
-the divisor map `f ↦ ∑_x ord_x(f) [x]` (`AlgebraicGeometry.Scheme.divisorSequenceMap`), with
-values in the vertex of any colimit cofan `cD` on the family `x ↦ i_{x*} ℤ` of points of
-codimension one, followed by reduction modulo `n`. -/
+/-- **The generic Kummer residue isomorphism is given by valuations**. Composed with the Kummer
+coboundary `η_* 𝔾ₘ ⟶ R¹η_* μₙ` (`AlgebraicGeometry.Scheme.genericKummerδ`, precomposed with
+`η_* η^* 𝔾ₘ ≅ η_* 𝔾ₘ`), the isomorphism `AlgebraicGeometry.Scheme.genericKummerResidueIso` is the
+divisor map `f ↦ ∑_x ord_x(f) [x]` (`AlgebraicGeometry.Scheme.divisorSequenceMap`), with values in
+the vertex of any colimit cofan `cD` on the family `x ↦ i_{x*} ℤ` of points of codimension one,
+followed by reduction modulo `n`. -/
 lemma genericKummerResidueIso_spec
     (cD : Cofan fun x : {x : X // coheight x = 1} ↦ X.pointConstantInt x.1)
     (hcD : IsColimit cD) :

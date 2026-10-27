@@ -88,7 +88,7 @@ theorem lieEquivTangent_infPointsMap (f : G ⟶ H) [IsMonHom f] (x : Lie G) :
 
 /-- The differential `df : Lie(G) → Lie(H)` of a homomorphism of group schemes `f : G ⟶ H` over
 `k`: on tangent vectors, `v ↦ v ≫ f`. It is a homomorphism of Lie algebras.
-(blueprint: `sk-d-tangent`) -/
+(blueprint: `def-wf-lie-algebra-derivation`) -/
 noncomputable def differential (f : G ⟶ H) [IsMonHom f] : Lie G →ₗ⁅k⁆ Lie H where
   toFun x := lieEquiv H (infPointsMap f ((lieEquiv G).symm x))
   map_add' x y := by

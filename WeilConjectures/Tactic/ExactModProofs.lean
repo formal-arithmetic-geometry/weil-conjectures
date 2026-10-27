@@ -25,6 +25,11 @@ motives `fun z⃗ ↦ H[c⃗ := z⃗]` and `fun z⃗ ↦ G[c⃗ := z⃗]` (all t
 simultaneously) and the equations `c = r` (closed by `rfl`, checked by proof irrelevance on the
 proofs alone). The two casted types differ only at the definitionally equal non-proof terms, if
 any.
+
+The variant `cast_proofs h` casts the goal along `proof_irrel` one pair of differing proofs at a
+time, at exactly the positions where they differ. Its motives stay close to the goal itself, so
+the kernel check stays cheap even with thousands of differing positions, where the single
+simultaneous cast of `exact_mod_proofs` can exhaust the kernel.
 -/
 
 public meta section
@@ -125,5 +130,90 @@ def exactModProofs (h : Expr) : TacticM Unit := do
 by closed proofs, at any number of positions, and by closed definitionally equal terms. -/
 elab "exact_mod_proofs " h:term : tactic => withMainContext do
   exactModProofs (← elabTerm h none)
+
+/-- The pairs of outermost differing closed proofs of `a` and `b`, in a parallel traversal; where
+the two terms have different shapes, the subterms are required to be closed and definitionally
+equal (they are compared by the kernel in the end). -/
+partial def proofPairs (a b : Expr) (acc : Array (Expr × Expr)) :
+    MetaM (Array (Expr × Expr)) := do
+  if a == b then return acc
+  if !a.hasLooseBVars && !b.hasLooseBVars && (← isProof a) then return acc.push (a, b)
+  let leaf : MetaM (Array (Expr × Expr)) := do
+    if !a.hasLooseBVars && !b.hasLooseBVars then
+      if (← withReducible (isDefEq a b)) then return acc
+      if (← isDefEq a b) then return acc
+    throwError "cast_proofs: the terms differ at{indentExpr a}\nand{indentExpr b}"
+  match a, b with
+  | .app .., .app .. =>
+    let fa := a.getAppFn
+    let fb := b.getAppFn
+    let as := a.getAppArgs
+    let bs := b.getAppArgs
+    if as.size != bs.size || (fa != fb && !(fa.isLambda && fb.isLambda)) then return ← leaf
+    try
+      let mut acc ← if fa == fb then pure acc else proofPairs fa fb acc
+      for i in [:as.size] do
+        acc ← proofPairs as[i]! bs[i]! acc
+      return acc
+    catch _ => leaf
+  | .lam _ ta ba _, .lam _ tb bb _ => proofPairs ba bb (← proofPairs ta tb acc)
+  | .forallE _ ta ba _, .forallE _ tb bb _ => proofPairs ba bb (← proofPairs ta tb acc)
+  | .letE _ ta va ba _, .letE _ tb vb bb _ =>
+    proofPairs ba bb (← proofPairs va vb (← proofPairs ta tb acc))
+  | .proj _ i sa, .proj _ j sb => if i == j then proofPairs sa sb acc else leaf
+  | _, _ => leaf
+
+/-- Replace in `g` the positions where `g` has `b` and the parallel term `h` has `a` by `z`. -/
+partial def abstractPair (g h a b z : Expr) : Expr :=
+  if g == h then g
+  else if g == b && h == a then z
+  else match g, h with
+  | .app fg ag, .app fh ah => g.updateApp! (abstractPair fg fh a b z) (abstractPair ag ah a b z)
+  | .lam _ tg bg _, .lam _ th bh _ =>
+    g.updateLambdaE! (abstractPair tg th a b z) (abstractPair bg bh a b z)
+  | .forallE _ tg bg _, .forallE _ th bh _ =>
+    g.updateForallE! (abstractPair tg th a b z) (abstractPair bg bh a b z)
+  | .letE _ tg vg bg _, .letE _ th vh bh _ =>
+    g.updateLet! (abstractPair tg th a b z) (abstractPair vg vh a b z)
+      (abstractPair bg bh a b z) false
+  | .proj _ i sg, .proj _ j sh => if i == j then g.updateProj! (abstractPair sg sh a b z) else g
+  | _, _ => g
+
+/-- Close the goal with `h`, whose type differs from the goal only by closed proofs (and closed
+definitionally equal terms), by casting the goal along `proof_irrel`, one pair of differing
+proofs at a time. -/
+def castProofs (h : Expr) : TacticM Unit := do
+  let mut g ← getMainGoal
+  let H := stripMData (← instantiateMVars (← inferType h))
+  let mut G := stripMData (← instantiateMVars (← g.getType))
+  g ← g.replaceTargetDefEq G
+  -- casting along a pair may expose new pairs inside the types of the proofs
+  for _ in [:20] do
+    let diffs ← proofPairs H G #[]
+    if diffs.isEmpty then break
+    let mut pairs : Array (Expr × Expr) := #[]
+    for p in diffs do
+      unless pairs.contains p do pairs := pairs.push p
+    for (a, b) in pairs do
+      let Pb ← inferType b
+      -- the motive `fun z ↦ G[b := z]`, at the positions where `H` has `a`
+      let motive ← withLocalDeclD `z Pb fun z ↦ mkLambdaFVars #[z] (abstractPair G H a b z)
+      let eq := mkApp3 (mkConst ``proof_irrel) Pb b a
+      let propEq := mkAppN (mkConst ``congrArg [.zero, .succ .zero])
+        #[Pb, .sort .zero, b, a, motive, eq]
+      let G' := motive.beta #[a]
+      let next ← mkFreshExprSyntheticOpaqueMVar G'
+      g.assign (mkAppN (mkConst ``Eq.mpr [.zero]) #[G, G', propEq, next])
+      g := next.mvarId!
+      G := G'
+  g.assign h
+  replaceMainGoal []
+
+/-- `cast_proofs h` closes the goal with `h` when the type of `h` and the goal differ only by
+closed proofs, at any number of positions, and by closed definitionally equal terms. Unlike
+`exact_mod_proofs`, the goal is cast along one pair of differing proofs at a time, which keeps
+the motives small for the kernel. -/
+elab "cast_proofs " h:term : tactic => withMainContext do
+  castProofs (← elabTerm h none)
 
 end ExactModProofs

@@ -31,7 +31,7 @@ open CategoryTheory Limits
 namespace AlgebraicGeometry.IsCurve
 
 /-- The kernel of the units comparison on the reduction of a curve has zero H^2.
-Source: literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-h2/
+Source: literature/blueprint/master/blueprint/sec-curve-estimates/lem-sc-second-kummer-divisors/
 lem-sc-brauer-zero-all-curves.md, Proof, Step 1 and the following Claim.
 (blueprint: lem-sc-reduction-units-kernel-h2)
 

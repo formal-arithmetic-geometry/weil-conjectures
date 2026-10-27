@@ -12,7 +12,8 @@ public import WeilConjectures.TraceFormula.Specialization.ComponentClassReductio
 public import WeilConjectures.TraceFormula.Specialization.ComponentCounitIso
 public import WeilConjectures.TraceFormula.Specialization.ComponentUnitClassF
 public import WeilConjectures.Tactic.MatchTactic
-public import WeilConjectures.TraceFormula.Specialization.PointExchangeNormalFormAux
+public import WeilConjectures.TraceFormula.Specialization.ComponentExchangeAssembly
+public import WeilConjectures.TraceFormula.Specialization.PointExchangeNormalForm
 
 /-!
 
@@ -53,8 +54,11 @@ variable {ℓ : ℕ} [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).
   {y : RationalPoint c.C} (hc : c.IsContractingAt y) (k' : Type u) [Field k'] [IsSepClosed k']
   [Fact (ringChar k').Prime] [Fact (ringChar k' ≠ ℓ)] [Algebra k k'] (F : c.FixedLocus)
 
+set_option Elab.async false in
 set_option maxHeartbeats 2000000 in
--- instantiating fact (III) and the reduction at the concrete data is slow
+-- instantiating the support identity, facts (II) and (III) and the reduction at the concrete data
+-- is slow; the auxiliary theorems of `instantiate_by_match` are checked one after the other
+-- (`Elab.async false`), which keeps the memory below 4 GB
 /-- **The compact-support exchanges of the deformation specialize the class of `B`** (blueprint
 `det-tf-sp-theta-proper-constant`, `det-tf-sp-theta-open-constant`, with
 `det-tf-fixed-deformation-points`; Varshavsky, *Lefschetz–Verdier trace formula and a
@@ -124,8 +128,7 @@ theorem specializesComponentClass_deformation {B : Over (Spec (.of k))} [QuasiCo
           rw [prodLift_supportClosureMap, supportClosureι_map],
       Category.assoc, F.isPullback.w, ← Category.assoc]
   have : IsProper ((j ≫ F.ι) ≫ c.support).left := isProper_left_of_isProper_of_isSeparated _
-  have : IsProper ((j ≫ F.ι) ≫ supportClosureι c).left :=
-    isProper_left_of_isProper_of_isSeparated _
+  have : IsProper ((j ≫ F.ι) ≫ supportClosureι c).left := isProper_left_of_isProper_of_isSeparated _
   have : IsProper (((j ≫ F.ι) ≫ supportClosureι c) ≫ Limits.prod.lift
     (supportClosureMap c ≫ Limits.prod.fst) (supportClosureMap c ≫ Limits.prod.snd)).left :=
     isProper_left_of_isProper_of_isSeparated _
@@ -138,18 +141,15 @@ theorem specializesComponentClass_deformation {B : Over (Spec (.of k))} [QuasiCo
   have : IsProper (hc.componentSpecialLift k' j hb ≫ (hc.specialFixedLocus k').d).left :=
     isProper_left_of_isProper_of_isSeparated _
   have : IsProper ((hc.componentSpecialLift k' j hb ≫ (hc.specialFixedLocus k').d) ≫
-    diag (deformationSpecialFibre X (y ≫ c.c₁).left.ker k')).left :=
-      isProper_left_of_isProper_of_isSeparated _
-  have : IsProper (componentSpecialFibreMap k' j hb).left :=
-    isProper_left_of_isProper_of_isSeparated _
+    diag (deformationSpecialFibre X (y ≫ c.c₁).left.ker k')).left := isProper_left_of_isProper_of_isSeparated _
+  have : IsProper (componentSpecialFibreMap k' j hb).left := isProper_left_of_isProper_of_isSeparated _
   have : IsProper (componentSpecialFibreMap k' j hb ≫
     (hc.specialCorrespondence k').support).left := isProper_left_of_isProper_of_isSeparated _
   have : IsProper (componentSpecialFibreMap k' j hb ≫ hc.supportClosureSpecialι k').left :=
     isProper_left_of_isProper_of_isSeparated _
   have : IsProper ((componentSpecialFibreMap k' j hb ≫ hc.supportClosureSpecialι k') ≫
     supportClosureSpecialMap c y k').left := isProper_left_of_isProper_of_isSeparated _
-  have : IsProper (hc.componentSpecialLift k' j hb).left :=
-    isProper_left_of_isProper_of_isSeparated _
+  have : IsProper (hc.componentSpecialLift k' j hb).left := isProper_left_of_isProper_of_isSeparated _
   have hphg' : ((componentSpecialFibreMap k' j hb).left ≫ (hc.supportClosureSpecialι k').left) ≫
       (supportClosureSpecialMap c y k').left = ((hc.componentSpecialLift k' j hb ≫
         (hc.specialFixedLocus k').d) ≫
@@ -217,20 +217,35 @@ theorem specializesComponentClass_deformation {B : Over (Spec (.of k))} [QuasiCo
       (congrArg (fun f => (boundedConstructibleLowerStar ℓ f).obj
         ((NearbyCyclesModel.boundedConstructibleNearbyCycles hM).obj (𝟙_ _))) hfsp)
       (congrArg (fun f => (boundedConstructibleLowerStar ℓ f).obj
-        ((NearbyCyclesModel.boundedConstructibleNearbyCycles hM).obj (𝟙_ _))) hfsp)] as _hSI
-  -- Facts (I) and (III) and the unit class identity of `ν_B` are `hI`, `h3` and `hD`; the
-  -- cancellation is `TraceSpecialization.specializesComponentClass_of_eq`, and `glue_unit_class`
-  -- glues `h3` to `hD`. Still open: fact (II), the factorization `h1` of `ν_F` on `j_! ℚ̄_ℓ`. It
-  -- is the generic `TraceSpecialization.specializesComponentClass_ofSupportExchange` at the support
-  -- identity `_hSI`, the normal form of `ν_X`
-  -- (`pointCompactSupportExchangeOfSeparated_app_lowerStar_normalForm`)
-  -- and the coherences `lowerShriekCompOfEq_hom_app_comp_map_comp_inv_comp_hom`,
-  -- `lowerShriekCompOfEq_hom_app_comp_map_isoLowerStar_comp_inv`. That instance is still to be
-  -- assembled, as for the normal form, with the hypotheses aligned by `assign_mod_proofs`.
-  refine TraceSpecialization.specializesComponentClass_of_eq _ _ _ j hI
-    (W := _) ?φ ((deformationCompactSupportExchange B b.left.ker k').app (𝟙_ _)) ?h1 ?h2
-  case h2 => glue_unit_class h3 hD
-  all_goals sorry
+        ((NearbyCyclesModel.boundedConstructibleNearbyCycles hM).obj (𝟙_ _))) hfsp)] as hSI
+  -- fact (II): the factorization of `ν_F` on `j_! ℚ̄_ℓ`
+  have : IsProper (deformationSpecialFibreMap (j ≫ F.d)
+      (map_siteIdeal_ker_le_of_comp_eq _ (component_comp_d_eq j hb)) k').left := by
+    rw [← hfsp]; infer_instance
+  have hNF := pointCompactSupportExchangeOfSeparated_app_lowerStar_normalForm (ℓ := ℓ)
+    (y ≫ c.c₁) k' (j ≫ F.d) (component_comp_d_eq j hb)
+  instantiate_by_match TraceSpecialization.fixedLocusToPointCompactSupportExchange_app_comp_eq_of_eq
+    [h := hSI, hX := hNF] as hFPE
+  have hS3 := lowerShriekCompOfEq_hom_app_comp_hom_app_comp_map_inv_comp_inv ℓ j F.d
+    (toPoint X) (comp_toPoint j) (comp_toPoint F.d) (comp_toPoint (j ≫ F.d))
+    (𝟙_ Dᵇc(B.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
+  have hS4 := lowerShriekCompOfEq_hom_app_comp_map_comp_inv_eq ℓ
+    (hc.componentSpecialLift k' j hb) (hc.specialFixedLocus k').d hfsp (toPoint _)
+    (comp_toPoint (hc.componentSpecialLift k' j hb)) (comp_toPoint (hc.specialFixedLocus k').d)
+    (comp_toPoint (deformationSpecialFibreMap (j ≫ F.d)
+      (map_siteIdeal_ker_le_of_comp_eq _ (component_comp_d_eq j hb)) k'))
+    ((NearbyCyclesModel.boundedConstructibleNearbyCycles hM).obj (𝟙_ _))
+    (congrArg (fun f => (boundedConstructibleLowerStar ℓ f).obj
+      ((NearbyCyclesModel.boundedConstructibleNearbyCycles hM).obj (𝟙_ _))) hfsp)
+  have hac := boundedConstructibleLowerStarCompOfEq_hom_app_rfl ℓ j F.ι
+    (𝟙_ Dᵇc(B.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
+  instantiate_by_match CategoryTheory.exchange_app_eq_of_fixedSquare_aux
+    [h := hFPE, hS3 := hS3, hS4 := hS4, hac := hac] as h1
+  -- fact (III) glued to the unit class identity of `ν_B`
+  instantiate_by_match CategoryTheory.comp_map_comp_comp_eq_of_eq' [h := h3, h' := hD] as h2
+  -- the cancellation
+  apply_by_match TraceSpecialization.specializesComponentClass_of_eq [j := j, hI := hI,
+    h₁ := h1, h₂ := h2]
 
 end IsContractingAt
 

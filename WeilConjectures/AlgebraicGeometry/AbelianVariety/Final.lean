@@ -45,7 +45,7 @@ namespace AlgebraicGeometry
 
 variable {K : Type u} [Field K]
 
-/-- Blueprint `sk-thm-av-final`: Abelian-variety estimate, clauses (a) and (b).
+/-- Blueprint `thm-av-final`: Abelian-variety estimate, clauses (a) and (b).
 
 Let `A` be an abelian variety of dimension `g` over a field `K`, let `p = char K` and let
 `0 < n`.
@@ -68,7 +68,7 @@ theorem abelianVariety_estimate (p : ℕ) [CharP K p] (A : Over (Spec (.of K))) 
     flat_torsionSubgroupScheme, finrankΓ_torsionSubgroupScheme,
     etale_torsionSubgroupScheme p A⟩
 
-/-- Blueprint `sk-thm-av-final`: Abelian-variety estimate, clauses (c) and (d).
+/-- Blueprint `thm-av-final`: Abelian-variety estimate, clauses (c) and (d).
 
 Let `A` be an abelian variety of dimension `g` over an algebraically closed field `K`, let
 `p = char K` and let `0 < n`.

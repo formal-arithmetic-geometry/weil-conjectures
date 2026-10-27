@@ -32,7 +32,7 @@ whose middle term is flasque, so that the connecting map identifies
 `H¹(X, M) ≅ Γ(X, 𝒫) ⧸ V` (`AlgebraicGeometry.Scheme.Modules.residueH1Equiv`), canonically and
 `Γ(X, 𝒪_X)`-linearly.
 
-(blueprint: `sk-thm-picard-duality`)
+(blueprint: `det-thm-picard-duality`)
 -/
 
 @[expose] public section

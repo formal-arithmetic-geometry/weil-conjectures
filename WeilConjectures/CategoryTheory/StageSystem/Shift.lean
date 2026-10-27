@@ -15,11 +15,11 @@ Let `S` be a stage system on categories `C i` equipped with shifts by an additiv
 such that the transition functors commute with the shifts (`Functor.CommShift`) and the
 associators are compatible with these commutations (`NatTrans.CommShift`). In the application
 these are the derived extensions of scalars `T_{F/E}` between the categories `D^b_c(T, E)`, with
-the comparisons `σ_{F/E}` of blueprint `prop-weil-pbc-scalar-extension`.
+their comparisons `σ_{F/E}`.
 
 The shifts by `a : A` at all stages form a morphism of stage systems
 `CategoryTheory.StageSystem.shiftMorphism S a`, and the descended functors define a shift on the
-pair category (blueprint `def-weil-pbc-common-stage-cones`, "the shift"): `(i, x)⟦a⟧ = (i, x⟦a⟧)`.
+pair category: `(i, x)⟦a⟧ = (i, x⟦a⟧)`.
 The stage inclusions `ι i` commute with the shifts, and so do the identifications
 `T_{j/i} ⋙ ι j ≅ ι i`.
 
@@ -150,10 +150,9 @@ noncomputable def shiftMkCore : ShiftMkCore S.PairCategory A where
       Iso.app_inv]
     exact this
 
-/-- The shift on the pair category (blueprint `def-weil-pbc-common-stage-cones`): the shift of
-`(i, x)` is `(i, x⟦a⟧)`, and a morphism represented by `u` at a stage `n` is shifted to the
-morphism represented by `u⟦a⟧`, up to the commutation isomorphisms of the transition functors
-with the shifts. -/
+/-- The shift on the pair category: the shift of `(i, x)` is `(i, x⟦a⟧)`, and a morphism represented
+by `u` at a stage `n` is shifted to the morphism represented by `u⟦a⟧`, up to the commutation
+isomorphisms of the transition functors with the shifts. -/
 noncomputable instance hasShift : HasShift S.PairCategory A :=
   hasShiftMk _ A (shiftMkCore S A)
 

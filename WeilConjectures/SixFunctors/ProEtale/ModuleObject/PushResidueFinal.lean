@@ -186,8 +186,6 @@ theorem exists_iso_Q_obj_mono_regularEndSMul_rightAcyclic_padicIntegers
     (padicIntegersRegularEnd X ℓ E ϖ) K n
   exact ⟨J, hK, hJ, hr, fun k ↦ hG f ιY (Iso.refl _) (by rw [Iso.refl_hom, Category.comp_id]) k⟩
 
-set_option maxHeartbeats 1000000 in
--- unifying objects of the derived categories of module objects is slow
 /-- **The derived (Push) comparison for `𝒪_E ⟶ 𝔽_E`**: for every morphism of schemes
 `f : X ⟶ Y` and every bounded below `K ∈ D(𝒪_{E,X})`, the comparison
 `𝔽_E ⊗ᴸ Rf_* K ⟶ Rf_*(𝔽_E ⊗ᴸ K)` is an isomorphism. -/
@@ -196,10 +194,12 @@ theorem isIso_derivedUpperStarExtendScalarsPushHom_residueField_app
       (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.1) X))) (n : ℤ) [K.IsGE n] :
     IsIso ((derivedUpperStarExtendScalarsPushHom
       (Profinite.padicIntegersRingObjToResidueField ℓ E.1) f).app K) := by
-  obtain ⟨ϖ, hϖ⟩ := PadicAlgCl.isPrincipal_maximalIdeal_integers ℓ E.1
+  -- Destructuring a local hypothesis avoids abstracting the term in the (large) goal.
+  have hϖ := PadicAlgCl.isPrincipal_maximalIdeal_integers ℓ E.1
+  obtain ⟨ϖ, hϖ⟩ := hϖ
   rw [Ideal.submodule_span_eq] at hϖ
-  obtain ⟨J, ⟨e⟩, hJn, hr, hJ⟩ :=
-    exists_iso_Q_obj_mono_regularEndSMul_rightAcyclic_padicIntegers ℓ E f ϖ hϖ K n
+  have hJ := exists_iso_Q_obj_mono_regularEndSMul_rightAcyclic_padicIntegers ℓ E f ϖ hϖ K n
+  obtain ⟨J, ⟨e⟩, hJn, hr, hJ⟩ := hJ
   have hmem := hϖ ▸ Ideal.mem_span_singleton_self ϖ
   have w := padicIntegersRegularEnd_hom_comp_residueField X ℓ E ϖ hmem
   have hφ := shortExact_padicIntegersRegularEnd X ℓ E ϖ hϖ
@@ -213,8 +213,11 @@ theorem isIso_derivedUpperStarExtendScalarsPushHom_residueField_app
       Mod.hom_ext _ _ (lowerStar_map_regularEndSMul ℓ E ϖ f (J.X k))
     rw [← h]
     infer_instance
-  refine isIso_derivedUpperStarExtendScalarsPushHom_app_of_isStrictlyGE _ f K J e (n - 1) hJ
-    (fun k ↦ ?_) (fun k ↦ ?_) ?_ ?_
+  -- The conclusion differs from the goal only in proof arguments; at default transparency the
+  -- unifier unfolds the morphisms of the derived categories instead (minutes).
+  with_reducible
+    refine isIso_derivedUpperStarExtendScalarsPushHom_app_of_isStrictlyGE _ f K J e (n - 1) hJ
+      (fun k ↦ ?_) (fun k ↦ ?_) ?_ ?_
   · have := hr k
     exact rightAcyclic_lowerStar_of_comap ℓ E f _
       ((Mod.shortExact_regularEndSMul_extendUnit w hφ (J.X k)).rightAcyclic_X₃ (hJ k) (hJ k))

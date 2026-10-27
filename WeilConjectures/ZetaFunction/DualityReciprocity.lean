@@ -20,12 +20,12 @@ eigenvalues in degree `2d - i` with the `qᵈ / α` for the eigenvalues `α` in 
 `P_{2d-i}(q^{-d} T⁻¹) = (-1)^{bᵢ} T^{-bᵢ} Dᵢ⁻¹ Pᵢ(T)`,  `Dᵢ D_{2d-i} = q^{d bᵢ}`,
 
 and `d χ` is even, `χ = ∑ᵢ (-1)ⁱ bᵢ`: for odd `d` the middle pairing is alternating
-(blueprint `sk-prop-reciprocity`, `prop-duality-reciprocity`).
+(blueprint `det-prop-reciprocity`, `prop-duality-reciprocity`).
 
 ## Main statements
 
 - `AlgebraicGeometry.Scheme.duality_reciprocity`: blueprint `prop-duality-reciprocity`.
-- `AlgebraicGeometry.Scheme.reciprocity`: blueprint `sk-prop-reciprocity`.
+- `AlgebraicGeometry.Scheme.reciprocity`: blueprint `det-prop-reciprocity`.
 -/
 
 @[expose] public section
@@ -127,7 +127,7 @@ theorem duality_reciprocity (l : ℕ) [Fact l.Prime] [Fact (ringChar k₀ ≠ l)
   · rw [natDegree_eq_finrank_of_isIntegralFrobeniusFactor k₀ X (hP m) l, hm]
     exact even_finrank_cohomology_middle k₀ X d l hd
 
-/-- Blueprint `sk-prop-reciprocity` (duality reciprocity of the factors): for the integral
+/-- Blueprint `det-prop-reciprocity` (duality reciprocity of the factors): for the integral
 Frobenius factors `Pᵢ` of `X₀`, with `bᵢ = deg Pᵢ` and `Dᵢ = (-1)^{bᵢ} [T^{bᵢ}] Pᵢ`,
 
 `P_{2d-i}(q^{-d} T⁻¹) = (-1)^{bᵢ} T^{-bᵢ} Dᵢ⁻¹ Pᵢ(T)` and `Dᵢ D_{2d-i} = q^{d bᵢ}`,

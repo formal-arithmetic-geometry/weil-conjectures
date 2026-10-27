@@ -5,6 +5,7 @@ Authors: Claude
 -/
 module
 
+public import WeilConjectures.CategoryTheory.Monoidal.FullSubcategoryUnitor
 public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Subcategory
 public import WeilConjectures.PoincareDuality.ProjectionFormulaMonoidalOfCompactification
 
@@ -31,7 +32,10 @@ for an arbitrary compactification and specialised to `compactificationOverField 
 
 The underlying morphisms are first rewritten into the ambient derived categories with the
 `rfl`-lemmas `ProEtale.CondensedRing.boundedConstructibleLowerShriekOfCompactification_map_hom`
-and the like, so that the ambient statement applies syntactically.
+and the like, so that the ambient statement applies syntactically. The lemmas for `Rf_!^c` and the
+comparison maps of `Lf^*` are used with `rw`, not `dsimp`: left to definitional unfolding, these
+identifications made the kernel unfold the derived functors (minutes of kernel time and over 5 GB
+of memory).
 
 -/
 
@@ -63,6 +67,19 @@ variable {X Y : Over (Spec (.of k))}
   [QuasiCompact Y.hom] [IsSeparated Y.hom]
   (f : X ⟶ Y)
 
+/-- `Rf_!^c` on bounded constructible complexes is `Rf_!(c)` on underlying morphisms. -/
+lemma boundedConstructibleLowerShriekOfCompactification_map_hom (c : Compactification f.left)
+    {K K' : Dᵇc(X.left)⟦𝐐⟧} (φ : K ⟶ K') :
+    ((boundedConstructibleLowerShriekOfCompactification ℓ c).map φ).hom =
+      (Rf_!(c)⟦𝐐⟧).map φ.hom :=
+  rfl
+
+/-- The unit of the derived pullback on bounded constructible complexes is that of `Lf^*` on
+underlying objects. -/
+lemma boundedConstructibleUpperStar_ε_hom :
+    (ε (boundedConstructibleUpperStar 𝐐 ℓ f)).hom = ε L((f.left)^*⟦𝐐⟧) :=
+  rfl
+
 /-- The exceptional projection morphism of a compactification `c`, restricted to bounded
 constructible complexes, is unital. -/
 lemma boundedConstructibleExceptionalProjectionMorphismOfCompactification_unit
@@ -75,14 +92,13 @@ lemma boundedConstructibleExceptionalProjectionMorphismOfCompactification_unit
       (ρ_ _).hom ≫ (boundedConstructibleLowerShriekOfCompactification ℓ c).map
         ((ρ_ K).inv ≫ K ◁ ε (boundedConstructibleUpperStar 𝐐 ℓ f)) := by
   refine ObjectProperty.hom_ext (P := boundedConstructible _) ?_
+  dsimp only [ObjectProperty.FullSubcategory.comp_hom, ObjectProperty.homMk_hom,
+    ObjectProperty.rightUnitor_hom_hom]
+  rw [boundedConstructibleLowerShriekOfCompactification_map_hom ℓ f c]
+  dsimp only [ObjectProperty.FullSubcategory.comp_hom, ObjectProperty.whiskerLeft_hom,
+    ObjectProperty.rightUnitor_inv_hom]
+  rw [boundedConstructibleUpperStar_ε_hom]
   exact exceptionalProjectionMorphismOfCompactification_unit 𝐐 c K.obj
-
-/-- `Rf_!^c` on bounded constructible complexes is `Rf_!(c)` on underlying morphisms. -/
-lemma boundedConstructibleLowerShriekOfCompactification_map_hom (c : Compactification f.left)
-    {K K' : Dᵇc(X.left)⟦𝐐⟧} (φ : K ⟶ K') :
-    ((boundedConstructibleLowerShriekOfCompactification ℓ c).map φ).hom =
-      (Rf_!(c)⟦𝐐⟧).map φ.hom :=
-  rfl
 
 /-- `Rf_!^c` on bounded constructible complexes is `Rf_!(c)` on underlying objects. -/
 lemma boundedConstructibleLowerShriekOfCompactification_obj_obj (c : Compactification f.left)
@@ -124,11 +140,11 @@ lemma boundedConstructibleExceptionalProjectionMorphismOfCompactification_tensor
           ((α_ _ _ _).hom ≫ K ◁ μ (boundedConstructibleUpperStar 𝐐 ℓ f) B C) := by
   refine ObjectProperty.hom_ext (P := boundedConstructible _) ?_
   dsimp only [ObjectProperty.FullSubcategory.comp_hom, ObjectProperty.homMk_hom,
-    ObjectProperty.tensorObj_obj, ObjectProperty.whiskerLeft_hom, ObjectProperty.whiskerRight_hom,
-    ObjectProperty.associator_hom_hom, ObjectProperty.associator_inv_hom,
-    boundedConstructibleLowerShriekOfCompactification_map_hom,
-    boundedConstructibleLowerShriekOfCompactification_obj_obj, boundedConstructibleUpperStar_μ_hom,
-    boundedConstructibleUpperStar_obj_obj]
+    ObjectProperty.whiskerRight_hom, ObjectProperty.associator_inv_hom]
+  rw [boundedConstructibleLowerShriekOfCompactification_map_hom ℓ f c]
+  dsimp only [ObjectProperty.FullSubcategory.comp_hom, ObjectProperty.whiskerLeft_hom,
+    ObjectProperty.associator_hom_hom]
+  rw [boundedConstructibleUpperStar_μ_hom]
   exact exceptionalProjectionMorphismOfCompactification_tensor 𝐐 c K.obj B.obj C.obj
 
 /-- **Unitality of the exceptional projection morphism** on bounded constructible complexes, in

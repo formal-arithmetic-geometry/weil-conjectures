@@ -47,7 +47,7 @@ those `Z ⊆ X_T` such that `T ⟶ S` factors through `V` and `Z ⊆ U_T`:
   affine space over an affine base
   (`AlgebraicGeometry.isRepresentable_hilbertPresheaf_affineSpace`).
 - `AlgebraicGeometry.isRepresentable_hilbertPresheaf`: representability of `Hilb^d_{X/S}`
-  (blueprint `sk-thm-picard-hilb-general`, `lem-pc-hilb-representable`).
+  (blueprint `det-thm-picard-hilb-general`, `lem-pc-hilb-representable`).
 -/
 
 @[expose] public section
@@ -331,7 +331,7 @@ The proof glues the Hilbert schemes of the morphisms of affine schemes `U ⟶ V`
 `V ⊆ S` and `U ⊆ f⁻¹ V`, using the gluing criterion
 `AlgebraicGeometry.Scheme.LocalRepresentability.isRepresentable_of_isSheaf_over`.
 
-(blueprint: `sk-thm-picard-hilb-general`, `lem-pc-hilb-representable`) -/
+(blueprint: `det-thm-picard-hilb-general`, `lem-pc-hilb-representable`) -/
 theorem isRepresentable_hilbertPresheaf (f : X ⟶ S) [IsSeparated f] (d : ℕ)
     (hf : ∀ (s : S) (t : Finset (f.fiber s)), t.card ≤ d →
       ∃ U : X.affineOpens, ∀ x ∈ t, (f.fiberι s).base x ∈ U.1) :

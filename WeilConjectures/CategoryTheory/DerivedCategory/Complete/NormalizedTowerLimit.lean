@@ -18,8 +18,8 @@ levels `L_n ∈ D(J, A_n)` whose transitions `L_{n+1} ⟶ Res L_n` exhibit `L_n`
 base change `L_{n+1} ⊗ᴸ_{A_{n+1}} A_n`.
 
 For such a tower and its derived limit `K_R = R lim_n K_n` (the point of a homotopy limit cone,
-`CategoryTheory.Pretriangulated.IsHomotopyLimit`), this file proves the realization statement of
-blueprint `sk-prop-trace-adic` (i), apart from the cohomological range:
+`CategoryTheory.Pretriangulated.IsHomotopyLimit`), this file proves the realization statement, apart
+from the cohomological range:
 
 * `K_R ⊗ᴸ_R A_n ≅ K_n`, compatibly with the transitions and with the legs of the cone
   (`DerivedCategory.IsNormalizedTower.exists_derivedCompletionDiagram_iso`);
@@ -65,8 +65,7 @@ noncomputable abbrev levelRestrictScalarsCompIso {j n : ℕ} (h : j ≤ n) :
     (Ideal.Quotient.factor_comp_mk (Ideal.pow_le_pow_right h)).symm
 
 /-- A tower `K : ℕᵒᵖ ⥤ D(J, R)` is *normalized* with respect to the ideal `I` and levels
-`L_n ∈ D(J, A_n)` over the rings `A_n = R ⧸ Iⁿ` (blueprints `def-trf-adic-system` and
-`sk-prop-trace-adic`) if
+`L_n ∈ D(J, A_n)` over the rings `A_n = R ⧸ Iⁿ` if
 - `K_n` is `L_n` with scalars restricted to `R`;
 - the transition `K_{n+1} ⟶ K_n` is the restriction to `R` of a map
   `t_n : L_{n+1} ⟶ Res L_n` in `D(J, A_{n+1})` exhibiting `L_n` as the derived base change
@@ -181,10 +180,9 @@ lemma exists_iso_isNormalizedAdicTower :
   exact ⟨T, asIso α, hT⟩
 
 include hϖ hI hK in
-/-- Blueprint `sk-prop-trace-adic` (i), levelwise reduction: the realization
-`K_R = R lim_n K_n` of a normalized tower (the point of a homotopy limit cone `c`) reduces to the
-given levels, `K_R ⊗ᴸ_R R ⧸ Iⁿ ≅ K_n`, compatibly with the transitions, the legs `K_R ⟶ K_n` of
-`c` being the reduction maps followed by these isomorphisms. -/
+/-- Levelwise reduction: the realization `K_R = R lim_n K_n` of a normalized tower (the point of a
+homotopy limit cone `c`) reduces to the given levels, `K_R ⊗ᴸ_R R ⧸ Iⁿ ≅ K_n`, compatibly with the
+transitions, the legs `K_R ⟶ K_n` of `c` being the reduction maps followed by these isomorphisms. -/
 theorem exists_derivedCompletionDiagram_iso {c : Cone K} (hc : IsHomotopyLimit c) :
     ∃ e : derivedCompletionDiagram J I c.pt ≅ K, ∀ n : ℕ,
       c.π.app (op n) = (derivedCompletionCone J I c.pt).π.app (op n) ≫ e.hom.app (op n) := by
@@ -192,9 +190,8 @@ theorem exists_derivedCompletionDiagram_iso {c : Cone K} (hc : IsHomotopyLimit c
   exact exists_derivedCompletionDiagram_iso_of_iso_isNormalizedAdicTower hϖ hI hT E hc
 
 include hϖ hI hK in
-/-- Blueprint `sk-prop-trace-adic` (i), derived completeness: the realization
-`K_R = R lim_n K_n` of a normalized tower is derived complete, that is, it is the derived limit
-of its own reductions `K_R ⊗ᴸ_R R ⧸ Iⁿ`. -/
+/-- Derived completeness: the realization `K_R = R lim_n K_n` of a normalized tower is derived
+complete, that is, it is the derived limit of its own reductions `K_R ⊗ᴸ_R R ⧸ Iⁿ`. -/
 theorem derivedComplete {c : Cone K} (hc : IsHomotopyLimit c) : derivedComplete J I c.pt := by
   obtain ⟨T, E, hT⟩ := hK.exists_iso_isNormalizedAdicTower hϖ hI
   exact derivedComplete_of_iso_isNormalizedAdicTower hϖ hI hT E hc

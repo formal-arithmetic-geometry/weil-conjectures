@@ -29,7 +29,7 @@ Reference: Brian Conrad, *Deligne's notes on Nagata compactifications*, Theorem 
 ## Main results
 
 - `AlgebraicGeometry.exists_admissibleBlowup_quasiDomination_extends`: the statement above
-  (blueprint: `sk-thm-nagata-sketch-conrad`).
+  (blueprint: `thm-nagata-conrad-elimination`).
 
 -/
 
@@ -43,7 +43,7 @@ open CategoryTheory Limits
 
 namespace AlgebraicGeometry
 
-/-- Blueprint `sk-thm-nagata-sketch-conrad`: **extension of a partial section after an
+/-- Blueprint `thm-nagata-conrad-elimination`: **extension of a partial section after an
 admissible blow-up** (Conrad's Theorem 2.4).
 
 Let `X` be a quasi-compact, quasi-separated `S`-scheme and let `y : Y ⟶ S` be separated and of

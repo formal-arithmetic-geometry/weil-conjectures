@@ -18,8 +18,8 @@ an ultrametric norm; the case of the blueprint is a finite extension `E` of `ℚ
 `ℓ` prime to the characteristic of `k₀`. Following blueprint `def-weil-weil-sheaf-complex`,
 
 - a *constructible `E`-Weil sheaf* on `X` is a constructible `E`-adic sheaf `F` on the pro-étale
-  site of `X̄`, an object of `Sh_c(X̄, E)` (`def-weil-constructible-heart`,
-  `AlgebraicGeometry.ProEtale.DerivedCategory.fieldConstructibleHeart`), together with an
+  site of `X̄`, an object of `Sh_c(X̄, E)`
+  (`AlgebraicGeometry.ProEtale.DerivedCategory.fieldConstructibleHeart`), together with an
   isomorphism `θ : Fr_X^* F ≅ F` (`AlgebraicGeometry.FieldWeilSheaf`);
 - `D^b_{c,W}(X, E)` is the triangulated category obtained from complexes of such sheaves by
   inverting the equivariant quasi-isomorphisms (`AlgebraicGeometry.FieldWeilComplex`);

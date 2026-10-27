@@ -58,7 +58,7 @@ under base change by `AlgebraicGeometry.Scheme.Hom.finrank_of_isPullback`.
 - `AlgebraicGeometry.IsHilbertSubscheme.eq_of_le`: two points of `Hilb^d_{X/S}(T)` one of
   which contains the other are equal.
 - `AlgebraicGeometry.isSheaf_hilbertPresheaf`: `Hilb^d_{X/S}` is an fppf sheaf
-  (blueprint `sk-cor-picard-hilb-sheaf`), hence a Zariski sheaf
+  (blueprint `det-cor-picard-hilb-sheaf`), hence a Zariski sheaf
   (`AlgebraicGeometry.isSheaf_zariskiTopology_hilbertPresheaf`).
 -/
 
@@ -170,10 +170,10 @@ topology (`AlgebraicGeometry.isSheaf_zariskiTopology_hilbertPresheaf`).
 A covering sieve of `T` is in particular an fpqc covering of `T.left`, the base changes of `X_T`
 along its members are the `X_{T'}`, and a compatible family of points of `Hilb^d_{X/S}` is a
 descent datum of closed subschemes; it glues uniquely by
-`AlgebraicGeometry.isSheaf_fpqc_finiteLocallyFreeSubscheme` (blueprint `sk-thm-picard-descent`,
+`AlgebraicGeometry.isSheaf_fpqc_finiteLocallyFreeSubscheme` (blueprint `det-thm-picard-descent`,
 part (D2)).
 
-(blueprint: `sk-cor-picard-hilb-sheaf`, `lem-pc-hilb-sheaf`) -/
+(blueprint: `det-cor-picard-hilb-sheaf`, `lem-pc-hilb-sheaf`) -/
 theorem isSheaf_hilbertPresheaf (f : X ⟶ S) (d : ℕ) :
     Presheaf.IsSheaf (Scheme.fppfTopology.over S) (hilbertPresheaf f d) := by
   rw [isSheaf_iff_isSheaf_of_type]
@@ -241,7 +241,7 @@ theorem isSheaf_hilbertPresheaf (f : X ⟶ S) (d : ℕ) :
 /-- The Hilbert functor is a Zariski sheaf, since it is an fppf sheaf and Zariski coverings are
 fppf coverings.
 
-(blueprint: `sk-cor-picard-hilb-sheaf`, `rem-ptr-pc-fppf-site-5`) -/
+(blueprint: `det-cor-picard-hilb-sheaf`, `rem-ptr-pc-fppf-site-5`) -/
 lemma isSheaf_zariskiTopology_hilbertPresheaf (f : X ⟶ S) (d : ℕ) :
     Presheaf.IsSheaf (Scheme.zariskiTopology.over S) (hilbertPresheaf f d) := by
   have h := isSheaf_hilbertPresheaf f d
