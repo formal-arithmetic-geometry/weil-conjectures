@@ -1,0 +1,126 @@
+{
+ "id": "lem-sf-closed-reduction-comparison",
+ "kind": "statement",
+ "title": "Invertibility of the normalized closed reduction square",
+ "statement": "Fix a prime ell, a finite extension E/Q_ell and a closed immersion i:Z -> X. Use the completed and finite coefficient categories and specified strict reduction of [def-sf-integral-support-normalization-data]. For every normalized ordinary integral comparison C for i [lem-sf-integral-ordinary-recollement-realization], the natural transformation closedReduction l E i C, defined as C.pull followed by the actual strict reduction/pullback counit, is invertible on the entire ambient derived category. No completeness, constructibility, or finite-type condition is imposed on its input.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sf-localization/prop-sf-open-closed-triangle-all-stages.proof.md",
+  "place": "Integral support comparison, refined in steps 1, 2 and 4 of lem-sf-closed-support-normalization; Stacks 0941, 099N and 0A07."
+ },
+ "stmt_deps": [
+  "def-sf-integral-support-normalization-data",
+  "lem-sf-integral-ordinary-recollement-realization"
+ ],
+ "proof": [
+  {
+   "text": "Represent an arbitrary input by a K-flat complex with flat terms. The pull_model clause of C fixes the augmentation into the strict Roos complex: its projection adjunct is the actual quotient unit followed by the finite pullback unit, and its homotopy coordinate is zero. Thus it determines the entire comparison after localization.",
+   "uses": [
+    "lem-sf-integral-ordinary-recollement-realization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply strict derived reduction and its normalized reconstruction counit. On this representative the resulting square is the scalar-extension/pullback comparison. The coefficient inverse-image identifications commute with all quotient maps; exact immersion inverse image and the flat terms identify it with the finite pullback isomorphism at every index, compatibly with every transition.",
+   "uses": [
+    "def-trf-integral-comparison-sequence-systems",
+    "lem-weil-strict-roos-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The cone of the strict system map has zero evaluated cohomology at every index. System cohomology is computed levelwise, so that cone is acyclic and the strict map is invertible. Good-complex localization extends the assertion to all ambient objects, and objectwise invertibility gives the stated natural isomorphism. This uses conservativity for isomorphisms, never faithfulness on derived morphisms.",
+   "uses": [
+    "def-trf-integral-comparison-sequence-systems"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-trf-integral-comparison-sequence-systems",
+  "lem-sf-integral-ordinary-recollement-realization",
+  "lem-weil-strict-roos-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "P6",
+  "date": "2026-10-28",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sf-localization/prop-sf-open-closed-triangle-all-stages.proof.md",
+  "place": "Integral support comparison, refined in steps 1, 2 and 4 of lem-sf-closed-support-normalization; Stacks 0941, 099N and 0A07."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Derived reduction of the completed pullback along a closed immersion is isomorphic to levelwise pullback of the strict coefficient system; the right adjoint limit comparison preserves projections and shifts",
+   "results": "8 hits, all ordinary pullback preservation or scheme pullback comparisons; no strict coefficient reduction normalization.",
+   "date": "2026-10-28",
+   "verdict": "No match for these specified completed and finite coefficient functors."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"NatTrans.CommShift\", \"iso\"",
+   "results": "6 hits, including CommShift.of_iso_inv, of_iso_symm and of_isIso. These transport an already established shift square.",
+   "date": "2026-10-28",
+   "verdict": "Use the inverse-compatibility lemma in the parent; none proves the geometric strict comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "closedAlpha|closedSupportNormalization|closedReduction; Mathlib/CategoryTheory/Shift/CommShift.lean and Shift/Adjunction.lean",
+   "results": "msearch grep returned 0 hits. Local project search finds the assigned statement and definitions only. Mathlib supplies ofComp, ofComp_compatibility, shift_app_comm and adjunction-shift transport. Blueprint search finds 0 nodes matching closed support normalization.",
+   "date": "2026-10-28",
+   "verdict": "No duplicate theorem; general categorical assembly is available."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralClosedSupportNormalization",
+  "date": "2026-10-28",
+  "group": "P6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-sf-open-closed-triangle-all-stages",
+   "place": "Integral support comparison, refined in steps 1, 2 and 4 of lem-sf-closed-support-normalization; Stacks 0941, 099N and 0A07.",
+   "via": [
+    "lem-sf-closed-support-normalization",
+    "lem-sf-integral-support-functor-normalization",
+    "lem-sf-rational-localization-triangle-orthogonality"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-open-closed-triangle",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.IntegralClosedReductionComparison",
+  "file": "lean/Sheaf/Paper/IntegralClosedReductionComparison.lean",
+  "declaration": "WeilConjectures.IntegralSupportNormalization.closedReduction_isIso",
+  "statement": "theorem closedReduction_isIso {Z X : Scheme.{u}}\n    (i : Z ⟶ X) [IsClosedImmersion i] (C : SfOrdinaryIntegralComparison l E i) :\n    IsIso (closedReduction l E i C)",
+  "branch": "sheaf-dag",
+  "by": "P6",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P6",
+  "result": "pass",
+  "landing": "20261027T180728-L-3895944",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P6",
+  "result": "pass",
+  "landing": "20261027T180728-L-3895944",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

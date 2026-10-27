@@ -12,103 +12,72 @@
  ],
  "proof": [
   {
-   "text": "Use [lem-sf-integral-ordinary-recollement-realization] for the existing ordinary integral comparison closed, including its coefficient diagrams and normalized pull map. Its actual quotient counit gives closedReductionIso. Apply [lem-weil-pbc-proetale-ringed-open-closed]: the quasi-compact open complement makes completed module closed image exact, giving finite limits and colimits preservation.",
+   "text": "Obtain ordinary recollement R from sfIntegralOrdinaryRecollement_realization and take C=R.closed. Its ordinary right adjunction supplies finite limits; its kernel adjunction supplies finite colimits of completed module direct image. Install the normalized strict reduction-square isomorphism from lem-sf-closed-reduction-comparison.",
    "uses": [
     "lem-sf-integral-ordinary-recollement-realization",
-    "lem-weil-pbc-proetale-ringed-open-closed"
+    "lem-sf-closed-reduction-comparison"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sf-localization/prop-sf-open-closed-triangle-all-stages.proof.md",
-    "place": "Integral support operations, detailed step 1 above, refining the corresponding part of lem-sf-integral-support-functor-normalization."
-   }
+   "elementary": false
   },
   {
-   "text": "Let u_M be the actual quotient-tower completion unit. By [prop-weil-pbc-koszul-reconstruction], Koszul completeness is equivalent to invertibility of this unit. Apply [prop-weil-pbc-direct-image-limits] to closed image: its conclusion gives completeness of the image and the canonical direct-image/limit comparison. Scalar restriction and closed image both evaluate on the same fiber product, so they commute sectionwise and with all quotient transitions. Conjugating this strict reduction square by its specified adjunctions gives exactly closedLimit. Thus closedAlpha is the composite of ordinary image of u_M and that limit comparison. It is invertible on complete constructible inputs; its inverse defines di. Naturality and the finite projections give di_formula and closedProjection. The perfect projection formula in the cited comparison gives closedReductionComparison. The actual integral image here is the one of [def-weil-derived-direct-image].",
+   "text": "On a constructible input the actual reconstruction unit is invertible by the specified coefficient system model. closedAlpha is ordinary image of this unit followed by the isomorphism closedLimit. Thus it is invertible objectwise and naturally. Define di as the inverse. The normalization theorem gives its inverse projection formula and the shift square of di by inverse compatibility.",
    "uses": [
-    "prop-weil-pbc-koszul-reconstruction",
-    "prop-weil-pbc-direct-image-limits",
-    "def-weil-derived-direct-image"
+    "def-weil-system-operation-exchange-realization",
+    "lem-sf-closed-alpha-normalization"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sf-localization/prop-sf-open-closed-triangle-all-stages.proof.md",
-    "place": "Integral support operations, detailed step 2 above, refining the corresponding part of lem-sf-integral-support-functor-normalization."
-   }
+   "elementary": false
   },
   {
-   "text": "For each finite reduction use [lem-sf-proetale-constructible-origin] to write the input as inverse image of a bounded constructible etale complex. Exact site comparison [prop-weil-pbc-site-comparison-finite-level] preserves its cohomological interval. A closed immersion is finite, so [prop-weil-pbc-comparison-direct-image] compares closed derived image with etale closed image. The latter is exact and constructible by [lem-fin-closed-immersion]. Induction using truncation triangles identifies its cohomology with closed image of input cohomology. This preserves the same interval, including an empty interval. Together with the preceding completeness and reduction comparisons this proves closedInterval and closedComplete in the sense of [def-weil-derived-complete-integral-detailed].",
+   "text": "The existing completed_image_complete proof transfers completeness along C.diagrams to ordinary completed direct image, for arbitrary ambient complete inputs. For constructible K the existing directImage_roos gives a prescribed Roos presentation L. C.push_reduction writes the actual ordinary push/reduction map as scalar extension of an isomorphism followed by an isomorphism, hence it is invertible.",
    "uses": [
-    "lem-sf-proetale-constructible-origin",
-    "prop-weil-pbc-site-comparison-finite-level",
-    "prop-weil-pbc-comparison-direct-image",
-    "lem-fin-closed-immersion",
-    "def-weil-derived-complete-integral-detailed"
+    "lem-sf-complete-direct-image-reduction",
+    "lem-sf-integral-ordinary-recollement-realization",
+    "def-weil-system-operation-exchange-realization"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sf-localization/prop-sf-open-closed-triangle-all-stages.proof.md",
-    "place": "Integral support operations, detailed step 3 above, refining the corresponding part of lem-sf-integral-support-functor-normalization."
-   }
+   "elementary": false
   },
   {
-   "text": "Closed image and scalar restriction act degreewise and commute with shifted differentials. In the normalized Roos model [lem-weil-strict-roos-comparison], actual augmentation has quotient maps as first component and zero second component. The limit comparison of [prop-weil-pbc-direct-image-limits] is the derived comparison of the underived sectionwise limit equality and commutes with these maps and the same cone signs. Therefore closedAlpha and its inverse di commute with the prescribed shifts. Restricting gives closedShiftInclusion; the exact-module right-derived/termwise comparison has this same shift because its defining universal unit is the termwise unit.",
+   "text": "At every finite level use identified-coefficient open/closed localization to obtain exactness of the canonical constant-coefficient module direct image. Its exact-derived homology comparison preserves zero cohomology. Transport across the preceding actual reduction isomorphism; this preserves every same interval including a>b. No etale-origin or bounded-complex replacement is needed.",
    "uses": [
-    "lem-weil-strict-roos-comparison",
-    "prop-weil-pbc-direct-image-limits",
-    "def-weil-exact-derived-adjunction"
+    "lem-sfb-proetale-identified-open-closed",
+    "lem-sf-exact-functor-derived-triangulated"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sf-localization/prop-sf-open-closed-triangle-all-stages.proof.md",
-    "place": "Integral support operations, detailed step 4 above, refining the corresponding part of lem-sf-integral-support-functor-normalization."
-   }
+   "elementary": false
   },
   {
-   "text": "Exact ordinary closed image is triangulated with its termwise shift by [lem-sf-exact-functor-derived-triangulated]. Restrict to the full integral constructible subcategories using [lem-weil-integral-constructible-triangulated] and the preceding preservation statements. The di shift equation transports this to the actual closed functor with the specified shift, proving closedExact. No restricted adjunction is part of this obligation.",
+   "text": "Transport the ordinary right-derived shift through di using the fully faithful constructible inclusion and Mathlib ofComp. Compare ofComp_compatibility with the normalized ambient di shift square and cancel shifted di. Prove this calculation first for abstract full-subcategory lifts in liftedShiftInclusion, then specialize to the definition of directImageFunctor; this retains the exact object presentation in the stated inclusion equation without normalizing chosen total-limit objects. Right-derived triangulatedness restricts through the same iso. The universal-unit exact-derived comparison commutes with shifts by the existing rightExactIso_shift lemma; explicit whiskering gives closedTermwiseShift.",
    "uses": [
-    "lem-sf-exact-functor-derived-triangulated",
-    "lem-weil-integral-constructible-triangulated"
+    "lem-pur-compact-support-identity-calculus",
+    "lem-weil-integral-constructible-triangulated",
+    "lem-sf-closed-alpha-normalization"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sf-localization/prop-sf-open-closed-triangle-all-stages.proof.md",
-    "place": "Integral support operations, detailed step 5 above, refining the corresponding part of lem-sf-integral-support-functor-normalization."
-   }
+   "elementary": false
   },
   {
-   "text": "The ringed open-closed zero identity of [lem-weil-pbc-proetale-ringed-open-closed] holds degreewise, since the relevant fiber product is empty. The normalized ordinary pull comparison in closed, invertible on complete inputs by its pull_complete property, identifies constructible pullback with ordinary restriction; di identifies the actual closed image with ordinary image. Transport the zero identity along these isomorphisms to prove disjoint. No open extension or open-support normalization is needed.",
+   "text": "R.disjoint gives vanishing of the actual integral open pullback on C.pushFunctor. Transport along di.app M under integralDerivedPullback, then reflect the zero identity through the faithful constructible inclusion. This proves vanishing for the specified directImageFunctor, without changing any functor or adjunction.",
    "uses": [
-    "lem-weil-pbc-proetale-ringed-open-closed",
     "lem-sf-integral-ordinary-recollement-realization"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sf-localization/prop-sf-open-closed-triangle-all-stages.proof.md",
-    "place": "Integral support operations, detailed step 6 above, refining the corresponding part of lem-sf-integral-support-functor-normalization."
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "def-weil-derived-complete-integral-detailed",
-  "def-weil-derived-direct-image",
-  "def-weil-exact-derived-adjunction",
-  "lem-fin-closed-immersion",
+  "def-weil-system-operation-exchange-realization",
+  "lem-pur-compact-support-identity-calculus",
+  "lem-sf-closed-alpha-normalization",
+  "lem-sf-closed-reduction-comparison",
+  "lem-sf-complete-direct-image-reduction",
   "lem-sf-exact-functor-derived-triangulated",
   "lem-sf-integral-ordinary-recollement-realization",
-  "lem-sf-proetale-constructible-origin",
-  "lem-weil-integral-constructible-triangulated",
-  "lem-weil-pbc-proetale-ringed-open-closed",
-  "lem-weil-strict-roos-comparison",
-  "prop-weil-pbc-comparison-direct-image",
-  "prop-weil-pbc-direct-image-limits",
-  "prop-weil-pbc-koszul-reconstruction",
-  "prop-weil-pbc-site-comparison-finite-level"
+  "lem-sfb-proetale-identified-open-closed",
+  "lem-weil-integral-constructible-triangulated"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Tags 0GL1 and 0A07, with the existing normalized strict-system comparison lemmas."
+  "group": "P6",
+  "date": "2026-10-28",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sf-localization/prop-sf-open-closed-triangle-all-stages.proof.md",
+  "place": "Integral support comparison, refined in steps 1, 2 and 4 of lem-sf-closed-support-normalization; Stacks 0941, 099N and 0A07."
  },
  "mathlib_searches": [
   {
@@ -187,13 +156,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-25",
+  "date": "2026-10-27",
   "by": "L",
-  "reviewer": "C-a5f73",
-  "group": "D6",
-  "result": "fix",
-  "landing": "20261025T122724-L-1799577",
+  "reviewer": "COMPILER",
+  "group": "P6",
+  "result": "pass",
+  "landing": "20261027T180728-L-3895944",
   "kind": "interface",
-  "note": "independent cc review: delivered Data module vs live IntegralSupportFunctorNormalization.lean (incl. H4 a74c29ee): verbatim move; OpenSupport/ClosedSupport vs Normalization fields; 4 direct importers compiled against delivered modules"
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
