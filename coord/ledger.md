@@ -20155,3 +20155,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 22:20 L: returned deliver/C2/Sheaf.Paper.CompletedPullbackTowerRealizations (reviewer RETURN: (reviewer C-e7cfd, head e7cfd3162) the reviewer passed it, but the landing failed: NOT MERGED Sheaf.Paper.CompletedPullb)
 - 22:22 L: returned deliver/NB/lem-pur-rational-tensor-associator-scalar-square (reviewer RETURN: I read the item, all four new nodes, every cited statement, def-sf-finite-rational-derived-operations, def-weil-rational)
 - 22:27 L: merged deliver/A4/Sheaf.Paper.ExceptionalFiniteSupportRealization (stage 3; reviewer PASS; first push; landing 20261027T222753-L-2823508 (proof); batch 20261027T222751; modules 1; new nodes 0)
+- 22:30 L: returned deliver/A4/Sheaf.Paper.ExceptionalFiniteSupportRealization (reviewer RETURN: (the global build of 228eb961b6, still running) your landing 20261027T222753-L-2823508 fails to compile in Sheaf.Paper.E)
