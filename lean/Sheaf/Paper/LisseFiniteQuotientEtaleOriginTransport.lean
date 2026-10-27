@@ -33,9 +33,6 @@ finite constant local models gives the relative finite lisse statement.
 Source: Stacks Project, proetale.tex, Tag 09C6
 (blueprint: lem-weil-pbc-lisse-finite-quotient-etale-origin-transport).
 -/
-/- STATEMENT-DISPUTED: the core data only asserts lissity and vanishing of
-  `C.level`; it contains no comparison between `C.level` and the pullback of
-  `K`, so the displayed derived-category isomorphism does not follow. -/
 theorem lisse_finite_quotient_etale_origin_transport
     {X Y : Scheme.{u}} {g : Y ⟶ X}
     {A : Type (u + 1)} [CommRing A] {d : AdicCoefficientDatum A} {n : ℕ}

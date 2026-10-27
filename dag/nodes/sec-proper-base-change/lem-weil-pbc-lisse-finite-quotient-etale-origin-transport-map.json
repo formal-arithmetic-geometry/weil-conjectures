@@ -14,29 +14,53 @@
  ],
  "proof": [
   {
-   "text": "Restrict the core comparison to Z, compose with the supplied constant-model isomorphism, and pull the resulting morphism to W. The comparison-pullback coherence and the canonical finite-coefficient scalar comparison identify its source with constantAdicQuotientRealization and its target with the displayed pullback of K.",
+   "text": "Use the repaired core comparison to identify the pro-etale realization of its fixed-B-coefficient etale level with the actual fixed-coefficient pullback of K on V. Restrict the supplied hE along q:B to the completion quotient, using the etale inverse-image/scalar-restriction comparison and constantCommuteCompose. This gives a constant model with algebraic value q*E on Z. Comparison-pullback coherence, comparison of constants, inverse-image composition and the factorization W through Z transport this isomorphism to W. Pullback composition and the retained C.comparison identify its other side with the fixed-coefficient pullback of K along W.hom followed by g.",
    "uses": [
+    "lem-weil-pbc-lisse-finite-quotient-etale-origin-core",
     "lem-weil-pbc-constant-adic-quotient-scalar-comparison",
-    "lem-weil-pbc-comparison-pullback"
+    "lem-weil-pbc-comparison-pullback",
+    "def-sfb-finite-upper-star",
+    "def-sfb-finite-upper-star-comp"
    ],
    "elementary": false
   },
   {
-   "text": "The local finite lisse models supplied by C.refinementLisse detect monomorphisms and epimorphisms after a covering restriction. Exactness of restriction and the sheaf epimorphism/monomorphism criteria descend these two properties to the global comparison morphism.",
+   "text": "Identify the specified constantAdicQuotientRealization E in those same fixed coefficients. The ring-sheaf coefficient restriction/pullback isomorphism and fixedPullbackIso identify the fixed encoding of the actual inverse image with finiteQuotientOriginPullback. In constantAdicQuotientModules the restriction along the inverse coefficient isomorphism cancels the forward restriction by the counit of proEtaleScalarEquivalence. The already proved constantEncodingNatIso identifies constant intrinsic modules with constant module-valued sheaves. Derive these natural isomorphisms and use preservation of constants under pro-etale inverse image. The source is therefore the same constant sheaf complex with value q*E.",
    "uses": [
-    "lem-weil-pbc-comparison-pullback"
+    "lem-weil-pbc-finite-pullback-constructibility",
+    "lem-weil-pbc-adic-lisse-relative-restriction",
+    "lem-weil-pbc-constant-adic-quotient-scalar-comparison",
+    "def-weil-pbc-ring-restriction-pullback-comparison",
+    "def-weil-pbc-constant-adic-finite-diagram-data",
+    "lem-weil-pbc-completed-constant-sheaf-reduction"
    ],
    "elementary": false
+  },
+  {
+   "text": "Compose the source encoding isomorphism with the inverse target model isomorphism. Both ring-sheaf restriction along the finite-coefficient isomorphism and relativeRestriction are equivalences, so their derived composite is fully faithful. Lift the encoded isomorphism with FullyFaithful.preimageIso. Its hom is monic and epic by Mathlib. All private helpers are proved in the item; no local mono/epi detection assertion or split-off hole remains.",
+   "uses": [
+    "lem-weil-pbc-lisse-finite-quotient-etale-origin-core",
+    "lem-weil-pbc-finite-pullback-constructibility"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
+  "lem-weil-pbc-lisse-finite-quotient-etale-origin-core",
   "lem-weil-pbc-constant-adic-quotient-scalar-comparison",
-  "lem-weil-pbc-comparison-pullback"
+  "lem-weil-pbc-comparison-pullback",
+  "lem-weil-pbc-finite-pullback-constructibility",
+  "lem-weil-pbc-adic-lisse-relative-restriction",
+  "def-sfb-finite-upper-star",
+  "def-sfb-finite-upper-star-comp",
+  "def-weil-pbc-ring-restriction-pullback-comparison",
+  "def-weil-pbc-constant-adic-finite-diagram-data",
+  "lem-weil-pbc-completed-constant-sheaf-reduction"
  ],
  "proof_origin": {
-  "by": "worker M1",
+  "by": "N3 stage 3",
   "document": "literature/stacks-project/proetale.tex",
-  "place": "Tag 09C6, local comparison and finite-model detection"
+  "place": "Tags 09AL, 09B1 and 09C6; direct composition of the retained origin, constant-sheaf and inverse-image isomorphisms, followed by reflection through the coefficient equivalence"
  },
  "mathlib_searches": [
   {
@@ -105,11 +129,11 @@
  "reviewed_proof": {
   "date": "2026-10-27",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "M1",
-  "result": "pass",
-  "landing": "20261027T210132-L-1661897",
+  "reviewer": "C-29b15",
+  "group": "N3",
+  "result": "fix",
+  "landing": "20261027T234119-L-1770",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent cc review: TransportMap proof + Core comparison-field repair against nodes core/transport-map, change record, Stacks 09AL/09B1/09C6; delivered set compiled with Origin importer, axioms clean"
  }
 }

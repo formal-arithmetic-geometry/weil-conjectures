@@ -2,7 +2,7 @@
  "id": "lem-weil-pbc-lisse-finite-quotient-etale-origin-core",
  "kind": "statement",
  "title": "Core descent data for one finite quotient",
- "statement": "A Noetherian scheme X, an immersion g:Y→X, an adic coefficient datum d on A, a finite level n, a bounded derived object K, and relatively finite lisse inverse-image cohomology determine, for every etale V→Y, a descended level over the completion quotient on V whose cohomology is finite locally constant, whose cohomology vanishing follows that of K, and whose original relative lisse data persists on every proetale refinement.",
+ "statement": "A Noetherian scheme X, an immersion g:Y→X, an adic coefficient datum d on A, a finite level n, a bounded derived object K, and relatively finite lisse inverse-image cohomology determine, for every etale V→Y, a descended level over the completion quotient on V whose cohomology is finite locally constant, whose cohomology vanishing follows that of K, and whose original relative lisse data persists on every proetale refinement. The core retains an isomorphism from the pro-etale realization of its etale level, restricted along the actual completion-quotient ring map, to the fixed-coefficient realization of the pullback of K along V to Y to X. Thus the level is an origin of that specific complex, not merely a complex with the same vanishing bounds.",
  "source": {
   "document": "literature/stacks-project/proetale.tex",
   "place": "Tags 09AL and 09B1"
@@ -11,7 +11,11 @@
   "def-weil-pbc-adic-coefficient-datum",
   "def-weil-pbc-bounded-constructible-tower",
   "def-weil-derived-cohomology-sheaves",
-  "def-weil-proetale-constructible-sheaf"
+  "def-weil-proetale-constructible-sheaf",
+  "lem-weil-pbc-constant-adic-quotient-scalar-comparison",
+  "def-weil-pbc-site-comparison-morphism",
+  "def-sfb-finite-upper-star",
+  "def-weil-pbc-adic-lisse-module"
  ],
  "proof": [
   {
@@ -57,6 +61,15 @@
     "lem-weil-pbc-finite-pullback-constructibility"
    ],
    "elementary": false
+  },
+  {
+   "text": "Retain the actual derived-origin comparison. Restriction along q:B to C cancels the inverse ring-equivalence restriction T used in level. The counit of the ring-equivalence module restriction, applied sectionwise, gives T followed by restriction along q isomorphic to the identity on etale sheaves. Derive the scalar restriction/pullback square; it identifies the restricted level with V-etale pullback of L. Comparison/pullback coherence identifies its pro-etale realization with V-proetale pullback of the already supplied comparison nu*L isomorphic to P. Compose with inverse-image composition to obtain comparison to the fixed-coefficient pullback of K along V.hom followed by g. This is a composition of actual isomorphisms, with no existence choice of additional data.",
+   "uses": [
+    "lem-weil-pbc-constant-adic-quotient-scalar-comparison",
+    "lem-weil-pbc-comparison-pullback",
+    "def-sfb-finite-upper-star-comp"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
@@ -70,14 +83,15 @@
   "lem-weil-pbc-finite-locally-constant-module-values",
   "lemma-constructible-pullback-locally-constant",
   "lemma-constructible-pullback-finite",
-  "lem-weil-pbc-comparison-pullback"
+  "lem-weil-pbc-comparison-pullback",
+  "def-sfb-finite-upper-star-comp"
  ],
  "proof_origin": {
-  "by": "worker K4",
+  "by": "worker K4; N3 stage 3 (comparison field)",
   "document": "literature/stacks-project/proetale.tex",
-  "place": "Tags 09AL and 09B1; bounded constructible descent and exact coefficient/pullback comparisons",
+  "place": "Tags 09AL and 09B1; bounded constructible descent and exact coefficient/pullback comparisons. N3: Tags 09AL, 09B1 and 09C6; retain the derived origin isomorphism already constructed before scalar transport and restriction to V",
   "date": "2026-10-28",
-  "note": "Lean proof reuses the already proved origin_boundedConstructible_of_homology and quotient_map_bijective helpers with proof-only import all. Private local helpers supply the derived comparison square and finite-model scalar restriction. No statement, structure field or public import changes."
+  "note": "K4: Lean proof reuses the already proved origin_boundedConstructible_of_homology and quotient_map_bijective helpers with proof-only import all; private local helpers supply the derived comparison square and finite-model scalar restriction. N3 (change record N3-finite-quotient-origin-comparison): added the comparison field and its constructor branch."
  },
  "mathlib_searches": [
   {
@@ -127,12 +141,17 @@
   "declaration": "AlgebraicGeometry.Scheme.lisse_finite_quotient_etale_origin_core",
   "declarations": [
    "AlgebraicGeometry.Scheme.LisseFiniteQuotientEtaleOriginCore",
-   "AlgebraicGeometry.Scheme.lisse_finite_quotient_etale_origin_core"
+   "AlgebraicGeometry.Scheme.lisse_finite_quotient_etale_origin_core",
+   "AlgebraicGeometry.Scheme.finiteQuotientOriginEncoding",
+   "AlgebraicGeometry.Scheme.finiteQuotientOriginEncoding_additive",
+   "AlgebraicGeometry.Scheme.finiteQuotientOriginEncoding_equivalence",
+   "AlgebraicGeometry.Scheme.finiteQuotientOriginPullback"
   ],
   "statement": "theorem lisse_finite_quotient_etale_origin_core\n    (X Y : Scheme.{u}) [IsNoetherian X] (g : Y ⟶ X) [IsImmersion g]\n    {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A) (n : ℕ)\n    (K : DerivedCategory (pbcModules X ((pbcAdicRings X d).obj (op n))))\n    (hbounded : ∃ a b : ℤ, ∀ q : ℤ, (q < a ∨ b < q) →\n      IsZero ((DerivedCategory.homologyFunctor _ q).obj K))\n    (hlisse : ∀ q : ℤ,\n      IsRelativelyFiniteLisseModule g (A ⧸ d.ideal ^ (n + 1))\n        ((pbcRestrict ((adicTowerInverseImage g).map\n          (pbcLevelConstantComparison X d n).hom)).obj\n            ((DerivedCategory.homologyFunctor _ q).obj\n              ((adicTowerPullback g ((pbcAdicRings X d).obj (op n))).obj K))))\n    (V : Y.Etale) :\n    Nonempty (LisseFiniteQuotientEtaleOriginCore X Y g d n K V)",
   "branch": "sheaf-dag",
   "by": "Q3",
-  "date": "2026-10-27"
+  "date": "2026-10-27",
+  "note": "N3 repair: comparison is retained in the core record. finiteQuotientOriginEncoding is a concrete public API for the existing fixed-scalar encoding (definitionally the previously proved private scalarRestriction); finiteQuotientOriginPullback names its composite with restriction and inverse image. Its equivalence proof reuses the already proved encoding result. The existing constructor proves every field without new holes."
  },
  "reviewed": {
   "date": "2026-10-27",
@@ -147,11 +166,90 @@
  "reviewed_proof": {
   "date": "2026-10-27",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "K4",
-  "result": "pass",
-  "landing": "20261027T210125-L-1660232",
+  "reviewer": "C-29b15",
+  "group": "N3",
+  "result": "fix",
+  "landing": "20261027T234119-L-1770",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent cc review: TransportMap proof + Core comparison-field repair against nodes core/transport-map, change record, Stacks 09AL/09B1/09C6; delivered set compiled with Origin importer, axioms clean"
+ },
+ "statement_change": {
+  "date": "2026-10-28",
+  "by": "N3 stage 2",
+  "old_statement": "A Noetherian scheme X, an immersion g:Y→X, an adic coefficient datum d on A, a finite level n, a bounded derived object K, and relatively finite lisse inverse-image cohomology determine, for every etale V→Y, a descended level over the completion quotient on V whose cohomology is finite locally constant, whose cohomology vanishing follows that of K, and whose original relative lisse data persists on every proetale refinement.",
+  "what": "The old core discarded its comparison to K. For a nonzero bounded constant K on a nonempty point, level=0 still satisfies the lissity, vanishing, and refinementLisse fields (the latter concerns only K). Taking E=0 and identity charts would then falsely force 0 isomorphic to the nonzero pullback of K. Retain the actual comparison obtained from the descended complex L; the existing constructor proves the added field by canonical isomorphisms. No target declaration or final origin definition changes. This statement_change uses the schema required by the stage-3 definition-repair rules.",
+  "source": {
+   "document": "literature/stacks-project/proetale.tex",
+   "place": "Tags 09AL (compare-constructible-derived), 09B1 (compare-derived), and 09C6 (connected-adic-lisse), retaining K_n = epsilon^(-1)L_n"
+  },
+  "citers": [
+   {
+    "id": "lem-weil-pbc-lisse-finite-quotient-etale-origin-transport-map",
+    "holds": true,
+    "note": "The retained comparison is exactly the missing hypothesis of the old proof plan; the delivered proof now composes and reflects isomorphisms."
+   },
+   {
+    "id": "lem-weil-pbc-lisse-finite-quotient-etale-origin-transport",
+    "holds": true,
+    "note": "The unchanged transport theorem is proved by the delivered monic-and-epic comparison; its obsolete dispute marker is removed."
+   },
+   {
+    "id": "lem-weil-pbc-lisse-finite-quotient-etale-origin",
+    "holds": true,
+    "note": "The existing core constructor constructs the stronger record, and the final origin copies its original fields and applies the unchanged transport theorem."
+   }
+  ],
+  "old_stmt_deps": [
+   "def-weil-pbc-adic-coefficient-datum",
+   "def-weil-pbc-bounded-constructible-tower",
+   "def-weil-derived-cohomology-sheaves",
+   "def-weil-proetale-constructible-sheaf"
+  ],
+  "old_proof": [
+   {
+    "text": "Put B=A/I^(n+1). Use the coefficient-restriction/pullback square, the constant-ring module equivalence and exact derived homology comparison to identify the given relative lisse cohomology with the cohomology of P=g* of the fixed-B-coefficient realization of K. The local fixedPullbackIso and fixedHomologyIso are constructed by uniqueness of left adjoints and derived functor composition. Exactness carries every cohomology vanishing of K to P, so P is bounded. The finite local models make every H^q(P) constructible using the identity stratification.",
+    "uses": [
+     "lem-weil-pbc-finite-pullback-constructibility",
+     "lem-weil-pbc-ring-sheaf-change-adjunction",
+     "lem-weil-pbc-proetale-constant-module-constructibility"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "For each q, descend the constructible sheaf H^q(P) by the fixed-module constructible-origin theorem. Apply the already proved private origin_boundedConstructible_of_homology helper of FiniteCoefficientDerivedOriginPresentation: its finite truncation and triangulated essential-image argument produces an etale complex L with nu* L isomorphic to P. This uses that existing proved helper directly, without constructing an additional finite-coefficient presentation.",
+    "uses": [
+     "lem-weil-pbc-fixed-module-constructible-origin",
+     "lem-weil-pbc-finite-coefficient-derived-origin-presentation"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "The homology comparison identifies nu* H^q(L) with H^q(P). Reflect finite local constancy with isFiniteLocallyConstantSheaf_of_comparison_finite_models. Faithful exact comparison reflects the zero homology obtained from each zero H^q(K), proving the required degreewise vanishing for L.",
+    "uses": [
+     "lem-weil-pbc-comparison-finite-local-constancy-reflection"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "Use the already proved quotient_map_bijective helper of ConstantAdicQuotientScalarComparison to construct the ring equivalence B with the completion quotient C. Restrict scalars along its inverse and pull L back along V to define level. The scalar_lisse helper keeps a finite-value trivializing cover and restricts each finite model along this ring map; finite_locally_constant_module_values_iff proves finite local constancy. Etale pullback preserves it. Exactness preserves the previously obtained degreewise vanishing.",
+    "uses": [
+     "lem-weil-pbc-constant-adic-quotient-scalar-comparison",
+     "lem-weil-pbc-finite-locally-constant-module-values",
+     "lemma-constructible-pullback-locally-constant",
+     "lemma-constructible-pullback-finite"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "For every refinement W, pull each finite locally constant H^q(L) along W.hom on the etale site, then apply comparison. The comparison/pullback isomorphism and L realization isomorphism give finite local models for W.hom* H^q(P). Exact homology comparison and pullback composition identify these with the fixed-coefficient realization of the original pullback of K along W.hom followed by g. The same fixedHomologyIso and relative/fixed finite-model equivalences give precisely refinementLisse. This argument does not require the arrow from W to V beyond its supplied type.",
+    "uses": [
+     "lem-weil-pbc-comparison-pullback",
+     "lemma-constructible-pullback-locally-constant",
+     "lemma-constructible-pullback-finite",
+     "lem-weil-pbc-finite-pullback-constructibility"
+    ],
+    "elementary": false
+   }
+  ]
  }
 }
