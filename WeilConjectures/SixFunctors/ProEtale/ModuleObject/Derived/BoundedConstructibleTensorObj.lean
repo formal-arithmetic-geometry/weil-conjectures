@@ -115,8 +115,8 @@ variable (Λ) in
 /-- The hypotheses on the coefficient ring `Λ` used by the noetherian induction proving that the
 bounded constructible complexes are stable under `⊗ᴸ`: on schemes with noetherian underlying
 space, the bounded constructible complexes form a triangulated subcategory, and `A ⊗ᴸ L` is
-bounded constructible for `A` bounded with pro-étale locally finitely presented (lisse)
-cohomology sheaves and `L` bounded constructible. -/
+bounded constructible for `A` and `L` bounded with pro-étale locally finitely presented (lisse)
+cohomology sheaves. -/
 structure LisseTensorHypotheses : Prop where
   isTriangulated (Z : Scheme.{u}) [TopologicalSpace.NoetherianSpace Z] :
     (boundedConstructible (condensedRingObj Λ Z)).IsTriangulated
@@ -126,7 +126,9 @@ structure LisseTensorHypotheses : Prop where
     (hA : DerivedCategory.TStructure.t.bounded A)
     (hA' : ∀ n, IsLocallyFinitelyPresented (condensedRingObj Λ Z)
       ((DerivedCategory.homologyFunctor _ n).obj A))
-    (hL : boundedConstructible (condensedRingObj Λ Z) L) :
+    (hL : DerivedCategory.TStructure.t.bounded L)
+    (hL' : ∀ n, IsLocallyFinitelyPresented (condensedRingObj Λ Z)
+      ((DerivedCategory.homologyFunctor _ n).obj L)) :
     boundedConstructible (condensedRingObj Λ Z) (A ⊗ L)
 
 /-- If the locally finitely presented module objects over `Λ` are locally free, the hypotheses
