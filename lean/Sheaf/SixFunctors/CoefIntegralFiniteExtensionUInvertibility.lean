@@ -1,0 +1,28 @@
+module
+public import Sheaf.SixFunctors.CoefIntegralFiniteExtensionCore
+/-! Auxiliary reduction for dualizing invertibility.
+Source: current blueprint, lem-coef-integral-finite-extension.proof.md, paragraphs 2-3
+(blueprint: lem-sf-integral-finite-extension-invertibility). -/
+@[expose] public noncomputable section
+set_option autoImplicit false
+universe u
+open CategoryTheory AlgebraicGeometry AlgebraicGeometry.Scheme
+namespace WeilConjectures.IntegralFiniteExtension
+variable (l : ℕ) [Fact l.Prime]
+  (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
+  (L : Type u) [Field L] [Algebra (Padic l) L] [FiniteDimensional (Padic l) L]
+  (ι : E →ₐ[Padic l] L) (X : Scheme.{u})
+  (D : FiniteFieldDatum.{u}) (hl : l ≠ D.p)
+  [X.Over (Spec (.of D.k))]
+  [LocallyOfFiniteType (X ↘ Spec (.of D.k))]
+  [QuasiCompact (X ↘ Spec (.of D.k))] [IsSeparated (X ↘ Spec (.of D.k))]
+  (wE : DualizingDatum l X D hl E) (wL : DualizingDatum l X D hl L)
+/-- The canonical finite-extension dualizing comparison is invertible.
+Source: finite-level counit invertibility, normalized DVR effectivity, and coherent
+reduction comparison identify the total-limit map with `u`.
+(blueprint: lem-sf-integral-finite-extension-u-invertibility)
+-/
+theorem comparison_invertibility_u :
+    IsIso (u l E L ι X D hl wE wL) := by
+  sorry
+end WeilConjectures.IntegralFiniteExtension

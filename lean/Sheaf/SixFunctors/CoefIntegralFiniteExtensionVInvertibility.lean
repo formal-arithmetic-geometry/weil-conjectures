@@ -1,0 +1,29 @@
+module
+public import Sheaf.SixFunctors.CoefIntegralFiniteExtensionCore
+/-! Auxiliary reduction for evaluation invertibility.
+Source: current blueprint, lem-coef-integral-finite-extension.proof.md, paragraphs 4-5
+(blueprint: lem-sf-integral-finite-extension-invertibility). -/
+@[expose] public noncomputable section
+set_option autoImplicit false
+universe u
+open CategoryTheory AlgebraicGeometry AlgebraicGeometry.Scheme
+namespace WeilConjectures.IntegralFiniteExtension
+variable (l : ℕ) [Fact l.Prime]
+  (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
+  (L : Type u) [Field L] [Algebra (Padic l) L] [FiniteDimensional (Padic l) L]
+  (ι : E →ₐ[Padic l] L) (X : Scheme.{u})
+  (a : IntegralHom.TensorPresentation.{u, u} X
+    (completedIntegralCommRingSheafUnrestricted l E X))
+  (b : IntegralHom.TensorPresentation.{u, u} X
+    (completedIntegralCommRingSheafUnrestricted l L X))
+  (K M : IntegralVerdier.Ambient l E X)
+  (hK : IsSfDerivedComplete l E X K) (hM : IsSfDerivedComplete l E X M)
+/-- The evaluation-defined finite-extension comparison is invertible on complete inputs.
+Source: finite-free basis computation of the evaluation transpose, followed by
+conjugation with the completion comparisons.
+(blueprint: lem-sf-integral-finite-extension-v-invertibility)
+-/
+theorem comparison_invertibility_v :
+    IsIso (v l E L ι X a b K M hK hM) := by
+  sorry
+end WeilConjectures.IntegralFiniteExtension
