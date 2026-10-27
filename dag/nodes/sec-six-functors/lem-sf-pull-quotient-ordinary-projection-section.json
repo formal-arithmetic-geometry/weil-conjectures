@@ -16,26 +16,49 @@
  ],
  "proof": [
   {
-   "text": "Evaluate the conjugate ordinary adjunction unit at degree i and section V. Use the ordinary limit projection equation, the inverse-image and reduction evaluation normalizations, and p.generators to identify both sides with the same finite pullback adjunction unit.",
+   "text": "Apply CategoryTheory.unit_conjugateEquiv to the two composite ordinary adjunctions. The definition of OrdinaryLimitModel.reductionPull identifies its right-adjoint conjugate with a.comparison. Evaluate the resulting equality on a section of P.X i after the completed-ring pullback unit, then apply a.projections at the finite level n.",
    "uses": [
     "def-sf-integral-system-canonical-bridge",
-    "def-sf-pull-completion-comparison",
-    "def-pur-completed-pullback-tower-realizations",
-    "def-pur-integral-derived-operations"
+    "def-pur-completed-pullback-tower-core"
    ],
-   "elementary": false
+   "elementary": true
+  },
+  {
+   "text": "Naturality of limit.π and the restriction/evaluation comparison moves the sequence pullback unit through the finite projection. The chosen reduction-evaluation and inverse-image-evaluation isomorphisms satisfy their stated adjunction-unit equations. Cancel the inverse evaluation maps and use naturality of the finite pullback unit. The projected mate sends the completed pullback unit of x to the finite pullback unit of 1 tensor x.",
+   "uses": [
+    "def-pur-completed-pullback-tower-core",
+    "lem-pur-integral-operations-well-defined"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The normalization of IntegralOnSlice.augmentation sends the pulled-back unit of x to its quotient generator. Apply p.generators: its image under p.tower is the same finite pullback unit of 1 tensor x. Injectivity of the completed-ring pullback adjunction Hom equivalence and sectionwise extensionality give equality of the two module maps, not merely equality on unit sections.",
+   "uses": [
+    "def-sf-pull-completion-comparison",
+    "def-pur-integral-derived-operations",
+    "lem-pur-integral-operations-well-defined"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Use the prescribed finite component of pullbackTensorPullbackTower to replace the composite restriction/evaluation and inverse finite comparisons. The complex-composition comparison is the identity in each degree. Evaluate the equality of module maps at the original arbitrary pro-etale object V and section x.",
+   "uses": [
+    "def-pur-completed-pullback-tower-core"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
   "def-sf-integral-system-canonical-bridge",
+  "def-pur-completed-pullback-tower-core",
+  "lem-pur-integral-operations-well-defined",
   "def-sf-pull-completion-comparison",
-  "def-pur-completed-pullback-tower-realizations",
   "def-pur-integral-derived-operations"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-compatibility/fix-prop-coherence.proof.md",
-  "place": "Ordinary projected-section calculation."
+  "place": "Sectionwise ordinary projection calculation; formalized from the composite adjunction unit identity, the finite evaluation normalizations, and the prescribed pull-tower generator equation by M5."
  },
  "mathlib_searches": [],
  "mathlib_match": null,
@@ -81,9 +104,9 @@
   "date": "2026-10-27",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "Z7",
+  "group": "M5",
   "result": "pass",
-  "landing": "20261027T181025-L-3922759",
+  "landing": "20261027T210139-L-1663059",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
