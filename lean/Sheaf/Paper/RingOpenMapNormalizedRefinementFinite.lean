@@ -6,6 +6,9 @@ module
 
 public import Sheaf.Paper.ConstructibleExceptionalCoefficientAssemblyData
 public import Sheaf.Paper.RefinementOpenRestriction
+import Sheaf.Paper.FiniteRingRefinementCoordinatesCore
+import Sheaf.Paper.FiniteRingConstructibleDerivedOrigin
+import Sheaf.AlgebraicGeometry.ProEtaleConstantRingPullbackComparison
 
 /-! # Finite coefficient normalized refinement comparisons -/
 
@@ -61,6 +64,47 @@ theorem exists_normalized_refinement_iso_finite
         (PurCompactSupport.openDerivedAdjunction
           ((RingStage.finite E n).coefficients l) c.i).unit.app
           ((RingStage.inclusion.{u, v} l Ω X (RingStage.finite E n)).obj K) := by
-  sorry
+  classical
+  by_cases hchar : l = D.p
+  · exact (hl hchar).elim
+  obtain ⟨m, hm⟩ := Nat.exists_eq_succ_of_ne_zero n.ne_zero
+  have hn : n = ⟨m + 1, Nat.succ_pos m⟩ := Subtype.ext hm
+  subst n
+  let A := Padic.coefficientExtensionRing l E.carrier (m + 1)
+  let : Finite A := Padic.finite_coefficientExtensionRing l E.carrier (m + 1)
+    (Nat.succ_pos m)
+  have hK : intrinsicFiniteTorsionConstructible l E.carrier (m + 1)
+      (Nat.succ_pos m) X K.obj := K.property.1
+  obtain ⟨a, ha⟩ := hK.1.bddBelow
+  obtain ⟨b, hb⟩ := hK.1.bddAbove
+  have hv : ∀ i : ℤ, (i < min a b ∨ b < i) →
+      CategoryTheory.Limits.IsZero ((DerivedCategory.homologyFunctor _ i).obj K.obj) := by
+    intro i hi
+    by_contra hz
+    rcases hi with hi | hi
+    · exact (not_lt_of_ge (ha hz)) (lt_of_lt_of_le hi (min_le_left _ _))
+    · exact (not_lt_of_ge (hb hz)) hi
+  obtain ⟨L, ⟨eL⟩⟩ := ((finiteRing_constructibleDerived_origin X A).2.2.1 K.obj).mpr
+    ⟨hK.2, min a b, b, min_le_right _ _, hv⟩
+  obtain ⟨c₀, d₀, _, hvan⟩ := L.property.2
+  let LP : DerivedCategory.Plus
+      (Sheaf X.smallEtaleTopology (ModuleCat.{max u v + 1} (ULift.{max u v + 1} A))) :=
+    ⟨L.obj, ⟨c₀, (DerivedCategory.isGE_iff L.obj c₀).2
+      (fun i hi ↦ hvan i (Or.inl hi))⟩⟩
+  let O : FrobeniusExchange.CompactOrigin A X :=
+    { K := K.obj
+      L := LP
+      alpha := eL }
+  have hg : (PurCompactSupport.finite l E.carrier (m + 1) (Nat.succ_pos m)).pull
+      (r.hom ≫ d.g) = proEtaleRingCompositeCoefficients r.hom d.g
+        ((PurCompactSupport.finite l E.carrier (m + 1) (Nat.succ_pos m)).ring Y)
+        ((PurCompactSupport.finite l E.carrier (m + 1) (Nat.succ_pos m)).ring d.Z)
+        ((PurCompactSupport.finite l E.carrier (m + 1) (Nat.succ_pos m)).ring c.Z)
+        ((PurCompactSupport.finite l E.carrier (m + 1) (Nat.succ_pos m)).pull d.g)
+        ((PurCompactSupport.finite l E.carrier (m + 1) (Nat.succ_pos m)).pull r.hom) :=
+    (proEtaleConstantRingCompositeCoefficients_eq r.hom d.g A).symm
+  obtain ⟨ε, hε, _⟩ := finite_ring_refinement_coordinates_canonical
+    l E.carrier m r O hi hg
+  exact ⟨ε, hε⟩
 
 end WeilConjectures.ConstructibleExceptionalCoefficients

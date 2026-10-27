@@ -20264,3 +20264,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 23:39 L: merged deliver/F4/Sheaf.Paper.SmoothExchangeScalarCompatibility (stage 3; reviewer PASS; first push; landing 20261027T233932-L-4138541 (interface); batch 20261027T233735; modules 1; new nodes 0)
 - 23:39 L: merged deliver/F5/Sheaf.Paper.ExceptionalRingTransportCoreLaws (stage 3; reviewer PASS; first push; landing 20261027T233933-L-4138789 (interface); batch 20261027T233735; modules 4; new nodes 3)
 - 23:39 L: merged deliver/F6/Sheaf.Paper.PodReindexingReductionTensorSquare (stage 3; reviewer PASS; first push; landing 20261027T233934-L-4138968 (interface); batch 20261027T233735; modules 2; new nodes 1)
+- 23:39 L: merged deliver/F7/Sheaf.Paper.RingOpenMapNormalizedRefinementFinite (stage 3; reviewer PASS; first push; landing 20261027T233936-L-4139153 (proof); batch 20261027T233735; modules 1; new nodes 0)
