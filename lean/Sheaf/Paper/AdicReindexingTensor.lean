@@ -6,6 +6,8 @@ Authors: SHEAF group B9
 module
 
 public import Sheaf.Paper.AdicRealizationFamilyData
+import Sheaf.Paper.AdicReindexingTensorCompatibility
+import Sheaf.Paper.AdicReindexingUnitCompatibility
 
 /-! # Tensor and unit compatibility of normalized reindexing
 
@@ -75,6 +77,12 @@ theorem normalized_reindexing_tensor
       (ordinary l T.base.left (C.data T).realization).map
         (C.unit_spec T U g).exists.choose.hom =
     (pullUnit l T.base.left g.hom (C.pullTensor T U g)).hom ≫ (C.data T).tensor.unit.hom) := by
-  sorry
+  constructor
+  · intro T U g M N
+    exact normalized_reindexing_tensor_compatibility l D C T U g
+      (h_integral_normalization T U g) M N
+  · intro T U g
+    exact normalized_reindexing_unit_compatibility l D C T U g
+      (h_integral_normalization T U g)
 
 end WeilConjectures.AdicQbarRealization

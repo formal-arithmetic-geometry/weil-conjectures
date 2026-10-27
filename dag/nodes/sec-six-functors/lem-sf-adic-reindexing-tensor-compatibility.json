@@ -1,0 +1,124 @@
+{
+ "id": "lem-sf-adic-reindexing-tensor-compatibility",
+ "kind": "statement",
+ "title": "Tensor square for a fixed normalized realization comparison",
+ "statement": "Fix a prime l, a finite-field datum D, a FamilyCore C, geometric spaces T,U over D, and a scheme isomorphism g:T.base.left ≅ U.base.left [def-sf-adic-realization-isomorphism-data]. Assume integralRealizationAgreement for C.comparison T U g at every finite coefficient index E, using C.integral T U g E and C.ring T U g. No normalization at any other scheme isomorphism is assumed. Put X=T.base.left, Y=U.base.left, J_X=ordinary(l,X,(C.data T).realization), J_Y=ordinary(l,Y,(C.data U).realization), P=commonStageDerivedPullback(l,PadicAlgCl(l),g.hom), G=derivedPull(l,X,g.hom,C.ring T U g), a=C.comparison T U g, and V=C.pullTensor T U g. Use the invertibility instances from C.data. For every pair M,N in generalAlgebraicallyClosedConstructibleCategory(l,PadicAlgCl(l),Y), write t_Y=(C.data U).tensor.tensor.hom, t_X=(C.data T).tensor.tensor.hom, B=(C.data T).tensor.closed.tensor, T_Y=commonStageDerivedTensor(l,PadicAlgCl(l),Y), and nu=canonicalCommonStagePullbackTensor(l,PadicAlgCl(l),g.hom,M,N). Then G.map(t_Y.app(M,N)) ≫ a.inv.app(T_Y.obj(M,N)) ≫ J_X.map(nu.hom) = V.tensor.hom.app(J_Y.obj M,J_Y.obj N) ≫ B.map(Prod.mkHom(a.inv.app M)(a.inv.app N)) ≫ t_X.app(P.obj M,P.obj N). This is only the tensor square; it asserts no coefficient-unit, identity, composition or Hom law.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Proposition 6.8.14 and Remark 6.8.15, printed pp. 61-62. Also literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf, Lemma 7.9. Precise native tensor/unit normalization is the agent-written calculation from the parent node, not a verbatim assertion of either source."
+ },
+ "stmt_deps": [
+  "def-sf-adic-realization-isomorphism-data"
+ ],
+ "proof": [
+  {
+   "text": "Represent M,N at the compositum of their coefficient fields. Choose integral constructible representatives and the flat-term K-flat models provided by the finite normalization data. Substitute integralRealizationAgreement, finiteTensorAgreement, finiteRepresentative and reindexTensorRepresentative. These express every arrow in the square in the same ordinary total-tensor and quotient-completion models.",
+   "uses": [
+    "def-sf-adic-realization-isomorphism-data",
+    "lem-fix-constructible-tensor-completion"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Evaluate both cochain routes on each homogeneous pure tensor. finiteBalanceSections and reindexTensorPure give the same product of scalar factors and the same total-tensor generator. Tensor balancing extends this equality to every section. Cochain pullback tensor coherence supplies the signed differential and quotient-transition identities. The entire quotient-completion map has the same quotient-coordinate values and zero shifted coordinate on both sides; the normalized completion comparison therefore preserves this equality.",
+   "uses": [
+    "lem-pur-cochain-pullback-tensor-coherence",
+    "lem-fix-constructible-tensor-completion"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the K-flat representative isomorphisms and invert the completion comparison on constructible tensors. Pass through raw rationalization and the inclusion at the common coefficient stage. The normalization of the canonical derived pullback tensor comparison identifies the resulting map with nu. Naturality along the original stage/representative isomorphisms transports the square to M,N; cancel the intermediate inverse comparison factors.",
+   "uses": [
+    "lem-pur-derived-pullback-tensor-iso",
+    "def-sf-adic-realization-isomorphism-data"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sf-adic-realization-isomorphism-data",
+  "lem-fix-constructible-tensor-completion",
+  "lem-pur-cochain-pullback-tensor-coherence",
+  "lem-pur-derived-pullback-tensor-iso"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Separate tensor part of lem-sf-adic-reindexing-tensor original finite-stage calculation; exact map normalization is an agent refinement, not claimed verbatim in the sources."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "NatTrans.*IsMonoidal|tensor.*naturality|unit.*naturality",
+   "results": "25 hits. Generic monoidal tensor and unitor naturality only; no native adic realization comparison.",
+   "date": "2026-10-27",
+   "verdict": "generic tools only; no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatTrans, CategoryTheory.Iso, \"naturality\"",
+   "results": "0 hits. No matching declaration.",
+   "date": "2026-10-27",
+   "verdict": "generic tools only; no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A natural isomorphism of tensor functors is determined on a jointly essentially surjective family of objects and tensor compatibility extends along isomorphisms",
+   "results": "8 hits. Returned generic monoidal localization lifts and tensorIso; none identifies the native normalized adic comparison.",
+   "date": "2026-10-27",
+   "verdict": "generic tools only; no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.AdicReindexingTensor",
+  "date": "2026-10-28",
+  "group": "A5"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sf-adic-reindexing-tensor",
+   "place": "The tensor equation in lem-sf-adic-reindexing-tensor, localized to one fixed scheme isomorphism.",
+   "via": [
+    "lem-sf-adic-reindexing-tensor"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.AdicReindexingTensorCompatibility",
+  "file": "lean/Sheaf/Paper/AdicReindexingTensorCompatibility.lean",
+  "declaration": "WeilConjectures.AdicQbarRealization.normalized_reindexing_tensor_compatibility",
+  "statement": "theorem normalized_reindexing_tensor_compatibility\n    (C : FamilyCore l D) (T U : GeometricSpace D) (g : T.base.left ≅ U.base.left)\n    (h_integral_normalization : ∀ (E : AlgebraicallyClosedCoefficients.Index l (PadicAlgCl l)),\n        letI := (C.data T).units\n        letI := (C.data U).units\n        integralRealizationAgreement l g.hom (C.data T).realization (C.data U).realization\n          (C.ring T U g) E (C.integral T U g E) (C.comparison T U g)) :\n    ∀ (M N : generalAlgebraicallyClosedConstructibleCategory l (PadicAlgCl l) U.base.left),\n    letI := (C.data T).units\n    letI := (C.data U).units\n    (derivedPull l T.base.left g.hom (C.ring T U g)).map ((C.data U).tensor.tensor.hom.app (M, N)) ≫\n      (C.comparison T U g).inv.app ((commonStageDerivedTensor l (PadicAlgCl l) U.base.left).obj\n        (M, N)) ≫\n      (ordinary l T.base.left (C.data T).realization).map\n        (canonicalCommonStagePullbackTensor l (PadicAlgCl l) g.hom M N).hom =\n    (C.pullTensor T U g).tensor.hom.app\n        ((ordinary l U.base.left (C.data U).realization).obj M,\n         (ordinary l U.base.left (C.data U).realization).obj N) ≫\n      (C.data T).tensor.closed.tensor.map (Prod.mkHom\n        ((C.comparison T U g).inv.app M) ((C.comparison T U g).inv.app N)) ≫\n      (C.data T).tensor.tensor.hom.app ((commonStageDerivedPullback l (PadicAlgCl l) g.hom).obj M,\n        (commonStageDerivedPullback l (PadicAlgCl l) g.hom).obj N)",
+  "branch": "sheaf-dag",
+  "by": "A5",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A5",
+  "result": "pass",
+  "landing": "20261027T205742-L-1609988",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A5",
+  "result": "pass",
+  "landing": "20261027T205742-L-1609988",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
