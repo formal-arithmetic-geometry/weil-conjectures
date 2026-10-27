@@ -6,9 +6,9 @@ Authors: Claude
 module
 
 public import WeilConjectures.TraceFormula.Specialization.CompactSupportExchangeRefinement
+public import WeilConjectures.TraceFormula.Specialization.OpenProperLowerShriek
 public import WeilConjectures.TraceFormula.Specialization.TraitModelProperExchange
 public import WeilConjectures.TraceFormula.Specialization.TraitModelRefinement
-public import WeilConjectures.Tactic.ExactModProofs
 
 /-!
 
@@ -26,24 +26,20 @@ through `Ra_! ≅ ι_! ⋙ Ra_{P*}`, with `ν_ι` the adjoint of `α_ι⁻¹`
 (`NearbyCyclesModel.IsTraitModelOfBase.Compactification.compactSupportExchange`, an instance of
 `ProEtale.CondensedRing.compactSupportExchangeOfCompactification`).
 
-It does not depend on the compactification: for a refinement `C₃ ⟶ C₁` it is unchanged
-(`NearbyCyclesModel.IsTraitModelOfBase.Compactification.compactSupportExchange_eq_of_refinement`),
-and any two compactifications have a common refinement
-(`NearbyCyclesModel.IsTraitModelOfBase.Compactification.exists_refinement`), so
-`ν_{C₁} = ν_{C₂}`
-(`NearbyCyclesModel.IsTraitModelOfBase.Compactification.compactSupportExchange_eq`).
-This is the independence statement of blueprint `det-nearby-exchange-maps`.
+## The refinement identity
 
-## The refinement step
-
-For a refinement `π : P₃ ⟶ P₁` over a proper `p : X₃ ⟶ X₁`, with `ι₁ = ι₃ ≫ p` and `N` cartesian
-over `P₁`, the composition law `χ_{a₃} = Ra'_{1*}(χ_π) ∘ χ_{a₁}(Rp_*)` of the proper exchanges and
-the identity
+The independence of `ν_C` from the compactification (blueprint `det-nearby-exchange-maps`) is
+proved along a refinement `π : P₃ ⟶ P₁` over a proper `p : X₃ ⟶ X₁` with `ι₁ = ι₃ ≫ p` and `N`
+cartesian over `P₁` (any two compactifications have a common refinement,
+`NearbyCyclesModel.IsTraitModelOfBase.Compactification.exists_refinement`). Its key identity
 ```
 χ_π(ι₃! K) ∘ Ψ_{P₁}(E_K) ∘ ν_{ι₁}(K) = Rp'_*(ν_{ι₃}(K)) ∘ E'_{Ψ_N K}
 ```
-for the identification `E : ι₁! ≅ Rp_* ι₃!` reduce the claim to the formal
-`ProEtale.CondensedRing.compactSupportExchange_comp_eq_aux`.
+for the identifications `E : ι₁! ≅ Rp_* ι₃!` (`ProEtale.CondensedRing.openProperLowerShriekIso`)
+is `NearbyCyclesModel.Hom.lowerShriekExchangeOfInv_comp_pushforwardExchange`, from the composition
+law of the pullback exchanges and the description of the adjoint of `E` as the inverse of the
+extension-by-zero base change. The remaining assembly is the formal
+`ProEtale.CondensedRing.compactSupportExchangeAux_lift_eq_of_refinement`.
 
 -/
 
@@ -54,6 +50,98 @@ universe u
 open CategoryTheory Limits
 
 open scoped CategoryTheory.Functor CategoryTheory.Obj
+
+namespace AlgebraicGeometry.ProEtale.CondensedRing
+open Scheme
+
+section Refinement
+
+variable (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).Prime]
+  [Fact (ringChar k ≠ ℓ)] {k' : Type u} [Field k'] [Fact (ringChar k').Prime]
+  [Fact (ringChar k' ≠ ℓ)]
+  {Y X₃ X₁ : Over (Spec (.of k))} [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom]
+  [IsSeparated Y.hom] [LocallyOfFiniteType X₃.hom] [QuasiCompact X₃.hom] [IsSeparated X₃.hom]
+  [LocallyOfFiniteType X₁.hom] [QuasiCompact X₁.hom] [IsSeparated X₁.hom]
+  {Y' X₃' X₁' : Over (Spec (.of k'))} [LocallyOfFiniteType Y'.hom] [QuasiCompact Y'.hom]
+  [IsSeparated Y'.hom] [LocallyOfFiniteType X₃'.hom] [QuasiCompact X₃'.hom] [IsSeparated X₃'.hom]
+  [LocallyOfFiniteType X₁'.hom] [QuasiCompact X₁'.hom] [IsSeparated X₁'.hom]
+  {ι₃ : Y ⟶ X₃} {p : X₃ ⟶ X₁} {ι₁ : Y ⟶ X₁} [IsOpenImmersion ι₃.left] [IsProper p.left]
+  [IsOpenImmersion ι₁.left] {ι₃' : Y' ⟶ X₃'} {p' : X₃' ⟶ X₁'} {ι₁' : Y' ⟶ X₁'}
+  [IsOpenImmersion ι₃'.left] [IsProper p'.left] [IsOpenImmersion ι₁'.left]
+  {N : NearbyCyclesModel Y.left Y'.left} {P₃ : NearbyCyclesModel X₃.left X₃'.left}
+  {P₁ : NearbyCyclesModel X₁.left X₁'.left}
+
+set_option maxHeartbeats 400000 in
+-- the abstract identity is instantiated on the ambient derived categories of `ℚ̄_ℓ`-modules
+/-- **The key identity of the refinement step for models** (blueprint `det-nearby-exchange-maps`,
+proof): for open immersions `φ₃ : N ⟶ P₃`, `φ₁ : N ⟶ P₁` of models and a morphism
+`π : P₃ ⟶ P₁` over proper `p`, `p'` with `ι₁ = ι₃ ≫ p`, `φ₁ = φ₃ ≫ π` and `Y`, `Y'` cartesian,
+the identifications `E : ι₁! ≅ ι₃! ⋙ Rp_*` (`ProEtale.CondensedRing.openProperLowerShriekIso`)
+intertwine the exchanges `ν_ι` (adjoint to `α_ι⁻¹`) through the pushforward exchange `χ_π`:
+`χ_π(ι₃! K) ∘ Ψ_{P₁}(E_K) ∘ ν_{ι₁}(K) = Rp'_*(ν_{ι₃}(K)) ∘ E'_{Ψ_N K}`. The morphisms `E_K`,
+`E'_{Ψ_N K}` are read on the ambient derived categories. -/
+theorem NearbyCyclesModel.Hom.lowerShriekExchangeOfInv_comp_pushforwardExchange
+    (φ₃ : N.Hom P₃ ι₃.left ι₃'.left) (φ₁ : N.Hom P₁ ι₁.left ι₁'.left)
+    (π : P₃.Hom P₁ p.left p'.left) [IsIso (φ₃.pullbackExchange (Profinite.padicAlgClRingObj ℓ))]
+    [IsIso (φ₁.pullbackExchange (Profinite.padicAlgClRingObj ℓ))]
+    (w : ι₃ ≫ p = ι₁) (w' : ι₃' ≫ p' = ι₁') (htot : φ₃.total ≫ π.total = φ₁.total)
+    (hgen : φ₃.generic ≫ π.generic = φ₁.generic)
+    (sq : IsPullback ι₃.left (𝟙 Y.left) p.left ι₁.left)
+    (sq' : IsPullback ι₃'.left (𝟙 Y'.left) p'.left ι₁'.left)
+    (hN : N.PreservesBoundedConstructible (Profinite.padicAlgClRingObj ℓ))
+    (M : Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
+    (lowerShriekExchangeOfInv (openImmersionAdjunction ℓ ι₁.left)
+        (openImmersionAdjunction ℓ ι₁'.left)
+        (φ₁.pullbackExchange (Profinite.padicAlgClRingObj ℓ))).app
+          M.obj ≫
+      (P₁.nearbyCycles (Profinite.padicAlgClRingObj ℓ)).map
+        (X := D((ι₁.left)_!open⟦Profinite.padicAlgClRingObj ℓ⟧).obj
+          M.obj)
+        (Y := R((p.left)_*⟦Profinite.padicAlgClRingObj ℓ⟧).obj
+          (D((ι₃.left)_!open⟦Profinite.padicAlgClRingObj ℓ⟧).obj
+            M.obj))
+        ((openProperLowerShriekIso ℓ ι₃ p ι₁ w).hom.app M).hom ≫
+      (π.pushforwardExchange (Profinite.padicAlgClRingObj ℓ)).app
+        (D((ι₃.left)_!open⟦Profinite.padicAlgClRingObj ℓ⟧).obj M.obj) =
+    CategoryStruct.comp
+      (X := D((ι₁'.left)_!open⟦Profinite.padicAlgClRingObj ℓ⟧).obj
+        ((N.nearbyCycles (Profinite.padicAlgClRingObj ℓ)).obj M.obj))
+      (Y := R((p'.left)_*⟦Profinite.padicAlgClRingObj ℓ⟧).obj
+        (D((ι₃'.left)_!open⟦Profinite.padicAlgClRingObj ℓ⟧).obj
+          ((N.nearbyCycles (Profinite.padicAlgClRingObj ℓ)).obj M.obj)))
+      ((openProperLowerShriekIso ℓ ι₃' p' ι₁' w').hom.app
+        ((NearbyCyclesModel.boundedConstructibleNearbyCycles hN).obj M)).hom
+      (R((p'.left)_*⟦Profinite.padicAlgClRingObj ℓ⟧).map
+        ((lowerShriekExchangeOfInv (openImmersionAdjunction ℓ ι₃.left)
+          (openImmersionAdjunction ℓ ι₃'.left)
+          (φ₃.pullbackExchange (Profinite.padicAlgClRingObj ℓ))).app
+            M.obj)) := by
+  have hι : ι₃.left ≫ p.left = ι₁.left := congrArg CommaMorphism.left w
+  have hι' : ι₃'.left ≫ p'.left = ι₁'.left := congrArg CommaMorphism.left w'
+  have := isIso_map_openProperLowerShriekIso_comp_counit ℓ ι₃' p' ι₁' w' sq'
+      ((NearbyCyclesModel.boundedConstructibleNearbyCycles hN).obj M)
+  apply lowerShriekExchangeOfInv_app_comp_map_comp_pushforwardExchange_app
+    (adjπ := derivedUpperStarLowerStarAdjunction (Profinite.padicAlgClRingObj ℓ) p.left)
+    (adjπ' := derivedUpperStarLowerStarAdjunction (Profinite.padicAlgClRingObj ℓ) p'.left)
+    (c := leftDerivedUpperStarCompOfEq (Profinite.padicAlgClRingObj ℓ) hι)
+    (c' := leftDerivedUpperStarCompOfEq (Profinite.padicAlgClRingObj ℓ) hι')
+    (adj₁ := openImmersionAdjunction ℓ ι₁.left) (adj₃ := openImmersionAdjunction ℓ ι₃.left)
+    (adj₁' := openImmersionAdjunction ℓ ι₁'.left) (adj₃' := openImmersionAdjunction ℓ ι₃'.left)
+  case hχπ => exact π.map_pushforwardExchange_app_comp_counit_app (Profinite.padicAlgClRingObj ℓ)
+  case hα =>
+    intro A
+    rw [← reassoc_of% φ₃.pullbackExchange_comp_app_of_eq (Profinite.padicAlgClRingObj ℓ) π φ₁ hι hι'
+          htot hgen A,
+      ← Functor.map_comp, Iso.hom_inv_id_app, CategoryTheory.Functor.map_id, Category.comp_id]
+  case hE => exact unit_comp_upperStarComp_comp_map_openProperLowerShriekIso ℓ ι₃ p ι₁ w sq M
+  case hE' =>
+    exact unit_comp_upperStarComp_comp_map_openProperLowerShriekIso ℓ ι₃' p' ι₁' w' sq'
+      ((NearbyCyclesModel.boundedConstructibleNearbyCycles hN).obj M)
+  case hEb' => exact this
+
+end Refinement
+
+end AlgebraicGeometry.ProEtale.CondensedRing
 
 namespace AlgebraicGeometry.ProEtale.CondensedRing.NearbyCyclesModel.IsTraitModelOfBase
 
@@ -97,41 +185,6 @@ noncomputable def compactSupportExchange :
     (preservesBoundedConstructible_traitModel ℓ) (comp_toPoint C.ι) (comp_toPoint C.ι') C.hom
     C.isTraitModelOfBase.toTrait (C.isIsoOn_pushforwardExchange ℓ)
 
-/-- **The compact-support exchange is unchanged along a refinement** (blueprint
-`det-nearby-exchange-maps`, proof: "compatibility of `ν_h` and `χ_q⁻¹ Rq_{s*}(ν_{h''})`"). -/
-theorem compactSupportExchange_eq_of_refinement {C₃ C₁ : h.Compactification}
-    (r : C₃.Refinement C₁) : C₃.compactSupportExchange ℓ = C₁.compactSupportExchange ℓ :=
-  sorry
-
-/-- **The compact-support exchange does not depend on the compactification** (blueprint
-`det-nearby-exchange-maps`): two compactifications have a common refinement
-(`NearbyCyclesModel.IsTraitModelOfBase.Compactification.exists_refinement`), along which the
-compact-support exchange is unchanged
-(`NearbyCyclesModel.IsTraitModelOfBase.Compactification.compactSupportExchange_eq_of_refinement`).
--/
-theorem compactSupportExchange_eq (C₁ C₂ : h.Compactification) :
-    C₁.compactSupportExchange ℓ = C₂.compactSupportExchange ℓ := by
-  obtain ⟨C₃, ⟨r₁⟩, ⟨r₂⟩⟩ := C₁.exists_refinement C₂
-  rw [← compactSupportExchange_eq_of_refinement ℓ r₁, compactSupportExchange_eq_of_refinement ℓ r₂]
-
 end Compactification
-
-variable (h) in
-/-- The compact-support exchange `ν_a : Ra'_! Ψ_N ⟶ Ψ_S Ra_!` of the structure morphism of a
-trait model over the base (blueprint `det-nearby-exchange-maps` (3)): the exchange of any
-compactification (`NearbyCyclesModel.IsTraitModelOfBase.Compactification.compactSupportExchange`),
-which does not depend on it
-(`NearbyCyclesModel.IsTraitModelOfBase.compactSupportExchange_eq_compactSupportExchange`). -/
-noncomputable def compactSupportExchange :
-    boundedConstructibleNearbyCycles (h.preservesBoundedConstructible ℓ) ⋙
-        boundedConstructibleLowerShriek ℓ (toPoint Y') ⟶
-      boundedConstructibleLowerShriek ℓ (toPoint Y) ⋙ traitSpecialization k k' (ℓ := ℓ) :=
-  h.nonempty_compactification.some.compactSupportExchange ℓ
-
-/-- The compact-support exchange of a trait model over the base is that of any of its
-compactifications. -/
-lemma compactSupportExchange_eq_compactSupportExchange (C : h.Compactification) :
-    h.compactSupportExchange ℓ = C.compactSupportExchange ℓ :=
-  Compactification.compactSupportExchange_eq ℓ _ _
 
 end AlgebraicGeometry.ProEtale.CondensedRing.NearbyCyclesModel.IsTraitModelOfBase

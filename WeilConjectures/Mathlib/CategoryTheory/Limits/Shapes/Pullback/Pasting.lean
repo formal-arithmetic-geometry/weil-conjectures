@@ -26,7 +26,17 @@ variable {C : Type*} [Category* C]
 
 /-- Base change of an inverse image: if `N = B ×_X N` along `π : B ⟶ X` and `h : N ⟶ X`, and
 `G_B = B ×_X G_X`, then for morphisms `G_N ⟶ G_B`, `G_N ⟶ G_X` lying over `N ⟶ B`, `N ⟶ X`
-along `G_N ⟶ N`, also `G_N = G_B ×_{G_X} G_N`. -/
+along `G_N ⟶ N`, also `G_N = G_B ×_{G_X} G_N`: the square on the left is cartesian if the one on
+the right is, the left one maps to the right one along `jN`, `jB`, `jX`, and `(jB, πG, π, jX)` is
+cartesian.
+```
+G_N --cG--> G_B          N --c--> B
+ |           |           |        |
+ 𝟙          πG           𝟙        π
+ v           v           v        v
+G_N --hG--> G_X          N --h--> X
+```
+-/
 lemma of_id_of_isPullback {N B X GN GB GX : C} {c : N ⟶ B} {π : B ⟶ X} {h : N ⟶ X}
     {jN : GN ⟶ N} {jB : GB ⟶ B} {jX : GX ⟶ X} {cG : GN ⟶ GB} {πG : GB ⟶ GX} {hG : GN ⟶ GX}
     (hpb : IsPullback c (𝟙 N) π h) (hR : IsPullback jB πG π jX) (hc : cG ≫ jB = jN ≫ c)
