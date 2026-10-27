@@ -5,7 +5,8 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import Sheaf.Paper.QuotientSectionTensorData
-public import Sheaf.Paper.QuotientScalarSectionModelExistence
+import Sheaf.Paper.QuotientScalarSectionOrdinaryComparisonExistence
+import Sheaf.Paper.QuotientScalarSectionDerivedComparisonExistence
 
 /-! Comparison and normalization for a fixed sectionwise scalar model. -/
 
@@ -54,6 +55,9 @@ theorem scalar_section_comparisons_exists (T : Scheme.{u})
         derivedFunctor Λ T ⋙ model.T,
         ScalarSectionNormalized a T
           { model := model, ordinary := ordinary, derived := derived } := by
-  sorry
+  obtain ⟨ordinary, hordinary⟩ := scalar_section_ordinary_comparison_exists a T model
+  obtain ⟨derived, hderived⟩ :=
+    scalar_section_derived_comparison_exists a T model ordinary
+  exact ⟨ordinary, derived, hordinary, hderived⟩
 
 end AlgebraicGeometry.ProEtale.QuotientSectionTensor
