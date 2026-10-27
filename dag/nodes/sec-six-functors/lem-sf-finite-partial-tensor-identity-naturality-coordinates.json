@@ -1,0 +1,83 @@
+{
+ "kind": "statement",
+ "status": "split",
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-pf-coherence",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-prop-sf-pf-coherence/prop-sf-pf-coherence.proof.md",
+  "place": "Naturality coordinate calculation after fixed-coordinate expansion."
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sf-finite-partial-tensor-identity-naturality",
+   "place": "fixed-coordinate reduction",
+   "via": []
+  },
+  "same_as": []
+ },
+ "mathlib_searches": [],
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FinitePartialTensorIdentityNaturality",
+  "date": "2026-10-28",
+  "group": "C5"
+ },
+ "id": "lem-sf-finite-partial-tensor-identity-naturality-coordinates",
+ "title": "Coordinate naturality of finite partial tensor comparison",
+ "statement": "The coordinate form of the finite partial tensor naturality square after postcomposition with target coordinates.",
+ "stmt_deps": [
+  "def-sf-finite-partial-pullback-tensor",
+  "def-sf-finite-projection-fixed-coordinates"
+ ],
+ "proof": [
+  {
+   "text": "Expand each comparison by pullbackTensor_fixed_coordinates and use naturality of the fixed tensor, fixed pullback realization, and upper-star tensor comparison.",
+   "uses": [
+    "lem-sf-finite-pullback-tensor-fixed-coordinates"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-finite-pullback-tensor-fixed-coordinates"
+ ],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FinitePartialTensorIdentityNaturalityCoordinates",
+  "file": "lean/Sheaf/Paper/FinitePartialTensorIdentityNaturalityCoordinates.lean",
+  "declaration": "WeilConjectures.finitePartialTensor_identityNaturality_coordinates",
+  "declarations": [
+   "WeilConjectures.finitePartialTensor_identityNaturality_coordinates"
+  ],
+  "statement": "theorem finitePartialTensor_identityNaturality_coordinates (S : SixFunctorFiniteOperations D C E n hn) (X : SixFunctorSpace D) : let U := S.finite.pull (𝟙 X) let V := CompactSupportFiniteProjection.torPull S (𝟙 X) let T := Functor.uncurry.obj (CompactSupportFiniteProjection.partialTensor S X) ∀ (M M' : sixFunctorFiniteCategory D C E n hn X) (L L' : finiteTorConstructibleCategory C.l E n hn X.obj.left) (f : M ⟶ M') (g : L ⟶ L'), (CompactSupportFiniteProjection.coordinates (C := C) (E := E) (n := n) (hn := hn) X).map (U.map (T.map (Prod.mkHom f g))) ≫ (CompactSupportFiniteProjection.coordinates (C := C) (E := E) (n := n) (hn := hn) X).map (CompactSupportFiniteProjection.pullbackTensorComparison S (𝟙 X) M' L').hom ≫ (CompactSupportFiniteProjection.targetCoordinates S (𝟙 X) (U.obj M') L').hom = (CompactSupportFiniteProjection.coordinates (C := C) (E := E) (n := n) (hn := hn) X).map (CompactSupportFiniteProjection.pullbackTensorComparison S (𝟙 X) M L).hom ≫ (CompactSupportFiniteProjection.coordinates (C := C) (E := E) (n := n) (hn := hn) X).map (T.map (Prod.mkHom (U.map f) (V.map g))) ≫ (CompactSupportFiniteProjection.targetCoordinates S (𝟙 X) (U.obj M') L').hom",
+  "branch": "sheaf-dag",
+  "by": "C5",
+  "date": "2026-10-28"
+ },
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-prop-sf-pf-coherence/prop-sf-pf-coherence.proof.md",
+  "place": "Naturality coordinate calculation."
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C5",
+  "result": "pass",
+  "landing": "20261027T205846-L-1624703",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C5",
+  "result": "pass",
+  "landing": "20261027T205846-L-1624703",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

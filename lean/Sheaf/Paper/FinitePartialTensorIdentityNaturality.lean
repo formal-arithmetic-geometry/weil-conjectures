@@ -5,6 +5,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import Sheaf.Paper.FinitePartialPullbackTensor
+import Sheaf.Paper.FinitePartialTensorIdentityNaturalityCoordinates
 
 /-! Naturality of the explicit finite partial tensor comparison.
 (blueprint: lem-sf-finite-partial-tensor-identity-naturality) -/
@@ -12,7 +13,6 @@ public import Sheaf.Paper.FinitePartialPullbackTensor
 @[expose] public noncomputable section
 set_option autoImplicit false
 set_option relaxedAutoImplicit false
-
 universe u
 open CategoryTheory AlgebraicGeometry AlgebraicGeometry.Scheme
 namespace WeilConjectures
@@ -40,6 +40,15 @@ theorem finitePartialTensor_identityNaturality
           (CompactSupportFiniteProjection.pullbackTensorComparison S (𝟙 X) M' L').hom =
         (CompactSupportFiniteProjection.pullbackTensorComparison S (𝟙 X) M L).hom ≫
           T.map (Prod.mkHom (U.map f) (V.map g)) := by
-  sorry
+  dsimp
+  intro M M' L L' f g
+  apply (CompactSupportFiniteProjection.coordinates (C := C) (E := E) (n := n)
+    (hn := hn) X).map_injective
+  apply (cancel_mono (CompactSupportFiniteProjection.targetCoordinates S (𝟙 X)
+    ((S.finite.pull (𝟙 X)).obj M') L').hom).1
+  simpa only [Functor.uncurry_obj_map, Functor.prod_map, Functor.prod_obj,
+    Functor.map_comp, Category.assoc] using
+    (finitePartialTensor_identityNaturality_coordinates S X M M' L L' f g)
+
 
 end WeilConjectures
