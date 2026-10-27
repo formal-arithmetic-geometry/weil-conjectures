@@ -36,6 +36,11 @@ import all Sheaf.SixFunctors.OpenReconstructionEffectivity
 import Sheaf.Paper.PurNormalizedReconstructionAdjunctionCalculus
 import Sheaf.Paper.SfDerivedCompleteLegacyComparison
 import all Sheaf.Paper.ConstantCoefficientObjectsConstructible
+import all Sheaf.AlgebraicGeometry.ProEtaleOperations
+import Sheaf.CategoryTheory.ScalarLocalizationSheafExact
+import Sheaf.AlgebraicGeometry.ContinuousCoefficientLocalization
+import Sheaf.AlgebraicGeometry.ContinuousCoefficientGeneralPullbackIso
+import Sheaf.Algebra.Homology.SheafRingCoefficientOrdinaryAdjunction
 
 /-! # Coordinates for compact-support realization factor normalization
 
@@ -441,6 +446,106 @@ def ordinaryRestrictionSquare {X Y : Scheme.{u}} (g : X ⟶ Y)
     (AX : CondensedERealization.At l E X) (AY : CondensedERealization.At l E Y) :=
   (ordinaryRestrictionSquare_existsUnique l E g AX AY).exists.choose
 
+private def uniformizerSection (l : ℕ) [Fact l.Prime]
+    (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
+    (W : Scheme.{u}) :
+    ((AlgebraicGeometry.Scheme.integralCoefficientSheaf l W E).obj ⋙
+      forget CommRingCat.{u + 1}).sections := by
+  letI := coefficientExtensionNormedField l E
+  exact ⟨fun U ↦ ContinuousMap.const U.unop.left
+    (ULift.up.{u + 1, u} (Padic.coefficientExtensionUniformizer l E)), fun _ ↦ rfl⟩
+
+private def continuousLocalizationPresheafChart (l : ℕ) [Fact l.Prime]
+    (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
+    (W : Scheme.{u}) :
+    ringedLocalizationRingPresheafOfUniverses
+        (AlgebraicGeometry.Scheme.integralCoefficientSheaf l W E)
+        (uniformizerSection l E W) ≅
+      (letI := coefficientExtensionNormedField l E
+       localizedContinuousMapPresheaf W
+         (ULift.{u + 1, u} (Padic.coefficientExtensionIntegers l E))
+         (ULift.up.{u + 1, u} (Padic.coefficientExtensionUniformizer l E))) := by
+  letI := coefficientExtensionNormedField l E
+  refine NatIso.ofComponents (fun _ ↦ Iso.refl _) ?_
+  intro U V f
+  simp only [Iso.refl_hom, Category.id_comp, Category.comp_id]
+  apply CommRingCat.hom_ext
+  apply IsLocalization.ringHom_ext
+    (S := Localization.Away (ContinuousMap.const U.unop.left
+      (ULift.up.{u + 1, u} (Padic.coefficientExtensionUniformizer l E))))
+    (Submonoid.powers (ContinuousMap.const U.unop.left
+      (ULift.up.{u + 1, u} (Padic.coefficientExtensionUniformizer l E))))
+  ext a
+  simp only [ringedLocalizationRingPresheafOfUniverses,
+    ringedSectionLocalizationMapOfUniverses, localizedContinuousMapPresheaf,
+    localizedContinuousMapRestriction, IsLocalization.Away.map, RingHom.comp_apply]
+  rfl
+
+private def continuousLocalizationChart (l : ℕ) [Fact l.Prime]
+    (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
+    (W : Scheme.{u}) :
+    ringedLocalizationRingOfUniverses (AlgebraicGeometry.Scheme.integralCoefficientSheaf l W E)
+        (uniformizerSection l E W) ≅ integralCoefficientLocalization l W E :=
+  (presheafToSheaf (ProEt.topology W) CommRingCat.{u + 1}).mapIso
+    (continuousLocalizationPresheafChart l E W)
+
+private theorem continuous_inclusion_factor (W : Scheme.{u})
+    (A : CondensedERealization.At l E W) :
+    ∃ e : ringedLocalizationRingOfUniverses
+        (AlgebraicGeometry.Scheme.integralCoefficientSheaf l W E)
+        (uniformizerSection l E W) ≅ rationalCoefficientSheaf l W E,
+      ringedLocalizationRingUnitOfUniverses
+        (AlgebraicGeometry.Scheme.integralCoefficientSheaf l W E)
+        (uniformizerSection l E W) ≫ e.hom = A.inclusion := by
+  obtain ⟨b, hb⟩ := continuousCoefficientLocalization l E W
+  refine ⟨continuousLocalizationChart l E W ≪≫ b, ?_⟩
+  apply Sheaf.hom_ext
+  ext U a
+  apply rationalCoefficientValue_ext l E W U
+  intro x
+  refine Eq.trans ?_ (A.inclusion_normalization U.unop a x).symm
+  change rationalCoefficientValue l E W U
+    (b.hom.hom.app U
+      (((ringedLocalizationRingUnitOfUniverses
+        (AlgebraicGeometry.Scheme.integralCoefficientSheaf l W E)
+        (uniformizerSection l E W) ≫ (continuousLocalizationChart l E W).hom).hom.app U) a)) x = _
+  let R := AlgebraicGeometry.Scheme.integralCoefficientSheaf l W E
+  let t := uniformizerSection l E W
+  let P := ringedLocalizationRingPresheafOfUniverses R t
+  let num := ((ringedLocalizationRingPresheafUnitOfUniverses R t).app U).hom a
+  have hn := ConcreteCategory.congr_hom
+    (congr_app (toSheafify_naturality (ProEt.topology W)
+      (continuousLocalizationPresheafChart l E W).hom) U) num
+  change rationalCoefficientValue l E W U (b.hom.hom.app U
+    (((presheafToSheaf (ProEt.topology W) CommRingCat.{u + 1}).map
+      (continuousLocalizationPresheafChart l E W).hom).hom.app U
+      ((toSheafify (ProEt.topology W) P).app U num))) x = _
+  simp only [NatTrans.comp_app, CommRingCat.comp_apply] at hn
+  erw [← hn]
+  exact hb U a x
+
+private theorem localization_restrict_kInjective (W : Scheme.{u})
+    (R : Sheaf (ProEt.topology W) CommRingCat.{u + 1})
+    (s : (R.obj ⋙ forget CommRingCat.{u + 1}).sections) :
+    (pbcRestrict (ringedLocalizationRingUnitOfUniverses R s)).PreservesKInjectiveComplexes := by
+  obtain ⟨F, hobj, hmap, hAdd, hLim, hColim, _⟩ :=
+    scalarLocalization_sheaf_exact (ProEt.topology W) R s
+  have : F.Additive := hAdd
+  have : PreservesFiniteLimits F := hLim
+  have : PreservesFiniteColimits F := hColim
+  obtain ⟨_, _, ha⟩ := SheafOfModules.sheafRingCoefficientOrdinaryAdjunction
+    (ringedLocalizationRingUnitOfUniverses R s)
+  obtain ⟨adj, _⟩ := ha F hobj hmap
+  exact adj.preservesKInjectiveComplexes
+
+private theorem iso_restrict_kInjective (W : Scheme.{u})
+    {R S : Sheaf (ProEt.topology W) CommRingCat.{u + 1}} (e : R ≅ S) :
+    (pbcRestrict e.hom).PreservesKInjectiveComplexes := by
+  have : (pbcRestrict e.hom).IsEquivalence :=
+    inferInstanceAs
+      (proEtaleScalarEquivalence W ((adicLisseForget W).mapIso e)).functor.IsEquivalence
+  infer_instance
+
 set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in
 /-- The ordinary restriction is exact and preserves K-injective complexes because its
@@ -452,7 +557,23 @@ adjoint is exact, so restriction preserves injectives and K-injective complexes.
 theorem ordinaryRestrict_kInjective (W : Scheme.{u})
     (A : CondensedERealization.At l E W) :
     (ordinaryRestrict l E W A).PreservesKInjectiveComplexes := by
-  sorry
+  obtain ⟨e, he⟩ := continuous_inclusion_factor l E W A
+  have : (pbcRestrict (ringedLocalizationRingUnitOfUniverses
+      (AlgebraicGeometry.Scheme.integralCoefficientSheaf l W E)
+      (uniformizerSection l E W))).PreservesKInjectiveComplexes :=
+    localization_restrict_kInjective W _ _
+  have : (pbcRestrict e.hom).PreservesKInjectiveComplexes := iso_restrict_kInjective W e
+  have : (pbcRestrict A.inclusion).PreservesKInjectiveComplexes :=
+    Functor.preservesKInjectiveComplexes_of_iso
+      (pbcRestrictComp _ _ _ he)
+  have : (pbcRestrict A.integralIso.hom).PreservesKInjectiveComplexes :=
+    iso_restrict_kInjective W A.integralIso
+  have : (pbcRestrict (A.integralIso.hom ≫ A.inclusion)).PreservesKInjectiveComplexes :=
+    Functor.preservesKInjectiveComplexes_of_iso (pbcRestrictComp _ _ _ rfl)
+  have : (purOrdinaryCoefficientModel l E W).PreservesKInjectiveComplexes :=
+    iso_restrict_kInjective W (purCoefficientIso l E W).symm
+  dsimp only [ordinaryRestrict]
+  infer_instance
 
 attribute [instance] ordinaryRestrict_kInjective
 
