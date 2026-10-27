@@ -5,8 +5,6 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 public import Sheaf.Paper.ExceptionalSiteRealization
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.ShortExactPullback
-import WeilConjectures.Mathlib.CategoryTheory.Localization.DerivabilityStructure.Derives
-import WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResolution
 /-! # Derived realization of the actual etale/pro-etale system comparison
 Source: blueprint def-weil-exceptional-inverse-image. All ordinary maps are fixed on
 sections or by adjunction transposes; their derived maps retain the localization units.
