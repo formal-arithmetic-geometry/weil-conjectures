@@ -1,0 +1,119 @@
+{
+ "kind": "statement",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-classes.proof.md",
+  "place": "Paragraph (2): integral reduction to (Z/ell^(n+1))_n, followed by extension to (O_E/ell^(n+1))_n; agent expansion of geometric naturality in realization steps 1--5."
+ },
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-classes.proof.md",
+  "place": "Paragraph (2): integral reduction to (Z/ell^(n+1))_n, followed by extension to (O_E/ell^(n+1))_n; agent expansion of geometric naturality in realization steps 1--5.",
+  "note": "U2: proved normalization API or endpoint calculation; no additional proof hole."
+ },
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.TowerChernReductionPullback",
+  "date": "2026-10-27",
+  "group": "U2"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sp-tower-geometric",
+ "id": "lem-sp-tower-chern-target-normalization-data",
+ "title": "The positive Kummer equation of normalized Chern data",
+ "statement": "Fix a prime ell, a scheme T, ring diagrams R,A on its pro-etale site, a morphism phi between their sequence-site ring objects, Chern data c [def-sp-tower-class-chern], and a morphism q from the R coefficient module to restriction of the A coefficient module. If ChernData.Normalized(c,q), then c.reduction.model.targetNormalization(Kummer(c),c.rootIso,c.rootForget) [def-sp-tower-class-reduction]. This retains the positive Kummer boundary and its shifts. The predicate is shared by the explicit definition ChernData.rootNormalized, with exactly this target-normalization formula.",
+ "stmt_deps": [
+  "def-sp-tower-class-chern",
+  "def-sp-tower-class-reduction"
+ ],
+ "proof": [
+  {
+   "text": "Unfold the conjunction defining normalization. Retain its second component using And.right, then its first component using And.left.",
+   "uses": [
+    "def-sp-tower-class-chern"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-classes.proof.md",
+    "place": "Paragraph (2): integral reduction to (Z/ell^(n+1))_n, followed by extension to (O_E/ell^(n+1))_n; agent expansion of geometric naturality in realization steps 1--5."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sp-tower-class-chern"
+ ],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Extract the first two equations from the three conjuncts defining normalized Chern data",
+   "results": "8 unrelated normalization results; no Chern-data projection API.",
+   "date": "2026-10-27",
+   "verdict": "no specialized match"
+  },
+  {
+   "tool": "loogle",
+   "query": "And.left",
+   "results": "12 results, including Init.Prelude And.left, the projection used in the proof.",
+   "date": "2026-10-27",
+   "verdict": "use core conjunction projections"
+  },
+  {
+   "tool": "grep",
+   "query": "ChernData.Normalized|chern_integral_normalizations",
+   "results": "0 Mathlib matches; local ChernData.Normalized is a conjunction of three equations.",
+   "date": "2026-10-27",
+   "verdict": "use the local definition and core conjunction projections"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-sp-tower-p1-adjunction",
+   "place": "Classes proof (2), the normalized integral Kummer endpoint and its exact inverse image.",
+   "via": [
+    "lem-sp-tower-chern-target-normalization",
+    "lem-sp-tower-kummer-pullback-transpose",
+    "lem-sp-tower-chern-reduction-pullback",
+    "lem-sp-tower-chern-realization-pullback",
+    "lem-sp-tower-chern-pullback",
+    "lem-sp-tower-p1-kernel-scalar-normalization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.TowerChernTargetNormalizationData",
+  "file": "lean/Sheaf/Paper/TowerChernTargetNormalizationData.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.SpTowerClasses.chern_integral_target_normalization",
+  "statement": "theorem chern_integral_target_normalization\n    (T : Scheme.{u})\n    (R A : ℕᵒᵖ ⥤ Sheaf (Scheme.ProEt.topology T) CommRingCat.{u + 1})\n    (φ : SemilinearSections.systemRing.{u + 1, u, u + 1} (Scheme.ProEt.topology T)\n        (fun n ↦ R.obj (op n)) (fun n ↦ R.map (homOfLE (Nat.le_succ n)).op) ⟶\n      SemilinearSections.systemRing.{u + 1, u, u + 1} (Scheme.ProEt.topology T)\n        (fun n ↦ A.obj (op n)) (fun n ↦ A.map (homOfLE (Nat.le_succ n)).op))\n    (c : ChernData l T R A φ)\n    (q : coefficient T R ⟶ (SemilinearSections.res.{u + 1, u, u + 1} φ).obj\n      (coefficient T A)) (n : ChernData.Normalized l T R A φ c q) :\n    c.rootNormalized l T R A φ",
+  "branch": "sheaf-dag",
+  "by": "U2",
+  "date": "2026-10-27",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.SpTowerClasses.chern_integral_target_normalization",
+   "AlgebraicGeometry.ProEtale.SpTowerClasses.ChernData.rootNormalized"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U2",
+  "result": "pass",
+  "landing": "20261027T151745-L-1203932",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U2",
+  "result": "pass",
+  "landing": "20261027T151745-L-1203932",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,122 @@
+{
+ "kind": "statement",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-classes.proof.md",
+  "place": "Paragraph (2): integral reduction to (Z/ell^(n+1))_n, followed by extension to (O_E/ell^(n+1))_n; agent expansion of geometric naturality in realization steps 1--5."
+ },
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-classes.proof.md",
+  "place": "Paragraph (2): integral reduction to (Z/ell^(n+1))_n, followed by extension to (O_E/ell^(n+1))_n; agent expansion of geometric naturality in realization steps 1--5.",
+  "note": "U2: proved construction/normalization API for the positive Kummer endpoint; no new hole."
+ },
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.TowerChernReductionPullback",
+  "date": "2026-10-27",
+  "group": "U2"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sp-tower-geometric",
+ "id": "lem-sp-tower-chern-root-normalization-equation",
+ "title": "Root normalization in derived-arrow coordinates",
+ "statement": "For Chern data c at arbitrary coefficient diagrams, assume the positive target-normalization predicate ChernData.rootNormalized. Then its root-isomorphism adjunction transpose, followed by the canonical forgetful shift, single-complex and root-identification comparisons, equals the positive Kummer boundary shifted once followed by the inverse shift-addition comparison. All endpoints are the literal full-units and roots towers.",
+ "stmt_deps": [
+  "def-sp-tower-class-chern",
+  "lem-sp-tower-chern-target-normalization-data",
+  "lem-sp-tower-kummer-short-complex"
+ ],
+ "proof": [
+  {
+   "text": "For a short complex constructed from generic endpoint objects, inclusion, power and zero relation, name its positive boundary with literal endpoints and unfold target normalization. This gives the displayed four-factor equation before specializing the category. Apply this generic theorem to the actual Kummer arrows and recorded short exactness. The named boundary has those same literal endpoints, so the specialized equation is exactly the required one.",
+   "uses": [
+    "def-sp-tower-class-reduction",
+    "lem-sp-tower-chern-target-normalization-data",
+    "lem-sp-tower-kummer-short-complex"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-classes.proof.md",
+    "place": "Paragraph (2): integral reduction to (Z/ell^(n+1))_n, followed by extension to (O_E/ell^(n+1))_n; agent expansion of geometric naturality in realization steps 1--5."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sp-tower-class-reduction",
+  "lem-sp-tower-chern-target-normalization-data",
+  "lem-sp-tower-kummer-short-complex"
+ ],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Unfold positive Kummer target normalization into the adjunction transpose boundary equation",
+   "results": "8 unrelated FLT/Witt-vector hits.",
+   "date": "2026-10-27",
+   "verdict": "use the project definition directly"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.ProEtale.SpTowerClasses.DerivedExtension.targetNormalization",
+   "results": "unknown identifier in Mathlib index",
+   "date": "2026-10-27",
+   "verdict": "project definition in TowerClassReduction supplies the equation"
+  },
+  {
+   "tool": "grep",
+   "query": "targetNormalization",
+   "results": "0 Mathlib hits; local rg locates TowerClassReduction lines69-89.",
+   "date": "2026-10-27",
+   "verdict": "unfold the project predicate directly"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-sp-tower-p1-adjunction",
+   "place": "Classes proof (2), the positive Kummer short complex and its boundary normalization.",
+   "via": [
+    "lem-sp-tower-kummer-pullback-transpose",
+    "lem-sp-tower-chern-reduction-pullback",
+    "lem-sp-tower-chern-realization-pullback",
+    "lem-sp-tower-chern-pullback",
+    "lem-sp-tower-p1-kernel-scalar-normalization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.TowerChernRootNormalizationEquation",
+  "file": "lean/Sheaf/Paper/TowerChernRootNormalizationEquation.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.SpTowerClasses.chern_root_normalization_equation",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.SpTowerClasses.chern_root_normalization_equation"
+  ],
+  "statement": "theorem chern_root_normalization_equation\n    (T : Scheme.{u})\n    (R A : ℕᵒᵖ ⥤ Sheaf (Scheme.ProEt.topology T) CommRingCat.{u + 1})\n    (φ : SemilinearSections.systemRing.{u + 1, u, u + 1} (Scheme.ProEt.topology T)\n        (fun n ↦ R.obj (op n)) (fun n ↦ R.map (homOfLE (Nat.le_succ n)).op) ⟶\n      SemilinearSections.systemRing.{u + 1, u, u + 1} (Scheme.ProEt.topology T)\n        (fun n ↦ A.obj (op n)) (fun n ↦ A.map (homOfLE (Nat.le_succ n)).op))\n    (c : ChernData l T R A φ)\n    (h : c.rootNormalized l T R A φ) :\n    (c.reduction.derivedAdjunction.homEquiv _ _) c.rootIso.hom ≫\n      (c.reduction.forget.F.mapDerivedCategory.commShiftIso (2 : ℤ)).hom.app\n        ((DerivedCategory.singleFunctor (Systems T R) 0).obj c.rootModule) ≫\n      ((c.reduction.forget.F.mapDerivedCategorySingleFunctor 0).hom.app\n        c.rootModule)⟦(2 : ℤ)⟧' ≫\n      ((DerivedCategory.singleFunctor (Ab T) 0).map c.rootForget.hom)⟦(2 : ℤ)⟧' =\n    c.kummer.boundary⟦(1 : ℤ)⟧' ≫\n      (shiftFunctorAdd (DerivedCategory (Ab T)) (1 : ℤ) 1).inv.app\n        ((DerivedCategory.singleFunctor (Ab T) 0).obj (roots l T))",
+  "branch": "sheaf-dag",
+  "by": "U2",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U2",
+  "result": "pass",
+  "landing": "20261027T151745-L-1203932",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U2",
+  "result": "pass",
+  "landing": "20261027T151745-L-1203932",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

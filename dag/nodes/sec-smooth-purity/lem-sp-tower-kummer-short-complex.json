@@ -1,0 +1,129 @@
+{
+ "kind": "statement",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-classes.proof.md",
+  "place": "Paragraph (2): integral reduction to (Z/ell^(n+1))_n, followed by extension to (O_E/ell^(n+1))_n; agent expansion of geometric naturality in realization steps 1--5."
+ },
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-classes.proof.md",
+  "place": "Paragraph (2): integral reduction to (Z/ell^(n+1))_n, followed by extension to (O_E/ell^(n+1))_n; agent expansion of geometric naturality in realization steps 1--5.",
+  "note": "U2: proved construction/normalization API for the positive Kummer endpoint; no new hole."
+ },
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.TowerChernReductionPullback",
+  "date": "2026-10-27",
+  "group": "U2"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sp-tower-geometric",
+ "id": "lem-sp-tower-kummer-short-complex",
+ "title": "The actual Kummer short complex with the shared Abelian zero structure",
+ "statement": "For prime ell, a scheme T and Kummer data q [def-sp-tower-class-systems], construct the short complex with objects roots(ell,T), powerUnits(ell,T), units(T), arrows q.inclusion and q.power, and zero relation q.zero. Use the zero-morphism structure induced by the named towerAbelian instance. This actual short complex is short exact. Its arrows and objects are unchanged. Its positive derived boundary has the literal full-units and roots towers as endpoints, and is defined by this recorded short exact sequence.",
+ "stmt_deps": [
+  "def-sp-tower-class-systems"
+ ],
+ "proof": [
+  {
+   "text": "Construct the three-object short complex using the actual inclusion, power map and zero relation of q. The generic Abelian boundary API uses the same zero structure, which is definitionally equal to the direct one used by the Kummer record. Define the positive boundary by the standard single-complex connecting morphism of this short exact sequence, with its literal endpoints.",
+   "uses": [
+    "def-sp-tower-class-systems"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-classes.proof.md",
+    "place": "Paragraph (2): integral reduction to (Z/ell^(n+1))_n, followed by extension to (O_E/ell^(n+1))_n; agent expansion of geometric naturality in realization steps 1--5."
+   }
+  },
+  {
+   "text": "The resulting complex has the same objects and arrows as the recorded short-exact Kummer sequence, so q.exact supplies its short exactness.",
+   "uses": [
+    "def-sp-tower-class-systems"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-classes.proof.md",
+    "place": "Paragraph (2): integral reduction to (Z/ell^(n+1))_n, followed by extension to (O_E/ell^(n+1))_n; agent expansion of geometric naturality in realization steps 1--5."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sp-tower-class-systems"
+ ],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A short complex built from given arrows with zero composition retains their recorded short exactness",
+   "results": "8 hits including ShortComplex.ShortExact, ShortComplex.ShortExact.mk' and ShortComplex.Exact.shortExact.",
+   "date": "2026-10-27",
+   "verdict": "reuse the recorded exactness; no new exactness argument is needed"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.ShortComplex.mk",
+   "results": "12 hits including the exact constructor in Mathlib.Algebra.Homology.ShortComplex.Basic.",
+   "date": "2026-10-27",
+   "verdict": "use the constructor directly"
+  },
+  {
+   "tool": "grep",
+   "query": "ShortComplex.mk",
+   "results": "25 hits including short-complex constructors in ExactSequence and module-presheaf generators.",
+   "date": "2026-10-27",
+   "verdict": "no more specialized existing tower construction"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-sp-tower-p1-adjunction",
+   "place": "Classes proof (2), the positive Kummer short complex and its boundary normalization.",
+   "via": [
+    "lem-sp-tower-kummer-pullback-transpose",
+    "lem-sp-tower-chern-reduction-pullback",
+    "lem-sp-tower-chern-realization-pullback",
+    "lem-sp-tower-chern-pullback",
+    "lem-sp-tower-p1-kernel-scalar-normalization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.TowerKummerComplex",
+  "file": "lean/Sheaf/Paper/TowerKummerComplex.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.SpTowerClasses.Kummer.shortComplex_exact",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.SpTowerClasses.Kummer.shortComplex",
+   "AlgebraicGeometry.ProEtale.SpTowerClasses.Kummer.shortComplex_exact",
+   "AlgebraicGeometry.ProEtale.SpTowerClasses.Kummer.boundary"
+  ],
+  "statement": "theorem Kummer.shortComplex_exact (q : Kummer l T) : q.shortComplex.ShortExact",
+  "branch": "sheaf-dag",
+  "by": "U2",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U2",
+  "result": "pass",
+  "landing": "20261027T151745-L-1203932",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U2",
+  "result": "pass",
+  "landing": "20261027T151745-L-1203932",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

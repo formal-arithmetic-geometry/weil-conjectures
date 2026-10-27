@@ -1,0 +1,144 @@
+{
+ "id": "lem-sp-tower-reduction-mate-invertible",
+ "kind": "statement",
+ "title": "Invertibility of the canonical mate for integral quotient reduction",
+ "statement": "Fix a prime $\\ell$, a finite extension $E/\\mathbf Q_\\ell$, schemes $X,Y$, a morphism $f:X\\to Y$, Chern data $c_Y,c_X$ [def-sp-tower-class-chern], and intermediate coefficient pullback data $d$ [def-sp-tower-chern-pullback-intermediate]. Let $L_T\\dashv U_T^D$ be the recorded derived reduction adjunctions [def-sp-tower-class-reduction], $F$ the exact inverse image of abelian towers [lem-sp-tower-integral-class-pullback], $P=d.\\mathrm{pull}$, and $b:U_Y^D F^D\\simeq P^D U_X^D$ the localization of $d.\\mathrm{forgetIso}$. Define $\\lambda:F^D L_X\\to L_Y P^D$ to be the adjunction mate of $b$, characterized by $\\eta_X(F^D M)\\,U_X^D(\\lambda_M)=F^D(\\eta_Y(M))\\,b_{L_Y M}$. Then $\\lambda$ is invertible. No normalization of the integer or root comparisons is assumed, and no such endpoint equation is concluded. Compositions are left to right.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-classes.proof.md",
+  "place": "Paragraph (2): integral reduction to (Z/ell^(n+1))_n, followed by extension to (O_E/ell^(n+1))_n; agent expansion of geometric naturality in realization steps 1--5."
+ },
+ "stmt_deps": [
+  "def-sp-tower-class-chern",
+  "def-sp-tower-chern-pullback-intermediate",
+  "def-sp-tower-class-reduction",
+  "lem-sp-tower-integral-class-pullback"
+ ],
+ "proof": [
+  {
+   "text": "Realize integer towers and quotient module systems on the sequence site. The section-normalized forgetful square identifies the given module inverse image with geometric inverse image: at each level the normalized constant Z/ell^(n+1) action is unique, and all maps of the underlying torsion sheaves are linear. Retain the actual quotient transitions.",
+   "uses": [
+    "lem-pur-torsion-sheaf-constant-module",
+    "def-weil-proetale-inverse-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-classes.proof.md",
+    "place": "Paragraph (2): integral reduction to (Z/ell^(n+1))_n, followed by extension to (O_E/ell^(n+1))_n; agent expansion of geometric naturality in realization steps 1--5."
+   }
+  },
+  {
+   "text": "Apply algebra-diagram extension/pullback coherence with constant base Z and the quotient diagram R. Balanced association on flat-term K-flat representatives gives an invertible comparison between exact inverse image after derived reduction and derived reduction after exact inverse image, on whole strict systems.",
+   "uses": [
+    "lem-pur-algebra-diagram-pullback-extension-coherence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-classes.proof.md",
+    "place": "Paragraph (2): integral reduction to (Z/ell^(n+1))_n, followed by extension to (O_E/ell^(n+1))_n; agent expansion of geometric naturality in realization steps 1--5."
+   }
+  },
+  {
+   "text": "Transport this comparison to the specified reduction functors using their universal derived counits. Their representative transpose equations identify its inverse as the canonical adjunction mate: its transpose is inverse image of the source adjunction unit followed by the derived forgetful square. Equality on representatives extends by localization, and injectivity of the target hom equivalence identifies the components. Hence the specified mate is invertible.",
+   "uses": [
+    "def-sp-tower-class-reduction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-classes.proof.md",
+    "place": "Paragraph (2): integral reduction to (Z/ell^(n+1))_n, followed by extension to (O_E/ell^(n+1))_n; agent expansion of geometric naturality in realization steps 1--5."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-torsion-sheaf-constant-module",
+  "def-weil-proetale-inverse-image",
+  "lem-pur-algebra-diagram-pullback-extension-coherence",
+  "def-sp-tower-class-reduction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-classes.proof.md",
+  "place": "Paragraph (2): integral reduction to (Z/ell^(n+1))_n, followed by extension to (O_E/ell^(n+1))_n; agent expansion of geometric naturality in realization steps 1--5."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The mate of the forgetful square for quotient sheaf modules is invertible after total derived extension of scalars",
+   "results": "8 hits. PresheafOfModules.sheafificationAdjunction, SheafOfModules.fullyFaithfulForget, PresheafOfModules.toSheaf_map_sheafificationHomEquiv_symm, SheafOfModules.forget, PresheafOfModules.toPresheaf_map_sheafificationHomEquiv, AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPresheafOfModulesToPresheafOfModules, SheafOfModules.forgetToSheafModuleCat_map_val, PresheafOfModules.toPresheaf_map_sheafificationAdjunction_unit_app",
+   "date": "2026-10-27",
+   "verdict": "no direct match for the canonical mate of the quotient-tower forgetful square"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An exact inverse image commutes with derived extension of scalars and respects the adjunction unit",
+   "results": "8 hits. CategoryTheory.Functor.mapExactFunctor_smul, CategoryTheory.Abelian.Ext.mapExactFunctor_hom, CategoryTheory.Adjunction.derivedε_fac_app, CategoryTheory.Adjunction.derived'_unit, CategoryTheory.Adjunction.derivedη_fac_app, CategoryTheory.Adjunction.derivedε_fac_app_assoc, CategoryTheory.Adjunction.derived_unit, CategoryTheory.Adjunction.derivedη_fac_app_assoc",
+   "date": "2026-10-27",
+   "verdict": "no direct match for the canonical mate of the quotient-tower forgetful square"
+  },
+  {
+   "tool": "grep",
+   "query": "mapDerivedCategorySquareIso|singleδ_naturality|map_singleδ",
+   "results": "No matches.",
+   "date": "2026-10-27",
+   "verdict": "no direct match for the canonical mate of the quotient-tower forgetful square"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.TowerChernReductionPullback",
+  "date": "2026-10-27",
+  "group": "U2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-sp-tower-p1-adjunction",
+   "place": "Classes proof (2), geometric pullback of integral quotient reduction, before endpoint normalizations.",
+   "via": [
+    "lem-sp-tower-chern-reduction-pullback",
+    "lem-sp-tower-chern-realization-pullback",
+    "lem-sp-tower-chern-pullback",
+    "lem-sp-tower-p1-kernel-scalar-normalization"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sp-tower-geometric",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.TowerReductionMateInvertible",
+  "file": "lean/Sheaf/Paper/TowerReductionMateInvertible.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.SpTowerClasses.tower_reductionMate_isIso",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.SpTowerClasses.reductionPullbackMate",
+   "AlgebraicGeometry.ProEtale.SpTowerClasses.tower_reductionMate_isIso"
+  ],
+  "statement": "theorem tower_reductionMate_isIso {X Y : Scheme.{u}} {f : X ⟶ Y}\n    {cY : Chern l E Y} {cX : Chern l E X}\n    (d : IntegralCoefficientPullback l E f cY cX) :\n    IsIso (reductionPullbackMate l E d)",
+  "branch": "sheaf-dag",
+  "by": "U2",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U2",
+  "result": "pass",
+  "landing": "20261027T151745-L-1203932",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U2",
+  "result": "pass",
+  "landing": "20261027T151745-L-1203932",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

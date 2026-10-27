@@ -1,0 +1,145 @@
+{
+ "kind": "statement",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-classes.proof.md",
+  "place": "Paragraph (2): integral reduction to (Z/ell^(n+1))_n, followed by extension to (O_E/ell^(n+1))_n; agent expansion of geometric naturality in realization steps 1--5."
+ },
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-classes.proof.md",
+  "place": "Paragraph (2): integral reduction to (Z/ell^(n+1))_n, followed by extension to (O_E/ell^(n+1))_n; agent expansion of geometric naturality in realization steps 1--5.",
+  "note": "U2: proved normalization API or endpoint calculation; no additional proof hole."
+ },
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.TowerChernReductionPullback",
+  "date": "2026-10-27",
+  "group": "U2"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sp-tower-geometric",
+ "id": "lem-sp-tower-kummer-pullback-transpose",
+ "title": "Pullback of the normalized positive Kummer transpose",
+ "statement": "Fix ell,E, schemes X,Y, a morphism f:X -> Y, normalized Chern data cY,cX [def-sp-tower-class-chern], and intermediate coefficient pullback data d [def-sp-tower-chern-pullback-intermediate]. Let tY,tX be the adjunction transposes of cY.rootIso.hom and cX.rootIso.hom [def-sp-tower-class-reduction], and let b be the derived forgetful-square isomorphism. Then F(tY) followed by b on the shifted root and U_X((d.derivedRoot 2).hom) equals unitsDerivedPull(f) followed by tX [lem-sp-tower-integral-class-pullback]. The full degree-two shift and all single-complex comparisons are included.",
+ "stmt_deps": [
+  "def-sp-tower-class-chern",
+  "def-sp-tower-chern-pullback-intermediate",
+  "def-sp-tower-class-reduction",
+  "lem-sp-tower-integral-class-pullback"
+ ],
+ "proof": [
+  {
+   "text": "Extract both positive target normalization equations at the actual coefficient diagrams, and express them as derived-arrow equations using the proved normalization-equation API.",
+   "uses": [
+    "lem-sp-tower-chern-target-normalization",
+    "lem-sp-tower-chern-root-normalization-equation"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-classes.proof.md",
+    "place": "Paragraph (2): integral reduction to (Z/ell^(n+1))_n, followed by extension to (O_E/ell^(n+1))_n; agent expansion of geometric naturality in realization steps 1--5."
+   }
+  },
+  {
+   "text": "Use exact-functor transport of the signed short-exact boundary. Naturality of the short-exact triangle under d.kummer compares its two boundaries. Apply shift commutation and commShiftIso_add to shift this square once more, retaining the shift-addition inverse.",
+   "uses": [
+    "lem-sp-tower-kummer-short-complex",
+    "lem-weil-pbc-exact-functor-ses-triangle-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-classes.proof.md",
+    "place": "Paragraph (2): integral reduction to (Z/ell^(n+1))_n, followed by extension to (O_E/ell^(n+1))_n; agent expansion of geometric naturality in realization steps 1--5."
+   }
+  },
+  {
+   "text": "Transport the forgetful square through the single and shift comparisons. Substitute d.kummer_roots and d.kummer_units. The arrow_normalized_square calculation combines the shifted boundary square with the two target equations and cancels invertible target comparisons, yielding exactly the root transpose square. The short complex and typed root transposes are cached to avoid repeated instance conversions.",
+   "uses": [
+    "def-sp-tower-chern-pullback-intermediate",
+    "def-sp-tower-class-reduction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-classes.proof.md",
+    "place": "Paragraph (2): integral reduction to (Z/ell^(n+1))_n, followed by extension to (O_E/ell^(n+1))_n; agent expansion of geometric naturality in realization steps 1--5."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sp-tower-chern-target-normalization",
+  "lem-sp-tower-chern-root-normalization-equation",
+  "lem-sp-tower-kummer-short-complex",
+  "lem-weil-pbc-exact-functor-ses-triangle-image",
+  "def-sp-tower-chern-pullback-intermediate",
+  "def-sp-tower-class-reduction"
+ ],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Naturality of the connecting morphism of a short exact sequence under an exact functor with derived single and shift isomorphisms",
+   "results": "8 results, including ShortComplex.ShortExact.singleδ and Abelian.Ext.mapExactFunctor_hom.",
+   "date": "2026-10-27",
+   "verdict": "use the existing boundary and exact-functor APIs"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.ShortComplex.ShortExact.mapShiftedHom_singleδ",
+   "results": "1 exact result: CategoryTheory.ShortComplex.ShortExact.mapShiftedHom_singleδ in Mathlib.Algebra.Homology.DerivedCategory.Ext.Map.",
+   "date": "2026-10-27",
+   "verdict": "used, through the recorded Mathlib leaf"
+  },
+  {
+   "tool": "grep",
+   "query": "mapShiftedHom_singleδ|singleTriangle.map",
+   "results": "6 hits in DerivedCategory.SingleTriangle, Ext.Map and Ext.ExtClass, including singleTriangle.map and both boundary-transport formulas.",
+   "date": "2026-10-27",
+   "verdict": "used the boundary-transport formula and the triangle morphism"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-sp-tower-p1-adjunction",
+   "place": "Classes proof (2), the normalized integral Kummer endpoint and its exact inverse image.",
+   "via": [
+    "lem-sp-tower-chern-reduction-pullback",
+    "lem-sp-tower-chern-realization-pullback",
+    "lem-sp-tower-chern-pullback",
+    "lem-sp-tower-p1-kernel-scalar-normalization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.TowerKummerPullbackTranspose",
+  "file": "lean/Sheaf/Paper/TowerKummerPullbackTranspose.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.SpTowerClasses.kummer_pullback_transpose",
+  "statement": "theorem kummer_pullback_transpose\n    {X Y : Scheme.{u}} {f : X ⟶ Y}\n    {cY : Chern l E Y} {cX : Chern l E X}\n    (nY : cY.Normalized l E) (nX : cX.Normalized l E)\n    (d : IntegralCoefficientPullback l E f cY cX) :\n    (abPull f).mapDerivedCategory.map\n        ((cY.reduction.derivedAdjunction.homEquiv _ _) cY.rootIso.hom) ≫\n      (Functor.mapDerivedCategorySquareIso d.forgetIso).hom.app\n        (((DerivedCategory.singleFunctor (Systems Y (Rrings l Y)) 0).obj\n          cY.rootModule)⟦(2 : ℤ)⟧) ≫\n      cX.reduction.forget.F.mapDerivedCategory.map (d.derivedRoot 2).hom =\n    unitsDerivedPull f ≫\n      (cX.reduction.derivedAdjunction.homEquiv _ _) cX.rootIso.hom",
+  "branch": "sheaf-dag",
+  "by": "U2",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U2",
+  "result": "pass",
+  "landing": "20261027T151745-L-1203932",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U2",
+  "result": "pass",
+  "landing": "20261027T151745-L-1203932",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
