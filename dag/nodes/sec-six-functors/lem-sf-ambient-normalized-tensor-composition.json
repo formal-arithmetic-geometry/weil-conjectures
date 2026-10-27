@@ -12,48 +12,32 @@
  ],
  "proof": [
   {
-   "text": "Transpose the ordinary tensor square under the composite module adjunction and test on pure tensors. The normalization hypotheses insert the scalar in the first tensor factor. The supplied generator-composition equation identifies both composite generators with the same generator, with intermediate scalars multiplied through the structural ring map. The second factor carries the unit scalar. Balancing and sheafification uniqueness identify the entire module maps.",
+   "text": "Apply injectivity of the composite module adjunction hom-equivalence, then extensionality on sheafified pure tensors. Evaluate at the two base-changed objects using the identity arrows and unit scalars. Naturality of each adjunction unit commutes the ordinary comparison with its inverse-image generator. The two normalized tensor formulas and tensor-morphism action on pure sections identify the first route. Apply the supplied generator-composition equation to both tensor factors and to the original pure tensor. The normalized composite tensor formula identifies the second route. Structural ring maps preserve 1, so the two sections agree.",
    "uses": [
     "lem-sf-ambient-tensor-data-exists-unique",
-    "def-pur-sheaf-tensor-product",
-    "lem-pc-sites-sheaf-tensor-bilinear-universal"
+    "lem-pur-independent-inverse-image-tensor-comparison",
+    "def-pur-sheaf-tensor-product"
    ],
    "elementary": false
   },
   {
-   "text": "Invert the ordinary square. In degree n precompose the asserted chain equality with each summand indexed by p+q=n. The three model.summand equations and termwise components of chainComp reduce it to the inverse ordinary square; functoriality of tensor and naturality of comp handle the inclusions. Direct-sum universality identifies the chain maps; ordinary naturality commutes with both signed differentials.",
+   "text": "Apply the proved general tensorComparisonComposition theorem to the three ambient inverse-image functors and their ordinary compositor, using the ordinary square just established. Its chain equation holds for all complexes, hence in particular on flat-term K-flat pairs. Its derived equation is precisely the ambient derived square, because the ambient chain and derived compositors are the canonical exact-functor compositors. The generic proof tests total summands, pastes representative equations and extends by rigidity; no new resolution choices or data are introduced.",
    "uses": [
-    "lem-pur-cochain-pullback-tensor-coherence",
-    "def-pc-tensor-complex-sheaves"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Choose flat-term K-flat resolutions of both entire inputs on the ringed site. Normalization preserves that class under both pullbacks. Substitute the three model.derived equations into localization of the chain equality and use mapDerivedCategoryCompNatIso_hom_app_Q. Naturality of the tensor model isomorphisms cancels the intermediate representative comparisons. After cancelling all invertible factors the equality is exactly the displayed derived square on resolving pairs. Full faithfulness of restriction to those pairs extends equality to arbitrary unbounded inputs.",
-   "uses": [
-    "lem-pc-kflat-resolution",
-    "lem-sf-cochain-tensor-model-rigidity",
-    "lem-weil-pbc-exact-functor-derived-factorization",
-    "lem-weil-pbc-site-derived-tensor-descent"
+    "lem-coef-semilinear-tensor-comparison-composition"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
   "lem-sf-ambient-tensor-data-exists-unique",
+  "lem-pur-independent-inverse-image-tensor-comparison",
   "def-pur-sheaf-tensor-product",
-  "lem-pc-sites-sheaf-tensor-bilinear-universal",
-  "lem-pur-cochain-pullback-tensor-coherence",
-  "def-pc-tensor-complex-sheaves",
-  "lem-pc-kflat-resolution",
-  "lem-sf-cochain-tensor-model-rigidity",
-  "lem-weil-pbc-exact-functor-derived-factorization",
-  "lem-weil-pbc-site-derived-tensor-descent"
+  "lem-coef-semilinear-tensor-comparison-composition"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/sites-modules.tex",
-  "place": "Explicit specialization and glue for the cited adjunction, tensor and K-flat arguments; no change to the unit route."
+  "place": "Tags 03D3 and 03EL, with sites-cohomology.tex 06YN and 07A4; explicit adjunction-unit calculation and representative-model pasting using existing proved helpers. The unit route and all statements are unchanged."
  },
  "mathlib_searches": [
   {
@@ -131,11 +115,11 @@
  "reviewed_proof": {
   "date": "2026-10-27",
   "by": "L",
-  "reviewer": "C-c03e3",
-  "group": "G2",
-  "result": "fix",
-  "landing": "20261027T205959-L-1641374",
+  "reviewer": "COMPILER",
+  "group": "F3",
+  "result": "pass",
+  "landing": "20261027T233924-L-4137414",
   "kind": "interface",
-  "note": "independent cc review: c03e delivery vs 0cdd packet (diff -r: only ICSS import TensorData→Coherence + text) and vs clone; fixed ICSS compiled with all delivered modules + FiniteQuotientPullbackDescent + StrictPullbackAdjointConstructor chain (28 OK)"
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

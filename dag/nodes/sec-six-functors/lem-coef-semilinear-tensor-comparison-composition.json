@@ -1,0 +1,122 @@
+{
+ "id": "lem-coef-semilinear-tensor-comparison-composition",
+ "kind": "statement",
+ "title": "Ordinary tensor composition implies chain and derived composition",
+ "statement": "Let J₀,J₁,J₂ be essentially small ringed sites with commutative coefficient sheaves, F and G successive additive exact module functors and H a direct additive exact functor, and θ:F⋙G≅H. Fix three closed derived tensor structures, their representative models, and bundled tensor comparisons KF, KG, KH [def-coef-semilinear-system-models]. Assume the ordinary tensor comparison square commutes. Then the inverse comparison square commutes on total tensor cochain complexes for every pair of complexes, and the forward comparison square commutes for the exact induced derived compositor and every pair of unbounded derived objects. The precise equations and universe parameters are the Lean statement below.",
+ "stmt_deps": [
+  "def-coef-semilinear-system-models",
+  "lem-weil-pbc-exact-functor-derived-factorization"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 07A4 and 06YS (total tensor comparison and flat K-flat representatives), 0G7E and 0G7D (extension by localization). The abstract three-functor case of the ambient tensor composition argument."
+ },
+ "proof": [
+  {
+   "text": "Prove the total-complex equation for all complexes, before imposing flatness. Work with three abstract exact module functors and an ordinary compositor, so no concrete site construction is unfolded. Test each degree on its tensor summand. Use tensorSummand_map and the three model.summand equations, and move the source summand across the natural compositor. Invert the ordinary square by Iso.inv_comp_eq and Iso.eq_comp_inv, then postcompose with the mapped source summand. The canonical mapHomologicalComplexCompIsoHomOfIso supplies the actual successive-complex source and agrees degreewise with the ordinary compositor. Explicit component types and reassociation avoid unfolding the sheaf tensor construction.",
+   "uses": [
+    "def-coef-semilinear-system-models",
+    "lem-pur-system-cochain-tensor-reduction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the existing fourModels_composite helper on the two successive normalized tensor models, and model_inverse on the composite model. On a flat-term K-flat pair, the model kflat property and the existing tensorComparisonModel_preserves_flat theorem supply flat-term K-flat intermediate images. The exact derived-compositor factorization identifies its representative components with the two exact-functor factors followed by localization of the chain compositor. Naturality of the target tensor representative comparison and the proved total-complex equation identify the two inverse derived routes after postcomposition by an invertible source representative comparison. Cancel it. Form these routes as natural transformations; cochain tensor model rigidity makes restriction to resolving pairs faithful, so they agree for every unbounded pair. Invert the resulting comparison square to obtain the displayed forward equation.",
+   "uses": [
+    "def-coef-semilinear-system-models",
+    "lem-coef-semilinear-geometric-tensor-evaluation",
+    "lem-coef-semilinear-tensor-model-preserves-flat",
+    "lem-pur-system-tensor-reduction-formula",
+    "lem-sf-cochain-tensor-model-rigidity",
+    "lem-weil-pbc-exact-functor-derived-factorization"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-coef-semilinear-system-models",
+  "lem-pur-system-cochain-tensor-reduction",
+  "lem-coef-semilinear-geometric-tensor-evaluation",
+  "lem-coef-semilinear-tensor-model-preserves-flat",
+  "lem-pur-system-tensor-reduction-formula",
+  "lem-sf-cochain-tensor-model-rigidity",
+  "lem-weil-pbc-exact-functor-derived-factorization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 07A4, 06YS, 0G7E and 0G7D. Explicit summand computation and representative-model pasting, followed by cochain tensor model rigidity."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Ordinary tensor comparison compatibility for three exact functors implies total cochain and derived tensor comparison compatibility",
+   "results": "Eight hits on HasGoodTensor, exact functor action on Ext, and Tor. No comparison theorem for the chosen BundledTensorComparison and representative models. Local four-model helpers supply the representative calculation.",
+   "date": "2026-10-28",
+   "verdict": "Use local model equations and the exact derived-compositor factorization."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mapDerivedCategoryCompNatIso_hom_app_Q\"",
+   "results": "0 hits (this is a source-library declaration).",
+   "date": "2026-10-28",
+   "verdict": "Use the proved source-library component factorization."
+  },
+  {
+   "tool": "grep",
+   "query": "tensorComparisonComposition|fourModels_composite|model_inverse",
+   "results": "0 Mathlib hits. Local source search finds private fourModels_composite and model_inverse in Sheaf.Paper.GeometricTensorEvaluation.",
+   "date": "2026-10-28",
+   "verdict": "Reuse those proved helpers and supply the three-model pasting."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.AmbientTensorComposition",
+  "date": "2026-10-28",
+  "group": "F3"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-rem-sf-pf-done",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sf-ambient-normalized-tensor-composition",
+   "place": "The total-complex and derived steps of normalized ambient tensor composition, abstracted to exact module functors.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.TensorComparisonComposition",
+  "file": "lean/Sheaf/Paper/TensorComparisonComposition.lean",
+  "declaration": "WeilConjectures.SemilinearSections.tensorComparisonComposition",
+  "statement": "theorem tensorComparisonComposition\n    {C₀ C₁ C₂ : Type c} [Category.{v} C₀] [Category.{v} C₁] [Category.{v} C₂]\n    [EssentiallySmall.{max c v r} C₀] [EssentiallySmall.{max c v r} C₁]\n    [EssentiallySmall.{max c v r} C₂]\n    (J₀ : GrothendieckTopology C₀) (J₁ : GrothendieckTopology C₁)\n    (J₂ : GrothendieckTopology C₂)\n    (R₀ : Sheaf J₀ CommRingCat.{max c v r}) (R₁ : Sheaf J₁ CommRingCat.{max c v r})\n    (R₂ : Sheaf J₂ CommRingCat.{max c v r})\n    (F : Mod.{c, v, max c v r} J₀ R₀ ⥤\n      Mod.{c, v, max c v r} J₁ R₁)\n    (G : Mod.{c, v, max c v r} J₁ R₁ ⥤\n      Mod.{c, v, max c v r} J₂ R₂)\n    (H : Mod.{c, v, max c v r} J₀ R₀ ⥤\n      Mod.{c, v, max c v r} J₂ R₂)\n    [F.Additive] [G.Additive] [H.Additive]\n    [PreservesFiniteLimits F] [PreservesFiniteColimits F]\n    [PreservesFiniteLimits G] [PreservesFiniteColimits G]\n    [PreservesFiniteLimits H] [PreservesFiniteColimits H]\n    (S₀ : Closed.{c, v, r} J₀ R₀)\n    (S₁ : Closed.{c, v, r} J₁ R₁)\n    (S₂ : Closed.{c, v, r} J₂ R₂)\n    (T₀ : Models.{c, v, r} J₀ R₀ S₀) (T₁ : Models.{c, v, r} J₁ R₁ S₁)\n    (T₂ : Models.{c, v, r} J₂ R₂ S₂)\n    (KF : BundledTensorComparison.{c, v, r} J₀ J₁ R₀ R₁ F S₀ S₁ T₀ T₁)\n    (KG : BundledTensorComparison.{c, v, r} J₁ J₂ R₁ R₂ G S₁ S₂ T₁ T₂)\n    (KH : BundledTensorComparison.{c, v, r} J₀ J₂ R₀ R₂ H S₀ S₂ T₀ T₂)\n    (θ : F ⋙ G ≅ H)\n    (ho : ∀ M N,\n      G.map (KF.model.ordinary M N).hom ≫\n        (KG.model.ordinary (F.obj M) (F.obj N)).hom ≫\n        ordinaryTensorHom.{c, v, r} J₂ R₂ (θ.hom.app M) (θ.hom.app N) =\n      θ.hom.app (ordinaryTensor.{c, v, r} J₀ R₀ M N) ≫ (KH.model.ordinary M N).hom)\n    : (∀ P Q : CochainComplex (Mod.{c, v, max c v r} J₀ R₀) ℤ,\n      (totalTensor.{c, v, r} J₂ R₂).map\n          (Prod.mkHom (Functor.mapHomologicalComplexCompIsoHomOfIso θ P)\n            (Functor.mapHomologicalComplexCompIsoHomOfIso θ Q)) ≫ KH.model.chain P Q =\n        KG.model.chain ((F.mapHomologicalComplex (.up ℤ)).obj P)\n            ((F.mapHomologicalComplex (.up ℤ)).obj Q) ≫\n          (G.mapHomologicalComplex (.up ℤ)).map (KF.model.chain P Q) ≫\n          Functor.mapHomologicalComplexCompIsoHomOfIso θ\n            ((totalTensor.{c, v, r} J₀ R₀).obj (P, Q))) ∧\n      ∀ M N : D.{c, v, max c v r} J₀ R₀,\n        G.mapDerivedCategory.map (KF.mu.hom.app (M, N)) ≫\n          KG.mu.hom.app (F.mapDerivedCategory.obj M, F.mapDerivedCategory.obj N) ≫\n          S₂.tensor.map (Prod.mkHom\n            ((Functor.mapDerivedCategoryCompNatIso θ).hom.app M)\n            ((Functor.mapDerivedCategoryCompNatIso θ).hom.app N)) =\n        (Functor.mapDerivedCategoryCompNatIso θ).hom.app (S₀.tensor.obj (M, N)) ≫\n          KH.mu.hom.app (M, N)",
+  "branch": "sheaf-dag",
+  "by": "F3",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F3",
+  "result": "pass",
+  "landing": "20261027T233924-L-4137414",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F3",
+  "result": "pass",
+  "landing": "20261027T233924-L-4137414",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
