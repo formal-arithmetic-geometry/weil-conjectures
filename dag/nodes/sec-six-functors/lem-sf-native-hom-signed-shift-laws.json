@@ -1,0 +1,118 @@
+{
+ "kind": "statement",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 08J9 and 08JC; lemma-RHom-triangulated (details omitted). Agent expansion using the native signed Hom and total tensor conventions."
+ },
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.NativeDerivedHomSignedExact",
+  "date": "2026-10-28",
+  "group": "C3"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-rf-shriek-preservation",
+ "id": "lem-sf-native-hom-signed-shift-laws",
+ "title": "Zero and addition laws for the explicit signed source-Hom mates",
+ "statement": "Let D be a preadditive closed monoidal category with additive tensor, additive integer shifts and a CommShift₂Int structure on its tensor bifunctor. For M in D put H(K)=ihom(K,M), a functor D^op→D, with the triangulated opposite shift K[n]=K[-n]. Let a_n(K)=(-1)^(n(n+1)/2) times the right-adjoint mate siteHomOppositeSourceShift(K,n), evaluated at M, including its specified transport -(-n)=n. Then a_0 is the canonical zero-shift comparison. For every m,n and X in D^op, a_(m+n)(X)=H(shiftFunctorAdd_op(m,n).hom_X)≫a_n(X[m])≫S_n(a_m(X))≫shiftFunctorAdd(m,n).inv_(H(X)). These are equations of the prescribed maps, without assuming a CommShift structure on H or claiming triangulatedness.",
+ "stmt_deps": [],
+ "proof": [
+  {
+   "text": "Put T_K=L↦K⊗L, c_K^r:S_r T_K≅T_K S_r and t_K^r:T_(S_r K)≅T_K S_r. The raw source-Hom shift is the right-adjoint mate of a_K^r=c_K^r≫(t_K^r)⁻¹, with adjunction S_r T_K ⊣ ihom(K) S_(-r). This is the existing explicit construction, not a chosen shift structure. At r=0 substitute the zero laws for c and t. At L the composite a_K^0 becomes (K◁(S_0≅Id).hom_L) followed by ((S_0≅Id).inv_K▷L); the middle shift unitor and its inverse cancel. Taking its mate, the shift-adjunction unit-counit identities give pre((S_0≅Id).inv_K) followed by the inverse zero unitor on ihom(K). The opposite zero-unitor formula gives exactly the stated isoZero component. Since q(0)=0, the scalar is 1.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "For addition expand the two successive mates using conjugateEquiv_comp and the units and counits of S_r⊣S_(-r). Move the parameter shift past the argument shift once. Before taking mates the only nonidentical subcomposites are c_(K[m])^n(L)≫S_n(t_K^m(L)) and t_K^m(L[n])≫S_m(c_K^n(L))≫shiftComm(K⊗L,m,n)⁻¹. The CommShift₂Int.comm identity says the former is the latter followed by (-1)^(m*n). All c/c and t/t composites combine by their CommShift addition laws. The shift-adjunction triangles cancel adjacent units and counits; the remaining shiftComm changes the reversed opposite shifts to the ordinary order. With r=-m and s=-n, their product has parity m*n. Thus the raw opposite mate at m+n is (-1)^(m*n) times H(shiftFunctorAdd_op.hom) followed by the raw n-mate at X[m], the shifted raw m-mate, and shiftFunctorAdd.inv on H(X). Additivity of tensor and ihom allows the scalar to pass through transposition.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Write q(t)=t(t+1)/2. The three integers t(t+1), for t=m,n,m+n, are even. Expanding (m+n)(m+n+1)=m(m+1)+n(n+1)+2mn and dividing the exact equality by 2 gives q(m+n)=q(m)+q(n)+mn for all integers, including negative ones. Multiplying the raw mate equation of the previous step by (-1)^q(m+n) cancels the extra (-1)^mn. Scalar composition in a preadditive category and additivity of shifts give precisely the displayed addition equation. At zero the preceding calculation applies. These prove the two assertions.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "group": "C3",
+  "date": "2026-10-28",
+  "note": "Explicit expansion of the native mate/cone calculations in the assigned proof, preserving the unit route."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Naturality and addition coherence of source internal Hom shift mates with quadratic sign n*(n+1)/2",
+   "results": "HomComplex.Cochain.leftUnshift_v, bifunctor shift helpers and NatTrans.commShift_op. None supplies the contravariant closed mate zero/addition equations.",
+   "date": "2026-10-28",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Right adjoint mates of two variable tensor shifts give coherent contravariant Hom shifts after quadratic sign correction",
+   "results": "Adjunction.RightAdjointCommShift.iso and iso_hom construct the fixed-parameter covariant adjoint shift, not the source-parameter mate.",
+   "date": "2026-10-28",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "internalHom.*CommShift|CommShift.*internalHom|conjugate.*CommShift|siteHomSourceShift",
+   "results": "Mathlib Shift/Adjunction and WeilConjectures derived tensor shifts give mate and tensor coherence APIs. Existing native exactness has unspecified normalization; no theorem has these equations.",
+   "date": "2026-10-28",
+   "verdict": "no exact match"
+  }
+ ],
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-finite-duality-site-comparison",
+   "place": "Proof, second paragraph: internal Hom is triangulated in the first variable and the exact comparison pullback carries triangles to triangles, so the comparison maps form morphisms of triangles. This node supplies the native signed shifts used in that clause.",
+   "via": [
+    "lem-sf-native-derived-hom-signed-exact",
+    "lem-sf-site-hom-comparison-thick"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.NativeHomSignedShiftLaws",
+  "file": "lean/Sheaf/CategoryTheory/NativeHomSignedShiftLaws.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.siteHom_signed_source_shift_laws",
+  "statement": "theorem siteHom_signed_source_shift_laws [MonoidalPreadditive D] (M : D) :\n    let H := MonoidalClosed.internalHom.flip.obj M\n    (∀ X : Dᵒᵖ, siteHomSignedSourceComponent M 0 X =\n      (Functor.CommShift.isoZero H ℤ).hom.app X) ∧\n    (∀ (m n : ℤ) (X : Dᵒᵖ), siteHomSignedSourceComponent M (m + n) X =\n      H.map ((shiftFunctorAdd Dᵒᵖ m n).hom.app X) ≫\n        siteHomSignedSourceComponent M n (X⟦m⟧) ≫\n        (siteHomSignedSourceComponent M m X)⟦n⟧' ≫\n        (shiftFunctorAdd D m n).inv.app (H.obj X))",
+  "branch": "sheaf-dag",
+  "by": "C3",
+  "date": "2026-10-28",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.siteHomTensorParameterShift",
+   "AlgebraicGeometry.ProEtale.siteHomSourceShift",
+   "AlgebraicGeometry.ProEtale.siteHomOppositeSourceShift",
+   "AlgebraicGeometry.ProEtale.siteHomSignedSourceComponent",
+   "AlgebraicGeometry.ProEtale.siteHom_signed_source_shift_laws"
+  ],
+  "note": "The three pre-existing source-shift definitions are moved verbatim from the assigned module and publicly reexported there. Only the two displayed zero/addition equations are left unproved. Naturality is proved by private helpers in the assigned module."
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-f80ad",
+  "group": "C3",
+  "result": "fix",
+  "landing": "20261027T233823-L-4120299",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-f80ad",
+  "group": "C3",
+  "result": "fix",
+  "landing": "20261027T233823-L-4120299",
+  "kind": "interface",
+  "note": "independent cc review: item nativeDerivedHom_signed_exact (signature identical to clone) + new modules NativeHomSignedShiftLaws/NativeHomLocalizedConeBoundary vs their nodes, change record and the 2 direct importers (both compiled OK against the delivery)"
+ }
+}

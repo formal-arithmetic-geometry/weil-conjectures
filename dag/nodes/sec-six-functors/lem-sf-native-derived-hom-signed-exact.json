@@ -9,38 +9,39 @@
  },
  "stmt_deps": [
   "def-weil-abstract-derived-category",
-  "def-pur-derived-internal-hom"
+  "def-pur-derived-internal-hom",
+  "lem-sf-native-hom-signed-shift-laws"
  ],
  "proof": [
   {
-   "text": "Represent M by a K-injective I. The evaluation-characterized qhInternalHomToIhom identifies native derived Hom with localization of the ordinary Hom complex. Signed reindexing gives raw shifts; multiply by the quadratic correction. Its cocycle identity cancels tensor interchange signs. This is the native closed-category counterpart of the ringed coefficient calculation.",
-   "uses": [
-    "lem-coef-signed-derived-internal-hom-exact"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 08J9 and 08JC; signed internal Hom and its evaluation transpose, as expanded in steps 1--6 of lem-sf-site-hom-comparison-thick."
-   }
+   "text": "Prove naturality of the raw source-shift mate by tensor-shift naturality, conjugateEquiv_whiskerLeft and conjugateEquiv_comp. Transport through -(-n)=n and multiply by the common quadratic scalar to obtain natural signed components. This calculation is implemented by the private naturality helpers, without a new assumption.",
+   "uses": [],
+   "elementary": true
   },
   {
-   "text": "Identify Hom(Cone(f),I) with the mapping cocone of Hom(f,I) by the signed summand calculation. The connecting morphism agrees with the corrected shift. Localize and transport along representing isomorphisms to every distinguished triangle.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 08J9 and 08JC; signed internal Hom and its evaluation transpose, as expanded in steps 1--6 of lem-sf-site-hom-comparison-thick."
-   }
+   "text": "Form a natural isomorphism for each integer using exactly the scalar multiple of siteHomOppositeSourceShift. The zero and addition component equations of lem-sf-native-hom-signed-shift-laws prove CommShift.isoZero and isoAdd by extensionality. Thus all maps of the resulting CommShift structure are fixed explicitly.",
+   "uses": [
+    "lem-sf-native-hom-signed-shift-laws"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For an arbitrary distinguished triangle of the triangulated opposite, use mem_distTriang_op_iff to present it by a distinguished original triangle, then DerivedCategory.mem_distTriang_iff to present the latter by a localized ordinary cone. The normalized cone-boundary lemma proves that exact image distinguished. Apply H.mapTriangle to the composite presenting isomorphism and transport distinguishedness. Every integer shift component has the desired formula definitionally.",
+   "uses": [
+    "lem-sf-native-hom-localized-cone-boundary"
+   ],
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-coef-signed-derived-internal-hom-exact"
+  "lem-sf-native-hom-signed-shift-laws",
+  "lem-sf-native-hom-localized-cone-boundary"
  ],
  "proof_origin": {
   "by": "agent",
-  "group": "Q1",
-  "date": "2026-10-25",
-  "note": "Extracted genuine intermediate steps of the parent proof, not a restatement of its conclusion."
+  "group": "C3",
+  "date": "2026-10-28",
+  "note": "Complete Lean assembly with proved mate naturality, reduced to the zero/addition equations and the normalized ordinary cone-boundary calculation. A decomposition, not a completed signed exactness proof."
  },
  "mathlib_searches": [
   {
@@ -104,12 +105,9 @@
   "by": "Q1",
   "date": "2026-10-25",
   "declarations": [
-   "AlgebraicGeometry.ProEtale.siteHomTensorParameterShift",
-   "AlgebraicGeometry.ProEtale.siteHomSourceShift",
-   "AlgebraicGeometry.ProEtale.siteHomOppositeSourceShift",
    "AlgebraicGeometry.ProEtale.nativeDerivedHom_signed_exact"
   ],
-  "note": "The three pre-existing shift constructions are relocated from SiteHomComparisonThick to permit the strictly lower native exactness statement without an import cycle. Their names, signatures, docstrings and construction bodies are unchanged; irreducibility attributes bound expansion of the canonical mates."
+  "note": "The original theorem signature is unchanged. The three existing shifts move verbatim to NativeHomSignedShiftLaws, publicly reexported here. Explicit private isomorphisms and CommShift data are constructed from the equations; no arbitrary witness is chosen."
  },
  "reviewed": {
   "date": "2026-10-25",
@@ -122,13 +120,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-25",
+  "date": "2026-10-27",
   "by": "L",
-  "reviewer": "C-50959",
-  "group": "Q1",
-  "result": "pass",
-  "landing": "20261025T164119-L-953435",
+  "reviewer": "C-f80ad",
+  "group": "C3",
+  "result": "fix",
+  "landing": "20261027T233823-L-4120299",
   "kind": "interface",
-  "note": "independent cc review: item proof assembly + 3 new nodes/modules against lem-sf-site-hom-comparison-thick, change record site-hom-native-shifts, existing nativeInternalHom_contravariant_exact (sign convention), unit sk-prop-sf-rf-shriek-preservation realized; importer LisseFlatHomSiteComparison compiled against delivery"
+  "note": "independent cc review: item nativeDerivedHom_signed_exact (signature identical to clone) + new modules NativeHomSignedShiftLaws/NativeHomLocalizedConeBoundary vs their nodes, change record and the 2 direct importers (both compiled OK against the delivery)"
  }
 }

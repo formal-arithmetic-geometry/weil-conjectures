@@ -1,0 +1,128 @@
+{
+ "kind": "statement",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 08J9 and 08JC; lemma-RHom-triangulated (details omitted). Agent expansion using the native signed Hom and total tensor conventions."
+ },
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.NativeDerivedHomSignedExact",
+  "date": "2026-10-28",
+  "group": "C3"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-rf-shriek-preservation",
+ "id": "lem-sf-native-hom-localized-cone-boundary",
+ "title": "Prescribed native-Hom boundary on localized ordinary cones",
+ "statement": "Let C be a closed braided monoidal Grothendieck abelian category with additive tensor and functorial flat resolutions. Use its canonical closed derived category [def-weil-abstract-derived-category, def-pur-derived-internal-hom]. For M in D(C) and a cochain map f:E→G, let T be the triangulated-opposite triangle of Q applied to the ordinary cone triangle of f. Put H(K)=ihom(K,M). Then the triangle with arrows H(T.mor₁), H(T.mor₂), and H(T.mor₃) followed by -siteHomOppositeSourceShift(T.obj₁.unop,1)_M is distinguished. The shift comparison is the explicit signed source component from [lem-sf-native-hom-signed-shift-laws]; this asserts only a boundary calculation on ordinary cones, with no CommShift structure assumed on H.",
+ "stmt_deps": [
+  "def-weil-abstract-derived-category",
+  "def-pur-derived-internal-hom",
+  "lem-sf-native-hom-signed-shift-laws"
+ ],
+ "proof": [
+  {
+   "text": "Choose a K-injective I representing M. The product Hom complex U(P) has differential at source product index p equal to (-1)^p times postcomposition by d_I minus precomposition by d_P. The evaluation-curried qhInternalHomToIhom gives a natural isomorphism Q(U(P))≅ihom(Q(P),Q(I)), because I is K-injective. The closed derived tensor here is the canonical K-flat tensor from [def-pur-derived-internal-hom]. These are exactly the model and comparison used for the already proved native internal-Hom exactness.",
+   "uses": [
+    "def-pur-derived-internal-hom"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For f:E→G, the signed bifunctor cone isomorphism identifies U(Cone f) with Cone(Uf)[-1]. At degree n, restrict a Hom component to G^p and E^(p+1), writing x_p,a_p. The coordinates are (y,x), y_j=(-1)^(j-1)a_(j-1), and the inverse is a_p=(-1)^p y_(p+1). The differential becomes (-d*y-U(f)*x,d*x); restriction to G is the x projection. Thus the first two squares of the inverse-rotated cone triangle commute. The existing bifunctor homotopy exactness proves this triangle distinguished with the explicit signed reindexing structure; its proof uses exactly these cone coordinates.",
+   "uses": [
+    "lem-sf-signed-bifunctor-cone-iso",
+    "lem-sf-bifunctor-homotopy-exact"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Identify the degree-one boundary with the actual mate in the statement. Transpose it by evaluation. For source shift r=-1, the raw adjoint mate reindexes the source product factor p of U(P[-1]) to p-1 in U(P)[1], with coefficient (-1)^(p-1), since the tensor argument shift crosses the original source degree p-1. The q(1)=1 scalar changes this to (-1)^p. This is the inverse of the explicit ordinary signed shift at -1, whose coefficient at the factor p is (-1)^p. To check the connecting arrow directly, use the termwise split cone sequence and its connecting cochain h. In the reversed Hom sequence the differential on its section and retraction gives (-1)^(p+1) times precomposition by h_p at the product factor P^p→I^(p+n+1); the postcomposition term vanishes because the two cone summands are disjoint. Applying the opposite third arrow h[-1].op and the just-computed corrected mate gives the identical coefficient. The third triangle square therefore commutes, not just the first two.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Apply localization Q to that cone triangle and its three commuting squares, and then the evaluation-characterized qhInternalHomToIhom isomorphisms. Its naturality in the source identifies the first two arrows; the evaluation transpose in the preceding step identifies the third. Finally transport Q(I)≅M using the coefficient naturality of the mate. Isomorphic triangles preserve distinguishedness. The result is exactly the displayed Triangle.mk on the opposite of the localized ordinary cone. Only ordinary cone inputs and the degree-one mate have been checked; arbitrary distinguished inputs and all-integer coherence are not assumed.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pur-derived-internal-hom",
+  "lem-sf-bifunctor-homotopy-exact",
+  "lem-sf-signed-bifunctor-cone-iso"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "C3",
+  "date": "2026-10-28",
+  "note": "Explicit expansion of the native mate/cone calculations in the assigned proof, preserving the unit route."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Derived internal Hom sends localization of mapping cone triangle to distinguished reversed triangle with signed source shift",
+   "results": "DerivedCategory.mem_distTriang_iff and mappingCone shift/triangle isomorphisms. No boundary normalized by the closed tensor mate.",
+   "date": "2026-10-28",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Internal Hom sends an ordinary mapping cone to a mapping cocone with prescribed signed connecting arrow",
+   "results": "mappingCone.desc, shiftIso and shift_f_comp_mappingConeHomOfDegreewiseSplitIso_inv_assoc. None identifies the native mate with the connecting arrow.",
+   "date": "2026-10-28",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "qhInternalHomToIhom|exists_distinguished_ihom_pre|signed.*cone|nativeInternalHom_contravariant_exact",
+   "results": "ClosedTriangulated supplies evaluation comparison and exactness with an unspecified third arrow; SignedBifunctorConeIso supplies the chain coordinates; NativeInternalHomExact supplies unspecified CommShift. The prescribed degree-one mate comparison remains.",
+   "date": "2026-10-28",
+   "verdict": "no exact match"
+  }
+ ],
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-finite-duality-site-comparison",
+   "place": "Proof, second paragraph: internal Hom is triangulated in the first variable, with the same Hom-complex argument on the pro-etale site. This node isolates its ordinary-cone calculation with the actual native mate boundary.",
+   "via": [
+    "lem-sf-native-derived-hom-signed-exact",
+    "lem-sf-site-hom-comparison-thick"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.NativeHomLocalizedConeBoundary",
+  "file": "lean/Sheaf/CategoryTheory/NativeHomLocalizedConeBoundary.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.nativeHom_localized_cone_boundary",
+  "statement": "theorem nativeHom_localized_cone_boundary\n    {C : Type d} [Category.{u + 1} C] [Abelian C]\n    [IsGrothendieckAbelian.{u + 1} C] [MonoidalCategory C]\n    [MonoidalPreadditive C] [MonoidalClosed C] [BraidedCategory C]\n    [Abelian.HasFunctorialFlatResolution C]\n    {E G : CochainComplex C ℤ} (f : E ⟶ G) (M : DerivedCategory C) :\n    let H := MonoidalClosed.internalHom.flip.obj M\n    let T := (triangleOpEquivalence (DerivedCategory C)).functor.obj\n      (op (DerivedCategory.Q.mapTriangle.obj (CochainComplex.mappingCone.triangle f)))\n    Triangle.mk (H.map T.mor₁) (H.map T.mor₂)\n      (H.map T.mor₃ ≫ siteHomSignedSourceComponent M 1 T.obj₁) ∈\n        distTriang (DerivedCategory C)",
+  "branch": "sheaf-dag",
+  "by": "C3",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-f80ad",
+  "group": "C3",
+  "result": "fix",
+  "landing": "20261027T233823-L-4120299",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-f80ad",
+  "group": "C3",
+  "result": "fix",
+  "landing": "20261027T233823-L-4120299",
+  "kind": "interface",
+  "note": "independent cc review: item nativeDerivedHom_signed_exact (signature identical to clone) + new modules NativeHomSignedShiftLaws/NativeHomLocalizedConeBoundary vs their nodes, change record and the 2 direct importers (both compiled OK against the delivery)"
+ }
+}
