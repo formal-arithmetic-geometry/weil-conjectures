@@ -5,6 +5,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import Sheaf.SixFunctors.IntegralSystemProperOpenTransportAdjunct
+import Sheaf.SixFunctors.IntegralSystemProperOpenTransportBridge
 
 /-! Canonical part of the intrinsic proper/open transport package. -/
 
@@ -38,6 +39,12 @@ theorem integralSystemProperOpenTransportCanonical (o : Operations l E)
           ((b.push l E r).hom.app M) ≫
         (ProEtale.SemilinearProperOpen.gamma (scalarRings l E) (scalarTransitions l E)
           k r p i h).app M := by
-  sorry
+  intro U V W Z k r p i hk hi qk qi hr hp h M
+  have hn := properOpenTransportMate_normalized l E o c a b h₀ k r p i h M
+  have hb := properOpenTransportMate_bridge l E o c a b k r p i h M
+  have hi := integralSystemIntrinsicMate l E k r p i h M
+  rw [hi] at hb
+  rw [hn]
+  exact hb
 
 end WeilConjectures.IntegralSystemRealization
