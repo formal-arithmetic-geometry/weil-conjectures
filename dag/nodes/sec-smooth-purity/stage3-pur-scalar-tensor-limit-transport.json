@@ -1,0 +1,117 @@
+{
+ "id": "stage3-pur-scalar-tensor-limit-transport",
+ "kind": "statement",
+ "title": "Transport of the strict scalar tensor comparison to total limits",
+ "statement": "Fix l,E,L,iota,W and coefficient system calculi SE,SL, normalized Roos models rhoE,rhoL, a normalized scalar model SY, and tensor models TE,TL as in the tensor limit-square statement. Let α be any derived natural isomorphism satisfying DerivedSigmaModel for SE and SL. For integral constructible M,N and a completeness proof for their completed E tensor, the composite of scalarTensorCompleted, TL.realization and the total limit of the SL tensor of the two scalarReduction maps equals SY.realization followed by the total limit of sequence scalar applied to tensorReduction_E and then α. This is the localization and total-limit transport step; finite strict tensor balancing is contained in the hypothesis DerivedSigmaModel.",
+ "stmt_deps": [
+  "def-pur-scalar-extension-tower-data",
+  "def-trf-integral-comparison-realization-models",
+  "lem-pur-integral-operations-scalar-extension",
+  "stage3-pur-derived-scalar-tensor-normalization"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex; literature/stacks-project/sites-modules.tex; literature/blueprint/latest/blueprint/sec-proetale-coefficients/sk-prop-sf-open-closed-triangle/def-weil-derived-pullback-tensor-hom.md",
+  "place": "Tags 07A4 and 0941; localization and derived-limit part of realization step 8 of lem-pur-scalar-extension-tower-coherence."
+ },
+ "proof": [
+  {
+   "text": "Choose simultaneous flat-term K-flat representatives of M and N. Apply the normalization equations of SY and TL to their quotient presentations and use DerivedSigmaModel to identify the strict scalar/tensor map. Naturality of the Roos bridge and completion isomorphisms transports the equality from representatives to completed objects; localization removes representative choices and total-limit functoriality gives the displayed equation. Zero complexes, identity coefficients and ramified quotient transitions satisfy the same transport.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "lem-pur-kflat-change-of-rings-independent",
+    "stage3-pur-derived-scalar-tensor-normalization",
+    "lem-pur-coefficient-extension-reduction-model",
+    "lem-pur-integral-operations-scalar-extension",
+    "def-trf-integral-comparison-realization-models"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-kflat-resolution",
+  "lem-pur-kflat-change-of-rings-independent",
+  "stage3-pur-derived-scalar-tensor-normalization",
+  "lem-pur-coefficient-extension-reduction-model",
+  "lem-pur-integral-operations-scalar-extension",
+  "def-trf-integral-comparison-realization-models"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/sites-cohomology.tex; literature/stacks-project/sites-modules.tex; literature/blueprint/latest/blueprint/sec-proetale-coefficients/sk-prop-sf-open-closed-triangle/def-weil-derived-pullback-tensor-hom.md",
+  "place": "Localization and derived-limit transport after the strict normalized scalar tensor equation."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Transport a normalized strict scalar tensor comparison through completion, realization and coefficient sequence total limit",
+   "results": "Only generic localization and total-limit functoriality; no theorem for the supplied normalized realization models.",
+   "date": "2026-10-28",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedSigmaModel coefficientSequenceLimit tensorReduction",
+   "results": "No matching project theorem; generic CategoryTheory.Functor.map_comp and localization APIs only.",
+   "date": "2026-10-28",
+   "verdict": "ingredients only"
+  },
+  {
+   "tool": "grep",
+   "query": "scalarTowerTensorLimitSquare_of_derivedSigmaModel|DerivedSigmaModel.*coefficientSequenceLimit",
+   "results": "The transport statement is new; existing normalization predicates provide the strict input.",
+   "date": "2026-10-28",
+   "verdict": "no existing declaration"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ScalarTowerTensorLimitSquare",
+  "date": "2026-10-28",
+  "group": "V1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "stage3-pur-scalar-tensor-limit-square",
+   "place": "Localization and derived-limit transport substep of realization step 8.",
+   "via": [
+    "lem-pur-scalar-extension-tower-coherence"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-purity-conv",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ScalarTowerTensorLimitSquareTransport",
+  "file": "lean/Sheaf/Paper/ScalarTowerTensorLimitSquareTransport.lean",
+  "declaration": "WeilConjectures.ScalarExtensionTower.scalarTowerTensorLimitSquare_of_derivedSigmaModel",
+  "statement": "theorem scalarTowerTensorLimitSquare_of_derivedSigmaModel (W : Scheme.{u})\n    (SE : CoefficientDerivedSystemCalculus.{u, u} l E W)\n    (SL : CoefficientDerivedSystemCalculus.{u, u} l L W)\n    (ρE : IntegralComparisonRoosModel.{u, u} l E W)\n    (ρL : IntegralComparisonRoosModel.{u, u} l L W)\n    (SY : IntegralComparisonScalarModel.{u, u} l E L ι W SE ρL)\n    (TE : TensorModel l E W SE ρE) (TL : TensorModel l L W SL ρL)\n    (_hl : IsUnit (l : Γ(W, ⊤)))\n    (M N : sfIntegralConstructibleCategory l E W)\n    (hT : IsSfDerivedComplete l E W\n      ((integralCompletedTensor.{u, u} l E W).obj (M.obj, N.obj)))\n    (α : SE.systemClosed.tensor ⋙ integralComparisonDerivedSequenceScalar.{u, u} l E L ι W ≅\n      (integralComparisonDerivedSequenceScalar.{u, u} l E L ι W).prod\n        (integralComparisonDerivedSequenceScalar.{u, u} l E L ι W) ⋙ SL.systemClosed.tensor)\n    (hα : DerivedSigmaModel l E L ι W SE SL α) :\n    (scalarTensorCompleted l E L ι W M.obj N.obj M.property.1 N.property.1 hT).hom ≫\n        TL.realization.hom.app\n          ((integralScalarExtension.{u} l E L ι W).obj M.obj,\n            (integralScalarExtension.{u} l E L ι W).obj N.obj) ≫\n        (coefficientSequenceLimit.{u, u} l L W).map\n          (SL.systemClosed.tensor.map (Prod.mkHom\n            (scalarReduction l E L ι W SE SL ρL SY M.obj)\n            (scalarReduction l E L ι W SE SL ρL SY N.obj))) =\n      SY.realization.hom.app\n          ((integralCompletedTensor.{u, u} l E W).obj (M.obj, N.obj)) ≫\n        (coefficientSequenceLimit.{u, u} l L W).map\n          ((integralComparisonDerivedSequenceScalar.{u, u} l E L ι W).map\n            (tensorReduction l E W SE ρE TE M.obj N.obj) ≫\n          α.hom.app (SE.reduction.obj M.obj, SE.reduction.obj N.obj))",
+  "branch": "sheaf-dag",
+  "by": "V1",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V1",
+  "result": "pass",
+  "landing": "20261027T210255-L-1682564",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V1",
+  "result": "pass",
+  "landing": "20261027T210255-L-1682564",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

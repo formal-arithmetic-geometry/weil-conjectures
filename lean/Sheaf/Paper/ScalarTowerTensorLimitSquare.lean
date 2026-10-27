@@ -6,6 +6,7 @@ Authors: SHEAF group B4
 module
 
 public import Sheaf.Paper.ScalarExtensionTowerRealizationData
+import Sheaf.Paper.ScalarTowerTensorLimitSquareTransport
 
 /-! # Canonical scalar comparison in total-limit coordinates
 
@@ -78,6 +79,12 @@ theorem scalarTowerTensorLimitSquare (W : Scheme.{u})
           ((integralComparisonDerivedSequenceScalar.{u, u} l E L ι W).map
             (tensorReduction l E W SE ρE TE M.obj N.obj) ≫
           (derivedSigma l E L ι W SE SL).hom.app
-            (SE.reduction.obj M.obj, SE.reduction.obj N.obj)) := by sorry
+            (SE.reduction.obj M.obj, SE.reduction.obj N.obj)) := by
+  have hα := (derivedSigma_existsUnique l E L ι W SE SL).exists.choose_spec
+  let α := derivedSigma l E L ι W SE SL
+  have hα' : DerivedSigmaModel l E L ι W SE SL α := by
+    simpa only [α, derivedSigma] using hα
+  exact scalarTowerTensorLimitSquare_of_derivedSigmaModel l E L ι W SE SL ρE ρL SY TE TL
+    _hl M N hT α hα'
 
 end WeilConjectures.ScalarExtensionTower
