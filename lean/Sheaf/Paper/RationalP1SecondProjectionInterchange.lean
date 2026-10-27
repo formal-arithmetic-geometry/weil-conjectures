@@ -6,6 +6,8 @@ Authors: SHEAF group M3
 module
 
 public import Sheaf.Paper.RationalP1SecondPretraceData
+import Sheaf.Paper.RationalP1SecondProjectionInterchangeCore
+import Sheaf.Paper.RationalP1SecondProjectionInterchangeTail
 
 /-! # Interchanging a Tate factor with the second projection
 
@@ -70,6 +72,34 @@ theorem second_projection_interchange
           (line l c (ProjectiveLine Y)) (line l c (diagonalSurface Y))
           (secondLineComparison l c k p hpl Y)
           ((moduleObjectDerivedPullback Λ (firstProjection Y)).obj (H.obj (F.obj K))) =
-      (H.obj (F.obj K) ◁ z) ≫ secondForwardProjection l c k p hpl Y K := by sorry
+      (H.obj (F.obj K) ◁ z) ≫ secondForwardProjection l c k p hpl Y K := by
+  dsimp
+  let Λ := (coefficient l c).X
+  have h := (secondTraceStrength_naturality l c k p hpl Y K V
+      ((moduleObjectDerivedPushforward Λ (secondProjection Y)).obj
+        (((DerivedCategory.singleFunctor (Modules Λ (diagonalSurface Y)) 0).obj
+          (line l c (diagonalSurface Y))) ⟦(2 : ℤ)⟧))
+      ((moduleObjectDerivedPushforward Λ (secondProjection Y)).obj
+        ((moduleObjectDerivedPullback Λ (firstProjection Y)).obj
+          ((twist Λ (ProjectiveLine Y) (line l c (ProjectiveLine Y))).obj
+            ((moduleObjectDerivedPullback Λ (ProjectiveLine Y ↘ Y)).obj K))))
+      ((moduleObjectDerivedPushforward Λ (secondProjection Y)).obj
+        ((twist Λ (diagonalSurface Y) (line l c (diagonalSurface Y))).obj
+          ((moduleObjectDerivedPullback Λ (firstProjection Y)).obj
+            ((twist Λ (ProjectiveLine Y) (line l c (ProjectiveLine Y))).obj
+              ((moduleObjectDerivedPullback Λ (ProjectiveLine Y ↘ Y)).obj K))))) z
+      (secondExtractProjection l c k p hpl Y K)
+      (twistProjectionMap Λ (secondProjection Y)
+        (line l c (ProjectiveLine Y)) (line l c (diagonalSurface Y))
+        (secondLineComparison l c k p hpl Y)
+        ((moduleObjectDerivedPullback Λ (firstProjection Y)).obj
+          ((twist Λ (ProjectiveLine Y) (line l c (ProjectiveLine Y))).obj
+            ((moduleObjectDerivedPullback Λ (ProjectiveLine Y ↘ Y)).obj K)))
+  ))
+  rw [h]
+  exact congrArg (fun f ↦
+    ((twist (coefficient l c).X (ProjectiveLine Y) (line l c (ProjectiveLine Y))).obj
+      ((moduleObjectDerivedPullback (coefficient l c).X (ProjectiveLine Y ↘ Y)).obj K) ◁ z) ≫ f)
+    (second_projection_tail_cancellation l c k p hpl Y K)
 
 end AlgebraicGeometry.ProEtale.RationalP1

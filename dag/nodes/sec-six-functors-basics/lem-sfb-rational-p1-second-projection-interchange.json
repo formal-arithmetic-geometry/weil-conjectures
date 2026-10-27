@@ -17,45 +17,28 @@
  },
  "proof": [
   {
-   "text": "Expand S and use tensorShiftIso naturality to cancel the monoidal tensorator with the inverse displayed inside H. Thus only the native associators and interchange of the outside line with F(V) remain.",
+   "text": "Apply the generic shifted-strength naturality theorem to z, the fixed secondExtractProjection, and twistProjectionMap. This rewrites the left side as the outside whiskering of the generic strength tail followed by the two fixed maps.",
    "uses": [
-    "def-sfb-rational-p1-second-pretrace-data",
-    "def-sfb-tate-twisted-projection-comparison"
+    "lem-sfb-rational-p1-second-projection-interchange-core"
    ],
    "elementary": false
   },
   {
-   "text": "Apply the two-factor projection identity for p2. Naturality in its second input moves the arbitrary z to the source. Use the root-normalized comparisons to identify both pulled lines with L_W[2]. On a root frame their self-interchange is identity: the underlying rank-one line gives ab=ba and the two degree-two shifts give (-1)^4=1. The local equality descends and survives totalization.",
+   "text": "Apply the fixed projection-tail cancellation theorem and whisker its equality on the left by H(FK) ◁ z. The resulting composite is exactly secondForwardProjection, giving the target equality for arbitrary z.",
    "uses": [
-    "lem-sfb-ringed-projection-tensor-composition",
-    "lem-pd-module-ringed-topos-derived-comparison",
-    "sk-def-sp-tate-twist",
-    "def-sfb-rational-tate-pullback-comparison"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Cancel the first pullTwistIso in D_K against the one in secondPullComparison. Its remaining factors are the twist of the self-square comparison and the inverse second pullTwistIso. The tensorShiftIso pairs cancel. This is precisely the defining forward word secondForwardProjection.",
-   "uses": [
-    "def-sfb-rational-p1-second-pretrace-data",
-    "def-sfb-rational-p1-second-pull-comparison"
+    "lem-sfb-rational-p1-second-projection-interchange-tail"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "def-sfb-rational-p1-second-pretrace-data",
-  "def-sfb-tate-twisted-projection-comparison",
-  "lem-sfb-ringed-projection-tensor-composition",
-  "lem-pd-module-ringed-topos-derived-comparison",
-  "sk-def-sp-tate-twist",
-  "def-sfb-rational-tate-pullback-comparison",
-  "def-sfb-rational-p1-second-pull-comparison"
+  "lem-sfb-rational-p1-second-projection-interchange-core",
+  "lem-sfb-rational-p1-second-projection-interchange-tail"
  ],
  "proof_origin": {
-  "by": "agent",
+  "by": "worker",
   "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-p1-adjunction-rational/sk-prop-p1-adjunction-rational-triangle.proof.md",
-  "place": "Second identity: extraction of q*K and cancellation of the projection, before applying a trace."
+  "place": "Second identity: monoidal strength naturality followed by fixed projection-tail cancellation."
  },
  "mathlib_searches": [
   {
@@ -144,11 +127,11 @@
  "reviewed_proof": {
   "date": "2026-10-27",
   "by": "L",
-  "reviewer": "C-10dda",
-  "group": "M3",
-  "result": "fix",
-  "landing": "20261027T210135-L-1662446",
+  "reviewer": "COMPILER",
+  "group": "C5",
+  "result": "pass",
+  "landing": "20261027T233831-L-4121595",
   "kind": "interface",
-  "note": "independent cc review: second_pretrace statement byte-identical to clone; moved defs verbatim in RationalP1SecondPretraceData; 2 new holes read against their nodes; direct importers ScalarChernMaps/SecondScalarTrace compiled OK against delivered set"
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
