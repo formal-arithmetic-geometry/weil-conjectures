@@ -1,0 +1,144 @@
+{
+ "id": "lem-sfb-tower-scalar-finite-boundary",
+ "kind": "statement",
+ "title": "Scalar extension and finite evaluation of an arbitrary integral arrow",
+ "statement": "Let $\\ell$ be prime, let $E/\\mathbf Q_\\ell$ be finite, and let $T$ be a scheme. Fix Chern data $c$ [def-sp-tower-class-chern], assuming only its scalar-unit normalization [def-sp-tower-class-reduction]. For any integral coefficient-linear arrow $f:R_T[0]\\to c.rootModule[2]$ and level $n\\geq0$, scalar-extend $f$ using $c.scalarUnit^{-1}$, the canonical scalar shift comparison, and the universal lineComparison. Evaluate, identify the target by the pure-tensor lineEvaluation [def-sp-tower-class-diagonal], and forget finite scalars. After precomposition with finiteQuotient, this equals finite evaluation of the underlying integral arrow, precomposed with integerGenerator and postcomposed with rootForget, followed by finiteRootMap [def-sp-tower-class-finite]. The equation is finiteBoundaryEquality with its two canonical endpoint transports. No integral source normalization, Kummer target normalization, or line-bundle construction of $f$ is assumed. The underlying integral arrow is the generic endpoint-transport composite [def-sfb-tower-underlying-arrow]. The scalar-extended arrow is the constructed scalarChernArrow [def-sfb-scalar-chern-arrow]. The displayed equality is the constructed proposition ScalarFiniteBoundary [def-sfb-scalar-finite-boundary].",
+ "stmt_deps": [
+  "def-sp-tower-class-chern",
+  "def-sp-tower-class-reduction",
+  "def-sp-tower-class-diagonal",
+  "def-sp-tower-class-finite",
+  "def-sfb-tower-underlying-arrow",
+  "def-sfb-scalar-chern-arrow",
+  "def-sfb-scalar-finite-boundary"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-classes.proof.md",
+  "place": "clause (2), evaluation gives the finite Kummer first Chern class; expanded SmoothPurityTowerClasses proof, steps 5--8"
+ },
+ "proof": [
+  {
+   "text": "For the derived scalar model, choose a K-flat resolution of the single root module. Apply ScalarData.transpose_model there and use naturality of the universal counit to cancel the resolution isomorphism. Thus the adjunct of lineComparison is the ordinary scalar unit on the root module. The specified canonical shift structure is the adjunction-induced one: the representative unit formulas and uniqueness of adjunctions identify the supplied normalized scalar adjunction with the canonical one. Consequently this adjunct identity also holds after shifting by two.",
+   "uses": [
+    "def-coef-semilinear-system-models",
+    "def-sp-tower-class-chern"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use naturality of that adjunction on an arbitrary f. The scalar-unit normalization replaces the source adjunct by scalarGenerator. The resulting underlying equation is f followed by the ordinary scalar unit, with all exact-single and shift comparisons retained. Apply exact finite evaluation and forgetting to this equation.",
+   "uses": [
+    "def-sp-tower-class-reduction",
+    "def-coef-semilinear-system-models",
+    "def-sp-tower-class-finite"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The section, restriction and morphism equalities of the recorded Forget functor give the natural additive evaluation comparison. The evaluated composite of integerGenerator with scalarGenerator sends every constant integer k to k times one, so finiteQuotient uniqueness fixes the source map. The ordinary scalar unit sends every root section to one tensor that section, and lineEvaluation has the same pure-tensor formula; finiteRootMap uniqueness fixes the target map. Substitute these maps into the evaluated equation and record the exact-single endpoint transports with HEq. This proves the conclusion without using any Kummer boundary or assumptions on f beyond its type.",
+   "uses": [
+    "def-sp-tower-class-systems",
+    "def-sp-tower-class-diagonal",
+    "def-sp-tower-class-finite"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-coef-semilinear-system-models",
+  "def-sp-tower-class-chern",
+  "def-sp-tower-class-reduction",
+  "def-sp-tower-class-finite",
+  "def-sp-tower-class-systems",
+  "def-sp-tower-class-diagonal"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-classes.proof.md",
+  "place": "clause (2), extension of scalars and exact finite evaluation; steps 2--3 of lem-sfb-normalized-chern-finite-boundary"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Derived scalar extension and finite evaluation preserve the underlying integral extension arrow after precomposition with the integer quotient",
+   "results": "8 results, including Algebra.IsIntegral.quotient, Module.FinitePresentation.isLocalizedModule_mapExtendScalars and IsAlgebraic.restrictScalars_of_isIntegral; none concerns derived sheaf scalar extension.",
+   "date": "2026-10-27",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.homEquiv_naturality_right",
+   "results": "CategoryTheory.Adjunction.homEquiv_naturality_right in Mathlib.CategoryTheory.Adjunction.Basic.",
+   "date": "2026-10-27",
+   "verdict": "Gives the naturality ingredient but not finite evaluation or the fixed coefficient and root maps."
+  },
+  {
+   "tool": "grep",
+   "query": "homEquiv_naturality_(left|right)",
+   "results": "25 hits in Mathlib, generic adjunction naturality applications; none states the specialized scalar/finite normalization.",
+   "date": "2026-10-27",
+   "verdict": "Generic ingredients only; no specialized theorem."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.NormalizedChernFiniteBoundary",
+  "date": "2026-10-27",
+  "group": "E5"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-prop-diagonal-tower-trace",
+   "place": "proof (1): finite evaluation of scalar extension of the integral cycle class",
+   "via": [
+    "lem-sfb-normalized-chern-finite-boundary",
+    "lem-sfb-diagonal-trace-chern-twist-existence"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-diagonal-tower",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.TowerScalarFiniteBoundary",
+  "file": "lean/Sheaf/Paper/TowerScalarFiniteBoundary.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.SpTowerClasses.scalarFiniteBoundary",
+  "statement": "theorem scalarFiniteBoundary (l : ℕ) [Fact l.Prime]\n    (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]\n    {T : Scheme.{u}} (c : Chern l E T)\n    (hc : unitNormalization c.scalar.T\n      (SemilinearSections.res.{u + 1, u, u + 1} (coefficientSystemMap l E T))\n      c.scalar.adjunction c.scalarUnit (scalarGenerator l E T))\n    (f : unit T (Rrings l T) ⟶\n      ((DerivedCategory.singleFunctor (Systems T (Rrings l T)) 0).obj\n        c.rootModule)⟦(2 : ℤ)⟧) (n : ℕ) :\n    ScalarFiniteBoundary l E c f n",
+  "branch": "sheaf-dag",
+  "by": "E5",
+  "date": "2026-10-27"
+ },
+ "merged_into": null,
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E5",
+  "result": "pass",
+  "landing": "20261027T151659-L-1191175",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E5",
+  "result": "pass",
+  "landing": "20261027T151659-L-1191175",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

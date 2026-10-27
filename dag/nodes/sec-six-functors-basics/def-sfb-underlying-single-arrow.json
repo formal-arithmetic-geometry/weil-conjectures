@@ -1,0 +1,114 @@
+{
+ "id": "def-sfb-underlying-single-arrow",
+ "kind": "definition",
+ "title": "Underlying exact single-arrow transport before specializing categories",
+ "statement": "Given an exact additive functor G from an abelian category C to an abelian category D, both with their derived categories, q : I → G(X), y : G(Y) → J and f : single(X) → single(Y)[2], underlyingSingleArrow G q y f is single(q) followed by mapSingleArrow G 2 f [def-sp-tower-class-reduction] and the shift by two of single(y).",
+ "stmt_deps": [
+  "def-sp-tower-class-reduction"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-classes.proof.md",
+  "place": "clause (2), evaluation gives the finite Kummer first Chern class; expanded SmoothPurityTowerClasses proof, steps 5--8"
+ },
+ "proof": [
+  {
+   "text": "Compose the single functor applied to q, the exact functor single-arrow transport of f, and the shift by two of the single functor applied to y. The definition constructs the actual arrow. Both categories and all their witnesses remain parameters, so later specialization need not rebuild their concrete compositions.",
+   "uses": [
+    "def-sp-tower-class-reduction"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-sp-tower-class-reduction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-classes.proof.md",
+  "place": "clause (2), underlying integral arrow in the finite evaluation calculation"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Transport a morphism between shifted single objects in derived categories by an exact functor and compose with specified maps on its source and target",
+   "results": "8 hits including CategoryTheory.Functor.shiftMap, CategoryTheory.ShiftedHom.map and CategoryTheory.ShiftedHom.comp_map.",
+   "date": "2026-10-27",
+   "verdict": "Shifted morphism mapping exists, but this wrapper also includes the exact single comparisons and specified endpoint maps."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.mapDerivedCategorySingleFunctor",
+   "results": "12 hits including mapDerivedCategorySingleFunctor and composition and naturality lemmas in the online search index. The local ExactFunctor file has 149 lines and does not yet contain the online composition lemmas.",
+   "date": "2026-10-27",
+   "verdict": "The local mapDerivedCategorySingleFunctor is the existing comparison used by mapSingleArrow. No endpoint wrapper for arbitrary degree was found."
+  },
+  {
+   "tool": "grep",
+   "query": "mapSingleArrow|mapExtensionEndpoints",
+   "results": "0 Mathlib hits; the project defines mapSingleArrow and the degree-one Ext-specific mapExtensionEndpoints in TowerClassReduction.",
+   "date": "2026-10-27",
+   "verdict": "Use existing mapSingleArrow and compose with specified endpoints in arbitrary degree."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.NormalizedChernFiniteBoundary",
+  "date": "2026-10-27",
+  "group": "E5"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-prop-diagonal-tower-trace",
+   "place": "proof (1): finite evaluation of scalar extension of the integral cycle class",
+   "via": [
+    "lem-sfb-normalized-chern-finite-boundary",
+    "lem-sfb-diagonal-trace-chern-twist-existence"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-diagonal-tower",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.UnderlyingSingleArrow",
+  "file": "lean/Sheaf/Paper/UnderlyingSingleArrow.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.SpTowerClasses.underlyingSingleArrow",
+  "statement": "def underlyingSingleArrow\n    {C : Type u₁} [Category.{v₁} C] [Abelian C]\n    {D : Type u₂} [Category.{v₂} D] [Abelian D]\n    [HasDerivedCategory.{w₁} C] [HasDerivedCategory.{w₂} D]\n    (G : C ⥤ D) [G.Additive] [PreservesFiniteLimits G] [PreservesFiniteColimits G]\n    {X Y : C} {I J : D} (q : I ⟶ G.obj X) (y : G.obj Y ⟶ J)\n    (f : (DerivedCategory.singleFunctor C 0).obj X ⟶\n      ((DerivedCategory.singleFunctor C 0).obj Y)⟦(2 : ℤ)⟧) :\n    (DerivedCategory.singleFunctor D 0).obj I ⟶\n      ((DerivedCategory.singleFunctor D 0).obj J)⟦(2 : ℤ)⟧",
+  "branch": "sheaf-dag",
+  "by": "E5",
+  "date": "2026-10-27"
+ },
+ "merged_into": null,
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E5",
+  "result": "pass",
+  "landing": "20261027T151659-L-1191175",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E5",
+  "result": "pass",
+  "landing": "20261027T151659-L-1191175",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

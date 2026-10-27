@@ -1,0 +1,123 @@
+{
+ "id": "lem-sfb-kummer-raw-composite-comparison",
+ "kind": "statement",
+ "title": "The named Kummer complex gives the original composite",
+ "statement": "For Kummer data k [def-sp-tower-class-systems] and any integer-to-shifted-units arrow f, kummerComposite [def-sp-tower-class-finite] using towerKummerComplex [def-sfb-canonical-kummer-complex] and towerKummerShortExact [lem-sfb-canonical-kummer-exact] equals kummerComposite using the original literal complex ShortComplex.mk k.inclusion k.power k.zero and k.exact.",
+ "stmt_deps": [
+  "def-sp-tower-class-systems",
+  "def-sfb-canonical-kummer-complex",
+  "lem-sfb-canonical-kummer-exact",
+  "def-sp-tower-class-finite"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-classes.proof.md",
+  "place": "clause (2), evaluation gives the finite Kummer first Chern class; expanded SmoothPurityTowerClasses proof, steps 5--8"
+ },
+ "proof": [
+  {
+   "text": "The named complex unfolds to the same actual constructor with the same three objects, maps and zero proof. Its named exactness proof and k.exact prove the same proposition. Subsingleton.elim identifies those proofs; congrArg for the Kummer-composite construction gives the equality without expanding the connecting morphism.",
+   "uses": [
+    "def-sp-tower-class-systems",
+    "def-sfb-canonical-kummer-complex",
+    "lem-sfb-canonical-kummer-exact",
+    "def-sp-tower-class-finite"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-sp-tower-class-systems",
+  "def-sfb-canonical-kummer-complex",
+  "lem-sfb-canonical-kummer-exact",
+  "def-sp-tower-class-finite"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-classes.proof.md",
+  "place": "clause (2), exact evaluation of the integral Kummer composite"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Compose a single shifted units object with the shifted connecting morphism of a short exact Kummer sequence, then evaluate an exact functor",
+   "results": "8 hits, including ShortComplex.ShortExact.singleδ; the others concern homology connecting sequences.",
+   "date": "2026-10-27",
+   "verdict": "Use the existing actual singleδ; this node only names its shifted composite."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.ShortComplex.ShortExact.singleδ",
+   "results": "9 hits including singleδ, singleTriangle_mor₃, extClass_hom and mapShiftedHom_singleδ.",
+   "date": "2026-10-27",
+   "verdict": "The desired boundary is the existing singleδ followed by shift addition. Comparing two names for that same composite needs only reflexivity."
+  },
+  {
+   "tool": "grep",
+   "query": "singleδ",
+   "results": "11 hits in DerivedCategory/SingleTriangle and Ext/Map and Ext/ExtClass.",
+   "date": "2026-10-27",
+   "verdict": "No tower-specific endpoint wrapper; construct it without new mathematical assumptions."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.NormalizedChernFiniteBoundary",
+  "date": "2026-10-27",
+  "group": "E5"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-prop-diagonal-tower-trace",
+   "place": "proof (1): integral reduction of the cycle class and its normalized Kummer boundary",
+   "via": [
+    "lem-sfb-normalized-chern-finite-boundary",
+    "lem-sfb-diagonal-trace-chern-twist-existence"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-diagonal-tower",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.TowerKummerRawComparison",
+  "file": "lean/Sheaf/Paper/TowerKummerRawComparison.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.SpTowerClasses.towerKummerComposite_eq_raw",
+  "statement": "theorem towerKummerComposite_eq_raw (l : ℕ) [Fact l.Prime] {T : Scheme.{u}}\n    (k : Kummer l T)\n    (f : (DerivedCategory.singleFunctor (Ab T) 0).obj (integers T) ⟶\n      ((DerivedCategory.singleFunctor (Ab T) 0).obj (units T))⟦(1 : ℤ)⟧) :\n    kummerComposite (C := Ab T) (towerKummerComplex l k) (towerKummerShortExact l k) f =\n      kummerComposite (C := Ab T)\n        (ShortComplex.mk k.inclusion k.power k.zero) k.exact f",
+  "branch": "sheaf-dag",
+  "by": "E5",
+  "date": "2026-10-27"
+ },
+ "merged_into": null,
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E5",
+  "result": "pass",
+  "landing": "20261027T151659-L-1191175",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E5",
+  "result": "pass",
+  "landing": "20261027T151659-L-1191175",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

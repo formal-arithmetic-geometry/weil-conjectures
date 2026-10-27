@@ -1,0 +1,120 @@
+{
+ "id": "lem-sfb-chern-evaluation-comparison",
+ "kind": "statement",
+ "title": "The scalar-arrow evaluation is the existing evaluated Chern arrow",
+ "statement": "For Chern data c [def-sp-tower-class-chern], each line bundle L and level n, applying forgetEvaluatedArrow [def-sp-tower-class-finite] to scalarChernArrow [def-sfb-scalar-chern-arrow] of firstChernR gives exactly mapSingleArrow of finiteForget applied to evaluatedChern. This is recorded as HEq, so the constructed endpoint types are transported explicitly. No normalization hypothesis is needed: it is an identity of the constructions.",
+ "stmt_deps": [
+  "def-sp-tower-class-chern",
+  "def-sp-tower-class-finite",
+  "def-sfb-scalar-chern-arrow"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-classes.proof.md",
+  "place": "clause (2), evaluation gives the finite Kummer first Chern class; expanded SmoothPurityTowerClasses proof, steps 5--8"
+ },
+ "proof": [
+  {
+   "text": "Unfold the constructed scalarChernArrow, firstChern, forgetEvaluatedArrow and evaluatedChern formulas. Their source isomorphism, scalar map, shift comparison, target comparison, evaluation, target-line isomorphism and finite forgetting occur in exactly the same order. All endpoint transports agree definitionally, so HEq.rfl proves the statement.",
+   "uses": [
+    "def-sp-tower-class-chern",
+    "def-sp-tower-class-finite",
+    "def-sfb-scalar-chern-arrow"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-sp-tower-class-chern",
+  "def-sp-tower-class-finite",
+  "def-sfb-scalar-chern-arrow"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-classes.proof.md",
+  "place": "clause (2), evaluating the scalar construction of the first Chern arrow"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Finite evaluation and forgetting of the scalar extension of an integral first Chern arrow agree with the evaluated Chern arrow",
+   "results": "8 results, including smoothSheafCommRing.ι_evalHom and Scheme.Γevaluation_naturality; none states the identity of these project constructions.",
+   "date": "2026-10-27",
+   "verdict": "No exact match; prove by unfolding the existing definitions."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.CommShift",
+   "results": "12 results, including Functor.CommShift.commShiftIso and Functor.CommShift.comp, in Mathlib.CategoryTheory.Shift.CommShift.",
+   "date": "2026-10-27",
+   "verdict": "The standard shift API is already used inside the project formulas; no additional comparison theorem is needed."
+  },
+  {
+   "tool": "grep",
+   "query": "forgetEvaluatedArrow|evaluatedChern",
+   "results": "0 Mathlib hits.",
+   "date": "2026-10-27",
+   "verdict": "These are project definitions, whose identity is definitional."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.NormalizedChernFiniteBoundary",
+  "date": "2026-10-27",
+  "group": "E5"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-prop-diagonal-tower-trace",
+   "place": "proof (1): integral reduction of the cycle class and its normalized Kummer boundary",
+   "via": [
+    "lem-sfb-normalized-chern-finite-boundary",
+    "lem-sfb-diagonal-trace-chern-twist-existence"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-diagonal-tower",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.TowerChernEvaluationComparison",
+  "file": "lean/Sheaf/Paper/TowerChernEvaluationComparison.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.SpTowerClasses.forgetEvaluatedArrow_firstChernR",
+  "statement": "theorem forgetEvaluatedArrow_firstChernR (l : ℕ) [Fact l.Prime]\n    (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]\n    {T : Scheme.{u}} (c : Chern l E T) (L : T.Pic) (n : ℕ) :\n    HEq (forgetEvaluatedArrow (C := Systems T (Arings l E T))\n      (SpTowerShriek.ev l E T n) (finiteForget l E T n) (lineEvaluation l E c n)\n      (scalarChernArrow l E c (firstChernR l E c L)))\n      (mapSingleArrow (finiteForget l E T n) (2 : ℤ) (evaluatedChern l E c L n))",
+  "branch": "sheaf-dag",
+  "by": "E5",
+  "date": "2026-10-27"
+ },
+ "merged_into": null,
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E5",
+  "result": "pass",
+  "landing": "20261027T151659-L-1191175",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E5",
+  "result": "pass",
+  "landing": "20261027T151659-L-1191175",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

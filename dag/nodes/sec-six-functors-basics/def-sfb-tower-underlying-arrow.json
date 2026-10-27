@@ -1,0 +1,117 @@
+{
+ "id": "def-sfb-tower-underlying-arrow",
+ "kind": "definition",
+ "title": "Underlying Chern arrow with canonical abelian-tower endpoints",
+ "statement": "For ChernData c [def-sp-tower-class-chern] with variable ring towers R and A and their system-ring map, underlyingChernArrow takes an integral coefficient-linear arrow f:unit R→rootModule[2] to the actual abelian-tower arrow from integers to roots[2]. It is the single map of integerGenerator, followed by mapSingleArrow for the recorded exact forgetting functor, followed by the shifted single map of rootForget. Its endpoint category and derived witnesses are explicitly those of Ab T [def-sp-tower-class-systems]. No source, target or scalar normalization is assumed.",
+ "stmt_deps": [
+  "def-sp-tower-class-chern",
+  "def-sp-tower-class-reduction",
+  "def-sp-tower-class-systems",
+  "def-sfb-underlying-single-arrow"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-classes.proof.md",
+  "place": "clause (2), evaluation gives the finite Kummer first Chern class; expanded SmoothPurityTowerClasses proof, steps 5--8"
+ },
+ "proof": [
+  {
+   "text": "Construct underlyingChernArrow by specializing underlyingSingleArrow to the actual forgetful functor, integerGenerator and c.rootForget.hom. This gives the original exact composite, with fixed canonical abelian-tower endpoints.",
+   "uses": [
+    "def-sfb-underlying-single-arrow"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-underlying-single-arrow"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-classes.proof.md",
+  "place": "clause (2), underlying integral arrow in the finite evaluation calculation"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Transport a morphism between shifted single objects in derived categories by an exact functor and compose with specified maps on its source and target",
+   "results": "8 hits including CategoryTheory.Functor.shiftMap, CategoryTheory.ShiftedHom.map and CategoryTheory.ShiftedHom.comp_map.",
+   "date": "2026-10-27",
+   "verdict": "Shifted morphism mapping exists, but this wrapper also includes the exact single comparisons and specified endpoint maps."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.mapDerivedCategorySingleFunctor",
+   "results": "12 hits including mapDerivedCategorySingleFunctor and composition and naturality lemmas in the online search index. The local ExactFunctor file has 149 lines and does not yet contain the online composition lemmas.",
+   "date": "2026-10-27",
+   "verdict": "The local mapDerivedCategorySingleFunctor is the existing comparison used by mapSingleArrow. No endpoint wrapper for arbitrary degree was found."
+  },
+  {
+   "tool": "grep",
+   "query": "mapSingleArrow|mapExtensionEndpoints",
+   "results": "0 Mathlib hits; the project defines mapSingleArrow and the degree-one Ext-specific mapExtensionEndpoints in TowerClassReduction.",
+   "date": "2026-10-27",
+   "verdict": "Use existing mapSingleArrow and compose with specified endpoints in arbitrary degree."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.NormalizedChernFiniteBoundary",
+  "date": "2026-10-27",
+  "group": "E5"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-prop-diagonal-tower-trace",
+   "place": "proof (1): finite evaluation of scalar extension of the integral cycle class",
+   "via": [
+    "lem-sfb-normalized-chern-finite-boundary",
+    "lem-sfb-diagonal-trace-chern-twist-existence"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-diagonal-tower",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.TowerClassArrowTransport",
+  "file": "lean/Sheaf/Paper/TowerClassArrowTransport.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.SpTowerClasses.underlyingChernArrow",
+  "statement": "def underlyingChernArrow (l : ℕ) [Fact l.Prime]\n    {T : Scheme.{u}}\n    {R A : ℕᵒᵖ ⥤ Sheaf (Scheme.ProEt.topology T) CommRingCat.{u + 1}}\n    {φ : WeilConjectures.SemilinearSections.systemRing.{u + 1, u, u + 1}\n        (Scheme.ProEt.topology T) (fun n ↦ R.obj (op n))\n        (fun n ↦ R.map (homOfLE (Nat.le_succ n)).op) ⟶\n      WeilConjectures.SemilinearSections.systemRing.{u + 1, u, u + 1}\n        (Scheme.ProEt.topology T) (fun n ↦ A.obj (op n))\n        (fun n ↦ A.map (homOfLE (Nat.le_succ n)).op)}\n    (c : ChernData l T R A φ)\n    (f : unit T R ⟶\n      ((DerivedCategory.singleFunctor (Systems T R) 0).obj c.rootModule)⟦(2 : ℤ)⟧) :\n    (DerivedCategory.singleFunctor (Ab T) 0).obj (integers T) ⟶\n      ((DerivedCategory.singleFunctor (Ab T) 0).obj (roots l T))⟦(2 : ℤ)⟧",
+  "branch": "sheaf-dag",
+  "by": "E5",
+  "date": "2026-10-27"
+ },
+ "merged_into": null,
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E5",
+  "result": "pass",
+  "landing": "20261027T151659-L-1191175",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E5",
+  "result": "pass",
+  "landing": "20261027T151659-L-1191175",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

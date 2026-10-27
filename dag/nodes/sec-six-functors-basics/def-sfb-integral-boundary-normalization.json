@@ -1,0 +1,122 @@
+{
+ "id": "def-sfb-integral-boundary-normalization",
+ "kind": "definition",
+ "title": "Named integral boundary equality for Chern data",
+ "statement": "For variable coefficient towers R,A and their ring-object map φ, ChernData c [def-sp-tower-class-chern], and f : single(integers) → single(units)[1], IntegralBoundaryNormalization l R A φ c f is exactly Fact of the equality underlyingChernArrow l c (c.unitIso.inv ≫ c.reduction.model.derived.map f ≫ c.rootIso.hom) [def-sfb-tower-underlying-arrow] = f ≫ towerKummerBoundary l c.kummer [def-sfb-positive-kummer-boundary]. The standard Fact.out field is precisely this equality; no additional condition or chosen object is supplied.",
+ "stmt_deps": [
+  "def-sp-tower-class-chern",
+  "def-sfb-tower-underlying-arrow",
+  "def-sfb-positive-kummer-boundary"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-classes.proof.md",
+  "place": "clause (2), evaluation gives the finite Kummer first Chern class; expanded SmoothPurityTowerClasses proof, steps 5--8"
+ },
+ "proof": [
+  {
+   "text": "Construct the exact equality predicate using Fact, the underlying conjugated integral arrow and composition with the actual named positive Kummer boundary.",
+   "uses": [
+    "def-sp-tower-class-chern",
+    "def-sfb-tower-underlying-arrow",
+    "def-sp-tower-class-finite",
+    "def-sfb-positive-kummer-boundary"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-sp-tower-class-chern",
+  "def-sfb-tower-underlying-arrow",
+  "def-sp-tower-class-finite",
+  "def-sfb-positive-kummer-boundary"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-classes.proof.md",
+  "place": "clause (2), actual integral boundary comparison; named to share the category witnesses"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Naturality of a derived adjunction identifies an integral extension arrow conjugated by normalized source and target comparisons with the positive Kummer composite",
+   "results": "8 hits including Adjunction.unit_naturality, counit_naturality_assoc, derived, derived_unit and homEquiv_naturality_right_square_assoc.",
+   "date": "2026-10-27",
+   "verdict": "Generic adjunction ingredients, no theorem for these endpoint comparisons."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.homEquiv_naturality_left",
+   "results": "One hit: Mathlib.CategoryTheory.Adjunction.Basic, Adjunction.homEquiv_naturality_left.",
+   "date": "2026-10-27",
+   "verdict": "Used in the complete generic proof."
+  },
+  {
+   "tool": "grep",
+   "query": "homEquiv_naturality_(left|right)",
+   "results": "25 Mathlib hits in generic adjunctions and their uses.",
+   "date": "2026-10-27",
+   "verdict": "Use the two existing naturality laws; assemble the endpoint normalization directly."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.NormalizedChernFiniteBoundary",
+  "date": "2026-10-27",
+  "group": "E5"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-prop-diagonal-tower-trace",
+   "place": "proof (1): integral reduction of the cycle class and its normalized Kummer boundary",
+   "via": [
+    "lem-sfb-normalized-chern-finite-boundary",
+    "lem-sfb-diagonal-trace-chern-twist-existence"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-diagonal-tower",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.TowerIntegralBoundaryData",
+  "file": "lean/Sheaf/Paper/TowerIntegralBoundaryData.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.SpTowerClasses.IntegralBoundaryNormalization",
+  "statement": "def IntegralBoundaryNormalization (l : ℕ) [Fact l.Prime]\n    {T : Scheme.{u}}\n    (R A : ℕᵒᵖ ⥤ Sheaf (Scheme.ProEt.topology T) CommRingCat.{u + 1})\n    (φ : WeilConjectures.SemilinearSections.systemRing.{u + 1, u, u + 1}\n        (Scheme.ProEt.topology T) (fun n ↦ R.obj (op n))\n        (fun n ↦ R.map (homOfLE (Nat.le_succ n)).op) ⟶\n      WeilConjectures.SemilinearSections.systemRing.{u + 1, u, u + 1}\n        (Scheme.ProEt.topology T) (fun n ↦ A.obj (op n))\n        (fun n ↦ A.map (homOfLE (Nat.le_succ n)).op))\n    (c : ChernData l T R A φ)\n    (f : (DerivedCategory.singleFunctor (Ab T) 0).obj (integers T) ⟶\n      ((DerivedCategory.singleFunctor (Ab T) 0).obj (units T))⟦(1 : ℤ)⟧) : Prop",
+  "branch": "sheaf-dag",
+  "by": "E5",
+  "date": "2026-10-27"
+ },
+ "merged_into": null,
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E5",
+  "result": "pass",
+  "landing": "20261027T151659-L-1191175",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E5",
+  "result": "pass",
+  "landing": "20261027T151659-L-1191175",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

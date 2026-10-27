@@ -13,10 +13,11 @@
  },
  "proof": [
   {
-   "text": "Expand firstChernR as the inverse source comparison followed by reduction of lineBundleClass and the target comparison. Apply the reduction adjunction Hom bijection. Naturality in lineBundleClass, sourceNormalization and targetNormalization identify its composite with the integer generator with the positive Kummer composite. The specified shift-addition comparison keeps its sign.",
+   "text": "Apply integralArrow_of_normalized with the actual quotient towers Rrings and Arings, the coefficientSystemMap, and the two integral normalization equations hc.1 and hc.2.1. Its generic adjunction proof gives the underlying firstChernR arrow as the positive Kummer composite for lineBundleClass. The coefficient towers remain variables inside the proved lemma, sharing its category witnesses.",
    "uses": [
-    "def-sp-tower-class-reduction",
-    "def-sp-tower-class-chern"
+    "lem-sfb-chern-data-integral-normalization",
+    "def-sp-tower-class-chern",
+    "def-sp-tower-class-finite"
    ],
    "elementary": false,
    "source": {
@@ -25,22 +26,11 @@
    }
   },
   {
-   "text": "For scalar extension, choose a K-flat representative and apply the representative transpose identity of ScalarData there. Naturality of the universal counit passes this equality through the resolution isomorphism to the original object; no K-flatness of an arbitrary root module concentrated in degree zero is assumed. Apply the scalar unitNormalization equation. The ordinary unit sends z to one tensor z. The universal scalar counit is exactly the lineComparison appearing in firstChern, including its shift comparison, so the resulting equality uses the actual Chern morphism.",
+   "text": "Extract the three normalization equations once. Apply scalarFiniteBoundary with the scalar-unit equation to every integral arrow and level. Supply this family and the integral normalizations from the first step to the proved finiteChernNormalization_of_arrowComparisons assembly lemma. Its substitution identifies the actual firstChern/evaluatedChern formula with FiniteChernNormalization.",
    "uses": [
-    "def-coef-semilinear-system-models",
-    "def-sp-tower-class-chern"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-classes.proof.md",
-    "place": "clause (2), evaluation gives the finite Kummer first Chern class; expanded SmoothPurityTowerClasses proof, steps 5--8"
-   }
-  },
-  {
-   "text": "Apply exact evaluation and finite forgetting, keeping their canonical single and shift comparisons. Exact functors preserve the connecting morphism of the Kummer short exact sequence. The integer map is finiteQuotient by uniqueness on constant integer sections, and the root map is finiteRootMap by uniqueness on z mapping to one tensor z. The pure-tensor equation for lineEvaluation identifies the target comparison. These equalities, with the two endpoint-transport witnesses, are precisely finiteBoundaryEquality for each line bundle and level.",
-   "uses": [
-    "def-sp-tower-class-finite",
-    "def-sp-tower-class-diagonal"
+    "lem-sfb-tower-scalar-finite-boundary",
+    "lem-sfb-chern-finite-assembly",
+    "def-sp-tower-class-finite"
    ],
    "elementary": false,
    "source": {
@@ -50,16 +40,16 @@
   }
  ],
  "proof_deps": [
-  "def-sp-tower-class-reduction",
+  "lem-sfb-chern-data-integral-normalization",
   "def-sp-tower-class-chern",
-  "def-coef-semilinear-system-models",
   "def-sp-tower-class-finite",
-  "def-sp-tower-class-diagonal"
+  "lem-sfb-tower-scalar-finite-boundary",
+  "lem-sfb-chern-finite-assembly"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-classes.proof.md",
-  "place": "clause (2), evaluation gives the finite Kummer first Chern class; expanded SmoothPurityTowerClasses proof, steps 5--8"
+  "place": "clause (2), integral adjunction naturality and scalar/finite evaluation; E5"
  },
  "mathlib_searches": [
   {
@@ -146,9 +136,9 @@
   "date": "2026-10-27",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "H6",
+  "group": "E5",
   "result": "pass",
-  "landing": "20261027T012844-L-2340165",
+  "landing": "20261027T151659-L-1191175",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

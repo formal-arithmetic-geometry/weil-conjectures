@@ -1,0 +1,104 @@
+{
+ "id": "def-sfb-scalar-chern-arrow",
+ "kind": "definition",
+ "title": "Scalar extension of an arbitrary integral Chern arrow",
+ "statement": "For Chern data c [def-sp-tower-class-chern] and any integral arrow f from the unit of Rrings in degree zero to c.rootModule shifted by two, scalarChernArrow is the actual composite of c.scalarUnit.inv, c.scalar.T.map f, the canonical scalar shift comparison, and lineComparison shifted by two. Its explicit source is unit T (Arings l E T) and its explicit target is line l E c shifted by two. This copies the existing firstChern construction with its integral argument left arbitrary; it is fully constructed, with no chosen data or hole.",
+ "stmt_deps": [
+  "def-sp-tower-class-chern"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-classes.proof.md",
+  "place": "clause (2), evaluation gives the finite Kummer first Chern class; expanded SmoothPurityTowerClasses proof, steps 5--8"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-classes.proof.md",
+  "place": "clause (2), derived scalar extension of the integral class with its fixed source and target comparisons"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Apply a functor commuting with shifts to a shifted morphism and conjugate its source by an isomorphism and its target by a comparison morphism",
+   "results": "8 hits including ShiftedHom.map, Functor.map_shiftFunctorComm and NatTrans.CommShift.shift_comm.",
+   "date": "2026-10-27",
+   "verdict": "Generic shifted mapping exists. Copy the project firstChern construction to preserve its precise comparisons and target type."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.commShiftIso",
+   "results": "0 hits; online index reported unknown identifier.",
+   "date": "2026-10-27",
+   "verdict": "The local project uses commShiftIso directly; the firstChern source supplies the exact formula."
+  },
+  {
+   "tool": "grep",
+   "query": "mapSingleArrow|scalarChernArrow",
+   "results": "0 Mathlib hits.",
+   "date": "2026-10-27",
+   "verdict": "The project firstChern formula is used, with its integral argument abstracted."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.NormalizedChernFiniteBoundary",
+  "date": "2026-10-27",
+  "group": "E5"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-prop-diagonal-tower-trace",
+   "place": "proof (1): finite evaluation of scalar extension of the integral cycle class",
+   "via": [
+    "lem-sfb-normalized-chern-finite-boundary",
+    "lem-sfb-diagonal-trace-chern-twist-existence"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-diagonal-tower",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.TowerScalarChernArrow",
+  "file": "lean/Sheaf/Paper/TowerScalarChernArrow.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.SpTowerClasses.scalarChernArrow",
+  "statement": "def scalarChernArrow (l : ℕ) [Fact l.Prime]\n    (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]\n    {T : Scheme.{u}} (c : Chern l E T)\n    (f : unit T (Rrings l T) ⟶\n      ((DerivedCategory.singleFunctor (Systems T (Rrings l T)) 0).obj\n        c.rootModule)⟦(2 : ℤ)⟧) :\n    unit T (Arings l E T) ⟶ (line l E c)⟦(2 : ℤ)⟧",
+  "branch": "sheaf-dag",
+  "by": "E5",
+  "date": "2026-10-27"
+ },
+ "merged_into": null,
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E5",
+  "result": "pass",
+  "landing": "20261027T151659-L-1191175",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E5",
+  "result": "pass",
+  "landing": "20261027T151659-L-1191175",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

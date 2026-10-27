@@ -1,0 +1,117 @@
+{
+ "id": "lem-sfb-canonical-kummer-exact",
+ "kind": "statement",
+ "title": "Exactness of the named concrete Kummer complex",
+ "statement": "For every Kummer datum k [def-sp-tower-class-systems], its actual named complex towerKummerComplex [def-sfb-canonical-kummer-complex] is short exact. The assertion has no additional hypothesis.",
+ "stmt_deps": [
+  "def-sp-tower-class-systems",
+  "def-sfb-canonical-kummer-complex"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-classes.proof.md",
+  "place": "clause (2), evaluation gives the finite Kummer first Chern class; expanded SmoothPurityTowerClasses proof, steps 5--8"
+ },
+ "proof": [
+  {
+   "text": "The named complex has the same three objects and two maps as the complex in k.exact. The two zero-morphism witnesses are definitionally equal, and the zero-composite proof is proof irrelevant. Therefore the exact field of k proves the assertion.",
+   "uses": [
+    "def-sp-tower-class-systems",
+    "def-sfb-canonical-kummer-complex"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-sp-tower-class-systems",
+  "def-sfb-canonical-kummer-complex"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-classes.proof.md",
+  "place": "clause (2), exact evaluation of the integral Kummer composite"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The zero morphism structures on a category are unique; transport the short exactness proof for the same short complex across these structures",
+   "results": "8 hits, including ShortComplex.ShortExact, shortExact_of_iso, shortExact_iff_of_iso and ShortExact.exact.",
+   "date": "2026-10-27",
+   "verdict": "The required exactness is already the exact field of k; no new exactness theorem is needed."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.HasZeroMorphisms.ext",
+   "results": "One hit: HasZeroMorphisms.ext, uniqueness of zero-morphism structures.",
+   "date": "2026-10-27",
+   "verdict": "The witness paths in this project are already definitionally equal; name the canonical presentation once."
+  },
+  {
+   "tool": "grep",
+   "query": "Subsingleton (HasZeroMorphisms",
+   "results": "The msearch grep returned zero hits; local rg located the Subsingleton instance at Mathlib/CategoryTheory/Limits/Shapes/ZeroMorphisms.lean:105.",
+   "date": "2026-10-27",
+   "verdict": "No new data or mathematical hypothesis is required to share the presentation of the given complex."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.NormalizedChernFiniteBoundary",
+  "date": "2026-10-27",
+  "group": "E5"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-prop-diagonal-tower-trace",
+   "place": "proof (1): integral reduction of the cycle class and its normalized Kummer boundary",
+   "via": [
+    "lem-sfb-normalized-chern-finite-boundary",
+    "lem-sfb-diagonal-trace-chern-twist-existence"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-diagonal-tower",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.TowerCanonicalKummerExact",
+  "file": "lean/Sheaf/Paper/TowerCanonicalKummerExact.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.SpTowerClasses.towerKummerShortExact",
+  "statement": "theorem towerKummerShortExact (l : ℕ) [Fact l.Prime] {T : Scheme.{u}} (k : Kummer l T) :\n    (towerKummerComplex l k).ShortExact",
+  "branch": "sheaf-dag",
+  "by": "E5",
+  "date": "2026-10-27"
+ },
+ "merged_into": null,
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E5",
+  "result": "pass",
+  "landing": "20261027T151659-L-1191175",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E5",
+  "result": "pass",
+  "landing": "20261027T151659-L-1191175",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

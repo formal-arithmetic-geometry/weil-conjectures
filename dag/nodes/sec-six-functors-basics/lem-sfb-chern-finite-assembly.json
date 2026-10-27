@@ -1,0 +1,135 @@
+{
+ "id": "lem-sfb-chern-finite-assembly",
+ "kind": "statement",
+ "title": "Assembling finite Chern normalization from the two arrow comparisons",
+ "statement": "For Chern data c [def-sp-tower-class-chern], assume IntegralBoundaryNormalization [def-sfb-integral-boundary-normalization] for every lineBundleClass and ScalarFiniteBoundary [def-sfb-scalar-finite-boundary] for every integral arrow and finite level. Then c satisfies the original FiniteChernNormalization [def-sp-tower-class-finite]. This is the fully proved substitution of the integral Kummer equality into scalar/finite compatibility.",
+ "stmt_deps": [
+  "def-sp-tower-class-chern",
+  "def-sfb-integral-boundary-normalization",
+  "def-sfb-scalar-finite-boundary",
+  "def-sp-tower-class-finite"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-classes.proof.md",
+  "place": "clause (2), evaluation gives the finite Kummer first Chern class; expanded SmoothPurityTowerClasses proof, steps 5--8"
+ },
+ "proof": [
+  {
+   "text": "At each line bundle and level, use the scalar comparison at firstChernR. Apply congrArg of exact finite evaluation to the proved integral normalization. The proved forgetEvaluatedArrow_firstChernR identity identifies the scalar/evaluated arrow with the existing evaluatedChern after forgetting. Transport the two HEq fields of finiteBoundaryEquality by these two identities, retaining its actual commuting square unchanged. This avoids rewriting the entire proposition with its coefficient-category witnesses.",
+   "uses": [
+    "def-sfb-integral-boundary-normalization",
+    "def-sfb-scalar-finite-boundary",
+    "def-sfb-scalar-chern-arrow",
+    "def-sp-tower-class-finite",
+    "lem-sfb-chern-evaluation-comparison",
+    "lem-sfb-integral-evaluation-comparison"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Use towerKummerBoundary_evaluation to identify the named positive boundary after evaluation with the original kummerComposite required by FiniteChernNormalization. Compose the two HEq witnesses, retaining the same commuting-square equality.",
+   "uses": [
+    "lem-sfb-kummer-evaluation-comparison"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-integral-boundary-normalization",
+  "def-sfb-scalar-finite-boundary",
+  "def-sfb-scalar-chern-arrow",
+  "def-sp-tower-class-finite",
+  "lem-sfb-chern-evaluation-comparison",
+  "lem-sfb-integral-evaluation-comparison",
+  "lem-sfb-kummer-evaluation-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-classes.proof.md",
+  "place": "clause (2), final equality of the evaluated first Chern arrow and the finite Kummer boundary"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Naturality of a derived adjunction identifies an integral extension arrow conjugated by normalized source and target comparisons with the positive Kummer composite",
+   "results": "8 hits including Adjunction.unit_naturality, counit_naturality_assoc, derived, derived_unit and homEquiv_naturality_right_square_assoc.",
+   "date": "2026-10-27",
+   "verdict": "Generic adjunction ingredients, no theorem for these endpoint comparisons."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.homEquiv_naturality_left",
+   "results": "One hit: Mathlib.CategoryTheory.Adjunction.Basic, Adjunction.homEquiv_naturality_left.",
+   "date": "2026-10-27",
+   "verdict": "Used in the complete generic proof."
+  },
+  {
+   "tool": "grep",
+   "query": "homEquiv_naturality_(left|right)",
+   "results": "25 Mathlib hits in generic adjunctions and their uses.",
+   "date": "2026-10-27",
+   "verdict": "Use the two existing naturality laws; assemble the endpoint normalization directly."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.NormalizedChernFiniteBoundary",
+  "date": "2026-10-27",
+  "group": "E5"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-prop-diagonal-tower-trace",
+   "place": "proof (1): integral reduction of the cycle class and its normalized Kummer boundary",
+   "via": [
+    "lem-sfb-normalized-chern-finite-boundary",
+    "lem-sfb-diagonal-trace-chern-twist-existence"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-diagonal-tower",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.TowerFiniteChernAssembly",
+  "file": "lean/Sheaf/Paper/TowerFiniteChernAssembly.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.SpTowerClasses.finiteChernNormalization_of_arrowComparisons",
+  "statement": "theorem finiteChernNormalization_of_arrowComparisons (l : ℕ) [Fact l.Prime]\n    (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]\n    {T : Scheme.{u}} (c : Chern l E T)\n    (hi : ∀ L : T.Pic, IntegralBoundaryNormalization l\n      (Rrings l T) (Arings l E T) (coefficientSystemMap l E T) c (lineBundleClass T L))\n    (hs : ∀ (f : unit T (Rrings l T) ⟶\n        ((DerivedCategory.singleFunctor (Systems T (Rrings l T)) 0).obj\n          c.rootModule)⟦(2 : ℤ)⟧) (n : ℕ), ScalarFiniteBoundary l E c f n) :\n    FiniteChernNormalization l E c",
+  "branch": "sheaf-dag",
+  "by": "E5",
+  "date": "2026-10-27"
+ },
+ "merged_into": null,
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E5",
+  "result": "pass",
+  "landing": "20261027T151659-L-1191175",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E5",
+  "result": "pass",
+  "landing": "20261027T151659-L-1191175",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
