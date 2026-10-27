@@ -1,0 +1,143 @@
+{
+ "id": "lem-sf-sheaf-tensor-pure-triple-ext",
+ "kind": "statement",
+ "title": "Extensionality on iterated sheafified pure tensors",
+ "statement": "Let D be a small category with topology K and a sheaf S of commutative rings. Use the existing module sheaves and pureTensor of [def-sf-twisted-action-presentation-data]. For S-module sheaves M,N,T,H, maps f,g from (M tensor N) tensor T to H are equal if, for every object X and sections x,y,z of M,N,T over X, their components agree on pureTensor(M tensor N,T,X,pureTensor(M,N,X,x,y),z). This is local generation after sheafification and requires no global generation hypothesis.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03EK and 03EL: module sheaf tensor, sheafification and unit coherence."
+ },
+ "stmt_deps": [
+  "def-sf-twisted-action-presentation-data"
+ ],
+ "proof": [
+  {
+   "text": "Let E be the presheaf tensor M.val tensor N.val. Its sheafification unit is a local equivalence. Tensor it with the identity of T.val and sheafify: tensor preserves local equivalences, so the resulting map is invertible. Compose with tensorObjIsoSheafification inverses and tensor the inner comparison inverse with the identity. This gives an invertible map to (M tensor N) tensor T.",
+   "uses": [
+    "def-sf-twisted-action-presentation-data"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03EK and 03EL: module sheaf tensor, sheafification and unit coherence."
+   }
+  },
+  {
+   "text": "Naturality of the sheafification unit and the proved pure_map formula show that this invertible map sends each ordinary pure triple to the displayed nested sheafified pure tensor.",
+   "uses": [
+    "def-sf-twisted-action-presentation-data",
+    "lem-sf-cocontinuous-ringed-tensor-restriction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03EK and 03EL: module sheaf tensor, sheafification and unit coherence."
+   }
+  },
+  {
+   "text": "Cancel the invertible map and apply the sheafification adjunction hom-equivalence. Presheaf morphism extensionality and ModuleCat tensor_ext₃-prime reduce equality to pure triples. The preceding formula and the hypothesis finish the proof.",
+   "uses": [
+    "def-sf-twisted-action-presentation-data"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03EK and 03EL: module sheaf tensor, sheafification and unit coherence."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sf-twisted-action-presentation-data",
+  "lem-sf-cocontinuous-ringed-tensor-restriction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "C1",
+  "date": "2026-10-28",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03EK and 03EL: module sheaf tensor, sheafification and unit coherence. Complete Lean proof of the generic pure-section calculation."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Maps from the tensor product of three sheaves of modules are equal if they agree on all sheafified pure triples",
+   "results": "8 hits, including SheafOfModules.hom_ext and sheafification injectivity results.",
+   "date": "2026-10-28",
+   "verdict": "No exact iterated sheaf tensor criterion; use the sheafification adjunction and sectionwise tensor extensionality."
+  },
+  {
+   "tool": "loogle",
+   "query": "ModuleCat.MonoidalCategory.tensor_ext₃'",
+   "results": "1 hit, in Mathlib.Algebra.Category.ModuleCat.Monoidal.Basic.",
+   "date": "2026-10-28",
+   "verdict": "Use this sectionwise after cancelling the invertible inner sheafification map."
+  },
+  {
+   "tool": "grep",
+   "query": "sheaf.*leftUnitor|leftUnitor.*tmul|tensor_ext₃",
+   "results": "10 Mathlib hits: presheaf monoidal left-unitor formulas, ModuleCat tensor_ext₃ and tensor_ext₃-prime, and scalar extension left-unitor formulas.",
+   "date": "2026-10-28",
+   "verdict": "These are presheaf or module formulas. Transport via sheafification for the sheaf tensor."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.TwistedActionUnderivedRestriction",
+  "date": "2026-10-28",
+  "group": "C1"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sf-twisted-action-tensor-coherence",
+   "place": "Generic pure-section calculation used in the fully proved tensor-coherence construction.",
+   "via": [
+    "lem-sf-twisted-action-tensor-coherence",
+    "lem-sf-twisted-action-underived-restriction",
+    "lem-sf-native-weil-tensor-ringed-bridge",
+    "lem-sf-native-weil-tensor-geometry",
+    "lem-sf-native-weil-ringed-tensor-model",
+    "lem-sf-native-weil-tensor-constraint-lifts",
+    "lem-sf-native-weil-tensor-coherence",
+    "lem-sf-native-weil-tensor-lift",
+    "lem-sf-weil-native-tensor-transport",
+    "lem-sf-weil-native-closed-forgetful"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.TwistedActionPureTripleExt",
+  "file": "lean/Sheaf/CategoryTheory/TwistedActionPureTripleExt.lean",
+  "declaration": "CategoryTheory.TwistedActionRingedSite.pure_triple_ext",
+  "statement": "theorem pure_triple_ext (M N T H : Modules S) {f g : (M ⊗ N) ⊗ T ⟶ H}\n    (h : ∀ X x y z,\n      f.val.app X (pureTensor (M ⊗ N) T X (pureTensor M N X x y) z) =\n      g.val.app X (pureTensor (M ⊗ N) T X (pureTensor M N X x y) z)) : f = g",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C1",
+  "result": "pass",
+  "landing": "20261027T205820-L-1619573",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C1",
+  "result": "pass",
+  "landing": "20261027T205820-L-1619573",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

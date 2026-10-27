@@ -1,0 +1,133 @@
+{
+ "id": "lem-sf-twisted-action-evaluation-preservation",
+ "kind": "statement",
+ "title": "Preservation of the specified right internal-Hom evaluations",
+ "statement": "For a twisted action-site Presentation P [def-sf-twisted-action-presentation-data], let U be its specified underlying-module functor. For source module sheaves M,N, let eB and eA be the right evaluations on Hom(M,N) tensor M and Hom(U(M),U(N)) tensor U(M), respectively, each satisfying its complete IsSheafEvaluation characterization [def-sf-ringed-forget-tensor-transposition-data]. Then P.tensor(Hom(M,N),M).hom followed by P.hom(M,N).hom tensor identity followed by eA equals U(eB). This is just the evaluation square for the specified components; no tensor coherence or naturality assertions are included.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03EK and 03EO: sheaf tensor, internal Hom and the tensor-Hom adjunction evaluation."
+ },
+ "stmt_deps": [
+  "def-sf-twisted-action-presentation-data",
+  "def-sf-ringed-forget-tensor-transposition-data"
+ ],
+ "proof": [
+  {
+   "text": "By right_evaluation_eq, each of the two maps characterized by IsSheafEvaluation is the corresponding braiding followed by the existing canonical left evaluationMap. Substitute both equalities and functoriality of U.",
+   "uses": [
+    "lem-sf-twisted-action-evaluation-unique",
+    "def-sf-ringed-forget-tensor-transposition-data"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03EK and 03EO: sheaf tensor, internal Hom and the tensor-Hom adjunction evaluation."
+   }
+  },
+  {
+   "text": "Apply braiding naturality to move P.hom(M,N).hom through the target braiding. Apply P.symmetry to move the tensor comparison through the braiding. The desired equation is now the composite of U of the source braiding with the reverse of the specified P.evaluation equation.",
+   "uses": [
+    "def-sf-twisted-action-presentation-data"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03EK and 03EO: sheaf tensor, internal Hom and the tensor-Hom adjunction evaluation."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-twisted-action-evaluation-unique",
+  "def-sf-ringed-forget-tensor-transposition-data",
+  "def-sf-twisted-action-presentation-data"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "C1",
+  "date": "2026-10-28",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03EK and 03EO; complete Lean proof from the specified left-evaluation square, symmetry, and uniqueness on pure sections."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A symmetric tensor functor preserving left internal Hom evaluation also preserves right evaluation by braiding naturality",
+   "results": "8 hits, including MonoidalClosed evaluation naturality and rigid tensor-Hom equivalences.",
+   "date": "2026-10-28",
+   "verdict": "No exact theorem for the specified sheaf evaluation predicates; use evaluation uniqueness and braiding naturality."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.BraidedCategory.braiding_naturality_assoc",
+   "results": "1 hit, in Mathlib.CategoryTheory.Monoidal.Braided.Basic.",
+   "date": "2026-10-28",
+   "verdict": "This supplies the braiding naturality calculation in the proof."
+  },
+  {
+   "tool": "grep",
+   "query": "braiding_naturality_assoc",
+   "results": "6 hits in graded, enriched, braided-functor and Hopf constructions.",
+   "date": "2026-10-28",
+   "verdict": "Use the general braiding formula; the specified evaluation preservation is proved here."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.TwistedActionUnderivedRestriction",
+  "date": "2026-10-28",
+  "group": "C1"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sf-twisted-action-underived-restriction",
+   "place": "The evaluation-preservation portion of the underived restriction proof, moved to a separate proved module after profiling.",
+   "via": [
+    "lem-sf-twisted-action-underived-restriction",
+    "lem-sf-native-weil-tensor-ringed-bridge",
+    "lem-sf-native-weil-tensor-geometry",
+    "lem-sf-native-weil-ringed-tensor-model",
+    "lem-sf-native-weil-tensor-constraint-lifts",
+    "lem-sf-native-weil-tensor-coherence",
+    "lem-sf-native-weil-tensor-lift",
+    "lem-sf-weil-native-tensor-transport",
+    "lem-sf-weil-native-closed-forgetful"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.TwistedActionEvaluationPreservation",
+  "file": "lean/Sheaf/CategoryTheory/TwistedActionEvaluationPreservation.lean",
+  "declaration": "CategoryTheory.TwistedActionRingedSite.specified_evaluation_square",
+  "statement": "theorem specified_evaluation_square (P : Presentation J s R a) :\n    letI := P.category\n    let U := P.modules.functor ⋙ forgetPairs (sigma J s R a)\n    ∀ (M N : Modules P.coefficient)\n      (eB : tensorObj (SheafOfModules.homObj (R := P.coefficient) M N) M ⟶ N)\n      (eA : tensorObj (SheafOfModules.homObj (R := R) (U.obj M) (U.obj N)) (U.obj M) ⟶\n        U.obj N),\n      RingedForgetTensorTransposition.IsSheafEvaluation.{u, u, u}\n        P.topology P.coefficient M N eB →\n      RingedForgetTensorTransposition.IsSheafEvaluation.{u, u, u}\n        J R (U.obj M) (U.obj N) eA →\n      (P.tensor (SheafOfModules.homObj (R := P.coefficient) M N) M).hom ≫\n        tensorMap (P.hom M N).hom (𝟙 (U.obj M)) ≫ eA = U.map eB",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C1",
+  "result": "pass",
+  "landing": "20261027T205820-L-1619573",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C1",
+  "result": "pass",
+  "landing": "20261027T205820-L-1619573",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

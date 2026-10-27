@@ -1,0 +1,129 @@
+{
+ "id": "lem-sf-twisted-action-hom-comparison",
+ "kind": "statement",
+ "title": "The specified action-site internal-Hom comparison is natural",
+ "statement": "For a small site (C,J), a site autoequivalence s whose inverse is continuous, a sheaf R of commutative rings and a ring identification a for inverse translation, fix a twisted action-site Presentation P [def-sf-twisted-action-presentation-data]. Let U be P.modules.functor followed by forgetPairs(sigma J s R a). There is a natural isomorphism from the uncurried internal-Hom bifunctor of P.coefficient followed by U to U.op.prod U followed by the uncurried internal-Hom bifunctor of R. At every pair (op M,N), its forward component is exactly P.hom(M,N).hom. This assertion concerns only naturality of the specified ordinary internal-Hom maps.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03EO: internal Hom functoriality; the specified twisted action-site presentation Hom naturality equation."
+ },
+ "stmt_deps": [
+  "def-sf-twisted-action-presentation-data"
+ ],
+ "proof": [
+  {
+   "text": "The map of the uncurried internal-Hom functor is the composite homObjMap(f,id) followed by homObjMap(id,g). The proved homObjMap composition formula and identity laws identify it with homObjMap(f,g). The forgetful functor of fixed pairs maps an algebra morphism to its underlying module morphism. Therefore P.hom_naturality gives the naturality equation between these uncurried functors.",
+   "uses": [
+    "def-sf-twisted-action-presentation-data"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EO: internal Hom functoriality; the specified twisted action-site presentation Hom naturality equation."
+   }
+  },
+  {
+   "text": "Apply Mathlib NatIso.ofComponents to the isomorphisms P.hom and the preceding naturality equation. Its forward component at (op M,N) is definitionally P.hom(M,N).hom. Take this natural isomorphism as the existential witness.",
+   "uses": [
+    "def-sf-twisted-action-presentation-data"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EO: internal Hom functoriality; the specified twisted action-site presentation Hom naturality equation."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sf-twisted-action-presentation-data"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "C1",
+  "date": "2026-10-28",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03EO: internal Hom functoriality; the specified twisted action-site presentation Hom naturality equation."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Natural isomorphism of internal Hom bifunctors from component isomorphisms natural in both variables",
+   "results": "8 hits, mostly closed-category currying naturality and functor-category internal Hom.",
+   "date": "2026-10-28",
+   "verdict": "No theorem about these specified presentation maps; use the generic component constructor."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatIso.ofComponents",
+   "results": "12 hits, including NatIso.ofComponents and ofComponents_hom_app.",
+   "date": "2026-10-28",
+   "verdict": "Use NatIso.ofComponents after checking the given two-variable naturality against uncurry."
+  },
+  {
+   "tool": "grep",
+   "query": "homObjMap_comp_homObjMap|homFunctor_map_app",
+   "results": "msearch grep returned 0 Mathlib hits. Local source search found the proved homObjMap_comp_homObjMap and homFunctor in WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHom.",
+   "date": "2026-10-28",
+   "verdict": "Use this adopted source-library API without changing it."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.TwistedActionUnderivedRestriction",
+  "date": "2026-10-28",
+  "group": "C1"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sf-twisted-action-underived-restriction",
+   "place": "The internal-Hom naturality part of the underived restriction proof, separated after profiling its checking cost.",
+   "via": [
+    "lem-sf-twisted-action-underived-restriction",
+    "lem-sf-native-weil-tensor-ringed-bridge",
+    "lem-sf-native-weil-tensor-geometry",
+    "lem-sf-native-weil-ringed-tensor-model",
+    "lem-sf-native-weil-tensor-constraint-lifts",
+    "lem-sf-native-weil-tensor-coherence",
+    "lem-sf-native-weil-tensor-lift",
+    "lem-sf-weil-native-tensor-transport",
+    "lem-sf-weil-native-closed-forgetful"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.TwistedActionSpecifiedHomNaturality",
+  "file": "lean/Sheaf/CategoryTheory/TwistedActionSpecifiedHomNaturality.lean",
+  "declaration": "CategoryTheory.TwistedActionRingedSite.hom_comparison",
+  "statement": "theorem hom_comparison (P : Presentation J s R a) :\n    letI := P.category\n    let U := P.modules.functor ⋙ forgetPairs (sigma J s R a)\n    ∃ H : Functor.uncurry.obj (SheafOfModules.homFunctor (R := P.coefficient)) ⋙ U ≅\n        (U.op.prod U) ⋙ Functor.uncurry.obj (SheafOfModules.homFunctor (R := R)),\n      ∀ M N : Modules P.coefficient, H.hom.app (op M, N) = (P.hom M N).hom",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C1",
+  "result": "pass",
+  "landing": "20261027T205820-L-1619573",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C1",
+  "result": "pass",
+  "landing": "20261027T205820-L-1619573",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

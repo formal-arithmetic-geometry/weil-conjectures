@@ -1,0 +1,147 @@
+{
+ "id": "lem-sf-twisted-action-tensor-associativity",
+ "kind": "statement",
+ "title": "Associativity of the specified action-site tensor comparison",
+ "statement": "For a twisted action-site Presentation P [def-sf-twisted-action-presentation-data], let U be the specified underlying-module functor. For all source module sheaves M,N,T, the composite U(associator) then P.tensor(M,N tensor T).hom then identity tensor P.tensor(N,T).hom equals P.tensor(M tensor N,T).hom then P.tensor(M,N).hom tensor identity then the target associator. These are the existing source and target tensor structures and the specified comparisons; no unit, internal-Hom or evaluation assertion is included.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03EK, 03EL and 03EO: sheaf tensor, associativity, unit and internal Hom evaluation; twisted action-site presentation tensor/evaluation steps 9--13."
+ },
+ "stmt_deps": [
+  "def-sf-twisted-action-presentation-data"
+ ],
+ "proof": [
+  {
+   "text": "Precompose the square with the inverse tensor comparisons for the first two factors and then the triple; postcompose with the inverse comparisons on the other bracketing. Tensor composition and inverse identities cancel the comparisons. Postcompose by the restriction isomorphism.",
+   "uses": [
+    "def-sf-twisted-action-presentation-data"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03EK, 03EL and 03EO: sheaf tensor, associativity, unit and internal Hom evaluation; twisted action-site presentation tensor/evaluation steps 9--13."
+   }
+  },
+  {
+   "text": "Apply pure_triple_ext to reduce equality of the remaining maps to nested local pure tensors. Naturality of restriction allows the source associator through restriction, and two applications of P.tensor_pure identify each inverse comparison on the tested generator. The pure_map formula justifies the tensoring of comparison inverses.",
+   "uses": [
+    "def-sf-twisted-action-presentation-data",
+    "lem-sf-sheaf-tensor-pure-triple-ext",
+    "lem-sf-cocontinuous-ringed-tensor-restriction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03EK, 03EL and 03EO: sheaf tensor, associativity, unit and internal Hom evaluation; twisted action-site presentation tensor/evaluation steps 9--13."
+   }
+  },
+  {
+   "text": "The pure-triple associator formula sends (x tensor y) tensor z to x tensor (y tensor z), on both source and target sites. Combine these equalities by transitivity to identify the tested values, and hence the two original composites.",
+   "uses": [
+    "lem-pur-module-tensor-generator-calculus",
+    "def-sf-twisted-action-presentation-data"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03EK, 03EL and 03EO: sheaf tensor, associativity, unit and internal Hom evaluation; twisted action-site presentation tensor/evaluation steps 9--13."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sf-twisted-action-presentation-data",
+  "lem-sf-sheaf-tensor-pure-triple-ext",
+  "lem-sf-cocontinuous-ringed-tensor-restriction",
+  "lem-pur-module-tensor-generator-calculus"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "C1",
+  "date": "2026-10-28",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Complete Lean proof of just the associativity square of the specified tensor restriction, using pure triples. Tags 03EK and 03EL."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Associativity of a tensor comparison on sheaves of modules can be checked on local pure tensors using a restriction isomorphism",
+   "results": "8 hits, including SheafOfModules.pullback_assoc and specialized condensed monoidal structures.",
+   "date": "2026-10-28",
+   "verdict": "No exact coherence theorem for the specified P.tensor. Prove its square from the normalization on local pure tensors."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.MonoidalCategory.tensorHom_comp_tensorHom_assoc",
+   "results": "1 hit, in Mathlib.CategoryTheory.Monoidal.Category.",
+   "date": "2026-10-28",
+   "verdict": "Use this composition law to cancel the inverse tensor comparisons."
+  },
+  {
+   "tool": "grep",
+   "query": "associator.*tmul|tensorHom_comp_tensorHom_assoc",
+   "results": "25 hits, including localization monoidal functors, tensor functor coherence and graded tensor formulas.",
+   "date": "2026-10-28",
+   "verdict": "These supply general tensor manipulation laws, not the exact specified restriction coherence."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.TwistedActionUnderivedRestriction",
+  "date": "2026-10-28",
+  "group": "C1"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sf-twisted-action-tensor-coherence",
+   "place": "The associativity portion of the fully proved tensor coherence construction, moved to a separate module after profiling.",
+   "via": [
+    "lem-sf-twisted-action-tensor-coherence",
+    "lem-sf-twisted-action-underived-restriction",
+    "lem-sf-native-weil-tensor-ringed-bridge",
+    "lem-sf-native-weil-tensor-geometry",
+    "lem-sf-native-weil-ringed-tensor-model",
+    "lem-sf-native-weil-tensor-constraint-lifts",
+    "lem-sf-native-weil-tensor-coherence",
+    "lem-sf-native-weil-tensor-lift",
+    "lem-sf-weil-native-tensor-transport",
+    "lem-sf-weil-native-closed-forgetful"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.TwistedActionTensorAssociativity",
+  "file": "lean/Sheaf/CategoryTheory/TwistedActionTensorAssociativity.lean",
+  "declaration": "CategoryTheory.TwistedActionRingedSite.tensor_associativity",
+  "statement": "theorem tensor_associativity (P : Presentation J s R a) :\n    letI := P.category\n    let U := P.modules.functor ⋙ forgetPairs (sigma J s R a)\n    ∀ M N T : Modules P.coefficient,\n      U.map (α_ M N T).hom ≫ (P.tensor M (N ⊗ T)).hom ≫\n          tensorMap (𝟙 _) (P.tensor N T).hom =\n        (P.tensor (M ⊗ N) T).hom ≫ tensorMap (P.tensor M N).hom (𝟙 _) ≫\n          (α_ (U.obj M) (U.obj N) (U.obj T)).hom",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C1",
+  "result": "pass",
+  "landing": "20261027T205820-L-1619573",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C1",
+  "result": "pass",
+  "landing": "20261027T205820-L-1619573",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

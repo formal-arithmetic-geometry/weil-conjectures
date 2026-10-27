@@ -1,0 +1,130 @@
+{
+ "id": "lem-sf-sheaf-tensor-pure-left-unit",
+ "kind": "statement",
+ "title": "The sheaf tensor left unitor on pure sections",
+ "statement": "Let D be a small category with topology K and a sheaf S of commutative rings. Use the existing tensor and pureTensor definitions of [def-sf-twisted-action-presentation-data]. For every S-module sheaf M, object X of D-op, scalar r in S(X), and x in M(X), the left unitor sends pureTensor(unit,M,X,r,x) to r times x. No nonzero-ring or nonempty-site assumption is required.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03EK and 03EL: module sheaf tensor, sheafification and unit coherence."
+ },
+ "stmt_deps": [
+  "def-sf-twisted-action-presentation-data"
+ ],
+ "proof": [
+  {
+   "text": "The forgetful functor to module presheaves is the right adjoint of sheafification; give it the induced lax monoidal structure. Its lax unit is the identity by the right triangle identity of the adjunction, and its tensor map on a presheaf pure tensor is the defined pureTensor.",
+   "uses": [
+    "def-sf-twisted-action-presentation-data"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03EK and 03EL: module sheaf tensor, sheafification and unit coherence."
+   }
+  },
+  {
+   "text": "Evaluate lax monoidal left-unitality at r tensor x. The presheaf left unitor acts by scalar multiplication. Substitution of the preceding unit and tensor-map formulas gives the asserted sheaf left-unitor formula.",
+   "uses": [
+    "def-sf-twisted-action-presentation-data"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03EK and 03EL: module sheaf tensor, sheafification and unit coherence."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sf-twisted-action-presentation-data"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "C1",
+  "date": "2026-10-28",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03EK and 03EL: module sheaf tensor, sheafification and unit coherence. Complete Lean proof of the generic pure-section calculation."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The left unitor of a sheaf tensor product sends a pure tensor of a scalar and a module section to scalar multiplication",
+   "results": "8 hits, including ModuleCat.MonoidalCategory.leftUnitor_hom_apply and presheaf tensorObj.",
+   "date": "2026-10-28",
+   "verdict": "No exact theorem for the localized sheaf tensor; derive it using lax monoidal left-unitality."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.LaxMonoidal.left_unitality",
+   "results": "1 hit, in Mathlib.CategoryTheory.Monoidal.Functor.",
+   "date": "2026-10-28",
+   "verdict": "This is the abstract coherence equation used in the proof."
+  },
+  {
+   "tool": "grep",
+   "query": "sheaf.*leftUnitor|leftUnitor.*tmul|tensor_ext₃",
+   "results": "10 Mathlib hits: presheaf monoidal left-unitor formulas, ModuleCat tensor_ext₃ and tensor_ext₃-prime, and scalar extension left-unitor formulas.",
+   "date": "2026-10-28",
+   "verdict": "These are presheaf or module formulas. Transport via sheafification for the sheaf tensor."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.TwistedActionUnderivedRestriction",
+  "date": "2026-10-28",
+  "group": "C1"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sf-twisted-action-tensor-coherence",
+   "place": "Generic pure-section calculation used in the fully proved tensor-coherence construction.",
+   "via": [
+    "lem-sf-twisted-action-tensor-coherence",
+    "lem-sf-twisted-action-underived-restriction",
+    "lem-sf-native-weil-tensor-ringed-bridge",
+    "lem-sf-native-weil-tensor-geometry",
+    "lem-sf-native-weil-ringed-tensor-model",
+    "lem-sf-native-weil-tensor-constraint-lifts",
+    "lem-sf-native-weil-tensor-coherence",
+    "lem-sf-native-weil-tensor-lift",
+    "lem-sf-weil-native-tensor-transport",
+    "lem-sf-weil-native-closed-forgetful"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.TwistedActionPureTensorUnit",
+  "file": "lean/Sheaf/CategoryTheory/TwistedActionPureTensorUnit.lean",
+  "declaration": "CategoryTheory.TwistedActionRingedSite.pure_left_unitor",
+  "statement": "theorem pure_left_unitor (M : Modules S) (X : Dᵒᵖ)\n    (r : S.obj.obj X) (x : M.val.obj X) :\n    (λ_ M).hom.val.app X (pureTensor (𝟙_ _) M X r x) = r • x",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C1",
+  "result": "pass",
+  "landing": "20261027T205820-L-1619573",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C1",
+  "result": "pass",
+  "landing": "20261027T205820-L-1619573",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

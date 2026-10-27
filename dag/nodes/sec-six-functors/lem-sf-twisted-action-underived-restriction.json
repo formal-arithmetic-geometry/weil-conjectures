@@ -13,9 +13,9 @@
  ],
  "proof": [
   {
-   "text": "Assemble the components P.tensor and P.hom into natural isomorphisms by NatIso.ofComponents, using P.tensor_naturality and P.hom_naturality. Take P.unit as the unit comparison.",
+   "text": "Apply tensor_coherence to obtain the natural tensor comparison with the prescribed P.tensor components and its complete associativity, unit and symmetry coherence.",
    "uses": [
-    "def-sf-twisted-action-presentation-data"
+    "lem-sf-twisted-action-tensor-coherence"
    ],
    "elementary": false,
    "source": {
@@ -24,10 +24,9 @@
    }
   },
   {
-   "text": "For associativity precompose by the two inverse tensor comparisons. Maps out of a triple sheaf tensor are determined by local pure triples: cancel the sheafified tensor of the sheafification units, apply the sheafification adjunction, and use tensor induction three times. Apply P.tensor_pure twice, restriction naturality and the pure-triple associator formula. Both paths give x tensor (y tensor z). For the two unit equations apply the two-variable pure tensor criterion and P.unit_sections. Coefficient restriction is a ring isomorphism, so both paths multiply the module section by the same coefficient. P.symmetry gives the symmetry equation.",
+   "text": "Apply hom_comparison to assemble the specified P.hom components into a natural isomorphism, retaining its component equations as the final Hom normalization.",
    "uses": [
-    "def-sf-twisted-action-presentation-data",
-    "lem-pur-module-tensor-generator-calculus"
+    "lem-sf-twisted-action-hom-comparison"
    ],
    "elementary": false,
    "source": {
@@ -36,10 +35,11 @@
    }
   },
   {
-   "text": "The pure-tensor characterization IsSheafEvaluation uniquely determines right evaluation by the sheafification adjunction and sectionwise tensor induction. The canonical right evaluation is braiding followed by the ordinary left evaluationMap. Substitute P.evaluation and P.symmetry. Tensor naturality moves P.hom through the braiding and gives the displayed Underived evaluation equation for every pair of evaluations satisfying that characterization. All data are fixed; zero modules, empty sites and zero rings satisfy the same calculations.",
+   "text": "Use specified_evaluation_square to preserve every pair of evaluations satisfying their complete pure-tensor characterizations. Substitute the component equations of the tensor and Hom comparisons. Assemble tensor coherence, the natural Hom comparison and evaluation compatibility into Underived, retaining the exact Hom component normalization.",
    "uses": [
     "def-sf-twisted-action-presentation-data",
-    "def-sf-ringed-forget-tensor-transposition-data"
+    "def-sf-ringed-forget-tensor-transposition-data",
+    "lem-sf-twisted-action-evaluation-preservation"
    ],
    "elementary": false,
    "source": {
@@ -49,16 +49,18 @@
   }
  ],
  "proof_deps": [
+  "lem-sf-twisted-action-tensor-coherence",
+  "lem-sf-twisted-action-hom-comparison",
   "def-sf-twisted-action-presentation-data",
-  "lem-pur-module-tensor-generator-calculus",
-  "def-sf-ringed-forget-tensor-transposition-data"
+  "def-sf-ringed-forget-tensor-transposition-data",
+  "lem-sf-twisted-action-evaluation-preservation"
  ],
  "proof_origin": {
   "by": "agent",
-  "group": "J2",
-  "date": "2026-10-27",
+  "group": "C1",
+  "date": "2026-10-28",
   "document": "literature/stacks-project/sites-modules.tex",
-  "place": "Ordinary action-site coherence, isolated from step 2 of lem-sf-native-weil-tensor-ringed-bridge; Tags 03EK, 03EL, 03EO."
+  "place": "Specified action-site restriction coherence; sheaf tensor and internal-Hom evaluation, Tags 03EK, 03EL and 03EO. Complete Lean proof using the sheafification adjunction and local pure generators."
  },
  "mathlib_searches": [
   {
@@ -134,11 +136,11 @@
  "reviewed_proof": {
   "date": "2026-10-27",
   "by": "L",
-  "reviewer": "C-3a85c",
-  "group": "J2",
-  "result": "fix",
-  "landing": "20261027T135426-L-3704573",
+  "reviewer": "COMPILER",
+  "group": "C1",
+  "result": "pass",
+  "landing": "20261027T205820-L-1619573",
   "kind": "interface",
-  "note": "independent cc review: delivered BridgeData structure+attributes vs published item (byte-identical); underived_restriction vs Presentation fields (tensor_pure/unit_sections/evaluation/symmetry) and Underived/TensorCoherence; new node records vs Lean; 2 direct importers compiled OK against delivery"
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

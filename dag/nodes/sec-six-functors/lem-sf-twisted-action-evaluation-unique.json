@@ -1,0 +1,145 @@
+{
+ "id": "lem-sf-twisted-action-evaluation-unique",
+ "kind": "statement",
+ "title": "Uniqueness of ordinary sheaf-Hom evaluation from pure sections",
+ "statement": "Let D be a small category with Grothendieck topology K and let S be a sheaf of commutative rings. Use the module-sheaf, pure-tensor and canonical left evaluationMap conventions of [def-sf-twisted-action-presentation-data]. Let M,N be S-module sheaves. Every map e from Hom(M,N) tensor M to N satisfying IsSheafEvaluation(K,S,M,N,e) [def-sf-ringed-forget-tensor-transposition-data] equals the braiding Hom(M,N) tensor M to M tensor Hom(M,N), followed by evaluationMap(M,N). No action-site presentation or nonzero-module hypothesis is required.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03EK and 03EO: sheaf tensor, internal Hom and the tensor-Hom adjunction evaluation."
+ },
+ "stmt_deps": [
+  "def-sf-twisted-action-presentation-data",
+  "def-sf-ringed-forget-tensor-transposition-data"
+ ],
+ "proof": [
+  {
+   "text": "The tensor-Hom adjunction sends evaluationMap to the identity of the internal Hom. Transport along tensorObjIsoSheafification and the sheafification adjunction. The unit formula for homEquiv and apply_symm_apply compute evaluationMap on a pure tensor x tensor phi as the value of phi at x.",
+   "uses": [
+    "def-sf-twisted-action-presentation-data"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03EK and 03EO: sheaf tensor, internal Hom and the tensor-Hom adjunction evaluation."
+   }
+  },
+  {
+   "text": "The generator in IsSheafEvaluation is definitionally the same sheafified pure tensor as pureTensor. Thus e has the required evaluation values on every pure pair. Braiding interchanges the pure factors, and the previous computation gives those same values for braiding followed by evaluationMap.",
+   "uses": [
+    "def-sf-twisted-action-presentation-data",
+    "def-sf-ringed-forget-tensor-transposition-data",
+    "lem-sf-cocontinuous-ringed-tensor-restriction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03EK and 03EO: sheaf tensor, internal Hom and the tensor-Hom adjunction evaluation."
+   }
+  },
+  {
+   "text": "Apply the proved local pure-tensor extensionality criterion to identify the two maps. This criterion follows from the sheafification adjunction and presheaf tensor extensionality, so no assumption that all sheaf sections are globally pure is used.",
+   "uses": [
+    "lem-sf-cocontinuous-ringed-tensor-restriction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03EK and 03EO: sheaf tensor, internal Hom and the tensor-Hom adjunction evaluation."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sf-twisted-action-presentation-data",
+  "def-sf-ringed-forget-tensor-transposition-data",
+  "lem-sf-cocontinuous-ringed-tensor-restriction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "C1",
+  "date": "2026-10-28",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03EK and 03EO: sheaf tensor, internal Hom and the tensor-Hom adjunction evaluation."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A morphism from a sheaf tensor product is uniquely determined by its values on local pure tensors and internal Hom evaluation applies the Hom section",
+   "results": "8 hits, including PresheafOfModules.Monoidal.tensorHom and special light-condensed internal-Hom formulas.",
+   "date": "2026-10-28",
+   "verdict": "No exact uniqueness theorem for this IsSheafEvaluation predicate; use the existing sheafification and pure-tensor APIs."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.homEquiv_unit",
+   "results": "1 hit: Adjunction.homEquiv_unit.",
+   "date": "2026-10-28",
+   "verdict": "Use this unit formula to compute the canonical evaluation on a pure generator."
+  },
+  {
+   "tool": "grep",
+   "query": "IsSheafEvaluation|sheafTensorGenerator",
+   "results": "msearch returned 0 Mathlib hits. Local source search found the predicate in RingedForgetTensorTranspositionData and private evaluation helpers in RingedForgetChainUncurry.",
+   "date": "2026-10-28",
+   "verdict": "The private helpers are not a public API; prove the general uniqueness statement from the adopted tensor-Hom adjunction and proved pure-tensor extensionality."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.TwistedActionUnderivedRestriction",
+  "date": "2026-10-28",
+  "group": "C1"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sf-twisted-action-underived-restriction",
+   "place": "The ordinary evaluation-uniqueness portion of the underived restriction proof, moved into a proved module after profiling.",
+   "via": [
+    "lem-sf-twisted-action-underived-restriction",
+    "lem-sf-native-weil-tensor-ringed-bridge",
+    "lem-sf-native-weil-tensor-geometry",
+    "lem-sf-native-weil-ringed-tensor-model",
+    "lem-sf-native-weil-tensor-constraint-lifts",
+    "lem-sf-native-weil-tensor-coherence",
+    "lem-sf-native-weil-tensor-lift",
+    "lem-sf-weil-native-tensor-transport",
+    "lem-sf-weil-native-closed-forgetful"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.TwistedActionEvaluationUnique",
+  "file": "lean/Sheaf/CategoryTheory/TwistedActionEvaluationUnique.lean",
+  "declaration": "CategoryTheory.TwistedActionRingedSite.right_evaluation_eq",
+  "statement": "theorem right_evaluation_eq (M N : Modules S)\n    (e : SheafOfModules.homObj (R := S) M N ⊗ M ⟶ N)\n    (h : RingedForgetTensorTransposition.IsSheafEvaluation.{u, u, u} K S M N e) :\n    e = (β_ (SheafOfModules.homObj (R := S) M N) M).hom ≫ evaluationMap M N",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C1",
+  "result": "pass",
+  "landing": "20261027T205820-L-1619573",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C1",
+  "result": "pass",
+  "landing": "20261027T205820-L-1619573",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
