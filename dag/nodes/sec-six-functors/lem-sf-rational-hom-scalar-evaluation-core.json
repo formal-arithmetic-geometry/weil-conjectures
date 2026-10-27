@@ -1,0 +1,106 @@
+{
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/thm-coef-rational-verdier.proof.md",
+  "place": "Finite-extension evaluation square, normalization and transpose substeps."
+ },
+ "stmt_deps": [
+  "def-sf-rational-verdier-data",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-weil-rationalization-karoubi"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/thm-coef-rational-verdier.proof.md",
+  "place": "Finite-extension evaluation square, normalization and transpose substeps."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "adjunction counit equals closed tensor-Hom evaluation transpose",
+   "results": "Generic Adjunction.homEquiv_counit is available; no exact normalized rational Hom identification theorem found.",
+   "date": "2026-10-28",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Adjunction.homEquiv_counit",
+   "results": "The standard counit transpose identity is available.",
+   "date": "2026-10-28",
+   "verdict": "generic match only"
+  },
+  {
+   "tool": "grep",
+   "query": "HomIdentification integral_evaluation counit normalized",
+   "results": "HomIdentification.integral_evaluation supplies the integral normalization; rational extension remains the split theorem.",
+   "date": "2026-10-28",
+   "verdict": "split required"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.RationalHomScalarEvaluation",
+  "date": "2026-10-28",
+  "group": "V4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sf-rational-hom-scalar-evaluation",
+   "place": "Finite-extension evaluation square and rationalization.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V4",
+  "result": "pass",
+  "landing": "20261027T234344-L-112337",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V4",
+  "result": "pass",
+  "landing": "20261027T234344-L-112337",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ },
+ "mathlib_match": null,
+ "id": "lem-sf-rational-hom-scalar-evaluation-core",
+ "kind": "statement",
+ "title": "Scalar evaluation from normalized counits",
+ "statement": "Given permitted rational Hom predicates over E and L, counit maps eE and eL, and hypotheses identifying each with normalizedCounit, the recorded rational tensor and Hom scalar comparisons satisfy the finite scalar evaluation square for every K,M over E.",
+ "proof": [
+  {
+   "text": "Apply the transpose compatibility of rationalHomScalarComparison to eE. The normalized counit formulas identify the transpose of the left composite with the Hom comparison, while the right composite transposes to the same arrow; injectivity of the closed transpose gives the equality.",
+   "uses": [
+    "lem-sf-rational-hom-normalized-counit",
+    "lem-sf-rational-hom-scalar-transpose"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-rational-hom-normalized-counit",
+  "lem-sf-rational-hom-scalar-transpose"
+ ],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.RationalHomScalarEvaluationCore",
+  "file": "lean/Sheaf/SixFunctors/RationalHomScalarEvaluationCore.lean",
+  "declaration": "WeilConjectures.RationalOperations.scalarEvaluation_of_normalizedCounits",
+  "statement": "theorem scalarEvaluation_of_normalizedCounits\n    (hE : ∀ K M : sfRationalConstructibleCategory l E X,\n      constructibleRationalHomPairs l E X (op K, M))\n    (hL : ∀ K M : sfRationalConstructibleCategory l L X,\n      constructibleRationalHomPairs l L X (op K, M))\n    (eE : ∀ K M : sfRationalConstructibleCategory l E X,\n      (RationalVerdier.tensor D l hl X E).obj\n          (K, (homRight l E X hE K).obj M) ⟶ M)\n    (eL : ∀ K M : sfRationalConstructibleCategory l L X,\n      (RationalVerdier.tensor D l hl X L).obj\n          (K, (homRight l L X hL K).obj M) ⟶ M)\n    (heE : ∀ K M, eE K M = normalizedCounit D l hl X E hE K M)\n    (heL : ∀ K M, eL K M = normalizedCounit D l hl X L hL K M) :\n    ∀ K M : sfRationalConstructibleCategory l E X,\n      (RationalVerdier.tensor D l hl X L).map\n          (Prod.mkHom (𝟙 ((RationalVerdier.scalar l X E L ι).obj K))\n            (rationalHomScalarComparison l E L ι X\n              ⟨(op K, M), hE K M⟩).hom) ≫ eL\n          ((RationalVerdier.scalar l X E L ι).obj K)\n          ((RationalVerdier.scalar l X E L ι).obj M) =\n        (@rationalTensorScalarComparison l _ E _ _ _ L _ _ _ ι X\n          (RationalVerdier.units D l hl X)).inv.app\n            (K, (homRight l E X hE K).obj M) ≫\n          (RationalVerdier.scalar l X E L ι).map (eE K M)",
+  "branch": "sheaf-dag",
+  "by": "V4",
+  "date": "2026-10-28"
+ }
+}

@@ -6,6 +6,7 @@ Authors: SHEAF group V4
 module
 
 public import Sheaf.SixFunctors.RationalOperationsData
+import Sheaf.SixFunctors.RationalHomScalarEvaluationCore
 
 /-! # Finite scalar compatibility of normalized rational Hom evaluation
 
@@ -62,6 +63,14 @@ theorem rationalHom_scalar_evaluation
     (B : RationalVerdier.Datum D l hl X L wL)
     (hE : HomIdentification l E X D hl wE A)
     (hL : HomIdentification l L X D hl wL B) :
-    HomScalarCompatibility l E X D hl L ι wE wL A B hE hL := by sorry
+    HomScalarCompatibility l E X D hl L ι wE wL A B hE hL := by
+  apply scalarEvaluation_of_normalizedCounits D l hl X E L ι
+    hE.permitted hL.permitted
+    (fun K M ↦ (hE.adjunction K).counit.app M)
+    (fun K M ↦ (hL.adjunction K).counit.app M)
+  · intro K M
+    exact homIdentification_counit_normalized D l hl X E wE A hE K M
+  · intro K M
+    exact homIdentification_counit_normalized D l hl X L wL B hL K M
 
 end WeilConjectures.RationalOperations
