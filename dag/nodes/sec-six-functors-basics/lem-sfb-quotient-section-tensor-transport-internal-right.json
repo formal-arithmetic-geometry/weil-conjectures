@@ -13,41 +13,37 @@
  ],
  "proof": [
   {
-   "text": "Use hc.1 and he to identify the ordinary scalar tensor square on scalar-unit generators. Extend by scalar linearity, balancing and sheafification.",
+   "text": "Set EP and EQ to the termwise section images of P and Q, and g to mapBifunctorComparison e. Its existing map_ιMapBifunctor_mapBifunctorComparisonX formula supplies the required equality on every tensor summand. This holds for all complexes and needs only the assumed countable-colimit preservation.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Apply section_tensor_total_scalar_square to g and its summand formula. This reuses the proved ordinary scalar-unit square and its signed totalization, with precisely the original hc and he hypotheses.",
    "uses": [
-    "def-sfb-quotient-section-tensor-data",
-    "lem-pe-internal-section-tensor-comparison"
+    "lem-sfb-quotient-section-tensor-total-square"
    ],
    "elementary": false
   },
   {
-   "text": "Totalize the ordinary square by checking each bidegree inclusion using mapBifunctorComparison, with identical differential signs.",
+   "text": "Apply section_tensor_total_localization_path to the preceding total square. Expand only the input and explicit path wrappers, the localized total comparison, and the identity termwise functor comparison. Rewrite sectionTotalComparison by sectionTotalComparison_eq and the total functor map on a pair by the native tensor map. Functoriality and associativity identify the resulting equation with the desired path equality.",
    "uses": [
-    "lem-weil-pbc-independent-sheaf-tensor-colimits"
-   ],
-   "elementary": true
-  },
-  {
-   "text": "Substitute the input qTensor normalization and hc.2 on P tensor Q. Naturality moves the section total comparison through the model counit and identifies the composite with scalarTensorSectionPath.",
-   "uses": [
-    "lem-pd-section-derived-tensor-normalization",
-    "def-sfb-quotient-section-tensor-data",
-    "def-sfb-quotient-section-tensor-transport-internal-data"
+    "lem-sfb-quotient-section-tensor-total-localization-path",
+    "def-sfb-quotient-section-tensor-transport-internal-data",
+    "def-sfb-quotient-section-tensor-data"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "def-sfb-quotient-section-tensor-data",
-  "lem-pe-internal-section-tensor-comparison",
-  "lem-weil-pbc-independent-sheaf-tensor-colimits",
-  "lem-pd-section-derived-tensor-normalization",
-  "def-sfb-quotient-section-tensor-transport-internal-data"
+  "lem-sfb-quotient-section-tensor-total-square",
+  "lem-sfb-quotient-section-tensor-total-localization-path",
+  "def-sfb-quotient-section-tensor-transport-internal-data",
+  "def-sfb-quotient-section-tensor-data"
  ],
  "proof_origin": {
-  "by": "Y3",
+  "by": "X2",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Tags 06YY and 07A4, lemma-pullback-tensor-product; ordinary scalar balancing: literature/stacks-project/sites-modules.tex, change-of-rings functor and tensor product sheaf, Tag 03EL."
+  "place": "Tags 06YY and 07A4, lemma-pullback-tensor-product; ordinary scalar balancing: literature/stacks-project/sites-modules.tex, change-of-rings functor and tensor product sheaf, Tag 03EL. Existing total-square and localization-path assembly; canonical bifunctor summand formula."
  },
  "mathlib_searches": [
   {
@@ -117,11 +113,11 @@
  "reviewed_proof": {
   "date": "2026-10-27",
   "by": "L",
-  "reviewer": "C-f6f1a",
-  "group": "Y3",
+  "reviewer": "COMPILER",
+  "group": "X2",
   "result": "pass",
-  "landing": "20261027T210317-L-1687664",
+  "landing": "20261027T234354-L-117891",
   "kind": "interface",
-  "note": "independent cc review: Disputed statement section_tensor_transport_normalized_total (+hbarB TensorSectionCondition) against the old signature: sign-flip counterexample confirmed; parent adaptation (import swap + 2 proof lines) against the change record and 3b (QuotientSectionTensorTransport OK); internal_left/right sorry statements against TensorNormalized, ScalarSectionNormalized, TensorRepresentativeNormalization and scalarTensorSectionPath; node proof_deps against step uses"
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

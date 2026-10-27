@@ -7,12 +7,31 @@ module
 public import Sheaf.Paper.QuotientSectionTensorTransportInternalData
 public import WeilConjectures.Mathlib.Algebra.Homology.Bifunctor
 import Sheaf.Paper.IntegralResidueDerivedMonoidal
+import Sheaf.Paper.QuotientSectionTensorTotalSquare
+import Sheaf.Paper.QuotientSectionTensorTotalLocalizationPath
 
 /-! # Ordinary-side scalar tensor evaluation -/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
 set_option synthInstance.maxSize 2048
+set_option backward.isDefEq.respectTransparency.types false
+set_option cleanup.letToHave false
+
+attribute [local irreducible] CategoryTheory.Functor.leftDerivedFunctor
+  CategoryTheory.Functor.mapDerivedCategory
+  DerivedCategory.monoidalClosed CategoryTheory.Mod.monoidalClosed
+  AlgebraicGeometry.ProEtale.upperStarFromPoint
+  CategoryTheory.Sheaf.monoidalCategory
+  DerivedCategory.monoidalCategoryOfMonoidalClosedBraidedCategory
+
+attribute [local instance] AlgebraicGeometry.ProEtale.CondensedRing.projectionDerivedMonoidal
+  AlgebraicGeometry.ProEtale.CondensedRing.projectionModuleAbelian
+  AlgebraicGeometry.ProEtale.CondensedRing.projectionModuleMonoidal
+  AlgebraicGeometry.ProEtale.CondensedRing.projectionModuleHasDerived
+  AlgebraicGeometry.ProEtale.CondensedRing.projectionSheafMonoidal
+  AlgebraicGeometry.ProEtale.CondensedRing.projectionCoefficientMonObj
+  AlgebraicGeometry.ProEtale.CondensedRing.projectionModuleCategory
 
 universe u
 open CategoryTheory CategoryTheory.Limits CategoryTheory.MonoidalCategory Opposite
@@ -29,6 +48,34 @@ variable {Λ Λ' : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
   [∀ T : Scheme.{u}, HasDerivedCategory.{u + 1} (modules Λ T)]
   [∀ T : Scheme.{u}, HasDerivedCategory.{u + 1} (modules Λ' T)]
 
+attribute [local implicit_reducible] Functor.mapHomologicalComplex
+
+attribute [local irreducible] ModuleRingedComparison.tensor tensorComparison qTensor
+  totalComparison totalScalar QuotientChange.compute Mod.extendScalars
+  CondensedRing.internalScalarMonoidal Mod.monoidalCategoryStruct
+  Localization.Monoidal.tensorBifunctor
+  HomologicalComplex₂.total Mod.inducingFunctorData
+  InternalAbelianSheafModule.sectionModuleEquivalence SheafOfModules.monoidalCategory
+
+private theorem paste_input_path {C : Type*} [Category C]
+    {A B D E F G H : C} {a : A ⟶ B} {b : B ⟶ D} {c : D ⟶ E}
+    {d : E ⟶ F} {e : F ⟶ G} {f : G ⟶ H} {r : A ⟶ H}
+    (h : a ≫ b ≫ c ≫ d ≫ e ≫ f = r) :
+    (a ≫ b ≫ c) ≫ d ≫ e ≫ f = r := by
+  simpa only [Category.assoc] using h
+
+private theorem internal_right_total_tensor_map
+    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
+    [MonObj Λ] [IsCommMonObj Λ]
+    [∀ X : Scheme.{u}, HasDerivedCategory.{u + 1} (ModuleRingedComparison.modules Λ X)]
+    (Z : Scheme.{u}) {P P' Q Q' : CochainComplex (ModuleRingedComparison.modules Λ Z) ℤ}
+    (f : P ⟶ P') (g : Q ⟶ Q') :
+    (ModuleRingedComparison.totalTensor Λ Z).map (Prod.mkHom f g) = f ⊗ₘ g := by
+  change (f ▷ _) ≫ (_ ◁ g) = f ⊗ₘ g
+  exact (MonoidalCategory.tensorHom_def f g).symm
+
+set_option maxHeartbeats 1600000 in
+-- Retain large derived tensor terms while identifying the localized path wrappers.
 /-- Evaluate the ordinary scalar-total side on all internal complexes.
 Source: Stacks Project, sites-modules.tex, Tag 03EL, extension of scalars and pure
 sections; sites-cohomology.tex, Tags 06YY and 07A4, signed total constituents.
@@ -73,6 +120,33 @@ theorem section_tensor_transport_internal_right (T : Scheme.{u})
           DerivedCategory.Q.map
             (HomologicalComplex.mapBifunctorComparison e (.up ℤ) EP EQ) =
         scalarTensorSectionPath a T c P Q := by
-  sorry
+  intro P Q
+  let EP := ((equivalence Λ T).functor.mapHomologicalComplex (.up ℤ)).obj P
+  let EQ := ((equivalence Λ T).functor.mapHomologicalComplex (.up ℤ)).obj Q
+  let g := HomologicalComplex.mapBifunctorComparison e (.up ℤ) EP EQ
+  have hg : ∀ (i j k : ℤ) (h : i + j = k),
+      c.model.E.map (HomologicalComplex.ιTensorObj EP EQ i j k h) ≫ g.f k =
+        (e.app ((equivalence Λ T).functor.obj (P.X i))).app
+            ((equivalence Λ T).functor.obj (Q.X j)) ≫
+          HomologicalComplex.ιTensorObj
+            ((c.model.E.mapHomologicalComplex (.up ℤ)).obj EP)
+            ((c.model.E.mapHomologicalComplex (.up ℤ)).obj EQ) i j k h := by
+    intro i j k h
+    exact HomologicalComplex.map_ιMapBifunctor_mapBifunctorComparisonX
+      e (.up ℤ) EP EQ i j k h
+  have hord := section_tensor_total_scalar_square a T c hc e he P Q g hg
+  have hpath := section_tensor_total_localization_path a T c hc P Q g hord
+  dsimp only at hpath
+  dsimp only [scalarTensorSectionInput]
+  apply paste_input_path
+  refine hpath.trans ?_
+  dsimp only [scalarTensorSectionPath, localizedTotalComparison,
+    sectionLocalizationComparison, Functor.mapHomologicalComplexCompIso,
+    Iso.trans_hom, Iso.symm_hom, NatIso.mapHomologicalComplex,
+    Iso.refl_hom, Iso.refl_inv, NatTrans.comp_app]
+  simp only [sectionTotalComparison_eq, Functor.map_comp, Category.assoc,
+    NatTrans.mapHomologicalComplex_id, NatTrans.id_app, Category.comp_id,
+    internal_right_total_tensor_map]
+  rfl
 
 end AlgebraicGeometry.ProEtale.QuotientSectionTensor
