@@ -1,0 +1,102 @@
+{
+ "id": "lem-weil-pbc-lisse-finite-level-etale-stalk-from-local-section",
+ "kind": "statement",
+ "title": "Geometric stalk from an étale local Isom representative",
+ "statement": "For a derived local Isomorphism sheaf on a small etale site, a pointed etale neighbourhood of a geometric point carrying an actual local derived isomorphism gives an inhabited sheaf fibre at that point.",
+ "stmt_deps": [
+  "def-weil-pbc-derived-local-isomorphism-sheaf"
+ ],
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 09BV, local Isom torsors and passage from local sections to geometric stalks."
+ },
+ "proof": [
+  {
+   "text": "Map the local isomorphism through the canonical presheaf-to-sheafification unit and then through the point fibre colimit at the pointed etale neighbourhood. The resulting germ is an element of the sheaf fibre.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "worker",
+  "group": "N2",
+  "date": "2026-10-28",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 09BV, local Isom torsors and passage from local sections to geometric stalks."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "point sheafFiber local presheaf section sheafification germ",
+   "results": "No exact project theorem; only generic sheafification, point-fibre and finite-limit APIs.",
+   "date": "2026-10-28",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "point sheafFiber local presheaf section sheafification germ",
+   "results": "No exact theorem matching this finite-level local comparison step.",
+   "date": "2026-10-28",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "point sheafFiber local presheaf section sheafification germ",
+   "results": "Repository search found only this new finite-level descent family; no duplicate declaration.",
+   "date": "2026-10-28",
+   "verdict": "no exact match"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.LisseFiniteLevelEtaleStalks",
+  "date": "2026-10-28",
+  "group": "N2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "new-lem-weil-pbc-lisse-finite-level-etale-stalks",
+   "place": "Strict stalk-evaluation substep of the geometric Isom-stalk proof.",
+   "via": [
+    "new-lem-weil-pbc-lisse-finite-level-etale-stalks"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.LisseFiniteLevelEtaleStalkFromLocal",
+  "file": "lean/Sheaf/Paper/LisseFiniteLevelEtaleStalkFromLocal.lean",
+  "declaration": "AlgebraicGeometry.Scheme.lisse_finite_level_etale_stalk_from_local_section",
+  "statement": "theorem lisse_finite_level_etale_stalk_from_local_section (X : Scheme.{u}) (B : Type (u + 1)) [CommRing B] (A D : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} B))) (Ω : Type u) [Field Ω] [IsSepClosed Ω] (x : Spec (.of Ω) ⟶ X) (V : X.Etale) (v : (pointSmallEtale x).fiber.obj V) (h : Nonempty ((localIsomorphismRestriction X B V).obj A ≅ (localIsomorphismRestriction X B V).obj D)) : Nonempty ((pointSmallEtale x).sheafFiber.obj (derivedLocalIsomorphismSheaf A D))",
+  "branch": "sheaf-dag",
+  "by": "N2",
+  "date": "2026-10-28"
+ },
+ "mathlib_match": null,
+ "status": "split",
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N2",
+  "result": "pass",
+  "landing": "20261027T234114-L-4193352",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N2",
+  "result": "pass",
+  "landing": "20261027T234114-L-4193352",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

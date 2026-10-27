@@ -6,12 +6,8 @@ Authors: SHEAF group K3
 module
 
 public import Sheaf.Paper.LisseTowerEtaleDescentData
-import Sheaf.AlgebraicGeometry.ClassicalDerivedEquivalence
-import Sheaf.AlgebraicGeometry.CompactSupportComparisonUnit
-import Sheaf.AlgebraicGeometry.DerivedHomSheafComparisonLisse
-import Sheaf.AlgebraicGeometry.DerivedIsomSheafComparisonFromHom
-import Sheaf.Paper.ProEtaleLisseOrigin
-import Sheaf.Paper.ProEtaleFiniteLocalConstancyReflection
+import Sheaf.Paper.LisseFiniteLevelEtaleLocalIsomorphisms
+import Sheaf.Paper.LisseFiniteLevelEtaleStalkFromLocal
 
 /-! # Geometric Isom stalks for a supplied finite-level model
 
@@ -75,6 +71,11 @@ theorem lisse_finite_level_etale_stalks
     ∀ (Ω : Type u) [Field Ω] [IsSepClosed Ω] (x : Spec (.of Ω) ⟶ U.left),
       Nonempty ((pointSmallEtale x).sheafFiber.obj (derivedLocalIsomorphismSheaf
         ((normalizationConstant U.left.smallEtaleTopology).obj E) D)) := by
-  sorry
+  intro Ω instField instSep x
+  obtain ⟨V, v, hV⟩ := lisse_finite_level_etale_local_isomorphisms X Y g d U n N E D
+    hDbounded hDlisse hcomparison hmodels Ω x
+  exact lisse_finite_level_etale_stalk_from_local_section U.left
+    (lisseTowerEtaleRing d n)
+    ((normalizationConstant U.left.smallEtaleTopology).obj E) D Ω x V v hV
 
 end AlgebraicGeometry.Scheme

@@ -1,0 +1,118 @@
+{
+ "id": "lem-weil-pbc-lisse-finite-level-etale-local-isomorphisms",
+ "kind": "statement",
+ "title": "Local étale representatives for finite-level Isom sections",
+ "statement": "Under the bounded finite-lisse, fixed-realization comparison, and local model hypotheses of the finite-level descent theorem, every geometric point of the etale base has an etale neighbourhood carrying an actual derived isomorphism from the normalized constant model to the supplied etale complex.",
+ "stmt_deps": [
+  "def-weil-pbc-lisse-tower-etale-descent-data",
+  "def-weil-pbc-derived-local-isomorphism-sheaf",
+  "def-weil-pbc-adic-coefficient-datum",
+  "def-weil-pbc-bounded-constructible-tower",
+  "lem-weil-pbc-constant-adic-quotient-scalar-comparison",
+  "def-weil-pbc-derived-normalization-arrows",
+  "def-constructible-finite-locally-constant",
+  "def-weil-derived-cohomology-sheaves",
+  "def-weil-pbc-derived-local-isomorphism-sheaf"
+ ],
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tags 099Y, 099Z, 09B1 and 09BV, local comparison and Isom presheaf sections."
+ },
+ "proof": [
+  {
+   "text": "Apply the bounded finite-lisse Hom comparison to the four pairs and the inverse-pair equalizer comparison. On a member of the supplied covering sieve, compose the model marking with the inverse of the fixed-realization comparison and lift through the fixed realization equivalence. Restricting to an etale neighbourhood of the geometric point gives the displayed local isomorphism representative.",
+   "uses": [
+    "lem-weil-pbc-derived-hom-sheaf-comparison-lisse",
+    "lem-weil-pbc-derived-isom-comparison-from-hom",
+    "thm-weil-pbc-site-comparison"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-derived-hom-sheaf-comparison-lisse",
+  "lem-weil-pbc-derived-isom-comparison-from-hom",
+  "thm-weil-pbc-site-comparison"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "N2",
+  "date": "2026-10-28",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tags 099Y, 099Z, 09B1 and 09BV, local comparison and Isom presheaf sections."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "finite-level derived local isomorphism representative etale neighbourhood",
+   "results": "No exact project theorem; only generic sheafification, point-fibre and finite-limit APIs.",
+   "date": "2026-10-28",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "finite-level derived local isomorphism representative etale neighbourhood",
+   "results": "No exact theorem matching this finite-level local comparison step.",
+   "date": "2026-10-28",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "finite-level derived local isomorphism representative etale neighbourhood",
+   "results": "Repository search found only this new finite-level descent family; no duplicate declaration.",
+   "date": "2026-10-28",
+   "verdict": "no exact match"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.LisseFiniteLevelEtaleStalks",
+  "date": "2026-10-28",
+  "group": "N2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "new-lem-weil-pbc-lisse-finite-level-etale-stalks",
+   "place": "Strict local-representative substep of the geometric Isom-stalk proof.",
+   "via": [
+    "new-lem-weil-pbc-lisse-finite-level-etale-stalks"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.LisseFiniteLevelEtaleLocalIsomorphisms",
+  "file": "lean/Sheaf/Paper/LisseFiniteLevelEtaleLocalIsomorphisms.lean",
+  "declaration": "AlgebraicGeometry.Scheme.lisse_finite_level_etale_local_isomorphisms",
+  "statement": "theorem lisse_finite_level_etale_local_isomorphisms (X Y : Scheme.{u}) (g : Y ⟶ X) {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A) (U : Y.ProEt) (n : ℕ) (N : DerivedCategory (pbcModules X ((pbcAdicRings X d).obj (op n)))) (E : DerivedCategory (ModuleCat.{u + 1} (lisseTowerEtaleRing d n))) (D : DerivedCategory (Sheaf U.left.smallEtaleTopology (ModuleCat.{u + 1} (lisseTowerEtaleRing d n)))) (hDbounded : ∃ a b : ℤ, ∀ q : ℤ, q < a ∨ b < q → IsZero ((DerivedCategory.homologyFunctor _ q).obj D)) (hDlisse : ∀ q : ℤ, IsFiniteLocallyConstantSheaf ((DerivedCategory.homologyFunctor _ q).obj D)) (hcomparison : Nonempty ((lisseTowerFixedRealization (U.hom ≫ g) d n).obj ((ProEtale.comparisonUpperStar (ModuleCat.{u + 1} (lisseTowerEtaleRing d n)) U.left).mapDerivedCategory.obj D) ≅ (adicTowerPullback (U.hom ≫ g) ((pbcAdicRings X d).obj (op n))).obj N)) (hmodels : ∃ T : Sieve U, T ∈ ProEt.topology Y U ∧ ∀ (W : Y.ProEt) (w : W ⟶ U), T w → Nonempty ((constantAdicQuotientRealization (W.hom ≫ g) d n).obj E ≅ (adicTowerPullback (W.hom ≫ g) ((pbcAdicRings X d).obj (op n))).obj N)) : ∀ (Ω : Type u) [Field Ω] [IsSepClosed Ω] (x : Spec (.of Ω) ⟶ U.left), ∃ (V : U.left.Etale) (v : (pointSmallEtale x).fiber.obj V), Nonempty ((localIsomorphismRestriction U.left (lisseTowerEtaleRing d n) V).obj ((normalizationConstant U.left.smallEtaleTopology).obj E) ≅ (localIsomorphismRestriction U.left (lisseTowerEtaleRing d n) V).obj D)",
+  "branch": "sheaf-dag",
+  "by": "N2",
+  "date": "2026-10-28"
+ },
+ "mathlib_match": null,
+ "status": "split",
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N2",
+  "result": "pass",
+  "landing": "20261027T234114-L-4193352",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N2",
+  "result": "pass",
+  "landing": "20261027T234114-L-4193352",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
