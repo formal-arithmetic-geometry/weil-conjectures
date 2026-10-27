@@ -135,5 +135,23 @@
   "group": "NF",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NF-c7fee6bb5 (reviewer sub-agent of L); spot-checked: I read the item, every cited statement, the Lean (RationalPullbackTensorAssociatorNaturality.lean:50-156, DerivedPullbackTensorConstraints.lean:152-578) and Stacks 06YS/07A4/0941/0FPQ in sites-cohomology.tex. The statement is unchanged from base and matches the private integral_naturality: same ℓ, E, residue-field invertibility, integral constructible category and arbitrary f,g,h. Identity and zero cases hold. I found no duplicate in the DAG: the rational analogue, the constraints existence nodes and the braiding sibling are all different statements. The route matches the Lean and the landed braiding sibling: c is natural via the counit of R⊣L plus the tensor model, α^int is fixed by its reduction equation (def-pod-integral-tensor-constraints), and faithfulness comes from lem-pod-integral-system-reduction-fully-faithful. C4/C1 fault in Step 2: it used the strict-system monoidal associator without citing the node that defines it, which is def-coef-ringed-tensor-hom-model (it owns CoefficientClosedStructure.monoidal). It also claimed a K-flat rebracketing formula, but that associator is not pinned on K-flat representatives. Fixed: cited def-coef-ringed-tensor-hom-model, used the monoidal-category naturality axiom, removed the representative claim, and changed the source to 0FPQ. I also spelled out the c-naturality and nested squares in Step 1 and the cancellation in Step 3, and added def-coef-ringed-tensor-hom-model to proof_deps. Batch 5: lem-pod-integral-system-reduction-fully-faithful is general adic reconstruction (full faithfulness of coherent reduction), not a step of the Poincaré-duality or trace-formula proofs. The item's closure grows by only 4 nodes, none from trf, PD or the targets, and the landed braiding sibling cites the same node, so I accepted it. No tool_uses and no new nodes.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.IntegralPullbackTensorAssociatorNaturality",
+  "declaration": "WeilConjectures.pullbackTensorIntegralAssociator_naturality",
+  "file": "lean/Sheaf/Paper/IntegralPullbackTensorAssociatorNaturality.lean",
+  "statement": "theorem pullbackTensorIntegralAssociator_naturality (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (W : Scheme.{u}) [∀ w : W, Invertible (l : W.residueField w)] {M N P M' N' P' : sfIntegralConstructibleCategory l E W} (f : M ⟶ M') (g : N ⟶ N') (h : P ⟶ P') : (constructibleIntegralTensor l E W).map (Prod.mkHom ((constructibleIntegralTensor l E W).map (Prod.mkHom f g)) h) ≫ (pullbackTensorIntegralAssociator l E W M' N' P').hom = (pullbackTensorIntegralAssociator l E W M N P).hom ≫ (constructibleIntegralTensor l E W).map (Prod.mkHom f ((constructibleIntegralTensor l E W).map (Prod.mkHom g h)))",
+  "branch": "newtargets-dag",
+  "by": "NB",
+  "date": "2026-10-27",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-cf3298662",
+  "group": "NB",
+  "result": "pass",
+  "note": "Signature has the same type as the live private integral_naturality helpers (CommonStageTensorLineCoherenceNaturality:200, RationalPullbackTensorAssociatorNaturality:131), so it is true and typechecks; clause-by-clause match with the node (prime l, finite E/Q_l, l invertible on W, sfIntegralConstructibleCategory, constructibleIntegralTensor, pullbackTensorIntegralAssociator, arbitrary f g h, same direction); no extra hypotheses, universe tie forced by deps; only the item's lean field changed; lean.statement verbatim; dep nodes unchanged; docstrings have source, blueprint tag and proof steps; proof is sorry, no defs; no public duplicate. Advisory: constructibleIntegralTensor owner def-sf-finite-rational-derived-operations is not a direct stmt_dep but is in the transitive stmt closure, acyclic; not changed under H2. No compile (no file changed)."
  }
 }
