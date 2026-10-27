@@ -1,0 +1,118 @@
+{
+ "kind": "statement",
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tags 099Y, 099Z and 09B1, bounded-below classical comparison and finite locally constant descent"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-lisse-tower-etale-descent-data",
+  "def-weil-pbc-derived-local-isomorphism-sheaf",
+  "def-weil-pbc-adic-coefficient-datum",
+  "def-weil-pbc-bounded-constructible-tower",
+  "lem-weil-pbc-constant-adic-quotient-scalar-comparison",
+  "def-weil-pbc-derived-normalization-arrows",
+  "def-constructible-finite-locally-constant",
+  "def-weil-derived-cohomology-sheaves"
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-comparison-pullback",
+  "thm-weil-pbc-site-comparison",
+  "det-pe-classical-derived-equivalence",
+  "lem-sf-proetale-locally-constant-origin",
+  "lem-weil-pbc-comparison-finite-local-constancy-reflection"
+ ],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "bounded finite locally constant derived pro-etale complex etale origin",
+   "results": "No exact fixed-realization descent theorem; existing searches return generic locally constant and derived-category APIs.",
+   "date": "2026-10-28",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory homology finite locally constant sheaf comparison",
+   "results": "No exact finite-level descent match.",
+   "date": "2026-10-28",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "lisseTowerFixedRealization derivedLocalIsomorphismSheaf",
+   "results": "Repository search found only the finite-level descent family and its tower consumers; no duplicate theorem.",
+   "date": "2026-10-28",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.LisseFiniteLevelEtaleModel",
+  "date": "2026-10-28",
+  "group": "N1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "new-lem-weil-pbc-lisse-finite-level-etale-model",
+   "place": "Strict decomposition of the model-and-comparison proof into cohomological data and fixed-realization comparison.",
+   "via": [
+    "new-lem-weil-pbc-lisse-finite-level-etale-model"
+   ]
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "id": "new-lem-weil-pbc-lisse-finite-level-etale-model-data",
+ "title": "The local-model construction yields an etale complex with bounded cohomology and finite locally constant cohomology.",
+ "statement": "The local-model construction yields an etale complex with bounded cohomology and finite locally constant cohomology. The conclusion is the displayed strict subclaim of the parent statement.",
+ "proof": [
+  {
+   "text": "The finite scalar equivalence transports the local models to a bounded pro-etale complex. Classical derived comparison descends it to an etale complex, and exactness together with finite local-constancy reflection gives the two displayed properties.",
+   "uses": [
+    "lem-weil-pbc-comparison-pullback",
+    "thm-weil-pbc-site-comparison",
+    "det-pe-classical-derived-equivalence",
+    "lem-sf-proetale-locally-constant-origin",
+    "lem-weil-pbc-comparison-finite-local-constancy-reflection"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tags 099Y, 099Z and 09B1; strict subclaim split from the parent model proof."
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.LisseFiniteLevelEtaleModelProperties",
+  "file": "lean/Sheaf/Paper/LisseFiniteLevelEtaleModelProperties.lean",
+  "declaration": "AlgebraicGeometry.Scheme.lisse_finite_level_etale_model_properties",
+  "statement": "theorem lisse_finite_level_etale_model_properties (X Y : Scheme.{u}) (g : Y ⟶ X) {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A) (U : Y.ProEt) (n : ℕ) (N : DerivedCategory (pbcModules X ((pbcAdicRings X d).obj (op n)))) (E : DerivedCategory (ModuleCat.{u + 1} (lisseTowerEtaleRing d n))) (hbounded : ∃ a b : ℤ, ∀ q : ℤ, q < a ∨ b < q → IsZero ((DerivedCategory.homologyFunctor _ q).obj E)) (hfinite : ∀ q : ℤ, Module.Finite (lisseTowerEtaleRing d n) ((DerivedCategory.homologyFunctor (ModuleCat.{u + 1} (lisseTowerEtaleRing d n)) q).obj E)) (hmodels : ∃ T : Sieve U, T ∈ ProEt.topology Y U ∧ ∀ (W : Y.ProEt) (w : W ⟶ U), T w → Nonempty ((constantAdicQuotientRealization (W.hom ≫ g) d n).obj E ≅ (adicTowerPullback (W.hom ≫ g) ((pbcAdicRings X d).obj (op n))).obj N)) : ∃ D : DerivedCategory (Sheaf U.left.smallEtaleTopology (ModuleCat.{u + 1} (lisseTowerEtaleRing d n))), (∃ a b : ℤ, ∀ q : ℤ, q < a ∨ b < q → IsZero ((DerivedCategory.homologyFunctor _ q).obj D)) ∧ (∀ q : ℤ, IsFiniteLocallyConstantSheaf ((DerivedCategory.homologyFunctor _ q).obj D))",
+  "branch": "sheaf-dag",
+  "by": "N1",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N1",
+  "result": "pass",
+  "landing": "20261027T234111-L-4191645",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N1",
+  "result": "pass",
+  "landing": "20261027T234111-L-4191645",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

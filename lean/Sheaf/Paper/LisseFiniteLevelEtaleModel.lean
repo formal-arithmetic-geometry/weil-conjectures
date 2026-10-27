@@ -6,10 +6,8 @@ Authors: SHEAF group K3
 module
 
 public import Sheaf.Paper.LisseTowerEtaleDescentData
-import Sheaf.AlgebraicGeometry.ClassicalDerivedEquivalence
-import Sheaf.AlgebraicGeometry.CompactSupportComparisonUnit
-import Sheaf.Paper.ProEtaleLisseOrigin
-import Sheaf.Paper.ProEtaleFiniteLocalConstancyReflection
+import Sheaf.Paper.LisseFiniteLevelEtaleModelProperties
+import Sheaf.Paper.LisseFiniteLevelEtaleModelComparison
 
 /-! # Bounded finite-lisse model at one coefficient level
 
@@ -75,6 +73,10 @@ theorem lisse_finite_level_etale_model
         ((ProEtale.comparisonUpperStar
           (ModuleCat.{u + 1} (lisseTowerEtaleRing d n)) U.left).mapDerivedCategory.obj D) ≅
         (adicTowerPullback (U.hom ≫ g) ((pbcAdicRings X d).obj (op n))).obj N) := by
-  sorry
+  obtain ⟨D, hDbounded, hDlisse⟩ :=
+    lisse_finite_level_etale_model_properties X Y g d U n N E hbounded hfinite hmodels
+  have hcomparison := lisse_finite_level_etale_model_comparison X Y g d U n N E D
+    hDbounded hDlisse hmodels
+  exact ⟨D, hDbounded, hDlisse, hcomparison⟩
 
 end AlgebraicGeometry.Scheme
