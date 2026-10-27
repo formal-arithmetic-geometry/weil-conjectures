@@ -1,0 +1,105 @@
+{
+ "id": "lem-weil-pbc-finite-perfect-adic-lifted-transition-universal",
+ "kind": "statement",
+ "title": "Universality of the lifted algebraic transition",
+ "statement": "theorem finitePerfectAdicLiftedTransition_universal\n    {A : Type t} [CommRing A] {d : AdicCoefficientDatum A}\n    (T : FinitePerfectAdicAlgebraTower d) (n : ℕ) :\n    Nonempty (StructuredArrow.IsUniversal (StructuredArrow.mk\n      (finitePerfectAdicLiftedTransition T n)))",
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tags 06YY and 09C6, normalized algebraic quotient transition"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-finite-perfect-adic-tower-data",
+  "def-weil-pbc-finite-perfect-adic-constant-normalization"
+ ],
+ "proof": [
+  {
+   "text": "Use the invertible transpose recorded by T.normalized under the step adjunction. Universe lifting and the coefficient interchange identify the lifted arrow with the adjunction-unit arrow transported along an isomorphism, hence it is initial in the structured-arrow category.",
+   "uses": [
+    "def-weil-pbc-finite-perfect-adic-tower-data",
+    "def-weil-pbc-finite-perfect-adic-constant-normalization"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-finite-perfect-adic-tower-data",
+  "def-weil-pbc-finite-perfect-adic-constant-normalization"
+ ],
+ "proof_origin": {
+  "by": "T3 stage 3",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tags 06YY and 09C6, normalized algebraic quotient transition"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "structured arrow universality coefficient normalization",
+   "results": "No exact match; project APIs used.",
+   "date": "2026-10-28",
+   "verdict": "reuse project APIs"
+  },
+  {
+   "tool": "loogle",
+   "query": "StructuredArrow.IsUniversal",
+   "results": "Generic initial-object transport APIs found.",
+   "date": "2026-10-28",
+   "verdict": "reuse generic APIs"
+  },
+  {
+   "tool": "grep",
+   "query": "finitePerfectAdicLiftedTransition_universal",
+   "results": "No existing theorem.",
+   "date": "2026-10-28",
+   "verdict": "new statement"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FinitePerfectAdicConstantUniversal",
+  "date": "2026-10-28",
+  "group": "T3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-finite-perfect-adic-constant-normalization-universal",
+   "place": "Tags 06YY and 09C6, normalized algebraic quotient transition",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FinitePerfectAdicLiftedTransitionUniversal",
+  "file": "lean/Sheaf/Paper/FinitePerfectAdicLiftedTransitionUniversal.lean",
+  "declaration": "AlgebraicGeometry.Scheme.finitePerfectAdicLiftedTransition_universal",
+  "statement": "theorem finitePerfectAdicLiftedTransition_universal\n    {A : Type t} [CommRing A] {d : AdicCoefficientDatum A}\n    (T : FinitePerfectAdicAlgebraTower d) (n : ℕ) :\n    Nonempty (StructuredArrow.IsUniversal (StructuredArrow.mk\n      (finitePerfectAdicLiftedTransition T n)))",
+  "branch": "sheaf-dag",
+  "by": "T3",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T3",
+  "result": "pass",
+  "landing": "20261027T210239-L-1679207",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T3",
+  "result": "pass",
+  "landing": "20261027T210239-L-1679207",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

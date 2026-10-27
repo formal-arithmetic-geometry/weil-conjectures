@@ -6,6 +6,8 @@ Authors: SHEAF group J8
 module
 
 public import Sheaf.Paper.FinitePerfectAdicConstantCohomology
+import Sheaf.Paper.FinitePerfectAdicLiftedTransitionUniversal
+import Sheaf.Paper.EtaleNormalizationArrowUniversal
 
 /-! # Sourcewise universality of the constant finite perfect transition
 
@@ -41,6 +43,10 @@ theorem finitePerfectAdicEtaleConstant_universal (Y : Scheme.{t})
       (etaleIsomorphismNormalizationArrow Y
         (RingHom.ulift (Ideal.Quotient.factorPowSucc d.ideal (n + 1)))
         (finitePerfectAdicEtaleConstantTransition Y T n) U))) := by
-  sorry
+  have h := finitePerfectAdicLiftedTransition_universal T n
+  simpa [finitePerfectAdicEtaleConstantTransition] using
+    (etaleNormalizationArrow_universal_of_constant Y
+      (RingHom.ulift (Ideal.Quotient.factorPowSucc d.ideal (n + 1)))
+      (finitePerfectAdicLiftedTransition T n) h U)
 
 end AlgebraicGeometry.Scheme

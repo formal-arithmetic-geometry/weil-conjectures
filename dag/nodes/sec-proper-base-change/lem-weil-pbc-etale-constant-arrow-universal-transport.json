@@ -1,0 +1,108 @@
+{
+ "id": "lem-weil-pbc-etale-constant-arrow-universal-transport",
+ "kind": "statement",
+ "title": "Etale source transport preserves universality of constant arrows",
+ "statement": "theorem etaleNormalizationArrow_universal_of_constant\n    (Y : Scheme.{t}) {R S : Type (t + 1)} [CommRing R] [CommRing S]\n    (q : R →+* S)\n    {E : DerivedCategory (ModuleCat.{t + 1} R)}\n    {E' : DerivedCategory (ModuleCat.{t + 1} S)}\n    (d : E ⟶ (normalizationModuleRestrict q).obj E')\n    (h : Nonempty (StructuredArrow.IsUniversal (StructuredArrow.mk d)))\n    (U : Y.Etale) :\n    Nonempty (StructuredArrow.IsUniversal (StructuredArrow.mk\n      (etaleIsomorphismNormalizationArrow Y q\n        (normalizationConstantArrow Y.smallEtaleTopology q d) U)))",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YY and 03ED, scalar extension and inverse image on an etale source"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-derived-normalization-arrows",
+  "def-weil-pbc-etale-isomorphism-normalization-arrow",
+  "def-weil-pbc-derived-local-isomorphism-sheaf"
+ ],
+ "proof": [
+  {
+   "text": "Transport the initial structured arrow for d through exact constant realization and the etale slice equivalence. The canonical inverse-image coefficient mate is an isomorphism, and the derived square identities identify the transported arrow with etaleIsomorphismNormalizationArrow.",
+   "uses": [
+    "def-weil-pbc-derived-normalization-arrows",
+    "def-weil-pbc-etale-isomorphism-normalization-arrow",
+    "def-weil-pbc-derived-local-isomorphism-sheaf"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-derived-normalization-arrows",
+  "def-weil-pbc-etale-isomorphism-normalization-arrow",
+  "def-weil-pbc-derived-local-isomorphism-sheaf"
+ ],
+ "proof_origin": {
+  "by": "T3 stage 3",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YY and 03ED, scalar extension and inverse image on an etale source"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "structured arrow universality coefficient normalization",
+   "results": "No exact match; project APIs used.",
+   "date": "2026-10-28",
+   "verdict": "reuse project APIs"
+  },
+  {
+   "tool": "loogle",
+   "query": "StructuredArrow.IsUniversal",
+   "results": "Generic initial-object transport APIs found.",
+   "date": "2026-10-28",
+   "verdict": "reuse generic APIs"
+  },
+  {
+   "tool": "grep",
+   "query": "etaleNormalizationArrow_universal_of_constant",
+   "results": "No existing theorem.",
+   "date": "2026-10-28",
+   "verdict": "new statement"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FinitePerfectAdicConstantUniversal",
+  "date": "2026-10-28",
+  "group": "T3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-finite-perfect-adic-constant-normalization-universal",
+   "place": "Tags 06YY and 03ED, scalar extension and inverse image on an etale source",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.EtaleNormalizationArrowUniversal",
+  "file": "lean/Sheaf/Paper/EtaleNormalizationArrowUniversal.lean",
+  "declaration": "AlgebraicGeometry.Scheme.etaleNormalizationArrow_universal_of_constant",
+  "statement": "theorem etaleNormalizationArrow_universal_of_constant\n    (Y : Scheme.{t}) {R S : Type (t + 1)} [CommRing R] [CommRing S]\n    (q : R →+* S)\n    {E : DerivedCategory (ModuleCat.{t + 1} R)}\n    {E' : DerivedCategory (ModuleCat.{t + 1} S)}\n    (d : E ⟶ (normalizationModuleRestrict q).obj E')\n    (h : Nonempty (StructuredArrow.IsUniversal (StructuredArrow.mk d)))\n    (U : Y.Etale) :\n    Nonempty (StructuredArrow.IsUniversal (StructuredArrow.mk\n      (etaleIsomorphismNormalizationArrow Y q\n        (normalizationConstantArrow Y.smallEtaleTopology q d) U)))",
+  "branch": "sheaf-dag",
+  "by": "T3",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T3",
+  "result": "pass",
+  "landing": "20261027T210239-L-1679207",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T3",
+  "result": "pass",
+  "landing": "20261027T210239-L-1679207",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
