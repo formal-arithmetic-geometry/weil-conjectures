@@ -16,28 +16,65 @@
  ],
  "proof": [
   {
-   "text": "the transpose equations determine the system and finite Hom maps after\nprecomposition with the respective source site counits. Evaluate these equations,\nsubstitute the comparison evaluation square, and use the three evaluated\nadjunctions. The evaluated source counit is the finite counit composed with the\ntwo inverse/direct evaluation comparisons; cancel it, using its invertibility on\norigins. Hence evaluation intertwines the forward Hom maps. Apply this identity\nto the identity of the left image for the unit, and to the counit for the counit,\nusing bijectivity of the finite Hom map. For quotient transitions use the actual\netale transition equation before evaluation, then apply the site inverse tensor\ncomparison. The scalar/site pullback cube identifies its derived tensor map and\nthe inverse-transition restriction comparison as scalar-adjunction mates. Moving\nthrough this mate square gives exactly the displayed transpose. The intermediate\ntensor object may be unbounded, so all transposes are taken in the unbounded\ncategories. No equality is inferred from agreement at every evaluation.",
+   "text": "Evaluate the origin comparison, expanding its source-site counit. Naturality of exceptionalProSupportEvaluation, the assumed comparison evaluation square, CX.image.counit and naturality of exceptionalSystemLevelComparison identify its evaluation with the finite origin comparison, preceded by the inverse-site, support and direct-site evaluation comparisons.",
    "uses": [
-    "lem-pur-coefficient-system-derived-comparison",
-    "lem-pur-etale-coefficient-system-adjoint",
-    "lem-coef-semilinear-derived-sections",
-    "lem-sfb-etale-proetale-scalar-pullback-cube",
-    "lem-weil-pbc-mate-pasting"
+    "def-pur-exceptional-system-transport-interfaces",
+    "def-coef-system-site-transport-interfaces",
+    "def-pur-coefficient-system-image-data"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The evaluated Hom transpose of an adjunction is obtained from its evaluated unit and naturality of the right evaluation comparison; for G use its prescribed evaluation-mate equation and adjunctionMate_transpose. Apply these identities to the three adjunctions in the origin Hom chain. The preceding comparison equation identifies the left-hand input words. Apply the system and finite ExceptionalOriginAdjunction.transpose fields, and cancel evaluation of the source-site counit, which is invertible by record.siteX.counit. This gives origin_hom_evaluation for every map, without inferring equality from evaluations.",
+   "uses": [
+    "def-pur-exceptional-system-transport-interfaces",
+    "def-coef-system-site-transport-interfaces",
+    "def-sf-strict-etale-exceptional-adjoint-interfaces",
+    "lem-pur-adjunction-mate-transpose",
+    "def-pur-coefficient-system-image-data"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For unit evaluation apply origin_hom_evaluation to the identity of the left image, and use homEquiv_id and right naturality of the finite Hom equivalence with the left-evaluation isomorphism. For counit evaluation apply it to the system counit. Its transpose is the identity; injectivity of the finite Hom equivalence, followed by homEquiv_counit and cancellation of the left-evaluation isomorphism, gives the displayed counit equation.",
+   "uses": [
+    "def-pur-exceptional-system-transport-interfaces"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The recorded restrictedDirect_mate equation identifies the scalar/site conjugate of derivedTensor. The recorded restrictedInverse_mate equation and the iterated mate identity then identify restrictedInverse as the scalar-adjunction mate of inverse derivedTensor. Apply adjunctionMate_transpose to inverseTransition to obtain site_inverse_transition, an equation of actual unbounded scalar transposes.",
+   "uses": [
+    "def-coef-system-site-transport-interfaces",
+    "lem-weil-pbc-mate-pasting",
+    "lem-pur-adjunction-mate-transpose",
+    "def-pur-coefficient-system-image-data"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Expand exceptionalSystemRightEtaleEvaluation. Move the evaluated etale-right comparison through inverse derivedTensor by naturality. Substitute G's given quotient transition equation, and then site_inverse_transition. Functoriality and associativity give exactly the displayed quotient equation on arbitrary systems. No tensor object is required to be bounded below.",
+   "uses": [
+    "def-pur-exceptional-system-transport-interfaces",
+    "def-coef-system-site-transport-interfaces",
+    "def-sf-strict-etale-exceptional-adjoint-interfaces",
+    "def-pur-coefficient-system-image-data"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-pur-coefficient-system-derived-comparison",
-  "lem-pur-etale-coefficient-system-adjoint",
-  "lem-coef-semilinear-derived-sections",
-  "lem-sfb-etale-proetale-scalar-pullback-cube",
+  "def-pur-exceptional-system-transport-interfaces",
+  "def-coef-system-site-transport-interfaces",
+  "def-pur-coefficient-system-image-data",
+  "def-sf-strict-etale-exceptional-adjoint-interfaces",
+  "lem-pur-adjunction-mate-transpose",
   "lem-weil-pbc-mate-pasting"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
-  "place": "Separated portion of system-transport steps 2–8: Evaluation and quotient equations for origin adjunctions"
+  "place": "Zheng Lemmas 4.10 and 5.22 and Proposition 5.24; formal adjunction calculation from the recorded interfaces, U7, 2026-10-28. The geometric existence and fixed-ring pullback-cube theorems are not reapplied."
  },
  "mathlib_match": null,
  "mathlib_searches": [
@@ -109,13 +146,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-25",
+  "date": "2026-10-27",
   "by": "L",
-  "reviewer": "C-dfec7",
-  "group": "C2",
-  "result": "fix",
-  "landing": "20261025T013903-L-4030217",
+  "reviewer": "COMPILER",
+  "group": "U7",
+  "result": "pass",
+  "landing": "20261027T180838-L-3908576",
   "kind": "interface",
-  "note": "independent cc review: item exceptionalSystemTransport (statement and kernel type hash unchanged vs published) with its 4 new sorry leaves + Interfaces relocation (49 moved decls: verbatim text; type-hash diffs only in Prop instance proofs); 6 delivered modules + 9 direct importers compiled clean in sandbox"
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
