@@ -11,6 +11,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.DirectImageTorAmplitude
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.QuotientCoefficients
 public import WeilConjectures.SixFunctors.Etale.Derived.Stability.ClosedImmersion
+public import WeilConjectures.SixFunctors.Etale.Derived.Stability.DirectImageTorAmplitudeNoetherian
 public import WeilConjectures.SixFunctors.Etale.Derived.Stability.OpenImmersion
 
 /-!
@@ -147,8 +148,11 @@ theorem torAmplitudeIn_rightDerivedLowerStar_of_isNoetherianRing [IsNoetherianRi
     (hbc : boundedConstructible (ModuleCat.{u + 1} Λ) X K)
     (hta : torAmplitudeIn (ModuleCat.{u + 1} Λ) X a b K) :
     torAmplitudeIn (ModuleCat.{u + 1} Λ) Y a (b + 2 * (d : ℤ))
-      ((R((f)_*[ModuleCat.{u + 1} Λ])).obj K) :=
-  sorry
+      ((R((f)_*[ModuleCat.{u + 1} Λ])).obj K) := by
+  -- neither the invertibility of `N` on `Y` nor the constructibility of `K` is needed
+  have _ := hNY
+  have _ := hbc
+  exact torAmplitudeIn_rightDerivedLowerStar_of_nsmul_id_eq_zero Λ aX aY f hf d hd a b N hN hta
 
 omit [Finite Λ] in
 /-- Blueprint `sk-prop-sf-finiteness`: Finiteness and constructibility.
