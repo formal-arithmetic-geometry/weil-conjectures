@@ -6,6 +6,7 @@ module
 
 public import Sheaf.Paper.ConstructibleExceptionalCoefficientAssemblyData
 public import Sheaf.Paper.RefinementOpenRestriction
+import Sheaf.Paper.QcqsCompletedRefinement
 
 /-! # Completed integral normalized refinement comparisons -/
 
@@ -61,6 +62,10 @@ theorem exists_normalized_refinement_iso_integral
         (PurCompactSupport.openDerivedAdjunction
           ((RingStage.integral E).coefficients l) c.i).unit.app
           ((RingStage.inclusion.{u, v} l Ω X (RingStage.integral E)).obj K) := by
-  sorry
+  let K' : sfIntegralConstructibleCategory l E.carrier X := ⟨K.obj, K.property.1⟩
+  obtain ⟨ρ, hρ⟩ := sfQcqsCompletedRefinement_exists l E.carrier D.k
+    (PurCompactSupport.coefficientPrimeUnit l D hl) r K'
+  obtain ⟨ε, hε, _⟩ := hρ
+  exact ⟨ε, hε⟩
 
 end WeilConjectures.ConstructibleExceptionalCoefficients
