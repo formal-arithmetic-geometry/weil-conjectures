@@ -8,6 +8,7 @@ module
 public import Sheaf.AlgebraicGeometry.SfIntrinsicRealizationTransport
 public import Sheaf.AlgebraicGeometry.ProEtaleOpenSquareExchange
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.UpperLowerStar
+import Sheaf.Paper.IntrinsicDirectCompositorCoordinatesMatePasting
 
 /-! # Coefficient realization of an ordinary direct-image compositor
 
@@ -80,6 +81,10 @@ theorem sfIntrinsicDirectCompositorCoordinates_kInjective
       (sfIntrinsicDerivedPullbackComp A f g)).hom.app
         ((sfIntrinsicDerivedEquivalence X A).functor.obj (DerivedCategory.Q.obj I)) ≫
       (sfIntrinsicDerivedDirectImageComparison (f ≫ g) A).hom.app
-        (DerivedCategory.Q.obj I) := by sorry
+        (DerivedCategory.Q.obj I) := by
+  calc
+    _ = sfIntrinsicAmbientIntermediate A f g I :=
+      sfIntrinsicDirectCompositorCoordinates_ambient_normalization A f g I
+    _ = _ := sfIntrinsicDirectCompositorCoordinates_ambient_to_intrinsic A f g I
 
 end AlgebraicGeometry.Scheme
