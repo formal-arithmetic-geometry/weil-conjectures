@@ -1,0 +1,125 @@
+{
+ "id": "lem-coef-qbar-evaluation-representatives",
+ "kind": "lemma",
+ "title": "Finite evaluation transpose and evaluation on common-stage representatives",
+ "statement": "theorem finite_evaluation_representatives (B : Duality D l hl Ω X) :\n    (∀ (E : Index l Ω) (K P : Stage l Ω X E),\n      Function.Bijective (fun f : P ⟶ (B.finite.datum E).dual.obj (op K) ↦\n        (RationalVerdier.tensor D l hl X (Coefficient.{u} l Ω E)).map\n          (Prod.mkHom (𝟙 K) f) ≫ (B.finite.datum E).evaluation K)) ∧\n    (∀ (K P : generalAlgebraicallyClosedConstructibleCategory l Ω X)\n      (E : Index l Ω) (hK : K.stage ≤ E) (hP : P.stage ≤ E)\n      (f : P.toStage hP ⟶ (B.finite.datum E).dual.obj (op (K.toStage hK))),\n      (CoefQbarTensor D l hl Ω X).map (Prod.mkHom (𝟙 K)\n        (((stageSystem l Ω X).isoToStage P hP).hom ≫ (inclusion E).map f ≫\n          (B.comparison E).hom.app (op (K.toStage hK)) ≫\n            B.duality.dual.map (((stageSystem l Ω X).isoToStage K hK).hom).op)) ≫\n        B.evaluation K =\n      (CoefQbarTensor D l hl Ω X).map\n        (Prod.mkHom ((stageSystem l Ω X).isoToStage K hK).hom\n          ((stageSystem l Ω X).isoToStage P hP).hom) ≫\n        (tensorInclusion D l hl Ω X E (K.toStage hK) (P.toStage hP)).inv ≫\n          (inclusion E).map\n            ((RationalVerdier.tensor D l hl X (Coefficient.{u} l Ω E)).map\n              (Prod.mkHom (𝟙 (K.toStage hK)) f) ≫\n                (B.finite.datum E).evaluation (K.toStage hK)) ≫\n            (B.omegaComparison E).hom) ∧\n    (∀ (K P : generalAlgebraicallyClosedConstructibleCategory l Ω X)\n    {E L : Index l Ω} (hi : K.stage ≤ E) (hj : P.stage ≤ E) (h : E ≤ L),\n    let := RationalVerdier.units D l hl X\n    (inclusion L).map\n      ((rationalTensorStageComparison l Ω X h).hom.app (K.toStage hi, P.toStage hj) ≫\n        (rationalDerivedTensor l (Coefficient.{u} l Ω L) X).map\n          (Prod.mkHom (((stageSystem l Ω X).assoc hi h).hom.app K.obj)\n            (((stageSystem l Ω X).assoc hj h).hom.app P.obj))) ≫\n      (tensorInclusion D l hl Ω X L (K.toStage (hi.trans h))\n        (P.toStage (hj.trans h))).hom ≫\n      (CoefQbarTensor D l hl Ω X).map\n        (Prod.mkHom ((stageSystem l Ω X).isoToStage K (hi.trans h)).inv\n          ((stageSystem l Ω X).isoToStage P (hj.trans h)).inv) =\n    ((stageSystem l Ω X).transIso h).hom.app\n      ((rationalDerivedTensor l (Coefficient.{u} l Ω E) X).obj\n        (K.toStage hi, P.toStage hj)) ≫\n      (tensorInclusion D l hl Ω X E (K.toStage hi) (P.toStage hj)).hom ≫\n      (CoefQbarTensor D l hl Ω X).map\n        (Prod.mkHom ((stageSystem l Ω X).isoToStage K hi).inv\n          ((stageSystem l Ω X).isoToStage P hj).inv))",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-biduality-general/sk-prop-sf-biduality-general.proof.md",
+  "place": "Coefficient transport through thm-coef-qbar-verdier; explicit normalization step of lem-coef-qbar-verdier-internal-hom-universal"
+ },
+ "stmt_deps": [
+  "def-sf-common-stage-verdier-data",
+  "lem-weil-rational-tensor-stage-coherence"
+ ],
+ "proof": [
+  {
+   "text": "The finite tensor-Hom adjunction gives a Hom equivalence. Conjugate by the specified finite duality isomorphism and use its counit normalization to identify the resulting bijection with evaluation transpose.",
+   "uses": [
+    "def-sf-common-stage-verdier-data",
+    "lem-coef-rational-operations"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Evaluation naturality moves the isoToStage comparison on K into the global dual. Tensor functoriality moves the comparison on P into the same formula. Tensor-inclusion naturality and the prescribed finite evaluation square then give the formula for an arbitrary finite morphism at a representative stage.",
+   "uses": [
+    "def-sf-common-stage-verdier-data",
+    "lem-coef-qbar-tensor-inclusion-coherent"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Tensor-inclusion naturality moves the two stage associators through the finite inclusion. The composition identities for isoToStage and the tensor-inclusion scalar square identify the resulting product morphism with its representative at the original stage.",
+   "uses": [
+    "def-weil-algebraically-closed-coefficients",
+    "lem-pur-bilinear-comparison-coefficient-descent",
+    "lem-coef-qbar-tensor-inclusion-coherent"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sf-common-stage-verdier-data",
+  "def-weil-algebraically-closed-coefficients",
+  "lem-coef-qbar-tensor-inclusion-coherent",
+  "lem-coef-rational-operations",
+  "lem-pur-bilinear-comparison-coefficient-descent"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-biduality-general/sk-prop-sf-biduality-general.proof.md",
+  "place": "Categorical expansion of finite-origin evaluation transport; H1"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A finite tensor Hom adjunction evaluation transpose is bijective and is natural after identifying objects with finite stage representatives",
+   "results": "8 hits on monoidal or module adjunctions and Hom equivalences. None identifies the prescribed project finite-stage evaluation with global evaluation.",
+   "date": "2026-10-28",
+   "verdict": "Use the generic adjunction Hom equivalence and prove the representative comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.homEquiv",
+   "results": "12 hits, including homEquiv and the counit formula homEquiv_symm_apply. Reused to identify evaluation transpose.",
+   "date": "2026-10-28",
+   "verdict": "Reuse the adjunction API; the normalized finite representative square is project-specific."
+  },
+  {
+   "tool": "grep",
+   "query": "evaluation.*isoToStage|isoToStage.*evaluation",
+   "results": "0 hits.",
+   "date": "2026-10-28",
+   "verdict": "No existing evaluation-on-representatives statement."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.CoefQbarVerdierInternalHomUniversal",
+  "date": "2026-10-28",
+  "group": "H1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-coef-qbar-verdier-internal-hom-universal",
+   "place": "Finite comparison normalization in evaluation descent",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.CoefQbarVerdierEvaluationRepresentatives",
+  "file": "lean/Sheaf/SixFunctors/CoefQbarVerdierEvaluationRepresentatives.lean",
+  "declaration": "WeilConjectures.CoefQbarVerdier.finite_evaluation_representatives",
+  "statement": "theorem finite_evaluation_representatives (B : Duality D l hl Ω X) :\n    (∀ (E : Index l Ω) (K P : Stage l Ω X E),\n      Function.Bijective (fun f : P ⟶ (B.finite.datum E).dual.obj (op K) ↦\n        (RationalVerdier.tensor D l hl X (Coefficient.{u} l Ω E)).map\n          (Prod.mkHom (𝟙 K) f) ≫ (B.finite.datum E).evaluation K)) ∧\n    (∀ (K P : generalAlgebraicallyClosedConstructibleCategory l Ω X)\n      (E : Index l Ω) (hK : K.stage ≤ E) (hP : P.stage ≤ E)\n      (f : P.toStage hP ⟶ (B.finite.datum E).dual.obj (op (K.toStage hK))),\n      (CoefQbarTensor D l hl Ω X).map (Prod.mkHom (𝟙 K)\n        (((stageSystem l Ω X).isoToStage P hP).hom ≫ (inclusion E).map f ≫\n          (B.comparison E).hom.app (op (K.toStage hK)) ≫\n            B.duality.dual.map (((stageSystem l Ω X).isoToStage K hK).hom).op)) ≫\n        B.evaluation K =\n      (CoefQbarTensor D l hl Ω X).map\n        (Prod.mkHom ((stageSystem l Ω X).isoToStage K hK).hom\n          ((stageSystem l Ω X).isoToStage P hP).hom) ≫\n        (tensorInclusion D l hl Ω X E (K.toStage hK) (P.toStage hP)).inv ≫\n          (inclusion E).map\n            ((RationalVerdier.tensor D l hl X (Coefficient.{u} l Ω E)).map\n              (Prod.mkHom (𝟙 (K.toStage hK)) f) ≫\n                (B.finite.datum E).evaluation (K.toStage hK)) ≫\n            (B.omegaComparison E).hom) ∧\n    (∀ (K P : generalAlgebraicallyClosedConstructibleCategory l Ω X)\n    {E L : Index l Ω} (hi : K.stage ≤ E) (hj : P.stage ≤ E) (h : E ≤ L),\n    let := RationalVerdier.units D l hl X\n    (inclusion L).map\n      ((rationalTensorStageComparison l Ω X h).hom.app (K.toStage hi, P.toStage hj) ≫\n        (rationalDerivedTensor l (Coefficient.{u} l Ω L) X).map\n          (Prod.mkHom (((stageSystem l Ω X).assoc hi h).hom.app K.obj)\n            (((stageSystem l Ω X).assoc hj h).hom.app P.obj))) ≫\n      (tensorInclusion D l hl Ω X L (K.toStage (hi.trans h))\n        (P.toStage (hj.trans h))).hom ≫\n      (CoefQbarTensor D l hl Ω X).map\n        (Prod.mkHom ((stageSystem l Ω X).isoToStage K (hi.trans h)).inv\n          ((stageSystem l Ω X).isoToStage P (hj.trans h)).inv) =\n    ((stageSystem l Ω X).transIso h).hom.app\n      ((rationalDerivedTensor l (Coefficient.{u} l Ω E) X).obj\n        (K.toStage hi, P.toStage hj)) ≫\n      (tensorInclusion D l hl Ω X E (K.toStage hi) (P.toStage hj)).hom ≫\n      (CoefQbarTensor D l hl Ω X).map\n        (Prod.mkHom ((stageSystem l Ω X).isoToStage K hi).inv\n          ((stageSystem l Ω X).isoToStage P hj).inv))",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H1",
+  "result": "pass",
+  "landing": "20261027T210021-L-1647069",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H1",
+  "result": "pass",
+  "landing": "20261027T210021-L-1647069",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,114 @@
+{
+ "id": "lem-coef-qbar-dual-inclusion-coherent",
+ "kind": "lemma",
+ "title": "Finite duality and dualizing-object inclusions respect scalar extension",
+ "statement": "theorem finite_dual_inclusion_coherent (B : Duality D l hl Ω X) :\n    (∀ (K : generalAlgebraicallyClosedConstructibleCategory l Ω X)\n    {E L : Index l Ω} (hi : K.stage ≤ E) (h : E ≤ L),\n    (inclusion L).map\n        (((operationStageTransitionIso l Ω X E L h).hom.app\n            ((B.finite.datum E).dual.obj (op (K.toStage hi))) ≫\n          (B.finite.beta E L h).hom.app (op (K.toStage hi)) ≫\n          (B.finite.datum L).dual.map\n            ((operationStageTransitionIso l Ω X E L h).hom.app (K.toStage hi)).op) ≫\n          (B.finite.datum L).dual.map\n            (((stageSystem l Ω X).assoc hi h).inv.app K.obj).op) ≫\n        (B.comparison L).hom.app (op (K.toStage (hi.trans h))) ≫\n        B.duality.dual.map (((stageSystem l Ω X).isoToStage K (hi.trans h)).hom).op =\n      ((stageSystem l Ω X).transIso h).hom.app\n          ((B.finite.datum E).dual.obj (op (K.toStage hi))) ≫\n        (B.comparison E).hom.app (op (K.toStage hi)) ≫\n        B.duality.dual.map (((stageSystem l Ω X).isoToStage K hi).hom).op) ∧\n    (∀ {E L : Index l Ω} (h : E ≤ L),\n    (inclusion L).map ((operationStageTransitionIso l Ω X E L h).hom.app\n          ((sfRationalConstructibleLocalization l (Coefficient.{u} l Ω E) X).obj\n            (B.finite.omega E).omega) ≫ (B.finite.scalar E L h).omega.hom) ≫\n        (B.omegaComparison L).hom =\n      ((stageSystem l Ω X).transIso h).hom.app\n          ((sfRationalConstructibleLocalization l (Coefficient.{u} l Ω E) X).obj\n            (B.finite.omega E).omega) ≫ (B.omegaComparison E).hom)",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-biduality-general/sk-prop-sf-biduality-general.proof.md",
+  "place": "Coefficient transport through thm-coef-qbar-verdier; explicit normalization step of lem-coef-qbar-verdier-internal-hom-universal"
+ },
+ "stmt_deps": [
+  "def-sf-common-stage-verdier-data"
+ ],
+ "proof": [
+  {
+   "text": "Normalize the inclusion-transition isomorphism as the scalar-functor equality whiskered with inclusion, followed by the stage transIso. Equality induction transports the two recorded finite inclusion squares to the stage-system transition.",
+   "uses": [
+    "def-sf-common-stage-verdier-data",
+    "def-weil-algebraically-closed-coefficients"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For an arbitrary representative of K at E, naturality of its finite dual comparison moves the associator into the global dual functor. Composition of the isoToStage maps identifies the resulting morphism with the representative at the larger stage. The dualizing-object clause is the transported recorded square.",
+   "uses": [
+    "def-sf-common-stage-verdier-data",
+    "def-weil-algebraically-closed-coefficients",
+    "lem-pur-bilinear-comparison-coefficient-descent"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sf-common-stage-verdier-data",
+  "def-weil-algebraically-closed-coefficients",
+  "lem-pur-bilinear-comparison-coefficient-descent"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-biduality-general/sk-prop-sf-biduality-general.proof.md",
+  "place": "Categorical expansion of finite-origin evaluation transport; H1"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A duality comparison and a dualizing object comparison commute with finite scalar extension after changing to an equal transition functor",
+   "results": "8 hits on dual base change, closed monoidal comparison and module extension. None states the normalized project inclusion squares.",
+   "date": "2026-10-28",
+   "verdict": "No exact match; use equality transport and categorical functoriality."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.isoWhiskerRight",
+   "results": "12 hits, including isoWhiskerRight and its component, symmetry and composition formulas. These provide the whiskering API used in the normalization.",
+   "date": "2026-10-28",
+   "verdict": "Reuse the whiskering API; prove the normalized stage square."
+  },
+  {
+   "tool": "grep",
+   "query": "comparison.*isoWhiskerRight|isoWhiskerRight.*comparison",
+   "results": "0 hits.",
+   "date": "2026-10-28",
+   "verdict": "No exact normalized stage inclusion statement."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.CoefQbarVerdierInternalHomUniversal",
+  "date": "2026-10-28",
+  "group": "H1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-coef-qbar-verdier-internal-hom-universal",
+   "place": "Finite comparison normalization in evaluation descent",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.CoefQbarVerdierDualInclusion",
+  "file": "lean/Sheaf/SixFunctors/CoefQbarVerdierDualInclusion.lean",
+  "declaration": "WeilConjectures.CoefQbarVerdier.finite_dual_inclusion_coherent",
+  "statement": "theorem finite_dual_inclusion_coherent (B : Duality D l hl Ω X) :\n    (∀ (K : generalAlgebraicallyClosedConstructibleCategory l Ω X)\n    {E L : Index l Ω} (hi : K.stage ≤ E) (h : E ≤ L),\n    (inclusion L).map\n        (((operationStageTransitionIso l Ω X E L h).hom.app\n            ((B.finite.datum E).dual.obj (op (K.toStage hi))) ≫\n          (B.finite.beta E L h).hom.app (op (K.toStage hi)) ≫\n          (B.finite.datum L).dual.map\n            ((operationStageTransitionIso l Ω X E L h).hom.app (K.toStage hi)).op) ≫\n          (B.finite.datum L).dual.map\n            (((stageSystem l Ω X).assoc hi h).inv.app K.obj).op) ≫\n        (B.comparison L).hom.app (op (K.toStage (hi.trans h))) ≫\n        B.duality.dual.map (((stageSystem l Ω X).isoToStage K (hi.trans h)).hom).op =\n      ((stageSystem l Ω X).transIso h).hom.app\n          ((B.finite.datum E).dual.obj (op (K.toStage hi))) ≫\n        (B.comparison E).hom.app (op (K.toStage hi)) ≫\n        B.duality.dual.map (((stageSystem l Ω X).isoToStage K hi).hom).op) ∧\n    (∀ {E L : Index l Ω} (h : E ≤ L),\n    (inclusion L).map ((operationStageTransitionIso l Ω X E L h).hom.app\n          ((sfRationalConstructibleLocalization l (Coefficient.{u} l Ω E) X).obj\n            (B.finite.omega E).omega) ≫ (B.finite.scalar E L h).omega.hom) ≫\n        (B.omegaComparison L).hom =\n      ((stageSystem l Ω X).transIso h).hom.app\n          ((sfRationalConstructibleLocalization l (Coefficient.{u} l Ω E) X).obj\n            (B.finite.omega E).omega) ≫ (B.omegaComparison E).hom)",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H1",
+  "result": "pass",
+  "landing": "20261027T210021-L-1647069",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H1",
+  "result": "pass",
+  "landing": "20261027T210021-L-1647069",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

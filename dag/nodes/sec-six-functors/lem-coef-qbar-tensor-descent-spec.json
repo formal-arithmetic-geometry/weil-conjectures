@@ -1,0 +1,119 @@
+{
+ "id": "lem-coef-qbar-tensor-descent-spec",
+ "kind": "lemma",
+ "title": "The prescribed tensor satisfies the explicit bilinear descent specification",
+ "statement": "theorem tensor_descent_spec :\n    let := RationalVerdier.units D l hl X\n    let S := stageSystem l Ω X\n    let U : BilinearCoefficientDescent.Family S S S :=\n      ⟨fun E ↦ rationalDerivedTensor l (Coefficient.{u} l Ω E) X,\n        fun {_ _} h ↦ rationalTensorStageComparison l Ω X h,\n        rationalTensorStageComparison_coherent l Ω X⟩\n    BilinearCoefficientDescent.IsDescent U (Padic.finiteCoefficientCompositum l Ω)\n      (fun E L ↦ ((Padic.finiteCoefficientFields_properties l Ω).1 E L).1)\n      (fun E L ↦ ((Padic.finiteCoefficientFields_properties l Ω).1 E L).2)\n      (CoefQbarTensor D l hl Ω X)",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-biduality-general/sk-prop-sf-biduality-general.proof.md",
+  "place": "Coefficient transport through thm-coef-qbar-verdier; explicit normalization step of lem-coef-qbar-verdier-internal-hom-universal"
+ },
+ "stmt_deps": [
+  "def-sf-common-stage-verdier-data",
+  "lem-weil-rational-tensor-stage-coherence",
+  "lem-pur-bilinear-comparison-coefficient-descent"
+ ],
+ "proof": [
+  {
+   "text": "Form the finite tensor family from the actual rational tensors and their proved scalar tower comparison. The endpoint formula for whiskering identifies its bilinear descent endpoints with commonStageTensorComparison.",
+   "uses": [
+    "lem-weil-rational-tensor-stage-coherence",
+    "def-weil-derived-pullback-tensor-hom",
+    "def-weil-algebraically-closed-coefficients"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The prescribed common-stage tensor and explicit bilinear descent satisfy the same unique representative prescription. Uniqueness identifies the functors. Transport the explicit descent specification along that equality to obtain IsDescent for the prescribed tensor.",
+   "uses": [
+    "def-sf-common-stage-verdier-data",
+    "lem-pur-bilinear-comparison-coefficient-descent",
+    "lem-weil-rational-tensor-stage-coherence"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sf-common-stage-verdier-data",
+  "def-weil-algebraically-closed-coefficients",
+  "def-weil-derived-pullback-tensor-hom",
+  "lem-pur-bilinear-comparison-coefficient-descent",
+  "lem-weil-rational-tensor-stage-coherence"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-biduality-general/sk-prop-sf-biduality-general.proof.md",
+  "place": "Categorical expansion of finite-origin evaluation transport; H1"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A chosen bilinear functor on finite coefficient stages satisfies the explicit common stage representative specification by uniqueness of descent",
+   "results": "8 hits on filtered colimits, finite presentation and diagram constructions; no project bilinear representative specification.",
+   "date": "2026-10-28",
+   "verdict": "Use the proved project bilinear descent and uniqueness API."
+  },
+  {
+   "tool": "loogle",
+   "query": "ExistsUnique.unique",
+   "results": "1 hit: ExistsUnique.unique, used to identify the two representative-preserving functors.",
+   "date": "2026-10-28",
+   "verdict": "Reuse uniqueness of a specified object."
+  },
+  {
+   "tool": "grep",
+   "query": "IsDescent.*Tensor|Tensor.*IsDescent",
+   "results": "0 hits.",
+   "date": "2026-10-28",
+   "verdict": "No existing statement connecting this prescribed tensor with IsDescent."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.CoefQbarVerdierInternalHomUniversal",
+  "date": "2026-10-28",
+  "group": "H1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-coef-qbar-verdier-internal-hom-universal",
+   "place": "Finite comparison normalization in evaluation descent",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.CoefQbarVerdierTensorDescent",
+  "file": "lean/Sheaf/SixFunctors/CoefQbarVerdierTensorDescent.lean",
+  "declaration": "WeilConjectures.CoefQbarVerdier.tensor_descent_spec",
+  "statement": "theorem tensor_descent_spec :\n    let := RationalVerdier.units D l hl X\n    let S := stageSystem l Ω X\n    let U : BilinearCoefficientDescent.Family S S S :=\n      ⟨fun E ↦ rationalDerivedTensor l (Coefficient.{u} l Ω E) X,\n        fun {_ _} h ↦ rationalTensorStageComparison l Ω X h,\n        rationalTensorStageComparison_coherent l Ω X⟩\n    BilinearCoefficientDescent.IsDescent U (Padic.finiteCoefficientCompositum l Ω)\n      (fun E L ↦ ((Padic.finiteCoefficientFields_properties l Ω).1 E L).1)\n      (fun E L ↦ ((Padic.finiteCoefficientFields_properties l Ω).1 E L).2)\n      (CoefQbarTensor D l hl Ω X)",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H1",
+  "result": "pass",
+  "landing": "20261027T210021-L-1647069",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H1",
+  "result": "pass",
+  "landing": "20261027T210021-L-1647069",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,115 @@
+{
+ "id": "lem-coef-qbar-finite-evaluation-stage-square",
+ "kind": "lemma",
+ "title": "Normalized finite evaluation square for the named stage transition",
+ "statement": "theorem finite_evaluation_scalar_of_stages (F : Finite D l hl Ω X)\n    {E L : Index l Ω} (h : E ≤ L) (K : Stage l Ω X E) :\n    let := RationalVerdier.units D l hl X\n    (RationalVerdier.tensor D l hl X (Coefficient.{u} l Ω L)).map\n      (Prod.mkHom (𝟙 (((stageSystem l Ω X).T h).obj K))\n        ((operationStageTransitionIso l Ω X E L h).hom.app\n            ((F.datum E).dual.obj (op K)) ≫ (F.beta E L h).hom.app (op K) ≫\n          (F.datum L).dual.map ((operationStageTransitionIso l Ω X E L h).hom.app K).op)) ≫\n        (F.datum L).evaluation (((stageSystem l Ω X).T h).obj K) =\n      (rationalTensorStageComparison l Ω X h).inv.app (K, (F.datum E).dual.obj (op K)) ≫\n        ((stageSystem l Ω X).T h).map ((F.datum E).evaluation K) ≫\n          (operationStageTransitionIso l Ω X E L h).hom.app\n            ((sfRationalConstructibleLocalization l (Coefficient.{u} l Ω E) X).obj\n              (F.omega E).omega) ≫ (F.scalar E L h).omega.hom",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-biduality-general/sk-prop-sf-biduality-general.proof.md",
+  "place": "Coefficient transport through thm-coef-qbar-verdier; explicit normalization step of lem-coef-qbar-verdier-internal-hom-universal"
+ },
+ "stmt_deps": [
+  "def-sf-common-stage-verdier-data",
+  "lem-weil-rational-tensor-stage-coherence"
+ ],
+ "proof": [
+  {
+   "text": "Use the recorded equality between the stage-system transition and the rational scalar-extension functor. By equality induction, transport the finite normalized evaluation square to the former; the tensor, dual, and dualizing-object comparisons acquire the corresponding equality isomorphisms.",
+   "uses": [
+    "def-sf-common-stage-verdier-data",
+    "def-weil-algebraically-closed-coefficients",
+    "lem-weil-rational-tensor-stage-coherence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The evaluation clause of Finite.normalized supplies the original square. Substitute Finite.betaNormalized and unfold rationalTensorStageComparison. The resulting equality is the displayed normalized stage square.",
+   "uses": [
+    "def-sf-common-stage-verdier-data",
+    "lem-weil-rational-tensor-stage-coherence"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sf-common-stage-verdier-data",
+  "def-weil-algebraically-closed-coefficients",
+  "lem-weil-rational-tensor-stage-coherence"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-biduality-general/sk-prop-sf-biduality-general.proof.md",
+  "place": "Normalized finite evaluation square, isolated after profiling; H1"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Transport a tensor evaluation compatibility square along equality of scalar extension functors",
+   "results": "8 tensor-product and base-change hits; none addresses the recorded categorical evaluation square.",
+   "date": "2026-10-28",
+   "verdict": "Reuse the categorical API; no exact normalized stage-system statement."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.eqToHom_app",
+   "results": "1 hit: CategoryTheory.eqToHom_app. Equality transport is available; the normalized finite-stage square is project-specific.",
+   "date": "2026-10-28",
+   "verdict": "Reuse the categorical API; no exact normalized stage-system statement."
+  },
+  {
+   "tool": "grep",
+   "query": "evaluation.*eqToIso|eqToIso.*evaluation",
+   "results": "0 hits.",
+   "date": "2026-10-28",
+   "verdict": "Reuse the categorical API; no exact normalized stage-system statement."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.CoefQbarVerdierInternalHomUniversal",
+  "date": "2026-10-28",
+  "group": "H1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-coef-qbar-verdier-internal-hom-universal",
+   "place": "Finite comparison normalization in evaluation descent",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.CoefQbarVerdierFiniteEvaluationStage",
+  "file": "lean/Sheaf/SixFunctors/CoefQbarVerdierFiniteEvaluationStage.lean",
+  "declaration": "WeilConjectures.CoefQbarVerdier.finite_evaluation_scalar_of_stages",
+  "statement": "theorem finite_evaluation_scalar_of_stages (F : Finite D l hl Ω X)\n    {E L : Index l Ω} (h : E ≤ L) (K : Stage l Ω X E) :\n    let := RationalVerdier.units D l hl X\n    (RationalVerdier.tensor D l hl X (Coefficient.{u} l Ω L)).map\n      (Prod.mkHom (𝟙 (((stageSystem l Ω X).T h).obj K))\n        ((operationStageTransitionIso l Ω X E L h).hom.app\n            ((F.datum E).dual.obj (op K)) ≫ (F.beta E L h).hom.app (op K) ≫\n          (F.datum L).dual.map ((operationStageTransitionIso l Ω X E L h).hom.app K).op)) ≫\n        (F.datum L).evaluation (((stageSystem l Ω X).T h).obj K) =\n      (rationalTensorStageComparison l Ω X h).inv.app (K, (F.datum E).dual.obj (op K)) ≫\n        ((stageSystem l Ω X).T h).map ((F.datum E).evaluation K) ≫\n          (operationStageTransitionIso l Ω X E L h).hom.app\n            ((sfRationalConstructibleLocalization l (Coefficient.{u} l Ω E) X).obj\n              (F.omega E).omega) ≫ (F.scalar E L h).omega.hom",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H1",
+  "result": "pass",
+  "landing": "20261027T210021-L-1647069",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H1",
+  "result": "pass",
+  "landing": "20261027T210021-L-1647069",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
