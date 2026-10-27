@@ -1,0 +1,112 @@
+{
+ "id": "lem-coef-derived-sections-normalization-scalar-hom-zero",
+ "kind": "statement",
+ "title": "H-zero scalar normalization for coefficient sections",
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "statement": "Given a coefficient reduction R, finite tensor normalization hF and scalar coherence D, the finite enriched scalar comparison, under the fixed coefficientHomZeroEquiv identifications, is the inverse of the finite scalar adjunction Hom equivalence on every degree-zero homology class.",
+ "stmt_deps": [
+  "def-coef-derived-system-calculus-data",
+  "def-coef-ringed-tensor-hom-model",
+  "def-coef-hom-zero-cycle-class",
+  "def-coef-hom-representative-evaluation"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 03CZ, 079P and 08JA; extracted H-zero normalization step of the coefficient-sections construction."
+ },
+ "proof": [
+  {
+   "text": "Choose a K-flat representative of the scalar input and a K-injective representative of the finite input. The finite tensor normalization and the closed uncurry model identify the enriched comparison with the ordinary extension/restriction Hom transpose on the product Hom complex. The fixed degree-zero cocycle and representative-evaluation equivalences send this transpose to the displayed derived Hom equivalence, and the scalar-section formula gives the required orientation.",
+   "uses": [
+    "lem-pur-rhom-global-sections",
+    "lem-coef-actual-scalar-derived-pair"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-rhom-global-sections",
+  "lem-coef-actual-scalar-derived-pair"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Extracted H-zero scalar transpose calculation from the normalized coefficient-sections construction."
+ },
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CoefficientDerivedSectionsNormalization",
+  "date": "2026-10-28",
+  "group": "N3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-coef-derived-sections-normalization",
+   "place": "Strictly smaller H-zero scalar field.",
+   "via": [
+    "lem-coef-derived-sections-normalization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CoefficientDerivedSectionsScalarHomZero",
+  "file": "lean/Sheaf/Paper/CoefficientDerivedSectionsScalarHomZero.lean",
+  "declaration": "WeilConjectures.coefficientDerivedSectionsScalarHomZero",
+  "declarations": [
+   "WeilConjectures.coefficientDerivedSectionsScalarHomZero"
+  ],
+  "statement": "theorem coefficientDerivedSectionsScalarHomZero\n    (R : CoefficientDerivedSystemReduction l E W)\n    (hF : CoefficientFiniteTensorNormalization l E W R)\n    (D : CoefficientDerivedSystemScalarCoherence l E W) :\n    ∀ (n : ℕ)\n    (P : DerivedCategory (scalarReductionSource l E W))\n    (M : normalizedDVRDerived l E W n)\n    (x : (DerivedCategory.homologyFunctor AddCommGrpCat.{max u (t + 1)} 0).obj\n      ((coefficientIntegralGlobalHom l E W).obj\n        (op P, (coefficientFiniteDerivedRestriction l E W n).obj M))),\n      coefficientFiniteHomEquiv l E W n _ _\n          ((DerivedCategory.homologyFunctor AddCommGrpCat.{max u (t + 1)} 0).map\n            ((coefficientIntegralSections l E W).map\n                (coefficientEnrichedAdjunctionMap R.integralClosed (R.finiteClosed n)\n                  (coefficientFiniteDerivedExtension l E W n)\n                  (coefficientFiniteAdjunction l E W n) (R.finiteTensor n) P M) ≫\n              (D.scalarSections n).hom.app\n                ((coefficientFiniteInternalHom l E W n).obj\n                  (op ((coefficientFiniteDerivedExtension l E W n).obj P), M))) x) =\n        ((coefficientFiniteAdjunction l E W n).homEquiv P M).symm\n          (coefficientIntegralHomEquiv l E W P _ x)",
+  "branch": "sheaf-dag",
+  "by": "N3",
+  "date": "2026-10-28"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "derived scalar adjunction homology zero cocycle transpose",
+   "results": "Generic adjunction and homology equivalence hits; no exact coefficient normalization.",
+   "date": "2026-10-28",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "finite scalar extension restriction Hom equivalence derived category",
+   "results": "Generic scalar extension and Hom-equivalence hits; no exact displayed equation.",
+   "date": "2026-10-28",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "coefficientFiniteHomEquiv coefficientIntegralHomEquiv",
+   "results": "Found the project-specific equivalences in the coefficient evaluation data.",
+   "date": "2026-10-28",
+   "verdict": "project declarations used"
+  }
+ ],
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N3",
+  "result": "pass",
+  "landing": "20261027T234118-L-1174",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N3",
+  "result": "pass",
+  "landing": "20261027T234118-L-1174",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

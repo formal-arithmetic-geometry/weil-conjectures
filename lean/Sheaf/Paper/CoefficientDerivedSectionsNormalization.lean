@@ -6,6 +6,8 @@ Authors: SHEAF group U1
 module
 
 public import Sheaf.Paper.CoefficientDerivedSystemEvaluationData
+import Sheaf.Paper.CoefficientDerivedSectionsCore
+import Sheaf.Paper.CoefficientDerivedSectionsScalarHomZero
 
 /-! # Normalized coefficient sections and inverse limits
 
@@ -137,6 +139,19 @@ These assertions involve no gamma comparison or internal-Hom fiber isomorphism. 
 theorem coefficientDerivedSectionsNormalization
     (R : CoefficientDerivedSystemReduction l E W)
     (hF : CoefficientFiniteTensorNormalization l E W R) :
-    Nonempty (CoefficientDerivedSectionsNormalization l E W R) := by sorry
+    Nonempty (CoefficientDerivedSectionsNormalization l E W R) := by
+  obtain ⟨C⟩ := coefficientDerivedSectionsCore l E W R hF
+  refine ⟨{
+    toCoefficientDerivedSystemScalarCoherence :=
+      C.toCoefficientDerivedSystemScalarCoherence
+    systemSectionsEvaluation := C.systemSectionsEvaluation
+    globalLimit := C.globalLimit
+    globalLimit_model := ?_
+    sections_projection := C.sections_projection
+    scalar_hom_zero := ?_ }⟩
+  · simpa only [CoefficientSectionsLimitResolutionEquation,
+      CoefficientSectionsLimitResolutionEquationCore] using C.globalLimit_model
+  · exact coefficientDerivedSectionsScalarHomZero l E W R hF
+      C.toCoefficientDerivedSystemScalarCoherence
 
 end WeilConjectures

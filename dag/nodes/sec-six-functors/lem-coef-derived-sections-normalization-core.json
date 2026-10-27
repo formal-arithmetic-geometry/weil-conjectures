@@ -1,0 +1,113 @@
+{
+ "id": "lem-coef-derived-sections-normalization-core",
+ "kind": "statement",
+ "title": "Core normalized coefficient sections package",
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "statement": "For a prime l, finite extension E and scheme W, a coefficient reduction R and finite tensor normalization hF determine a nonempty core package consisting of scalar coherence, derived tower-section evaluation, the prescribed total-limit comparison and its resolution equation, and the actual finite projection equation. The package omits only the H-zero scalar Hom normalization.",
+ "stmt_deps": [
+  "def-coef-ringed-sequence-site",
+  "def-coef-derived-system-calculus-data",
+  "def-coef-ringed-tensor-hom-model"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 03CZ, 079P, 08JA, 0D6E and 0941; extracted construction steps 1--2 of the normalized coefficient-sections package."
+ },
+ "proof": [
+  {
+   "text": "Apply the normalized sequence global-sections evaluation theorem to the completed coefficient ring and its quotient tower. Transport the resulting scalar comparisons, finite evaluations and universal derived comparison through the prescribed coefficient functors. Apply the simultaneous sections/limit comparison theorem and identify its ordinary and derived projections with the recorded coefficient comparisons. The resulting data are exactly the fields of the core package.",
+   "uses": [
+    "lem-coef-sequence-global-sections-evaluation",
+    "lem-coef-sequence-sections-limit-comparison"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-sequence-global-sections-evaluation",
+  "lem-coef-sequence-sections-limit-comparison"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Extracted core of the normalized coefficient-sections construction."
+ },
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CoefficientDerivedSectionsNormalization",
+  "date": "2026-10-28",
+  "group": "N3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-coef-derived-sections-normalization",
+   "place": "Strictly smaller package omitting the H-zero scalar field.",
+   "via": [
+    "lem-coef-derived-sections-normalization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CoefficientDerivedSectionsCore",
+  "file": "lean/Sheaf/Paper/CoefficientDerivedSectionsCore.lean",
+  "declaration": "WeilConjectures.coefficientDerivedSectionsCore",
+  "declarations": [
+   "WeilConjectures.CoefficientSectionsLimitResolutionEquationCore",
+   "WeilConjectures.CoefficientDerivedSectionsCore",
+   "WeilConjectures.coefficientDerivedSectionsCore"
+  ],
+  "statement": "theorem coefficientDerivedSectionsCore (R : CoefficientDerivedSystemReduction l E W) (hF : CoefficientFiniteTensorNormalization l E W R) : Nonempty (CoefficientDerivedSectionsCore l E W R)",
+  "branch": "sheaf-dag",
+  "by": "N3",
+  "date": "2026-10-28"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "normalized derived sections and inverse limit comparison coefficient tower",
+   "results": "Generic derived sections and limit comparison declarations; no exact coefficient package.",
+   "date": "2026-10-28",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "derived tower sections finite evaluation total inverse limit",
+   "results": "Generic limit projection and derived functor hits; no exact normalized package.",
+   "date": "2026-10-28",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "coefficientSequenceGlobalSectionsEvaluation coefficientSequenceSectionsLimitComparison",
+   "results": "Found the two generic comparison theorems used by the core construction.",
+   "date": "2026-10-28",
+   "verdict": "existing declarations used"
+  }
+ ],
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N3",
+  "result": "pass",
+  "landing": "20261027T234118-L-1174",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N3",
+  "result": "pass",
+  "landing": "20261027T234118-L-1174",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -20346,3 +20346,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 23:41 L: merged deliver/N2/Sheaf.Paper.LisseFiniteLevelEtaleStalks (stage 3; reviewer PASS; first push; landing 20261027T234114-L-4193352 (interface); batch 20261027T233735; modules 3; new nodes 2)
 - 23:41 L: merged deliver/N2/Sheaf.SixFunctors.CoefIntegralFiniteExtensionIdentityL (stage 3; reviewer PASS; first push; landing 20261027T234116-L-4193935 (proof); batch 20261027T233735; modules 1; new nodes 0)
 - 23:41 L: merged deliver/N2/Sheaf.SixFunctors.IntegralVerdierReductionPairingTransition (stage 3; reviewer PASS; first push; landing 20261027T234117-L-590 (proof); batch 20261027T233735; modules 1; new nodes 0)
+- 23:41 L: merged deliver/N3/Sheaf.Paper.CoefficientDerivedSectionsNormalization (stage 3; reviewer PASS; first push; landing 20261027T234118-L-1174 (interface); batch 20261027T233735; modules 3; new nodes 2)
