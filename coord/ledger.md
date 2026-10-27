@@ -19610,3 +19610,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 15:17 L: merged deliver/N4/Sheaf.Paper.HigherTensorIdentityComposition (stage 3; reviewer PASS; first push; landing 20261027T151728-L-1198857 (interface); batch 20261027T151642; modules 1; new nodes 0)
 - 15:17 L: merged deliver/P3/Sheaf.Paper.IntegralPullbackStrictFiniteComponent (stage 3; reviewer PASS; first push; landing 20261027T151730-L-1199419 (interface); batch 20261027T151642; modules 3; new nodes 2)
 - 15:17 L: merged deliver/P6/Sheaf.AlgebraicGeometry.SymmetricProjQuotientPullbackComparison (stage 3; reviewer PASS; first push; landing 20261027T151731-L-1199869 (interface); batch 20261027T151642; modules 2; new nodes 1)
+- 15:17 L: merged deliver/P9/Sheaf.AlgebraicGeometry.SymmetricProjNormalizedQuotientEpi (stage 3; reviewer PASS; first push; landing 20261027T151732-L-1200259 (interface); batch 20261027T151642; modules 1; new nodes 0)

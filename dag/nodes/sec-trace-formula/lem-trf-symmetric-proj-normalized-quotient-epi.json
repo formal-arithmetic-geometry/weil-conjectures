@@ -14,25 +14,34 @@
  ],
  "proof": [
   {
-   "text": "The opens D_+(iota(m)) cover each symmetric Proj: a homogeneous prime containing all degree-one generators contains the irrelevant ideal, contrary to its Proj membership.",
+   "text": "The standard opens D_+(iota(m)) cover the symmetric Proj of each affine base chart. Apply Proj.iSup_basicOpen_eq_top' and prove algebra generation by SymmetricAlgebra.induction: the degree-zero algebra contains the coefficient scalars and the adjoin contains every iota(m). The canonical grading gives iota(m) degree one.",
    "uses": [
     "lem-weil-pbc-symmetric-algebra-graded"
    ],
    "elementary": false
   },
   {
-   "text": "On D_+(iota(m)), the degree-one twist is generated freely by iota(m); multiplication and division by iota(m) are inverse. The normalization and adjunction identify this frame with the quotient of the actual pulled-back section 1 tensor m.",
+   "text": "Use the zero-cancellation criterion for epimorphisms. If f out of L satisfies q followed by f equals zero, naturality of the normalized tensor adjunction identifies sigma followed by p_* f with zero. Thus f annihilates every sigma(m). Naturality of the chart tensor unit and the assumed normalization show that chart.inv followed by j^* f annihilates unitToTwist(iota(m)). Here j^-1(p^-1 U) is the top open, by the relative Proj chart-range formula.",
    "uses": [
-    "def-weil-pbc-proj-twisting-sheaf",
-    "lem-pc-module-pullback-adjunction"
+    "lem-pc-module-pullback-adjunction",
+    "def-pc-module-pullback",
+    "lemma-nagata-relative-proj-exists"
    ],
    "elementary": false
   },
   {
-   "text": "Every section is locally a scalar multiple of that frame and therefore lifts. These standard opens over affine base opens cover relative Proj; epimorphy is local. Empty standard opens cause no exception.",
+   "text": "On every open contained in D_+(iota(m)), unitToTwist(iota(m)) is bijective on sections. A morphism out of the structure module is determined by its value on 1, so each composite with this morphism is zero. Lift a twist section through that bijection and evaluate the zero composite to show that the chart morphism vanishes on every smaller open. Since these standard opens cover, sheaf separation proves chart.inv followed by j^* f is zero, hence j^* f is zero.",
    "uses": [
-    "lemma-nagata-relative-proj-exists",
-    "def-pc-module-pullback"
+    "def-weil-pbc-proj-twisting-sheaf"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For an open immersion j, uniqueness of left adjoints compares the tensor-pullback adjunction with the usual module pullback adjunction. The latter unit is bijective on sections of opens contained in j.opensRange, so the tensor unit is injective there. Its naturality therefore detects f=0 on each chart range from j^* f=0. The chart ranges cover the relative Proj; sheaf separation gives f=0 globally and zero-cancellation proves q epic. Empty opens and zero modules require no separate hypotheses.",
+   "uses": [
+    "def-pc-module-pullback",
+    "lem-pc-module-pullback-adjunction",
+    "lemma-nagata-relative-proj-exists"
    ],
    "elementary": false
   }
@@ -47,7 +56,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/constructions.tex",
-  "place": "Tags 01OB (definition-projective-bundle) and 01O4 (lemma-apply-relative)"
+  "place": "Tags 01OB (definition-projective-bundle) and 01O4 (lemma-apply-relative); direct zero-cancellation proof using the degree-one standard opens, by P9, 2026-10-27"
  },
  "mathlib_searches": [
   {
@@ -117,9 +126,9 @@
   "date": "2026-10-27",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "R4",
+  "group": "P9",
   "result": "pass",
-  "landing": "20261027T123529-L-2317365",
+  "landing": "20261027T151732-L-1200259",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
