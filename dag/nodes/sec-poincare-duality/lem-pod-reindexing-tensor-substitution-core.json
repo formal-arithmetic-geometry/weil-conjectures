@@ -1,0 +1,112 @@
+{
+ "id": "lem-pod-reindexing-tensor-substitution-core",
+ "kind": "statement",
+ "title": "Fixed-model core for normalized reindexing substitution",
+ "statement": "Fix a prime l, a finite extension E of Q_l, an isomorphism g:X→Y with l invertible, and normalized reindexing data D and T satisfying their Laws. There exists a CompletedOperations.Models C on the two Bool locations, integral completed tensor identifications qY and qX, the specified calculus, completion, Roos and pullback equalities, the primitive D.limit equation, and ComparisonLaws, SubstitutionLaw and StructuralLaw for C. The tensor Model and Canonical fields are omitted because they are supplied by T.Laws.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-poincare-duality/sk-thm-frobenius/prop-pod-dual-tate-data-compatibility.proof.md",
+  "place": "Steps 1 and 5, construction of the fixed normalized operation model before the final packaging."
+ },
+ "stmt_deps": [
+  "def-pod-completion-reindex-models",
+  "def-pod-completion-tensor-reindex-models",
+  "def-pod-completion-tensor-normalization",
+  "def-pod-completion-reindex-substitution",
+  "lem-pur-completed-operation-tower-substitution"
+ ],
+ "proof": [
+  {
+   "text": "Construct C from the fixed quotient and Roos calculi of D, transport the canonical closed tensor presentations, use D.pullback and its normalization, and prove the primitive limit equation from the counit and triangle identities. The recursive comparison, substitution and structural laws follow by induction on completed expressions and conjugation by invertible comparisons.",
+   "uses": [
+    "lem-pur-completed-operation-tower-substitution"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-poincare-duality/sk-thm-frobenius/prop-pod-dual-tate-data-compatibility.proof.md",
+    "place": "Steps 1 and 5."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-completed-operation-tower-substitution"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/blueprint/latest/blueprint/sec-poincare-duality/sk-thm-frobenius/prop-pod-dual-tate-data-compatibility.proof.md",
+  "place": "Steps 1 and 5; strict core of lem-pod-reindexing-tensor-substitution."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "completed operation model substitution laws",
+   "results": "CompletedOperationTowerSubstitution.lean supplies the generic expression comparison, substitution and structural laws once primitive models are fixed.",
+   "date": "2026-10-28",
+   "verdict": "match for the generic law assembly; no direct fixed-D construction in Mathlib."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "normalized reindexing completed tensor pullback model substitution",
+   "results": "No direct match.",
+   "date": "2026-10-28",
+   "verdict": "no match."
+  },
+  {
+   "tool": "loogle",
+   "query": "CompletedOperations.Models ComparisonLaws SubstitutionLaw StructuralLaw",
+   "results": "No direct fixed-D match.",
+   "date": "2026-10-28",
+   "verdict": "no match."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.PodReindexingTensorSubstitution",
+  "date": "2026-10-28",
+  "group": "R4"
+ },
+ "chapter": "sec-poincare-duality",
+ "unit": "sk-def-weil",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pod-reindexing-tensor-substitution",
+   "place": "Core construction before final packaging.",
+   "via": [
+    "lem-pod-reindexing-tensor-substitution"
+   ]
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.PodReindexingTensorSubstitutionCore",
+  "file": "lean/Sheaf/Paper/PodReindexingTensorSubstitutionCore.lean",
+  "declaration": "WeilConjectures.podReindexingTensorSubstitutionCore",
+  "statement": "theorem podReindexingTensorSubstitutionCore {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g] [∀ x : X, Invertible (l : X.residueField x)] [∀ y : Y, Invertible (l : Y.residueField y)] (D : PodCompletionReindex l E g) (hD : PodCompletionReindex.Laws l E g D) (T : PodCompletedTensorReindex l E g D) (hT : PodCompletedTensorReindex.Laws l E g D T) : ∃ core : PodReindexingTensorSubstitutionCoreData l E g D, True",
+  "branch": "sheaf-dag",
+  "by": "R4",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R4",
+  "result": "pass",
+  "landing": "20261027T234257-L-85813",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R4",
+  "result": "pass",
+  "landing": "20261027T234257-L-85813",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

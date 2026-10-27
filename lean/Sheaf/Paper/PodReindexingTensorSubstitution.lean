@@ -6,6 +6,7 @@ Authors: SHEAF group U2
 module
 
 public import Sheaf.Paper.PodCompletionReindexSubstitution
+import Sheaf.Paper.PodReindexingTensorSubstitutionCore
 
 /-! # Substitution with fixed normalized reindexing primitives
 
@@ -70,6 +71,12 @@ theorem podReindexingTensorSubstitution
     (D : PodCompletionReindex l E g) (hD : PodCompletionReindex.Laws l E g D)
     (T : PodCompletedTensorReindex l E g D)
     (hT : PodCompletedTensorReindex.Laws l E g D T) :
-    PodReindexSubstitution l E g D T := by sorry
+    PodReindexSubstitution l E g D T := by
+  obtain ⟨core, _⟩ := podReindexingTensorSubstitutionCore l E g D hD T hT
+  rcases hT with ⟨_, _, _, _, hModel, hCanonical⟩
+  refine ⟨core.C, core.qY, core.qX, core.calculus_false, core.calculus_true,
+    core.completion_false, core.completion_true, core.roos_false, core.roos_true,
+    core.pullback, core.tensor_Y, core.tensor_X, core.limit, hModel, hCanonical,
+    core.comparisonLaws, core.substitutionLaw, core.structuralLaw⟩
 
 end WeilConjectures

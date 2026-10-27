@@ -18,26 +18,9 @@
  ],
  "proof": [
   {
-   "text": "present the completed-operation models on the two Bool locations using the fixed calculi podReindexCalculus, the completion comparisons and Roos models of D. The canonical closed total-tensor presentations identify their system and integral closed structures with those of these calculi. At g use D.pullback; its PullbackNormalization is precisely the required representative normalization. At other morphisms use the same normalized pullback construction. Thus no independently chosen limit or completion maps replace those in D. Choose qY and qX by composing the given integral tensor realization with the inverse tensor realization of these models. This gives their two HEq equations. The primitive pullback formula is realization followed by the full-system counit. Substitute D.Counit into this formula and use the right triangle identity: F(unit) followed by this primitive comparison is exactly D.limit. The completion and Roos coordinate laws supply all other displayed pins. Normalized reconstruction makes the counit invertible on normalized systems. Tensor and pullback preserve normalization on quotient representatives. The expression induction of completed-operation substitution now applies to these same primitives: naturality gives ComparisonLaws, induction on the outer expression gives SubstitutionLaw, and conjugation by the invertible expression comparisons gives StructuralLaw. Keep T.Model and T.Canonical unchanged.",
+   "text": "Apply the fixed-model core construction. Its output supplies the completed-operation model, tensor realization identifications, primitive limit equation, and all three expression laws. The tensor laws of T supply Model and Canonical. Package these fields in the target existential.",
    "uses": [
-    "lem-pur-normalized-completed-operation-models",
-    "lem-pur-completed-operation-tower-substitution",
-    "lem-pur-normalized-actual-reconstruction-maps",
-    "lem-coef-derived-system-evaluation-calculus"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/latest/blueprint/sec-poincare-duality/sk-thm-frobenius/prop-pod-dual-tate-data-compatibility.proof.md",
-    "place": "Steps 1 and 5, expanded in parent node proof: Substitution with fixed normalized reindexing primitives."
-   }
-  },
-  {
-   "text": "All steps concern whole systems, work without boundedness, and include an empty scheme or empty expression family. .",
-   "uses": [
-    "lem-pur-normalized-completed-operation-models",
-    "lem-pur-completed-operation-tower-substitution",
-    "lem-pur-normalized-actual-reconstruction-maps",
-    "lem-coef-derived-system-evaluation-calculus"
+    "lem-pod-reindexing-tensor-substitution-core"
    ],
    "elementary": false,
    "source": {
@@ -47,15 +30,12 @@
   }
  ],
  "proof_deps": [
-  "lem-pur-normalized-completed-operation-models",
-  "lem-pur-completed-operation-tower-substitution",
-  "lem-pur-normalized-actual-reconstruction-maps",
-  "lem-coef-derived-system-evaluation-calculus"
+  "lem-pod-reindexing-tensor-substitution-core"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/latest/blueprint/sec-poincare-duality/sk-thm-frobenius/prop-pod-dual-tate-data-compatibility.proof.md",
-  "place": "Steps 1 and 5; strictly partial reduction of lem-pod-reindexing-completion-unit-tensor"
+  "place": "Core construction plus direct packaging of the tensor Model and Canonical laws."
  },
  "mathlib_searches": [
   {
@@ -110,8 +90,8 @@
   "declaration": "WeilConjectures.podReindexingTensorSubstitution",
   "statement": "theorem podReindexingTensorSubstitution\n    {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]\n    [∀ x : X, Invertible (l : X.residueField x)]\n    [∀ y : Y, Invertible (l : Y.residueField y)]\n    (D : PodCompletionReindex l E g) (hD : PodCompletionReindex.Laws l E g D)\n    (T : PodCompletedTensorReindex l E g D)\n    (hT : PodCompletedTensorReindex.Laws l E g D T) :\n    PodReindexSubstitution l E g D T",
   "branch": "sheaf-dag",
-  "by": "U2",
-  "date": "2026-10-25"
+  "by": "R4",
+  "date": "2026-10-28"
  },
  "split_report": {
   "date": "2026-10-25",
@@ -149,12 +129,12 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-25",
+  "date": "2026-10-27",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "U2",
+  "group": "R4",
   "result": "pass",
-  "landing": "20261025T123949-L-1921632",
+  "landing": "20261027T234257-L-85813",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
