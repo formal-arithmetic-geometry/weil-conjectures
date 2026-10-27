@@ -7,6 +7,10 @@ module
 
 public import WeilConjectures.CategoryTheory.RingObjects.Condensed.EllAdic
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.MorphismDefs
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.CoefficientChange
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.CoefficientChangeIntegralRational
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.ReductionConstructible
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.LowerShriekBaseChange
 
 /-!
 
@@ -97,8 +101,24 @@ with `f` proper, the base-change morphism `BC_sq : Rf_* ⋙ Lg^* ⟶ Lg'^* ⋙ R
 isomorphism of functors `Dᵇc(X)⟦E̲⟧ ⥤ Dᵇc(Y')⟦E̲⟧`. -/
 theorem isIso_boundedConstructibleBaseChange_of_isProper [IsProper f.left]
     (sq : IsPullback g' f' f g) :
-    IsIso (ContinuousMapRingObj.boundedConstructibleBaseChange ℓ E sq.toCommSq) :=
-  sorry
+    IsIso (ContinuousMapRingObj.boundedConstructibleBaseChange ℓ E sq.toCommSq) := by
+  have hsq : IsPullback g'.left f'.left f.left g.left := sq.map (Over.forget _)
+  have := isNoetherian_of_locallyOfFiniteType X.hom
+  have := isNoetherian_of_locallyOfFiniteType Y'.hom
+  have : Finite (ResidueFieldCoeff.{u} ℓ E) :=
+    inferInstanceAs (Finite (ULift.{u + 1} (PadicAlgCl.integersResidueField ℓ E.1)))
+  rw [NatTrans.isIso_iff_isIso_app]
+  intro K
+  obtain ⟨K₀, ⟨e⟩⟩ := exists_boundedConstructibleExtendScalars_obj_iso X.left ℓ E K
+  rw [← NatTrans.isIso_app_iff_of_iso _ e]
+  obtain ⟨α⟩ := nonempty_arrowIso_boundedConstructibleBaseChange_integralToRational ℓ E
+    sq.toCommSq K₀
+  have := isIso_boundedConstructibleBaseChange_integral_app_of_reduction ℓ E sq.toCommSq hsq K₀
+    (isIso_derivedBaseChangeMap_app_of_isProper _ hsq _
+      (boundedConstructible_derivedReduction_obj X.left ℓ E _ K₀.property).plusEtaleOrigin)
+  exact ((MorphismProperty.isomorphisms _).arrow_mk_iso_iff α).1 (by
+    simp only [MorphismProperty.isomorphisms.iff]
+    infer_instance)
 
 /-- **The proper base change theorem** (blueprint `sk-thm-sfb-proper-base-change`) for bounded
 constructible `ℚ̄_ℓ`-sheaves: for a cartesian square of schemes `sq : IsPullback g' f' f g` with
@@ -108,7 +128,15 @@ constructible `ℚ̄_ℓ`-sheaves: for a cartesian square of schemes `sq : IsPul
 `ℚ̲̄_ℓ = Profinite.padicAlgClRingObj ℓ`. -/
 theorem isIso_boundedConstructibleBaseChange_of_isProper_padicAlgCl [IsProper f.left]
     (sq : IsPullback g' f' f g) :
-    IsIso (boundedConstructibleBaseChange ℓ sq.toCommSq) :=
-  sorry
+    IsIso (boundedConstructibleBaseChange ℓ sq.toCommSq) := by
+  have hsq : IsPullback g'.left f'.left f.left g.left := sq.map (Over.forget _)
+  have := isNoetherian_of_locallyOfFiniteType X.hom
+  have := isNoetherian_of_locallyOfFiniteType Y'.hom
+  refine isIso_boundedConstructibleBaseChange_padicAlgCl_of_integral ℓ _ hsq fun E K₀ ↦ ?_
+  have : Finite (ResidueFieldCoeff.{u} ℓ E) :=
+    inferInstanceAs (Finite (ULift.{u + 1} (PadicAlgCl.integersResidueField ℓ E.1)))
+  exact isIso_boundedConstructibleBaseChange_integral_app_of_reduction ℓ E sq.toCommSq hsq K₀
+    (isIso_derivedBaseChangeMap_app_of_isProper _ hsq _
+      (boundedConstructible_derivedReduction_obj X.left ℓ E _ K₀.property).plusEtaleOrigin)
 
 end AlgebraicGeometry.ProEtale.CondensedRing
