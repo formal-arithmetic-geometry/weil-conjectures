@@ -19871,3 +19871,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 19:18 L: merged deliver/NE/lem-route-inverse-image-ring-functor (reviewer FIX; first push; new nodes: 0)
 - 19:25 L: merged deliver/NC/lem-route-inverse-image-constant-comparison (reviewer FIX; first push; new nodes: 0)
 - 19:32 L: returned deliver/NA/lem-sf-native-proper-projection-realization (reviewer RETURN: L: independent stage-2 immutable head d233fbfcd91a: H12/H2: the new node def-sf-native-projection-tensor-comparison-data)
+- 19:40 L: returned deliver/C2/Sheaf.Paper.CompletedPullbackTowerRealizations (reviewer RETURN: (reviewer C-2a9a4, head 2a9a4d116) D2/D1: the new existence sorry is the item ∃! minus its trivial uniqueness half, so n)
