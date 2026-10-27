@@ -12,6 +12,7 @@ public import WeilConjectures.TraceFormula.Specialization.PointExchangeOnCompone
 public import WeilConjectures.TraceFormula.Specialization.SupportIdentityOnComponent
 public import WeilConjectures.TraceFormula.Specialization.PointExchangeNormalFormAbstract
 public import WeilConjectures.Tactic.MatchTactic
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Proper
 
 /-!
 
@@ -752,13 +753,3 @@ lemma pointComponentCompModelHom_generic_eq :
 end Model
 
 end AlgebraicGeometry.ProEtale.CondensedRing
-
-namespace AlgebraicGeometry
-
-/-- A morphism over `S` from a proper `S`-scheme to a separated `S`-scheme is proper. -/
-lemma isProper_left_of_isProper_of_isSeparated {S : Scheme.{u}} {B Y : Over S} [IsProper B.hom]
-    [IsSeparated Y.hom] (f : B ⟶ Y) : IsProper f.left := by
-  have : IsProper (f.left ≫ Y.hom) := by rw [Over.w f]; infer_instance
-  exact IsProper.of_comp _ Y.hom
-
-end AlgebraicGeometry
