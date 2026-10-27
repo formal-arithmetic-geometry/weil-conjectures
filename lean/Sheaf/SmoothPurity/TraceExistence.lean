@@ -32,7 +32,13 @@ namespace AlgebraicGeometry.ProEtale.CondensedRing
 
 open Scheme
 
-/-- The normalized finite and adic purity system supplies a unique representing trace.
+/-- STATEMENT-DISPUTED: the representing morphism is not unique without a
+normalization that fixes the automorphism of the representing object.  For the
+identity smooth map of relative dimension zero, both the identity and any
+nontrivial automorphism of the coefficient unit induce bijections by
+postcomposition.
+
+The normalized finite and adic purity system supplies a unique representing trace.
 
 At every positive-power coefficient level, finite smooth purity identifies the
 compact-support Hom pairing with postcomposition by the finite counit.  The normalized
