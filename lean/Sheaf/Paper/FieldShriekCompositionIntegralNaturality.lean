@@ -5,6 +5,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import Sheaf.Paper.FieldShriekCompositionIntegralComponent
+import WeilConjectures.SixFunctors.Etale.Derived.CoefficientChangeOpenImmersion
 
 /-! # Naturality of normalized integral shriek components
 
