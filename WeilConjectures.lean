@@ -5454,6 +5454,7 @@ public import WeilConjectures.AlgebraicGeometry.NormalEtale
 public import WeilConjectures.AlgebraicGeometry.NormalLocusAssociatedPrime
 public import WeilConjectures.AlgebraicGeometry.NormalLocusOpen
 public import WeilConjectures.AlgebraicGeometry.NormalScheme
+public import WeilConjectures.AlgebraicGeometry.NormalSchemeDivisor
 public import WeilConjectures.AlgebraicGeometry.NormalSectionsFiniteProduct
 public import WeilConjectures.AlgebraicGeometry.NormalizationCover
 public import WeilConjectures.AlgebraicGeometry.NormalizationCoverIn
