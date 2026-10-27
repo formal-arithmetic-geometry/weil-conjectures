@@ -1,0 +1,127 @@
+{
+ "id": "lem-sf-native-weil-tensor-ringed-chain-data",
+ "kind": "statement",
+ "title": "Total-complex comparison for normalized native ringed tensors",
+ "statement": "Given the underived normalized comparison U and a specified scalar sign on ringed morphisms, there is a record containing the total-complex isomorphism from b.native applied to T's total to the ringed coefficient total with the reversed factors, its signed homogeneous summand equation, and its naturality under arbitrary maps of complexes.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
+  "place": "Native tensor model, geometric tensor part of steps 1 and 3; Stacks 06YS, 06YU, 0FPT"
+ },
+ "stmt_deps": [
+  "def-sf-native-weil-tensor-ringed-bridge",
+  "lem-sf-native-weil-tensor-ringed-underived-data"
+ ],
+ "proof": [
+  {
+   "text": "Apply the homological-complex bifunctor comparison to U. Preservation of the diagonal coproducts makes every component an isomorphism.",
+   "uses": [
+    "lem-sf-native-weil-tensor-ringed-underived-data"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
+    "place": "Native tensor model, geometric tensor part of steps 1 and 3; Stacks 06YS, 06YU, 0FPT"
+   }
+  },
+  {
+   "text": "The coproduct formula gives the signed summand equation, and the naturality theorem for mapBifunctorComparison gives naturality in both complex variables.",
+   "uses": [
+    "lem-sf-native-weil-tensor-ringed-underived-data"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
+    "place": "Native tensor model, geometric tensor part of steps 1 and 3; Stacks 06YS, 06YU, 0FPT"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-native-weil-tensor-ringed-underived-data"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "W8",
+  "date": "2026-10-28",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
+  "place": "Native tensor model, normalized ringed complex comparison."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "underived tensor comparison from two adjunctions and an internal Hom isomorphism",
+   "results": "Generic adjunction uniqueness results; no exact native Weil ringed comparison.",
+   "date": "2026-10-28",
+   "verdict": "No exact match; the intermediate statement remains open."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "normalized underived tensor comparison for an additive equivalence of sheaf modules",
+   "results": "Generic tensor and equivalence APIs only; no exact native statement.",
+   "date": "2026-10-28",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "loogle",
+   "query": "Adjunction.leftAdjointUniq tensorHomAdjunction",
+   "results": "Adjunction.leftAdjointUniq and tensor-Hom adjunction declarations; neither supplies the required native formulas.",
+   "date": "2026-10-28",
+   "verdict": "Use as indicated in the proof plan; no exact match."
+  },
+  {
+   "tool": "grep",
+   "query": "NativeWeilRingedTensorUnderivedData|nativeRingedTensorObjData",
+   "results": "No existing declaration; this is the first strict underived split.",
+   "date": "2026-10-28",
+   "verdict": "New node required."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.NativeWeilTensorRingedComplexes",
+  "date": "2026-10-28",
+  "group": "W8"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sf-native-weil-tensor-ringed-complexes",
+   "place": "Strict decomposition of its three proof steps.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.NativeWeilTensorRingedChainData",
+  "file": "lean/Sheaf/Paper/NativeWeilTensorRingedChainData.lean",
+  "declaration": "AlgebraicGeometry.ProEtaleWeilSheaf.native_weil_tensor_ringed_chain_data",
+  "statement": "theorem native_weil_tensor_ringed_chain_data\n    (U : NativeWeilRingedTensorUnderivedData b T adj)\n    (sign : ∀ (_p _q : ℤ) {Y Z : RingedTensorModules.{u + 1, u + 1, u + 1} b.J b.R}\n      (_f : Y ⟶ Z), Y ⟶ Z) :\n    Nonempty (NativeWeilRingedTensorChainData b T adj U sign)",
+  "branch": "sheaf-dag",
+  "by": "W8",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W8",
+  "result": "pass",
+  "landing": "20261027T180939-L-3916475",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W8",
+  "result": "pass",
+  "landing": "20261027T180939-L-3916475",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

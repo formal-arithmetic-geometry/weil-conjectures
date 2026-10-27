@@ -7,6 +7,9 @@ module
 
 public import Sheaf.Paper.NativeWeilTensorRingedBridge
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.MonoidalClosed
+import Sheaf.Paper.NativeWeilTensorRingedUnderivedData
+import Sheaf.Paper.NativeWeilTensorRingedChainData
+import Sheaf.Paper.NativeWeilTensorRingedKFlatData
 
 /-! # Normalized complex comparisons for an additive ringed presentation
 
@@ -129,6 +132,19 @@ comparisons and the homotopy quotient give the displayed localization of complex
 No derived tensor, symmetry, closed structure or forgetful comparison is used.
 All coproducts are countable; the proof applies to unbounded and zero complexes. -/
 theorem native_weil_tensor_ringed_complexes :
-    Nonempty (NativeWeilRingedTensorComplexes b T adj) := by sorry
+    Nonempty (NativeWeilRingedTensorComplexes b T adj) := by
+  obtain ⟨u⟩ := native_weil_tensor_ringed_underived_data b T adj
+  obtain ⟨c⟩ := native_weil_tensor_ringed_chain_data b T adj u
+    (nativeRingedTensorSign b)
+  obtain ⟨k⟩ := native_weil_tensor_ringed_kflat_data b T adj
+  refine ⟨{ underived := u.underived
+            uncurry := u.uncurry
+            chain := c.chain
+            summand := ?_
+            naturality := c.naturality
+            flat := k.flat
+            localization := k.localization }⟩
+  intro P Q p q n hpq hqp
+  simpa only [nativeRingedTensorSign] using c.summand P Q p q n hpq hqp
 
 end AlgebraicGeometry.ProEtaleWeilSheaf

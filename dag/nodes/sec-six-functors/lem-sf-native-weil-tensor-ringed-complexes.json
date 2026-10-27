@@ -13,9 +13,9 @@
  ],
  "proof": [
   {
-   "text": "For each P transport the native tensor-Hom adjunction along b.native, use b.nativeHom, and use uniqueness of left adjoints. Compose with the sheaf braiding to order actual factors EQ,EP. The counit formula fixes uncurry; parameter naturality fixes naturality in both arguments.",
+   "text": "Obtain the underived comparison and its evaluation normalization as NativeWeilRingedTensorUnderivedData.",
    "uses": [
-    "def-sf-native-weil-tensor-ringed-bridge"
+    "lem-sf-native-weil-tensor-ringed-underived-data"
    ],
    "elementary": false,
    "source": {
@@ -24,9 +24,9 @@
    }
   },
   {
-   "text": "Extend this underived comparison termwise. Equivalences preserve coproducts. Exchange the two cochain directions with the Koszul factor (-1)^(pq); its differential identity gives the signed summand formula and naturality.",
+   "text": "Extend the underived comparison to totals and signed summands, obtaining naturality, as NativeWeilRingedTensorChainData.",
    "uses": [
-    "def-sf-native-weil-tensor-ringed-bridge"
+    "lem-sf-native-weil-tensor-ringed-chain-data"
    ],
    "elementary": false,
    "source": {
@@ -35,11 +35,9 @@
    }
   },
   {
-   "text": "The equivalence and its inverse preserve and reflect acyclicity. Every ringed acyclic test is in the essential image of the equivalence on complexes, so the total comparison identifies the native and ringed K-flat conditions. Transport ringed K-flat resolutions through the equivalence. Tensor respects chain homotopies; contractible complexes are K-flat and K-flat complexes are closed under cones and shifts. In the homotopy category replace the middle complex of each derived roof, and each common refinement witnessing equality, by a K-flat resolution. This proves full faithfulness of the localized K-flat inclusion. Resolutions give essential surjectivity. Composing with the homotopy quotient gives the stated localization of native complexes.",
+   "text": "Transport K-flatness and the resolving localization as NativeWeilRingedTensorKFlatData, then assemble all fields into NativeWeilRingedTensorComplexes.",
    "uses": [
-    "def-sf-native-weil-tensor-ringed-bridge",
-    "def-sf-native-weil-tensor-presentation",
-    "lem-pc-kflat-resolution"
+    "lem-sf-native-weil-tensor-ringed-kflat-data"
    ],
    "elementary": false,
    "source": {
@@ -49,14 +47,16 @@
   }
  ],
  "proof_deps": [
-  "def-sf-native-weil-tensor-ringed-bridge",
-  "def-sf-native-weil-tensor-presentation",
-  "lem-pc-kflat-resolution"
+  "lem-sf-native-weil-tensor-ringed-underived-data",
+  "lem-sf-native-weil-tensor-ringed-chain-data",
+  "lem-sf-native-weil-tensor-ringed-kflat-data"
  ],
  "proof_origin": {
-  "by": "agent",
+  "by": "worker",
+  "group": "W8",
+  "date": "2026-10-28",
   "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
-  "place": "Native tensor transport, Normalized tensor transport on complexes and K-flat localization; Stacks 06YS, 06YU, 0FPT."
+  "place": "Native tensor transport, strict three-interface assembly."
  },
  "mathlib_searches": [
   {
@@ -153,9 +153,9 @@
   "date": "2026-10-27",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "H2",
+  "group": "W8",
   "result": "pass",
-  "landing": "20261027T123444-L-2301020",
+  "landing": "20261027T180939-L-3916475",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
