@@ -16,26 +16,7 @@ public import Sheaf.AlgebraicGeometry.ProEtaleIntrinsicExtensionByZero
 public import Sheaf.AlgebraicGeometry.ProEtaleConstantRingOperations
 public import Sheaf.AlgebraicGeometry.ProEtaleConstantDerivedDirectImage
 
-import Mathlib.CategoryTheory.Limits.Shapes.Pullback.HasPullback
-import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
-import Sheaf.AlgebraicGeometry.ProEtaleOpenClosedSequence
-import Sheaf.AlgebraicGeometry.ProEtaleIntrinsicExtensionByZeroAdjunction
-import Sheaf.AlgebraicGeometry.ProEtaleIntrinsicExtensionByZeroExact
-import Sheaf.SecSmoothPurity.ProEtaleDerivedOpenRestriction
-import Sheaf.AlgebraicGeometry.ProEtaleDerivedExtensionZeroBaseChange
-import Mathlib.Algebra.Homology.DerivedCategory.RightDerivedFunctorPlus
-import Sheaf.CategoryTheory.RingedSiteKInjectiveResolutionsOfUniverses
-import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.EnoughInjectives
-import Sheaf.RingTheory.BoundedWContractibleExtension
-import Mathlib.AlgebraicGeometry.Morphisms.WeaklyEtale
-import Mathlib.CategoryTheory.MorphismProperty.Composition
-import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
-import Sheaf.RingTheory.WContractibleClosedLocalization
-import Sheaf.AlgebraicGeometry.WContractibleAffineEvaluation
-import Sheaf.AlgebraicGeometry.ProEtaleWeaklyContractibleEvaluationExact
-import Sheaf.AlgebraicGeometry.ProEtaleRestrictionInjectives
-import Mathlib.Algebra.Homology.DerivedCategory.DerivabilityStructureInjectives
-import Sheaf.AlgebraicGeometry.ProEtaleProperBoundaryCohomology
+import Sheaf.AlgebraicGeometry.ProEtaleOpenInjectiveProperAcyclicFromWitness
 
 /-!
 # Proper-direct-image acyclicity of open-extended pro-etale injectives
@@ -182,6 +163,8 @@ theorem isZero_higherDirectImage_open_injective_of_proper
           ((DerivedCategory.singleFunctor
             (proEtaleRingModules B (proEtaleConstantRing B A)) 0).obj
             ((sfIntrinsicExtensionByZero k A).obj J)))) := by
-  sorry
+  obtain ⟨w⟩ := exists_openProperClopenWitness p r k i hcomm
+  exact isZero_higherDirectImage_open_injective_of_proper_of_witness
+    A p r k i hcomm J w
 
 end AlgebraicGeometry.Scheme

@@ -32,152 +32,26 @@
  ],
  "proof": [
   {
-   "text": "Form the fibre product $V=B\\times_D E$ with projections $b:V\\to B$ and $s:V\\to E$. Base change preserves proper morphisms, so $s$ is proper, while base change of the open immersion $i$ makes $b$ an open immersion. The equation $pk=ir$ gives a unique map $t=(k,r):C\\to V$ with $b t=k$ and $s t=r$. Since $k$ is an open immersion and $b$ identifies $V$ with the open $p^{-1}(E)$ in $B$, the map $t$ is an open immersion. The morphism $s$ is separated (proper), and $r=s t$ is proper; hence $t$ is proper by properness over a separated target. A proper immersion is a closed immersion, so $t(C)$ is both open and closed in $V$.",
+   "text": "Obtain the fibre-product/clopen factorisation witness from [lem-sp-proetale-open-injective-proper-acyclic-geometry]. Apply [lem-sp-proetale-open-injective-proper-acyclic-from-witness] to this witness. The resulting conclusion is exactly the stated higher-direct-image vanishing.",
    "uses": [
-    "def-pc-fibre-product",
-    "def-weil-open-immersion",
-    "def-weil-proper-morphism",
-    "lem-weil-pbc-open-immersion-base-change",
-    "lem-weil-pbc-proper-base-change",
-    "lem-weil-pbc-proper-over-separated",
-    "lem-weil-pbc-proper-immersion-closed"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-etale.tex",
-    "place": "Tag 0F7B, case (b), fibre-product and clopen-component reduction; morphisms.tex Tags 01W4 and 01W6"
-   }
-  },
-  {
-   "text": "On the clopen decomposition $V=t(C)\\amalg(V\\setminus t(C))$, extension by zero identifies a module sheaf on $C$ with the pair consisting of that sheaf on the first component and the zero sheaf on the second. This follows by the pro-etale open-closed exact sequence and the open-extension adjunction, evaluated on the two components. Consequently $t_!J$ is injective: for a monomorphism $M\\hookrightarrow N$ and a map $M\\to t_!J$, restrict to $C$, extend the resulting map to $N|_C$ using injectivity of $J$, and glue it with the zero map on the complementary clopen component. The glued map is the required lift. The same componentwise description identifies $t_!J$ with $t_*J$; no exactness of a general open direct image is being used.",
-   "uses": [
-    "lem-sf-proetale-open-closed-sequence",
-    "lem-weil-extension-by-zero-adjunction",
-    "lem-weil-extension-by-zero-exact",
-    "def-sp-injective-resolutions",
-    "def-weil-pbc-proetale-operations"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 09AH, open-closed exact sequence, together with the componentwise lifting argument for a clopen immersion"
-   }
-  },
-  {
-   "text": "Put $F=k_!J$ and $M=Rp_*(F[0])$. Apply the derived open-restriction isomorphism to the Cartesian square with source open $b:V\\hookrightarrow B$ and base open $i:E\\hookrightarrow D$. It gives $i^*M\\cong Rs_*(b^*F[0])$. The extension-by-zero base-change isomorphism identifies $b^*k_!J$ with $t_!J$: the pullback $C\\times_BV$ is $C$, since $k$ factors through $V$. Consequently $i^*M\\cong Rs_*(t_*J[0])$. By step 2 this input is injective. The module category is Grothendieck by the resolution-existence statement, hence has enough injectives by the cited Grothendieck theorem. The one-term complex $t_*J[0]$ is a bounded-below complex of injectives, hence K-injective by the bounded-below representative theorem, so the defined $Rs_*$ is computed on it termwise; the right-derived injective computation likewise makes the right side $s_*t_*J$ concentrated in degree zero. Exactness of the identified-coefficient inverse image therefore gives $i^*R^qp_*F=0$ for $q>0$. This proves only the restriction to $E$; it makes no identification of $M$ with an open direct image.",
-   "uses": [
-    "lem-exc-proetale-derived-open-restriction",
-    "lem-cbc-proetale-extension-zero-base-change",
-    "lem-weil-pbc-right-derived-plus-injective",
-    "prop-pur-kinjective-resolutions-exist",
-    "def-weil-pbc-proetale-operations",
-    "lem-sp-grothendieck-enough-injectives",
-    "lem-weil-pbc-dplus-injective-representative"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tags 08BJ (lemma-adjoint-preserve-K-injectives), 05TH (lemma-injective-acyclic), 05TI (lemma-enough-injectives-right-derived); proetale.tex Tag 09BN (lemma-open-immersion). Open restriction, not proper base change at the boundary."
-   }
-  },
-  {
-   "text": "Fix $q>0$ and write $G=R^qp_*F$. To prove $G=0$ it suffices to show it vanishes locally on every site object, by the sheaf equalizer axiom. First cover such an object by affine opens. For an affine object $Q_0=\\operatorname{Spec}R_0\\to D$, the w-contractible-ring extension gives a one-member pro-etale cover $Q=\\operatorname{Spec}R\\to Q_0$ with every faithfully flat weakly etale $R$-algebra admitting a retraction. Choose its cardinal parameter large enough to contain $R_0$, in the fixed site universes. Composition of weakly etale maps makes $Q\\to D$ a site object. It is enough to prove $G(Q)=0$ for each such cover. The pullback $E_Q=E\\times_DQ$ is a quasi-compact open of $Q$. Since principal opens form a basis, quasi-compactness supplies finitely many $f_1,\\ldots,f_m\\in R$ with $E_Q=\\bigcup_aD(f_a)$; the empty list is permitted. Put $I=(f_1,\\ldots,f_m)$ and $Z_Q=\\operatorname{Spec}(R/I)$.",
-   "uses": [
-    "def-weil-pbc-proetale-site",
-    "lem-weil-pbc-wcontractible-ring-extension",
-    "lem-weil-pbc-weakly-etale-composition-base-change",
-    "lem-weil-pbc-open-immersion-base-change",
-    "lem-pc-quasi-compact-base-change",
-    "def-weil-affine-spectrum"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Proposition 0983, proposition-find-w-contractible, with the size-controlled node cited; affine principal-open refinement is the definition of the affine topology and quasi-compactness."
-   }
-  },
-  {
-   "text": "Let $S=\\{s\\in R:s\\bmod I\\in(R/I)^\\times\\}$ and $Q^\\sim=\\operatorname{Spec}(S^{-1}R)$. The closed-localization lemma gives a pro-etale cover of $Q$ consisting of the $D(f_a)$ and $Q^\\sim$. Every point of $Q^\\sim$ specializes to $Z^\\sim=Q^\\sim\\times_Q Z_Q$, and $S^{-1}R$ has the same ring-retraction property as $R$. Since the $D(f_a)$ factor through $E$, step 3 gives $G(D(f_a))=0$. It remains to show $G(Q^\\sim)=0$. The localization is a site object over $D$ by composition of weakly etale maps. The ring-to-site weak-contractibility statement, followed by exact module evaluation, shows evaluation on $Q^\\sim$ preserves homology of complexes of constant-$A$ module sheaves on $D$.",
-   "uses": [
-    "lem-weil-pbc-wcontractible-closed-localization",
-    "lem-weil-pbc-weakly-etale-composition-base-change",
-    "lem-weil-pbc-wcontractible-affine-weakly-contractible",
-    "lem-weil-pbc-proetale-weakly-contractible-evaluation-exact"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tags 096V (lemma-localization), 0987 (lemma-localization-w-contractible), 09AH (lemma-ses-associated-to-open, displayed localization cover), 098H (lemma-w-contractible-is-weakly-contractible); sites-cohomology.tex Tag 0946 (lemma-w-contractible)."
-   }
-  },
-  {
-   "text": "Put $P=B\\times_DQ^\\sim$, $U=C\\times_DQ^\\sim$, $E^\\sim=E\\times_DQ^\\sim$, and let $p^\\sim:P\\to Q^\\sim$ and $k^\\sim:U\\hookrightarrow P$ be the projections. Properness and quasi-compact openness are preserved by base change. The map $U\\hookrightarrow P\\times_{Q^\\sim}E^\\sim$ is the base change of the clopen map $t$ of step 1, hence is clopen: its image is the inverse image of the clopen subset $t(C)$, and base change preserves its open-immersion identification. The projection $U\\to C$ is weakly etale, so the restriction $J^\\sim$ of $J$ is injective. Extension-by-zero base change gives $F|_P\\cong k^\\sim_!J^\\sim$. Choose a bounded-below injective representative $I^\\bullet$ of $F[0]$; it exists by the Grothendieck property, the enough-injectives theorem, and the bounded-below representative theorem. It computes $Rp_*F$. Exact evaluation from step 5 gives\n$$G(Q^\\sim)=H^q((p_*I^\\bullet)(Q^\\sim))=H^q(I^\\bullet(P))=H^q(P_{\\mathrm{proet}},k^\\sim_!J^\\sim).$$\nThe middle equality is the direct-image section formula. For the last equality, restriction along the weakly etale projection $P\\to B$ is exact and preserves injectives, so $I^\\bullet|_P$ computes derived global sections of $F|_P$. This resolves $F$ on $B$, not $J$ on $C$, and assumes no acyclicity of $k_!J$.",
-   "uses": [
-    "lem-weil-pbc-proper-base-change",
-    "lem-weil-pbc-open-immersion-base-change",
-    "lem-pc-quasi-compact-base-change",
-    "lem-weil-pbc-weakly-etale-composition-base-change",
-    "lem-weil-pbc-proetale-restriction-injectives",
-    "lem-cbc-proetale-extension-zero-base-change",
-    "prop-pur-kinjective-resolutions-exist",
-    "lem-weil-pbc-dplus-injective-representative",
-    "lem-weil-pbc-right-derived-plus-injective",
-    "def-weil-pbc-proetale-operations",
-    "lem-sp-grothendieck-enough-injectives"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tags 05TH (lemma-injective-acyclic) and 05TI (lemma-enough-injectives-right-derived); weakly-etale localization used in proetale.tex Tag 09AE (definition-extension-zero), via sites.tex Section 00XZ and sites-modules.tex Section 03DH; extension-by-zero base change is the cited pro-etale statement. Explicit evaluation calculation."
-   }
-  },
-  {
-   "text": "Apply [lem-sp-proetale-proper-boundary-cohomology] to $Q^\\sim$, its closed subscheme $Z^\\sim$, its quasi-compact open complement $E^\\sim$, the proper map $p^\\sim$, and the clopen open $U\\subset P\\times_{Q^\\sim}E^\\sim$. Step 5 verifies both the ring-retraction and specialization hypotheses; step 6 verifies properness, quasi-compactness of $k^\\sim$, and injectivity of $J^\\sim$. It gives $H^q(P_{\\mathrm{proet}},k^\\sim_!J^\\sim)=0$, so $G(Q^\\sim)=0$. On the cover of step 5 every restriction of a section of $G(Q)$ is now zero. Separatedness of $G$ gives $G(Q)=0$. The covers in step 4 then give $G=0$ on every site object. This proves $R^qp_*(k_!J)=0$ for all $q>0$. The new cited statement is precisely the boundary-cohomology input; neither degree-zero specialization vanishing nor the etale Tag 0F7B is used as its proof.",
-   "uses": [
-    "lem-sp-proetale-proper-boundary-cohomology",
-    "def-weil-pbc-proetale-site"
+    "lem-sp-proetale-open-injective-proper-acyclic-geometry",
+    "lem-sp-proetale-open-injective-proper-acyclic-from-witness"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-existence/_section.md",
-    "place": "Clause (b), compactification independence: boundary cohomology input followed by sheaf-local vanishing; agent proof."
+    "place": "Clause (b), compactification independence; geometric clopen factorisation followed by the sheaf-theoretic acyclicity argument."
    }
   }
  ],
  "proof_deps": [
-  "def-pc-fibre-product",
-  "def-weil-open-immersion",
-  "def-weil-proper-morphism",
-  "lem-weil-pbc-open-immersion-base-change",
-  "lem-weil-pbc-proper-base-change",
-  "lem-weil-pbc-proper-over-separated",
-  "lem-weil-pbc-proper-immersion-closed",
-  "lem-sf-proetale-open-closed-sequence",
-  "lem-weil-extension-by-zero-adjunction",
-  "lem-weil-extension-by-zero-exact",
-  "def-sp-injective-resolutions",
-  "def-weil-pbc-proetale-operations",
-  "lem-exc-proetale-derived-open-restriction",
-  "lem-cbc-proetale-extension-zero-base-change",
-  "lem-weil-pbc-right-derived-plus-injective",
-  "prop-pur-kinjective-resolutions-exist",
-  "lem-sp-grothendieck-enough-injectives",
-  "def-weil-pbc-proetale-site",
-  "lem-weil-pbc-wcontractible-ring-extension",
-  "lem-weil-pbc-weakly-etale-composition-base-change",
-  "lem-pc-quasi-compact-base-change",
-  "def-weil-affine-spectrum",
-  "lem-weil-pbc-wcontractible-closed-localization",
-  "lem-weil-pbc-wcontractible-affine-weakly-contractible",
-  "lem-weil-pbc-proetale-weakly-contractible-evaluation-exact",
-  "lem-weil-pbc-proetale-restriction-injectives",
-  "lem-weil-pbc-dplus-injective-representative",
-  "lem-sp-proetale-proper-boundary-cohomology"
+  "lem-sp-proetale-open-injective-proper-acyclic-geometry",
+  "lem-sp-proetale-open-injective-proper-acyclic-from-witness"
  ],
  "proof_origin": {
-  "by": "agent",
+  "by": "worker",
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-existence/_section.md",
-  "place": "Clause (b), compactification independence: factor through the clopen component over E, use derived open restriction there, and reduce the complementary vanishing to an explicit statement-only proper boundary-cohomology node on w-contractible closed localizations. Tag 0F7B is only the motivating etale analogue."
+  "place": "Clause (b), compactification independence; the proof is decomposed into a geometric clopen witness and the acyclicity argument from that witness."
  },
  "mathlib_searches": [
   {
@@ -350,27 +224,7 @@
    }
   ]
  },
- "tool_uses": [
-  "lem-weil-pbc-open-immersion-base-change",
-  "lem-weil-pbc-proper-base-change",
-  "lem-weil-pbc-proper-over-separated",
-  "lem-weil-pbc-proper-immersion-closed",
-  "lem-sf-proetale-open-closed-sequence",
-  "lem-weil-extension-by-zero-adjunction",
-  "lem-weil-extension-by-zero-exact",
-  "lem-cbc-proetale-extension-zero-base-change",
-  "lem-weil-pbc-right-derived-plus-injective",
-  "prop-pur-kinjective-resolutions-exist",
-  "lem-weil-pbc-wcontractible-ring-extension",
-  "lem-weil-pbc-weakly-etale-composition-base-change",
-  "lem-pc-quasi-compact-base-change",
-  "lem-weil-pbc-wcontractible-closed-localization",
-  "lem-weil-pbc-wcontractible-affine-weakly-contractible",
-  "lem-weil-pbc-proetale-weakly-contractible-evaluation-exact",
-  "lem-weil-pbc-proetale-restriction-injectives",
-  "lem-weil-pbc-dplus-injective-representative",
-  "lem-sp-grothendieck-enough-injectives"
- ],
+ "tool_uses": [],
  "reviewed": {
   "date": "2026-10-18",
   "by": "L",
@@ -396,5 +250,15 @@
   "by": "NG",
   "date": "2026-10-18",
   "existing": false
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P4",
+  "result": "pass",
+  "landing": "20261027T234137-L-12273",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

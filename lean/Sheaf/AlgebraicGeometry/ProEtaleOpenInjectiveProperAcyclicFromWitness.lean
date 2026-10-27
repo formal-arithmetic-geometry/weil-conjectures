@@ -1,0 +1,58 @@
+/-
+Copyright (c) 2026 The SHEAF contributors. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+-/
+module
+
+public import Mathlib.AlgebraicGeometry.Scheme
+public import Mathlib.CategoryTheory.Preadditive.Injective.Basic
+public import Sheaf.AlgebraicGeometry.ProEtaleConstantDerivedDirectImage
+public import Sheaf.AlgebraicGeometry.ProEtaleIntrinsicExtensionByZero
+public import Sheaf.AlgebraicGeometry.ProEtaleOpenProperClopenWitness
+
+/-!
+# Acyclicity from a clopen geometric witness
+
+This is the sheaf-theoretic part of the proper/open acyclicity argument.  Its
+geometric input is isolated in `OpenProperClopenWitness`.
+(blueprint: lem-sp-proetale-open-injective-proper-acyclic-from-witness)
+-/
+
+@[expose] public section
+
+set_option autoImplicit false
+
+universe u
+
+open CategoryTheory CategoryTheory.Limits
+
+namespace AlgebraicGeometry.Scheme
+
+/-- The pro-etale acyclicity conclusion from the clopen geometric factorisation.
+
+Source: Weil blueprint, `sec-smooth-purity/sk-prop-sf-existence`, clause (b),
+with the geometric factorisation supplied by
+`OpenProperClopenWitness`.  The proof uses the open--closed sequence, derived
+open restriction, and the proper-boundary cohomology argument.
+(blueprint: lem-sp-proetale-open-injective-proper-acyclic-from-witness)
+-/
+theorem isZero_higherDirectImage_open_injective_of_proper_of_witness
+    (A : Type u) [CommRing A] [Finite A]
+    {B D C E : Scheme.{u}} (p : B ⟶ D) (r : C ⟶ E)
+    (k : C ⟶ B) (i : E ⟶ D)
+    [IsProper p] [IsProper r]
+    [IsOpenImmersion k] [QuasiCompact k]
+    [IsOpenImmersion i] [QuasiCompact i]
+    (hcomm : k ≫ p = r ≫ i)
+    (J : proEtaleRingModules C (proEtaleConstantRing C A)) [Injective J]
+    (w : OpenProperClopenWitness p r k i) :
+    ∀ q : ℕ, 0 < q →
+      IsZero ((DerivedCategory.homologyFunctor
+        (proEtaleRingModules D (proEtaleConstantRing D A)) (q : ℤ)).obj
+        ((proEtaleConstantDerivedDirectImage p A).obj
+          ((DerivedCategory.singleFunctor
+            (proEtaleRingModules B (proEtaleConstantRing B A)) 0).obj
+            ((sfIntrinsicExtensionByZero k A).obj J)))) := by
+  sorry
+
+end AlgebraicGeometry.Scheme

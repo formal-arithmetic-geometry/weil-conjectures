@@ -1,0 +1,97 @@
+{
+ "kind": "statement",
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-existence",
+ "status": "split",
+ "mathlib_searches": [],
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sp-proetale-open-injective-proper-acyclic",
+   "place": "Proof decomposition: geometric factorisation and sheaf-theoretic acyclicity from the factorisation.",
+   "via": [
+    "lem-sp-proetale-open-injective-proper-acyclic"
+   ]
+  },
+  "same_as": []
+ },
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ProEtaleOpenInjectiveProperAcyclic",
+  "date": "2026-10-28",
+  "group": "P4"
+ },
+ "id": "lem-sp-proetale-open-injective-proper-acyclic-from-witness",
+ "title": "Acyclicity from a clopen factorisation witness",
+ "statement": "Let A be a finite commutative ring and let p, r, k, i and J satisfy the hypotheses of lem-sp-proetale-open-injective-proper-acyclic. If w is an OpenProperClopenWitness p r k i, then for every q > 0 the q-th homology object of the ordinary constant-coefficient derived direct image of the degree-zero extension by zero of J along k is zero.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-existence/_section.md",
+  "place": "Clause (b), compactification independence; open-closed sequence, derived open restriction, local boundary cohomology, and proper direct image."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-proetale-operations",
+  "def-weil-extension-by-zero",
+  "def-sp-injective-resolutions"
+ ],
+ "proof": [
+  {
+   "text": "Use the clopen decomposition supplied by w. The open-closed exact sequence identifies extension by zero with the corresponding direct-image object and the injective lifting argument. Derived open restriction handles the component over E. On affine weakly contractible localizations, exact evaluation and the proper-boundary cohomology argument give vanishing; sheaf locality then gives the global higher-direct-image vanishing.",
+   "uses": [
+    "lem-sf-proetale-open-closed-sequence",
+    "lem-weil-extension-by-zero-adjunction",
+    "lem-weil-extension-by-zero-exact",
+    "lem-exc-proetale-derived-open-restriction",
+    "lem-sp-proetale-proper-boundary-cohomology",
+    "lem-weil-pbc-proetale-weakly-contractible-evaluation-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-existence/_section.md",
+    "place": "Clause (b), compactification independence."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-proetale-open-closed-sequence",
+  "lem-weil-extension-by-zero-adjunction",
+  "lem-weil-extension-by-zero-exact",
+  "lem-exc-proetale-derived-open-restriction",
+  "lem-sp-proetale-proper-boundary-cohomology",
+  "lem-weil-pbc-proetale-weakly-contractible-evaluation-exact"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-existence/_section.md",
+  "place": "Clause (b), compactification independence, after isolating the geometric clopen witness."
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ProEtaleOpenInjectiveProperAcyclicFromWitness",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProEtaleOpenInjectiveProperAcyclicFromWitness.lean",
+  "declaration": "AlgebraicGeometry.Scheme.isZero_higherDirectImage_open_injective_of_proper_of_witness",
+  "statement": "theorem isZero_higherDirectImage_open_injective_of_proper_of_witness (A : Type u) [CommRing A] [Finite A] {B D C E : Scheme.{u}} (p : B ⟶ D) (r : C ⟶ E) (k : C ⟶ B) (i : E ⟶ D) [IsProper p] [IsProper r] [IsOpenImmersion k] [QuasiCompact k] [IsOpenImmersion i] [QuasiCompact i] (hcomm : k ≫ p = r ≫ i) (J : proEtaleRingModules C (proEtaleConstantRing C A)) [Injective J] (w : OpenProperClopenWitness p r k i) : ∀ q : ℕ, 0 < q → IsZero ((DerivedCategory.homologyFunctor (proEtaleRingModules D (proEtaleConstantRing D A)) (q : ℤ)).obj ((proEtaleConstantDerivedDirectImage p A).obj ((DerivedCategory.singleFunctor (proEtaleRingModules B (proEtaleConstantRing B A)) 0).obj ((sfIntrinsicExtensionByZero k A).obj J))))",
+  "branch": "sheaf-dag",
+  "by": "P4",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P4",
+  "result": "pass",
+  "landing": "20261027T234137-L-12273",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P4",
+  "result": "pass",
+  "landing": "20261027T234137-L-12273",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
