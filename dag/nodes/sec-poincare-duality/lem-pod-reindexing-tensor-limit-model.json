@@ -1,0 +1,138 @@
+{
+ "id": "lem-pod-reindexing-tensor-limit-model",
+ "kind": "statement",
+ "title": "Limit realization of normalized completed tensor reindexing",
+ "statement": "Let $\\ell$ be prime, let $E/\\mathbf Q_\\ell$ be finite, and let $g:X\\xrightarrow\\sim Y$ be an isomorphism of schemes on which $\\ell$ is invertible. Use the recorded coefficient calculus [def-coef-derived-system-calculus-data]. Let $A,T$ be normalized completion and completed tensor reindexing data [def-pod-completion-reindex-models, def-pod-completion-tensor-normalization], with ordinary functor $F$, system functor $P$, reduction comparison $a:P R_Y\\cong R_X F$, and limit comparison $\\lambda:F L_Y\\cong L_X P$. Let $d_W:M\\widehat\\otimes_W N\\cong L_W(R_WM\\otimes R_WN)$ be the prescribed tensor realization [def-pur-completed-pullback-tower-realizations] and $\\nu$ the equality-transported canonical system tensor comparison constructed in [lem-pod-reindexing-reduction-tensor-square]. For complete constructible integral $M,N$ on $Y$, one has $F(d_Y);\\lambda_{R_YM\\otimes R_YN};L_X(\\nu);L_X(a_M\\otimes a_N)=T_{M,N};d_X$. This identifies isomorphisms between completed tensors; it contains neither an ordinary tensor comparison nor an augmentation.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-poincare-duality/sk-thm-frobenius/prop-pod-dual-tate-data-compatibility.proof.md",
+  "place": "Steps 2 and 4, strict tensor comparison before the augmentation; Stacks sites-cohomology.tex lemma-pullback-tensor-product (07A4), section-derived-limits (0941) and lemma-derived-limit-is-ok (08TC)."
+ },
+ "stmt_deps": [
+  "def-pod-completion-reindex-models",
+  "def-coef-derived-system-calculus-data",
+  "def-pur-completed-pullback-tower-realizations",
+  "def-pod-completion-tensor-normalization",
+  "lem-pod-reindexing-reduction-tensor-square"
+ ],
+ "proof": [
+  {
+   "text": "Choose simultaneous good representatives of the two constructible inputs. The normalized tensor realizations identify completed tensor with the total limit of the tensor of the two coherent reductions. Apply A.LimitModel and the strict tensor tower identification to this coherent tensor.",
+   "uses": [
+    "def-pod-completion-reindex-models",
+    "def-coef-derived-system-calculus-data",
+    "def-pur-completed-pullback-tower-realizations",
+    "lem-pc-kflat-resolution"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The canonical system tensor comparison on cochains sends homogeneous pure tensors to the two inverse-image unit sections. Compute A.reduction inverse by the proved whole-system adjunct formula podReindexing_reduction_inv_mate and LimitModel, using the strict quotient units. Its representative is A.quotient; FiniteModel and QuotientGenerators give the section formula. This step does not infer equality of derived arrows from finite evaluations. The resulting strict tensor tower map equals T.tower by T.Generators, respecting all transitions by QuotientTransition and TowerNaturality.",
+   "uses": [
+    "def-pod-completion-reindex-models",
+    "def-coef-derived-system-calculus-data",
+    "def-pur-completed-pullback-tower-realizations",
+    "lem-pc-kflat-resolution",
+    "def-pod-completion-tensor-normalization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "A.RoosFst and A.RoosSnd identify both cone coordinates with A.roos followed by the Roos image of T.tower. T.Model identifies its localization with T.tensor. Cancel the representative realization isomorphisms and descend by naturality along the product good-complex localization. This equation involves only isomorphisms, and no ordinary tensor or augmentation; in particular it needs no completeness of an ordinary tensor.",
+   "uses": [
+    "def-pod-completion-reindex-models",
+    "def-coef-derived-system-calculus-data",
+    "def-pur-completed-pullback-tower-realizations",
+    "lem-pc-kflat-resolution",
+    "def-pod-completion-tensor-normalization"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pod-completion-reindex-models",
+  "def-coef-derived-system-calculus-data",
+  "def-pur-completed-pullback-tower-realizations",
+  "lem-pc-kflat-resolution",
+  "def-pod-completion-tensor-normalization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-poincare-duality/sk-thm-frobenius/prop-pod-dual-tate-data-compatibility.proof.md",
+  "place": "Steps 2 and 4, separating the coherent tensor and total-limit comparisons from the adjunction-unit calculation."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Total derived inverse limit tensor comparison for reindexing of sheaves under an isomorphism",
+   "results": "8 hits: PiTensorProduct.reindex_symm, CategoryTheory.Functor.sheafPushforwardContinuousIso_inv, PiTensorProduct.map_comp_reindex_symm, CategoryTheory.Limits.Pi.reindex, TensorProduct.directLimitLeft_symm_of_tmul, PiTensorProduct.reindex, TensorProduct.directLimitRight_symm_of_tmul, CategoryTheory.Limits.HasLimit.isoOfNatIso_inv_π",
+   "date": "2026-10-27",
+   "verdict": "No normalized coherent derived sheaf tensor/reindexing square. The ordinary tensor and generic functor results do not supply the representative-normalized comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A monoidal inverse image commutes with extension of scalars and the tensor comparison in the derived category",
+   "results": "8 hits: CategoryTheory.Tor'_obj_map, CategoryTheory.Tor'_map_app, ModuleCat.extendScalarsComp_hom_app_one_tmul, CategoryTheory.Tor'_obj_obj, ModuleCat.extendScalars_id_comp_assoc, CategoryTheory.Functor.mapExactFunctor_smul, CategoryTheory.Tor_map, ModuleCat.extendScalarsId_inv_app_apply",
+   "date": "2026-10-27",
+   "verdict": "No normalized coherent derived sheaf tensor/reindexing square. The ordinary tensor and generic functor results do not supply the representative-normalized comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "mapDerivedCategory.*tensor|tensor.*mapDerivedCategory|tensor.*lim|lim.*tensor",
+   "results": "25 hits: Mathlib/CategoryTheory/Action/Monoidal.lean, Mathlib/CategoryTheory/GradedObject/Monoidal.lean, Mathlib/CategoryTheory/GradedObject/Monoidal.lean, Mathlib/CategoryTheory/GradedObject/Monoidal.lean, Mathlib/CategoryTheory/GradedObject/Monoidal.lean, Mathlib/CategoryTheory/GradedObject/Monoidal.lean, Mathlib/CategoryTheory/Distributive/Monoidal.lean, Mathlib/CategoryTheory/Distributive/Monoidal.lean",
+   "date": "2026-10-27",
+   "verdict": "No normalized coherent derived sheaf tensor/reindexing square. The ordinary tensor and generic functor results do not supply the representative-normalized comparison."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.PodReindexingTensorAugmentationSquare",
+  "group": "V2",
+  "date": "2026-10-28"
+ },
+ "chapter": "sec-poincare-duality",
+ "unit": "sk-def-weil",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-pod-dual-tate-data-compatibility",
+   "place": "Steps 2 and 4: Limit realization of normalized completed tensor reindexing",
+   "via": [
+    "lem-pod-reindexing-tensor-augmentation-square",
+    "lem-pod-reindexing-completed-evaluation-reflection"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.PodReindexingTensorLimitModel",
+  "file": "lean/Sheaf/Paper/PodReindexingTensorLimitModel.lean",
+  "declaration": "WeilConjectures.podReindexing_tensor_limit_model",
+  "statement": "theorem podReindexing_tensor_limit_model\n    {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]\n    [∀ x : X, Invertible (l : X.residueField x)]\n    [∀ y : Y, Invertible (l : Y.residueField y)]\n    (A : PodCompletionReindex l E g) (T : PodCompletedTensorReindex l E g A)\n    (hA : PodCompletionReindex.Laws l E g A)\n    (hT : PodCompletedTensorReindex.Laws l E g A T)\n    (M N : sfIntegralConstructibleCategory l E Y) :\n    let q := podReindexingTensorFrame l E g A hA M.obj N.obj\n    let t : q.F.obj q.CY ⟶ q.CX := (T.tensor M N).hom\n    q.F.map q.dY.hom ≫ q.δ.app q.U ≫ q.RX.map q.w₁ ≫ q.RX.map q.w₂ =\n      t ≫ q.dX.hom",
+  "branch": "sheaf-dag",
+  "by": "V2",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V2",
+  "result": "pass",
+  "landing": "20261027T210258-L-1683106",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V2",
+  "result": "pass",
+  "landing": "20261027T210258-L-1683106",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
