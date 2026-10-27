@@ -1,0 +1,92 @@
+{
+ "id": "lem-sf-proper-open-lambda-completion-isiso",
+ "kind": "statement",
+ "title": "Proper/open lambda endpoint completion isomorphism",
+ "statement": "The recursive completion map of every admissible finite word of length at most three is an isomorphism.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-compatibility/fix-prop-coherence.proof.md",
+  "place": "Proper/open lambda coefficient-square expansion, split-off intermediate statement."
+ },
+ "stmt_deps": [
+  "lem-sf-proper-open-lambda-reduction-square"
+ ],
+ "proof": [
+  {
+   "text": "Induct on the finite word. Inputs and units are identities; tensor uses child isomorphisms and primitive tensor effectivity; pull, push and open use the corresponding primitive effectivity.",
+   "uses": [],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-compatibility/fix-prop-coherence.proof.md",
+    "place": "Proper/open lambda coefficient-square expansion."
+   }
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-compatibility/fix-prop-coherence.proof.md",
+  "place": "Proper/open lambda coefficient-square expansion.",
+  "by": "agent",
+  "group": "Y9",
+  "date": "2026-10-28"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "properOpenLambda ordinary completion square",
+   "results": "No existing public declaration combines the specified finite-word maps; the intermediate statement is project-specific.",
+   "date": "2026-10-28",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.ProperOpenLambdaReductionSquare",
+  "date": "2026-10-28",
+  "group": "Y9"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-compatibility",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sf-proper-open-lambda-reduction-square",
+   "place": "Split-off intermediate for its ordinary/clopen proof route.",
+   "via": [
+    "lem-sf-proper-open-lambda-reduction-square"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.ProperOpenLambdaCompletionIso",
+  "file": "lean/Sheaf/SixFunctors/ProperOpenLambdaCompletionIso.lean",
+  "declaration": "WeilConjectures.OpenInterchangeReduction.properOpenLambdaCompletionIso",
+  "statement": "theorem properOpenLambdaCompletionIso\n    {D : FiniteFieldDatum.{u}} (Cf : D.CoefficientDatum)\n    (E : Type u) [Field E] [Algebra (Padic Cf.l) E]\n    [FiniteDimensional (Padic Cf.l) E] (o : Operations Cf.l E)\n    {S : Type s} (W : S → Scheme.{u})\n    {I : Type i} (location : I → S)\n    {a : S} (B : Word W location a) (hB : B.length ≤ 3)\n    (K : ∀ k : I, DerivedCategory (scalarReductionSource Cf.l E (W (location k))))\n    (lo hi torLo torHi : ℤ)\n    (hInputs : ∀ k : I, Admissible Cf.l E\n      (IntegralSystemRealization.calculus Cf.l E (W (location k))) (K k)\n      lo hi torLo torHi)\n    (hBAdmissible : Word.admissible Cf.l E W location o K lo hi torLo torHi B) :\n    IsIso (B.completionMap Cf.l E W location o K)",
+  "branch": "sheaf-dag",
+  "by": "Y9",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y9",
+  "result": "pass",
+  "landing": "20261027T181017-L-3921890",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y9",
+  "result": "pass",
+  "landing": "20261027T181017-L-3921890",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

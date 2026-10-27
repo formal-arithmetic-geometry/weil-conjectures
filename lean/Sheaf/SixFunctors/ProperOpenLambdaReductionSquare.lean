@@ -5,6 +5,9 @@ Authors: SHEAF group E3
 -/
 module
 public import Sheaf.SixFunctors.OpenInterchangeReductionData
+import Sheaf.SixFunctors.ProperOpenLambdaOrdinarySquare
+import Sheaf.SixFunctors.ProperOpenLambdaCompletionTransport
+import Sheaf.SixFunctors.ProperOpenLambdaCompletionIso
 
 /-! # The coefficient square for the four-factor proper/open restriction
 Source: the open-adjunction and clopen expansion of the coherence proof.
@@ -69,5 +72,50 @@ theorem properOpenLambdaReductionSquare
       (GeneratorKind.properOpenLambda k r p i h hk hki hio hii hr hp B)) :
     Assertion Cf.l E W location o K
       (GeneratorKind.properOpenLambda k r p i h hk hki hio hii hr hp B) := by
-  sorry
+  let hStructural' : StructuralSquares.{u, s, i} Cf.l E D o := hStructural
+  let hGenerator' := hGenerator
+  let := hk
+  let := hki
+  let := hio
+  let := hii
+  let := hr
+  let := hp
+  let B₀ := Word.pull i (by infer_instance) (by infer_instance) hii
+    (Word.push p (by infer_instance) (by infer_instance) (by infer_instance) hp
+      (Word.open k hk hki B))
+  let C₀ := Word.push r (by infer_instance) (by infer_instance) (by infer_instance) hr B
+  have hB₀ : Word.admissible Cf.l E W location o K lo hi torLo torHi B₀ := hSource
+  have hC₀ : Word.admissible Cf.l E W location o K lo hi torLo torHi C₀ := hTarget
+  have hIsoB : IsIso (B₀.completionMap Cf.l E W location o K) :=
+    properOpenLambdaCompletionIso Cf E o W location B₀ hSourceLength K lo hi torLo torHi
+      hInputs hB₀
+  have hIsoC : IsIso (C₀.completionMap Cf.l E W location o K) :=
+    properOpenLambdaCompletionIso Cf E o W location C₀ hTargetLength K lo hi torLo torHi
+      hInputs hC₀
+  have hOrd := properOpenLambdaOrdinarySquare Cf E o W hW location k r p i h hk hki
+    hio hii hr hp B K
+  have hSrc := properOpenLambdaCompletionTransport Cf E o W location B₀ hSourceLength K
+    lo hi torLo torHi hInputs hB₀
+  have hTgt := properOpenLambdaCompletionTransport Cf E o W location C₀ hTargetLength K
+    lo hi torLo torHi hInputs hC₀
+  unfold Assertion GeneratorKind.integralMap
+  dsimp only [B₀, C₀] at hOrd hSrc hTgt hIsoB hIsoC ⊢
+  have hInv : inverseOrZero (B₀.completionMap Cf.l E W location o K) =
+      inv (B₀.completionMap Cf.l E W location o K) := by
+    unfold GeneratorReduction.inverseOrZero
+    split <;> simp_all
+  rw [hInv]
+  apply (cancel_epi ((IntegralSystemRealization.calculus Cf.l E (W c)).reduction.map
+    (B₀.completionMap Cf.l E W location o K))).1
+  rw [← Category.assoc, hSrc, hOrd]
+  rw [← hTgt]
+  simp only [CategoryTheory.Functor.map_comp, Category.assoc]
+  have hbi :
+      (IntegralSystemRealization.calculus Cf.l E (W c)).reduction.map
+          (B₀.completionMap Cf.l E W location o K) ≫
+        (IntegralSystemRealization.calculus Cf.l E (W c)).reduction.map
+          (inv (B₀.completionMap Cf.l E W location o K)) = 𝟙 _ := by
+    rw [← CategoryTheory.Functor.map_comp]
+    simp only [IsIso.hom_inv_id, CategoryTheory.Functor.map_id]
+  conv_rhs => rw [← Category.assoc, hbi, Category.id_comp]
 end WeilConjectures.OpenInterchangeReduction

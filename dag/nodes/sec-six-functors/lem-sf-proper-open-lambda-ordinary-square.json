@@ -1,0 +1,92 @@
+{
+ "id": "lem-sf-proper-open-lambda-ordinary-square",
+ "kind": "statement",
+ "title": "Ordinary proper/open lambda coefficient square",
+ "statement": "The ordinary pre-completion coefficient square holds for the properOpenLambda generator, after expanding its cartesian, restriction, clopen and direct-image compositor factors and pasting their structural adjunction squares.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-compatibility/fix-prop-coherence.proof.md",
+  "place": "Proper/open lambda coefficient-square expansion, split-off intermediate statement."
+ },
+ "stmt_deps": [
+  "lem-sf-proper-open-lambda-reduction-square"
+ ],
+ "proof": [
+  {
+   "text": "Expand the prescribed four-factor lambda in the ordinary ringed and system categories. Apply the structural unit, counit, pullback compositor, open comparison and proper/open mate squares to each factor, then paste them.",
+   "uses": [],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-compatibility/fix-prop-coherence.proof.md",
+    "place": "Proper/open lambda coefficient-square expansion."
+   }
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-compatibility/fix-prop-coherence.proof.md",
+  "place": "Proper/open lambda coefficient-square expansion.",
+  "by": "agent",
+  "group": "Y9",
+  "date": "2026-10-28"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "properOpenLambda ordinary completion square",
+   "results": "No existing public declaration combines the specified finite-word maps; the intermediate statement is project-specific.",
+   "date": "2026-10-28",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.ProperOpenLambdaReductionSquare",
+  "date": "2026-10-28",
+  "group": "Y9"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-compatibility",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sf-proper-open-lambda-reduction-square",
+   "place": "Split-off intermediate for its ordinary/clopen proof route.",
+   "via": [
+    "lem-sf-proper-open-lambda-reduction-square"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.ProperOpenLambdaOrdinarySquare",
+  "file": "lean/Sheaf/SixFunctors/ProperOpenLambdaOrdinarySquare.lean",
+  "declaration": "WeilConjectures.OpenInterchangeReduction.properOpenLambdaOrdinarySquare",
+  "statement": "theorem properOpenLambdaOrdinarySquare\n    {D : FiniteFieldDatum.{u}} (Cf : D.CoefficientDatum)\n    (E : Type u) [Field E] [Algebra (Padic Cf.l) E]\n    [FiniteDimensional (Padic Cf.l) E] (o : Operations Cf.l E)\n    {S : Type s} (W : S → Scheme.{u}) (hW : FiniteTypeFamily W D.k)\n    {I : Type i} (location : I → S)\n    {a b c d : S}\n      (k : W a ⟶ W b) (r : W a ⟶ W c) (p : W b ⟶ W d) (j : W c ⟶ W d)\n      (h : k ≫ p = r ≫ j) (hk : IsOpenImmersion k) (hki : QuasiCompact k)\n      (hjo : IsOpenImmersion j) (hji : QuasiCompact j)\n      (hr : IsProper r) (hp : IsProper p) (B : Word W location a)\n    (K : ∀ k : I, DerivedCategory (scalarReductionSource Cf.l E (W (location k)))) :\n    properOpenOrdinaryR Cf.l E location o K\n        (Word.pull j (by let := hjo; infer_instance) (by let := hjo; infer_instance)\n          hji (Word.push p (by let := hp; infer_instance) (by let := hp; infer_instance)\n            (by let := hp; infer_instance) hp (Word.open k hk hki B))) ≫\n        (GeneratorKind.properOpenLambda k r p j h hk hki hjo hji hr hp B).systemMap\n          Cf.l E W location o (inputReduction Cf.l E W location K) =\n      (IntegralSystemRealization.calculus Cf.l E (W c)).reduction.map\n          ((GeneratorKind.properOpenLambda k r p j h hk hki hjo hji hr hp B).ringedMap\n            Cf.l E W location o K) ≫\n        properOpenOrdinaryR Cf.l E location o K\n          (Word.push r (by let := hr; infer_instance) (by let := hr; infer_instance)\n            (by let := hr; infer_instance) hr B)",
+  "branch": "sheaf-dag",
+  "by": "Y9",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y9",
+  "result": "pass",
+  "landing": "20261027T181017-L-3921890",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y9",
+  "result": "pass",
+  "landing": "20261027T181017-L-3921890",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
