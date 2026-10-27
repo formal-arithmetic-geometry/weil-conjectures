@@ -16,34 +16,48 @@
  },
  "proof": [
   {
-   "text": "For two normalized comparisons, restrict to standard affine opens and use the denominator-multiplied fraction rule. The affine pullback-sections generators determine both maps, and gluing and isomorphism extensionality give equality.",
+   "text": "For every j, pass from a pullback morphism to its adjoint under the section-normalized tensor-pullback adjunction. Its value on a section s over U is scalarExtensionTwistSection r theta j U s: the Hom equivalence is unit followed by pushforward of the morphism, and the unit is the actual section 1 tensor s. Thus injectivity of the adjunction Hom equivalence reduces uniqueness to equality of these transported sections.",
    "uses": [
-    "lem-weil-pbc-proj-graded-module-sheaf-exists",
-    "def-weil-pbc-proj-twisting-sheaf",
-    "lem-weil-pbc-module-pullback-affine-sections",
-    "lem-weil-pbc-affine-tilde-gamma-adjunction",
-    "lem-weil-pbc-glue-sheaves-of-modules",
-    "lem-weil-pbc-proj-basic-open-intersection"
+    "def-pc-module-pullback",
+    "def-sfb-proj-scalar-extension-twist-normalization"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/constructions.tex",
-    "place": "Tags 01N2, 01MY and 01MZ."
-   }
+   "elementary": true
+  },
+  {
+   "text": "If b has degree k and U is contained in D_+(b), construct the section 1/b of twist -k directly using degreePart.mk and isLocallyFraction_mk. Its product with b in every point localization is 1. Apply the normalization of theta to this section with numerator 1, degrees 0 and k, and coefficient 1. The value of its transported section times psi(b) equals 1, so psi(b) is a unit in every point localization above U. This does not assume that r was already identified with the morphism induced by psi.",
+   "uses": [
+    "def-weil-pbc-proj-twisting-sheaf",
+    "def-sfb-proj-scalar-extension-twist-normalization"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Fix an arbitrary section s of twist j over U and a point x of r inverse U. The defining locally-fraction property of s supplies an open V containing r(x), a restriction e:V to U, homogeneous a of degree i and b of degree k, i=k+j, with the restriction t equal pointwise to a/b and V contained in D_+(b). Localization.mk_mul and mk_self give t*b=a. Apply the two normalization predicates to t with coefficient 1. They give identical products after multiplication by psi(b). Cancel this unit, obtained in the preceding step from theta, to identify the two transported values at x over V.",
+   "uses": [
+    "def-weil-pbc-proj-twisting-sheaf",
+    "def-sfb-proj-scalar-extension-twist-normalization"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Naturality of the adjoint sheaf morphisms under e identifies their restrictions with the transported sections over V. Restrictions of twist sections are pointwise restrictions, so the preceding equality is equality at the original point x. Function and subtype extensionality give equality of sections; module-morphism extensionality, injectivity of Adjunction.homEquiv, Iso.ext and function extensionality then give theta prime = theta.",
+   "uses": [
+    "def-pc-module-pullback",
+    "def-weil-pbc-proj-twisting-sheaf",
+    "def-sfb-proj-scalar-extension-twist-normalization"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-proj-graded-module-sheaf-exists",
-  "def-weil-pbc-proj-twisting-sheaf",
-  "lem-weil-pbc-module-pullback-affine-sections",
-  "lem-weil-pbc-affine-tilde-gamma-adjunction",
-  "lem-weil-pbc-glue-sheaves-of-modules",
-  "lem-weil-pbc-proj-basic-open-intersection"
+  "def-pc-module-pullback",
+  "def-sfb-proj-scalar-extension-twist-normalization",
+  "def-weil-pbc-proj-twisting-sheaf"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/constructions.tex",
-  "place": "Tags 01N2, 01MY and 01MZ."
+  "place": "Tag 01MY (lemma-morphism-proj), uniqueness by the homogeneous-fraction formula, specialized to the existing normalized predicate. The section-normalized tensor-pullback adjunction uses sheaves.tex Tag 0096; its existing proved Lean API replaces affine generators and gluing."
  },
  "mathlib_searches": [
   {
@@ -160,9 +174,9 @@
   "date": "2026-10-27",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "K8",
+  "group": "R1",
   "result": "pass",
-  "landing": "20261027T210130-L-1661352",
+  "landing": "20261027T234159-L-23766",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
