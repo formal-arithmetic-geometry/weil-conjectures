@@ -5,6 +5,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import Sheaf.Paper.ConstructibleExceptionalCoefficientConstructionData
+import Sheaf.Paper.IntegralNormalizedRingRefinementIdentityComponent
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -38,6 +39,11 @@ theorem integral_normalized_ring_refinement_identity
     (N : CoefficientConstructionRefinements.{u, v} l Ω D hl R F M)
     (E : FieldStage.{max u v} l) :
     ∀ c : Compactification f, (N.refinement (.id c) (.integral E)).left = Iso.refl _ := by
-  sorry
+  intro c
+  apply Iso.ext
+  apply NatTrans.ext
+  funext K
+  apply (RingStage.inclusion.{u, v} l Ω Y (.integral E)).map_injective
+  exact integral_normalized_ring_refinement_identity_component l Ω D hl R F M N E c K
 
 end WeilConjectures.ConstructibleExceptionalCoefficients

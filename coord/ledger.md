@@ -20411,3 +20411,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 23:43 L: merged deliver/T1/Sheaf.Paper.IntegralNormalizedRingRefinementComposition (stage 3; reviewer PASS; first push; landing 20261027T234315-L-94411 (interface); batch 20261027T233735; modules 2; new nodes 1)
 - 23:43 L: merged deliver/T1/Sheaf.Paper.IsomorphismScalarFiniteCore (stage 3; reviewer PASS; first push; landing 20261027T234317-L-95132 (interface); batch 20261027T233735; modules 4; new nodes 3)
 - 23:43 L: merged deliver/T2/Sheaf.Paper.FinitePartialTensorIdentityNaturalityCoordinates (stage 3; reviewer PASS; first push; landing 20261027T234318-L-95897 (interface); batch 20261027T233735; modules 2; new nodes 1)
+- 23:43 L: merged deliver/T2/Sheaf.Paper.IntegralNormalizedRingRefinementIdentity (stage 3; reviewer PASS; first push; landing 20261027T234319-L-96686 (interface); batch 20261027T233735; modules 2; new nodes 1)
