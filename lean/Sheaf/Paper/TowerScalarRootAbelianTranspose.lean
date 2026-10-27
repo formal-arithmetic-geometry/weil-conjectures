@@ -7,6 +7,7 @@ module
 
 public import Sheaf.Paper.TowerRestrictedScalarAdjunction
 public import Sheaf.Paper.TowerClassPullback
+import Sheaf.Paper.TowerScalarRootAbelianTransposeComponent
 
 /-! # The abelian transpose of the ordinary root comparison
 
@@ -73,6 +74,8 @@ theorem scalarRoot_abelianTranspose
       ((abAdjunction f).homEquiv _ _)
         (d.forgetIso.hom.app cY.rootModule ≫ cX.reduction.forget.F.map
           ((cX.scalar.ordinaryAdjunction.homEquiv _ _)
-            (cX.scalar.model.E.map d.rootIso.hom))) := by sorry
+            (cX.scalar.model.E.map d.rootIso.hom))) := by
+  ext n U x
+  exact scalarRoot_abelianTranspose_component l E f b g cY cX d χ hχ hk θ₁ n U x
 
 end AlgebraicGeometry.ProEtale.SpTowerClasses
