@@ -6,6 +6,7 @@ Authors: SHEAF group Y3
 module
 
 public import Sheaf.SixFunctors.IntegralVerdierModels
+import Sheaf.SixFunctors.IntegralVerdierReductionPairingDeltaUncurried
 
 /-! # Split lemma: Reduction compatibility of the signed Verdier delta
 
@@ -72,7 +73,20 @@ theorem reductionPairing_delta
           (Prod.mkHom (@asIso _ _ _ _ (comparison l E X D hl (m n) ω r K)
             (h K n)).inv.op (𝟙 (integralDualizingFiniteTerm l E D X n))) =
       delta X (m n).target (t n) (integralDualizingFiniteTerm l E D X n)
-        ((scalarReductionDerivedExtension l E X n).obj K)) := by
-  sorry
+        ((scalarReductionDerivedExtension l E X n).obj K))  := by
+  intro K n
+  unfold delta restrictionDualDelta comparison
+  let adj := (m n).target.adjunction
+    ((IntegralHom.hom.{u, u} X (integralCoefficientCommRingSheaf l E X n)).obj
+      (op ((scalarReductionDerivedExtension l E X n).obj K),
+        integralDualizingFiniteTerm l E D X n))
+  change _ = adj.homEquiv
+    ((scalarReductionDerivedExtension l E X n).obj K)
+    (integralDualizingFiniteTerm l E D X n) _
+  apply adj.homEquiv
+    ((scalarReductionDerivedExtension l E X n).obj K)
+    (integralDualizingFiniteTerm l E D X n) |>.symm.injective
+  simpa [adj, delta, restrictionDualDelta, comparison, restrictionDualEvaluation] using
+    (reductionPairing_delta_uncurried D l hl E X a s hs m t ht he het ω r h K n)
 
 end WeilConjectures.IntegralVerdier

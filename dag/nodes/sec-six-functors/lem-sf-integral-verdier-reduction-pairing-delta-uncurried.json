@@ -1,0 +1,104 @@
+{
+ "id": "lem-sf-integral-verdier-reduction-pairing-delta-uncurried",
+ "kind": "statement",
+ "title": "Uncurried reduction compatibility of the signed Verdier delta",
+ "statement": "Under the data and hypotheses of lem-sf-integral-verdier-reduction-pairing-delta, after applying the inverse finite tensor--Hom adjunction bijection to the displayed reduced delta composite, the result is the finite signed swap followed by the finite evaluation counit.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/thm-coef-integral-verdier.proof.md",
+  "place": "Second paragraph: uncurry the reduced delta through the finite adjunction"
+ },
+ "stmt_deps": [
+  "def-sf-integral-verdier-models"
+ ],
+ "proof": [
+  {
+   "text": "Expand both delta maps as evaluation transposes. Use the naturality of the reduction tensor comparison and the ambient and finite evaluation compatibilities to move the reduction map through the counits. Apply the signed swap naturality equations and cancel the inverse comparison in the contravariant Hom variable.",
+   "uses": [
+    "def-sf-integral-verdier-models"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sf-integral-verdier-models"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "M4",
+  "date": "2026-10-28",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/thm-coef-integral-verdier.proof.md",
+  "place": "Second paragraph: the actual double-dual map"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "Adjunction.homEquiv_counit|homEquiv_naturality|restrictionDualDelta",
+   "results": "Existing categorical mate identities provide the final injectivity step; no existing theorem states this coefficient-reduction calculation.",
+   "date": "2026-10-28",
+   "verdict": "No direct match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Adjunction.homEquiv_counit",
+   "results": "Only generic adjunction counit identities; no theorem packages this reduction calculation.",
+   "date": "2026-10-28",
+   "verdict": "No direct match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "uncurry reduction tensor Hom signed dual delta",
+   "results": "No matching specialized theorem; the existing hits are generic closed-category mate identities.",
+   "date": "2026-10-28",
+   "verdict": "No direct match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.IntegralVerdierReductionPairingDelta",
+  "date": "2026-10-28",
+  "group": "M4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sf-integral-verdier-reduction-pairing-delta",
+   "place": "Split of its uncurrying proof step",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.IntegralVerdierReductionPairingDeltaUncurried",
+  "file": "lean/Sheaf/SixFunctors/IntegralVerdierReductionPairingDeltaUncurried.lean",
+  "declaration": "WeilConjectures.IntegralVerdier.reductionPairing_delta_uncurried",
+  "statement": "theorem reductionPairing_delta_uncurried\n    (a : IntegralHom.TensorPresentation.{u, u} X\n      (completedIntegralCommRingSheaf l E X D hl))\n    (s : SignedSymmetry X (completedIntegralCommRingSheaf l E X D hl) a)\n    (hs : ∀ (K L K' L' : Ambient l E X) (f : K ⟶ K') (g : L ⟶ L'),\n      a.tensor.map (Prod.mkHom f g) ≫ (s.swap K' L').hom =\n        (s.swap K L).hom ≫ a.tensor.map (Prod.mkHom g f))\n    (m : ∀ n : ℕ, IntegralHom.ReductionPresentation l E X D hl a n)\n    (t : ∀ n : ℕ, SignedSymmetry X (integralCoefficientCommRingSheaf l E X n)\n      (m n).target)\n    (ht : ∀ (n : ℕ) (K L K' L' : DerivedCategory (scalarReductionTarget l E X n))\n      (f : K ⟶ K') (g : L ⟶ L'),\n      (m n).target.tensor.map (Prod.mkHom f g) ≫ ((t n).swap K' L').hom =\n        ((t n).swap K L).hom ≫ (m n).target.tensor.map (Prod.mkHom g f))\n    (he : ∀ (K K' W : Ambient l E X) (f : K' ⟶ K),\n      a.tensor.map (Prod.mkHom (𝟙 K')\n        ((IntegralHom.hom.{u, u} X (completedIntegralCommRingSheaf l E X D hl)).map\n          (Prod.mkHom f.op (𝟙 W)))) ≫ (a.adjunction K').counit.app W =\n      a.tensor.map (Prod.mkHom f (𝟙 _)) ≫ (a.adjunction K).counit.app W)\n    (het : ∀ (n : ℕ) (K K' W : DerivedCategory (scalarReductionTarget l E X n))\n      (f : K' ⟶ K),\n      (m n).target.tensor.map (Prod.mkHom (𝟙 K')\n        ((IntegralHom.hom.{u, u} X (integralCoefficientCommRingSheaf l E X n)).map\n          (Prod.mkHom f.op (𝟙 W)))) ≫ ((m n).target.adjunction K').counit.app W =\n      (m n).target.tensor.map (Prod.mkHom f (𝟙 _)) ≫\n        ((m n).target.adjunction K).counit.app W)\n    (ω : sfIntegralConstructibleCategory l E X)\n    (r : ∀ n : ℕ, (scalarReductionDerivedExtension l E X n).obj ω.obj ≅\n      integralDualizingFiniteTerm l E D X n)\n    (h : ∀ (K : Ambient l E X) (n : ℕ), IsIso (comparison l E X D hl (m n) ω r K)) :\n    ∀ (K : Ambient l E X) (n : ℕ),\n      (((m n).target.adjunction\n          ((IntegralHom.hom.{u, u} X (integralCoefficientCommRingSheaf l E X n)).obj\n            (op ((scalarReductionDerivedExtension l E X n).obj K),\n              integralDualizingFiniteTerm l E D X n))).homEquiv\n        ((scalarReductionDerivedExtension l E X n).obj K)\n        (integralDualizingFiniteTerm l E D X n)).symm\n      ((scalarReductionDerivedExtension l E X n).map (delta X a s ω.obj K) ≫\n        comparison l E X D hl (m n) ω r ((dual l E X ω.obj).obj (op K)) ≫\n        (IntegralHom.hom.{u, u} X (integralCoefficientCommRingSheaf l E X n)).map\n          (Prod.mkHom (@asIso _ _ _ _ (comparison l E X D hl (m n) ω r K)\n            (h K n)).inv.op (𝟙 (integralDualizingFiniteTerm l E D X n)))) =\n      ((t n).swap\n          ((IntegralHom.hom.{u, u} X (integralCoefficientCommRingSheaf l E X n)).obj\n            (op ((scalarReductionDerivedExtension l E X n).obj K),\n              integralDualizingFiniteTerm l E D X n))\n          ((scalarReductionDerivedExtension l E X n).obj K)).hom ≫\n        ((m n).target.adjunction\n          ((scalarReductionDerivedExtension l E X n).obj K)).counit.app\n          (integralDualizingFiniteTerm l E D X n)",
+  "branch": "sheaf-dag",
+  "by": "M4",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M4",
+  "result": "pass",
+  "landing": "20261027T234107-L-4189508",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M4",
+  "result": "pass",
+  "landing": "20261027T234107-L-4189508",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
