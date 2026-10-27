@@ -1,0 +1,128 @@
+{
+ "id": "lem-coef-evaluation-tensor-comparison-model",
+ "kind": "lemma",
+ "title": "Representative normalization of the specified native evaluation tensor isomorphism",
+ "statement": "Fix a prime l, a finite extension E of Q_l, a scheme W, a coefficient derived system calculus S [def-coef-derived-system-calculus-data], and a level n. Use the native coefficient sequence site and exact evaluation e_n [def-coef-ringed-sequence-site], and TensorComparisonModel [def-coef-semilinear-system-models]. Then the specified isomorphism S.evaluationTensor(n), between evaluation of the system derived tensor and the finite derived tensor of evaluations, admits a TensorComparisonModel relative to the closed structures and tensor models stored in S. The ordinary comparison of this model is exactly ordinaryEvaluationTensor on every pair of coefficient system module sheaves. No boundedness, flatness, or cartesianness hypothesis is imposed on the pair of module sheaves.",
+ "stmt_deps": [
+  "def-coef-derived-system-calculus-data",
+  "def-coef-ringed-sequence-site",
+  "def-coef-semilinear-system-models"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 07A4, sites-cohomology-lemma-pullback-tensor-product; Tag 0941 sequence-site evaluation; sites-modules.tex Tag 03EK, tensor product of module sheaves. Representative-normalization consequence for the already specified calculus evaluation tensor."
+ },
+ "proof": [
+  {
+   "text": "Use ordinaryEvaluationTensor for the ordinary model field and the inverse of evaluationTotalIso for the chain field. Its total-summand equation is exactly the summand condition in TensorComparisonModel. Evaluation preserves independently K-flat complexes, so it gives the K-flat model field.",
+   "uses": [
+    "lem-coef-semilinear-total-tensor-evaluation",
+    "lem-coef-semilinear-tensor-evaluation",
+    "lem-coef-derived-system-evaluation-calculus"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The inverse generator formula for evaluationTotalIso and cancellation of that isomorphism give its forward pure-generator formula. By the uniqueness in coefficientEvaluationTensorIso_exists it equals the native coefficientEvaluationTensorIso; the section transports agree on their underlying carriers.",
+   "uses": [
+    "lem-coef-semilinear-total-tensor-evaluation",
+    "lem-pur-system-ordinary-tensor-reduction",
+    "lem-coef-derived-system-evaluation-calculus"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Substitute that equality into S.evaluationTensor_normalization. Compose with the inverses of the finite tensor model, tensor of factorization isomorphisms, evaluation tensor isomorphism, and evaluated system tensor model. Cancellation gives precisely the derived field of TensorComparisonModel. Assemble these five fields. Their ordinary field was defined to be ordinaryEvaluationTensor, which gives the asserted equality.",
+   "uses": [
+    "lem-coef-derived-system-evaluation-calculus",
+    "lem-coef-semilinear-tensor-evaluation"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 07A4 and 0941 and sites-modules.tex 03EK; normalization and cancellation in the recorded native evaluation tensor square."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A prescribed derived tensor evaluation isomorphism admits a representative TensorComparisonModel from its K-flat tensor normalization",
+   "results": "8 generic tensor-flatness hits, including Module.Flat.iff_lTensor_exact and Module.Flat.iff_rTensor_exact; no representative normalization of an already specified derived tensor comparison.",
+   "date": "2026-10-28",
+   "verdict": "Reuse project total evaluation and model normalization APIs."
+  },
+  {
+   "tool": "loogle",
+   "query": "TensorComparisonModel",
+   "results": "0 hits; unknown identifier in Mathlib search.",
+   "date": "2026-10-28",
+   "verdict": "This project-specific structure requires a bridge from the native calculus normalization."
+  },
+  {
+   "tool": "grep",
+   "query": "evaluationTensor_normalization|TensorComparisonModel",
+   "results": "0 hits in Mathlib search service. Local project search finds the generic evaluation model and the native normalization separately.",
+   "date": "2026-10-28",
+   "verdict": "Use those existing constructions, identifying their unique total generator normalizations."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CoefNativeRestrictionTensorEvaluation",
+  "date": "2026-10-28",
+  "group": "G9"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-coef-native-restriction-tensor-evaluation",
+   "place": "Representative normalization for the two evaluation sides of the four-model square, a proper substep of native restriction tensor evaluation.",
+   "via": [
+    "lem-coef-native-restriction-tensor-evaluation"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CoefEvaluationTensorComparisonModel",
+  "file": "lean/Sheaf/Paper/CoefEvaluationTensorComparisonModel.lean",
+  "declaration": "WeilConjectures.CoefSupportOpenTensor.coefficientEvaluationTensorModel_exists",
+  "statement": "theorem coefficientEvaluationTensorModel_exists (W : Scheme.{u})\n    (S : CoefficientDerivedSystemCalculus.{u, u} l E W) (n : ℕ) :\n    ∃ model : (\n      let := coefficientSequenceEvaluation_additiveInstance l E W n\n      let := coefficientSequenceEvaluation_limits l E W n\n      let := coefficientSequenceEvaluation_colimits l E W n\n      @TensorComparisonModel.{u+1, u, u}\n        (ℕ × W.ProEt) _ (coefficientSequenceTopology (ProEt.topology W))\n        (ProEtale.VaryingRing.sequenceSiteSmall W)\n        W.ProEt _ (ProEtale.VaryingRing.siteSmall W) (ProEt.topology W)\n        (coefficientSequenceCommRingSheaf l E W) (integralCoefficientCommRingSheaf l E W n)\n        (coefficientSequenceEvaluation l E W n)\n        (coefficientSequenceEvaluation_additiveInstance l E W n)\n        (coefficientSequenceEvaluation_limits l E W n)\n        (coefficientSequenceEvaluation_colimits l E W n)\n        S.systemClosed (S.finiteClosed n) S.systemTensorModel (S.finiteTensorModel n)\n        (S.evaluationTensor n)),\n      ∀ M N : coefficientSequenceModules l E W,\n        (modelField% ordinary model) M N =\n          ordinaryEvaluationTensor.{u+1, u, u} (ProEt.topology W)\n            (integralCoefficientCommRingSheaf l E W)\n            (coefficientSequenceCommRingTransition l E W) n M N",
+  "branch": "sheaf-dag",
+  "by": "G9",
+  "date": "2026-10-28"
+ },
+ "proof_deps": [
+  "lem-coef-semilinear-total-tensor-evaluation",
+  "lem-coef-semilinear-tensor-evaluation",
+  "lem-coef-derived-system-evaluation-calculus",
+  "lem-pur-system-ordinary-tensor-reduction"
+ ],
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G9",
+  "result": "pass",
+  "landing": "20261027T233954-L-4147458",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G9",
+  "result": "pass",
+  "landing": "20261027T233954-L-4147458",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
