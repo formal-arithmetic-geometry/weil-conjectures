@@ -7,7 +7,6 @@ module
 
 public import Sheaf.Paper.NativeWeilScalarCounitData
 
-
 import WeilConjectures.WeilSheaf.LowerShriek
 import Sheaf.Paper.GeneralAlgebraicallyClosedCoefficients
 import Sheaf.Paper.SfIntegralConstructible
@@ -42,6 +41,7 @@ import Sheaf.Paper.CondensedERealization
 import Sheaf.Paper.RingedTopoiCanonicalTensorPullbackOfUniverses
 import Sheaf.AlgebraicGeometry.ProEtale.IsoSectionwiseInverseImage
 import Sheaf.Paper.CompactSupportRealizationFactorNormalization
+import Sheaf.Paper.NativePinnedCounitDataExistence
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -324,7 +324,8 @@ theorem scalar_frobenius_counit
     ∃ A : CounitData l D R f₀ c₀ S.leftSystem.functor S.rightSystem.functor O.adjunction G,
       Nonempty (ScalarNormalization l D hl R f₀ c₀ S O P A) ∧
       Nonempty (FrobeniusNormalization l D hl R f₀ c₀ S O G A) := by
-  sorry
+  obtain ⟨A⟩ := native_pinned_counit_data_exists l D hl R f₀ c₀ S O P
+  exact ⟨A.data, ⟨A.scalar⟩, ⟨A.frobenius⟩⟩
 
 end Geometry
 end WeilConjectures.NativeWeilScalar
