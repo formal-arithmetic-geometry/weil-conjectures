@@ -6,6 +6,8 @@ Authors: Claude
 module
 
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteComparison.EtaleOriginReadingProof
+public import WeilConjectures.PoincareDuality.Biduality.EtaleReadingHomAdjunction
+public import WeilConjectures.PoincareDuality.Biduality.EtaleReadingHomTensor
 
 /-!
 # The étale reading of finite-coefficient complexes commutes with internal homs
@@ -62,6 +64,45 @@ noncomputable def ambientEtaleReading :
   (finiteCoefficientDerivedEquivalence X.left (PadicAlgCl.integersModPow ℓ E n)).functor ⋙
     R(ν_*(X.left)[ModuleCat.{u + 1} (integersModPowCoeff.{u} ℓ E n)])
 
+/-- The left adjoint `Φ⁻¹ ∘ ν^*` of the étale reading `ρ_X = Rν_* ∘ Φ`: the composite of the
+adjunction `ν^* ⊣ Rν_*` (`AlgebraicGeometry.ProEtale.derivedComparisonAdjunction`) and of the
+equivalence `Φ`. -/
+noncomputable def ambientEtaleReadingAdjunction :
+    D(ν^*(X.left)[ModuleCat.{u + 1} (integersModPowCoeff.{u} ℓ E n)]) ⋙
+        (finiteCoefficientDerivedEquivalence X.left (PadicAlgCl.integersModPow ℓ E n)).inverse ⊣
+      ambientEtaleReading ℓ E n X :=
+  (derivedComparisonAdjunction (ModuleCat.{u + 1} (integersModPowCoeff.{u} ℓ E n)) X.left).comp
+    (finiteCoefficientDerivedEquivalence X.left (PadicAlgCl.integersModPow ℓ E n)).symm.toAdjunction
+
+/-- The tensor isomorphism of the left adjoint `Φ⁻¹ ∘ ν^*` of the étale reading: the tensor
+comparison of `D(ν^*)` (`CategoryTheory.Functor.mapDerivedCategoryTensorComparison`) followed by
+the one of `Φ⁻¹`, deduced from the compatibility of `Φ` with the tensor products
+(`ProEtale.finiteCoefficientModEquivalenceTensorIso`,
+`CategoryTheory.Functor.mapDerivedCategoryTensorIsoOfTensorIso`). -/
+noncomputable def ambientEtaleReadingLeftAdjointTensorIso :
+    (D(ν^*(X.left)[ModuleCat.{u + 1} (integersModPowCoeff.{u} ℓ E n)]) ⋙
+      (finiteCoefficientDerivedEquivalence X.left
+        (PadicAlgCl.integersModPow ℓ E n)).inverse).TensorIso :=
+  Functor.TensorIso.comp
+    (asIso (ν^*(X.left)[ModuleCat.{u + 1}
+      (integersModPowCoeff.{u} ℓ E n)]).mapDerivedCategoryTensorComparison)
+    (Functor.TensorIso.inverse _
+      ((finiteCoefficientModEquivalence X.left
+        (PadicAlgCl.integersModPow ℓ E n)).functor.mapDerivedCategoryTensorIsoOfTensorIso
+          (finiteCoefficientModEquivalenceTensorIso X.left (PadicAlgCl.integersModPow ℓ E n))))
+
+omit [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)] [LocallyOfFiniteType X.hom]
+  [QuasiCompact X.hom] [IsSeparated X.hom] in
+/-- On bounded constructible complexes, the counit of the adjunction `Φ⁻¹ ∘ ν^* ⊣ ρ_X` is an
+isomorphism: `Φ(M)` is of étale origin (`ProEtale.CondensedRing.etaleOriginReading`). -/
+lemma isIso_ambientEtaleReadingAdjunction_counit_app
+    (A : Dᵇc(X.left)⟦Profinite.integersModPowRingObj ℓ E n⟧) :
+    IsIso ((ambientEtaleReadingAdjunction ℓ E n X).counit.app A.obj) := by
+  have := isIso_derivedComparisonAdjunction_counit_app_of_boundedConstructible ℓ E n X.left
+    (etaleOriginReading ℓ E n X A)
+  rw [ambientEtaleReadingAdjunction, Adjunction.comp_counit_app]
+  infer_instance
+
 /-- **The étale reading commutes with internal homs** out of bounded constructible complexes:
 `ρ_X RHom(A, B) ≅ RHom(ρ_X A, ρ_X B)` (natural in `A`, see
 `ProEtale.CondensedRing.finiteEtaleReadingIhomIso_hom_naturality`). -/
@@ -69,7 +110,11 @@ noncomputable def finiteEtaleReadingIhomIso
     (A B : Dᵇc(X.left)⟦Profinite.integersModPowRingObj ℓ E n⟧) :
     (ambientEtaleReading ℓ E n X).obj ((ihom A.obj).obj B.obj) ≅
       (ihom ((finiteEtaleReading ℓ E n X).obj A)).obj ((finiteEtaleReading ℓ E n X).obj B) :=
-  sorry
+  have := isIso_ambientEtaleReadingAdjunction_counit_app ℓ E n X A
+  have := (ambientEtaleReadingAdjunction ℓ E n X).isIso_ihomComparison
+    (ambientEtaleReadingLeftAdjointTensorIso ℓ E n X) A.obj B.obj
+  asIso ((ambientEtaleReadingAdjunction ℓ E n X).ihomComparison
+    (ambientEtaleReadingLeftAdjointTensorIso ℓ E n X) A.obj B.obj)
 
 /-- Naturality of `finiteEtaleReadingIhomIso` in the first variable. -/
 lemma finiteEtaleReadingIhomIso_hom_naturality
@@ -79,6 +124,7 @@ lemma finiteEtaleReadingIhomIso_hom_naturality
         (finiteEtaleReadingIhomIso ℓ E n X A B).hom =
       (finiteEtaleReadingIhomIso ℓ E n X A' B).hom ≫
         (pre ((finiteEtaleReading ℓ E n X).map f)).app ((finiteEtaleReading ℓ E n X).obj B) :=
-  sorry
+  (ambientEtaleReadingAdjunction ℓ E n X).map_pre_app_comp_ihomComparison
+    (ambientEtaleReadingLeftAdjointTensorIso ℓ E n X) f.hom B.obj
 
 end AlgebraicGeometry.ProEtale.CondensedRing
