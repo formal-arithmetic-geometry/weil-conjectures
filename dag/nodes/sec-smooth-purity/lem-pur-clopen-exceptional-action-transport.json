@@ -1,0 +1,152 @@
+{
+ "id": "lem-pur-clopen-exceptional-action-transport",
+ "kind": "statement",
+ "title": "Transport only the common-stage action of an existing clopen exceptional comparison",
+ "statement": "Fix a purity datum $P$, with $k=\\overline{\\mathbf F}_q$, prime $\\ell\\ne\\operatorname{char}(k)$, the fixed finite coefficient extension and fixed algebraic closure [def-pur-conventions]. Let $X,Y,X_i$ be finite-type $k$-schemes and $g:X\\to Y$ a separated finite-type $k$-morphism. Fix a compactification $c$ of $g$ [def-weil-compactifications-refinements] and an open and closed immersion $j:X_i\\to X$ [def-weil-open-immersion, def-weil-closed-immersion]. Suppose $R$ is an actual normalized all-coefficients comparison record for the identity inclusion $X\\to X$ and $S$ is such a record for $j$, both with global compactification $c$ [def-pur-clopen-exceptional-all-coefficients]. There exists an all-coefficients record $T$ for $j$ whose base-field comparison record is exactly $S.\\mathrm{base}$ and whose global common-stage exceptional functor is exactly $R.\\mathrm{action}.\\mathrm{functor}$. Every strict-system, evaluation, total-limit, rational and common-stage coherence field of $T$ is retained. This statement assumes the initial records; it synchronizes only the common-stage functor, not the base integral or rational functors. No finite family, cover, smoothness or nonempty component is assumed.",
+ "stmt_deps": [
+  "def-pur-conventions",
+  "def-weil-exceptional-inverse-image",
+  "def-weil-proper-morphism",
+  "def-weil-finite-type-morphism",
+  "def-weil-compactifications-refinements",
+  "def-weil-open-immersion",
+  "def-weil-closed-immersion",
+  "def-pur-clopen-exceptional-all-coefficients"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-def-purity-conv/def-pur-section-invariant.md",
+  "place": "Final invertibility sentence, finite-clopen assembly: Step 3, simultaneous actual-system comparisons"
+ },
+ "proof": [
+  {
+   "text": "At each finite coefficient field, retain the global strict support and exceptional systems of the supplied identity record R. Restrict to the clopen component, using the two-piece partition by the component and its complement if a partition interface is needed. The counit comparison constructs the component strict square for this fixed global adjoint. Transport through the actual site and inverse-limit functors. Any separately supplied component presentation is identified by the unique counit-preserving right-adjoint isomorphism; finite evaluations and the normalization equations are transported in the same diagram.",
+   "uses": [
+    "lem-pur-clopen-strict-system-support",
+    "lem-pur-clopen-counit-adjoint-comparison",
+    "lem-pur-clopen-system-integral-realization",
+    "det-sp-unique-right-adjoint"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-def-purity-conv/def-pur-section-invariant.md",
+    "place": "Final invertibility sentence, finite-clopen assembly: Step 3, simultaneous actual-system comparisons"
+   }
+  },
+  {
+   "text": "Rationalize these actual integral comparisons. Use the stage adjunctions of R as the global adjunctions, and normalize component adjunctions with their restriction comparison. The strict open-extension square commutes with coefficient extension. Taking its counit mates gives compatible scalar restriction squares, including identities, compositions and ramified cofinal reindexing. Thus the component coefficient action is compatible with the already fixed global action R.action.",
+   "uses": [
+    "lem-pur-etale-coefficient-system-adjoint",
+    "lem-pur-clopen-exceptional-scalar-descent",
+    "lem-weil-pbc-mate-pasting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-def-purity-conv/def-pur-section-invariant.md",
+    "place": "Final invertibility sentence, finite-clopen assembly: Step 3, simultaneous actual-system comparisons"
+   }
+  },
+  {
+   "text": "Descend the compatible stage comparisons and their inverses to the common-stage pair category with its representative formula. The resulting record has global action R.action. Replace its independent base field record by S.base: none of the all-coefficients coherence conjuncts refers to the base record, so all of them remain true. In particular no compatibility between S.base and the stage records is assumed or needed. For an empty component all component functors and maps are zero; the identity component uses the identity comparison.",
+   "uses": [
+    "lem-pur-associative-stage-family-descent",
+    "def-pur-clopen-exceptional-all-coefficients"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-def-purity-conv/def-pur-section-invariant.md",
+    "place": "Final invertibility sentence, finite-clopen assembly: Step 3, simultaneous actual-system comparisons"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-clopen-strict-system-support",
+  "lem-pur-clopen-counit-adjoint-comparison",
+  "lem-pur-clopen-system-integral-realization",
+  "det-sp-unique-right-adjoint",
+  "lem-pur-etale-coefficient-system-adjoint",
+  "lem-pur-clopen-exceptional-scalar-descent",
+  "lem-weil-pbc-mate-pasting",
+  "lem-pur-associative-stage-family-descent",
+  "def-pur-clopen-exceptional-all-coefficients"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "lean/Sheaf/Paper/FiniteClopenExceptionalRestriction.lean",
+  "place": "Steps 8-10 of the proof docstring, restricted to common-stage synchronization with a prescribed global action; the independent base record is copied."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A clopen exceptional comparison can be transported to a fixed coherent right adjoint on coefficient stages using counit mates, while retaining its original integral coefficient record",
+   "results": "{\"t\": \"2026-10-27T19:24:13Z\", \"tool\": \"leanfinder\", \"query\": \"A clopen exceptional comparison can be transported to a fixed coherent right adjoint on coefficient stages using counit mates, while retaining its original integral coefficient record\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CompHausLike.LocallyConstant.adjunction_counit\", \"CategoryTheory.OrthogonalReflection.isRightAdjoint_ι\", \"CategoryTheory.Comonad.ComonadicityInternal.comparisonRightAdjointHomEquiv\", \"CategoryTheory.Comonad.ComonadicityInternal.comparisonAdjunction_counit\", \"CategoryTheory.Comonad.ComonadicityInternal.rightAdjointComparison\", \"CategoryTheory.LiftLeftAdjoint.constructLeftAdjointEquiv_apply\", \"LightCondSet.instIsIsoFunctorSequentialCounitSequentialAdjunction\", \"CategoryTheory.Comonad.ComonadicityInternal.comparisonRightAdjointHomEquiv_apply\"], \"digest\": \"5dbf911857401d81\"}",
+   "date": "2026-10-28",
+   "verdict": "No matching statement: the eight hits concern general adjunctions and unrelated sheaf comparisons."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv",
+   "results": "{\"t\": \"2026-10-27T19:25:44Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.mateEquiv\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.mateEquiv\", \"CategoryTheory.mateEquiv_counit\", \"CategoryTheory.mateEquiv_counit_symm\", \"CategoryTheory.unit_mateEquiv\", \"CategoryTheory.unit_mateEquiv_symm\", \"CategoryTheory.conjugateEquiv_mateEquiv_vcomp\", \"CategoryTheory.mateEquiv_conjugateEquiv_vcomp\", \"CategoryTheory.mateEquiv_vcomp\"], \"digest\": \"b8ac30fd6644aa85\"}",
+   "date": "2026-10-28",
+   "verdict": "General mate and pasting tools found, but none states the normalized clopen coefficient-record transport."
+  },
+  {
+   "tool": "grep",
+   "query": "ClopenExceptional|rebaseAction|rebaseBase",
+   "results": "{\"t\": \"2026-10-27T19:24:11Z\", \"tool\": \"grep\", \"query\": \"ClopenExceptional|rebaseAction|rebaseBase\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-28",
+   "verdict": "No matches in Mathlib CategoryTheory."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteClopenCommonExceptional",
+  "date": "2026-10-28",
+  "group": "S3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-pur-section-invariant",
+   "place": "Final invertibility sentence, finite-clopen assembly: Step 3, simultaneous actual-system comparisons",
+   "via": [
+    "lem-pur-finite-clopen-common-exceptional"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-purity-conv",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ClopenExceptionalActionTransport",
+  "file": "lean/Sheaf/Paper/ClopenExceptionalActionTransport.lean",
+  "declaration": "WeilConjectures.PurityFiniteSetting.clopenExceptional_action_transport",
+  "statement": "theorem clopenExceptional_action_transport\n    (Xi : Over (Spec (.of P.field.k)))\n    [LocallyOfFiniteType (Xi.left ↘ Spec (.of P.field.k))]\n    [QuasiCompact (Xi.left ↘ Spec (.of P.field.k))]\n    (c : Compactification g) (j : Xi ⟶ X)\n    [IsOpenImmersion j.left] [IsClosedImmersion j.left]\n    (R : ClopenExceptionalAllCoefficients P X Y X g c (𝟙 X))\n    (S : ClopenExceptionalAllCoefficients P X Y Xi g c j) :\n    ∃ T : ClopenExceptionalAllCoefficients P X Y Xi g c j,\n      T.base = S.base ∧ T.action.functor = R.action.functor",
+  "branch": "sheaf-dag",
+  "by": "S3",
+  "date": "2026-10-28",
+  "note": "The surrounding section supplies the common finite-type geometry. This theorem assumes two initial records and only transports their common-stage part; its base record stays fixed."
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S3",
+  "result": "pass",
+  "landing": "20261027T210224-L-1673634",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S3",
+  "result": "pass",
+  "landing": "20261027T210224-L-1673634",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

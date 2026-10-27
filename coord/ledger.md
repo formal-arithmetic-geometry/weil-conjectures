@@ -20074,3 +20074,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 21:02 L: merged deliver/S1/Sheaf.Paper.AdicAmbientHomEvaluationComparison (stage 3; reviewer PASS; first push; landing 20261027T210220-L-1672110 (proof); batch 20261027T205736; modules 1; new nodes 0)
 - 21:02 L: merged deliver/S2/Sheaf.Paper.PodReindexingCompletedEvaluationReflection (stage 3; reviewer PASS; first push; landing 20261027T210221-L-1672619 (proof); batch 20261027T205736; modules 1; new nodes 2)
 - 21:02 L: merged deliver/S3/Sheaf.AlgebraicGeometry.ProperShriekCompSupports (stage 3; reviewer PASS; first push; landing 20261027T210222-L-1673078 (proof); batch 20261027T205736; modules 1; new nodes 0)
+- 21:02 L: merged deliver/S3/Sheaf.Paper.FiniteClopenCommonExceptional (stage 3; reviewer PASS; first push; landing 20261027T210224-L-1673634 (interface); batch 20261027T205736; modules 2; new nodes 1)
