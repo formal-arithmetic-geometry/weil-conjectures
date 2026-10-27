@@ -1,0 +1,128 @@
+{
+ "id": "def-sf-native-proper-projection-comparison-data",
+ "kind": "definition",
+ "title": "Canonical section tensor and proper projection comparison data",
+ "status": "split",
+ "import_flags": [],
+ "statement": "Fix a finite field $k_0$, a prime $\\ell\\ne\\operatorname{char}(k_0)$, and the native Weil-sheaf framework and ambient derived tensor of [def-sf-native-weil-derived-framework] and [def-sf-derived-weil-category-and-operations]. For a separated finite-type $k_0$-scheme $X_0$, let $R$ be a normalized coefficient realization and $S$ its ordinary section-module closed structure as in [lem-sf-adic-qbar-constructible-realization]. Define $U_0$ to be actual Frobenius forgetting (the native forgetful functor of [def-sf-native-weil-closed-models]) followed by the section-module functor, $U_{Ch}$ its termwise cochain functor, and $U$ the corresponding exact derived functor, with its canonical localization-factor isomorphism. A section tensor comparison is a cochain isomorphism $U_{Ch}\\operatorname{Tot}_W(P,Q)\\cong\\operatorname{Tot}_S(U_{Ch}P,U_{Ch}Q)$ on every pair of native complexes, equal to the identity on each left-first homogeneous pure balanced tensor summand, together with preservation of K-flatness and a derived tensor isomorphism $U(A\\otimes_W^LB)\\cong UA\\otimes_S^LUB$. The latter is normalized by the actual total-complex comparison and the K-flat model isomorphisms, summand insertions, sheaf tensor and pullback of [def-sf-native-open-tensor-operations], with the conventions of [def-sf-native-open-tensor-presentation-data]. Both totals use left degree first and differential $d_P\\otimes1+(-1)^i1\\otimes d_Q$; no exchange of bidegrees or factors is implicit. This is comparison data for the closed forgetful realization of [lem-sf-weil-native-closed-forgetful], not its existence theorem. For a morphism $p_0:Z_0\\to Y_0$ between separated finite-type schemes, define the native projection source and target functors using the actual native tensor, pullback and right-derived direct image, and the actual cochain-to-derived pushforward computation map. Using the adjunction of [lem-sf-derived-weil-pullback-pushforward-adjunction], the balanced comparison data of [def-sf-native-projection-tensor-comparison-data], and the ordinary operations of [lem-sf-adic-proper-adjunction-realization], define the ordinary and common-stage projection arrows as their actual counit mates; the common-stage arrow uses the canonical common-stage pullback/tensor comparison of [def-pur-completed-pullback-tensor-comparison]. The common-stage arrow has the proper identity-open normalization. Also define the termwise comparison induced by any specified sheaf direct-image comparison. No invertibility of a projection arrow is asserted.",
+ "stmt_deps": [
+  "def-sf-native-weil-derived-framework",
+  "def-sf-derived-weil-category-and-operations",
+  "lem-sf-adic-qbar-constructible-realization",
+  "lem-sf-weil-native-closed-forgetful",
+  "lem-sf-derived-weil-pullback-pushforward-adjunction",
+  "lem-sf-adic-proper-adjunction-realization",
+  "def-sf-native-projection-tensor-comparison-data",
+  "def-sf-native-open-tensor-presentation-data",
+  "def-sf-native-weil-closed-models",
+  "def-sf-native-open-tensor-operations",
+  "def-pur-completed-pullback-tensor-comparison"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/fix-lem-tensor-adjunction.proof.md",
+  "place": "Step 1, second Hom bijection: proper factor; Stacks 03EK, 012Z, 06YU, 08BJ; normalized section and counit comparisons"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "canonical tensor comparison for forgetting Frobenius from Weil sheaves to section modules normalized on pure tensors and K-flat representatives",
+   "results": "[leansearch] OK 8 hit(s): SheafOfModules.forget, forgetToSheafModuleCat_map_val, forget_obj, toSheaf_map_val, fullyFaithfulForget, PresheafOfModules.toPresheaf_map_sheafificationHomEquiv_def, instFaithfulPresheafOfModulesValRingCatForget, instReflectsIsomorphismsPresheafOfModulesValRingCatForget. None specifies the native cochain/derived tensor comparison.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.mapDerivedCategoryFactors, CategoryTheory.NatIso.mapHomologicalComplex",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "ProperSectionTensor|properSectionFactors|properCommonProjection|properNativeSheafGenerator; Mathlib CategoryTheory, lean/WeilConjectures, lean/Sheaf; DAG normalized section tensor; blueprint_refs proper projection",
+   "results": "Mathlib [grep] OK 0 hit(s); no project/upstream declaration with these names. DAG search found NativeSectionClosed.TransportNormalized and NativeDualRealization.Datum: these use a specified closure transport and realization Family, and the former compares the reversed-curried ordinary total to the factor-exchanged section total (with its disputed missing sign). They do not define the present left-first native total comparison for fixed R,S or the proper counit-mate arrows. def-sfb-section-tensor-comparison instead defines a projection along a geometric section. blueprint_refs reports seven proper-projection units, none defining this comparison data.",
+   "date": "2026-10-27",
+   "verdict": "reuse underlying operations; no exact comparison-data node"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sf-native-proper-projection-realization",
+  "date": "2026-10-27",
+  "group": "NC"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "fix-lem-tensor-adjunction.proof.md Step 1, second Hom bijection: proper factor; old compact-projection proof Steps 1 and 3; Bhatt-Scholze Proposition 6.8.14 and Remark 6.8.15, pp. 61-62",
+   "via": [
+    "lem-sf-native-proper-projection-realization",
+    "lem-sf-derived-weil-compact-projection-formula",
+    "lem-sf-weil-verdier-exchange"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "module": "Sheaf.Paper.NativeProperProjectionComparisons",
+  "declaration": "AlgebraicGeometry.ProEtaleWeilSheaf.ProperSectionTensor",
+  "declarations": [
+   "AlgebraicGeometry.ProEtaleWeilSheaf.properSectionForget",
+   "AlgebraicGeometry.ProEtaleWeilSheaf.properSectionDerived",
+   "AlgebraicGeometry.ProEtaleWeilSheaf.properSectionCochain",
+   "AlgebraicGeometry.ProEtaleWeilSheaf.properSectionFactors",
+   "AlgebraicGeometry.ProEtaleWeilSheaf.properNativeSheafGenerator",
+   "AlgebraicGeometry.ProEtaleWeilSheaf.properNativeTotalGenerator",
+   "AlgebraicGeometry.ProEtaleWeilSheaf.ProperSectionTensor",
+   "AlgebraicGeometry.ProEtaleWeilSheaf.properNativePushUnit",
+   "AlgebraicGeometry.ProEtaleWeilSheaf.properNativeProjectionSource",
+   "AlgebraicGeometry.ProEtaleWeilSheaf.properNativeProjectionTarget",
+   "AlgebraicGeometry.ProEtaleWeilSheaf.properGeometricOver",
+   "AlgebraicGeometry.ProEtaleWeilSheaf.properGeometricFiniteType",
+   "AlgebraicGeometry.ProEtaleWeilSheaf.properGeometricQuasiCompact",
+   "AlgebraicGeometry.ProEtaleWeilSheaf.properGeometricMapIsOver",
+   "AlgebraicGeometry.ProEtaleWeilSheaf.properCommonPush",
+   "AlgebraicGeometry.ProEtaleWeilSheaf.properCommonProjection",
+   "AlgebraicGeometry.ProEtaleWeilSheaf.properOrdinaryProjection",
+   "AlgebraicGeometry.ProEtaleWeilSheaf.properPushSheafCochain"
+  ],
+  "file": "lean/Sheaf/Paper/NativeProperProjectionComparisons.lean",
+  "statement": "structure ProperSectionTensor (X : Scheme.{u}) [X.Over (Spec (CommRingCat.of k₀))] [IsSeparated (X ↘ Spec (CommRingCat.of k₀))] [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))] [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))] (R : LocallyFiniteAdicRealization.Realization l (X ↘ Spec (CommRingCat.of k₀)).geometricFiber) [∀ x : (X ↘ Spec (CommRingCat.of k₀)).geometricFiber, Invertible (l : (X ↘ Spec (CommRingCat.of k₀)).geometricFiber.residueField x)] (A : At l (X ↘ Spec (CommRingCat.of k₀)).geometricFiber R)",
+  "branch": "sheaf-dag",
+  "by": "NC",
+  "date": "2026-10-27",
+  "existing": false,
+  "note": "H4 repair: uses NativeBaseChange.geometricMap directly. Geometric-fiber structure instances are scoped, activated explicitly at use sites. The tensor declarations are imported directly from their owning DerivedWeilTensorOperations module, avoiding the VerdierDual-to-compact-theorem import path of DerivedWeilOperations."
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7b45b9d34",
+  "group": "NC",
+  "result": "fix",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7b45b9d34",
+  "group": "NC",
+  "result": "fix",
+  "note": "7b45 (NC) = NA 770f Lean byte-identical (5 modules, compact node identical; only group fields, item lean.note and report self-check differ); item not live. Maths re-read: actual homEquiv counit mate, complete pinned forget/realization squares, identity-open normalization, arbitrary A,T, IsProper on theorem only, sorry only, lean.statement verbatim; edge cases p=id, A/T=0, empty, multi-degree OK. Import closure re-run vs side-live b252b5a: no path to NativeCompactProjectionFormulaTheorem/WCSTC/DerivedWeilOperations. FIX (770f fixes lost, 7th time): (1) tensor-comparison node stmt_deps += def-sf-native-open-tensor-operations, def-sf-generic-open-tensor-presentation (cited); (2) comparisons node stmt_deps += def-sf-native-weil-closed-models, def-sf-native-open-tensor-operations, def-pur-completed-pullback-tensor-comparison (cited; closes item nativeOpenPull gap); added edges acyclic; (3) H11 report: self-check second reading replaced by real reading. Advisory: compact node lacks cite of new data node and lists nativeConstructibleTensor; geometricMap theorem-owned. No Lean changed, no compile; worker scompile 5 modules <60 s and dry run OK."
+ }
+}

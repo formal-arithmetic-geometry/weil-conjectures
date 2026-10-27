@@ -6,7 +6,7 @@ Authors: SHEAF group NN
 module
 
 public import Sheaf.Paper.DerivedWeilTensorOperations
-public import Sheaf.Paper.NativeCompactProjectionFormula
+public import Sheaf.Paper.NativeCompactProjectionFormulaTheorem
 public import WeilConjectures.WeilSheaf.LowerShriekFunctoriality
 public import Mathlib.CategoryTheory.HomCongr
 
@@ -237,3 +237,4 @@ theorem native_compact_structure_tensor_comparison :
       Category.assoc]
 
 end AlgebraicGeometry.WeilComplex
+

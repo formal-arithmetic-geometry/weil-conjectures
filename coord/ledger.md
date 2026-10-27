@@ -20452,3 +20452,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 23:44 L: merged deliver/ND/lem-pur-rational-tensor-associator-scalar-square (stage 2; reviewer FIX; parallel immutable checks); batch 20261027T233735; landing 20261027T234404-ND-122540 (proof)
 - 23:44 L: merged deliver/NA/lem-pur-rational-braiding-scalar-compatibility (stage 2; reviewer PASS; parallel immutable checks); batch 20261027T233735; landing 20261027T234405-NA-123101 (proof)
 - 23:44 L: merged deliver/NC/lem-pur-integral-braiding-naturality (stage 2; reviewer PASS; parallel immutable checks); batch 20261027T233735; landing 20261027T234406-NC-123596 (proof)
+- 23:44 L: merged deliver/NC/lem-sf-native-proper-projection-realization (stage 2; reviewer FIX; parallel immutable checks); batch 20261027T233735; landing 20261027T234407-NC-124313 (interface)

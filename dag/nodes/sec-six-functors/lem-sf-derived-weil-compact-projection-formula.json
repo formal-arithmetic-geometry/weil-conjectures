@@ -323,14 +323,10 @@
   }
  },
  "lean": {
-  "module": "Sheaf.Paper.NativeCompactProjectionFormula",
+  "module": "Sheaf.Paper.NativeCompactProjectionFormulaTheorem",
   "declaration": "AlgebraicGeometry.WeilComplex.native_compact_projection_formula",
   "declarations": [
-   "CategoryTheory.ProjectionTensorSummandNormalization",
-   "CategoryTheory.ProjectionTensorPresentation",
    "AlgebraicGeometry.WeilComplex.nativeConstructibleTensor",
-   "AlgebraicGeometry.ProEtaleWeilSheaf.NativeProjectionTensorComparison",
-   "AlgebraicGeometry.ProEtaleWeilSheaf.nativeProjectionProperMate",
    "AlgebraicGeometry.WeilComplex.nativeProjectionCompactification",
    "AlgebraicGeometry.WeilComplex.nativeProjectionCompactification_locallyOfFiniteType",
    "AlgebraicGeometry.WeilComplex.nativeProjectionCompactification_quasiCompact",
@@ -340,20 +336,20 @@
    "AlgebraicGeometry.WeilComplex.nativeProjectionPullComp",
    "AlgebraicGeometry.WeilComplex.native_compact_projection_formula"
   ],
-  "file": "lean/Sheaf/Paper/NativeCompactProjectionFormula.lean",
+  "file": "lean/Sheaf/Paper/NativeCompactProjectionFormulaTheorem.lean",
   "statement": "theorem native_compact_projection_formula : ∃ (C : ProEtaleWeilSheaf.NativeProjectionTensorComparison k₀ l (nativeProjectionCompactification k₀ f).g) (s : ProEtaleWeilSheaf.NativeOpenTensorData k₀ l (nativeProjectionCompactification k₀ f).i) (d : ProEtaleWeilSheaf.NativeOpenDerivedTensorData k₀ l (nativeProjectionCompactification k₀ f).i s) (c : OpenTensorPresentation (ProEtaleWeilSheaf k₀ l X) (ProEtaleWeilSheaf k₀ l (nativeProjectionCompactification k₀ f).Z)) (pi : nativeCompactProjectionLeft k₀ l f ≅ nativeCompactProjectionRight k₀ l f), ProEtaleWeilSheaf.NativeOpenPresentationCompatibility k₀ l (nativeProjectionCompactification k₀ f).i s d c ∧ ∀ (M : WeilComplex k₀ l X) (T : WeilComplex k₀ l Y), (pi.hom.app (M, T)).hom = ProEtaleWeilSheaf.nativeProjectionProperMate k₀ l (nativeProjectionCompactification k₀ f).g C ((ProEtaleWeilSheaf.nativeOpenExtension k₀ l (nativeProjectionCompactification k₀ f).i).obj M.obj) T.obj ≫ (ProEtaleWeilSheaf.lowerStar k₀ l (nativeProjectionCompactification k₀ f).g).rightDerivedFunctor.map (d.gamma.hom.app (M.obj, (ProEtaleWeilSheaf.nativeOpenPull k₀ l (nativeProjectionCompactification k₀ f).g).obj T.obj)) ≫ (ProEtaleWeilSheaf.lowerStar k₀ l (nativeProjectionCompactification k₀ f).g).rightDerivedFunctor.map ((ProEtaleWeilSheaf.nativeOpenExtension k₀ l (nativeProjectionCompactification k₀ f).i).map ((ProEtaleWeilSheaf.nativeDerivedTensor k₀ l X).map (Prod.mkHom (𝟙 M.obj) ((nativeProjectionPullComp k₀ l f).hom.app T.obj))))",
   "branch": "sheaf-dag",
-  "by": "Q25",
-  "date": "2026-10-24",
+  "by": "NC",
+  "date": "2026-10-27",
   "existing": false,
-  "note": "Natural isomorphism on the actual bounded constructible full categories; ambient map is pinned to the chosen compactification, canonical proper counit mate, normalized open tensor isomorphism, and balanced pullback compositor. The proper tensor comparison is fixed on actual sheaf carriers, total summands, and all K-flat representatives. No extra assumption on either derived input."
+  "note": "Repair of the returned duplicate report at 95e62c1f9e07 using the expressly permitted theorem-module split: the original NativeCompactProjectionFormula source removes this theorem completely; this module is its sole declaration site and publicly imports the eight unchanged compactification/helper definitions. The four balanced tensor/mate definitions remain in their original module and are uniquely owned by def-sf-native-projection-tensor-comparison-data. This preserves every signature and removes the future proof import cycle. The live landing tool now checks the complete replacement source overlay, so deleted base locations are no longer counted as duplicates."
  },
  "reviewed_lean": {
-  "date": "2026-10-24",
+  "date": "2026-10-27",
   "by": "L",
-  "reviewer": "NT-stage2-cc-63985d370",
-  "group": "Q25",
-  "result": "pass",
-  "note": "Re-delivery after RETURN H2 (558d). Lean module byte-identical to 558d, whose mathematics was found correct (pinned proper counit mate, then Rp*(gamma), then Rp*j!(1 tensor compositor); C, s, d, c existential and fully pinned; NatIso on WC^der; no extra hypotheses). The item differs from side-live only in lean plus the stmt_deps addition of the new def node; the theorem lem-sf-native-open-derived-tensor stays in proof_deps only. New def-sf-native-open-tensor-presentation-data: existing:true over the landed Sheaf.Paper.NativeOpenDerivedTensor (live = side-live); 22 declarations = all non-theorem decls; statement verbatim to lines 512-515; prose matches the Lean clause by clause; stmt_deps are four existing def nodes; unique owner; same route as def-sfb-space-affine-higher-image-sections-data. No compile needed (no file changed). Advisory only: the module docstrings cite the theorem node."
+  "reviewer": "NT-stage2-cc-7b45b9d34",
+  "group": "NC",
+  "result": "fix",
+  "note": "7b45 (NC) = NA 770f Lean byte-identical (5 modules, compact node identical; only group fields, item lean.note and report self-check differ); item not live. Maths re-read: actual homEquiv counit mate, complete pinned forget/realization squares, identity-open normalization, arbitrary A,T, IsProper on theorem only, sorry only, lean.statement verbatim; edge cases p=id, A/T=0, empty, multi-degree OK. Import closure re-run vs side-live b252b5a: no path to NativeCompactProjectionFormulaTheorem/WCSTC/DerivedWeilOperations. FIX (770f fixes lost, 7th time): (1) tensor-comparison node stmt_deps += def-sf-native-open-tensor-operations, def-sf-generic-open-tensor-presentation (cited); (2) comparisons node stmt_deps += def-sf-native-weil-closed-models, def-sf-native-open-tensor-operations, def-pur-completed-pullback-tensor-comparison (cited; closes item nativeOpenPull gap); added edges acyclic; (3) H11 report: self-check second reading replaced by real reading. Advisory: compact node lacks cite of new data node and lists nativeConstructibleTensor; geometricMap theorem-owned. No Lean changed, no compile; worker scompile 5 modules <60 s and dry run OK."
  }
 }

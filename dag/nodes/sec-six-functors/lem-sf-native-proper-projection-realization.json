@@ -13,7 +13,9 @@
   "lem-sf-adic-qbar-constructible-realization",
   "lem-sf-weil-native-closed-forgetful",
   "lem-sf-derived-weil-pullback-pushforward-adjunction",
-  "lem-sf-adic-proper-adjunction-realization"
+  "lem-sf-adic-proper-adjunction-realization",
+  "def-sf-native-projection-tensor-comparison-data",
+  "def-sf-native-proper-projection-comparison-data"
  ],
  "proof": [
   {
@@ -317,5 +319,28 @@
   "group": "Q86",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q86-60995585a (reviewer sub-agent of L); spot-checked: Re-delivery of db325177f48e, whose review was FIX (step 1 to cite lem-sf-locally-finite-coefficient-ring-realization). The landing then refused that head because the item was a side completion not yet in the live DAG, and the FIX was lost: step 1 of this head is byte-identical to the unfixed step. The item is still unsplit with no proof in live and side-live, so no other group has superseded it. Delta against the earlier head: only steps 2-3 and the split_report summary changed. Step 2 is correct: native pullback is exact because the frobenius-mates node gives exact ordinary pullback and the resolutions node gives exact, conservative U. Step 3 is correct: for acyclic N, termwise-adjunction-homotopy gives Hom_K(N,p_*I)=Hom_K(p^*N,I)=0, so p_*I is K-injective, kinjective-hom-derived applies to both sides, and the counit Q(eps_I) followed by (Qu)^{-1} follows (Stacks 08BJ argument). Steps 4-8 are unchanged and re-checked: the balanced tensor inverses carry no sign; alpha=R(h)eta is the ringed projection mate; thm-sf-pf-field applies with compactification (id,p), where Rp_!=Rp_* and D^b_ctf=D^b_c at field stages; the quoted counit equation of proper-adjunction-realization holds verbatim; conservative U_Y gives invertibility. All 22 proof_deps and 6 stmt_deps statements are unchanged against live. Edge cases p=id, T=1, A=0 and multi-degree complexes are fine. No SGA source. Declared tool_uses accepted. FIX (C1/C5), re-applied: step 1 now cites theta_V and its eta_h/precomposition square from the same-unit node lem-sf-locally-finite-coefficient-ring-realization (statement unchanged live, status split; its closure of 891 nodes does not contain the item and has no trace-formula or Poincare-duality node), and the node is added to the step's uses and to proof_deps. Corrected file: fixes/dag/nodes/sec-six-functors/lem-sf-native-proper-projection-realization.json. Maintainer note: this FIX has now been lost once after a landing refusal; re-apply it if the head is refused again.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.NativeProperProjectionRealization",
+  "declaration": "AlgebraicGeometry.ProEtaleWeilSheaf.native_proper_projection_realization",
+  "declarations": [
+   "AlgebraicGeometry.ProEtaleWeilSheaf.NativeProperProjectionRealization",
+   "AlgebraicGeometry.ProEtaleWeilSheaf.native_proper_projection_realization"
+  ],
+  "file": "lean/Sheaf/Paper/NativeProperProjectionRealization.lean",
+  "statement": "theorem native_proper_projection_realization [IsProper p] : Nonempty (NativeProperProjectionRealization k₀ l p)",
+  "branch": "sheaf-dag",
+  "by": "NC",
+  "date": "2026-10-28",
+  "existing": false,
+  "note": "Actual ambient native counit mate and normalized proper realization. The helper comparison data are delivered as the two new definition nodes in this packet; the downstream compact projection theorem remains separated to avoid an import cycle."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7b45b9d34",
+  "group": "NC",
+  "result": "fix",
+  "note": "7b45 (NC) = NA 770f Lean byte-identical (5 modules, compact node identical; only group fields, item lean.note and report self-check differ); item not live. Maths re-read: actual homEquiv counit mate, complete pinned forget/realization squares, identity-open normalization, arbitrary A,T, IsProper on theorem only, sorry only, lean.statement verbatim; edge cases p=id, A/T=0, empty, multi-degree OK. Import closure re-run vs side-live b252b5a: no path to NativeCompactProjectionFormulaTheorem/WCSTC/DerivedWeilOperations. FIX (770f fixes lost, 7th time): (1) tensor-comparison node stmt_deps += def-sf-native-open-tensor-operations, def-sf-generic-open-tensor-presentation (cited); (2) comparisons node stmt_deps += def-sf-native-weil-closed-models, def-sf-native-open-tensor-operations, def-pur-completed-pullback-tensor-comparison (cited; closes item nativeOpenPull gap); added edges acyclic; (3) H11 report: self-check second reading replaced by real reading. Advisory: compact node lacks cite of new data node and lists nativeConstructibleTensor; geometricMap theorem-owned. No Lean changed, no compile; worker scompile 5 modules <60 s and dry run OK."
  }
 }
