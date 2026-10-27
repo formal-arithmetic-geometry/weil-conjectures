@@ -66,14 +66,6 @@ lemma ofArrows_mem_proetalePrecoverage_of_comp {V V' : Scheme.{u}} (p : V' ⟶ V
 
 namespace ProEt
 
-/-- The underlying morphism of schemes of a morphism of the small pro-étale site is weakly
-étale. -/
-lemma weaklyEtale_left {Y : Scheme.{u}} {A B : Y.ProEt} (φ : A ⟶ B) : WeaklyEtale φ.left := by
-  have : WeaklyEtale (φ.left ≫ B.hom) := by
-    rw [MorphismProperty.Over.w φ]
-    exact A.prop
-  exact .of_comp φ.left B.hom
-
 /-- Base change along a quasi-compact surjective morphism `r : X ⟶ Y` reflects pro-étale
 covering presieves: if the base change of a presieve `R` on `V : Y.ProEt` is a covering presieve,
 then so is `R`. -/

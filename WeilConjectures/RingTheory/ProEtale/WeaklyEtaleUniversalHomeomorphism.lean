@@ -15,9 +15,10 @@ public import WeilConjectures.RingTheory.ProEtale.WStrictlyLocalUniversalHomeomo
 
 Let `A → A'` be a universal homeomorphism and let `B` be a weakly étale `A'`-algebra. We show
 that, locally for the ind-étale topology on `A`, `B` comes from `A`: there is an ind-étale
-`A`-algebra `D` and a faithfully flat `A'`-algebra map `B → A' ⊗[A] D`. Here we assume that
-the base change `A' ⊗[A] C` of the w-strict localization `C = WStrictLocalization A` is
-w-strictly local.
+`A`-algebra `D` and a faithfully flat `A'`-algebra map `B → A' ⊗[A] D`. We first prove this
+assuming that the base change `A' ⊗[A] C` of the w-strict localization
+`C = WStrictLocalization A` is w-strictly local, and then discharge this assumption using
+`IsWStrictlyLocalRing.of_isUniversalHomeomorphism`.
 
 ## Proof
 
@@ -36,7 +37,10 @@ homeomorphism and the closed points of `Spec C'` map onto `Spec A'`.
 
 ## Main results
 
-- `Algebra.WeaklyEtale.exists_indEtale_baseChange_of_isWStrictlyLocalRing`
+- `Algebra.WeaklyEtale.exists_indEtale_baseChange_of_isWStrictlyLocalRing`: the statement
+  assuming that `A' ⊗[A] WStrictLocalization A` is w-strictly local.
+- `Algebra.WeaklyEtale.exists_indEtale_baseChange`: local descent of weakly étale algebras along
+  universal homeomorphisms.
 -/
 
 @[expose] public section
