@@ -5,7 +5,7 @@ Authors: Claude
 -/
 module
 
-public import Mathlib.CategoryTheory.Monoidal.Category
+public import Mathlib.CategoryTheory.Monoidal.Preadditive
 public import Mathlib.CategoryTheory.MorphismProperty.Retract
 
 /-!
@@ -134,6 +134,59 @@ lemma IsTensorRetract.isSquareRetract {U V V' S₁ S₂ T₁ T₂ : C} {x : U �
   refine ⟨r₁ ⊗ₘ inv u₂, ρ, ?_, ha, ?_⟩
   · rw [tensorHom_comp_tensorHom, hr₁, IsIso.hom_inv_id, tensorHom_id, id_whiskerRight]
   · rw [← Category.assoc, tensorHom_comp_tensorHom, IsIso.inv_hom_id, tensorHom_id, hc]
+
+/-- **Averaging gives a tensor retract structure**: on a square `x ≫ a = δ ≫ (u₁ ⊗ u₂) ≫ π` in a
+preadditive monoidal category, let `r₁`, `ρ` be retractions of `u₁` and `a`, and let a finite
+family of endomorphisms `e₁ i` of `T₁` and `e i` of `V'` be carried into each other by `π`
+(`(e₁ i ▷ T₂) ≫ π = π ≫ e i`, an action that is trivial on `T₂`). If `n` times the idempotents
+`r₁ ≫ u₁` and `ρ ≫ a` are the sums `∑ e₁ i` and `∑ e i` (the idempotents are the averages of the
+action) and `n` is cancellable, the square is a tensor retract. -/
+lemma isTensorRetract_of_sum [Preadditive C] [MonoidalPreadditive C] {U V V' S₁ S₂ T₁ T₂ : C}
+    {x : U ⟶ V} {a : V ⟶ V'} {δ : U ⟶ S₁ ⊗ S₂} {u₁ : S₁ ⟶ T₁} {u₂ : S₂ ⟶ T₂}
+    {π : T₁ ⊗ T₂ ⟶ V'} (hsq : x ≫ a = δ ≫ (u₁ ⊗ₘ u₂) ≫ π) {ι : Type*} (s : Finset ι) (n : ℕ)
+    (hn : ∀ f g : T₁ ⊗ T₂ ⟶ V', n • f = n • g → f = g) (r₁ : T₁ ⟶ S₁) (ρ : V' ⟶ V)
+    (hr₁ : u₁ ≫ r₁ = 𝟙 S₁) (ha : a ≫ ρ = 𝟙 V) (e₁ : ι → (T₁ ⟶ T₁)) (e : ι → (V' ⟶ V'))
+    (he : ∀ i, (e₁ i ▷ T₂) ≫ π = π ≫ e i) (h₁ : n • (r₁ ≫ u₁) = ∑ i ∈ s, e₁ i)
+    (h : n • (ρ ≫ a) = ∑ i ∈ s, e i) : IsTensorRetract hsq := by
+  have hw : ∀ (m : ℕ) (f : T₁ ⟶ T₁), (m • f) ▷ T₂ = m • (f ▷ T₂) := fun m f ↦ by
+    induction m with
+    | zero => simp
+    | succ m ih => rw [succ_nsmul, MonoidalPreadditive.add_whiskerRight, ih, succ_nsmul]
+  refine ⟨r₁, ρ, hr₁, ha, hn _ _ ?_⟩
+  rw [← Preadditive.nsmul_comp, ← hw, h₁,
+    sum_whiskerRight, Preadditive.sum_comp,
+    ← Preadditive.comp_nsmul, h, Preadditive.comp_sum]
+  exact Finset.sum_congr rfl fun i _ ↦ he i
+
+omit [MonoidalCategory C] in
+/-- Conjugating an average by an isomorphism: if `n • (r ≫ α) = ∑ act i` and
+`act i ≫ m = m ≫ act' i`
+with `mi ≫ m = 𝟙`, then `n • ((mi ≫ r) ≫ α ≫ m) = ∑ act' i`. -/
+lemma nsmul_comp_comp_eq_sum [Preadditive C] {W W' V : C} (m : W ⟶ W') (mi : W' ⟶ W)
+    (hmi : mi ≫ m = 𝟙 W') (r : W ⟶ V) (α : V ⟶ W) {ι : Type*} (s : Finset ι) (n : ℕ)
+    (act : ι → (W ⟶ W)) (act' : ι → (W' ⟶ W')) (havg : n • (r ≫ α) = ∑ i ∈ s, act i)
+    (hnat : ∀ i, act i ≫ m = m ≫ act' i) : n • ((mi ≫ r) ≫ α ≫ m) = ∑ i ∈ s, act' i := by
+  have : (mi ≫ r) ≫ α ≫ m = mi ≫ (r ≫ α) ≫ m := by simp only [Category.assoc]
+  rw [this, ← Preadditive.comp_nsmul, ← Preadditive.nsmul_comp, havg, Preadditive.sum_comp,
+    Preadditive.comp_sum]
+  refine Finset.sum_congr rfl fun i _ ↦ ?_
+  rw [hnat, reassoc_of% hmi]
+
+/-- Variant of `CategoryTheory.isTensorRetract_of_sum` where the right vertical map is a composite
+`a₀ ≫ m` with `m` invertible, and the averaging identity is given for `a₀`. -/
+lemma isTensorRetract_of_sum' [Preadditive C] [MonoidalPreadditive C]
+    {U V V₀ V' S₁ S₂ T₁ T₂ : C} {x : U ⟶ V} {a₀ : V ⟶ V₀} {m : V₀ ⟶ V'} [IsIso m]
+    {δ : U ⟶ S₁ ⊗ S₂} {u₁ : S₁ ⟶ T₁} {u₂ : S₂ ⟶ T₂} {π : T₁ ⊗ T₂ ⟶ V'}
+    (hsq : x ≫ a₀ ≫ m = δ ≫ (u₁ ⊗ₘ u₂) ≫ π) {ι : Type*} (s : Finset ι) (n : ℕ)
+    (hn : ∀ f g : T₁ ⊗ T₂ ⟶ V', n • f = n • g → f = g) (r₁ : T₁ ⟶ S₁) (ρ₀ : V₀ ⟶ V)
+    (hr₁ : u₁ ≫ r₁ = 𝟙 S₁) (ha₀ : a₀ ≫ ρ₀ = 𝟙 V) (e₁ : ι → (T₁ ⟶ T₁)) (e₀ : ι → (V₀ ⟶ V₀))
+    (e : ι → (V' ⟶ V')) (hnat : ∀ i, e₀ i ≫ m = m ≫ e i)
+    (he : ∀ i, (e₁ i ▷ T₂) ≫ π = π ≫ e i) (h₁ : n • (r₁ ≫ u₁) = ∑ i ∈ s, e₁ i)
+    (h₀ : n • (ρ₀ ≫ a₀) = ∑ i ∈ s, e₀ i) : IsTensorRetract hsq :=
+  isTensorRetract_of_sum hsq s n hn r₁ (inv m ≫ ρ₀) hr₁
+    (by rw [Category.assoc, IsIso.hom_inv_id_assoc, ha₀]) e₁ e he h₁
+    (by simpa only [Category.assoc] using
+      nsmul_comp_comp_eq_sum m (inv m) (IsIso.inv_hom_id m) ρ₀ a₀ s n e₀ e h₀ hnat)
 
 end Monoidal
 
