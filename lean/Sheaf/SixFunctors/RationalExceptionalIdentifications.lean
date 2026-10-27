@@ -6,6 +6,8 @@ Authors: SHEAF group D2
 module
 
 public import Sheaf.SixFunctors.RationalOperationsData
+import Sheaf.SixFunctors.RationalDualFormulaScalarCounit
+import Mathlib.CategoryTheory.Adjunction.Unique
 
 /-! # Scalar-compatible rational exceptional dual formulas
 
@@ -21,6 +23,55 @@ universe u
 open CategoryTheory Opposite AlgebraicGeometry AlgebraicGeometry.Scheme
 namespace WeilConjectures.RationalOperations
 open ConstructibleExceptionalCoefficients
+
+private theorem rightAdjointUniq_scalar
+    {C D E H : Type*} [Category C] [Category D] [Category E] [Category H]
+    {L₁ : C ⥤ D} {R₁ V₁ : D ⥤ C} {L₂ : E ⥤ H} {R₂ V₂ : H ⥤ E}
+    (a₁ : L₁ ⊣ R₁) (a₂ : L₂ ⊣ R₂) (v₁ : L₁ ⊣ V₁) (v₂ : L₂ ⊣ V₂)
+    (TX : C ⥤ E) (TY : D ⥤ H) (alpha : L₁ ⋙ TY ≅ TX ⋙ L₂)
+    (beta : R₁ ⋙ TX ⟶ TY ⋙ R₂)
+    (hbeta : ∀ M : D, L₂.map (beta.app M) ≫ a₂.counit.app (TY.obj M) =
+      alpha.inv.app (R₁.obj M) ≫ TY.map (a₁.counit.app M))
+    (M : D) (delta : TX.obj (V₁.obj M) ⟶ V₂.obj (TY.obj M))
+    (hdelta : L₂.map delta ≫ v₂.counit.app (TY.obj M) =
+      alpha.inv.app (V₁.obj M) ≫ TY.map (v₁.counit.app M)) :
+    TX.map ((a₁.rightAdjointUniq v₁).hom.app M) ≫ delta =
+      beta.app M ≫ (a₂.rightAdjointUniq v₂).hom.app (TY.obj M) := by
+  apply (v₂.homEquiv _ _).symm.injective
+  simp only [Adjunction.homEquiv_counit, Functor.map_comp, Category.assoc]
+  rw [hdelta, Adjunction.rightAdjointUniq_hom_app_counit]
+  rw [← Category.assoc]
+  have h := alpha.inv.naturality ((a₁.rightAdjointUniq v₁).hom.app M)
+  change L₂.map (TX.map _) ≫ alpha.inv.app _ =
+    alpha.inv.app _ ≫ TY.map (L₁.map _) at h
+  rw [h, Category.assoc, ← TY.map_comp,
+    Adjunction.rightAdjointUniq_hom_app_counit, hbeta]
+
+private theorem transported_scalar_counit
+    {C D E H : Type*} [Category C] [Category D] [Category E] [Category H]
+    {L₁ P₁ : C ⥤ D} {R₁ : D ⥤ C} {L₂ P₂ : E ⥤ H} {R₂ : H ⥤ E}
+    (a₁ : L₁ ⊣ R₁) (a₂ : L₂ ⊣ R₂) (e₁ : L₁ ≅ P₁) (e₂ : L₂ ≅ P₂)
+    (TX : C ⥤ E) (TY : D ⥤ H) (alpha : L₁ ⋙ TY ≅ TX ⋙ L₂)
+    (beta : R₁ ⋙ TX ⟶ TY ⋙ R₂)
+    (hbeta : ∀ M : D, alpha.hom.app (R₁.obj M) ≫ L₂.map (beta.app M) ≫
+      a₂.counit.app (TY.obj M) = TY.map (a₁.counit.app M)) (M : D) :
+    P₂.map (beta.app M) ≫ (a₂.ofNatIsoLeft e₂).counit.app (TY.obj M) =
+      (Functor.isoWhiskerRight e₁.symm TY ≪≫ alpha ≪≫
+        Functor.isoWhiskerLeft TX e₂).inv.app (R₁.obj M) ≫
+          TY.map ((a₁.ofNatIsoLeft e₁).counit.app M) := by
+  have hb : L₂.map (beta.app M) ≫ a₂.counit.app (TY.obj M) =
+      alpha.inv.app (R₁.obj M) ≫ TY.map (a₁.counit.app M) := by
+    rw [← hbeta M]
+    simp only [← Category.assoc, Iso.inv_hom_id_app, Category.id_comp]
+  simp only [Adjunction.ofNatIsoLeft_counit, NatTrans.comp_app,
+    Functor.whiskerRight_app, Iso.trans_inv, NatTrans.comp_app,
+    Functor.isoWhiskerLeft_inv, Functor.isoWhiskerRight_inv, Iso.symm_inv,
+    Functor.whiskerLeft_app, Functor.map_comp, Category.assoc]
+  have he := e₂.inv.naturality (beta.app M)
+  change P₂.map (beta.app M) ≫ e₂.inv.app (R₂.obj (TY.obj M)) =
+    e₂.inv.app (TX.obj (R₁.obj M)) ≫ L₂.map (beta.app M) at he
+  rw [← Category.assoc, he, Category.assoc, hb]
+  simp only [← TY.map_comp, Iso.hom_inv_id_app_assoc]
 
 variable (D : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (hl : l ≠ D.p)
   (X : Scheme.{u}) [X.Over (Spec (.of D.k))]
@@ -119,6 +170,40 @@ theorem rationalExceptional_identifications
           dualScalar l X D hl Ω c S F G ι I J eX eY M =
         (S.fields.rationalComparison c F G ι).b.hom.app M ≫
           eG.comparison.hom.app
-            ((RationalVerdier.scalar l Y F.carrier G.carrier ι).obj M) := by sorry
+            ((RationalVerdier.scalar l Y F.carrier G.carrier ι).obj M) := by
+  obtain ⟨adjF, hF⟩ := rationalDualFormulaAdjunction_exists D l hl X c F wXF wYF DXF DYF Ω S
+  obtain ⟨adjG, hG⟩ := rationalDualFormulaAdjunction_exists D l hl X c G wXG wYG DXG DYG Ω S
+  let aF := (S.ring.operation c (.rational F)).adjunction.ofNatIsoLeft
+    (S.ring.rationalLeft c F)
+  let aG := (S.ring.operation c (.rational G)).adjunction.ofNatIsoLeft
+    (S.ring.rationalLeft c G)
+  let qF := aF.rightAdjointUniq adjF
+  let qG := aG.rightAdjointUniq adjG
+  refine ⟨qF, qG, ?_⟩
+  let eF := exceptionalIdentificationOfIso D l hl X Ω c S F wXF wYF DXF DYF qF
+  let eG := exceptionalIdentificationOfIso D l hl X Ω c S G wXG wYG DXG DYG qG
+  let I : Identification l X D hl Ω c S F := ⟨wXF, wYF, DXF, DYF, hXF, hYF, eF⟩
+  let J : Identification l X D hl Ω c S G := ⟨wXG, wYG, DXG, DYG, hXG, hYG, eG⟩
+  let TX := RationalVerdier.scalar l X F.carrier G.carrier ι
+  let TY := RationalVerdier.scalar l Y F.carrier G.carrier ι
+  let field := S.fields.rationalComparison c F G ι
+  let := field.shiftX
+  let := field.shiftY
+  let alpha := Functor.isoWhiskerRight (S.ring.rationalLeft c F).symm TY ≪≫
+    field.q ≪≫ Functor.isoWhiskerLeft TX (S.ring.rationalLeft c G)
+  change ∀ M : sfRationalConstructibleCategory l F.carrier Y,
+    TX.map (qF.hom.app M) ≫ dualScalar l X D hl Ω c S F G ι I J eX eY M =
+      field.b.hom.app M ≫ qG.hom.app (TY.obj M)
+  intro M
+  exact rightAdjointUniq_scalar aF aG adjF adjG TX TY alpha field.b.hom
+    (fun N ↦ transported_scalar_counit
+      (S.ring.operation c (.rational F)).adjunction
+      (S.ring.operation c (.rational G)).adjunction
+      (S.ring.rationalLeft c F) (S.ring.rationalLeft c G) TX TY field.q field.b.hom
+      field.comparison.counit N) M
+    (dualScalar l X D hl Ω c S F G ι I J eX eY M)
+    (rationalDualFormulaScalarCounit D l hl X Ω c S F G ι
+      wXF wYF wXG wYG DXF DYF DXG DYG adjF adjG hF hG
+      eX eY normalizedX normalizedY M)
 
 end WeilConjectures.RationalOperations

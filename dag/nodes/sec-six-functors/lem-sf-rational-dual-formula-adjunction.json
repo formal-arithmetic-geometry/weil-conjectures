@@ -1,0 +1,152 @@
+{
+ "id": "lem-sf-rational-dual-formula-adjunction",
+ "kind": "statement",
+ "title": "Trace-normalized integral and rational dual-formula adjunction",
+ "statement": "Fix the finite-field datum D, a prime l different from its characteristic, separated finite-type D.k-schemes X and Y, a separated finite-type morphism f:X→Y, a compactification c, a normalized exceptional coefficient system S [def-weil-exceptional-inverse-image], and a finite coefficient-field stage F. Supply coherent integral dualizing data wX,wY and rational Verdier data A,B [def-sf-coherent-integral-dualizing-datum, def-sf-rational-verdier-data]. Let H_I be the integral dual-pullback-dual functor using the supplied preservation fields and the prescribed completed pullback [def-weil-derived-pullback-tensor-hom]. There is an adjunction between rational compact support and the rational dual formula [def-sf-rational-operation-comparison-data]. Its counit is normalized as follows: there exist an ordinary derived tensor presentation aZ on c.Z and an integral compact-support/H_I adjunction such that for every integral M the identity of H_I(M) satisfies FormulaNormalized for the actual trace, completion augmentation and projection map [lem-coef-dual-formula-scalar-transpose], and the rational counit at Q(M) is heterogeneously equal to Q of this integral counit. This is a single-field construction with no exceptional-comparison isomorphism and no finite-scalar square.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/lem-coef-rational-operations.md",
+  "place": "lem-coef-rational-operations, original proof steps 10--11; single-field normalized adjunction only"
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-sf-coherent-integral-dualizing-datum",
+  "def-sf-rational-verdier-data",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-sf-rational-operation-comparison-data",
+  "lem-coef-dual-formula-scalar-transpose",
+  "def-weil-exceptional-inverse-image"
+ ],
+ "proof": [
+  {
+   "text": "Use the given coefficient system S for its integral adjunction. Change its finite-Tor integral full categories to the entire integral constructible categories using integral_residue_tor and identity-on-underlying-objects equivalences. Transport the left functor through integralLeft.",
+   "uses": [
+    "def-weil-exceptional-inverse-image",
+    "lem-coef-integral-residue-tor"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the trace/evaluation characterization FormulaNormalized to obtain the natural canonical formula isomorphism for the given dualizing data. Its inverse Hom operation is currying followed by inverse biduality; naturality gives the natural isomorphism. Transport the integral adjunction along it, so that its identity component satisfies FormulaNormalized. Ordinary tensor on c.Z supplies aZ.",
+   "uses": [
+    "lem-coef-dual-formula-scalar-transpose"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Localize the linear integral Hom bijection and its inverse. The triangle equations localize. The object/pure-map equations in the supplied Verdier data and the coefficient-passage definitions identify both localized functors with the stated ones. The counit is the integral counit tensored with one, yielding the required HEq.",
+   "uses": [
+    "prop-weil-pbc-rational-transport",
+    "def-weil-rationalization-karoubi",
+    "def-sf-rational-verdier-data"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sf-rational-verdier-data",
+  "def-weil-exceptional-inverse-image",
+  "def-weil-rationalization-karoubi",
+  "lem-coef-dual-formula-scalar-transpose",
+  "lem-coef-integral-residue-tor",
+  "prop-weil-pbc-rational-transport"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/lem-coef-rational-operations.md",
+  "place": "lem-coef-rational-operations, original proof steps 10--11; single-field normalized adjunction only; the precise normalization and descent arguments are given in the theorem docstring."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A natural isomorphism between right adjoints to compact support and Verdier dual pullback dual compatible with scalar extension",
+   "results": "Hits: PresheafOfModules.pullbackComp, SheafOfModules.freeFunctorCompPullbackIso, SheafOfModules.pullbackIso, SheafOfModules.pushforwardPushforwardAdj, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit, SheafOfModules.PullbackConstruction.adjunction, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit, SheafOfModules.pullbackComp. ",
+   "date": "2026-10-27",
+   "verdict": "No geometric match; the generic uniqueness and counit identities are used in the assembly proof."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.rightAdjointUniq",
+   "results": "Hits: CategoryTheory.Adjunction.rightAdjointUniq, CategoryTheory.Adjunction.rightAdjointUniq_refl, CategoryTheory.Adjunction.rightAdjointUniq_inv_app, CategoryTheory.Adjunction.rightAdjointUniq_hom_counit, CategoryTheory.Adjunction.unit_rightAdjointUniq_hom, CategoryTheory.Adjunction.rightAdjointUniq_trans, CategoryTheory.Adjunction.rightAdjointUniq_trans_app, CategoryTheory.Adjunction.unit_rightAdjointUniq_hom_app. ",
+   "date": "2026-10-27",
+   "verdict": "No geometric match; the generic uniqueness and counit identities are used in the assembly proof."
+  },
+  {
+   "tool": "grep",
+   "query": "rightAdjointUniq|homEquiv.*injective",
+   "results": "Hits: Mathlib/CategoryTheory/SmallRepresentatives.lean, Mathlib/CategoryTheory/SmallRepresentatives.lean, Mathlib/CategoryTheory/Types/Basic.lean, Mathlib/CategoryTheory/Monad/Monadicity.lean, Mathlib/CategoryTheory/Monad/Comonadicity.lean, Mathlib/CategoryTheory/Subobject/Classifier/Defs.lean, Mathlib/CategoryTheory/Bicategory/Adjunction/Mate.lean, Mathlib/CategoryTheory/FintypeCat.lean. ",
+   "date": "2026-10-27",
+   "verdict": "No geometric match; the generic uniqueness and counit identities are used in the assembly proof."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Verdier dual pullback dual is right adjoint to compact support with trace normalized counit and scalar extension",
+   "results": "Hits: SheafOfModules.PullbackConstruction.adjunction, PresheafOfModules.pullback, TopCat.Presheaf.pushforwardPullbackAdjunction, SheafOfModules.pullbackPushforwardAdjunction, PresheafOfModules.pullbackPushforwardAdjunction, AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointPullback, ModuleCat.ExtendRestrictScalarsAdj.Counit.map, AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction. ",
+   "date": "2026-10-27",
+   "verdict": "No geometric match; the generic uniqueness and counit identities are used in the assembly proof."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.RationalExceptionalIdentifications",
+  "date": "2026-10-28",
+  "group": "V3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-coef-rational-operations",
+   "place": "lem-coef-rational-operations, original proof steps 10--11; single-field normalized adjunction only",
+   "via": [
+    "lem-sf-rational-exceptional-identifications"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.RationalDualFormulaAdjunction",
+  "file": "lean/Sheaf/SixFunctors/RationalDualFormulaAdjunction.lean",
+  "declaration": "WeilConjectures.RationalOperations.rationalDualFormulaAdjunction_exists",
+  "statement": "theorem rationalDualFormulaAdjunction_exists\n    (Ω : Type u) [Field Ω] [Algebra (Padic l) Ω] [IsAlgClosure (Padic l) Ω]\n    (S : System l Ω D hl (f := f)) :\n    ∃ adj : sfCompactSupportFiniteFunctor l D.k\n        (PurCompactSupport.coefficientPrimeUnit l D hl) c F.carrier ⊣\n          dualFormula l X D hl (f := f) F wX wY A B,\n      DualFormulaAdjunctionNormalized D l hl X c F wX wY A B adj",
+  "branch": "sheaf-dag",
+  "by": "V3",
+  "date": "2026-10-28",
+  "declarations": [
+   "WeilConjectures.RationalOperations.integralDualFormula",
+   "WeilConjectures.RationalOperations.DualFormulaAdjunctionNormalized",
+   "WeilConjectures.RationalOperations.rationalDualFormulaAdjunction_exists"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V3",
+  "result": "pass",
+  "landing": "20261027T180848-L-3909906",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V3",
+  "result": "pass",
+  "landing": "20261027T180848-L-3909906",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

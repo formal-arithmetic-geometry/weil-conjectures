@@ -18,191 +18,41 @@
  ],
  "proof": [
   {
-   "text": "For separated finite-type $f:X\\to Y$, put $A_R=Rf_{!,R}$ and $G_R(M)=R\\lim_n\\operatorname{Res}_n Rf_n^!M_n$. The integral exceptional-adjoint theorem supplies the adjunction $A_R\\dashv G_R$ on the stated bounded constructible categories, its actual unit $\\eta_R$, counit $\\varepsilon_R$, and the canonical isomorphism $G_R\\cong D_{X,R}f^*_{\\mathrm{comp}}D_{Y,R}$ identifying those data. The compact-support functor is $R$-linear by its coefficient-level construction and strict derived limit. The displayed formula for $G_R$ also makes it $R$-linear: internal duality acts by linear precomposition (Steps 6 and 9), completed pullback is linear on the coefficient representatives of Step 1, and the formula contains two dualities. For $h:A_RK\\to M$, its adjoint is $G_R(h)\\circ\\eta_{R,K}$, so the adjoint of $ah$ is $G_R(ah)\\circ\\eta_{R,K}=a(G_R(h)\\circ\\eta_{R,K})$. This proves the required linearity of the actual adjunction bijection. Apply scalar transport to the functors and natural transformations, and explicitly tensor the integral Hom bijection with $E$. This gives $A_E\\dashv G_E$, with units $\\eta_R\\otimes1$ and counits $\\varepsilon_R\\otimes1$; the triangle equations remain equations after tensoring with $1$. The transport statement alone is not being used as a theorem asserting that every adjunction survives an unspecified localization.",
+   "text": "Apply rationalDualFormulaAdjunction_exists separately over F and G. This supplies adjF and adjG on the dual formulas with integral trace-normalized localized counits. Transport each actual system adjunction along rationalLeft. Define qF and qG by Mathlib Adjunction.rightAdjointUniq between these transported adjunctions and adjF/adjG; its counit equation fixes both comparisons.",
    "uses": [
-    "prop-coef-integral-exceptional-adjoint",
-    "prop-weil-pbc-rational-transport",
-    "def-weil-rationalization-karoubi"
+    "lem-sf-rational-dual-formula-adjunction"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/lem-coef-rational-operations.md",
-    "place": "Proof, paragraph 7: localize the integral exceptional adjunction"
-   }
+   "elementary": false
   },
   {
-   "text": "The left adjoint $A_E$ of Step 10 is the rational compact-support functor: its integral representative and strict finite-reduction tower are exactly the ones in the definition of rational compact support. Likewise $G_E$ is the rationalized finite-stage exceptional inverse image specified in the exceptional-inverse-image definition. Localizing the integral formula, using the already identified pullback and duality functors, gives $Rf_E^!M\\cong D_{X,E}f^*D_{Y,E}M$. If either operation is instead characterized by the adjunction, its comparison is forced by the counit: the unique map between right adjoints whose transpose is the other counit is inverse to the reverse comparison, since both composites transpose to the original counit. This proves preservation of the units and counits too. For $f=a_X$, the integral theorem identifies $G_R(R)$ with $\\omega_{X,R}$, so rationalizing gives $Ra_{X,E}^!E=\\omega_{X,E}$.",
+   "text": "Conjugate the coefficient-system compact-support comparison by rationalLeft at both fields. Its counit identity after transporting the system adjunctions follows by naturality of rationalLeft inverse, cancellation of the inverse support comparison, and cancellation of rationalLeft with its inverse. This is the proved private transported_scalar_counit lemma.",
    "uses": [
-    "def-weil-integral-rational-qbar-compact-support",
-    "def-weil-exceptional-inverse-image",
-    "def-weil-derived-pullback-tensor-hom",
-    "prop-coef-integral-exceptional-adjoint",
-    "thm-coef-rational-verdier"
+    "def-weil-exceptional-inverse-image"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/lem-coef-rational-operations.md",
-    "place": "Proof, paragraph 7: identify the prescribed operations, formula and structure-morphism value"
-   }
+   "elementary": true
   },
   {
-   "text": "We now check finite extension, including the adjunction maps. Let $E\\subset L$, $S=\\mathcal O_L$, $v=\\varpi_L$, ramification index $e$, and $r=[L:E]$. At level $n$ use $B_n=S/\\pi^nS=S/v^{en}$, finite free over $A_n$; these are the specified cofinal $S$-levels. Write $T_W$ for integral completed extension. Finite-free completed-scalar comparison identifies it, by its canonical completion map, with ordinary derived extension $-\\otimes^L_{\\mathscr R_W}\\mathscr S_W$, where $\\mathscr S_W$ is finite free of rank $r$ over $\\mathscr R_W$. This comparison is between the actual strict-tower functors, not just unrelated objects with isomorphic reductions. The integral dualizing, internal-Hom and duality comparisons $u,v_{K,M},\\beta$ preserve evaluation and biduality; pullback and tensor also have the stated scalar comparisons. In particular internal-Hom evaluation has the scalar rule $(h\\otimes s,k\\otimes t)\\mapsto h(k)\\otimes st$.",
+   "text": "Apply rationalDualFormulaScalarCounit to adjF,adjG and the supplied normalized duality comparisons. It gives the counit transpose of the actual composite dualScalar without assuming either requested comparison square.",
    "uses": [
-    "lem-coef-finite-free-extension",
-    "lem-weil-finite-free-completed-scalar-comparison",
-    "lem-coef-integral-finite-extension",
-    "lem-pur-integral-operations-scalar-extension"
+    "lem-sf-rational-dual-formula-scalar-counit"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/lem-coef-rational-operations.md",
-    "place": "Proof, paragraph 8: use finite free extension, not arbitrary infinite coefficient extension"
-   }
+   "elementary": false
   },
   {
-   "text": "Fix one compactification $f=pj$ at all coefficient levels. The compact-support reduction-tower functor gives a lift to the derived category of strict towers, whose evaluations and quotient transitions are exactly the stated finite compact-support functors; use this lift when applying derived inverse limit below. At $A_n\\to B_n$, extension by zero commutes with finite direct sums and restriction of scalars because it is an exact additive left adjoint computed degreewise. The $Rp_*$ finite-free comparison is the one in the finite-free-extension statement, and composing gives $T_{Y,n}Rf_{!,A_n}\\cong Rf_{!,B_n}T_{X,n}$. These maps are compatible with the quotient transitions: restriction of scalars commutes with $Rf_!$, and the cited finite-free comparisons commute with reductions. Choose an $R$-basis of $S$, giving a compatible basis of every $B_n$. On the underlying $A_n$-complexes the comparison is the finite-sum map $(Rf_{!,A_n}K_n)^{\\oplus r}\\to Rf_{!,A_n}(K_n^{\\oplus r})$. A basis change acts by the same matrix on both sides, so the map is independent of the basis. Finite sums commute with termwise products and $1-s$ and hence with the strict-tower cone computing $R\\lim$; exact countable products justify this model on pro-etale modules. Taking these actual tower maps and the cofinal levels of Step 12 yields\n$$\\alpha:T_Y A_R\\xrightarrow{\\sim}A_S T_X.$$\nIts underlying map in any basis is finite-sum distributivity. All its inverses and compositions are therefore compatible with the chosen reduction maps, not just identifiable after reduction.",
-   "uses": [
-    "lem-cbc-proetale-extension-zero",
-    "lem-coef-finite-free-extension",
-    "lem-sf-compact-support-restriction-of-scalars",
-    "def-weil-integral-rational-qbar-compact-support",
-    "lem-weil-proetale-countable-products-exact",
-    "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
-    "lem-weil-finite-free-completed-scalar-comparison",
-    "lem-weil-compact-support-reduction-tower-functor"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/lem-coef-rational-operations.md",
-    "place": "Proof, paragraph 8, expanded: finite-free compact-support comparison on strict coefficient towers"
-   }
-  },
-  {
-   "text": "Let $U_W$ be restriction from $\\mathscr S_W$ to $\\mathscr R_W$; it leaves underlying abelian sheaves unchanged and is exact. The balanced maps $h\\mapsto[k\\mapsto h(1\\otimes k)]$ and $g\\mapsto[s\\otimes k\\mapsto s g(k)]$ give $T_W\\dashv U_W$ on module sheaves. Finite freeness makes $T_W$ exact as well. Thus the partial-derived-adjunction lemma applies with everywhere-defined derived functors: their quasi-isomorphism diagrams are already constant up to the invertible images of the quasi-isomorphisms. It gives the same adjunction on ambient derived categories. It restricts to the constructible categories. Indeed $T_W$ preserves them by the integral finite-extension statement. For $N\\in\\mathcal C_S(W)$, choose an $S$-K-flat resolution; it is also $R$-K-flat: for an acyclic $R$-complex $Q$, first tensor with the finite free $\\mathscr S_W$, then with the $S$-K-flat resolution. Both operations preserve the required acyclicity. Tensoring this representative gives\n$$(U_WN)\\otimes^L_{\\mathscr R_W}(A_n)_W=\\operatorname{Res}_{A_n\\to B_n}(N\\otimes^L_{\\mathscr S_W}(B_n)_W).$$\nRestriction preserves finite-level constructibility (finite modules remain finite, and the same local constant presentations apply) and the given uniform cohomological interval. It also commutes with products and cones on the underlying sheaves. Completeness therefore follows from the complete $S$-tower on the cofinal $en$ levels of Step 12. Hence $U_WN\\in\\mathcal C_R(W)$.",
-   "uses": [
-    "def-pc-sheaf-restrict-scalars",
-    "lem-weil-finite-free-completed-scalar-comparison",
-    "lem-pc-pre-derived-adjoint-functors-general",
-    "lem-coef-integral-finite-extension",
-    "lem-coef-finite-free-extension",
-    "def-weil-derived-complete-integral-detailed",
-    "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
-    "def-pc-kflat-complex",
-    "lem-pc-kflat-resolution"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/lem-coef-rational-operations.md",
-    "place": "Proof, paragraph 8, expanded using Tag 0DVC (derived-lemma-pre-derived-adjoint-functors): finite-free extension/restriction adjunction and its domain"
-   }
-  },
-  {
-   "text": "Apply Steps 10 and 14 over both rings. For $N\\in\\mathcal C_S(Y)$ the following natural bijections, in this order, determine an isomorphism $\\rho:U_XG_SN\\cong G_RU_YN$:\n$$\\begin{aligned}\n\\operatorname{Hom}_R(K,U_XG_SN)&\\cong\\operatorname{Hom}_S(T_XK,G_SN)\\\\\n&\\cong\\operatorname{Hom}_S(A_ST_XK,N)\\\\\n&\\cong\\operatorname{Hom}_S(T_YA_RK,N)\\\\\n&\\cong\\operatorname{Hom}_R(A_RK,U_YN)\\\\\n&\\cong\\operatorname{Hom}_R(K,G_RU_YN).\n\\end{aligned}$$\nThe middle map is precomposition with $\\alpha_K$. Taking identities on the two representing objects gives inverse comparison maps: their composites are identities because the displayed bijections are inverse and natural. In particular this uses only the constructible exceptional adjunction, not an unbounded ambient pro-etale exceptional adjoint.",
-   "uses": [
-    "prop-coef-integral-exceptional-adjoint"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/lem-coef-rational-operations.md",
-    "place": "Proof, paragraph 8, expanded: explicit Hom bijections defining the right-adjoint comparison"
-   }
-  },
-  {
-   "text": "Define $b_M:T_XG_RM\\to G_ST_YM$ as the transpose under $A_S\\dashv G_S$ of\n$$A_ST_XG_RM\\xrightarrow{\\alpha_{G_RM}^{-1}}T_YA_RG_RM\\xrightarrow{T_Y\\varepsilon_{R,M}}T_YM.$$\nThis map is invertible. To check it, choose the basis of Step 13. Then $U_YT_YM=M^{\\oplus r}$, and $\\rho$ of Step 15 identifies the underlying target with $G_R(M^{\\oplus r})$. A right adjoint preserves finite products; here they are finite biproducts. The $i$-th component of $\\rho U_Xb_M$ is $G_R$ applied to the $i$-th coefficient projection, composed with the map transposed from the corresponding component of $T_Y\\varepsilon_R$. By the scalar rule for the extension/restriction adjunction and the finite-sum description of $\\alpha$, this is projection onto the $i$-th copy of $G_RM$, followed by $G_R\\varepsilon_R\\circ\\eta_RG_R=1$. The off-diagonal components are zero. Thus the underlying matrix of $b_M$ is the identity on $(G_RM)^{\\oplus r}$. Restriction detects an isomorphism, since it leaves the cohomology sheaves of its cone unchanged. This proves invertibility without inferring equality of maps from equality of their finite reductions.",
-   "uses": [
-    "lem-weil-pbc-right-adjoint-preserves-limits",
-    "prop-coef-integral-exceptional-adjoint",
-    "def-pc-sheaf-restrict-scalars"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/lem-coef-rational-operations.md",
-    "place": "Proof, paragraph 8, expanded: finite-free mate isomorphism; finite products from Tag 0038 (categories-lemma-adjoint-exact)"
-   }
-  },
-  {
-   "text": "Apply the mate counit identity [lem-amb-mate-unit-counit] and unit identity [lem-pur-mate-unit-compatibility] to $L_1=A_R$, $R_1=G_R$, $L_2=A_S$, $R_2=G_S$, $G=T_X$, $H=T_Y$, and the square $\\alpha^{-1}$. Step 16 defined $b$ by exactly this transpose. Hence\n$$\\varepsilon_{S,T_YM}\\circ A_S(b_M)\\circ\\alpha_{G_RM}=T_Y(\\varepsilon_{R,M}),$$\n$$b_{A_RK}\\circ T_X(\\eta_{R,K})=G_S(\\alpha_K^{-1})\\circ\\eta_{S,T_XK}.$$\nThese are the required counit and unit identities for the actual integral adjunctions. The only rearrangement is precomposition of the counit equation with the isomorphism $\\alpha_{G_RM}$.",
-   "uses": [
-    "lem-amb-mate-unit-counit",
-    "lem-pur-mate-unit-compatibility"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/lem-coef-rational-operations.md",
-    "place": "Proof, paragraph 8, expanded: mate equations for units and counits and the duality formula"
-   }
-  },
-  {
-   "text": "The integral adjunction uses the coherent finite exceptional realization specified in [prop-coef-integral-exceptional-adjoint]. Apply [lem-coef-finite-scalar-mate-realization] with the fixed compactification of Step 13 and the cofinal $S$-levels $en$ of Step 12. Its source and target comparisons are precisely those used in Steps 12-14. It identifies the total limit of the finite transposes with the map whose transpose is $T_Y\\varepsilon_R\\circ\\alpha^{-1}$. That map is $b$ by Step 16 and injectivity of the adjunction bijection. Thus the coefficient-passage exceptional comparison is $b$, with the equations of Step 17. No equality of integral maps is inferred solely from equality of their finite reductions.",
-   "uses": [
-    "prop-coef-integral-exceptional-adjoint",
-    "lem-coef-finite-scalar-mate-realization"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/lem-coef-rational-operations.md",
-    "place": "Proof, paragraph 8, expanded: mate equations for units and counits and the duality formula"
-   }
-  },
-  {
-   "text": "Write $c_Z:T_Xf_R^*Z\\xrightarrow{\\sim}f_S^*T_YZ$ and $\\beta^W_Z:T_WD_{W,R}Z\\xrightarrow{\\sim}D_{W,S}T_WZ$ for the pullback and duality comparisons of Step 12. With the canonical formula identifications $\\kappa_R:G_R\\cong D_{X,R}f_R^*D_{Y,R}$ and $\\kappa_S:G_S\\cong D_{X,S}f_S^*D_{Y,S}$, their composite is\n$$b'_M=\\kappa_{S,T_YM}^{-1}\\circ D_{X,S}\\bigl(c_{D_{Y,R}M}^{-1}\\circ f_S^*((\\beta^Y_M)^{-1})\\bigr)\\circ\\beta^X_{f_R^*D_{Y,R}M}\\circ T_X(\\kappa_{R,M}).$$\nThe arrow inside $D_{X,S}$ runs from $f_S^*D_{Y,S}T_YM$ to $T_Xf_R^*D_{Y,R}M$, as contravariance requires. By [lem-coef-dual-formula-scalar-transpose], the $A_S\\dashv G_S$ transpose of this map is $T_Y\\varepsilon_R\\circ\\alpha^{-1}$. It equals the defining transpose of $b$ in Step 16, so $b'=b$. Consequently the formula comparison preserves the same units and counits as the coefficient-passage comparison; the evaluation comparisons remain those fixed in Step 12.",
-   "uses": [
-    "lem-coef-dual-formula-scalar-transpose"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/lem-coef-rational-operations.md",
-    "place": "Proof, paragraph 8, expanded: mate equations for units and counits and the duality formula"
-   }
-  },
-  {
-   "text": "Finally rationalize the finite-extension comparisons. By the definition of $-\\otimes_E L$, its integral representative is exactly $T$, and each component of $\\alpha,b,u,v,\\beta$ is sent to that component tensored with $1$. Composition in raw scalar localization is bilinear, so both equations of Step 17 and the evaluation identities remain the same equations after localization. Coherence for $E\\subset L\\subset L'$ follows at compact support from multiplication $(k\\otimes s)\\otimes t\\mapsto k\\otimes st$ on the finite free tower maps; taking mates gives the same equality for $b$ because their transposes are the same composite counit. For internal Hom and duality, identity and associator coherence are those of the integral comparisons. The rational duality theorem gives the corresponding evaluation and biduality comparisons as well. This proves every scalar-extension compatibility claimed in the item within the specified rationalized constructible categories.",
-   "uses": [
-    "def-weil-rationalization-karoubi",
-    "prop-weil-pbc-rational-transport",
-    "lem-coef-integral-finite-extension",
-    "lem-pur-integral-operations-scalar-extension",
-    "thm-coef-rational-verdier"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/lem-coef-rational-operations.md",
-    "place": "Proof, final two paragraphs: rationalize the specified comparisons and their equations"
-   }
+   "text": "Apply injectivity of the target normalized adjunction Hom bijection to the two sides of the requested square. Naturality of alpha inverse and the rightAdjointUniq counit equations turn the first side into scalar extension of the source system counit. The transported coefficient-system counit identity gives exactly the same transpose for the other side. Thus the two maps are equal. This is the proved private rightAdjointUniq_scalar lemma. Package qF,qG and this equality; exceptionalIdentificationOfIso retains the actual transported unit and counit.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-pc-kflat-complex",
-  "def-pc-sheaf-restrict-scalars",
-  "def-weil-derived-complete-integral-detailed",
-  "def-weil-derived-pullback-tensor-hom",
   "def-weil-exceptional-inverse-image",
-  "def-weil-integral-rational-qbar-compact-support",
-  "def-weil-rationalization-karoubi",
-  "lem-amb-mate-unit-counit",
-  "lem-cbc-proetale-extension-zero",
-  "lem-coef-dual-formula-scalar-transpose",
-  "lem-coef-finite-free-extension",
-  "lem-coef-finite-scalar-mate-realization",
-  "lem-coef-integral-finite-extension",
-  "lem-pc-kflat-resolution",
-  "lem-pc-pre-derived-adjoint-functors-general",
-  "lem-pur-integral-operations-scalar-extension",
-  "lem-pur-mate-unit-compatibility",
-  "lem-sf-compact-support-restriction-of-scalars",
-  "lem-weil-compact-support-reduction-tower-functor",
-  "lem-weil-finite-free-completed-scalar-comparison",
-  "lem-weil-pbc-right-adjoint-preserves-limits",
-  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
-  "lem-weil-proetale-countable-products-exact",
-  "prop-coef-integral-exceptional-adjoint",
-  "prop-weil-pbc-rational-transport",
-  "thm-coef-rational-verdier"
+  "lem-sf-rational-dual-formula-adjunction",
+  "lem-sf-rational-dual-formula-scalar-counit"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/lem-coef-rational-operations.md",
-  "place": "Formal interface for the cited steps; complete representative and comparison argument retained in the theorem docstring."
+  "place": "V3 assembly: normalized single-field adjunctions and scalar counit equation; Mathlib rightAdjointUniq, naturality, and injectivity of the adjunction Hom equivalence."
  },
  "mathlib_searches": [
   {
@@ -278,13 +128,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-25",
+  "date": "2026-10-27",
   "by": "L",
-  "reviewer": "C-849a5",
-  "group": "D2",
-  "result": "fix",
-  "landing": "20261025T100911-L-3636679",
+  "reviewer": "COMPILER",
+  "group": "V3",
+  "result": "pass",
+  "landing": "20261027T180848-L-3909906",
   "kind": "interface",
-  "note": "independent cc review: delivered RationalOperationsData vs published RationalOperations prefix (verbatim, imports only differ); item proof vs exists_system/coef_rational_verdier/dualizingDatum_nonempty + 3 new sorry statements read against RationalVerdier.Datum/TensorPresentation/DualizingDatum pinning; nodes vs Lean; 11 direct importers compiled against sandbox build"
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
