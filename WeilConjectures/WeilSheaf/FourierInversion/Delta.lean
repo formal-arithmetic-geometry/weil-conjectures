@@ -79,7 +79,7 @@ theorem WeilComplex.nonempty_iso_upperStar_tensorLisse_artinSchreierOf_comp_uppe
     Functor.isoWhiskerRight (C₁.symm ≪≫ E ≪≫ C₂) _ ≪≫ Functor.associator _ _ _⟩
 
 /-- **The delta kernel on a trivial line bundle** (the relative form of blueprint
-`lem-fd-convolution-kernel`, `lem-fd-convolution-kernel`). Let `h` be a function on a
+`lem-fd-convolution-kernel`). Let `h` be a function on a
 `k₀`-scheme `X` (as a morphism `X ⟶ 𝔸¹`), with zero locus `i : Z ⟶ X` (the base change of
 the zero section along `h`), let `π : Y ≅ X ×_{k₀} 𝔸¹ ⟶ X` be the trivial line bundle with
 fibre coordinate `s`, and let `ψ` be nontrivial. Then

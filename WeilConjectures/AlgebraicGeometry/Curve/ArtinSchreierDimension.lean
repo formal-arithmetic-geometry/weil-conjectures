@@ -32,10 +32,11 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace AlgebraicGeometry
 
-/-- Source: blueprint `sec-curve-estimates/lem-sc-arbitrary-curve-cd/lem-sc-artin-schreier-dimension`;
-Stacks Project, Tag 0A3N (blueprint: lem-sc-artin-schreier-dimension).
-For a smooth separated connected curve over an algebraically closed field of positive
-characteristic `p`, the constant étale sheaf `ℤ/p` has zero cohomology in degrees above one.
+/-- Source: blueprint
+`sec-curve-estimates/lem-sc-arbitrary-curve-cd/lem-sc-artin-schreier-dimension`; Stacks Project, Tag
+0A3N (blueprint: lem-sc-artin-schreier-dimension). For a smooth separated connected curve over an
+algebraically closed field of positive characteristic `p`, the constant étale sheaf `ℤ/p` has zero
+cohomology in degrees above one.
 
 Proof: The Artin–Schreier short exact sequence `0 → ℤ/p → G_a → G_a → 0`
 (lem-sc-as-sequence) gives the long exact sequence for derived global sections, by

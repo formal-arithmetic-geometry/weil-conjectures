@@ -59,7 +59,8 @@ for these groups are in
 
 ## Blueprint
 
-- `def-wf-lie-algebra-derivation`: the Lie algebra of an algebraic group as its tangent space at the identity.
+- `def-wf-lie-algebra-derivation`: the Lie algebra of an algebraic group as its tangent space at the
+  identity.
 - `sk-i-cartier`: the Lie algebra clauses of Cartier's theorem.
 - `sk-i-restriction`: pairs `V(J) ⊆ V(I)` with `⁅V(I), V(I)⁆ ⊆ V(J)`.
 - `sk-p-product`: the multiplication morphism `Z(G°)° × H° ⟶ G°`.

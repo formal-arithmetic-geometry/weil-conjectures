@@ -16,8 +16,8 @@ The two subsection statements of the real-sheaves chapter about the lisse sheaf�
 equivalence on a smooth geometrically connected curve `C₀` over a finite field:
 
 - `AlgebraicGeometry.WeilGroup.exists_equivalence_isLisse_tensor_shortExact` (blueprint
-  `prop-wf-weil-sheaf-representation-equivalence`): `ℱ ↦ (ℱ_η̄, ρ_ℱ)` is an exact tensor equivalence between lisse Weil
-  sheaves on `C₀` and lisse representations of `W(C₀)`;
+  `prop-wf-weil-sheaf-representation-equivalence`): `ℱ ↦ (ℱ_η̄, ρ_ℱ)` is an exact tensor equivalence
+  between lisse Weil sheaves on `C₀` and lisse representations of `W(C₀)`;
 - `AlgebraicGeometry.WeilGroup.exists_equivalence_isLisse_globalSections_upperStar` (blueprint
   `p-real-sections`): for a nonempty open `U₀ ⊆ C₀`, `H⁰(U, ℱ|_U) = V ^ {π₁(U)}`,
   compatibly with the Frobenius.
@@ -36,8 +36,8 @@ variable {K : Type u} [Field K] [Finite K] {C : Scheme.{u}} [C.Over (Spec (.of K
   [GeometricallyConnected (C ↘ Spec (.of K))] (W : WeilGroup (C ↘ Spec (.of K))) (l : ℕ)
   [Fact l.Prime] [Fact (ringChar K ≠ l)]
 
-/-- Blueprint `prop-wf-weil-sheaf-representation-equivalence`: lisse Weil sheaves are lisse representations of the Weil
-group.
+/-- Blueprint `prop-wf-weil-sheaf-representation-equivalence`: lisse Weil sheaves are lisse
+representations of the Weil group.
 
 The functor `ℱ ↦ (ℱ_η̄, ρ_ℱ)` is an exact tensor equivalence between lisse Weil sheaves on `C₀`
 and the lisse representations of `W(C₀)`: there is an equivalence `e` which is, naturally in

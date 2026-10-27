@@ -13,7 +13,7 @@ public import WeilConjectures.Compactification.TwoOpenComparison
 
 This file complements `WeilConjectures.Compactification.TwoOpenComparison` with the
 scheme-level forms of the statements of the blueprint subsections
-`lemma-nagata-key-boundary-disjointness` and `lemma-nagata-key-boundary-disjointness`, which the
+`lemma-nagata-key-boundary-disjointness`, which the
 main chain of the two-open compactification theorem only uses in topological form.
 
 * `AlgebraicGeometry.TwoOpenSide.boundaryLoci`: all clauses of

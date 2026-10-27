@@ -39,8 +39,7 @@ concludes.
 
 ## Blueprint
 
-`Bialgebra.exists_finrank_eq_pow` is the algebraic content of `lem-sc-connected-finite-order` and
-`lem-sc-connected-finite-order`.
+`Bialgebra.exists_finrank_eq_pow` is the algebraic content of `lem-sc-connected-finite-order`.
 -/
 
 @[expose] public section

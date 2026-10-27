@@ -51,7 +51,7 @@ open MvPolynomial
 /-- Let `r ≥ 0`. A field `K` has *property `Cᵣ`* if every homogeneous polynomial form
 `F ∈ K[x₁, …, x_N]` of degree `d > 0` in `N > d ^ r` variables has a nontrivial zero in
 `K ^ N`, that is, there is `x : Fin N → K` with `x ≠ 0` and `F(x) = 0`.
-(blueprint: `def-sc-cr-field`, `def-sc-cr-field`) -/
+(blueprint: `def-sc-cr-field`) -/
 class IsCField (K : Type*) [Field K] (r : ℕ) : Prop where
   /-- A homogeneous form of degree `d > 0` in `N > d ^ r` variables has a nontrivial zero. -/
   exists_ne_zero_and_eval_eq_zero {N d : ℕ} (F : MvPolynomial (Fin N) K)

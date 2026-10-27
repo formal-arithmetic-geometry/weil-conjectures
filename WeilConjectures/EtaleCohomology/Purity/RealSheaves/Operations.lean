@@ -19,10 +19,10 @@ public import WeilConjectures.Mathlib.RepresentationTheory.Irreducible
 /-!
 # Linear-algebra operations on lisse Weil sheaves
 
-The operations of `def-real-weil-representation-operations` and `sk-r-real-linear` on lisse Weil representations:
-subquotients, finite direct sums, exterior powers and the determinant line of a lisse Weil
-representation are again lisse, and an exterior power of a Weil representation whose local
-characteristic polynomials are those of an `ι`-real one is again `ι`-real.
+The operations of `def-real-weil-representation-operations` and `sk-r-real-linear` on lisse Weil
+representations: subquotients, finite direct sums, exterior powers and the determinant line of a
+lisse Weil representation are again lisse, and an exterior power of a Weil representation whose
+local characteristic polynomials are those of an `ι`-real one is again `ι`-real.
 
 Lisseness is checked on the coefficients `g ↦ φ (ρ g v)` of the geometric part
 (`AlgebraicGeometry.WeilGroup.IsLisse.continuous_apply` and

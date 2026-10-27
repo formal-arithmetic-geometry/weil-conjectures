@@ -138,8 +138,8 @@ genus `g` over an algebraically closed field `k` and let `n ≥ 1` be prime to `
 
 The proof is the one of the remark closing the curve estimates: degree zero is `μₙ(k) = ℤ/n`,
 degree one is `Pic(C)[n] = J(C)[n]`, degree two is `Pic(C)/n = ℤ/n` via the Kummer sequence and
-`H²(C, μₙ) ≅ Pic(C)/n` (blueprint `lem-sc-second-kummer-divisors`), and the vanishing above two is the bound on the
-cohomological dimension (blueprint `lem-sc-arbitrary-curve-cd`).
+`H²(C, μₙ) ≅ Pic(C)/n` (blueprint `lem-sc-second-kummer-divisors`), and the vanishing above two is
+the bound on the cohomological dimension (blueprint `lem-sc-arbitrary-curve-cd`).
 (blueprint: `thm-sc-proper-cohomology`, `sk-thm-curveestimate`,
 `sk-the-final-theorem-the-curve-estimate--remark-1`,
 `the-final-theorem-the-curve-estimate--remark-1`) -/

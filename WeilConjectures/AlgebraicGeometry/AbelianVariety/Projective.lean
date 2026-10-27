@@ -15,8 +15,8 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Proper
 # Abelian varieties are projective
 
 An abelian variety admits a closed immersion into a projective space over the base field, hence
-carries an ample invertible module (blueprint `lem-sc-abelian-variety-projective`, Stacks 0BFA), and the
-symmetrisation `L ⊗ [-1]^* L` of an ample invertible
+carries an ample invertible module (blueprint `lem-sc-abelian-variety-projective`, Stacks 0BFA), and
+the symmetrisation `L ⊗ [-1]^* L` of an ample invertible
 module is again ample and is symmetric.
 
 An abelian variety is a group scheme of finite type over `K`, hence quasi-projective: it admits
@@ -65,7 +65,7 @@ noncomputable def Scheme.Modules.symmetrisation {A : Over (Spec (.of K))} [GrpOb
     (L : A.left.Modules) : A.left.Modules :=
   tensorObj L (overPullback ι[A] L)
 
-/-- Blueprint `lem-sc-abelian-variety-projective` (also `lem-sc-abelian-variety-projective`): Abelian
+/-- Blueprint `lem-sc-abelian-variety-projective`: Abelian
 varieties are projective.
 
 Every abelian variety `A` over a field `K` admits a closed immersion into a projective space
@@ -85,7 +85,7 @@ theorem IsAbelianVariety.exists_isClosedImmersion_projectiveSpace (A : Over (Spe
   have : IsProper (j ≫ ℙ(α; Spec (.of K)) ↘ Spec (.of K)) := hjA ▸ inferInstance
   exact IsClosedImmersion.of_comp_of_isSeparated j (ℙ(α; Spec (.of K)) ↘ Spec (.of K))
 
-/-- Blueprint `lem-sc-abelian-variety-projective` (also `lem-sc-abelian-variety-projective`): Abelian
+/-- Blueprint `lem-sc-abelian-variety-projective`: Abelian
 varieties are projective.
 
 Being projective, an abelian variety carries an ample invertible `𝒪_A`-module, namely the

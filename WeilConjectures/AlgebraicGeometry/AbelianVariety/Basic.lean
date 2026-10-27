@@ -47,7 +47,8 @@ namespace AlgebraicGeometry
 
 variable {K : Type u} [Field K]
 
-/-- Blueprint `lem-sc-abelian-variety-characterization`: Abelian varieties are the complete group varieties.
+/-- Blueprint `lem-sc-abelian-variety-characterization`: Abelian varieties are the complete group
+varieties.
 
 Let `G` be a group scheme over a field `K` which is proper, connected and smooth over `K`, that
 is, an abelian variety in the sense of `AlgebraicGeometry.IsAbelianVariety`. Then `G` is
@@ -64,7 +65,8 @@ instance IsAbelianVariety.geometricallyIntegral (G : Over (Spec (.of K))) [GrpOb
   have := GeometricallyIrreducible.of_smooth_of_geometricallyConnected G.hom
   exact .of_geometricallyReduced_of_geometricallyIrreducible _
 
-/-- Blueprint `lem-sc-abelian-variety-characterization`: Abelian varieties are the complete group varieties.
+/-- Blueprint `lem-sc-abelian-variety-characterization`: Abelian varieties are the complete group
+varieties.
 
 The underlying space of an abelian variety is irreducible, being geometrically irreducible over
 the one-point space `Spec K`.

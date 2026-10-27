@@ -39,7 +39,7 @@ Each remark with mathematical content is a theorem bundling the statements it po
 The tower shapes that occur are described by
 `AlgebraicGeometry.Etale.exists_normalizedTower_and_boundedConstructibleIntegral_iff`.
 
-## Where this feeds (`sk-rem-sf-feeds`, `sk-rem-sf-feeds`)
+## Where this feeds (`sk-rem-sf-feeds`)
 
 The package `prop-functor-package` is consumed as follows. The smooth-purity chapter needs
 clause (7), the relative product theorem, as the relative input for its affine-line orientation

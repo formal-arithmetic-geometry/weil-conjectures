@@ -75,7 +75,8 @@ private theorem quotient_torsion_comparison
 /-- Pullback on the `n`-torsion of the Picard group of a smooth connected affine curve
 is bijective under extension of algebraically closed fields.
 
-Source: literature/blueprint/master/blueprint/sec-curve-estimates/sbc-thm-algebraically-closed-invariance/
+Source:
+literature/blueprint/master/blueprint/sec-curve-estimates/sbc-thm-algebraically-closed-invariance/
 _section.md, affine case (blueprint: lem-sc-affine-picard-torsion-base-change).
 
 Proof: Choose a smooth proper connected compactification by lem-sc-compactification.

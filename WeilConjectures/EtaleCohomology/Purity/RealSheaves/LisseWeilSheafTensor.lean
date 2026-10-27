@@ -138,9 +138,10 @@ end WeilSheaf
 namespace LisseWeilSheaf
 
 variable (k₀ l X) in
-/-- Blueprint `prop-wf-weil-sheaf-representation-equivalence` (subsection `prop-wf-weil-sheaf-representation-equivalence`):
-the tensor product `(ℱ, 𝒢) ↦ ℱ ⊗ 𝒢 = [ℱ^∨, 𝒢]` of lisse Weil sheaves, as a bifunctor
-(`AlgebraicGeometry.WeilSheaf.tensorObj`, `AlgebraicGeometry.WeilSheaf.tensorHom`). -/
+/-- Blueprint `prop-wf-weil-sheaf-representation-equivalence` (subsection
+`prop-wf-weil-sheaf-representation-equivalence`): the tensor product `(ℱ, 𝒢) ↦ ℱ ⊗ 𝒢 = [ℱ^∨, 𝒢]` of
+lisse Weil sheaves, as a bifunctor (`AlgebraicGeometry.WeilSheaf.tensorObj`,
+`AlgebraicGeometry.WeilSheaf.tensorHom`). -/
 noncomputable def tensor :
     LisseWeilSheaf k₀ l X × LisseWeilSheaf k₀ l X ⥤ LisseWeilSheaf k₀ l X where
   obj F := ⟨F.1.obj.tensorObj F.2.obj F.1.property, F.1.property.tensorObj F.2.property⟩
@@ -149,8 +150,9 @@ noncomputable def tensor :
   map_comp _ _ := ObjectProperty.hom_ext _ (WeilSheaf.tensorHom_comp _ _ _ _ _ _ _)
 
 variable (k₀ l X) in
-/-- Blueprint `prop-wf-weil-sheaf-representation-equivalence` (subsection `prop-wf-weil-sheaf-representation-equivalence`):
-the constant lisse Weil sheaf `ℚ̄_ℓ`, the unit for the tensor product. -/
+/-- Blueprint `prop-wf-weil-sheaf-representation-equivalence` (subsection
+`prop-wf-weil-sheaf-representation-equivalence`): the constant lisse Weil sheaf `ℚ̄_ℓ`, the unit for
+the tensor product. -/
 noncomputable def unit : LisseWeilSheaf k₀ l X :=
   ⟨WeilSheaf.adicConstant k₀ l X, WeilSheaf.isLisse_adicConstant k₀ l X⟩
 

@@ -402,11 +402,11 @@ sharper bound for affine `C` is
 `AlgebraicGeometry.IsCurve.subsingleton_sheafH_of_two_le_of_isAffine`.
 
 The proof reduces to integral curves
-(`AlgebraicGeometry.IsCurve.subsingleton_sheafH_of_three_le_generic`, blueprint `lem-sc-arbitrary-curve-cd`,
-Step 1): the units `F ⟶ cₚ_* cₚ^* F` for the irreducible components `cₚ : Zₚ ⟶ C` with their
-reduced structure assemble to a map `F ⟶ ⨁ₚ cₚ_* cₚ^* F` which is an isomorphism away from
-finitely many closed points, hence bijective on `Hᵠ` for `q ≥ 2`. On an integral curve the
-vanishing is the generic-point argument of
+(`AlgebraicGeometry.IsCurve.subsingleton_sheafH_of_three_le_generic`, blueprint
+`lem-sc-arbitrary-curve-cd`, Step 1): the units `F ⟶ cₚ_* cₚ^* F` for the irreducible components
+`cₚ : Zₚ ⟶ C` with their reduced structure assemble to a map `F ⟶ ⨁ₚ cₚ_* cₚ^* F` which is an
+isomorphism away from finitely many closed points, hence bijective on `Hᵠ` for `q ≥ 2`. On an
+integral curve the vanishing is the generic-point argument of
 `AlgebraicGeometry.IsCurve.subsingleton_sheafH_of_three_le_of_isIntegral`: `Hᵠ(C, F)` agrees
 with `Hᵠ(C, η_* η^* F)` for the generic point `η`, and the function field has cohomological
 dimension at most one. (blueprint: `lem-sc-arbitrary-curve-cd`) -/

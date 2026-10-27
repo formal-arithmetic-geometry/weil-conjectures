@@ -59,8 +59,8 @@ proof would need the triviality of lisse `ℓ`-adic sheaves on `ℙ¹_k̄`.
 
 The local boundary pairing follows the Verdier duality argument of the blueprint. The nodes of
 other sections it uses are stated for Weil complexes in `WeilConjectures.WeilSheaf.VerdierDual`,
-each with its blueprint id: `det-pd-biduality-coefficients` (the adjunction `Rf₀! ⊣ Rf^!`, biduality,
-`Rf^! = 𝔻 f^* 𝔻`), `fix-cor-verdier-exchange` (for `j`),
+each with its blueprint id: `det-pd-biduality-coefficients` (the adjunction `Rf₀! ⊣ Rf^!`,
+biduality, `Rf^! = 𝔻 f^* 𝔻`), `fix-cor-verdier-exchange` (for `j`),
 `cor-pur-adic-and-rational-smooth-dualizing-complexes` (`ω_U = ℚ̄_ℓ(1)[2]`, `ω_Z = ℚ̄_ℓ`),
 `lem-sf-hom-finite-projective` (`RHom(P, N) = P^∨ ⊗ N` for lisse `P`) and
 `prop-sf-localization-all-stages` (`Ri^! Rj_* = 0`). The steps proved here are:

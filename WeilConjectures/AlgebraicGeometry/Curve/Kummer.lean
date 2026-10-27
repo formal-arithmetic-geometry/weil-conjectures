@@ -145,8 +145,8 @@ theorem nonempty_addEquiv_sheafH_rootsOfUnitySheaf_two_of_smooth [IsAlgClosed k]
 
 `H²(C, μₙ) ≅ Pic(C)/n·Pic(C)`.
 
-This is the remark of blueprint `lem-sc-second-kummer-divisors` that the identity holds for every curve, since
-the Brauer group of every curve vanishes
+This is the remark of blueprint `lem-sc-second-kummer-divisors` that the identity holds for every
+curve, since the Brauer group of every curve vanishes
 (`AlgebraicGeometry.IsCurve.subsingleton_cohomologicalBrauerGroup`, blueprint
 `lem-sc-brauer-zero-all-curves`); for smooth curves see
 `AlgebraicGeometry.IsCurve.nonempty_addEquiv_sheafH_rootsOfUnitySheaf_two_of_smooth`.

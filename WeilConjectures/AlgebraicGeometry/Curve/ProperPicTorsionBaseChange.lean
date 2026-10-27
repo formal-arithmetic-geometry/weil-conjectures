@@ -18,8 +18,8 @@ import WeilConjectures.AlgebraicGeometry.Curve.PicZeroTorsionBaseChange
 /-!
 # Proper Picard torsion under algebraically closed extension
 
-Source: blueprint sec-curve-estimates/sbc-thm-algebraically-closed-invariance, proper case in degree one
-(blueprint: lem-sc-proper-pic-torsion-base-change).
+Source: blueprint sec-curve-estimates/sbc-thm-algebraically-closed-invariance, proper case in degree
+one (blueprint: lem-sc-proper-pic-torsion-base-change).
 -/
 
 @[expose] public section
@@ -30,8 +30,8 @@ open CategoryTheory CategoryTheory.Limits AlgebraicGeometry.Scheme
 
 namespace AlgebraicGeometry
 
-/-- Source: blueprint sec-curve-estimates/sbc-thm-algebraically-closed-invariance, proper case in degree one
-(blueprint: lem-sc-proper-pic-torsion-base-change).
+/-- Source: blueprint sec-curve-estimates/sbc-thm-algebraically-closed-invariance, proper case in
+degree one (blueprint: lem-sc-proper-pic-torsion-base-change).
 
 Proof: the degree map takes values in the torsion-free group of integers, so an n-torsion
 line bundle has degree zero. The representing Jacobian identifies degree-zero line bundles

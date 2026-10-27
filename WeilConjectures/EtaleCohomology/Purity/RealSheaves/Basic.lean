@@ -312,8 +312,8 @@ theorem isLisse_iff_exists_basis {V : Type u} [AddCommGroup V] [Module (PadicAlg
   exact continuous_finsetSum _ fun i _ ↦ continuous_const.mul <|
     continuous_finsetSum _ fun j _ ↦ (hb i j).mul continuous_const
 
-/-- Blueprint `def-real-weil-representation-operations`: Operations, constituents and coinvariants. Blueprint
-`def-wf-constant-weil-twist`: Constant Weil twist.
+/-- Blueprint `def-real-weil-representation-operations`: Operations, constituents and coinvariants.
+Blueprint `def-wf-constant-weil-twist`: Constant Weil twist.
 
 The constant Weil line `B_b`: the one-dimensional representation of `W(C₀)` on which `g`
 acts by `b ^ deg g`; it is trivial on `π₁(C) = ker deg`. Tensoring with it,

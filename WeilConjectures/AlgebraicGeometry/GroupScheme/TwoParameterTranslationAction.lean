@@ -13,7 +13,8 @@ import WeilConjectures.AlgebraicGeometry.DualNumbersBaseChange
 # Section operators of two-parameter right translations
 
 Source: the invariant-extension and mixed-coefficient steps in the Lie-ring paragraph of
-`WeilConjectures/AlgebraicGeometry/GroupScheme/Lie/Bracket.lean` (blueprint `def-wf-lie-algebra-derivation`).
+`WeilConjectures/AlgebraicGeometry/GroupScheme/Lie/Bracket.lean` (blueprint
+`def-wf-lie-algebra-derivation`).
 -/
 
 @[expose] public section

@@ -58,7 +58,7 @@ conjunction of these four inputs, each stated as its consumer uses it.
 * `S₄`, into the generation condition (2)(c) of the representability criterion: the twist lemma
   (`AlgebraicGeometry.Scheme.exists_isInvertible_twist`).
 
-(blueprint: `sk-rem-picard-seams`, `sk-rem-picard-seams`) -/
+(blueprint: `sk-rem-picard-seams`) -/
 theorem picard_seams :
     -- `S₁` (G): positive degree implies ample
     (∀ (k : Type u) [Field k] (X : Scheme.{u}) [X.Over (Spec (.of k))]

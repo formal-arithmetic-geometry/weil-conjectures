@@ -59,7 +59,8 @@ sheaf of a morphism of schemes; it is constructed here. The dual sheaf `ℋom_{�
 
 ## Blueprint
 
-- `def-wf-lie-algebra-derivation`: the tangent space of a point as the dual of the cotangent space `𝔪_x/𝔪_x²`.
+- `def-wf-lie-algebra-derivation`: the tangent space of a point as the dual of the cotangent space
+  `𝔪_x/𝔪_x²`.
 -/
 
 @[expose] public section
@@ -190,7 +191,8 @@ noncomputable def cotangentSheaf : X.Modules :=
   (PresheafOfModules.sheafification (𝟙 X.ringCatSheaf.obj)).obj f.cotangentPresheaf
 
 /-- The tangent sheaf `T_{X/S} = ℋom_{𝒪_X}(Ω¹_{X/S}, 𝒪_X)` of `f : X ⟶ S`: the sheaf of relative
-vector fields, that is of derivations of `𝒪_X` over `f⁻¹𝒪_S`. (blueprint: `def-wf-lie-algebra-derivation`) -/
+vector fields, that is of derivations of `𝒪_X` over `f⁻¹𝒪_S`. (blueprint:
+`def-wf-lie-algebra-derivation`) -/
 noncomputable def tangentSheaf : X.Modules :=
   Modules.dual f.cotangentSheaf
 

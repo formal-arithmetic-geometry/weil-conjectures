@@ -468,8 +468,8 @@ lemma Scheme.galoisRepFunctorUnitIso_hom_hom_apply
 end Unit
 
 
-/-- Blueprint `cor-galois-lisse-representations`: Galois correspondence for finite local systems, with its
-tensor structure.
+/-- Blueprint `cor-galois-lisse-representations`: Galois correspondence for finite local systems,
+with its tensor structure.
 
 Let `Y` be a connected scheme, `s` a geometric point, `Λ` a finite ring and `G = π₁(Y, s)` a
 fundamental group of the fibre functor at `s`. The geometric stalk at `s` is an equivalence `e`
@@ -511,8 +511,8 @@ theorem Scheme.exists_equivalence_isFiniteLocallyConstantSheaf_tensor_of_isFunda
   ext w
   rfl
 
-/-- Blueprint `cor-galois-lisse-representations`: Galois correspondence for finite local systems, as an exact
-*tensor* equivalence.
+/-- Blueprint `cor-galois-lisse-representations`: Galois correspondence for finite local systems, as
+an exact *tensor* equivalence.
 
 For a connected scheme `Y`, a geometric point `s` and a finite ring `Λ`, there is a profinite
 group `G` (the étale fundamental group `π₁(Y, s)`) and an equivalence `e` between finite locally

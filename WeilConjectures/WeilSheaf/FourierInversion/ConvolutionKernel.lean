@@ -16,7 +16,7 @@ For lisse Weil sheaves `𝒦`, `𝒦'` on `𝔸¹ ×_{k₀} 𝔸¹`, the *convol
 `𝒦' ∗ 𝒦 = Rr₁₃!(r₁₂^* 𝒦 ⊗ r₂₃^* 𝒦')` is a Weil complex on `𝔸¹ ×_{k₀} 𝔸¹`
 (`AlgebraicGeometry.WeilComplex.kernelConvolution`), the triple product `𝔸³` having points
 `(x, ξ, y)`. For the Fourier kernels `𝒦_ψ = μ^* ℒ_ψ` and a nontrivial character `ψ`
-(blueprint `lem-fd-convolution-kernel`, `lem-fd-convolution-kernel`):
+(blueprint `lem-fd-convolution-kernel`):
 
 * `𝒦_{ψ⁻¹} ∗ 𝒦_ψ ≅ RΔ!(ℚ̄_ℓ(-1)[-2])`, the constant sheaf on the diagonal
   (`AlgebraicGeometry.nonempty_iso_kernelConvolution_fourierKernel_inv`);
@@ -61,7 +61,7 @@ noncomputable def WeilComplex.kernelConvolution (𝒦 𝒦' : WeilSheaf k₀ l (
         (WeilSheaf.toComplex.obj (WeilSheaf.adicConstant k₀ l (affineTripleProduct k₀)))))
 
 /-- **The convolution of the Fourier kernels is the delta kernel** (blueprint
-`lem-fd-convolution-kernel`, `lem-fd-convolution-kernel`, first formula): for a nontrivial
+`lem-fd-convolution-kernel`, first formula): for a nontrivial
 additive character `ψ`,
 
 `𝒦_{ψ⁻¹} ∗ 𝒦_ψ ≅ RΔ!(ℚ̄_ℓ(-1)[-2])`,
@@ -95,7 +95,7 @@ theorem nonempty_iso_kernelConvolution_fourierKernel_inv (ψ : AddChar k₀ (Pad
         (WeilComplex.upperStarAdicConstantIso (affineLine.diagonal k₀))))⟩
 
 /-- **The convolution of the Fourier kernel with itself** (blueprint
-`lem-fd-convolution-kernel`, `lem-fd-convolution-kernel`, second formula): for a nontrivial
+`lem-fd-convolution-kernel`, second formula): for a nontrivial
 additive character `ψ`,
 
 `𝒦_ψ ∗ 𝒦_ψ ≅ R((1 × ι') ∘ Δ)!(ℚ̄_ℓ(-1)[-2])`,

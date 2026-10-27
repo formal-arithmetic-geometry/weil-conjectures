@@ -65,10 +65,10 @@ variable {Z Y : Scheme.{u}} [Z.Over (Spec (CommRingCat.of k₀))]
   [IsProper g] [LocallyOfFiniteType (Y ↘ Spec (CommRingCat.of k₀))]
   [QuasiCompact (Y ↘ Spec (CommRingCat.of k₀))]
 
-/-- **The proper exceptional adjunction** (blueprint: `det-pd-biduality-coefficients`, "the constructible
-adjunction `Rf_! ⊣ Rf^!`", for a proper `f`, where `Rf_! = Rf_*`): for a proper morphism
-`g : Z ⟶ Y` of `k₀`-schemes, `Y` of finite type, the direct image `Rg_*` of Weil complexes has a
-right adjoint `Rg^!`. The general case
+/-- **The proper exceptional adjunction** (blueprint: `det-pd-biduality-coefficients`, "the
+constructible adjunction `Rf_! ⊣ Rf^!`", for a proper `f`, where `Rf_! = Rf_*`): for a proper
+morphism `g : Z ⟶ Y` of `k₀`-schemes, `Y` of finite type, the direct image `Rg_*` of Weil complexes
+has a right adjoint `Rg^!`. The general case
 `AlgebraicGeometry.WeilComplex.isLeftAdjoint_derivedLowerShriek` reduces to this one through a
 compactification. -/
 theorem isLeftAdjoint_derivedLowerStar_of_isProper :
@@ -187,8 +187,8 @@ theorem nonempty_iso_verdierDual_rightOp_comp_verdierDual :
   sorry
 
 open Pretriangulated.Opposite in
-/-- **The Verdier dual is exact** (blueprint: `det-pd-biduality-coefficients`, "an exact `ℚ̄_ℓ`-linear
-anti-equivalence `D_{X,ℚ̄_ℓ}`"): it commutes with the shifts and carries distinguished
+/-- **The Verdier dual is exact** (blueprint: `det-pd-biduality-coefficients`, "an exact
+`ℚ̄_ℓ`-linear anti-equivalence `D_{X,ℚ̄_ℓ}`"): it commutes with the shifts and carries distinguished
 triangles of `(WeilComplex X)ᵒᵖ` to distinguished triangles. -/
 theorem exists_commShift_isTriangulated_verdierDual :
     ∃ _ : (verdierDual k₀ l X).CommShift ℤ, (verdierDual k₀ l X).IsTriangulated := by

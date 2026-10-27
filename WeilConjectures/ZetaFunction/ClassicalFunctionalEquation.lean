@@ -38,8 +38,8 @@ stated in this repository, and no declaration here mentions `Z`.
 That `d χ` is even, so that a half `m` exists, is
 `TraceDatum.even_mul_alternatingNatDegreeSum_of_pairing`.
 
-This file formalises the functional-equation subsection `prop-functional-equation` of the blueprint block on
-zeta functions and the Weil conjectures. The blueprint deduces it from the Poincaré duality
+This file formalises the functional-equation subsection `prop-functional-equation` of the blueprint
+block on zeta functions and the Weil conjectures. The blueprint deduces it from the Poincaré duality
 reciprocity relations of the Frobenius factors; here those relations are derived directly from
 the matching of reciprocal roots in `AlgebraicGeometry.WeilFunctionalEquation`, via
 `Polynomial.eval_inv_mul_inv_of_roots_eq_map_inv` and
@@ -211,8 +211,8 @@ theorem WeilFunctionalEquation.alternatingProdEval_eq_prod_determinant {q d : �
     Finset.prod_mul_distrib, ← zpow_sum₀ (neg_ne_zero.2 one_ne_zero),
     ← zpow_sum₀ ht, Polynomial.alternatingNatDegreeSum]
 
-/-- **The classical functional equation** (blueprint `prop-functional-equation`, and the main claim of
-`prop-functional-equation`). The alternating product of the values of a family of normalized
+/-- **The classical functional equation** (blueprint `prop-functional-equation`, and the main claim
+of `prop-functional-equation`). The alternating product of the values of a family of normalized
 Weil factors satisfying the functional equation obeys `Z (q^{-d} t⁻¹) = ε q^{m} t^χ Z (t)` at
 every nonzero `t` at which no factor vanishes, where `2 m = d χ`.
 

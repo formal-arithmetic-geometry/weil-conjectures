@@ -46,7 +46,8 @@ noncomputable def omega : S.Modules :=
   (Scheme.Modules.pullback (unitSection G)).obj G.hom.cotangentSheaf
 
 /-- The Lie algebra sheaf `Lie(G/S) = ℋom_{𝒪_S}(ω_{G/S}, 𝒪_S)` of a group scheme `G` over `S`: the
-sheaf of relative tangent vectors along the identity section. (blueprint: `def-wf-lie-algebra-derivation`) -/
+sheaf of relative tangent vectors along the identity section. (blueprint:
+`def-wf-lie-algebra-derivation`) -/
 noncomputable def lieAlgebraSheaf : S.Modules :=
   Scheme.Modules.dual (omega G)
 
@@ -64,7 +65,7 @@ theorem lieAlgebraSheaf_iso_pullback_tangentSheaf [Smooth G.hom] :
 /-- The Lie algebra `Lie(G) = Hom_{𝒪_S}(ω_{G/S}, 𝒪_S)` of a group scheme `G` over `S`: the global
 sections of the Lie algebra sheaf, the module of relative tangent vectors at the identity. Its Lie
 bracket is constructed in `WeilConjectures.AlgebraicGeometry.GroupScheme.Lie.Bracket`.
-(blueprint: `def-wf-lie-algebra-derivation`, `def-wf-lie-algebra-derivation`) -/
+(blueprint: `def-wf-lie-algebra-derivation`) -/
 def Lie : Type u :=
   omega G ⟶ Scheme.Modules.unitModule S
 

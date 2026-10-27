@@ -58,8 +58,8 @@ even when it is only a commutative ring.
 
 ## Blueprint
 
-- `def-wf-lie-algebra-derivation`: the Lie algebra of `GL_n` as its tangent space at the identity, rational
-  representations and their differentials.
+- `def-wf-lie-algebra-derivation`: the Lie algebra of `GL_n` as its tangent space at the identity,
+  rational representations and their differentials.
 - `sk-p-comparison`: subspaces stable under the group are stable under its Lie algebra.
 -/
 
@@ -299,7 +299,7 @@ theorem bijective_toMatrixLieHom : Function.Bijective (toMatrixLieHom n k) := by
 
 /-- The Lie algebra of the general linear group is `gl_n`, the matrices with the commutator
 bracket: the tangent vector `1 + εX` corresponds to `X`.
-(blueprint: `def-wf-lie-algebra-derivation`, `def-wf-lie-algebra-derivation`) -/
+(blueprint: `def-wf-lie-algebra-derivation`) -/
 noncomputable def lieAlgebraEquivMatrix : GrpObj.Lie 𝔾𝕃(n; k) ≃ₗ⁅k⁆ Matrix n n k :=
   LieEquiv.ofBijective _ (bijective_toMatrixLieHom n k)
 
@@ -332,7 +332,7 @@ variable {k : Type u} [CommRing k] (G : Over (Spec (.of k))) [GrpObj G]
 
 /-- A rational representation of a group scheme `G` over `k` on `k^m`: a morphism of schemes
 `G ⟶ GL_m` over `k`, required to be a homomorphism of group schemes through an `IsMonHom`
-instance. (blueprint: `def-wf-lie-algebra-derivation`, `def-wf-lie-algebra-derivation`) -/
+instance. (blueprint: `def-wf-lie-algebra-derivation`) -/
 abbrev RationalHom :=
   G ⟶ 𝔾𝕃(m; k)
 
@@ -418,7 +418,7 @@ namespace RationalHom
 
 /-- The differential `dr : Lie(G) → gl_m` of a rational representation `r`: the differential of
 the homomorphism of group schemes `G ⟶ GL_m`, read in `gl_m` through `Lie(GL_m) = gl_m`. It is a
-homomorphism of Lie algebras. (blueprint: `def-wf-lie-algebra-derivation`, `def-wf-lie-algebra-derivation`) -/
+homomorphism of Lie algebras. (blueprint: `def-wf-lie-algebra-derivation`) -/
 noncomputable def differential (r : RationalHom G m) [IsMonHom r] :
     GrpObj.Lie G →ₗ⁅k⁆ Matrix m m k :=
   (lieAlgebraEquivMatrix m k).toLieHom.comp (GrpObj.differential r)

@@ -798,7 +798,8 @@ The map factors as `H²(X, 𝔾ₘ) ⟶ H²(X, i_* i^* 𝔾ₘ) ⟶ H²(Spec k(X
 `i^* ⊣ i_*` followed by the edge map of the Leray spectral sequence of `i`. The first map is
 injective by the long exact cohomology sequence of the divisor sequence, since
 `H¹(X, ⨁_x i_{x*} ℤ) = 0`; the second is injective since `R¹i_*(i^* 𝔾ₘ) = 0`.
-(blueprint: `lem-sc-brauer-injectivity`, and the subsection statement `lem-sc-brauer-injectivity`) -/
+(blueprint: `lem-sc-brauer-injectivity`, and the subsection statement `lem-sc-brauer-injectivity`)
+-/
 theorem injective_cohomologyMap_gmSheaf_two [IsNoetherian X] [IsRegular X] :
     Function.Injective (Etale.cohomologyMap X.fromSpecFunctionField X.gmSheaf 2) := by
   have : HasColimitsOfSize.{u + 1, u + 1} (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) :=

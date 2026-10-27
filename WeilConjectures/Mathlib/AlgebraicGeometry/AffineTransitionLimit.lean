@@ -4574,7 +4574,8 @@ closed immersions.
 
 The system is that of the closed subschemes of a finite presentation model `Y` of `X` over `S`
 cut out by the subideal sheaves of finite type of the kernel of the closed immersion `X ⟶ Y`.
-(Blueprint: `lemma:nagata-finite-type-fp-model-system`, `lemma-nagata-finite-type-fp-model-system`.) -/
+(Blueprint: `lemma:nagata-finite-type-fp-model-system`, `lemma-nagata-finite-type-fp-model-system`.)
+-/
 @[stacks 09ZQ]
 theorem Scheme.Hom.nonempty_finitePresentationApproximation {X S : Scheme.{u}} (f : X ⟶ S)
     [CompactSpace X] [QuasiSeparatedSpace X] [CompactSpace S] [QuasiSeparatedSpace S]

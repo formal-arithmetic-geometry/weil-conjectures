@@ -18,8 +18,8 @@ import Mathlib.GroupTheory.QuotientGroup.Basic
 /-!
 # Affine Kummer degree-one base change
 
-Source: blueprint sec-curve-estimates/sbc-thm-algebraically-closed-invariance, affine case in degree one
-(blueprint: lem-sc-affine-kummer-degree-one-base-change).
+Source: blueprint sec-curve-estimates/sbc-thm-algebraically-closed-invariance, affine case in degree
+one (blueprint: lem-sc-affine-kummer-degree-one-base-change).
 -/
 
 @[expose] public section
@@ -56,8 +56,8 @@ private theorem quotient_eq_one_of_boundary_zero {A B : Type*}
   have hv' : n • v = Additive.ofMul a := by simpa using hv
   simpa only [toMul_nsmul, toMul_ofMul] using congrArg Additive.toMul hv'
 
-/-- Source: blueprint sec-curve-estimates/sbc-thm-algebraically-closed-invariance, affine case in degree one
-(blueprint: lem-sc-affine-kummer-degree-one-base-change).
+/-- Source: blueprint sec-curve-estimates/sbc-thm-algebraically-closed-invariance, affine case in
+degree one (blueprint: lem-sc-affine-kummer-degree-one-base-change).
 
 Proof: The Kummer sequence gives short exact sequences with outer terms units modulo
 n-th powers and Picard n-torsion. Kummer naturality makes pullback a commuting

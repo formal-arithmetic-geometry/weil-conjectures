@@ -176,7 +176,7 @@ variable (Λ : Type (u + 1)) [CommRing Λ]
 if `f : X ⟶ Y` and `h : Y ⟶ Z` satisfy the base change property, so does `f ≫ h`. For a
 torsion ring the property is `AlgebraicGeometry.Etale.IsBaseChangeIso`, which is stable under
 composition by the vertical pasting law of the derived base change map.
-(blueprint: `prop-weil-pbc-composition-stability`, `prop-weil-pbc-composition-stability`) -/
+(blueprint: `prop-weil-pbc-composition-stability`) -/
 @[stacks 0A4D]
 theorem Etale.HasTorsionBaseChange.comp (hΛ : IsAddTorsion Λ) {X Y Z : Scheme.{u}}
     {f : X ⟶ Y} {h : Y ⟶ Z} (hf : Etale.HasTorsionBaseChange Λ f)
@@ -188,7 +188,7 @@ theorem Etale.HasTorsionBaseChange.comp (hΛ : IsAddTorsion Λ) {X Y Z : Scheme.
 
 /-- **Composition stability of injective acyclicity.** For a torsion coefficient ring `Λ` and
 proper morphisms `f : X ⟶ Y`, `h : Y ⟶ Z` with injective acyclicity, `f ≫ h` has injective
-acyclicity. (blueprint: `prop-weil-pbc-composition-stability`, `prop-weil-pbc-composition-stability`) -/
+acyclicity. (blueprint: `prop-weil-pbc-composition-stability`) -/
 theorem Etale.HasInjectiveAcyclicity.comp (hΛ : IsAddTorsion Λ) {X Y Z : Scheme.{u}}
     {f : X ⟶ Y} {h : Y ⟶ Z} [IsProper f] [IsProper h] (hf : Etale.HasInjectiveAcyclicity Λ f)
     (hh : Etale.HasInjectiveAcyclicity Λ h) : Etale.HasInjectiveAcyclicity Λ (f ≫ h) :=

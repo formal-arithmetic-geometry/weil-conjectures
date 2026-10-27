@@ -19,8 +19,9 @@ set_option linter.style.haveILetI false
 /-!
 # Universal-homeomorphism invariance, with functorial compatibility
 
-Source: Stacks Project, Tags 04DZ and 03SI; blueprint `sec-curve-estimates/lem-sc-arbitrary-curve-cd`
-(blueprint: thm-weil-pbc-universal-homeomorphism-invariance).
+Source: Stacks Project, Tags 04DZ and 03SI; blueprint
+`sec-curve-estimates/lem-sc-arbitrary-curve-cd` (blueprint:
+thm-weil-pbc-universal-homeomorphism-invariance).
 -/
 
 @[expose] public section

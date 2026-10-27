@@ -242,8 +242,9 @@ instance (Y : Scheme.{u}) : (Scheme.FiniteEtale.toFiniteLocallyConstant Y).EssSu
 
 instance (Y : Scheme.{u}) : (Scheme.FiniteEtale.toFiniteLocallyConstant Y).IsEquivalence where
 
-/-- **Sheaves and covers** (the first step of `cor-galois-lisse-representations`): finite étale `Y`-schemes are
-equivalent to finite locally constant étale sheaves of sets, by `P ↦ Hom_Y(-, P)`. -/
+/-- **Sheaves and covers** (the first step of `cor-galois-lisse-representations`): finite étale
+`Y`-schemes are equivalent to finite locally constant étale sheaves of sets, by `P ↦ Hom_Y(-, P)`.
+-/
 noncomputable def Scheme.FiniteEtale.equivalenceFiniteLocallyConstant (Y : Scheme.{u}) :
     Y.FiniteEtale ≌ Y.FiniteLocallyConstant :=
   (Scheme.FiniteEtale.toFiniteLocallyConstant Y).asEquivalence
@@ -1286,8 +1287,8 @@ instance : (Scheme.galoisRepFunctorFiniteContinuous s (Λ := Λ) G).IsEquivalenc
 
 end GaloisRepEquivalence
 
-/-- Blueprint `cor-galois-lisse-representations`: Galois correspondence for finite local systems. Also
-blueprint `cor-galois-lisse-representations`: Lisse sheaves and continuous representations.
+/-- Blueprint `cor-galois-lisse-representations`: Galois correspondence for finite local systems.
+Also blueprint `cor-galois-lisse-representations`: Lisse sheaves and continuous representations.
 
 The steps *sheaves and covers* and *linear structure* of the proof, for a named fundamental
 group: let `Y` be a connected scheme, `s : Spec Ω ⟶ Y` a geometric point, `Λ` a finite ring
@@ -1363,20 +1364,22 @@ variable {K : Type u} [Field K] [Finite K] {C U : Scheme.{u}} {p : C ⟶ Spec (.
 
 namespace WeilGroup
 
-/-- Blueprint `prop-wf-weil-sheaf-representation-equivalence`: The lisse sheaf–representation equivalence.
+/-- Blueprint `prop-wf-weil-sheaf-representation-equivalence`: The lisse sheaf–representation
+equivalence.
 
 The property of an object of `Rep ℚ̄_ℓ W(C₀)` of being a *lisse Weil representation*: the
 underlying `ℚ̄_ℓ`-vector space is finite dimensional and the geometric subgroup `π₁(C)`
 acts continuously (`AlgebraicGeometry.WeilGroup.IsLisse`). Under the equivalence of
-`prop-wf-weil-sheaf-representation-equivalence` these are exactly the objects corresponding to lisse Weil sheaves on
-`C₀`. -/
+`prop-wf-weil-sheaf-representation-equivalence` these are exactly the objects corresponding to lisse
+Weil sheaves on `C₀`. -/
 def isLisseRep (W : WeilGroup p) (l : ℕ) [Fact l.Prime] :
     ObjectProperty (Rep.{u} (PadicAlgCl l) W.carrier) :=
   fun X ↦ FiniteDimensional (PadicAlgCl l) X.V ∧ W.IsLisse l X.ρ
 
 variable (W : WeilGroup p) (l : ℕ) [Fact l.Prime]
 
-/-- Blueprint `prop-wf-weil-sheaf-representation-equivalence`: The lisse sheaf–representation equivalence.
+/-- Blueprint `prop-wf-weil-sheaf-representation-equivalence`: The lisse sheaf–representation
+equivalence.
 
 A subrepresentation of a lisse Weil representation is again lisse: it is finite dimensional,
 and every coefficient `g ↦ φ (ρ g v)` of it is a coefficient of the ambient representation,
@@ -1394,7 +1397,8 @@ instance isLisseRep.isClosedUnderSubobjects :
     have hψ' (x : X.V) : ψ (f.hom x) = x := LinearMap.congr_fun hψ x
     simpa [← Rep.hom_comm_apply, hψ'] using hρ.continuous_apply (φ ∘ₗ ψ) (f.hom v)
 
-/-- Blueprint `prop-wf-weil-sheaf-representation-equivalence`: The lisse sheaf–representation equivalence.
+/-- Blueprint `prop-wf-weil-sheaf-representation-equivalence`: The lisse sheaf–representation
+equivalence.
 
 A quotient of a lisse Weil representation is again lisse: it is finite dimensional, and every
 coefficient `g ↦ φ (ρ g (f v))` of it is the coefficient `g ↦ (φ ∘ f) (ρ g v)` of the source. -/
@@ -1409,7 +1413,8 @@ instance isLisseRep.isClosedUnderQuotients :
     obtain ⟨v, rfl⟩ := hf w
     simpa [Rep.hom_comm_apply] using hρ.continuous_apply (φ ∘ₗ f.hom.toLinearMap) v
 
-/-- Blueprint `prop-wf-weil-sheaf-representation-equivalence`: The lisse sheaf–representation equivalence.
+/-- Blueprint `prop-wf-weil-sheaf-representation-equivalence`: The lisse sheaf–representation
+equivalence.
 
 Lisse Weil representations are closed under kernels, so a subobject of a lisse Weil
 representation is again lisse. -/
@@ -1417,7 +1422,8 @@ instance isLisseRep.isClosedUnderKernels :
     ObjectProperty.IsClosedUnderKernels (W.isLisseRep l) :=
   inferInstance
 
-/-- Blueprint `prop-wf-weil-sheaf-representation-equivalence`: The lisse sheaf–representation equivalence.
+/-- Blueprint `prop-wf-weil-sheaf-representation-equivalence`: The lisse sheaf–representation
+equivalence.
 
 Lisse Weil representations are closed under cokernels, so a quotient of a lisse Weil
 representation is again lisse. -/
@@ -1425,13 +1431,14 @@ instance isLisseRep.isClosedUnderCokernels :
     ObjectProperty.IsClosedUnderCokernels (W.isLisseRep l) :=
   inferInstance
 
-/-- Blueprint `prop-wf-weil-sheaf-representation-equivalence`, node `prop-wf-weil-sheaf-representation-equivalence`:
-The lisse sheaf–representation equivalence.
+/-- Blueprint `prop-wf-weil-sheaf-representation-equivalence`, node
+`prop-wf-weil-sheaf-representation-equivalence`: The lisse sheaf–representation equivalence.
 
 A short complex of lisse Weil representations is short exact exactly when its geometric
 generic stalk, i.e. its image under the forgetful functor to `ModuleCat ℚ̄_ℓ`, is short exact.
 This is the form in which the exactness of the geometric-generic-stalk equivalence of
-`prop-wf-weil-sheaf-representation-equivalence` is used, lisse `ℚ̄_ℓ`-sheaves themselves being unavailable.
+`prop-wf-weil-sheaf-representation-equivalence` is used, lisse `ℚ̄_ℓ`-sheaves themselves being
+unavailable.
 
 The forgetful functor is faithful and exact, since kernels and cokernels of representations
 are computed on the underlying vector spaces, so it preserves and reflects short exactness;

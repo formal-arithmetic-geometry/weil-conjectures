@@ -17,15 +17,14 @@ public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Cartesian.Mon
 /-!
 # Torsion subgroup schemes and isogenies
 
-Following Mathlib, a group scheme over a field `K` (blueprint `def-sc-group-scheme`,
-`def-sc-group-scheme`) is an object `G` of `Over (Spec (.of K))` equipped with
-`CategoryTheory.GrpObj G`; it is commutative if `CategoryTheory.IsCommMonObj G`, a homomorphism
-is a morphism `f` with `CategoryTheory.IsMonHom f`, and the kernel of `f` is
-`CategoryTheory.GrpObj.ker f`. The group scheme `G` is finite if `AlgebraicGeometry.IsFinite G.hom`,
-its order is then `AlgebraicGeometry.Scheme.Hom.finrankΓ G.hom`, and it is étale if
-`AlgebraicGeometry.Etale G.hom`. Multiplication by `n` is the `n`-th power `𝟙 G ^ n` of the
-identity in the group `G ⟶ G` of `CategoryTheory.GrpObj.Hom.group`. This file introduces
-subgroup schemes, the `n`-torsion subgroup scheme and isogenies.
+Following Mathlib, a group scheme over a field `K` (blueprint `def-sc-group-scheme`) is an object
+`G` of `Over (Spec (.of K))` equipped with `CategoryTheory.GrpObj G`; it is commutative if
+`CategoryTheory.IsCommMonObj G`, a homomorphism is a morphism `f` with `CategoryTheory.IsMonHom f`,
+and the kernel of `f` is `CategoryTheory.GrpObj.ker f`. The group scheme `G` is finite if
+`AlgebraicGeometry.IsFinite G.hom`, its order is then `AlgebraicGeometry.Scheme.Hom.finrankΓ G.hom`,
+and it is étale if `AlgebraicGeometry.Etale G.hom`. Multiplication by `n` is the `n`-th power
+`𝟙 G ^ n` of the identity in the group `G ⟶ G` of `CategoryTheory.GrpObj.Hom.group`. This file
+introduces subgroup schemes, the `n`-torsion subgroup scheme and isogenies.
 
 ## Main definitions
 
@@ -295,7 +294,7 @@ class IsIsogeny {A B : Over (Spec (.of K))} [GrpObj A] [GrpObj B] (f : A ⟶ B) 
 
 attribute [instance] IsIsogeny.isFinite_ker
 
-/-- Blueprint `def-sc-isogeny` (also `def-sc-isogeny`): the degree of an isogeny
+/-- Blueprint `def-sc-isogeny`: the degree of an isogeny
 `f : A ⟶ B`, the order of its kernel.
 
 This is only the degree of `f` as a finite flat morphism when `f` is an isogeny of abelian

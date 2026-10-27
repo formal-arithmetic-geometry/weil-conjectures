@@ -32,8 +32,8 @@ set_option autoImplicit false
 /-- The canonical comparison on degree-zero Picard groups is injective and every
 prime-to-characteristic torsion point after extension lifts to a torsion point before extension.
 
-Source: blueprint sec-curve-estimates/sbc-thm-algebraically-closed-invariance, proper degree-one comparison
-and affine Jacobian correction (blueprint: lem-sc-piczero-torsion-base-change).
+Source: blueprint sec-curve-estimates/sbc-thm-algebraically-closed-invariance, proper degree-one
+comparison and affine Jacobian correction (blueprint: lem-sc-piczero-torsion-base-change).
 
 Proof: a proper smooth connected curve over an algebraically closed field is geometrically
 integral and smooth of relative dimension one. Jacobian representability identifies its

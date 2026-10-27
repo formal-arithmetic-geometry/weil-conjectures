@@ -506,9 +506,9 @@ instance invertible_card_ulift_zmod {p : ℕ} [NeZero p] [Invertible (p : Λ)] :
 /-- For a scheme `X` of characteristic `p`, the Artin–Schreier sheaf `ℒ_{Ψ, f}` of a global
 function `f` and an additive character `Ψ` of `ℤ/p`, where `X` is viewed as a scheme over
 `𝔽_p` by `AlgebraicGeometry.Scheme.overSpecZModOfCharP`. This is the construction of the
-blueprint definition `def-fd-artin-schreier-sheaf` (sketch blueprint: `def-fd-artin-schreier-sheaf`): the
-`Ψ`-isotypic part, for a character `Ψ` of `𝔽_p`, of the Artin–Schreier covering
-`T ^ p - T = f`. -/
+blueprint definition `def-fd-artin-schreier-sheaf` (sketch blueprint:
+`def-fd-artin-schreier-sheaf`): the `Ψ`-isotypic part, for a character `Ψ` of `𝔽_p`, of the
+Artin–Schreier covering `T ^ p - T = f`. -/
 def artinSchreierSheafZMod {p : ℕ} [Fact p.Prime] [Invertible (p : Λ)] (X : Scheme.{u})
     [CharP Γ(X, ⊤) p] (Ψ : AddChar (ZMod p) Λ) (f : Γ(X, ⊤)) :
     Sheaf X.smallEtaleTopology (ModuleCat Λ) :=

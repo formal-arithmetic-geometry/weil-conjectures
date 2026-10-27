@@ -216,8 +216,8 @@ theorem endpoints_of_isIntegralFrobeniusFactor {P : Fin (2 * d + 1) → Polynomi
       Nat.cast_mul,
       Nat.cast_two, e.finrank_eq, Module.finrank_self]
 
-/-- Blueprint `thm-weil-final-betti` (Betti symmetry and the endpoint factors): for `X₀` smooth, proper
-and geometrically connected of pure dimension `d` over `k₀ = 𝔽_q`, with integral Frobenius
+/-- Blueprint `thm-weil-final-betti` (Betti symmetry and the endpoint factors): for `X₀` smooth,
+proper and geometrically connected of pure dimension `d` over `k₀ = 𝔽_q`, with integral Frobenius
 factors `Pᵢ` and Betti numbers `bᵢ = deg Pᵢ`:
 
 * `bᵢ = dim Hⁱ(X₀ ⊗ k̄, ℚ̄_ℓ)` for every prime `ℓ ≠ p`;
