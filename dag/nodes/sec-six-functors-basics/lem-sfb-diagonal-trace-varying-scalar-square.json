@@ -13,7 +13,7 @@
  },
  "proof": [
   {
-   "text": "Use the specified ordinary push evaluation and its identity-on-sections normalization, transported from the generic geometry by g's coordinate equalities. The underlying fields of the supplied restrictions give the common additive section carriers. At level n both Z_l actions are multiplication by the natural-number representative of the residue, so the additive identity and its inverse are linear.",
+   "text": "Construct restrictionUnderlying at every level: its section components are eqToIso of the supplied underlying additive-group equalities. The restrictions and morphisms fields prove respectively chart and system-morphism naturality by equality transport. Compose these natural isomorphisms with ordinaryPushEvaluation, the identity comparison between forgotten constant-ring direct image and direct image of additive sheaves, and the inverse source restriction comparison. This gives levelUnderlying, a natural additive-sheaf isomorphism.",
    "uses": [
     "def-sp-tower-shriek-data",
     "def-sfb-diagonal-trace-models"
@@ -21,9 +21,24 @@
    "elementary": false
   },
   {
-   "text": "The chart and module-map naturality follow from ordinary evaluation and the restrictions and morphisms fields. For horizontal arrows transpose the supplied generic ordinaryPullTransition through the ordinary system and level adjunctions, using ordinary_unit_evaluation and the adjunction triangle identities. The restrictionPullback_underlying equation identifies this mate with the original horizontal section map. Thus the transitions fields give horizontal naturality. Assemble the level isomorphisms into a natural isomorphism of strict systems, preserving the sectionwise identity.",
+   "text": "Every additive section equivalence in levelUnderlying commutes with natural-number multiples. Both supplied scalar actions are multiplication by the same natural-number representative of the residue of z modulo l^(n+1). Thus the additive equivalence is Z_l-linear, and so is its inverse. Chart and system-morphism naturality are inherited from the additive comparison. This constructs levelIso without choosing any witness from an existence theorem.",
    "uses": [
-    "lem-coef-semilinear-derived-sections",
+    "def-sfb-diagonal-trace-models"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Fix a system N on X and let D=g.push(N). Define d_n as inverse pull-evaluation at D followed by evaluation of the ordinary system counit at N. The ordinary unit-evaluation theorem, naturality of push-evaluation and the adjunction triangle identity give adj_n(d_n)=ordinaryPushEvaluation_n(N). Apply g.ordinaryUnitTransition to D and a horizontal transition. Postcompose with direct image of the restricted d_n. Naturality of the system counit identifies the upper composite with d_m followed by the transition of N. Naturality of the finite hom-equivalences then gives e_n composed with the transition of D equals the transition of N composed with e_m, on every section. The transition_exists section formula identifies these horizontal maps with the original sequence-site restrictions.",
+   "uses": [
+    "def-sp-tower-shriek-data",
+    "lem-sp-tower-ordinary-unit-evaluation"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Transport the preceding horizontal square through the underlying equalities of rS and rX, using their transitions fields. Forgetting discrete scalars is faithful, so this proves horizontal naturality for levelIso. NatIso.ofComponents now assembles the level isomorphisms into the desired natural isomorphism of strict systems. Finally transport generic.ordinaryPushEvaluation_sections through the specified coefficient, functor and level-adjunction equalities of g. The two equality casts in restrictionUnderlying are identities heterogeneously. Their composite with this normalized push-evaluation is therefore the asserted identity on every section.",
+   "uses": [
+    "def-sp-tower-shriek-data",
     "def-sfb-diagonal-trace-models"
    ],
    "elementary": false
@@ -32,13 +47,14 @@
  "proof_deps": [
   "def-sp-tower-shriek-data",
   "def-sfb-diagonal-trace-models",
-  "lem-coef-semilinear-derived-sections"
+  "lem-sp-tower-ordinary-unit-evaluation"
  ],
  "proof_origin": {
   "by": "agent",
-  "group": "F8",
+  "group": "E1",
+  "date": "2026-10-28",
   "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-trace.proof.md",
-  "place": "paragraph (1), ordinary scalar restrictions before right derivation"
+  "place": "paragraph (1), ordinary scalar restriction; explicit finite-unit/counit argument in the delivered Lean proof"
  },
  "mathlib_searches": [
   {
@@ -108,9 +124,9 @@
   "date": "2026-10-27",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "F8",
+  "group": "E1",
   "result": "pass",
-  "landing": "20261027T034642-L-3670718",
+  "landing": "20261027T205915-L-1632819",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
