@@ -6,6 +6,7 @@ Authors: SHEAF group U5
 module
 
 public import Sheaf.AlgebraicGeometry.EtaleGraphChosenComparisons
+import Sheaf.AlgebraicGeometry.EtaleGraphProperPrecompositionUnitKInjectiveCore
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.MapDerivedComp
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.FiniteEtale
 
@@ -78,6 +79,7 @@ theorem graph_proper_precomposition_unit_component
           (openImmersionLowerShriek (ModuleCat.{u + 1} A) c.i)
           (lowerStar (ModuleCat.{u + 1} A) c.g)).app
         J := by
-  sorry
+  obtain ⟨K, rfl⟩ := HomotopyCategory.quotient_obj_surjective J
+  exact graph_proper_precomposition_unit_component_on_complex A q v hf c τ hτ K
 
 end AlgebraicGeometry.Etale
