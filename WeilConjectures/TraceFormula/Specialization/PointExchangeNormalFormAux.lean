@@ -10,6 +10,7 @@ public import WeilConjectures.TraceFormula.Specialization.CompactificationRouteC
 public import WeilConjectures.TraceFormula.Specialization.DeformationUnitClass
 public import WeilConjectures.TraceFormula.Specialization.PointExchangeOnComponentBdc
 public import WeilConjectures.TraceFormula.Specialization.SupportIdentityOnComponent
+public import WeilConjectures.TraceFormula.Specialization.PointExchangeNormalFormAbstract
 
 /-!
 
@@ -144,6 +145,7 @@ lemma lowerShriekCompOfEq_inv_app_comp_isoLowerStar_hom {S : Over (Spec (.of k))
   subst w
   simp
 
+set_option linter.unusedSectionVars false in
 lemma pointRoute_left_eq (g : B ⟶ X) (u : X ⟶ Y) :
     ((g.left ≫ u.left) ≫ 𝟙 Y.left) ≫ (toPoint Y).left = (toPoint B).left := by
   rw [Category.comp_id, ← Over.comp_left, ← Over.comp_left, comp_toPoint]
@@ -325,6 +327,7 @@ theorem targetRoute_bdc (g : B ⟶ X) (u : X ⟶ Y) (h : Y ⟶ P) [IsOpenImmersi
     Functor.whiskerRight_app, Category.assoc]
   rw [← reassoc_of% n2, hD]
 
+set_option linter.unusedSectionVars false in
 lemma pointRoute_target_left_eq (g : B ⟶ X) (u : X ⟶ Y) (h : Y ⟶ P) :
     ((g.left ≫ u.left) ≫ h.left) ≫ (toPoint P).left = (toPoint B).left := by
   rw [← Over.comp_left, ← Over.comp_left, ← Over.comp_left, comp_toPoint]
@@ -398,7 +401,8 @@ theorem pointRoute_target_eq (g : B ⟶ X) (u : X ⟶ Y) (h : Y ⟶ P) [IsOpenIm
         (rfl : ((g.left ≫ u.left) ≫ h.left) ≫ (toPoint P).left = _)).inv.app M.obj =
     ((compactificationLowerShriekIso ℓ h (toPoint P) (comp_toPoint h)).hom.app
         ((boundedConstructibleLowerStar ℓ (g ≫ u)).obj M) ≫
-      (boundedConstructibleLowerStar ℓ (toPoint P)).map ((openProperExtension ℓ (g ≫ u) h).hom.app M) ≫
+      (boundedConstructibleLowerStar ℓ (toPoint P)).map
+        ((openProperExtension ℓ (g ≫ u) h).hom.app M) ≫
       (boundedConstructibleLowerStarComp ℓ ((g ≫ u) ≫ h) (toPoint P)).hom.app M).hom :=
     compactificationRoute_ambient ℓ (g ≫ u) h (toPoint P) (comp_toPoint h) M
       (openProperExtension_unit_comp_closedBaseChange ℓ (g ≫ u) h M)
@@ -407,7 +411,8 @@ theorem pointRoute_target_eq (g : B ⟶ X) (u : X ⟶ Y) (h : Y ⟶ P) [IsOpenIm
   have n3 := (boundedConstructibleOpenImmersionLowerShriekCompatibility Λℓ ℓ h).hom.naturality
     ((openProperExtension ℓ g u).hom.app M)
   have n4 := (boundedConstructibleLowerStarCompatibility ℓ (toPoint P)).hom.naturality
-    ((boundedConstructibleOpenImmersionLowerShriek Λℓ ℓ h).map ((openProperExtension ℓ g u).hom.app M))
+    ((boundedConstructibleOpenImmersionLowerShriek Λℓ ℓ h).map
+      ((openProperExtension ℓ g u).hom.app M))
   simp only [Functor.comp_map] at n3 n4
   have hA : (boundedConstructibleLowerStarCompatibility ℓ (toPoint P)).hom.app
         ((boundedConstructibleOpenImmersionLowerShriek Λℓ ℓ h).obj
@@ -424,19 +429,139 @@ theorem pointRoute_target_eq (g : B ⟶ X) (u : X ⟶ Y) (h : Y ⟶ P) [IsOpenIm
       (boundedConstructible _).ι.map
         ((compactificationLowerShriekIso ℓ h (toPoint P) (comp_toPoint h)).inv.app
           ((boundedConstructibleLowerStar ℓ (g ≫ u)).obj M)) ≫
-      (boundedConstructible _).ι.map
         ((compactificationLowerShriekIso ℓ h (toPoint P) (comp_toPoint h)).hom.app
           ((boundedConstructibleLowerStar ℓ (g ≫ u)).obj M) ≫
         (boundedConstructibleLowerStar ℓ (toPoint P)).map
           ((openProperExtension ℓ (g ≫ u) h).hom.app M) ≫
-        (boundedConstructibleLowerStarComp ℓ ((g ≫ u) ≫ h) (toPoint P)).hom.app M) := by
-    rw [← hamb, ← Functor.map_comp_assoc, Iso.inv_hom_id_app, CategoryTheory.Functor.map_id,
-      Category.id_comp]
-  rw [← (boundedConstructible _).ι.map_comp, hB, ← reassoc_of% hNF, reassoc_of% t1,
-    ← reassoc_of% n3]
-  trace_state
-  sorry
+        (boundedConstructibleLowerStarComp ℓ ((g ≫ u) ≫ h) (toPoint P)).hom.app M).hom := by
+    rw [← cancel_epi ((boundedConstructible _).ι.map
+      ((compactificationLowerShriekIso ℓ h (toPoint P) (comp_toPoint h)).hom.app
+        ((boundedConstructibleLowerStar ℓ (g ≫ u)).obj M))), hamb, ← Functor.map_comp_assoc,
+      Iso.hom_inv_id_app, CategoryTheory.Functor.map_id, Category.id_comp]
+  rw [← reassoc_of% hNF] at hB
+  have hB2 := congrArg (boundedConstructible (condensedRingObj Λℓ (point k).left)).ι.map hB
+  rw [Functor.map_comp] at hB2
+  have key := fun (T' : DerivedCategory
+      (Mod (Sheaf (Scheme.ProEt.topology (point k).left) Ab.{u + 1})
+      (condensedRingObj Λℓ (point k).left))) (e : _ ⟶ T') ↦
+    targetRoute_glue_aux (boundedConstructibleLowerStarCompatibility ℓ (toPoint P))
+      (boundedConstructibleOpenImmersionLowerShriekCompatibility Λℓ ℓ h)
+      ((openProperExtension ℓ g u).hom.app M) _ _ _ _ t1 _ _ e _ _ hA
+  trans_kernel_last hB2 key
+  apply ObjectProperty.ι_map_comp_aux
+  close_by_match_lhs CategoryTheory.Functor.map_eqToHom_comp_eqToHom
 
 end Target
+
+section Exchange
+
+variable (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).Prime]
+  [Fact (ringChar k ≠ ℓ)]
+
+set_option hygiene false in
+/-- The coefficients `ℚ̄_ℓ`. -/
+local notation "Λℓ" => Profinite.padicAlgClRingObj ℓ
+
+variable {B S : Over (Spec (.of k))} [LocallyOfFiniteType B.hom] [QuasiCompact B.hom]
+  [IsSeparated B.hom] [LocallyOfFiniteType S.hom] [QuasiCompact S.hom] [IsSeparated S.hom]
+
+/-- A transport into `Rf_*` followed by the (identity) compatibility isomorphism of `Rf_*`. -/
+lemma eqToHom_comp_lowerStarCompatibility_hom (f : B ⟶ S) {f₁ : B.left ⟶ S.left}
+    (hf : f₁ = f.left) (N : Dᵇc(B.left)⟦Λℓ⟧) :
+    (eqToHom (by rw [hf]; rfl) : R((f₁)_*⟦Λℓ⟧).obj N.obj ⟶
+        (boundedConstructible _).ι.obj ((boundedConstructibleLowerStar ℓ f).obj N)) ≫
+      (boundedConstructibleLowerStarCompatibility ℓ f).hom.app N = eqToHom (by subst hf; rfl) := by
+  subst hf
+  simp [boundedConstructibleLowerStarCompatibility, ObjectProperty.liftCompιIso]
+
+/-- The naturality of a transport into `Rf_*`, through the compatibility isomorphism. -/
+lemma map_comp_eqToHom_lowerStarCompatibility (f : B ⟶ S) {f₁ : B.left ⟶ S.left}
+    (hf : f₁ = f.left) (K : Dᵇc(B.left)⟦Λℓ⟧)
+    {E : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology B.left) Ab.{u + 1})
+      (condensedRingObj Λℓ B.left))} (c : E ⟶ K.obj) :
+    R((f₁)_*⟦Λℓ⟧).map c ≫ (eqToHom (by rw [hf]; rfl) : R((f₁)_*⟦Λℓ⟧).obj K.obj ⟶
+        (boundedConstructible _).ι.obj ((boundedConstructibleLowerStar ℓ f).obj K)) =
+      eqToHom (by subst hf; rfl) ≫ R((f.left)_*⟦Λℓ⟧).map c ≫
+        (boundedConstructibleLowerStarCompatibility ℓ f).inv.app K := by
+  subst hf
+  simp [boundedConstructibleLowerStarCompatibility, ObjectProperty.liftCompιIso]
+
+end Exchange
+
+section Deformation
+
+variable {k : Type u} [Field k] (X : Over (Spec (.of k))) (I : X.left.IdealSheafData)
+  (k' : Type u) [Field k'] [Algebra k k'] {ℓ : ℕ} [Fact ℓ.Prime] [Fact (ringChar k).Prime]
+  [Fact (ringChar k ≠ ℓ)] [IsSepClosed k'] [Fact (ringChar k').Prime] [Fact (ringChar k' ≠ ℓ)]
+  [IsProper X.hom] [IsProper (deformationTotalToTrait X I k')]
+
+/-- `ν_B` composed with `Ψ_s(Ra_! ≅ Ra_*)` and the pushforward exchange is `Ra'_! ≅ Ra'_*`. -/
+lemma deformationCompactSupportExchange_app_comp [IsProper (toPoint X).left]
+    [IsProper (toPoint (deformationSpecialFibre X I k')).left]
+    (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
+    (deformationCompactSupportExchange X I k').app K ≫
+        (traitSpecialization k k').map
+          ((boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ (toPoint X)).hom.app K) ≫
+        ((deformationToTraitModelHom X I k').boundedConstructiblePushforwardExchange ℓ
+          ((deformationModel X I k').preservesBoundedConstructible_of_isTraitModel
+            (isTraitModel_deformationModel X I k') (deformationModel_exists_comp_ε X I k'))
+          ((traitModel k k').preservesBoundedConstructible_of_isTraitModel (ℓ := ℓ)
+            (isTraitModel_traitModel k k')
+              ⟨traitToBase k k', traitModel_j_traitToBase k k'⟩)).app K =
+      (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ
+        (toPoint (deformationSpecialFibre X I k'))).hom.app
+          ((NearbyCyclesModel.boundedConstructibleNearbyCycles
+            ((deformationModel X I k').preservesBoundedConstructible_of_isTraitModel
+              (isTraitModel_deformationModel X I k')
+              (deformationModel_exists_comp_ε X I k'))).obj K) := by
+  simp only [deformationCompactSupportExchange, NearbyCyclesModel.Hom.properCompactSupportExchange,
+    invExchange, NatTrans.comp_app, Functor.whiskerLeft_app, Functor.whiskerRight_app,
+    Category.assoc]
+  erw [← Functor.map_comp_assoc, Iso.inv_hom_id_app, CategoryTheory.Functor.map_id,
+    Category.id_comp]
+  simp
+
+end Deformation
+
+section Model
+
+variable {k : Type u} [Field k] {X : Over (Spec (.of k))} (x : RationalPoint X) (k' : Type u)
+  [Field k'] [Algebra k k'] {B : Over (Spec (.of k))} {b : RationalPoint B} (g : B ⟶ X)
+  (hbg : b ≫ g = x) {Y : Over (Spec (.of k))} (u : X ⟶ Y) [IsOpenImmersion u.left] [IsProper Y.hom]
+
+/-- The composite `𝒟_B ⟶ S` of `pointCompModelHom` over `pointComponentModelHom` is the structure
+map of the deformation of `B`. -/
+lemma pointComponentCompModelHom_total_eq :
+    (pointCompModelHom x u k' (pointComponentModelHom k' g hbg)).total =
+      deformationTotalToTrait B b.left.ker k' := by
+  have h : (pointCompModelHom x u k' (pointComponentModelHom k' g hbg)).total =
+      ((deformationTotalMap g (map_siteIdeal_ker_le_of_comp_eq g hbg) k' ≫
+        deformationTotalMap u (ker_compatible_of_isOpenImmersion x u) k') ≫
+        deformationTotalToCompactified Y (x ≫ u) k') ≫ compactifiedTotalToTrait Y (x ≫ u) k' :=
+    rfl
+  rw [h, Category.assoc, deformationTotalToCompactified_toTrait, Category.assoc,
+    deformationTotalMap_toTrait, deformationTotalMap_toTrait]
+
+/-- The composite `𝒟_{B,Ω} ⟶ Spec Ω` of `pointCompModelHom` over `pointComponentModelHom` is the
+projection. -/
+lemma pointComponentCompModelHom_generic_eq :
+    (pointCompModelHom x u k' (pointComponentModelHom k' g hbg)).generic =
+      pullback.snd (deformationTotalToTrait B b.left.ker k') (traitGenericPoint k') := by
+  have h : (pointCompModelHom x u k' (pointComponentModelHom k' g hbg)).generic =
+      ((deformationGenericMap g (map_siteIdeal_ker_le_of_comp_eq g hbg) k' ≫
+        deformationGenericMap u (ker_compatible_of_isOpenImmersion x u) k') ≫
+        deformationGenericToCompactified Y (x ≫ u) k') ≫
+        compactifiedGenericToPoint Y (x ≫ u) k' :=
+    rfl
+  rw [h, Category.assoc, deformationGenericToCompactified_toPoint, Category.assoc,
+    deformationGenericMap_snd, deformationGenericMap_snd]
+
+end Model
+
+/-- A morphism from a proper `S`-scheme to a separated one is proper. -/
+lemma isProper_left_of_isProper_hom {S : Scheme.{u}} {B Y : Over S} [IsProper B.hom]
+    [IsSeparated Y.hom] (f : B ⟶ Y) : IsProper f.left := by
+  have : IsProper (f.left ≫ Y.hom) := by rw [Over.w f]; infer_instance
+  exact IsProper.of_comp _ Y.hom
 
 end AlgebraicGeometry.ProEtale.CondensedRing

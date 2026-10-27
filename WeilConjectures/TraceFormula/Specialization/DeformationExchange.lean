@@ -222,7 +222,13 @@ theorem specializesComponentClass_deformation {B : Over (Spec (.of k))} [QuasiCo
         ((NearbyCyclesModel.boundedConstructibleNearbyCycles hM).obj (𝟙_ _))) hfsp)] as _hSI
   -- Facts (I) and (III) and the unit class identity of `ν_B` are `hI`, `h3` and `hD`; the
   -- cancellation is `TraceSpecialization.specializesComponentClass_of_eq`, and `glue_unit_class`
-  -- glues `h3` to `hD`. Still open: fact (II), the factorization `h1` of `ν_F` on `j_! ℚ̄_ℓ`.
+  -- glues `h3` to `hD`. Still open: fact (II), the factorization `h1` of `ν_F` on `j_! ℚ̄_ℓ`. It
+  -- is the generic `TraceSpecialization.specializesComponentClass_ofSupportExchange` at the support
+  -- identity `_hSI`, the normal form of `ν_X`
+  -- (`pointCompactSupportExchangeOfSeparated_app_lowerStar_normalForm`)
+  -- and the coherences `lowerShriekCompOfEq_hom_app_comp_map_comp_inv_comp_hom`,
+  -- `lowerShriekCompOfEq_hom_app_comp_map_isoLowerStar_comp_inv`; that instance (with
+  -- `apply_by_match`) elaborates in seconds, but the kernel does not finish checking it.
   refine TraceSpecialization.specializesComponentClass_of_eq _ _ _ j hI
     (W := _) ?φ ((deformationCompactSupportExchange B b.left.ker k').app (𝟙_ _)) ?h1 ?h2
   case h2 => glue_unit_class h3 hD

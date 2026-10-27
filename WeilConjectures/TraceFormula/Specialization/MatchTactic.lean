@@ -145,10 +145,14 @@ meta partial def synMatchCore (p t : Expr) : MetaM Unit := do
       return
   -- `(F ⋙ G).obj X` and `(F ⋙ G).map f` are `G.obj (F.obj X)` and `G.map (F.map f)`
   let compUnfold (e : Expr) : MetaM (Option Expr) := do
-    if (e.isAppOfArity ``CategoryTheory.Functor.obj 6 ||
-        e.isAppOfArity ``CategoryTheory.Functor.map 8)
-        && (e.getArg! 4).isAppOf ``Functor.comp then
-      let some FG' ← unfoldDefinition? (e.getArg! 4) | return none
+    if e.isAppOfArity ``CategoryTheory.Functor.obj 6 ||
+        e.isAppOfArity ``CategoryTheory.Functor.map 8 then
+      -- the functor, with reducible definitions (`abbrev`s of composites) unfolded
+      let FG ← whnfR (e.getArg! 4)
+      -- `(𝟭 C).obj X` and `(𝟭 C).map f` are `X` and `f`
+      if FG.isAppOf ``Functor.id then return some e.appArg!
+      unless FG.isAppOf ``Functor.comp do return none
+      let some FG' ← unfoldDefinition? FG | return none
       let e' := mkAppN e.getAppFn (e.getAppArgs.set! 4 FG')
       let some e2 ← unfoldDefinition? e' | return none
       let r ← whnfCore e2
@@ -183,10 +187,12 @@ meta partial def synMatchCore (p t : Expr) : MetaM Unit := do
   | .lam _ d b _, .lam _ d' b' _ => synMatch d d'; synMatch b b'
   | .proj s i e, .proj s' i' e' =>
     if s == s' && i == i' then synMatch e e' else throwError m!"synMatch: projections"
-  | .proj _ i e, _ =>
+  | .proj s i e, _ =>
     if let some n := t'.getAppFn.constName? then
       if let some info ← getProjectionFnInfo? n then
-        if info.i == i && t'.getAppNumArgs == info.numParams + 1 then
+        -- the projection must be the same field of the same structure
+        if info.i == i && t'.getAppNumArgs == info.numParams + 1 &&
+            info.ctorName.getPrefix == s then
           return ← synMatch e t'.appArg!
     let t2 ← whnfR t'
     if t2 != t' then return ← synMatch p' t2
@@ -210,6 +216,23 @@ meta partial def synMatchCore (p t : Expr) : MetaM Unit := do
     if p2 != p' then return ← synMatch p2 t'
     let t2 ← whnfR t'
     if t2 != t' then return ← synMatch p' t2
+    -- one delta step (cheaper than `whnf`, which may compute projections), on the side whose
+    -- head has the larger definitional height first, as in the kernel
+    let height (e : Expr) : MetaM Nat := do
+      let some n := e.getAppFn.constName? | return 0
+      match (← getEnv).find? n with
+      | some (.defnInfo d) => return match d.hints with | .regular h => h.toNat + 1 | _ => 0
+      | _ => return 0
+    let tFirst := (← height t') > (← height p')
+    for side in (if tFirst then [true, false] else [false, true]) do
+      if side then
+        if let some t4 ← unfoldDefinition? t' then
+          let s ← saveState
+          try synMatch p' t4; return catch _ => s.restore
+      else
+        if let some p4 ← unfoldDefinition? p' then
+          let s ← saveState
+          try synMatch p4 t'; return catch _ => s.restore
     let p3 ← whnf p'
     if p3 != p' then
       if ← (do synMatch p3 t'; pure true) <|> pure false then return
@@ -252,3 +275,53 @@ elab "instantiate_by_match " c:ident " [" args:(ident ":=" term),* "] " "as " h:
   let g ← getMainGoal
   let (_, g') ← (← g.assert h.getId concl pf).intro1P
   replaceMainGoal [g']
+
+open Lean Meta Elab Tactic in
+/-- `apply_by_match c [x := e, …]`: close the goal by the lemma `c`, matching the types of the
+given arguments syntactically (`synMatch`), then the conclusion of `c` against the goal; the
+remaining instance arguments are synthesized and the remaining other arguments become new goals,
+named after their binders. The comparison of the conclusion with the goal is left to the kernel. -/
+elab "apply_by_match " c:ident " [" args:(ident ":=" term),* "]" : tactic =>
+  withMainContext do
+  let g ← getMainGoal
+  let cst ← realizeGlobalConstNoOverload c
+  let e ← mkConstWithFreshMVarLevels cst
+  let ty ← inferType e
+  let mut names : Array Name := #[]
+  let mut t := ty
+  while t.isForall do
+    names := names.push t.bindingName!
+    t := t.bindingBody!
+  let (mvs, bis, concl) ← forallMetaTelescope ty
+  for a in args.getElems do
+    let nm := a.raw[0].getId
+    let some idx := names.findIdx? (· == nm) | throwError m!"no binder {nm}"
+    let ety ← instantiateMVars (← inferType mvs[idx]!)
+    let v ← elabTerm a.raw[2] none
+    Term.synthesizeSyntheticMVarsNoPostponing
+    let v ← instantiateMVars v
+    synMatch ety (← inferType v)
+    (mvs[idx]!).mvarId!.assign v
+  synMatch (← instantiateMVars concl) (← instantiateMVars (← g.getType))
+  let mut newGoals : Array MVarId := #[]
+  for i in [0:mvs.size] do
+    let m := mvs[i]!.mvarId!
+    unless ← m.isAssigned do
+      if bis[i]! == .instImplicit then
+        m.assign (← synthInstance (← instantiateMVars (← inferType mvs[i]!)))
+      else
+        m.setUserName names[i]!
+        m.setKind .syntheticOpaque
+        newGoals := newGoals.push m
+  g.assign (← instantiateMVars (mkAppN e mvs))
+  replaceMainGoal newGoals.toList
+
+open Lean Meta Elab Tactic in
+/-- `match_rfl` closes a goal `a = b` by `rfl` after assigning the metavariables of `b` by
+matching it against `a` (`synMatch`); the comparison is left to the kernel. -/
+elab "match_rfl" : tactic => withMainContext do
+  let g ← getMainGoal
+  let (l, r) ← eqSidesOf (← g.getType)
+  synMatch (← instantiateMVars r) l
+  g.assign (← mkEqRefl l)
+  replaceMainGoal []
