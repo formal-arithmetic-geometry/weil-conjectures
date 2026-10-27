@@ -1,0 +1,91 @@
+{
+ "id": "lem-sf-integral-ordinary-basic-square",
+ "kind": "lemma",
+ "title": "Ordinary coefficient square for a basic pair",
+ "statement": "For fixed l,E,o,a, family X and integral inputs K, every BasicPair between expressions e and t has its ordinary reduction map followed by the system arrow equal to the reduction of the ringed arrow followed by the ordinary reduction of t.",
+ "stmt_deps": [
+  "def-sf-integral-ordinary-expression-reduction",
+  "def-sf-integral-system-realization-data"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-compatibility/fix-prop-coherence.proof.md",
+  "place": "Strict-system expression realization, generator square step."
+ },
+ "proof": [
+  {
+   "text": "Transpose the equality through the reduction/limit adjunction and induct on BasicPair. Canonical isomorphisms, units and counits use mate identities; exchange and projection use the normalized proper mates; proper/open and compactification use their normalized pasting equations. Naturality and recursive ordinaryReduction finish each constructor.",
+   "uses": [
+    "lem-sf-integral-ordinary-canonical-iso-square",
+    "lem-sf-tensor-adjunction-reduction-squares",
+    "lem-weil-pbc-ringed-exchange-tensor-coherence"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-integral-ordinary-canonical-iso-square",
+  "lem-sf-tensor-adjunction-reduction-squares",
+  "lem-weil-pbc-ringed-exchange-tensor-coherence"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-compatibility/fix-prop-coherence.proof.md",
+  "place": "The basic-pair component of the generator square."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "ordinary_basic_square BasicPair",
+   "results": "The source plan contains this generic intermediate as a private helper in IntegralBasicGeneratorSquare; it cannot be imported directly because that module depends on the assigned exchange module.",
+   "date": "2026-10-28",
+   "verdict": "Split as a named intermediate theorem."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.IntegralOrdinaryExchangeSquare",
+  "date": "2026-10-28",
+  "group": "V3"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-compatibility",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sf-integral-ordinary-exchange-projection-squares",
+   "place": "Basic-pair generator square intermediate."
+  },
+  "via": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.OrdinaryBasicSquare",
+  "file": "lean/Sheaf/SixFunctors/OrdinaryBasicSquare.lean",
+  "declaration": "WeilConjectures.IntegralSystemRealization.ordinaryBasicSquare",
+  "statement": "theorem ordinaryBasicSquare (o : Operations l E) (a : AmbientModels l E o) {B : Scheme.{u}} {I : Type u} {X : I → Over B} (K : ∀ i, Integral l E (X i).left) {W : Over B} {e t : Expression B I X W} {s : e.systemObj l E o ((inputReduction l E X).obj K) ⟶ t.systemObj l E o ((inputReduction l E X).obj K)} {r : e.ringedObj l E a.ringedModels K ⟶ t.ringedObj l E a.ringedModels K} (h : BasicPair l E o a.compositors a.openComparisons a.canonicalBridge a.properOpen a.ringedModels a.ringedOpenComparisons a.ringedProperOpen ((inputReduction l E X).obj K) K e t s r) : e.ordinaryReduction l E o a K ≫ s = (calculus l E W.left).reduction.map r ≫ t.ordinaryReduction l E o a K",
+  "branch": "sheaf-dag",
+  "by": "V3",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V3",
+  "result": "pass",
+  "landing": "20261027T210300-L-1683531",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V3",
+  "result": "pass",
+  "landing": "20261027T210300-L-1683531",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -5,6 +5,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import Sheaf.SixFunctors.IntegralOrdinaryExpressionReduction
+import Sheaf.SixFunctors.OrdinaryBasicSquare
 
 /-! # Ordinary coefficient exchange square
 
@@ -53,6 +54,8 @@ theorem ordinaryExchangeSquare
               (ringedSquare l E k.left r.left p.left i.left w).hom)).natTrans.app
                 (e.ringedObj l E a.ringedModels K)) ≫
         (Expression.push r hr (.pull k e)).ordinaryReduction l E o a K := by
-  sorry
+  intro U V W Z k r p i hr hp w e
+  exact ordinaryBasicSquare l E o a K
+    (BasicPair.exchange k r p i hr hp w e)
 
 end WeilConjectures.IntegralSystemRealization
