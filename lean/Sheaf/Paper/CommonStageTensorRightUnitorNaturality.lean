@@ -4,7 +4,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 -/
 module
 
-public import Sheaf.Paper.DerivedPullbackTensorIso
+public import Sheaf.Paper.DerivedPullbackTensorConstraints
 import Sheaf.Paper.IntegralSystemReductionFullyFaithful
 
 /-! # Naturality of the prescribed common-stage right unitor
@@ -15,6 +15,7 @@ Source: Stacks Project, Tags 07A4 and 0941; coefficient operations blueprint.
 
 @[expose] public noncomputable section
 set_option autoImplicit false
+set_option Elab.async false
 set_option backward.isDefEq.respectTransparency true
 set_option backward.isDefEq.respectTransparency.types true
 set_option synthInstance.maxSize 2048
@@ -175,6 +176,14 @@ private theorem rational_naturality {M N : sfRationalConstructibleCategory l E X
       (pullbackTensorRationalRightUnitor l E X M).hom (f : M ⟶ N) (g : M ⟶ N)).symm
 
 end Integral
+
+-- Compare the cached category instances rather than unfolding their Hom data.
+set_option allowUnsafeReducibility true in
+attribute [local irreducible] Preadditive.fullSubcategory
+  StageSystem.PairCategory.categoryStruct
+attribute [local irreducible] ObjectProperty.FullSubcategory.category
+  ScalarLocalization.category ScalarLocalization.linear sfIntegralConstructible
+  Linear.homModule Preadditive.homGroup
 
 attribute [local implicit_reducible] GeneralAlgebraicallyClosedCoefficients.Stage
 
