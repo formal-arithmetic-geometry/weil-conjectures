@@ -6,6 +6,7 @@ Authors: SHEAF group U6
 module
 
 public import Sheaf.Paper.DerivedPullbackTensorHom
+import Sheaf.Paper.RestrictionTensorRepresentativeStageTransport
 
 /-! # Enlargement of restriction tensor representatives
 
@@ -106,6 +107,8 @@ theorem restrictionTensorRepresentativeTransport
                 A.stage B.stage).2.trans hK)) ≫ (z A B K hK).inv
         ofHom (S A B) (U A B) H le_rfl le_rfl (c H le_rfl) =
           ofHom (S A B) (U A B) L h h (c L h) := by
-  sorry
+  intro R T b theta S U a z mu hmu A B L h H c
+  have hs := restrictionTensorRepresentativeStageTransport l Ω f mu hmu A B L h
+  exact pairRepresentative_eq_of_stage_transport (stageSystem l Ω Y) _ _ h _ _ hs
 
 end WeilConjectures

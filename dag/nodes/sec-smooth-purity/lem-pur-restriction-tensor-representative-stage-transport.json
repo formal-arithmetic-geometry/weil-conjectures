@@ -1,0 +1,124 @@
+{
+ "id": "lem-pur-restriction-tensor-representative-stage-transport",
+ "kind": "statement",
+ "title": "Stage transport of a restriction tensor representative",
+ "statement": "In the raw rational finite coefficient stages, fix a scheme morphism f:Y→X with the coefficient prime invertible in residue fields. For a family of stagewise pullback/tensor isomorphisms mu satisfying the mixed tensor scalar square, form the endpoint comparison conjugate c_K at each common coefficient stage K for a pair of input representatives A,B. For every enlargement h:H≤L from the compositum stage H, c_L is the stage-system transport of c_H. The equality retains the transition isomorphisms and does not identify distinct coefficient fields literally.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-def-purity-conv/def-pur-section-invariant.md",
+  "place": "Final invertibility assertion; fixed-component enlargement calculation of steps 3–5."
+ },
+ "stmt_deps": [
+  "def-weil-derived-pullback-tensor-hom",
+  "def-weil-algebraically-closed-coefficients",
+  "lem-pur-integral-operations-scalar-extension",
+  "lem-weil-scalar-extension-composition"
+ ],
+ "proof": [
+  {
+   "text": "Expand c_H and c_L using the prescribed pullback and tensor endpoint comparisons.",
+   "uses": [
+    "def-weil-derived-pullback-tensor-hom"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the mixed scalar square and naturality of the tensor comparison to move scalar extension through mu and cancel inverse endpoint comparisons.",
+   "uses": [
+    "def-weil-derived-pullback-tensor-hom"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the pullback/tensor scalar tower equations and associator cocycle to identify the remaining composites with the stage-system transport from H to L.",
+   "uses": [
+    "lem-pur-integral-operations-scalar-extension",
+    "lem-weil-scalar-extension-composition"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-derived-pullback-tensor-hom",
+  "lem-pur-integral-operations-scalar-extension",
+  "lem-weil-scalar-extension-composition"
+ ],
+ "proof_origin": {
+  "by": "agent B4",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-def-purity-conv/def-pur-section-invariant.md",
+  "place": "Fixed-component enlargement calculation of steps 3–5."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Equality of scalar-extended common-stage representatives using natural tensor comparisons and coefficient associators",
+   "results": "No specialized match; ordinary scalar extension and tensor lemmas do not express the prescribed common-stage representative calculation.",
+   "date": "2026-10-28",
+   "verdict": "No match."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.StageSystem.PairCategory.mkHom_tr",
+   "results": "The pair-category transport law is available in the adopted StageSystem API.",
+   "date": "2026-10-28",
+   "verdict": "Use the existing pair-category transport law for the final quotient step."
+  },
+  {
+   "tool": "grep",
+   "query": "restrictionTensorRepresentativeStageTransport|canonicalRationalPullbackTensor_scalar",
+   "results": "No existing theorem states the arbitrary-mu stage transport; only canonical scalar compatibility is available elsewhere.",
+   "date": "2026-10-28",
+   "verdict": "Split the stage-level mixed-square calculation."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.RestrictionTensorRepresentativeTransport",
+  "date": "2026-10-28",
+  "group": "B4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-restriction-tensor-representative-transport",
+   "place": "Fixed-component enlargement calculation of steps 3–5",
+   "via": [
+    "lem-pur-common-stage-restriction-tensor-descent"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-purity-conv",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.RestrictionTensorRepresentativeStageTransport",
+  "file": "lean/Sheaf/Paper/RestrictionTensorRepresentativeStageTransport.lean",
+  "declaration": "WeilConjectures.restrictionTensorRepresentativeStageTransport",
+  "statement": "theorem restrictionTensorRepresentativeStageTransport\n    (l : ℕ) [Fact l.Prime] (Ω : Type v) [Field Ω]\n    [Algebra (Padic l) Ω] [IsAlgClosure (Padic l) Ω]\n    {X Y : Scheme.{u}} (f : Y ⟶ X)\n    [∀ x : X, Invertible (l : X.residueField x)]\n    [∀ y : Y, Invertible (l : Y.residueField y)] :\n    let R := fun E : Index l Ω ↦ rationalDerivedPullback l (Coefficient.{u} l Ω E) f\n    let T := fun (W : Scheme.{u}) [∀ w : W, Invertible (l : W.residueField w)]\n      (E : Index l Ω) ↦ rationalDerivedTensor l (Coefficient.{u} l Ω E) W\n    let b := fun (E L : Index l Ω) (h : E ≤ L) ↦\n      rationalPullbackScalarComparison l (Coefficient.{u} l Ω E)\n        (Coefficient.{u} l Ω L) (coefficientInclusion l Ω E L h) f\n    let theta := fun (W : Scheme.{u}) [∀ w : W, Invertible (l : W.residueField w)]\n      (E L : Index l Ω) (h : E ≤ L) ↦\n      rationalTensorScalarComparison l (Coefficient.{u} l Ω E)\n        (Coefficient.{u} l Ω L) (coefficientInclusion l Ω E L h) W\n    let S := fun A B : Pair l Ω X ↦\n      commonStagePullbackObject l Ω f (commonStageTensorObject l Ω X A B)\n    let U := fun A B : Pair l Ω X ↦ commonStageTensorObject l Ω Y\n      (commonStagePullbackObject l Ω f A) (commonStagePullbackObject l Ω f B)\n    let a := fun (A B : Pair l Ω X) (L : Index l Ω) (h : (S A B).stage ≤ L) ↦\n      commonStagePullbackComparison l Ω f (commonStageTensorObject l Ω X A B) L h ≪≫\n        (R L).mapIso (commonStageTensorComparison l Ω X A B L h)\n    let z := fun (A B : Pair l Ω X) (L : Index l Ω) (h : (U A B).stage ≤ L) ↦\n      commonStageTensorComparison l Ω Y\n        (commonStagePullbackObject l Ω f A) (commonStagePullbackObject l Ω f B) L h ≪≫\n      (T Y L).mapIso (Iso.prod\n        (commonStagePullbackComparison l Ω f A L\n          (((Padic.finiteCoefficientFields_properties l Ω).1 A.stage B.stage).1.trans h))\n        (commonStagePullbackComparison l Ω f B L\n          (((Padic.finiteCoefficientFields_properties l Ω).1 A.stage B.stage).2.trans h)))\n    ∀ (mu : ∀ E : Index l Ω, T X E ⋙ R E ≅ (R E).prod (R E) ⋙ T Y E),\n      (∀ (E L : Index l Ω) (h : E ≤ L) (M N : Stage l Ω X E),\n        (transition l Ω Y E L h).map ((mu E).hom.app (M, N)) ≫\n          (theta Y E L h).hom.app ((R E).obj M, (R E).obj N) ≫\n          (T Y L).map (Prod.mkHom ((b E L h).hom.app M) ((b E L h).hom.app N)) =\n        (b E L h).hom.app ((T X E).obj (M, N)) ≫\n          (R L).map ((theta X E L h).hom.app (M, N)) ≫\n          (mu L).hom.app ((transition l Ω X E L h).obj M,\n            (transition l Ω X E L h).obj N)) →\n      ∀ (A B : Pair l Ω X) (L : Index l Ω) (h : (S A B).stage ≤ L),\n        let H := (S A B).stage\n        let c := fun (K : Index l Ω) (hK : H ≤ K) ↦\n          (a A B K hK).hom ≫\n            (mu K).hom.app\n              (A.toStage (((Padic.finiteCoefficientFields_properties l Ω).1\n                A.stage B.stage).1.trans hK),\n               B.toStage (((Padic.finiteCoefficientFields_properties l Ω).1\n                A.stage B.stage).2.trans hK)) ≫ (z A B K hK).inv\n        c L h = (stageSystem l Ω Y).tr h (c H le_rfl)",
+  "branch": "sheaf-dag",
+  "by": "B4",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B4",
+  "result": "pass",
+  "landing": "20261027T205805-L-1616669",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B4",
+  "result": "pass",
+  "landing": "20261027T205805-L-1616669",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
