@@ -29,7 +29,7 @@ degree `0`.
   (`ProEtale.exists_isLocallyFree_extendScalars_iso`), `L ≅ ℚ̄_ℓ,S ⊗_{E_S} L_E` for a lisse
   `E_S`-module `L_E`; the complex `a_! L_E` is bounded constructible
   (`ProEtale.CondensedRing.boundedConstructible_openImmersionLowerShriek_obj_of_noetherianSpace`
-  and `ProEtale.CondensedRing.boundedConstructible_rightDerivedLowerStar_obj_of_isClosedImmersion`),
+  and `ProEtale.CondensedRing.boundedConstructible_rightDerivedLowerStar_of_isClosedImmersion`),
   and `T^X_{E,Ω} (a_! L_E) ≅ a_! L` by the (Shriek) isomorphism for the open immersion `j`
   (`ProEtale.CondensedRing.derivedOpenImmersionShriekIso`) and the commutation of the extension
   of scalars with the pushforward along the closed immersion `i`
@@ -115,7 +115,10 @@ space, every `K ∈ Dᵇc(X, ℚ̄_ℓ)` is obtained by finitely many cones from
 `j` an open immersion), `L` a lisse `ℚ̄_ℓ,S`-module and `n ∈ ℤ`, where
 `a_! L = j_! Ri_* L`. That is, `K` lies in every class `P` of objects of `D(ℚ̄_ℓ,X)` which is
 closed under isomorphisms and extensions in distinguished triangles and contains these
-objects. -/
+objects.
+
+This states only one direction of the blueprint node (the objects `(a_! L)[n]` generate
+`Dᵇc`; that they lie in `Dᵇc` is not restated), and only for `Λ = ℚ̄_ℓ`. -/
 theorem boundedConstructible_le_of_lowerShriek_isLocallyFree (X : Scheme.{u})
     [TopologicalSpace.NoetherianSpace X]
     (P : ObjectProperty (DerivedCategory (Mod (Sheaf (ProEt.topology X) Ab.{u + 1})
@@ -153,7 +156,7 @@ theorem descendsToPadicSubfield_lowerShriek [TopologicalSpace.NoetherianSpace X]
   refine ⟨E, (D((j)_!open⟦_⟧)).obj ((R((i)_*⟦_⟧)).obj
     ((DerivedCategory.singleFunctor _ 0).obj L')), ?_, ⟨?_⟩⟩
   · exact boundedConstructible_openImmersionLowerShriek_obj_of_noetherianSpace _ j
-      (boundedConstructible_rightDerivedLowerStar_obj_of_isClosedImmersion _ i
+      (boundedConstructible_rightDerivedLowerStar_of_isClosedImmersion _ i
         (boundedConstructible_singleFunctor_obj_of_isConstructibleModuleObject _ 0
           hL'.isConstructibleModuleObject))
   · exact derivedExtendScalarsLowerShriekSingleIso
