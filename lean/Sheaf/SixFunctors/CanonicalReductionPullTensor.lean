@@ -6,6 +6,7 @@ Authors: SHEAF group J5
 module
 
 public import Sheaf.SixFunctors.GeneratorReductionData
+import Sheaf.SixFunctors.CanonicalReductionTensorPull
 
 /-! # The ordinary restriction/tensor coefficient square
 
@@ -65,6 +66,8 @@ theorem canonicalReductionPullTensor
         (pullbackTensorSystemComparison l E j).hom.app
           ((IntegralSystemRealization.calculus l E X).reduction.obj H,
             (IntegralSystemRealization.calculus l E X).reduction.obj N) := by
-  sorry
+  exact
+    (IntegralSystemRealization.canonicalReductionTensorPull l E o.system
+      o.realization o.ringed j H N).symm
 
 end WeilConjectures.GeneratorReduction
