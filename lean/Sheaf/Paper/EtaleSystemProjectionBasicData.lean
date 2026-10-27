@@ -5,6 +5,8 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import Sheaf.Paper.EtaleSystemProjectionData
+import Sheaf.Paper.EtaleSystemProjectionSupportExistence
+import Sheaf.Paper.EtaleSystemProjectionEvaluationExistence
 
 /-! # Ordinary operations for normalized etale systems
 
@@ -50,6 +52,24 @@ it does not assert any restriction or evaluation comparison.
 -/
 theorem etaleSystemProjectionBasicData_nonempty
     {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f) (l : ℕ) :
-    Nonempty (BasicData c l) := by sorry
+    Nonempty (BasicData c l) := by
+  classical
+  obtain ⟨support⟩ := etaleSystemProjectionSupportData_nonempty c l
+  obtain ⟨⟨evaluationX, evaluationZ, evaluationY⟩⟩ :=
+    etaleSystemProjectionEvaluationData_nonempty c l
+  refine ⟨{
+    support := support
+    evaluationX := evaluationX
+    evaluationZ := evaluationZ
+    evaluationY := evaluationY
+    scalarX := fun a ↦
+      (SheafOfModules.nonempty_systemScalarModel
+        (J := WeilConjectures.coefficientSequenceTopology X.smallEtaleTopology)
+        (ringMap X a)).some
+    scalarY := fun a ↦
+      (SheafOfModules.nonempty_systemScalarModel
+        (J := WeilConjectures.coefficientSequenceTopology Y.smallEtaleTopology)
+        (ringMap Y a)).some
+  }⟩
 
 end AlgebraicGeometry.Etale.SystemProjection
