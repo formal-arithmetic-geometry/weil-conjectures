@@ -6,6 +6,8 @@ Authors: SHEAF group J4
 module
 
 public import Sheaf.Paper.ProjectionFiniteBaseChangeCoordinates
+import Sheaf.Paper.ProjectionFiniteBaseChangeLeftRouteCalculation
+import Sheaf.Paper.ProjectionFiniteBaseChangeRightRouteCalculation
 
 /-! # Realization of the two finite base-change routes
 
@@ -78,6 +80,8 @@ theorem sixFunctorProjectionFinite_routes_realization
     I.map (sixFunctorProjectionFiniteRightPath S Q K L) ≫ target.hom =
       source.hom ≫ R'.functor.map
         (FiniteProjectionExchange.diamondRight A Q.square Q.compactification
-          (RX.inverse.obj K.obj) (RY.inverse.obj L.obj)) := by sorry
+          (RX.inverse.obj K.obj) (RY.inverse.obj L.obj)) := by
+  exact ⟨sixFunctorProjectionFinite_left_route_calculation S Q K L,
+    sixFunctorProjectionFinite_right_route_calculation S Q K L⟩
 
 end WeilConjectures
