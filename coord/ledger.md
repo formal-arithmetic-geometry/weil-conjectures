@@ -20269,3 +20269,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 23:39 L: merged deliver/F9/Sheaf.SixFunctors.IntegralPullEvaluationCochainSquare (stage 3; reviewer PASS; first push; landing 20261027T233938-L-4139662 (interface); batch 20261027T233735; modules 2; new nodes 1)
 - 23:39 L: merged deliver/G1/Sheaf.Paper.CoefficientDerivedSystemHomProjectionTransport (stage 3; reviewer PASS; first push; landing 20261027T233939-L-4139797 (proof); batch 20261027T233735; modules 1; new nodes 0)
 - 23:39 L: merged deliver/G1/Sheaf.Paper.CommonConstantUnitFrobenius (stage 3; reviewer PASS; first push; landing 20261027T233940-L-4140079 (interface); batch 20261027T233735; modules 2; new nodes 1)
+- 23:39 L: merged deliver/G1/Sheaf.Paper.IntegralHomModelsExist (stage 3; reviewer PASS; first push; landing 20261027T233941-L-4140222 (interface); batch 20261027T233735; modules 3; new nodes 2)

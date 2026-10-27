@@ -6,13 +6,8 @@ Authors: SHEAF group M4
 module
 
 public import Sheaf.Paper.IntegralHomReductionModels
-import Sheaf.Algebra.Homology.SiteDerivedTensorDescent
-import Sheaf.Algebra.Homology.RingedDerivedClosedSymmetricMonoidal
-import Sheaf.Algebra.Homology.ScalarInternalHomAdjunction
-import Sheaf.Algebra.Homology.RingedInternalHomExactRestriction
-import Sheaf.Algebra.Homology.RhomGlobalSectionsOfUniverses
-import Sheaf.Paper.ProEtaleCanonicalTensorPullback
-import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
+import Sheaf.Paper.IntegralHomTensorPresentation
+import Sheaf.Paper.IntegralHomReductionPresentation
 
 /-! # Existence of normalized integral tensor-Hom models
 
@@ -64,6 +59,8 @@ The defining counit square is exactly the remaining normalization equation.
 Use the same source presentation for every n; no bound on either input is used. -/
 theorem models_exist :
     ∃ a : TensorPresentation.{t, u} Y (completedIntegralCommRingSheaf l E Y D hl),
-      ∀ n : ℕ, Nonempty (ReductionPresentation l E Y D hl a n) := by sorry
+      ∀ n : ℕ, Nonempty (ReductionPresentation l E Y D hl a n) := by
+  obtain ⟨a⟩ := tensor_presentation_exists l E Y D hl
+  exact ⟨a, fun n => reduction_presentation_exists_at l E Y D hl a n⟩
 
 end WeilConjectures.IntegralHom
