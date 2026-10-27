@@ -27,6 +27,7 @@ set_option autoImplicit false
 set_option backward.isDefEq.respectTransparency true
 set_option backward.isDefEq.respectTransparency.types false
 set_option synthInstance.maxSize 2048
+set_option linter.privateModule false
 universe u v₁ v₂ u₁ u₂ w₁ w₂
 open CategoryTheory CategoryTheory.MonoidalCategory AlgebraicGeometry
 namespace WeilConjectures
@@ -259,6 +260,8 @@ def etalePowerComparison (P : PurityFiniteSetting.{u}) (T : Scheme.{u})
     (d : ℕ) → P.diagonalTwistEtale T d ≅ (etaleSingle P T d)⟦2 * (d : ℤ)⟧ :=
   ((existsUnique_etalePowerPresentation P T hT).exists.choose).comparison
 
+attribute [local irreducible] etalePowerComparison
+
 set_option backward.isDefEq.respectTransparency false in
 /-- The unique finite site comparison fixed by the root-limit projections.
 Source: corollary proof, finite normalization; finite Tate site descent
@@ -319,6 +322,8 @@ Source: corollary proof, finite comparison
 (blueprint: cor-pur-adic-and-rational-smooth-dualizing-complexes). -/
 def finiteRealization (P : PurityFiniteSetting.{u}) (T : Scheme.{u}) (n d : ℕ) :=
   (existsUnique_finiteRealization P T n d).exists.choose
+
+attribute [local irreducible] finiteRealization
 
 /-- Exact functors carry shifted single complexes to the shifted single image.
 The data is the standard shift comparison followed by the single-complex comparison.
@@ -605,6 +610,8 @@ def integralIdentification (d : ℕ)
         integralTwist P X (X ↘ Spec (.of P.field.k)) d :=
   (existsUnique_integralIdentification P X S d).exists.choose
 
+attribute [local irreducible] integralIdentification
+
 /-- The rational coefficient unit and its shifted twist, using the literal
 rationalization of the same completed integral representatives.
 Source: corollary proof Step 2, rationalization
@@ -625,6 +632,8 @@ def rationalIdentification (d : ℕ)
     (integralTwist P (Spec (.of P.field.k)) (𝟙 _) 0)) ≪≫
   (ConstructibleExceptionalCoefficients.rationalization P.coefficients.l P.coefficients.Qbar
     (fieldStage P) X).mapIso (integralIdentification P X S d)
+
+attribute [local irreducible] rationalIdentification
 
 set_option maxHeartbeats 1600000 in
 -- The elaboration of this declaration ran out of the default 200000 heartbeats in the red global
@@ -701,6 +710,8 @@ def closedIdentification (d : ℕ)
             (fieldIndex P)) (modelEmbedding P)).b.symm.app
               (rationalTwist P (Spec (.of P.field.k)) (𝟙 _) 0)) ≪≫
         (modelScalar P X).mapIso (rationalIdentification P X S d))
+
+attribute [local irreducible] closedIdentification
 
 set_option backward.isDefEq.respectTransparency false in
 /-- Qbar integration is common-stage descent of the same rationalized integral map.
