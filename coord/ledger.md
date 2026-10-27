@@ -19628,3 +19628,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 15:17 L: merged deliver/Y2/Sheaf.WeilSheaf.NativeExceptionalLeftModels (stage 3; reviewer PASS; first push; landing 20261027T151750-L-1204791 (interface); batch 20261027T151642; modules 2; new nodes 1)
 - 15:17 L: merged deliver/Y3/Sheaf.WeilSheaf.NativeExceptionalStructuralTransport (stage 3; reviewer PASS; first push; landing 20261027T151752-L-1205031 (interface); batch 20261027T151642; modules 2; new nodes 1)
 - 15:29 L: merged deliver/NA/lem-sf-native-ordinary-chain-currying (reviewer PASS; first push; new nodes: 0)
+- 16:04 L: returned deliver/J3/Sheaf.SecSmoothPurity.FiniteGeneralRingIntegrationExponent (reviewer RETURN: (reviewer C-833ed, head 833eddcbb) the reviewer passed it, but the landing failed: T MERGED Sheaf.SecSmoothPurity.Finite)
