@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.CategoryTheory.Adjunction.RestrictEssImage
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.ProperLowerShriek
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.RationalProperLowerStarAdjoint
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperShriekLocalizing
 
 /-!
@@ -226,18 +227,6 @@ theorem isLeftAdjoint_boundedConstructibleLowerStar_padicAlgClRingObj_of_finite_
 
 /-! ### Fields of infinite cohomological dimension -/
 
-/-- Blueprint `lem-sfb-dc-proper-pushforward-left-adjoint-e`, for `k` neither finite nor separably
-closed: for a proper morphism `g : Z ⟶ Y` and a finite subextension `E ⊆ ℚ̄_ℓ` of `ℚ_ℓ`, the
-derived pushforward `Rg_* : Dᵇc(Z)⟦E̲⟧ ⥤ Dᵇc(Y)⟦E̲⟧` is a left adjoint (SGA 4 XVIII, 3.1.4;
-SGA 4½, [Th. finitude]; Bhatt–Scholze, Section 6.8). The Brown representability argument of
-`isLeftAdjoint_boundedConstructibleLowerStar_continuousMapRingObj_of_finite_or_isSepClosed`
-needs `cd_ℓ(k) < ∞`; for a general `k` the right adjoint is the derived limit of the étale
-`Rg^!` on the torsion levels. -/
-theorem isLeftAdjoint_boundedConstructibleLowerStar_continuousMapRingObj_of_not
-    (E : PadicAlgCl.FiniteIntermediateField ℓ) (hk : ¬(Finite k ∨ IsSepClosed k)) :
-    (ContinuousMapRingObj.boundedConstructibleLowerStar ℓ E g).IsLeftAdjoint :=
-  sorry
-
 /-- Blueprint `lem-sfb-dc-proper-pushforward-left-adjoint-oe`, for `k` neither finite nor
 separably closed: for a proper morphism `g : Z ⟶ Y` and a finite extension `E ⊆ ℚ̄_ℓ` of `ℚ_ℓ`,
 the derived pushforward `Rg_* : Dᵇc(Z)⟦𝒪̲_E⟧ ⥤ Dᵇc(Y)⟦𝒪̲_E⟧` is a left adjoint (SGA 4 XVIII,
@@ -251,6 +240,17 @@ theorem isLeftAdjoint_boundedConstructibleLowerStar_padicIntegersRingObj_of_not
     (hk : ¬(Finite k ∨ IsSepClosed k)) :
     (PadicIntegersRingObj.boundedConstructibleLowerStar ℓ E g).IsLeftAdjoint :=
   sorry
+
+/-- Blueprint `lem-sfb-dc-proper-pushforward-left-adjoint-e`, for `k` neither finite nor separably
+closed: for a proper morphism `g : Z ⟶ Y` and a finite subextension `E ⊆ ℚ̄_ℓ` of `ℚ_ℓ`, the
+derived pushforward `Rg_* : Dᵇc(Z)⟦E̲⟧ ⥤ Dᵇc(Y)⟦E̲⟧` is a left adjoint. Inverting `ℓ`, this
+follows from the case of `𝒪̲_E`
+(`isLeftAdjoint_boundedConstructibleLowerStar_continuousMapRingObj_of_padicIntegersRingObj`). -/
+theorem isLeftAdjoint_boundedConstructibleLowerStar_continuousMapRingObj_of_not
+    (E : PadicAlgCl.FiniteIntermediateField ℓ) (hk : ¬(Finite k ∨ IsSepClosed k)) :
+    (ContinuousMapRingObj.boundedConstructibleLowerStar ℓ E g).IsLeftAdjoint :=
+  have := isLeftAdjoint_boundedConstructibleLowerStar_padicIntegersRingObj_of_not ℓ g E.1 hk
+  isLeftAdjoint_boundedConstructibleLowerStar_continuousMapRingObj_of_padicIntegersRingObj ℓ g E
 
 /-- Blueprint `lem-sfb-dc-proper-pushforward-left-adjoint-qlbar`, for `k` neither finite nor
 separably closed: for a proper morphism `g : Z ⟶ Y`, the derived pushforward
