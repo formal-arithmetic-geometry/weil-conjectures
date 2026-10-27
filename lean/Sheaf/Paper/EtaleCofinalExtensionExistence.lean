@@ -1,11 +1,11 @@
 /-
 Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
-Authors: SHEAF group U6
 -/
 module
 
 public import Sheaf.Paper.EtaleSystemCofinalData
+import Sheaf.Paper.EtaleCofinalExtensionLevelNormalization
 
 /-! # Selected extension on the actual étale sequence site
 
@@ -24,25 +24,22 @@ normalization, exists on the actual sequence-site category.
 Source: Zheng, Construction 4.1, printed p. 21; Stacks 06YS and 06YT
 (blueprint: lem-pur-etale-cofinal-extension-existence).
 
-Proof: identify sequence-site modules with strict systems by the identity on every
-section and restriction, using strictSystemSequenceEquivalence. Transport the ordinary
-selected tensor extension and its adjunction across this equivalence. At m it is tensor
-extension from r(t(m)) applied to the component at t(m). The tensor-adjunction formula
-systemSelectedTranspose gives the recorded ordinaryLevel_unit, including t(r(i))=i.
-Resolve on the ringed sequence site by a K-flat complex with flat terms. Exact evaluation
-preserves these resolving complexes by systemSequenceEvaluation_preservesKFlat. The
-selected extension preserves quasi-isomorphisms between them, by componentwise scalar
-extension, so its normalized total left derived functor is adjoint to the exact
-localization of the actual sectionwise restriction. Transport the selected extension
-from systemLevelLeftExtensionTheory and use adjoint uniqueness with the ordinary unit
-normalization to identify its ordinary functor. Evaluation of this normalized derivation
-is the derived tensor formula; the universal cochain comparison gives level_normalization.
-For a K-flat complex without flat terms, resolve it again by such a flat-term complex.
-Its acyclic K-flat cone stays acyclic after scalar extension, so comparison with that
-resolution gives the same computation and representative normalization. These comparisons
-supply every field of CofinalExtension; no compact-support functor is involved. -/
+Proof: take the transported core data and the separately constructed normalized level
+comparison, then package their fields into `CofinalExtension`. -/
 theorem etaleCofinalExtension_nonempty (W : Scheme.{u}) {l : ℕ}
     (B : Coefficients.{u} l) (r : ℕ ↪o ℕ) :
-    Nonempty (CofinalExtension W B r) := by sorry
+    Nonempty (CofinalExtension W B r) := by
+  classical
+  obtain ⟨core⟩ := etaleCofinalExtension_core_nonempty W B r
+  let normalized := (etaleCofinalExtension_level_normalization core).some
+  exact ⟨{ base := core.base,
+            selected := core.selected,
+            theory := core.theory,
+            model := core.model,
+            ordinary := core.ordinary,
+            ordinaryLevel := core.ordinaryLevel,
+            ordinaryLevel_unit := core.ordinaryLevel_unit,
+            level := normalized.1,
+            level_normalization := normalized.2 }⟩
 
 end AlgebraicGeometry.Etale.SystemProjection

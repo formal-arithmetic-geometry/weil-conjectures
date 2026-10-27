@@ -1,0 +1,115 @@
+{
+ "id": "lem-pur-etale-cofinal-extension-core",
+ "kind": "statement",
+ "title": "Core transported selected extension data on the actual étale sequence site",
+ "statement": "For every scheme W, coefficient tower B, and order embedding r, the actual étale sequence site admits the transported core selected-extension data before level normalization. Precisely:\n```lean\ntheorem etaleCofinalExtension_core_nonempty (W : Scheme.{u}) {l : ℕ}\n    (B : Coefficients.{u} l) (r : ℕ ↪o ℕ) :\n    Nonempty (CofinalExtensionCore W B r)\n```",
+ "source": {
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Construction 4.1, printed pp. 21--23; strict-system transport and K-flat level normalization."
+ },
+ "stmt_deps": [
+  "def-pur-etale-system-cofinal-data"
+ ],
+ "proof": [
+  {
+   "step": 1,
+   "text": "Identify actual section-site modules with strict systems, transport the existing system-level extension theory and its selected ordinary extension across the equivalence, and record the transported ordinary comparison and tensor unit. The strict-system ordinary selected-extension and adjunction declarations provide the transported ordinaryLevel and ordinaryLevel_unit fields. This proves exactly the core fields; the derived level normalization is deferred to the separate normalization statement.",
+   "uses": [
+    "lem-pur-system-level-left-extension",
+    "lem-pur-system-ordinary-selected-extension",
+    "lem-pur-system-selected-derived-extension"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-system-level-left-extension",
+  "lem-pur-system-ordinary-selected-extension",
+  "lem-pur-system-selected-derived-extension"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Construction 4.1, printed p. 21; strict-system transport before level normalization."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Transport a strict-system selected extension across an equivalence of module categories",
+   "results": "Generic equivalence and adjunction results only; no complete actual étale sequence-site transport theorem.",
+   "date": "2026-10-28",
+   "verdict": "No complete match; use the listed strict-system declarations."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "SystemLevelLeftExtensionTheory selected ordinary extension",
+   "results": "Existing SystemLevelLeftExtensionTheory and selected ordinary-extension declarations found.",
+   "date": "2026-10-28",
+   "verdict": "Reuse existing declarations."
+  },
+  {
+   "tool": "grep",
+   "query": "strictSystemSequenceEquivalence|systemSelectedDerivedExtension|systemSelectedOrdinaryExtension",
+   "results": "Inspected the strict-system transport modules; no theorem packages the actual-site core structure.",
+   "date": "2026-10-28",
+   "verdict": "The intermediate statement is required."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.EtaleCofinalExtensionExistence",
+  "date": "2026-10-28",
+  "group": "F5"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-etale-cofinal-extension-existence",
+   "place": "Intermediate construction split from the normalized selected extension proof.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-operations",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.EtaleCofinalExtensionCore",
+  "file": "lean/Sheaf/Paper/EtaleCofinalExtensionCore.lean",
+  "declaration": "AlgebraicGeometry.Etale.SystemProjection.etaleCofinalExtension_core_nonempty",
+  "statement": "theorem etaleCofinalExtension_core_nonempty (W : Scheme.{u}) {l : ℕ}\n    (B : Coefficients.{u} l) (r : ℕ ↪o ℕ) :\n    Nonempty (CofinalExtensionCore W B r)",
+  "branch": "sheaf-dag",
+  "by": "F5",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F5",
+  "result": "pass",
+  "landing": "20261027T205945-L-1637494",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F5",
+  "result": "pass",
+  "landing": "20261027T205945-L-1637494",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
