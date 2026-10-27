@@ -28,6 +28,13 @@
  ],
  "proof": [
   {
+   "text": "Import the unchanged model definitions and proved auxiliary transport lemmas from their extracted module. This separates their kernel checking from the final conjunction; the following four argument steps and all constructions are unchanged.",
+   "uses": [
+    "def-pod-point-evaluation-completion-models"
+   ],
+   "elementary": false
+  },
+  {
    "text": "The bounded-above flat criterion gives good representatives C and J. Apply the K-flat total tensor model to get the same for Tot(C,J); B[0] is the tensor unit and has flat terms. The balanced quotient tower lemma gives rho with its formula on every local generator.",
    "uses": [
     "lem-weil-pbc-independent-bounded-flat-kflat",
@@ -62,6 +69,7 @@
   }
  ],
  "proof_deps": [
+  "def-pod-point-evaluation-completion-models",
   "lem-weil-pbc-independent-bounded-flat-kflat",
   "lem-pur-kflat-total-tensor-model",
   "lem-pod-point-balanced-quotient-tower",
@@ -75,7 +83,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-  "place": "Definition 3.4.10, Lemmas 3.4.11--3.4.12, Proposition 3.5.1; A7 strict-coordinate reduction and categorical assembly"
+  "place": "Definition 3.4.10, Lemmas 3.4.11--3.4.12, Proposition 3.5.1; A7 strict-coordinate reduction and categorical assembly; H1 separates unchanged model definitions and proved private auxiliaries into PointEvaluationCompletionModels for the per-file compile limit"
  },
  "mathlib_searches": [
   {
@@ -234,27 +242,6 @@
   "module": "Sheaf.Paper.PointEvaluationCompletionNormalization",
   "declaration": "WeilConjectures.PointEvaluationCompletion.point_evaluation_completion_normalization",
   "declarations": [
-   "WeilConjectures.PointEvaluationCompletion.R",
-   "WeilConjectures.PointEvaluationCompletion.B",
-   "WeilConjectures.PointEvaluationCompletion.Mod",
-   "WeilConjectures.PointEvaluationCompletion.Q",
-   "WeilConjectures.PointEvaluationCompletion.QR",
-   "WeilConjectures.PointEvaluationCompletion.coefficient",
-   "WeilConjectures.PointEvaluationCompletion.total",
-   "WeilConjectures.PointEvaluationCompletion.tower",
-   "WeilConjectures.PointEvaluationCompletion.completion",
-   "WeilConjectures.PointEvaluationCompletion.unit",
-   "WeilConjectures.PointEvaluationCompletion.Balanced",
-   "WeilConjectures.PointEvaluationCompletion.tensorModelIso",
-   "WeilConjectures.PointEvaluationCompletion.chi",
-   "WeilConjectures.PointEvaluationCompletion.chainChi",
-   "WeilConjectures.PointEvaluationCompletion.unitCompletion",
-   "WeilConjectures.PointEvaluationCompletion.completedPairing",
-   "WeilConjectures.PointEvaluationCompletion.inverseTensorComparison",
-   "WeilConjectures.PointEvaluationCompletion.model",
-   "WeilConjectures.PointEvaluationCompletion.quotient",
-   "WeilConjectures.PointEvaluationCompletion.UnitCoordinates",
-   "WeilConjectures.PointEvaluationCompletion.betaCompletionEquation",
    "WeilConjectures.PointEvaluationCompletion.point_evaluation_completion_normalization"
   ],
   "file": "lean/Sheaf/Paper/PointEvaluationCompletionNormalization.lean",
@@ -274,13 +261,13 @@
   "note": "First S2 delivery; one module, the item record changes only in lean, statement verbatim (checked mechanically). Every node clause is present with no stronger hypothesis: L pinned by hobj plus an HEq on maps; actual unit eta with QuasiIso; bijective constant-section map; constructibility and finite Tor via _hB/hC/hJ/_hT. Balanced pins the tower iso rho on local generators; chi = Q(unit ≫ Roos(rho)^-1) ≫ the recorded completed-tensor comparison, with IsIso; b.hom = Q(unit_B); UnitCoordinates give the quotient and zero shifted coordinates; strict reduction squares and the chain square before localization; completedPairing = chi_B^-1 H(e_m) with chi ≫ it = Q e and ∃! v; beta pinned on generators; the final tau^-1 = Gamma(chi_D) beta equation uses pointIntegralTensorComparison S, pinned by PointIntegralTensorCanonical (the dependency's ∃S Nonempty-canonical interface), and is consistent with betaCompletionEquation (checked by hand). Edge cases m=1 (n=0), negative degrees, l=p excluded, P/J/e zero, eta only a quasi-isomorphism. Helpers are abbrevs or composites of recorded canonical maps, none hollow; docstrings carry the source place, blueprint tag and six proof steps; only sorry. No compile, since no file was changed. Advisory: PointDerivedHom.*, integralOperations*, pointIntegralSectionMap and integralScalar* owners are not in stmt_deps (stage-1 list); the ∃! clause is implied by IsIso chi and UnitCoordinates/the naturality square restate the recorded unit, accepted because no completed tensor/internal-Hom adjunction is recorded in Lean and node step 5 itself characterizes the pairing by precomposition."
  },
  "reviewed_proof": {
-  "date": "2026-10-26",
+  "date": "2026-10-27",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "A7",
-  "result": "pass",
-  "landing": "20261026T022753-L-431069",
+  "reviewer": "C-0ee8b",
+  "group": "H1",
+  "result": "fix",
+  "landing": "20261027T151710-L-1194234",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent cc review: delivered item, 4 new aux modules, verbatim PointEvaluationCompletion split, and 7 node files checked against the clone (published lines 1-520 diffed against Models), node statements and the lean records; sandbox compiles of the delivered set, the fixed set, unsplit/published originals and CompletedHomScalarTranspose; #print axioms"
  }
 }

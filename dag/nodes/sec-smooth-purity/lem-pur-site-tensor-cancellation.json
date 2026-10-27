@@ -1,0 +1,137 @@
+{
+ "id": "lem-pur-site-tensor-cancellation",
+ "kind": "statement",
+ "title": "A specified sheaf pairing determines cancellation in the explicit site tensor",
+ "statement": "Let C be a category with Grothendieck topology J, essentially small in the chosen coefficient universe, with additive sheafification, W equal to the locally bijective maps, and the ring-valued sheaf composition functor. Let R be a sheaf of commutative rings. Use the module category [def-weil-sheaf-of-modules-category], ordinary sheaf tensor [def-pur-sheaf-tensor-product], and its pure sections [lem-pur-sheaf-line-evaluation-inverse-pair]. For any R-module sheaves P,Q and any specified isomorphism e:P tensor Q ≅ R, there exists exactly one natural isomorphism between successive explicit site tensor by P and by Q and the identity functor whose value on (x tensor p) tensor q is e(p tensor q) times x. No local freeness assumption or choice of a pairing is added.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03EK and 0B8N: sheaf tensor, reassociation, pairing into the unit and cancellation."
+ },
+ "stmt_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "def-pur-sheaf-tensor-product",
+  "lem-pur-sheaf-line-evaluation-inverse-pair"
+ ],
+ "proof": [
+  {
+   "text": "The ordinary tensor comparison identifies each explicit site tensor with monoidal sheaf tensor, naturally in the variable module; its pure-section formula and pure tensor extensionality prove the required naturality.",
+   "uses": [
+    "lem-sfb-scalar-ordinary-tensor-comparison",
+    "lem-pur-sheaf-line-evaluation-inverse-pair"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03EK and 0B8N: sheaf tensor, reassociation, pairing into the unit and cancellation."
+   }
+  },
+  {
+   "text": "Transport monoidal reassociation followed by e and the right unitor through these comparisons. The pure formulas for the comparison, reassociation and unitor give e(p tensor q) times x on nested site tensors.",
+   "uses": [
+    "lem-sfb-scalar-ordinary-tensor-comparison",
+    "lem-pur-sheaf-line-evaluation-inverse-pair",
+    "lem-pd-sheaf-trilinear-universal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03EK and 0B8N: sheaf tensor, reassociation, pairing into the unit and cancellation."
+   }
+  },
+  {
+   "text": "Two cancellation natural isomorphisms with this formula have equal hom components by the trilinear universal property; extensionality for natural transformations and isomorphisms proves uniqueness. This includes the zero ring and zero sheaves whenever the specified e exists.",
+   "uses": [
+    "lem-pd-sheaf-trilinear-universal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03EK and 0B8N: sheaf tensor, reassociation, pairing into the unit and cancellation."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-scalar-ordinary-tensor-comparison",
+  "lem-pur-sheaf-line-evaluation-inverse-pair",
+  "lem-pd-sheaf-trilinear-universal"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/sk-def-sp-tate-twist-locally-free.proof.md",
+  "place": "Proof (3), evaluation isomorphisms. The general explicit-site cancellation step is extracted to avoid repeatedly expanding concrete coefficient-sheaf tensor comparisons."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A pairing identifying two sheaves' tensor product with the unit gives a unique cancellation natural isomorphism on explicit site tensors",
+   "results": "8 hits about the monoidal sheaf structure and sheaf-to-presheaf coherence; none gives the explicit module-site cancellation formula.",
+   "date": "2026-10-27",
+   "verdict": "Use the existing project monoidal cancellation and ordinary/site comparison, then prove the formula and uniqueness."
+  },
+  {
+   "tool": "loogle",
+   "query": "tensorRightTensor",
+   "results": "No hits: unknown identifier in this search index. The local library has MonoidalCategory.tensorRightTensor, already used in LineEvaluation.cancellation.",
+   "date": "2026-10-27",
+   "verdict": "The project cancellation theorem supplies the abstract isomorphism, but explicit site tensor comparison is still required."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A tensor pairing with values in the unit induces cancellation by reassociation and the unitor",
+   "results": "8 hits, including monoidal unitor coherence and ExactPairing.evaluation_coevaluation_assoc.",
+   "date": "2026-10-27",
+   "verdict": "No theorem has the explicit site presentation and its pure-section uniqueness statement."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CompletedLineTensorCoherence",
+  "group": "H1",
+  "date": "2026-10-27"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-def-sp-tate-twist-locally-free",
+   "place": "Evaluation of signed line powers and tensor cancellation.",
+   "via": [
+    "lem-pur-completed-line-tensor-coherence"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-an",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Category.ModuleCat.Sheaf.SiteTensorCancellation",
+  "file": "lean/Sheaf/Algebra/Category/ModuleCat/Sheaf/SiteTensorCancellation.lean",
+  "declaration": "SheafOfModules.siteTensorCancellation",
+  "statement": "theorem siteTensorCancellation (P Q : LineEvaluation.Modules.{uC, vC, r} R)\n    (e : P ⊗ Q ≅ unit ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R)) :\n    ∃! c : siteSheafTensorRight P ⋙ siteSheafTensorRight Q ≅ 𝟭 _,\n      ∀ (M : LineEvaluation.Modules.{uC, vC, r} R) (U : Cᵒᵖ)\n        (x : M.val.obj U) (p : P.val.obj U) (q : Q.val.obj U),\n        (c.hom.app M).val.app U\n          (siteSheafTensorTmul _ Q U (siteSheafTensorTmul M P U x p) q) =\n          @SMul.smul _ _ (M.val.obj U).isModule.toSMul\n            (e.hom.val.app U (LineEvaluation.pureTensor R P Q U p q)) x",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-0ee8b",
+  "group": "H1",
+  "result": "fix",
+  "landing": "20261027T151710-L-1194234",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-0ee8b",
+  "group": "H1",
+  "result": "fix",
+  "landing": "20261027T151710-L-1194234",
+  "kind": "interface",
+  "note": "independent cc review: delivered item, 4 new aux modules, verbatim PointEvaluationCompletion split, and 7 node files checked against the clone (published lines 1-520 diffed against Models), node statements and the lean records; sandbox compiles of the delivered set, the fixed set, unsplit/published originals and CompletedHomScalarTranspose; #print axioms"
+ }
+}

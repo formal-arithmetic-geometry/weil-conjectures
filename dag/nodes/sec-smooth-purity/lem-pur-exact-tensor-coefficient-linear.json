@@ -1,0 +1,140 @@
+{
+ "id": "lem-pur-exact-tensor-coefficient-linear",
+ "kind": "statement",
+ "title": "Exact tensor preserves the recorded constant coefficient action after deriving",
+ "statement": "For a prime l, a finite extension E of Q_l, and a scheme Y in the same universe as E, let P be any module sheaf over the completed integral coefficient sheaf. Suppose the explicit right tensor functor with P is additive and preserves finite limits and finite colimits. Its exact derived functor is linear over the valuation ring of E for the published integralCoefficientLinear constant-section action on the ambient derived category. No local freeness, boundedness, constructibility or completeness assumption is needed.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03EL, tensor functoriality and scalar linearity; Mathlib derived localization transports the equality to derived morphisms."
+ },
+ "stmt_deps": [
+  "def-pur-sheaf-tensor-product",
+  "lem-weil-integral-constructible-linear"
+ ],
+ "proof": [
+  {
+   "text": "Use linearity of monoidal tensor over global sections. Restrict scalars along the constant coefficient homomorphism defining coefficientModuleLinear. Transport through siteSheafTensorRightIso, so the explicit site tensor preserves exactly the recorded constant-section action.",
+   "uses": [
+    "lem-pur-sheaf-line-evaluation-inverse-pair",
+    "lem-weil-integral-constructible-linear"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EL, tensor functoriality and scalar linearity; Mathlib derived localization transports the equality to derived morphisms."
+   }
+  },
+  {
+   "text": "The uniqueness formula for integralCoefficientLinear and coefficientDerived_eq identify the recorded action on derived Hom groups with Localization.linear for the cochain localization Q. This is equality of Linear structures, not just equality on morphisms represented before localization.",
+   "uses": [
+    "lem-weil-integral-constructible-linear"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EL, tensor functoriality and scalar linearity; Mathlib derived localization transports the equality to derived morphisms."
+   }
+  },
+  {
+   "text": "The exact tensor functor acts linearly termwise on cochains. Its mapDerivedCategoryFactors is the prescribed localization lifting. Apply Localization.functor_linear_iff to Q and this lifting, using the equality of derived actions from the preceding step.",
+   "uses": [
+    "lem-weil-integral-constructible-linear"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EL, tensor functoriality and scalar linearity; Mathlib derived localization transports the equality to derived morphisms."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-sheaf-line-evaluation-inverse-pair",
+  "lem-weil-integral-constructible-linear"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/sk-def-sp-tate-twist-locally-free.proof.md",
+  "place": "Proof (3), exact tensor by a coefficient line; coefficient linearity extracted for the integral constructible restriction. Blueprint search for coefficient-linear found det-sp-tower-classes, whose statement is different; the constant-action specialization here is not a duplicate blueprint statement."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "mapDerivedCategory.*Linear",
+   "results": "Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor: instance [F.Linear R] : F.mapDerivedCategory.Linear R.",
+   "date": "2026-10-27",
+   "verdict": "The generic theorem supplies the localization argument, but its linear structure must be identified with the project constant-section action."
+  },
+  {
+   "tool": "loogle",
+   "query": "Functor.Linear",
+   "results": "Functor.linear_of_iso, Functor.map_smul, and linear functor composition.",
+   "date": "2026-10-27",
+   "verdict": "Used to transport sheaf tensor linearity through the specified site presentation."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An exact derived tensor functor is linear over the coefficient ring",
+   "results": "Functor.mapDerivedCategory linearity; tensorRight linearity.",
+   "date": "2026-10-27",
+   "verdict": "No result directly mentions the recorded constant-section action. The lemma connects that action to localization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An exact derived tensor functor is linear over the coefficient ring",
+   "results": "8 hits, including CategoryTheory.tensorRight_linear and CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory in Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor; other hits concern tensor exactness or Ext.",
+   "date": "2026-10-27",
+   "verdict": "Use the generic localization criterion after identifying the project constant-section action with Localization.linear. None of the hits states that identification for these coefficient sheaves."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CompletedLineTensorCoherence",
+  "group": "H1",
+  "date": "2026-10-27"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-def-sp-tate-twist-locally-free",
+   "place": "Integral constructible line tensor is coefficient-linear.",
+   "via": [
+    "lem-pur-completed-line-tensor-coherence"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-an",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ExactTensorCoefficientLinear",
+  "file": "lean/Sheaf/Paper/ExactTensorCoefficientLinear.lean",
+  "declaration": "WeilConjectures.exactTensorCoefficientLinear",
+  "statement": "theorem exactTensorCoefficientLinear (P : integralTowerModules l E Y)\n    [(SheafOfModules.siteSheafTensorRight.{u, u + 1, u + 1, u + 1}\n      (A := completedIntegralCommRingSheafUnrestricted l E Y) P).Additive]\n    [PreservesFiniteLimits (SheafOfModules.siteSheafTensorRight.{u, u + 1, u + 1, u + 1}\n      (A := completedIntegralCommRingSheafUnrestricted l E Y) P)]\n    [PreservesFiniteColimits (SheafOfModules.siteSheafTensorRight.{u, u + 1, u + 1, u + 1}\n      (A := completedIntegralCommRingSheafUnrestricted l E Y) P)] :\n    (SheafOfModules.siteSheafTensorRight.{u, u + 1, u + 1, u + 1}\n      (A := completedIntegralCommRingSheafUnrestricted l E Y) P).mapDerivedCategory.Linear\n        (Padic.coefficientExtensionIntegers l E)",
+  "by": "H1",
+  "date": "2026-10-27",
+  "branch": "sheaf-dag"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-0ee8b",
+  "group": "H1",
+  "result": "fix",
+  "landing": "20261027T151710-L-1194234",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-0ee8b",
+  "group": "H1",
+  "result": "fix",
+  "landing": "20261027T151710-L-1194234",
+  "kind": "interface",
+  "note": "independent cc review: delivered item, 4 new aux modules, verbatim PointEvaluationCompletion split, and 7 node files checked against the clone (published lines 1-520 diffed against Models), node statements and the lean records; sandbox compiles of the delivered set, the fixed set, unsplit/published originals and CompletedHomScalarTranspose; #print axioms"
+ }
+}

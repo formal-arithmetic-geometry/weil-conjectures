@@ -1,0 +1,136 @@
+{
+ "id": "lem-pur-signed-line-native-evaluation",
+ "kind": "statement",
+ "title": "The native pairing of every signed line power is an isomorphism",
+ "statement": "Let C be a category with Grothendieck topology J, essentially small in the coefficient universe, with additive sheafification and the locally bijective description of W. Suppose additive sheafification and the same description hold on every slice site, and commutative-to-ring sheaf composition is available on the site and slices. Let R be a sheaf of commutative rings and L a locally free rank-one R-module sheaf [lem-pur-sheaf-line-evaluation-inverse-pair]. Use the existing signedLinePower [lem-pur-signed-line-scalar-tensor-tower]: positive powers are scalarTensorPower, degree zero is the unit, and negative powers are Hom into the unit. Define signedLinePairing by multiplication at zero, actual internal Hom evaluation at positive powers and evaluation with the two arguments exchanged at negative powers. For every integer m there is an isomorphism signedLinePower L m tensor signedLinePower L (-m) ≅ R whose formula on pure tensors is exactly signedLinePairing. No choice of line or pairing is assumed.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03EO and 04TT, rank-one local evaluation and sheaf internal Hom; blueprint Proof (3), evaluation of signed powers."
+ },
+ "stmt_deps": [
+  "lem-pur-signed-line-scalar-tensor-tower",
+  "lem-pur-sheaf-line-evaluation-inverse-pair"
+ ],
+ "proof": [
+  {
+   "text": "Choose a rank-one trivializing covering for L. The existing power_over_unit theorem trivializes every positive tensor power on the same covering. Local unit isomorphisms give invertibility, hence rank-one local freeness of each positive power.",
+   "uses": [
+    "lem-pur-signed-line-scalar-tensor-tower"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03EO and 04TT, rank-one local evaluation and sheaf internal Hom; blueprint Proof (3), evaluation of signed powers."
+   }
+  },
+  {
+   "text": "For any rank-one P, refine its covering family to a covering sieve at each object. Pull the unit trivializations to each member of that sieve using overFunctorMap, overMap and overMapUnitIso. The normalized Hom evaluation is locally invertible on this sieve and therefore globally invertible. Its pure-section formula is actual evaluation.",
+   "uses": [
+    "lem-pur-sheaf-line-evaluation-inverse-pair"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03EO and 04TT, rank-one local evaluation and sheaf internal Hom; blueprint Proof (3), evaluation of signed powers."
+   }
+  },
+  {
+   "text": "For positive m apply this evaluation to the positive power. For negative m precompose the corresponding positive evaluation with the braiding, whose pure formula swaps the factors. At zero use the right unitor and commutativity of coefficient multiplication. These give precisely the three cases of the explicitly constructed signedLinePairing. Empty sites and the zero ring require no exceptions.",
+   "uses": [
+    "lem-pur-sheaf-line-evaluation-inverse-pair"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03EO and 04TT, rank-one local evaluation and sheaf internal Hom; blueprint Proof (3), evaluation of signed powers."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-signed-line-scalar-tensor-tower",
+  "lem-pur-sheaf-line-evaluation-inverse-pair"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/sk-def-sp-tate-twist-locally-free.proof.md",
+  "place": "Proof (3), signed line evaluation. Extracted from the concrete item proof to check the Hom-evaluation and braiding constructions once for an arbitrary coefficient sheaf, rather than repeatedly reducing completed coefficient presentations."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Evaluation of a locally free line's tensor powers against their internal Hom dual is an isomorphism",
+   "results": "8 hits, including Module.Invertible.linearEquiv, ModuleCat.ihom_ev_app and finite-dimensional module-category evaluation.",
+   "date": "2026-10-27",
+   "verdict": "These are module results; use the existing project sheaf evaluation and local trivializations."
+  },
+  {
+   "tool": "loogle",
+   "query": "IsFiniteLocallyFreeOfRank",
+   "results": "No hits: unknown identifier in this index. The adopted source tree proves isInvertible_iff_isFiniteLocallyFreeOfRank_one and the covering characterization.",
+   "date": "2026-10-27",
+   "verdict": "Use the adopted source lemmas and the existing signed-line local power theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A locally free rank-one sheaf has invertible evaluation to its dual for all signed tensor powers",
+   "results": "8 hits, including TensorPower.pairingDual, Module.Invertible.instDual, Picard inverse-dual identities and module dual tensor Hom equivalences.",
+   "date": "2026-10-27",
+   "verdict": "No result gives the specified slice-Hom sheaf evaluation for these signed powers."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CompletedLineTensorCoherence",
+  "group": "H1",
+  "date": "2026-10-27"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-def-sp-tate-twist-locally-free",
+   "place": "Evaluation of signed line powers and tensor cancellation.",
+   "via": [
+    "lem-pur-completed-line-tensor-coherence"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-an",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Category.ModuleCat.Sheaf.SignedLineEvaluation",
+  "file": "lean/Sheaf/Algebra/Category/ModuleCat/Sheaf/SignedLineEvaluation.lean",
+  "declaration": "SheafOfModules.signedLineEvaluation_exists",
+  "declarations": [
+   "SheafOfModules.signedLinePairing",
+   "SheafOfModules.signedLineEvaluation_exists"
+  ],
+  "statement": "theorem signedLineEvaluation_exists (L : LineEvaluation.Modules.{uC, vC, r} R)\n    [L.IsFiniteLocallyFreeOfRank 1] (m : ℤ) :\n    ∃ e : signedLinePower.{uC, vC, r} L m ⊗ signedLinePower.{uC, vC, r} L (-m) ≅ unit\n        ((sheafCompose (J)\n          (forget₂ CommRingCat RingCat)).obj\n            (R)),\n      ∀ U a b, e.hom.val.app U\n        (LineEvaluation.pureTensor.{uC, vC, r}\n          (R) _ _ U a b) =\n        signedLinePairing.{uC, vC, r} R L m U a b",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-0ee8b",
+  "group": "H1",
+  "result": "fix",
+  "landing": "20261027T151710-L-1194234",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-0ee8b",
+  "group": "H1",
+  "result": "fix",
+  "landing": "20261027T151710-L-1194234",
+  "kind": "interface",
+  "note": "independent cc review: delivered item, 4 new aux modules, verbatim PointEvaluationCompletion split, and 7 node files checked against the clone (published lines 1-520 diffed against Models), node statements and the lean records; sandbox compiles of the delivered set, the fixed set, unsplit/published originals and CompletedHomScalarTranspose; #print axioms"
+ }
+}

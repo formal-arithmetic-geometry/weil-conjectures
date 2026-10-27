@@ -1,0 +1,135 @@
+{
+ "id": "lem-pur-ordinary-scalar-unit-all-complexes",
+ "kind": "statement",
+ "title": "Ordinary identity scalar extension has its normalized derived unitor on all complexes",
+ "statement": "Let l be prime, E a finite extension of Q_l, and X a scheme, with independent scheme and coefficient universes. The recorded ordinary derived scalar extension along the identity of E admits a natural isomorphism to the identity functor. On the localization Q(P) of every cochain complex P, its hom component is the specified derived scalar counit followed by Q applied to the specified cochain multiplication unitor. This assertion constructs the isomorphism and its formula; uniqueness on the good-complex localization is a separate argument in the parent theorem.",
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tag 06YY; blueprint Proof (3), ordinary identity-scalar normalization."
+ },
+ "stmt_deps": [
+  "lem-weil-finite-free-completed-scalar-comparison"
+ ],
+ "proof": [
+  {
+   "text": "The existing cochain multiplication unitor identifies ordinary identity scalar extension on cochains with the identity. Whisker with Q. The resulting functor inverts quasi-isomorphisms, so its universal left-derived counit is an isomorphism.",
+   "uses": [
+    "lem-weil-finite-free-completed-scalar-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 06YY; blueprint Proof (3), ordinary identity-scalar normalization."
+   }
+  },
+  {
+   "text": "Compose that derived counit with the cochain multiplication unitor and the functor unitors. Fully faithful precomposition by Q gives a unique preimage natural isomorphism of derived functors. Its map-preimage equation is exactly the required formula on Q(P), for every complex P.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 06YY; blueprint Proof (3), ordinary identity-scalar normalization."
+   }
+  },
+  {
+   "text": "The existing cochain model has precisely the published ordinary and derived scalar-extension functors and the published counit. Substitute these identities into the preceding abstract construction. The resulting isomorphism has the stated normalization without any choice of chain inverse to completion.",
+   "uses": [
+    "lem-weil-finite-free-completed-scalar-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 06YY; blueprint Proof (3), ordinary identity-scalar normalization."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-finite-free-completed-scalar-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/sk-def-sp-tate-twist-locally-free.proof.md",
+  "place": "Proof (3), ordinary multiplication and localization; this is the construction part of the existing ordinaryUnit_existsUnique proof, extracted after profiling its concrete cochain-model conversions."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "completedScalarCochainModel.*(functor|complex|counit)",
+   "results": "Existing cochain-model projections and counit in FiniteFreeCompletedScalarComparison, and their use in the original CompletedLineTensorCoherence proof.",
+   "date": "2026-10-27",
+   "verdict": "Reuse the existing model and its universal counit; no new scalar-extension construction."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "an identity ordinary scalar extension has a derived identity isomorphism normalized by its derived counit on every complex",
+   "results": "8 hits, including ModuleCat.extendScalarsId and differential-object comparison unitors.",
+   "date": "2026-10-27",
+   "verdict": "These provide ordinary or unrelated unitors, not the normalized derived unitor for the recorded completed coefficient construction."
+  },
+  {
+   "tool": "loogle",
+   "query": "Functor.isIso_of_isLeftDerivedFunctor_of_inverts",
+   "results": "0 hits; identifier not known to the remote Loogle index.",
+   "date": "2026-10-27",
+   "verdict": "The locally available Mathlib declaration is used in the proof."
+  },
+  {
+   "tool": "leansearch",
+   "query": "left derived functor isomorphic identity functor localization counit",
+   "results": "8 hits, including Functor.isLeftDerivedFunctor_of_inverts, Functor.isLeftDerivedFunctor_iff_of_inverts, and totalLeftDerivedCounit.",
+   "date": "2026-10-27",
+   "verdict": "The generic localization theorem supplies the abstract argument. The new theorem identifies the recorded model, scalar counit and multiplication on all complexes."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CompletedLineTensorCoherence",
+  "group": "H1",
+  "date": "2026-10-27"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-def-sp-tate-twist-locally-free",
+   "place": "Ordinary identity-scalar multiplication and its derived normalization.",
+   "via": [
+    "lem-pur-completed-line-tensor-coherence"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-an",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CompletedScalarIdentityUnit",
+  "file": "lean/Sheaf/Paper/CompletedScalarIdentityUnit.lean",
+  "declaration": "WeilConjectures.CompletedLineTensor.ordinaryUnitOnComplexes_exists",
+  "statement": "theorem ordinaryUnitOnComplexes_exists :\n    ∃ e : completedDerivedScalarExtension l E E (AlgHom.id ℚ_[l] E) X ≅ 𝟭 _,\n      ∀ P : CochainComplex (integralTowerModules l E X) ℤ,\n        e.hom.app (DerivedCategory.Q.obj P) =\n          completedScalarCounit l E E (AlgHom.id ℚ_[l] E) X P ≫\n            DerivedCategory.Q.map ((completedScalarIdentityMultiplication l E X).hom.app P)",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-0ee8b",
+  "group": "H1",
+  "result": "fix",
+  "landing": "20261027T151710-L-1194234",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-0ee8b",
+  "group": "H1",
+  "result": "fix",
+  "landing": "20261027T151710-L-1194234",
+  "kind": "interface",
+  "note": "independent cc review: delivered item, 4 new aux modules, verbatim PointEvaluationCompletion split, and 7 node files checked against the clone (published lines 1-520 diffed against Models), node statements and the lean records; sandbox compiles of the delivered set, the fixed set, unsplit/published originals and CompletedHomScalarTranspose; #print axioms"
+ }
+}
