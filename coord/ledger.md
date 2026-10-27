@@ -20119,3 +20119,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 21:03 L: merged deliver/NB/lem-route-inverse-image-module-lift (stage 2; reviewer PASS; parallel immutable checks); batch 20261027T205736; landing 20261027T210319-NB-1688410 (proof)
 - 21:03 L: merged deliver/NC/lem-route-inverse-image-constant-comparison (stage 2; reviewer FIX; parallel immutable checks); batch 20261027T205736; landing 20261027T210320-NC-1688717 (proof)
 - 21:12 L: returned deliver/C2/Sheaf.Paper.CompletedPullbackTowerRealizations (reviewer RETURN: (reviewer C-f3fd5, head f3fd5dfde) D1/G1: the item sorry pullbackTensorTensorTower_existsUnique is unchanged, and the ne)
+- 21:16 L: returned deliver/NC/lem-pur-derived-pullback-tensor-constraints-common-composition-existence (reviewer RETURN: I read the item, the Lean declaration (DerivedPullbackTensorConstraints.lean:230; commonStagePullbackComparison at Deriv)
