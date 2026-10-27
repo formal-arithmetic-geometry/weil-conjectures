@@ -1,0 +1,141 @@
+{
+ "id": "lem-pur-intrinsic-coefficient-stage-shift-coherence",
+ "kind": "statement",
+ "title": "Intrinsic finite coefficient stage data and associator shift compatibility",
+ "statement": "Fix a finite-field datum D, a prime l different from D.p, an algebraic closure Ω of Q_l, and any scheme Y. Use the prescribed small finite coefficient models and their conjugated inclusion maps. Let the finite stages, integral and rational scalar transitions, their normalized shift comparisons, exactness, tensor associators and unitors be the existing intrinsic constructions, with the same signatures and data. Then for every E≤L≤M the prescribed scalar associator commutes with the prescribed integral-image-normalized integer shifts. The assertion includes repeated fields and identity inclusions. This node also records the existing finite-stage data relocated unchanged from SfAlgebraicallyClosedCoefficients into SfCoefficientStageCore; the original module publicly re-exports them.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-def-sfb-filtered-two-colimit/det-def-sfb-filtered-two-colimit-model.proof.md",
+  "place": "Tensor-generator localization step in the retained common-stage shift clause; abstract version of the rational step of lem-pur-intrinsic-associator-shift-square, without its general-stage specialization."
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-finite-subextension-directed-set",
+  "lem-route-coefficient-inclusion-laws",
+  "def-weil-derived-complete-integral-detailed",
+  "def-weil-rationalization-karoubi",
+  "lem-weil-scalar-extension-composition",
+  "lem-route-integral-transition-comm-shift-exists-unique",
+  "lem-route-transition-comm-shift-exists-unique",
+  "def-weil-l-adic-numbers",
+  "def-weil-algebraic-closure",
+  "def-weil-triangulated-category"
+ ],
+ "proof": [
+  {
+   "text": "Keep all finite-stage data constructions unchanged. Lift the normalized integral transition comparison through the fully faithful intrinsic inclusion. The ordinary derived tensor compositor commutes with shifts; the defining comparison equations therefore give integral compositor compatibility after whiskering by that inclusion. Faithfulness reflects the square, and equality induction supplies the corrected coefficient-composition equality. Apply the abstract rational associator compatibility theorem using exactly the specified degree-one rational shifts and comparison normalizations. Compare the whole corrected associators to specialize to the fixed small coefficient models, obtaining the required scalar associator square without expanding its concrete components. Coefficient inclusion laws and scalar tensor coherence also supply the existing component cocycle. Every step includes reflexive coefficient maps.",
+   "uses": [
+    "lem-route-coefficient-inclusion-laws",
+    "lem-route-integral-transition-comm-shift-exists-unique",
+    "lem-route-transition-comm-shift-exists-unique",
+    "lem-weil-scalar-extension-composition",
+    "lem-pur-intrinsic-rational-associator-shift-compat"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-route-coefficient-inclusion-laws",
+  "lem-route-integral-transition-comm-shift-exists-unique",
+  "lem-route-transition-comm-shift-exists-unique",
+  "lem-weil-scalar-extension-composition",
+  "lem-pur-intrinsic-rational-associator-shift-compat"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "agent": "D2",
+  "date": "2026-10-28",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-def-sfb-filtered-two-colimit/det-def-sfb-filtered-two-colimit-model.proof.md",
+  "place": "Tensor-generator localization step in the retained common-stage shift clause; abstract version of the rational step of lem-pur-intrinsic-associator-shift-square, without its general-stage specialization."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A natural scalar associator on a localized category commutes with normalized integer shifts if its integral associator does",
+   "results": "{'ok': True, 'n_hits': 8, 'top': ['CategoryTheory.Functor.commShiftOfLocalization', 'CategoryTheory.NatTrans.commShift_iso_hom_of_localization', 'CategoryTheory.Shift.instLinearLocalizationShiftFunctorOfCommShiftOfQ', \"CategoryTheory.Shift.instLinearLocalization'ShiftFunctorOfCommShiftOfQ'\", \"CategoryTheory.MorphismProperty.commShift_Q'\", 'CategoryTheory.Localization.SmallShiftedHom.comp_assoc', 'CategoryTheory.Functor.commShiftOfLocalization.iso_hom_app_assoc', 'CategoryTheory.Shift.linear_of_localization'], 'digest': '1ddabdbeb6bc763c'}",
+   "date": "2026-10-28",
+   "verdict": "Generic categorical-localization or CommShift APIs only; none supplies the tensor-Hom scalar-localization compositor equation with the prescribed raw rational shifts and normalizations."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatTrans.CommShift",
+   "results": "{'ok': True, 'n_hits': 12, 'top': ['CategoryTheory.NatTrans.CommShift.id', 'CategoryTheory.NatTrans.CommShift.isoRefl_hom', 'CategoryTheory.NatTrans.CommShift', 'CategoryTheory.Functor.CommShift.ofIso_compatibility', 'CategoryTheory.NatTrans.CommShift.of_core', 'CategoryTheory.NatTrans.CommShift.leftUnitor', 'CategoryTheory.NatTrans.CommShift.rightUnitor', 'CategoryTheory.NatTrans.CommShift.of_iso_inv'], 'digest': '90520e9555bd11f4'}",
+   "date": "2026-10-28",
+   "verdict": "Generic categorical-localization or CommShift APIs only; none supplies the tensor-Hom scalar-localization compositor equation with the prescribed raw rational shifts and normalizations."
+  },
+  {
+   "tool": "grep",
+   "query": "CommShift|commShift",
+   "results": "{'ok': True, 'n_hits': 5, 'top': ['90', '91', '94', '96', '104'], 'digest': 'efd3dfb559e1ce53'}",
+   "date": "2026-10-28",
+   "verdict": "Generic categorical-localization or CommShift APIs only; none supplies the tensor-Hom scalar-localization compositor equation with the prescribed raw rational shifts and normalizations."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "proved",
+ "created": {
+  "by": "worker",
+  "group": "D2",
+  "item": "Sheaf.Paper.SfAlgebraicallyClosedCoefficients",
+  "date": "2026-10-28"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-operations",
+ "blueprint": {
+  "from": {
+   "node": "lem-pur-general-intrinsic-finite-field-transport",
+   "place": "Finite-stage part and normalized scalar associator square of the intrinsic pair construction.",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ },
+ "lean": {
+  "module": "Sheaf.Paper.SfCoefficientStageCore",
+  "file": "lean/Sheaf/Paper/SfCoefficientStageCore.lean",
+  "declaration": "WeilConjectures.SfAlgebraicallyClosedCoefficients.associator_commShift",
+  "declarations": [
+   "WeilConjectures.SfAlgebraicallyClosedCoefficients.Stage",
+   "WeilConjectures.SfAlgebraicallyClosedCoefficients.stageCategory",
+   "WeilConjectures.SfAlgebraicallyClosedCoefficients.stagePreadditive",
+   "WeilConjectures.SfAlgebraicallyClosedCoefficients.stageZero",
+   "WeilConjectures.SfAlgebraicallyClosedCoefficients.stageShift",
+   "WeilConjectures.SfAlgebraicallyClosedCoefficients.stageShiftAdditive",
+   "WeilConjectures.SfAlgebraicallyClosedCoefficients.stagePretriangulated",
+   "WeilConjectures.SfAlgebraicallyClosedCoefficients.stageTriangulated",
+   "WeilConjectures.SfAlgebraicallyClosedCoefficients.transition",
+   "WeilConjectures.SfAlgebraicallyClosedCoefficients.integralTransitionCommShift",
+   "WeilConjectures.SfAlgebraicallyClosedCoefficients.transitionCommShift",
+   "WeilConjectures.SfAlgebraicallyClosedCoefficients.transitionAdditive",
+   "WeilConjectures.SfAlgebraicallyClosedCoefficients.associator",
+   "WeilConjectures.SfAlgebraicallyClosedCoefficients.unitor",
+   "WeilConjectures.SfAlgebraicallyClosedCoefficients.associator_commShift",
+   "WeilConjectures.SfAlgebraicallyClosedCoefficients.associator_cocycle"
+  ],
+  "statement": "theorem associator_commShift (E L M : Index l Ω) (h : E ≤ L) (k : L ≤ M) :\n    NatTrans.CommShift (associator D l hl Ω Y E L M h k).hom ℤ",
+  "existing": false,
+  "branch": "sheaf-dag",
+  "by": "D2",
+  "date": "2026-10-28",
+  "note": "The one new public theorem is associator_commShift, previously a proved private helper in the item. Other attached declarations are the existing finite-stage data relocated with signatures and bodies unchanged from the item. The three existing normalization/exactness theorem nodes keep their ownership and now point to this core. No sorry occurs here; the proof imports the one named rational associator intermediate."
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-f2508",
+  "group": "D2",
+  "result": "fix",
+  "landing": "20261027T233842-L-4123375",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-f2508",
+  "group": "D2",
+  "result": "fix",
+  "landing": "20261027T233842-L-4123375",
+  "kind": "interface",
+  "note": "independent cc review: Delivered item/core/normalization/rational modules and 7 node files vs published SfAlgebraicallyClosedCoefficients (per-declaration byte comparison), DAG nodes, and the 2 direct importers compiled against the delivered set"
+ }
+}

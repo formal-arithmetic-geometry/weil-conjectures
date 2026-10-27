@@ -21,7 +21,8 @@
   "lem-route-integral-transition-comm-shift-exists-unique",
   "lem-route-transition-comm-shift-exists-unique",
   "def-weil-directed-colimit-abelian-groups",
-  "def-weil-triangulated-category"
+  "def-weil-triangulated-category",
+  "lem-pur-intrinsic-coefficient-stage-shift-coherence"
  ],
  "proof": [
   {
@@ -29,7 +30,8 @@
    "uses": [
     "lem-route-coefficient-inclusion-laws",
     "lem-route-integral-transition-comm-shift-exists-unique",
-    "lem-route-transition-comm-shift-exists-unique"
+    "lem-route-transition-comm-shift-exists-unique",
+    "lem-pur-intrinsic-coefficient-stage-shift-coherence"
    ],
    "elementary": false,
    "source": {
@@ -42,7 +44,8 @@
    "uses": [
     "lem-weil-scalar-extension-composition",
     "lem-route-coefficient-inclusion-laws",
-    "lem-route-transition-exact"
+    "lem-route-transition-exact",
+    "lem-pur-intrinsic-coefficient-stage-shift-coherence"
    ],
    "elementary": false,
    "source": {
@@ -51,52 +54,57 @@
    }
   },
   {
-   "text": "Let $S$ denote the datum-free normalized system. Use the equality $\\eta:S=S_D$ supplied by the specialization-pairs theorem. It identifies the literal pairs, the representative maps and the actual associator-conjugated transports, including repeated fields. Apply the datum-free pair-Hom-coordinate theorem to $S$ and substitute along $\\eta$. More explicitly, eliminate $\\eta$; then $S_D$, its common-overfield indices, each group $G_L$ and each map $t_{LM}$ become the identical expressions for $S$. That theorem states that these maps form a directed system of abelian groups, which includes additivity, $t_{LL}=1$ and $t_{MN}t_{LM}=t_{LN}$. It also supplies the unique coordinate equivalence with $[L,u]\\mapsto\\iota_L(u)$. After substitution this is the required equivalence for the actual colimit on $P_D$, not for a separately selected isomorphic model.",
+   "text": "Work directly with the prescribed intrinsic StageSystem, rather than passing through its datum-free specialization. Additivity of representative transport follows by expanding its associator conjugation and applying additivity of the scalar functor and bilinearity of stage composition. The cocycle makes reflexive transport idempotent. The scalar unitor identifies the reflexive transition with the identity, so it is faithful; injectivity of the transported map turns idempotence into the identity law. StageSystem.tr_tr gives the composition law. The private generic_coordinates construction sends each quotient representative [L,u] to its class in the set direct limit, with inverse given by the same representative in PairCategory. Both are well-defined by the eventual-equality criteria. Compose this equivalence with Mathlib Module.DirectLimit.linearEquiv to obtain the actual abelian-group colimit coordinates. Representative induction proves uniqueness.",
    "uses": [
-    "lem-pur-general-specialization-pairs",
-    "lem-pur-general-pair-hom-coordinates"
+    "lem-weil-scalar-extension-composition",
+    "def-sf-directed-common-stage-data",
+    "def-weil-directed-colimit-abelian-groups"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sfb-qlbar-two-colimit/_section.md",
-    "place": "Retained old owning argument 13, actual transports and quotient/abelian-colimit coordinates; SfAlgebraicallyClosedCoefficients.lean:906-1000."
+    "place": "Retained old owning argument 13, actual transports and quotient/abelian-colimit coordinates; private stage_transport_self and generic_coordinates, and public transportSystem and homCoordinates_existsUnique."
    }
   },
   {
-   "text": "Under the same equality substitution the group structure pulled back from the specified colimit is the one in the pair-Hom-coordinate theorem: both its underlying equivalence and its representative normalization coincide by uniqueness. Consequently $[L,u]+[L,v]=[L,u+v]$ and $[L,0]=0$. The theorem gives bilinear composition, additive inclusions, finite representatives, their eventual-equality criterion, and the zero pair at the bottom coefficient field. All these statements concern the original pair-category composition. They therefore give exactly the requested Hom laws and zero object on $P_D$.",
+   "text": "Transfer the abelian-group structure through the uniquely normalized coordinate equivalence. Its additivity and the additive structure maps of the direct limit give [L,u]+[L,v]=[L,u+v] and [L,0]=0. Represent two summands at a common field and move the third map there as well; the explicit common-stage composition formula and stage bilinearity prove bilinearity of the original pair-category composition. The inclusion formula is a representative conjugated by fixed scalar unit/associator components, so this same sum formula proves inclusion additivity. Quotient representative induction and the quotient eventual-equality criterion prove representatives and their equality criterion. At the bottom field take the image of the stage zero object. Its identity is a representative of zero, because the exact reflexive transition sends zero to zero; hence that literal pair is a zero object.",
    "uses": [
-    "lem-pur-general-specialization-pairs",
-    "lem-pur-general-pair-hom-coordinates"
+    "def-sf-directed-common-stage-data",
+    "def-weil-directed-colimit-abelian-groups",
+    "lem-route-transition-exact"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sfb-qlbar-two-colimit/_section.md",
-    "place": "Retained old owning argument 13, transferred groups, composition, inclusions, representatives and zero; SfAlgebraicallyClosedCoefficients.lean:1001-1128, 1205-1221."
+    "place": "Retained old owning argument 13, transferred groups, composition, inclusions, representatives and zero; coordinates_add/zero, pair_composition_bilinear, inclusion_additive, representatives and zero_exists."
    }
   },
   {
-   "text": "By parameter independence of the normalized shifts, the comparison for $S$ becomes the comparison $\\sigma_{EL,n}$ of step 1 after the transition identifications. Apply the pair-shift-normalization theorem to $S$ and substitute along $\\eta$. Equality elimination retains the object expression $(E,K[n])$, the class expression $[L,\\sigma_{FL,n,H}^{-1}\\circ u[n]\\circ\\sigma_{EL,n,K}]$, additivity, and the identity components of every inclusion comparison. The zero and addition coherence data are substituted with the functors. Conversely, a full coherent structure satisfying the required formulas on $P_D$ substitutes back to one satisfying the datum-free theorem. Its uniqueness equates that entire structure with the one just obtained. Substituting the equality forward proves the claimed uniqueness of the full structure on $P_D$.",
+   "text": "First prove that the prescribed scalar associators commute with the prescribed transition shifts. Lift the ordinary tensor shift through the fully faithful intrinsic inclusion, using the existing normalization theorem. The ordinary derived tensor compositor commutes with shifts. Apply the fully faithful inclusion to the integral compositor square; its defining ordinary-comparison equation and the normalized inclusion comparison reduce it to that ordinary square. Equality induction on the composite coefficient inclusion proves the corrected integral associator square. Apply the abstract rational-associator compatibility lemma to this integral square. Its hypotheses are the following degree-one normalization data: every object is an integral image, the rational shifts and transition comparisons have the stated integral-image normalization, and a scalar extension maps 1 tensor f to 1 tensor its integral image. The rational compositor has precisely the integral compositor as its localized component. Thus the integral square localizes to the rational square. The abstract rational-localization component remains a separately named theorem; then equality of the whole corrected scalar associators specializes the resulting natural-transformation compatibility to the fixed small models, without rechecking component conversions at Shrink fields. CommShiftCore addition and inversion extend degree one to every integer. Equality elimination transports this compatibility to the published StageSystem transitions and associators. Apply the already proved generic StageSystem.PairCategory.hasShift construction. Its object and representative formulas and identity inclusion comparisons are definitional. For additivity use the actual colimit-induced group law of step 4, represent both maps at a common field, and expand the representative shift formula using stage-shift additivity and bilinearity. To prove uniqueness, the required object and representative formulas first identify all shift functors, by Functor.hext and quotient representative induction. Every pair is literally the image of its own stage. Equality of the normalized inclusion comparisons together with their CommShift zero and addition equations therefore determines the pair shift zero and addition isomorphisms at every object, cancelling the invertible stage comparisons. Extensionality of HasShift and its monoidal structure then gives equality of the full coherent integer shift.",
    "uses": [
-    "lem-general-algebraically-closed-coefficient-stages",
-    "lem-pur-general-specialization-pairs",
-    "lem-pur-general-pair-shift-normalization"
+    "lem-route-coefficient-inclusion-laws",
+    "lem-route-integral-transition-comm-shift-exists-unique",
+    "lem-route-transition-comm-shift-exists-unique",
+    "lem-weil-scalar-extension-composition",
+    "def-sf-directed-common-stage-data",
+    "lem-pur-intrinsic-rational-associator-shift-compat",
+    "lem-pur-intrinsic-coefficient-stage-shift-coherence"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sfb-qlbar-two-colimit/_section.md",
-    "place": "Retained old owning argument 13, full pair-shift normalization; SfAlgebraicallyClosedCoefficients.lean:1129-1204."
+    "place": "Retained old owning argument 13, normalized pair shifts; private integral_corrected_comp_commShift, rational_corrected_comp_commShift, associator_commShift and pairShift_unique; the proved generic StageSystem/Shift construction."
    }
   },
   {
-   "text": "Apply the datum-free transition-shift-compatibility theorem and substitute along $\\eta$ with the normalized shifts of step 5. The canonical $\\theta_{EL}$ is fixed by its associator representative, so the associator and representative identifications in the specialization-pairs theorem preserve this actual map. Its asserted square becomes\n$$\\beta_{E,n,K}\\circ\\theta_{EL,K[n]}=\\theta_{EL,K}[n]\\circ\\beta_{L,n,T_{EL}K}\\circ j_L(\\sigma_{EL,n,K}).$$\nThis proves compatibility for the prescribed identity inclusion comparisons and every integer, including $E=L$.",
+   "text": "The preceding uniqueness proof identifies the chosen pair HasShift with the generic StageSystem.PairCategory.hasShift. Eliminate this equality. The chosen inclusion CommShift structures equal the generic StageSystem.ι_commShift structures because both have identity hom components at every integer and every object; component extensionality gives equality of the whole coherent structures. Eliminate those equalities as well. The result is precisely the proved generic StageSystem.transIso_commShift theorem, for the same published transitions and their prescribed comparisons. No new comparison is chosen, and repeated fields are included.",
    "uses": [
-    "lem-pur-general-transition-shift-compatibility",
-    "lem-pur-general-specialization-pairs"
+    "def-sf-directed-common-stage-data"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sfb-qlbar-two-colimit/_section.md",
-    "place": "Retained old owning argument 13, actual transition identifications; SfAlgebraicallyClosedCoefficients.lean:1223-1238."
+    "place": "Retained old owning argument 13, canonical stage identifications and normalized inclusion comparisons; private pairShift_transIso and the proved generic StageSystem.transIso_commShift."
    }
   },
   {
@@ -134,22 +142,20 @@
   "lem-route-transition-comm-shift-exists-unique",
   "lem-weil-scalar-extension-composition",
   "lem-route-transition-exact",
-  "lem-pur-general-specialization-pairs",
-  "lem-pur-general-pair-hom-coordinates",
-  "lem-general-algebraically-closed-coefficient-stages",
-  "lem-pur-general-pair-shift-normalization",
-  "lem-pur-general-transition-shift-compatibility",
+  "def-sf-directed-common-stage-data",
+  "def-weil-directed-colimit-abelian-groups",
+  "lem-pur-intrinsic-rational-associator-shift-compat",
   "lem-weil-integral-constructible-triangulated",
   "lem-weil-integral-constructible-linear",
   "lem-weil-linear-scalar-localization-triangulated",
-  "def-sf-directed-common-stage-data",
   "lem-route-common-stage-verdier-exists-unique",
-  "def-weil-triangulated-category"
+  "def-weil-triangulated-category",
+  "lem-pur-intrinsic-coefficient-stage-shift-coherence"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sfb-qlbar-two-colimit/_section.md",
-  "place": "Retained old owning argument 13 and its intrinsic finite-field realization; the proof assembles existing DAG theorems by equality induction and writes out the cone-isomorphism calculation. S2 (2026-10-27) writes the intrinsic scalar cocycle directly from sfRationalScalar_coherence and records the structure-extensionality uniqueness plan. D2 (2026-10-27) completes stageSystem_existsUnique by applying a proved generic record-construction and field-extensionality lemma to the natural-transformation pentagon; its cocycle is evaluated componentwise inside that generic lemma. The remaining pair-shift obligations retain their existing statements."
+  "place": "Retained old owning argument 13 and its intrinsic finite-field realization. D2 (2026-10-27) constructs the prescribed stage system directly from the scalar natural-transformation pentagon, and uses the actual quotient/direct-limit Hom coordinates. The pair shift is the proved upstream StageSystem construction, after proving associator shift compatibility from normalized ordinary/integral comparisons and localization on tensor generators. Full HasShift uniqueness follows from functor extensionality and the zero/add equations for the normalized inclusion comparisons. Equality elimination then identifies the chosen inclusion comparisons and applies the generic transition-isomorphism shift theorem. The actual finite-stage Verdier and literal-cone arguments remain unchanged. No datum-free specialization module is imported. The abstract tensor-generator rational-localization step is split as lem-pur-intrinsic-rational-associator-shift-compat, while the pair shift, full coherence uniqueness and transition compatibility proofs in the item are complete. The finite-stage definitions and scalar coherence proofs are separated into SfCoefficientStageCore, with the original module publicly re-exporting them, solely to satisfy the per-file compilation bound."
  },
  "mathlib_searches": [
   {
@@ -262,21 +268,6 @@
   "module": "Sheaf.Paper.SfAlgebraicallyClosedCoefficients",
   "declaration": "WeilConjectures.SfAlgebraicallyClosedCoefficients.shift_existsUnique",
   "declarations": [
-   "WeilConjectures.SfAlgebraicallyClosedCoefficients.Stage",
-   "WeilConjectures.SfAlgebraicallyClosedCoefficients.stageCategory",
-   "WeilConjectures.SfAlgebraicallyClosedCoefficients.stagePreadditive",
-   "WeilConjectures.SfAlgebraicallyClosedCoefficients.stageZero",
-   "WeilConjectures.SfAlgebraicallyClosedCoefficients.stageShift",
-   "WeilConjectures.SfAlgebraicallyClosedCoefficients.stageShiftAdditive",
-   "WeilConjectures.SfAlgebraicallyClosedCoefficients.stagePretriangulated",
-   "WeilConjectures.SfAlgebraicallyClosedCoefficients.stageTriangulated",
-   "WeilConjectures.SfAlgebraicallyClosedCoefficients.transition",
-   "WeilConjectures.SfAlgebraicallyClosedCoefficients.integralTransitionCommShift",
-   "WeilConjectures.SfAlgebraicallyClosedCoefficients.transitionCommShift",
-   "WeilConjectures.SfAlgebraicallyClosedCoefficients.transitionAdditive",
-   "WeilConjectures.SfAlgebraicallyClosedCoefficients.associator",
-   "WeilConjectures.SfAlgebraicallyClosedCoefficients.unitor",
-   "WeilConjectures.SfAlgebraicallyClosedCoefficients.associator_cocycle",
    "WeilConjectures.SfAlgebraicallyClosedCoefficients.stageSystem_existsUnique",
    "WeilConjectures.SfAlgebraicallyClosedCoefficients.stageSystem",
    "WeilConjectures.SfAlgebraicallyClosedCoefficients.stageTransition",
@@ -328,7 +319,7 @@
   "by": "NN",
   "date": "2026-10-27",
   "existing": true,
-  "note": "Existing intrinsic finite-field construction, not the legacy AlgebraicallyClosedCoefficients presentation. The primary theorem gives uniqueness of the full coherent integer shift with the literal object/representative formulas and identity inclusion components. The listed companion declarations give ordinary-to-completed integral normalization, integral-image rational normalization, equality-transported exact/additive published transitions, actual directed Hom colimits and their normalized coordinates, bilinear composition, additive inclusions, zero, shift-compatible canonical identifications, common-stage Verdier triangles and the literal-pair cone. These are existing statements, some still sorry; no proof completion or new module is claimed. Reviewer fix: the route theorems integralTransitionCommShift_existsUnique, transitionCommShift_existsUnique (owned by the cited lem-route-integral-transition-comm-shift-exists-unique and lem-route-transition-comm-shift-exists-unique) and transitionExact (owned by lem-route-transition-exact) are used, not re-owned, here; the module's remaining public declarations released by def-weil-algebraically-closed-coefficients (lean_invalidation.previous_lean) — the raw stages and their instances, transition, associator, unitor, associator_cocycle, stageTransition, pairCategory, Common, StageHom, ofHom, the colimit helpers and sfAlgebraicallyClosedConstructibleCategory — are owned by this item.",
+  "note": "Existing intrinsic finite-field construction, not the legacy AlgebraicallyClosedCoefficients presentation. The primary theorem gives uniqueness of the full coherent integer shift with the literal object/representative formulas and identity inclusion components. The listed companion declarations give ordinary-to-completed integral normalization, integral-image rational normalization, equality-transported exact/additive published transitions, actual directed Hom colimits and their normalized coordinates, bilinear composition, additive inclusions, zero, shift-compatible canonical identifications, common-stage Verdier triangles and the literal-pair cone. These are existing statements, some still sorry; no proof completion or new module is claimed. Reviewer fix: the route theorems integralTransitionCommShift_existsUnique, transitionCommShift_existsUnique (owned by the cited lem-route-integral-transition-comm-shift-exists-unique and lem-route-transition-comm-shift-exists-unique) and transitionExact (owned by lem-route-transition-exact) are used, not re-owned, here; the module's remaining public declarations released by def-weil-algebraically-closed-coefficients (lean_invalidation.previous_lean) — the raw stages and their instances, transition, associator, unitor, associator_cocycle, stageTransition, pairCategory, Common, StageHom, ofHom, the colimit helpers and sfAlgebraicallyClosedConstructibleCategory — are owned by this item. D2: the finite-stage definitions and scalar coherence declarations are now defined in SfCoefficientStageCore, publicly re-exported here, and attached to lem-pur-intrinsic-coefficient-stage-shift-coherence; the pair-category declarations and primary shift theorem stay in this module.",
   "fixed_by": "NT-stage2-cc-e87835a9b"
  },
  "reviewed_lean": {
@@ -342,11 +333,11 @@
  "reviewed_proof": {
   "date": "2026-10-27",
   "by": "L",
-  "reviewer": "COMPILER",
+  "reviewer": "C-f2508",
   "group": "D2",
-  "result": "pass",
-  "landing": "20261027T135059-L-3664847",
-  "kind": "proof",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "result": "fix",
+  "landing": "20261027T233842-L-4123375",
+  "kind": "interface",
+  "note": "independent cc review: Delivered item/core/normalization/rational modules and 7 node files vs published SfAlgebraicallyClosedCoefficients (per-declaration byte comparison), DAG nodes, and the 2 direct importers compiled against the delivered set"
  }
 }

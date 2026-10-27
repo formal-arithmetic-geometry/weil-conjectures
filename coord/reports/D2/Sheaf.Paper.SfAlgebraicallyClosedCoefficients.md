@@ -1,73 +1,124 @@
 ## What changed
 
-Proved `WeilConjectures.SfAlgebraicallyClosedCoefficients.stageSystem_existsUnique`
-using the actual intrinsic scalar transitions, associators and their proved pentagon.
-The private generic helper `stage_spec_existsUnique` evaluates a natural-transformation
-pentagon componentwise to construct a `StageSystem`. Its uniqueness proof equates the
-transition functions, then the dependent associator functions, and finishes by proof
-irrelevance for the cocycle field. It constructs the prescribed data directly.
+Replaced both remaining item `sorry` bodies by proofs using the proved upstream
+`StageSystem.PairCategory.hasShift`. Its object and representative formulas are
+literal. Additivity follows from the actual colimit-induced common-stage sum
+formula. Uniqueness identifies the shift functors, then their zero/addition
+coherence maps using the identity inclusion comparisons. The canonical transition
+isomorphisms commute with shifts by the upstream pair-category theorem after
+identifying the chosen shift and comparison structures.
 
-The componentwise cocycle supplied directly to the concrete record caused a kernel
-conversion timeout. Profiling isolated kernel checking rather than elaboration.
-Passing the natural-transformation pentagon into the generic construction reduces
-that theorem's kernel check to milliseconds. The profiled whole module compiled in
-41.5 seconds; all profiler settings were removed. The final clean module compiled without warnings
-in 41.8 seconds through lcompile.py.
+The scalar associator compatibility is proved integrally by ordinary derived tensor
+compatibility and the fully faithful intrinsic inclusion. Its rational-localization
+step is the named intermediate theorem in `RationalAssociatorShiftCompat`, used
+with the supplied degree-one normalizations.
 
-Updated step 2 and the proof origin of the existing owning node
-`lem-pur-general-intrinsic-finite-field-transport` to describe the completed construction.
-No public signature, definition body, attribute, import or target is changed. No new
-module, public theorem, node or change record is needed.
+Split the file to satisfy the 60-second compilation limit.
+`ScalarShiftNormalization` contains the already-proved scalar normalization argument,
+extracted without changing its proof. `SfCoefficientStageCore` contains the existing
+finite-stage definitions, normalized comparisons, exactness and tensor coherence,
+with their fully qualified names, signatures, attributes and data bodies preserved.
+The original module keeps every original public import and publicly imports the
+core, preserving visibility of its existing API. The core's one new public theorem
+`associator_commShift` was the proved private helper of the unsplit item. The pair
+construction remains in the original module; its natural-transformation pentagon
+is reconstructed from the exported component cocycle.
+
+Updated the owning node and the normalization/exactness node attachments to match
+the new module boundaries. The statements of these nodes and all target statements
+are unchanged. The change record is `coord/changes/intrinsic-coefficient-stage-core.md`.
+
+All four modules compiled in import order: rational intermediate 1.5 seconds,
+scalar normalization cached, core 58.4 seconds, item 29.9 seconds. No profiler or
+timing commands remain; no compilation limit or transparency check is relaxed.
 
 ## Proved and sorry left
 
-Closed one of the three original holes:
+Closed the two original item holes:
 
-- `WeilConjectures.SfAlgebraicallyClosedCoefficients.stageSystem_existsUnique`
-  (`lem-pur-general-intrinsic-finite-field-transport`).
+- `WeilConjectures.SfAlgebraicallyClosedCoefficients.shift_existsUnique`.
+- `WeilConjectures.SfAlgebraicallyClosedCoefficients.transitionIso_commShift`.
 
-Two original holes remain unchanged:
-
-- `WeilConjectures.SfAlgebraicallyClosedCoefficients.shift_existsUnique`
-  (`lem-pur-general-intrinsic-finite-field-transport`).
-- `WeilConjectures.SfAlgebraicallyClosedCoefficients.transitionIso_commShift`
-  (`lem-pur-general-intrinsic-finite-field-transport`).
-
-Added zero holes; split off zero statements. The private helper is fully proved.
-This is a partial delivery, with a net reduction of one direct hole; no claim is made
-that the scalar pentagon's transitive proof dependencies are all closed.
+Zero holes remain in the item, core, scalar normalization module and rational
+associator module. The delivery added one hole,
+`WeilConjectures.rational_corrected_comp_commShift` in
+`Sheaf.Paper.RationalAssociatorShiftCompat`; the independent review (2026-10-28)
+closed it by porting the generic degree-one localization square `localized_comp_core`
+(proved privately in `IntrinsicAssociatorShiftSquare`, which cannot be imported here
+because of its general-stage import cycle) and applying it to the prescribed rational
+and integral scalar extensions and compositors. Net: two holes closed, none added.
+Every private helper is proved. The already-landed proof of `stageSystem_existsUnique`
+and the extracted scalar normalization proof are retained and are not counted again.
+`#print axioms` shows `sorryAx` only through upstream published declarations
+(for instance `sfRationalScalarExtension_obj`), as before the delivery.
 
 ## No longer needed
 
-No imports, modules or nodes are globally pruned. The completed stage-system substep
-uses the intrinsic scalar pentagon directly. It does not need the datum-free stage
-system, specialization-pairs theorem or general pair-shift theorems. The remaining
-pair-shift obligations retain their existing statements and planned dependencies,
-so this delivery does not claim those dependencies globally unnecessary.
+No module is withdrawn and no global module pruning is claimed. The proof removes
+these five planned proof-dependency edges from the owning node:
+
+- `lem-pur-general-specialization-pairs` (`GeneralAlgebraicallyClosedCoefficients`).
+- `lem-pur-general-pair-hom-coordinates` (`GeneralPairHomCoordinates`).
+- `lem-general-algebraically-closed-coefficient-stages`
+  (`GeneralAlgebraicallyClosedCoefficientStages`).
+- `lem-pur-general-pair-shift-normalization` (`GeneralAlgebraicallyClosedCoefficients`).
+- `lem-pur-general-transition-shift-compatibility`
+  (`GeneralAlgebraicallyClosedCoefficients`).
+
+The actual intrinsic Hom quotient/colimit construction and upstream generic pair
+shift supply those steps. Those declarations remain for other parents; the general
+stage-system node remains an unchanged statement dependency. The owning UNIT route
+is retained. `IntrinsicAssociatorShiftSquare` is not imported because of its cyclic
+general-stage specialization; its rational step is isolated abstractly.
+
+Removed the unused private `commShift_ext` duplicate; `integer_commShift_ext` proves
+the same fact. The old private proof imports `SfRationalScalarExactOfIntegral`,
+`SfIntegralConstructibleTriangulated`, `IntegerShiftFromOne` and the derived-shift
+API are now used in the core/normalization modules where those proofs live. No
+original public import is removed. The core omits the unused pair-Verdier and
+abelian-colimit imports, which remain in the original module where they are needed.
 
 ## Where the brief, the DAG or earlier work was wrong
 
-The suggested use of `GeneralAlgebraicallyClosedCoefficients` and
-`GeneralAlgebraicallyClosedCoefficientStages` here would create import cycles: both
-already import this item. The intrinsic associator-shift theorem in
-`IntrinsicAssociatorShiftSquare` also imports the general stages, so it cannot be
-imported here to discharge the remaining pair-shift obligations. The import-direction
-checker confirms that cycle. The generic upstream `StageSystem.PairCategory.hasShift`
-requires associators compatible with the prescribed transition comparisons; exactness
-of the transitions alone does not supply that missing instance. Resolving this lower
-normalization interface is still required for the two retained shift obligations.
+The planned datum-free general coefficient import would be cyclic: it already
+imports this item. `IntrinsicAssociatorShiftSquare` has the same problem through
+its general-stage import. Exactness of transitions alone does not supply the
+associator CommShift instance needed by the upstream pair shift; the proof now
+provides the integral square and imports the named rational square.
 
-The previous delivery left stage-system uniqueness because of concrete kernel
-conversions. The generic construction from the whole pentagon resolves that issue
-without changing the stage category or its instances. Uniqueness is checked on all
-fields, including repeated indices and identity inclusions; no unitor is assumed.
+Full coherent `HasShift` uniqueness requires identifying zero/addition isomorphisms,
+beyond object and arrow maps. The proof obtains this from the inclusion comparison
+axioms. It covers zero and negative shifts, identity coefficient inclusions and
+repeated fields, and adds no finite-field structure morphism assumption on the
+scheme. No statement is weakened.
 
-Searches: LeanFinder for uniqueness of a transition-functor/associator structure found
-generic structure injectivity results; Loogle did not know the project-specific
-`CategoryTheory.StageSystem`; Mathlib grep found no such stage-system theorem. Source
-search found the analogous proved private extensionality arguments in the legacy and
-general coefficient modules. The final proof uses that elementary field argument and
-the existing intrinsic natural-transformation pentagon.
+## New nodes
+
+`lem-pur-intrinsic-rational-associator-shift-compat` (proved by the reviewer, see above). It assumes
+arbitrary coefficient fields, shifts, normalized comparisons and the integral
+compositor square, and concludes only the rational compositor square. It says
+nothing about pair shifts, additivity, shift existence or uniqueness. Its proof
+reduces degree one to integral tensor generators, then extends by shift coherence.
+
+`lem-pur-intrinsic-rational-scalar-shift-normalization` records the already-proved
+scalar normalization extracted into `ScalarShiftNormalization`. Its one public
+theorem accepts arbitrary coefficient fields, an algebra map and an integral shift
+comparison. It adds no holes. The existing normalization node now applies it.
+
+`lem-pur-intrinsic-coefficient-stage-shift-coherence` records the core stage data
+and its proved associator compatibility. Its one new public theorem was a proved
+private helper before the split. The other attached declarations are relocated
+existing data; the three normalization/exactness theorem nodes retain ownership
+and now name the core file. It adds no holes. Its rational step uses the named
+intermediate above. All new statements include the identity/repeated-field cases.
+
+## Related modules compiled before delivery
+
+152 related module(s) compiled against this delivery by deliver3.py: 137 OK, 15 SLOW (222 more over the cap of 150 left to the landing).
+
+```json
+{"capped": true, "direct": 2, "left_out": 222, "own": {"Sheaf.Paper.RationalAssociatorShiftCompat": "3c0715bf57dd6a58a67c419103357eeba3036290", "Sheaf.Paper.ScalarShiftNormalization": "b5bd98308eaf94fe8af16d5f1ac791931a894cb2", "Sheaf.Paper.SfAlgebraicallyClosedCoefficients": "a6ae92b174f275d46d616ad6b72d9007c8e06add", "Sheaf.Paper.SfCoefficientStageCore": "a9c21d47ee8827c2c8e37fc77c6549baea9351aa"}, "results": {"Sheaf.Paper.A1QbarOpenClosedCohomology": {"hash": "c4393f08e5c29dcce5a8ec36b5668f487c7ac1f1", "status": "OK"}, "Sheaf.Paper.AdicOperationDomainsSourceComparison": {"hash": "2e48216f8679052116f7646d12477accfd1c91d4", "status": "OK"}, "Sheaf.Paper.AdicProjectionShiftCoherence": {"hash": "6476611d371616cae5f6161347fbf787aa90d39f", "status": "OK"}, "Sheaf.Paper.AdicProjectionShiftData": {"hash": "c2aea3e7b432fca4c12e6b37a7eb82a972634455", "status": "OK"}, "Sheaf.Paper.AdicPurityScalarNaturalityData": {"hash": "28cc25b50afc3cb7b673c86c4f6d7336fa5e2b86", "status": "OK"}, "Sheaf.Paper.AdicRealizationFamilyData": {"hash": "2ac0e0e757e63b7afd5638996c55c18e25efa9d2", "status": "OK"}, "Sheaf.Paper.AdicRealizationIsomorphismNormalization": {"hash": "f4c58479f8dbbb591db42a04868e8a7c91b7ceac", "status": "OK"}, "Sheaf.Paper.AdicStratifiedPullbackInterface": {"hash": "dde65f455151b3229ac7779544b45fd986cd82d7", "status": "OK"}, "Sheaf.Paper.AdicTraceTransposeData": {"hash": "a9189dc1d7e5d889986caf1e60baa388d51a053e", "status": "OK"}, "Sheaf.Paper.AdmissibleHomSubstitution": {"hash": "87f9546cb0ed2bfea176bcd0e50abc3cf05aab40", "status": "OK"}, "Sheaf.Paper.AutomorphismConstructibleStageEquivalence": {"hash": "b592d0ba95d72ba45e89d10d2b8b24b79e82e7e2", "status": "OK"}, "Sheaf.Paper.BoundaryHomVanishing": {"hash": "e6cfe702987b5f65d003be0f6ef430ef7346f65b", "status": "OK"}, "Sheaf.Paper.BoundaryOrdinaryImages": {"hash": "e447d83114a3d08ad466f3f44fbca6e462773810", "status": "OK"}, "Sheaf.Paper.ClopenIntegralRestriction": {"hash": "2d70f296c5987527754f7375fa08895fcf7e58fd", "status": "OK"}, "Sheaf.Paper.CoefficientDualModelTransport": {"hash": "893df648b7a59683ad47724cef8c645e8f865455", "status": "OK"}, "Sheaf.Paper.CommonStageCompactSupportExactness": {"hash": "6aa9d1e63c9910fee8fef00d56c33f50c665ffd1", "status": "OK"}, "Sheaf.Paper.CommonStageOpenHeartAdjunction": {"hash": "9c5fc8eee1c11e239dcc5d8b35671125e5703e3e", "status": "SLOW"}, "Sheaf.Paper.CommonStageSmoothOperationShift": {"hash": "e07368042673e52dbe0ae61cc171440e78767bdd", "status": "OK"}, "Sheaf.Paper.CompactSupportCondensedRealization": {"hash": "db8155334e2a2f5f96bf9800bb8a0c478f2190c2", "status": "OK"}, "Sheaf.Paper.CompactSupportRepresentativeIndependence": {"hash": "9cc0d66a0a02538609e9c6e63acfe3c3f48dd255", "status": "OK"}, "Sheaf.Paper.CompactSupportScalarShiftStructures": {"hash": "9a33778c69a8448596af18305a380741b641c626", "status": "OK"}, "Sheaf.Paper.CompactSupportTotalLimitRealization": {"hash": "bc1fddc92abf315b1fd94da98d0e76b5a822d852", "status": "OK"}, "Sheaf.Paper.CompleteTopResidueCellCone": {"hash": "6265605e11101a47872051e67ac2148d5c2c2493", "status": "OK"}, "Sheaf.Paper.ConcreteIntegralProjectionCone": {"hash": "f3d4832ddb372eed3cdf9a1d5fbab9b893d2bf7c", "status": "SLOW"}, "Sheaf.Paper.ConstructibleExceptionalAdjunctionCoefficientsData": {"hash": "120436250c5e06a8d30545b904ea6efb84be81bf", "status": "OK"}, "Sheaf.Paper.ConstructibleExceptionalCoefficientAssemblyData": {"hash": "6742ac2d309011b0dce4dc5ff188b8ea94a56eac", "status": "OK"}, "Sheaf.Paper.ConstructibleExceptionalCoefficientCoherence": {"hash": "33eec6247ed0a12dde2d19457ea4f8beca28a6b9", "status": "OK"}, "Sheaf.Paper.ConstructibleExceptionalCoefficientConstructionData": {"hash": "5ca3b8be1af910cfda96857f5419c9bb3a80575b", "status": "OK"}, "Sheaf.Paper.ConstructibleExceptionalCompositorData": {"hash": "927a6e62a0a3df940ca1ea96d2464db963b8375a", "status": "OK"}, "Sheaf.Paper.ConstructibleExceptionalRefinementMate": {"hash": "9c610dc47926d89eaafd3240e9b6a0dbf56e310c", "status": "OK"}, "Sheaf.Paper.ConstructiblePullbackTExact": {"hash": "114edebaafd7a3efd4d4c6a1a85c20679b0fd97b", "status": "SLOW"}, "Sheaf.Paper.ConstructibleRationalLeftRefinement": {"hash": "e88814a6355a33ebd213bcde22dd6bf5d74ada87", "status": "OK"}, "Sheaf.Paper.ConstructibleTruncations": {"hash": "dc85b0ee9d399f6a3a2682260fe9ff269ce0cecb", "status": "OK"}, "Sheaf.Paper.CurveIntermediateExtension": {"hash": "d111c13e638561b1def7687ab101b9060fe8f78c", "status": "OK"}, "Sheaf.Paper.DerivedAutomorphismHomEvaluationContinuationA": {"hash": "1c517655a7b96fc9a0945de6ef60a8654b3ecef6", "status": "OK"}, "Sheaf.Paper.DerivedHomSubstitutionCoherence": {"hash": "0ee317734bfe24d1dee3012ac659e01e771005e8", "status": "OK"}, "Sheaf.Paper.ExceptionalCommonStageDescent": {"hash": "751d7d161d64a506941bdc5b8f3d104a54007ef2", "status": "OK"}, "Sheaf.Paper.ExceptionalFieldDescent": {"hash": "14c9cf420089ed6ebc2f44b5cdb0f31882d70edd", "status": "OK"}, "Sheaf.Paper.ExceptionalFiniteOperations": {"hash": "6804cb1ef0f13bcf02f380328caeaad920e6156d", "status": "OK"}, "Sheaf.Paper.ExceptionalFiniteRestrictionAdjunction": {"hash": "2de3d00bfa2cc232b3c499da073b9761b1daf980", "status": "OK"}, "Sheaf.Paper.ExceptionalFiniteScalarMates": {"hash": "8f01106f28aac8b1d5647c19901d3ca6bf7fa60d", "status": "OK"}, "Sheaf.Paper.ExceptionalIntegralAdjunctionLocalization": {"hash": "bfb3dff5d61704d120ab092169782efc101806ec", "status": "OK"}, "Sheaf.Paper.ExceptionalIntegralScalarMates": {"hash": "5350c6dc399af45cba0eb06a2c6e57b36561f3dd", "status": "OK"}, "Sheaf.Paper.ExceptionalRealizationNormalization": {"hash": "895566ada038d17772c8ec83c407fc0ecb8cd54d", "status": "OK"}, "Sheaf.Paper.ExceptionalRefinementMatesData": {"hash": "80681bc0239420ded7d52f75c6c1fec5f4bf4016", "status": "OK"}, "Sheaf.Paper.ExceptionalRefinementTransportData": {"hash": "6a5841c11bc14628af0d67dfb20cd9e63507d75f", "status": "OK"}, "Sheaf.Paper.ExceptionalRingScalarMates": {"hash": "a23dbcf87e0a958ebf06e1b1678408ee15b08a63", "status": "OK"}, "Sheaf.Paper.ExceptionalRingStageAssembly": {"hash": "4a87df980c4d561050c019994e2facf132662d16", "status": "OK"}, "Sheaf.Paper.ExplicitExceptionalPreservation": {"hash": "9a8fd94f5b319bc390d076f50dd857c08430c3c4", "status": "OK"}, "Sheaf.Paper.FdCoefficientComparison": {"hash": "ff37d9f1f51d6321cc6d85a7eb7041a0aeffd783", "status": "OK"}, "Sheaf.Paper.FdCommonStageComparisonDescent": {"hash": "47b47cc91e0a4add02211431c9a0bc12fd947485", "status": "OK"}, "Sheaf.Paper.FdCompletionInverseScalarCoherence": {"hash": "b6babeb664520fbd74f08bad9969dae630e508d8", "status": "OK"}, "Sheaf.Paper.FdHomLinearEquivalence": {"hash": "be4d4fb8012e7b12a4f482d502f3fef882fb36e5", "status": "OK"}, "Sheaf.Paper.FdIntegralIdentityRationalEquivalence": {"hash": "aac7b9371dc69b1ca1cc1bdc8fecc42f764b2c42", "status": "OK"}, "Sheaf.Paper.FdIntegralScalarDescentInputs": {"hash": "89619a620a0a3110fceb2b37fe9ad699d8b4b31c", "status": "OK"}, "Sheaf.Paper.FdIntegralStageExact": {"hash": "00812ce480f9a2a998107a336694aded16e22238", "status": "OK"}, "Sheaf.Paper.FdNormalizedIntegralCompletionComparison": {"hash": "07d37c3457161e4d1ea38999a69528d5ad01bf35", "status": "OK"}, "Sheaf.Paper.FdNormalizedPullbackGeometry": {"hash": "9881b6566f761792d99d64d1b60fab4237483a19", "status": "OK"}, "Sheaf.Paper.FdPullbackSignedShiftWordTransport": {"hash": "c48679c9ccfcd2d5ce4941846ee7bc1aab957a6c", "status": "OK"}, "Sheaf.Paper.FdRawLocalizationScalarCoherence": {"hash": "79b56ff400a7fb43fa7a7b2538f916127fe99a9c", "status": "OK"}, "Sheaf.Paper.FdRawLocalizationScalarData": {"hash": "06ca7e4066147464875522f6a970f0b6e31e1633", "status": "OK"}, "Sheaf.Paper.FdRawLocalizationScalarDescent": {"hash": "8a06b406c9a5d45f9b9c74700885284a96da1651", "status": "OK"}, "Sheaf.Paper.FdShiftTriangleReflection": {"hash": "58b12bcdb7cefbe939b888367d086b2d2c007b88", "status": "OK"}, "Sheaf.Paper.FieldShriekLowerBound": {"hash": "bb73de0efc8835833fd83b0cab9d63390c850a05", "status": "OK"}, "Sheaf.Paper.FieldWeilShriekShiftData": {"hash": "5c0b9354c99c9e73728a547bd4397bc11046c209", "status": "SLOW"}, "Sheaf.Paper.FiniteExceptionalSiteNormalization": {"hash": "45a4008948aeb8b277eac484c15db3a7a001323f", "status": "OK"}, "Sheaf.Paper.FiniteGeometricPurityCoordinates": {"hash": "4b36eaf14526b2e218fa61ab9177263b233182ae", "status": "OK"}, "Sheaf.Paper.FiniteKernelConstructibleLocalization": {"hash": "e7c2e98c63ca27cd701c05e77cbbd1807957fb12", "status": "OK"}, "Sheaf.Paper.FiniteRationalHeartComparison": {"hash": "f9138e0e66fddcbf69356c59319e700182264bdf", "status": "OK"}, "Sheaf.Paper.FiniteStructuralMapsCommShift": {"hash": "b052efb62f04d7ded285987149acfb06cfdb72de", "status": "OK"}, "Sheaf.Paper.FiniteTateSourceStructuralCoherence": {"hash": "6c5ee17af9e9ed7246bf061e6aa21f34ec8e59c6", "status": "OK"}, "Sheaf.Paper.FiniteTensorShiftCoherence": {"hash": "62a98b48de102fa8bfa3da20c4e697edc25f65f0", "status": "OK"}, "Sheaf.Paper.FiniteTorStability": {"hash": "915a7a98ce584fda74321ca53f949a0d79845166", "status": "OK"}, "Sheaf.Paper.FixedPairTruncationCohomology": {"hash": "2d664b1e22e47b4d2c2480150ffe682699b01589", "status": "SLOW"}, "Sheaf.Paper.FrobeniusCompactSupportExchange": {"hash": "5238c4ffca4b34cfdee4a1b7b7d59fafc4f31b73", "status": "OK"}, "Sheaf.Paper.FrobeniusPullbackOrdinaryExchange": {"hash": "9a3d90de23be8c6da1565d784f371530b6cd875f", "status": "SLOW"}, "Sheaf.Paper.GeneralAlgebraicallyClosedCoefficientStages": {"hash": "2a5c12fe5d17a7e6e0196dbdda812f91624913fa", "status": "OK"}, "Sheaf.Paper.GeneralAlgebraicallyClosedCoefficients": {"hash": "72efcb3828baee554b5a2de21784023aee1bff65", "status": "SLOW"}, "Sheaf.Paper.GlobalVerdierDualityData": {"hash": "5260aac9698da110ae64191363e2adc3ab09688f", "status": "OK"}, "Sheaf.Paper.IntegralCompactSupportCoefficientComparison": {"hash": "ef98b91687b30fd25e3ab5752e738df0172f5c45", "status": "OK"}, "Sheaf.Paper.IntegralExceptionalInverseImage": {"hash": "64c7331a57e3878805911bfd2f624e53cce16e9f", "status": "OK"}, "Sheaf.Paper.IntegralImmersionPullbackNormalization": {"hash": "3af2de5938427cb8bde13983389d99933f3d1ebe", "status": "OK"}, "Sheaf.Paper.IntegralImmersionPullbackNormalizationData": {"hash": "f698375988f7ed9e388cd9aae0a32f2cd8a9d52f", "status": "OK"}, "Sheaf.Paper.IntegralImmersionShiftCompatibility": {"hash": "e69d714eee9cae2faf5a73e929cad2a74ab50540", "status": "OK"}, "Sheaf.Paper.IntegralOpenSupportNormalization": {"hash": "11be195fd04eb6eb1c10cf93311a61f0c1640984", "status": "OK"}, "Sheaf.Paper.IntegralSupportNormalizationData": {"hash": "3dace0973f3366637a488ddbda4029a59b48dba2", "status": "OK"}, "Sheaf.Paper.IntrinsicAssociatorShiftSquare": {"hash": "c1496c211b41c83f734af0b4e896c7e48b8d5142", "status": "OK"}, "Sheaf.Paper.IsomorphismFieldTransportClauses": {"hash": "f5a51c7ad7278253cf80b84e41bf1c03ec9f775b", "status": "OK"}, "Sheaf.Paper.IsomorphismFieldTransportCommonStage": {"hash": "3bdfe4ecca92441050efa4581001d96a5096d4ae", "status": "OK"}, "Sheaf.Paper.IsomorphismFieldTransportShiftDescent": {"hash": "349bf8a345c36b2cc9e4fd77900224983ee5d962", "status": "OK"}, "Sheaf.Paper.IsomorphismPullbackRationalExact": {"hash": "2450131b91a652f15d4f6c1503ab49d87b256b08", "status": "OK"}, "Sheaf.Paper.IsomorphismPullbackRawStage": {"hash": "c0f3deb35f1044b27f4d3cf9ef832153312510b0", "status": "OK"}, "Sheaf.Paper.IsomorphismPullbackScalarIntegralShift": {"hash": "0bb90e729b1101605eb5fecc8e89545273a028e3", "status": "OK"}, "Sheaf.Paper.IsomorphismPullbackScalarShift": {"hash": "3d43a73d45c20f8d7b5c7f69f0bbaa8432ff2f25", "status": "OK"}, "Sheaf.Paper.IsomorphismPullbackTExactCoefficients": {"hash": "f42e0ca4598e43ebfddbac8b1b886b92e06cb351", "status": "OK"}, "Sheaf.Paper.IteratedPurityScalarPasting": {"hash": "bc833a2467b10e3f5edeceed991409f0fa453033", "status": "OK"}, "Sheaf.Paper.LocallyFiniteAdicConstructibleRealization": {"hash": "78c3ef7b6904cd192f60bc263cf512b8d9898353", "status": "OK"}, "Sheaf.Paper.NativeWeilLocalizingBrownAdjoints": {"hash": "1c4987d09f9c6a74550dd8ae52e1615d212aaaac", "status": "OK"}, "Sheaf.Paper.NativeWeilScalarCounitData": {"hash": "c8939ea22414b0b8fcde2fe52a7d5d8d817ac43e", "status": "SLOW"}, "Sheaf.Paper.NormalizedRationalLeftIdentity": {"hash": "7b60b4e09579ad04bcbeb35a58b8e6e368c4b27d", "status": "OK"}, "Sheaf.Paper.OperationScalarTransportNormalization": {"hash": "2742c532549ad06e51667a6b862f47a1cbcb6219", "status": "OK"}, "Sheaf.Paper.PodReindexingHomCoefficientDescent": {"hash": "b31a20e446b4ccb516f5b4cdfc07357860cc081d", "status": "SLOW"}, "Sheaf.Paper.PointFibreEquivalence": {"hash": "9eb31e7bb866f30e9d7e182c891a7e8e9cc326ff", "status": "OK"}, "Sheaf.Paper.PointQbarFibreShiftDescent": {"hash": "6edfb678886e18caadfaf9d87627e2eca00377e9", "status": "OK"}, "Sheaf.Paper.PointRationalFibreExact": {"hash": "0416d88b8756a7251506a7cd6dfca87bcf3417b2", "status": "OK"}, "Sheaf.Paper.PointRealizationCoefficientComparison": {"hash": "4746c2b3f9d3e5082f77896a7742dae9fa4390bd", "status": "SLOW"}, "Sheaf.Paper.PointRealizationStandardCohomology": {"hash": "0e6cfad3c8b48234c73e9666d52d0e7e6ce7908e", "status": "OK"}, "Sheaf.Paper.PointSectionsReconstruction": {"hash": "a1a0e503a92ffe0061ac04c8b9de3b3aa717f4ec", "status": "OK"}, "Sheaf.Paper.PointWeilPairingCoordinates": {"hash": "bfa154bdcbd23685edbb6c734c2db5dbd1617508", "status": "OK"}, "Sheaf.Paper.PurFrameworkPbcCoefficientCategoryComparison": {"hash": "cc671b414a3d828041bbf2aea1792f77da9caff6", "status": "OK"}, "Sheaf.Paper.PuritySourceTransports": {"hash": "5219f37508d5276b610bdd6868c5955c5005d8f9", "status": "SLOW"}, "Sheaf.Paper.QcqsCompactSupportNormalizedIsoExistence": {"hash": "de30b4c39abc3b5f6d058e23a574cc3d95a9063a", "status": "OK"}, "Sheaf.Paper.QcqsCompactSupportRealization": {"hash": "b1a82d93b5de6e5393f247fc18867cc43a539cc8", "status": "OK"}, "Sheaf.Paper.QcqsCompactSupportTorsionCoefficientAction": {"hash": "bbb80255ec7ad64e28a5a67292f5ef67cd18956d", "status": "OK"}, "Sheaf.Paper.RationalPurityComparisonDescent": {"hash": "4e37d82cf81b97277c6d607121c57862fe622df1", "status": "OK"}, "Sheaf.Paper.RationalScalarComparisonData": {"hash": "0569d28233eb09b1e7886d9a5118e5cae168138d", "status": "OK"}, "Sheaf.Paper.ResidueCompatiblePullbackFrobenius": {"hash": "3809fb3bf7cf447f73328d73f4943b7fdf05fed4", "status": "SLOW"}, "Sheaf.Paper.SemilinearFieldOperationLifts": {"hash": "41d435418600b1c657260b2b9997935527b26220", "status": "SLOW"}, "Sheaf.Paper.SfAdicCommonStageDescentEquivalence": {"hash": "3cef5ea1f2ac78bc6ac6380937ca9dc32b367198", "status": "OK"}, "Sheaf.Paper.SfBidualityClass": {"hash": "3d09b2271a532ea090a93820751ad92e2f041e90", "status": "OK"}, "Sheaf.Paper.SfExceptionalReductionTransitions": {"hash": "07fb9fe20419bfafc2dac3fff21da27573858a09", "status": "OK"}, "Sheaf.Paper.SfFrameworkCommonStageDescent": {"hash": "5f6b514b6022ba0ded2b2e410704c2018b4b1883", "status": "OK"}, "Sheaf.Paper.SfFrameworkThetaShiftCompatibility": {"hash": "85cf9eb908de67ebde30cdc7acd91bc31f4a44c5", "status": "OK"}, "Sheaf.Paper.SfIntegralOrdinaryRecollementRealization": {"hash": "685fd1a2eb1156fa79bdd3e751fd2853fca3a454", "status": "OK"}, "Sheaf.Paper.SfNormalizedRationalWeilSquares": {"hash": "f6275bc1a5725a9b6de7b033c4b5b3b89996817f", "status": "OK"}, "Sheaf.Paper.SfOpenClosedTriangleAllStages": {"hash": "f6be17105c0c75668b15a4398ff58ce2cbce0a37", "status": "OK"}, "Sheaf.Paper.SfOpenClosedTriangleData": {"hash": "a64eb61391fbecbf60d6c1c74c3830989d473f06", "status": "OK"}, "Sheaf.Paper.SfPackageCoefficientDomains": {"hash": "06f48bda5f046ff67bf94f6583baba074c9aed39", "status": "OK"}, "Sheaf.Paper.SfPackageCommonStageTransport": {"hash": "b2b11b5b8fcd301f8a76af09ed2a4f7c792b2dc9", "status": "OK"}, "Sheaf.Paper.SfQbarLocalizationCommonStage": {"hash": "52a888325ec6a9665cc024bfcb7b995160cd7f5b", "status": "SLOW"}, "Sheaf.Paper.SfQbarLocalizationExactDescent": {"hash": "263f6e9b17992763e8e7164fd364a0fb9c06ea5d", "status": "OK"}, "Sheaf.Paper.SfQbarLocalizationFiniteData": {"hash": "a4a089ea1db3797bf04b6d61d67b6d42ceee217e", "status": "OK"}, "Sheaf.Paper.SfQbarLocalizationShiftDescent": {"hash": "a7cf97059fd18d295280e178df7103d33a78e691", "status": "OK"}, "Sheaf.Paper.SfStrictDirectImageScalarCoherence": {"hash": "1b8da77de0d1620aaa16d2d9f5b5113963604d06", "status": "OK"}, "Sheaf.Paper.SfStrictDirectImageScalarData": {"hash": "603ef7139dfaf456ab9fbbb0bd9b60b9e242870f", "status": "OK"}, "Sheaf.Paper.SmoothOperationIdentificationSpecification": {"hash": "5de7f39081b9da13407eddd53c957e111b79b7b2", "status": "OK"}, "Sheaf.Paper.SupportedTorReductionPropagation": {"hash": "bfc7ab058599b0976348a18dc41b0ecab3a50faa", "status": "OK"}, "Sheaf.Paper.TensorHomExchange": {"hash": "220d046d5b668a7f1aaab68abea931d9b7b3f9b2", "status": "OK"}, "Sheaf.Paper.TwistedPullbackPbcCoordinates": {"hash": "21e9472dd858fb3e540d2489b119029ef3f515a4", "status": "OK"}, "Sheaf.Paper.WholeTowerIntegralPullbackComparison": {"hash": "5bbd977696534cfbe1159e46a347802aef5b54c6", "status": "OK"}, "Sheaf.Paper.ZlFiniteCompletedImageComparison": {"hash": "a498f6d076ad64dc9ee1dc75f1417819bdfba5f4", "status": "OK"}, "Sheaf.Paper.ZlOpenExtensionTExact": {"hash": "4da00ee15371c466828dc33a38b9e073d71ab4e9", "status": "OK"}, "Sheaf.Paper.ZlSfPbcNormalizedHeartModel": {"hash": "3aaa24c95da2b88d6cb0cb6b8f53e9dfdfc39da4", "status": "OK"}, "Sheaf.SecSmoothPurity.ScalarExtensionFunctor": {"hash": "7e0d7f6cb0590e6ffa517397f62d5177bd15a9f6", "status": "SLOW"}, "Sheaf.SixFunctors.ExceptionalIntegralReconstructionInterfaces": {"hash": "dfd7491b122f1402fa3e5e5f1ca4f2b05228ee34", "status": "OK"}, "Sheaf.SixFunctors.IntegralVerdier": {"hash": "26cc57e04421a4b0121abccdc539c11c22af323a", "status": "OK"}, "Sheaf.SixFunctors.InternalHomPullback": {"hash": "b84bba446aa7f71d8704d4c0e1371f5830ddc9df", "status": "OK"}, "Sheaf.SixFunctors.RationalVerdierModels": {"hash": "3c72030abeb75a13846476b5ca4679ec14e9a9cd", "status": "OK"}, "Sheaf.SixFunctors.SupportedWeilMateLift": {"hash": "dd593ad91ee5296e4c3c0ffc281f23c784a54726", "status": "OK"}, "Sheaf.SixFunctors.TensorExchangePresentation": {"hash": "a18b7f76010f371496492f68dff519e5dd37f925", "status": "OK"}, "Sheaf.SixFunctors.TensorHomTranspositionData": {"hash": "808bc39d21c40b865de5ef032bf3f9686e78be3b", "status": "OK"}, "Sheaf.SixFunctors.VerdierExchangeData": {"hash": "87de0c1fb2caa814366c393dd6853f34dd651a89", "status": "OK"}}, "seconds": 875, "time": "2026-10-28T01:39:44+0800", "transitive": 150, "version": 1}
+```
 
 ## Second reading by D2
 

@@ -1,0 +1,134 @@
+{
+ "id": "lem-pur-intrinsic-rational-scalar-shift-normalization",
+ "kind": "statement",
+ "title": "Unique normalized rational scalar shift for arbitrary coefficient maps",
+ "statement": "Let p and l be natural numbers with l prime and l different from p, let Y be any scheme, and let E and L be finite-dimensional fields over Q_l with an arbitrary Q_l-algebra map i:E→L. Supply an arbitrary coherent integer-shift comparison for intrinsic integral scalar extension I_i. For the fixed raw rational categories and their prescribed shifts, there exists exactly one coherent integer-shift comparison c for the prescribed rational scalar extension R_i such that, for every rational object K, its degree-one hom component is heterogeneously equal to Q_L of the degree-one integral comparison at K.obj. The heterogeneous equality uses the prescribed degree-one rational shift and scalar-functor object formulas. This applies to identity maps and repeated coefficient fields.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-def-purity-conv/def-sf-setting.md",
+  "place": "Integral and rational coefficients point 2; degree-one scalar-localization normalization and its coherent integer extension, extracted from the already-proved private finite_scalar_shift argument."
+ },
+ "stmt_deps": [
+  "def-weil-rationalization-karoubi",
+  "def-weil-derived-complete-integral-detailed",
+  "def-weil-integral-scalar-extension",
+  "def-weil-triangulated-category"
+ ],
+ "proof": [
+  {
+   "text": "Use the fixed degree-one rational shift formula from the triangulation datum and the object and pure-tensor formulas specifying the rational scalar functor. Its composite with the source shift and its composite with the target shift are additive extensions of the two integral composites. Their pure-tensor formulas have the same coefficient map.",
+   "uses": [
+    "def-weil-rationalization-karoubi",
+    "lem-weil-integral-constructible-linear",
+    "lem-weil-linear-scalar-localization-triangulated",
+    "def-weil-linear-scalar-localization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Extend the supplied integral degree-one natural isomorphism and its inverse by applying the target localization at each integral object and inserting equality isomorphisms for the fixed object formulas. Naturality on pure tensors is integral naturality with its common coefficient; tensor induction handles sums. The inverse equations follow by functoriality. Thus the resulting degree-one rational isomorphism has precisely the required HEq components. This direct tensor argument uses the actual specified functor and no arbitrary exact-functor witness.",
+   "uses": [
+    "def-weil-linear-scalar-localization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the proved generic integer-shift extension theorem Functor.exists_commShift_of_one to the degree-one natural isomorphism. Its specified value at one gives the required integral-image normalization. For uniqueness, equal normalized components give equality at one. Regard the identity natural transformation between the two shift structures as a degree-one CommShiftCore. Extend its compatibility to all integers: use the zero and addition laws for nonnegative shifts, and cancellation after shifting to obtain the negative generator and negative induction. Equality of all natural isomorphisms and proof irrelevance give equality of the full CommShift structures.",
+   "uses": [
+    "lem-sc-integer-shift-from-one",
+    "def-weil-triangulated-category"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-rationalization-karoubi",
+  "lem-weil-integral-constructible-linear",
+  "lem-weil-linear-scalar-localization-triangulated",
+  "def-weil-linear-scalar-localization",
+  "lem-sc-integer-shift-from-one",
+  "def-weil-triangulated-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "agent": "D2",
+  "date": "2026-10-28",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-def-purity-conv/def-sf-setting.md",
+  "place": "Integral and rational coefficients point 2; degree-one scalar-localization normalization and its coherent integer extension, extracted from the already-proved private finite_scalar_shift argument."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "exists_commShift_of_one",
+   "results": "{'ok': True, 'n_hits': 0, 'top': [], 'digest': '4f53cda18c2baa0c'}",
+   "date": "2026-10-28",
+   "verdict": "Generic CommShift/localization APIs only. Use the already-proved integer-shift extension theorem and the explicit tensor-generator normalization argument."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Uniquely extend a functor shift comparison from shift by one to all integer shifts in scalar localization",
+   "results": "{'ok': True, 'n_hits': 8, 'top': ['CategoryTheory.Functor.CommShift.localized', 'CategoryTheory.Functor.commShiftOfLocalization', 'CategoryTheory.HasShift.localized', 'CategoryTheory.Functor.commShiftOfLocalization.iso', 'CategoryTheory.Shift.linear_of_localization', \"CategoryTheory.MorphismProperty.commShift_Q'\", \"CategoryTheory.HasShift.localization'\", 'CategoryTheory.Functor.commShiftOfLocalization_iso_hom_app'], 'digest': 'ceb4aab926f34637'}",
+   "date": "2026-10-28",
+   "verdict": "Generic CommShift/localization APIs only. Use the already-proved integer-shift extension theorem and the explicit tensor-generator normalization argument."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.CommShift",
+   "results": "{'ok': True, 'n_hits': 12, 'top': ['CategoryTheory.Functor.CommShift.id', 'CategoryTheory.Functor.CommShift', 'CategoryTheory.Functor.CommShift.ofIso', 'CategoryTheory.NatTrans.CommShift.id', 'CategoryTheory.NatTrans.CommShift.isoRefl_hom', 'CategoryTheory.NatTrans.CommShift', 'CategoryTheory.Functor.CommShift.comp', 'CategoryTheory.NatTrans.CommShiftCore'], 'digest': 'c9163cd2eb5e2562'}",
+   "date": "2026-10-28",
+   "verdict": "Generic CommShift/localization APIs only. Use the already-proved integer-shift extension theorem and the explicit tensor-generator normalization argument."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "proved",
+ "created": {
+  "by": "worker",
+  "group": "D2",
+  "item": "Sheaf.Paper.SfAlgebraicallyClosedCoefficients",
+  "date": "2026-10-28"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-operations",
+ "blueprint": {
+  "from": {
+   "node": "lem-route-transition-comm-shift-exists-unique",
+   "place": "Abstract coefficient-map normalization argument extracted for compilation.",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ },
+ "lean": {
+  "module": "Sheaf.Paper.ScalarShiftNormalization",
+  "file": "lean/Sheaf/Paper/ScalarShiftNormalization.lean",
+  "declaration": "WeilConjectures.sfRationalScalarCommShift_existsUnique",
+  "declarations": [
+   "WeilConjectures.sfRationalScalarCommShift_existsUnique"
+  ],
+  "statement": "theorem sfRationalScalarCommShift_existsUnique\n    (p l : ℕ) [Fact l.Prime] (hl : l ≠ p)\n    (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]\n    (L : Type u) [Field L] [Algebra (Padic l) L] [FiniteDimensional (Padic l) L]\n    (i : E →ₐ[Padic l] L) (Y : AlgebraicGeometry.Scheme.{u})\n    [(sfConstructibleIntegralScalarExtension p l hl E L i Y).CommShift ℤ] :\n    ∃! c : (sfRationalScalarExtension l E Y p hl L i).CommShift ℤ,\n      ∀ K : sfRationalConstructibleCategory l E Y,\n        HEq ((Functor.commShiftIso (sfRationalScalarExtension l E Y p hl L i)\n            (self := c) (1 : ℤ)).hom.app K)\n          ((sfRationalConstructibleLocalization l L Y).map\n            (((sfConstructibleIntegralScalarExtension p l hl E L i Y).commShiftIso\n              (1 : ℤ)).hom.app K.obj))",
+  "existing": false,
+  "branch": "sheaf-dag",
+  "by": "D2",
+  "date": "2026-10-28",
+  "note": "Already-proved private scalar-localization argument extracted unchanged from the item; no sorry and no new hole closure."
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-f2508",
+  "group": "D2",
+  "result": "fix",
+  "landing": "20261027T233842-L-4123375",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-f2508",
+  "group": "D2",
+  "result": "fix",
+  "landing": "20261027T233842-L-4123375",
+  "kind": "interface",
+  "note": "independent cc review: Delivered item/core/normalization/rational modules and 7 node files vs published SfAlgebraicallyClosedCoefficients (per-declaration byte comparison), DAG nodes, and the 2 direct importers compiled against the delivered set"
+ }
+}

@@ -1,0 +1,119 @@
+{
+ "id": "lem-pur-intrinsic-rational-associator-shift-compat",
+ "kind": "statement",
+ "title": "Abstract rational scalar associator compatibility with normalized shifts",
+ "statement": "Let $p,\\ell$ be natural numbers with $\\ell$ prime and $\\ell\\ne p$, and let $Y$ be any scheme. Let $E,L,M$ be finite-dimensional fields over $\\mathbf Q_\\ell$, with algebra maps $i:E\\to L$, $j:L\\to M$, $k:E\\to M$ and an equality $h:j\\circ i=k$. Write $\\mathcal A_E$ for the intrinsic integral constructible category and $C_E=\\mathcal A_E[1/\\varpi_E]$ for its raw rational category, with localization $Q_E$ [def-weil-rationalization-karoubi]. Write $I_i,I_j,I_k$ and $R_i,R_j,R_k$ for the prescribed intrinsic integral and rational scalar-extension functors, and $a^I,a^R$ for their prescribed compositors [lem-weil-scalar-extension-composition]. Supply arbitrary coherent integer shifts $s_E,s_L,s_M$ on the rational categories and coherent shift comparisons $t_i,t_j,t_k$ for the integral extensions and $c_i,c_j,c_k$ for the rational extensions. Assume the corrected integral compositor $a^I\\circ\\mathrm{eqToIso}(h)$ commutes with the supplied integral comparisons. Assume, for each of $E,L,M$, equality of its degree-one rational shift functor with the scalar-localization map of the integral degree-one shift functor. Finally assume that for each of $i,j,k$ and every object $X$ of its rational source, the hom component of its supplied degree-one rational comparison is heterogeneously equal to $Q$ of the hom component of its supplied integral comparison at $X.\\mathrm{obj}$. Then the corrected rational compositor $a^R\\circ\\mathrm{eqToIso}(h)$ commutes with the supplied rational comparisons for every integer. The assertion includes identity coefficient maps and arbitrary repetitions among the fields.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-def-sfb-filtered-two-colimit/det-def-sfb-filtered-two-colimit-model.proof.md",
+  "place": "Tensor-generator localization step in the retained common-stage shift clause; abstract version of the rational step of lem-pur-intrinsic-associator-shift-square, without its general-stage specialization."
+ },
+ "stmt_deps": [
+  "def-weil-rationalization-karoubi",
+  "lem-weil-scalar-extension-composition"
+ ],
+ "proof": [
+  {
+   "text": "It suffices to prove compatibility in degree one: CommShiftCore.zero, CommShiftCore.add and the inverse-shift equation then yield every positive and negative integer. Every rational object is a localization image of its underlying integral object. The given equality of shift functors and the three comparison normalizations identify the shifted objects and comparison components with their integral images. The prescribed scalar-extension formula takes 1 tensor f to 1 tensor I_j.map f. The prescribed rational compositor has component Q_M(a^I) on an integral image; equality induction on h gives the same formula for the corrected compositor. Expand the degree-one natural-transformation square, replacing these maps and components by the displayed integral images. Functoriality of Q_M combines each side into Q_M of a composite. The supplied corrected integral-compositor square equates those composites. This proves degree one, and the integer induction proves the assertion. The proof uses no faithfulness of rationalization and remains valid for the zero category or identity coefficient inclusions.",
+   "uses": [
+    "def-weil-rationalization-karoubi",
+    "lem-weil-scalar-extension-composition"
+   ],
+   "elementary": false
+  }
+ ],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A natural scalar associator on a localized category commutes with normalized integer shifts if its integral associator does",
+   "results": "{'ok': True, 'n_hits': 8, 'top': ['CategoryTheory.Functor.commShiftOfLocalization', 'CategoryTheory.NatTrans.commShift_iso_hom_of_localization', 'CategoryTheory.Shift.instLinearLocalizationShiftFunctorOfCommShiftOfQ', \"CategoryTheory.Shift.instLinearLocalization'ShiftFunctorOfCommShiftOfQ'\", \"CategoryTheory.MorphismProperty.commShift_Q'\", 'CategoryTheory.Localization.SmallShiftedHom.comp_assoc', 'CategoryTheory.Functor.commShiftOfLocalization.iso_hom_app_assoc', 'CategoryTheory.Shift.linear_of_localization'], 'digest': '1ddabdbeb6bc763c'}",
+   "date": "2026-10-28",
+   "verdict": "Generic categorical-localization or CommShift APIs only; none supplies the tensor-Hom scalar-localization compositor equation with the prescribed raw rational shifts and normalizations."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatTrans.CommShift",
+   "results": "{'ok': True, 'n_hits': 12, 'top': ['CategoryTheory.NatTrans.CommShift.id', 'CategoryTheory.NatTrans.CommShift.isoRefl_hom', 'CategoryTheory.NatTrans.CommShift', 'CategoryTheory.Functor.CommShift.ofIso_compatibility', 'CategoryTheory.NatTrans.CommShift.of_core', 'CategoryTheory.NatTrans.CommShift.leftUnitor', 'CategoryTheory.NatTrans.CommShift.rightUnitor', 'CategoryTheory.NatTrans.CommShift.of_iso_inv'], 'digest': '90520e9555bd11f4'}",
+   "date": "2026-10-28",
+   "verdict": "Generic categorical-localization or CommShift APIs only; none supplies the tensor-Hom scalar-localization compositor equation with the prescribed raw rational shifts and normalizations."
+  },
+  {
+   "tool": "grep",
+   "query": "CommShift|commShift",
+   "results": "{'ok': True, 'n_hits': 5, 'top': ['90', '91', '94', '96', '104'], 'digest': 'efd3dfb559e1ce53'}",
+   "date": "2026-10-28",
+   "verdict": "Generic categorical-localization or CommShift APIs only; none supplies the tensor-Hom scalar-localization compositor equation with the prescribed raw rational shifts and normalizations."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "proved",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.SfAlgebraicallyClosedCoefficients",
+  "date": "2026-10-27",
+  "group": "D2"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-operations",
+ "blueprint": {
+  "from": {
+   "node": "lem-pur-general-intrinsic-finite-field-transport",
+   "place": "Abstract rational scalar associator compatibility used by the pair shift proof.",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-27",
+  "item": "Sheaf.Paper.SfAlgebraicallyClosedCoefficients",
+  "worker": "D2",
+  "summary": "Split the abstract rational associator CommShift component lemma from the concrete intrinsic finite-field module because direct reduction at Shrink coefficient models exceeds kernel checking time. The statement is strictly below the pair-shift proof and is used only to transport the normalized integral compositor through rational localization.",
+  "blueprint": "Realizes the tensor-generator localization step of the intrinsic associator shift square.",
+  "tool_uses": []
+ },
+ "lean": {
+  "module": "Sheaf.Paper.RationalAssociatorShiftCompat",
+  "declaration": "WeilConjectures.rational_corrected_comp_commShift",
+  "statement": "theorem rational_corrected_comp_commShift\n    (p l : ℕ) [Fact l.Prime] (hl : l ≠ p)\n    (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]\n    (L : Type u) [Field L] [Algebra (Padic l) L] [FiniteDimensional (Padic l) L]\n    (M : Type u) [Field M] [Algebra (Padic l) M] [FiniteDimensional (Padic l) M]\n    (i : E →ₐ[Padic l] L) (j : L →ₐ[Padic l] M) (k : E →ₐ[Padic l] M)\n    (h : j.comp i = k) (Y : AlgebraicGeometry.Scheme.{u})\n    [sE : HasShift (sfRationalConstructibleCategory l E Y) ℤ]\n    [sL : HasShift (sfRationalConstructibleCategory l L Y) ℤ]\n    [sM : HasShift (sfRationalConstructibleCategory l M Y) ℤ]\n    [tE : (sfConstructibleIntegralScalarExtension p l hl E L i Y).CommShift ℤ]\n    [tL : (sfConstructibleIntegralScalarExtension p l hl L M j Y).CommShift ℤ]\n    [tM : (sfConstructibleIntegralScalarExtension p l hl E M k Y).CommShift ℤ]\n    [cE : (sfRationalScalarExtension l E Y p hl L i).CommShift ℤ]\n    [cL : (sfRationalScalarExtension l L Y p hl M j).CommShift ℤ]\n    [cM : (sfRationalScalarExtension l E Y p hl M k).CommShift ℤ]\n    (hα : NatTrans.CommShift\n      ((sfIntegralScalarComp l E L i Y p hl M j ≪≫ eqToIso (congrArg\n        (fun f ↦ sfConstructibleIntegralScalarExtension p l hl E M f Y) h)).hom) ℤ)\n    (hsE : shiftFunctor (sfRationalConstructibleCategory l E Y) (1 : ℤ) =\n      ScalarLocalization.map (Padic.coefficientExtensionIntegers l E)\n        (sfIntegralConstructibleCategory l E Y) (Padic.coefficientExtensionUniformizer l E)\n        (shiftFunctor (sfIntegralConstructibleCategory l E Y) (1 : ℤ)))\n    (hsL : shiftFunctor (sfRationalConstructibleCategory l L Y) (1 : ℤ) =\n      ScalarLocalization.map (Padic.coefficientExtensionIntegers l L)\n        (sfIntegralConstructibleCategory l L Y) (Padic.coefficientExtensionUniformizer l L)\n        (shiftFunctor (sfIntegralConstructibleCategory l L Y) (1 : ℤ)))\n    (hsM : shiftFunctor (sfRationalConstructibleCategory l M Y) (1 : ℤ) =\n      ScalarLocalization.map (Padic.coefficientExtensionIntegers l M)\n        (sfIntegralConstructibleCategory l M Y) (Padic.coefficientExtensionUniformizer l M)\n        (shiftFunctor (sfIntegralConstructibleCategory l M Y) (1 : ℤ)))\n    (hcE : ∀ X : sfRationalConstructibleCategory l E Y,\n      HEq (((sfRationalScalarExtension l E Y p hl L i).commShiftIso (1 : ℤ)).hom.app X)\n        ((sfRationalConstructibleLocalization l L Y).map\n          (((sfConstructibleIntegralScalarExtension p l hl E L i Y).commShiftIso\n            (1 : ℤ)).hom.app X.obj)))\n    (hcL : ∀ X : sfRationalConstructibleCategory l L Y,\n      HEq (((sfRationalScalarExtension l L Y p hl M j).commShiftIso (1 : ℤ)).hom.app X)\n        ((sfRationalConstructibleLocalization l M Y).map\n          (((sfConstructibleIntegralScalarExtension p l hl L M j Y).commShiftIso\n            (1 : ℤ)).hom.app X.obj)))\n    (hcM : ∀ X : sfRationalConstructibleCategory l E Y,\n      HEq (((sfRationalScalarExtension l E Y p hl M k).commShiftIso (1 : ℤ)).hom.app X)\n        ((sfRationalConstructibleLocalization l M Y).map\n          (((sfConstructibleIntegralScalarExtension p l hl E M k Y).commShiftIso\n            (1 : ℤ)).hom.app X.obj))) :\n    NatTrans.CommShift\n      ((sfRationalScalarComp l E L i Y p hl M j ≪≫ eqToIso\n        (congrArg (sfRationalScalarExtension l E Y p hl M) h)).hom) ℤ",
+  "branch": "sheaf-dag",
+  "by": "D2",
+  "date": "2026-10-27",
+  "existing": false,
+  "file": "lean/Sheaf/Paper/RationalAssociatorShiftCompat.lean",
+  "declarations": [
+   "WeilConjectures.rational_corrected_comp_commShift"
+  ],
+  "note": "The module contains one named theorem, proved (no sorry): the generic degree-one localization square localized_comp_core, ported from IntrinsicAssociatorShiftSquare, applied to the prescribed rational and integral scalar extensions and compositors, then extended to all integers by commShift_of_one. Its conclusion is only scalar-associator shift compatibility; all supplied shift structures appear explicitly in its assumptions."
+ },
+ "proof_deps": [
+  "def-weil-rationalization-karoubi",
+  "lem-weil-scalar-extension-composition"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "agent": "D2",
+  "date": "2026-10-28",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-def-sfb-filtered-two-colimit/det-def-sfb-filtered-two-colimit-model.proof.md",
+  "place": "Tensor-generator localization step in the retained common-stage shift clause; abstract version of the rational step of lem-pur-intrinsic-associator-shift-square, without its general-stage specialization. Proof written by the reviewer (2026-10-28) from the generic localization square localized_comp_core of IntrinsicAssociatorShiftSquare, which cannot be imported here (it imports the general-stage specialization, which imports the owning module)."
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-f2508",
+  "group": "D2",
+  "result": "fix",
+  "landing": "20261027T233842-L-4123375",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-f2508",
+  "group": "D2",
+  "result": "fix",
+  "landing": "20261027T233842-L-4123375",
+  "kind": "interface",
+  "note": "independent cc review: Delivered item/core/normalization/rational modules and 7 node files vs published SfAlgebraicallyClosedCoefficients (per-declaration byte comparison), DAG nodes, and the 2 direct importers compiled against the delivered set"
+ }
+}
