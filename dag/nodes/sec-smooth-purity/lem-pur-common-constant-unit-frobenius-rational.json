@@ -1,0 +1,118 @@
+{
+ "id": "lem-pur-common-constant-unit-frobenius-rational",
+ "kind": "statement",
+ "title": "Rational-stage normalized constant-unit Frobenius coherence",
+ "statement": "For finite coefficient field E, the rationalized normalized constant unit commutes with the geometric Frobenius square before passage to the algebraically closed common-stage coefficient category.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/thm-pur-weil-equivariance-of-purity-and-trace.proof.md",
+  "place": "Step 1, finite coefficient stage of the canonical constant input"
+ },
+ "stmt_deps": [
+  "def-weil-constant-weil-structure",
+  "def-weil-derived-pullback-tensor-hom",
+  "lem-pod-semilinear-field-operation-lifts",
+  "def-weil-frobenius-witnessed-compactification",
+  "def-weil-weil-sheaf-complex",
+  "def-zl-weil-ind-sheaf-category",
+  "def-weil-algebraically-closed-coefficients"
+ ],
+ "proof": [
+  {
+   "text": "At each finite coefficient quotient, pro-etale constant-ring composition identifies the two pullback maps around the geometric Frobenius square.",
+   "uses": [
+    "lem-pur-proetale-constant-ring-composition"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply the normalized strict Roos unit and the canonical Frobenius comparison of the constant integral object, then pass to the rational derived pullback.",
+   "uses": [
+    "lem-pur-completed-operation-tower-substitution",
+    "lem-zl-constant-geometric-stalk-unit"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-proetale-constant-ring-composition",
+  "lem-pur-completed-operation-tower-substitution",
+  "lem-zl-constant-geometric-stalk-unit"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/thm-pur-weil-equivariance-of-purity-and-trace.proof.md",
+  "place": "Step 1, finite coefficient stage of the canonical constant input"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "rational derived pullback constant unit commutes with geometric Frobenius square",
+   "results": "No exact match; only generic pullback composition and naturality lemmas.",
+   "date": "2026-10-28",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "constant coefficient unit Frobenius square rational pullback",
+   "results": "No exact match.",
+   "date": "2026-10-28",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "rationalUnit.*frobenius|constantWeilRational.*str",
+   "results": "No existing theorem for this rational-stage square.",
+   "date": "2026-10-28",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CommonConstantUnitFrobenius",
+  "date": "2026-10-28",
+  "group": "G1"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-purity-transport",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-common-constant-unit-frobenius",
+   "place": "finite coefficient stage",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean": {
+  "module": "Sheaf.Paper.RationalConstantUnitFrobenius",
+  "file": "lean/Sheaf/Paper/RationalConstantUnitFrobenius.lean",
+  "declaration": "WeilConjectures.ConstantPurityFrobenius.rationalizedUnit_frobenius",
+  "statement": "theorem rationalizedUnit_frobenius\n    (D : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (hl : l ≠ D.p)\n    (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]\n    (X₀ Y₀ : Over (Spec (.of D.k₀)))\n    [LocallyOfFiniteType X₀.hom] [QuasiCompact X₀.hom]\n    [LocallyOfFiniteType Y₀.hom] [QuasiCompact Y₀.hom]\n    (f₀ : X₀ ⟶ Y₀) :\n    letI := fun x ↦ sfWeilPrimeInvertible D l hl X₀ x\n    letI := fun y ↦ sfWeilPrimeInvertible D l hl Y₀ y\n    let f := FrobeniusExchange.fiberMap D f₀\n    let K := constantWeilRationalObject l E D hl (D.geometricFiber Y₀).left\n    let u := rationalizedUnit D l hl E f\n    (podRationalSquarePullbackComponent l E f\n        (D.geometricFrobenius X₀).hom (D.geometricFrobenius Y₀).hom\n        (zlFrobenius_naturality D f₀) K).hom ≫\n        (rationalDerivedPullback l E f).map\n          (constantWeilRationalComplex l E D hl Y₀).str.hom ≫ u.hom =\n      (sfWeilFrobeniusPullback D l hl X₀ E).map u.hom ≫\n        (constantWeilRationalComplex l E D hl X₀).str.hom",
+  "branch": "sheaf-dag",
+  "by": "G1",
+  "date": "2026-10-28",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261027T233940-L-4140079",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261027T233940-L-4140079",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

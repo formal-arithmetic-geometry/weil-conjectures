@@ -9,6 +9,7 @@ public import Sheaf.Paper.ConstantWeilStructure
 public import Sheaf.Paper.SemilinearFieldOperationLifts
 public import Sheaf.Paper.FrobeniusGeometricExchange
 import Sheaf.Paper.ConstantGeometricStalkUnit
+import Sheaf.Paper.RationalConstantUnitFrobenius
 
 /-! # Frobenius coherence of the normalized constant unit
 
