@@ -1,0 +1,104 @@
+{
+ "id": "lem-sfb-diagonal-trace-finite-adjunction-geometric",
+ "kind": "statement",
+ "title": "Geometric-arrow half of finite direct-image factorization",
+ "statement": "theorem diagonalTrace_finiteAdjunction_geometric\n    (l : ℕ) [Fact l.Prime] (Y : Scheme.{u})\n    [DiagonalTraceLocalizations l (ProjectiveLine Y)]\n    [DiagonalTraceLocalizations l (diagonalSurface Y)]\n    (f : diagonalSurface Y ⟶ ProjectiveLine Y)\n    (p : Presentation l (ULift.{u} (Padic l)) f)\n    (a : SupportedSource l Y f p.Rc) (n : ℕ) :\n    let E := ULift.{u} (Padic l)\n    let UX := diagonalCompletedUnderlying l (diagonalSurface Y)\n    let VX := p.restrictionX.F.mapDerivedCategory\n    let VS := p.restrictionS.F.mapDerivedCategory\n    let evX := ((evaluation ℕᵒᵖ (DiagonalMod l (diagonalSurface Y))).obj\n      (op n)).mapDerivedCategory\n    let evS := ((evaluation ℕᵒᵖ (DiagonalMod l (ProjectiveLine Y))).obj\n      (op n)).mapDerivedCategory\n    let line := (SpTowerClasses.line l E p.chernX)⟦(2 : ℤ)⟧\n    ∀ (Φ : (UX.obj (completedUnit l (diagonalSurface Y)) ⟶\n        evX.obj (VX.obj line)) →\n        ((diagonalCompletedUnderlying l (ProjectiveLine Y)).obj\n          (completedUnit l (ProjectiveLine Y)) ⟶\n            evS.obj (VS.obj ((SpTowerShriek.push l E p.base p.model.geometry).obj line)))),\n      (∀ γ : diagonalCompletedDomain l Y ⟶ diagonalCompletedCodomain l Y,\n        Φ (UX.map\n            ((DerivedCategory.singleFunctor (DiagonalCompleted l (diagonalSurface Y)) 0).map\n              (completedSupportedUnit l Y) ≫ γ) ≫\n          shiftedComparison UX (VX ⋙ p.LX.R) (p.coefficientsX.lineMap l E p.LX) 2 ≫\n            (p.LX.projection n).app _) =\n          (diagonalCompletedUnderlying l (ProjectiveLine Y)).map\n              (a.hom ≫ p.Rc.R.map γ) ≫ p.sourceMap l E ≫\n            (p.LS.projection n).app _ ≫ evS.map (p.varying.inv.app _)) →\n      ∀ θ : SpTowerClasses.unit (diagonalSurface Y)\n          (SpTowerClasses.Arings l E (diagonalSurface Y)) ⟶ line,\n        Φ ((p.coefficientsX.unitMap l E p.LX ≫ (p.LX.projection n).app _) ≫\n          evX.map (VX.map θ)) =\n          (p.coefficientsS.unitMap l E p.LS ≫ (p.LS.projection n).app _) ≫\n            evS.map (VS.map\n              ((SpTowerShriek.adjunction l E p.base p.model.geometry).homEquiv _ _\n                ((p.model.coefficientPullback.derivedIso l E).hom ≫ θ)))",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-trace.proof.md",
+  "place": "geometric classes proof (3), forgetting support"
+ },
+ "stmt_deps": [
+  "def-sfb-diagonal-trace-presentation",
+  "def-sfb-diagonal-trace-sources",
+  "def-sfb-diagonal-trace-coefficients",
+  "def-sfb-diagonal-trace-completed-supported-unit"
+ ],
+ "proof": [
+  {
+   "text": "Expand the geometric adjunction hom-equivalence, use the coefficient-pullback derived isomorphism and the exact-cone projection identity, and apply naturality.",
+   "uses": [
+    "def-sfb-diagonal-trace-presentation",
+    "def-sfb-diagonal-trace-coefficients",
+    "lem-pur-coefficient-system-derived-comparison",
+    "lem-sfb-diagonal-trace-exact-cone-projection"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The supported equation fixes the normalization of the common operation..",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-diagonal-trace-presentation",
+  "def-sfb-diagonal-trace-coefficients",
+  "lem-pur-coefficient-system-derived-comparison",
+  "lem-sfb-diagonal-trace-exact-cone-projection"
+ ],
+ "proof_origin": {
+  "kind": "adapted",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-trace.proof.md",
+  "place": "geometric classes proof (3), forgetting support",
+  "by": "R5"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "finite adjunction factorization",
+   "results": "No existing declaration with this normalized diagonal-trace interface.",
+   "date": "2026-10-27",
+   "verdict": "The two halves are stated as separate interfaces."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.DiagonalTraceFiniteAdjunctionFactorization",
+  "date": "2026-10-27",
+  "group": "R5"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sfb-diagonal-trace-finite-adjunction-factorization",
+   "place": "geometric classes proof (3), forgetting support",
+   "via": [
+    "lem-sfb-diagonal-trace-finite-adjunction-factorization"
+   ]
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-diagonal-tower",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.DiagonalTraceFiniteAdjunctionGeometric",
+  "file": "lean/Sheaf/Paper/DiagonalTraceFiniteAdjunctionGeometric.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.DiagonalTrace.diagonalTrace_finiteAdjunction_geometric",
+  "statement": "theorem diagonalTrace_finiteAdjunction_geometric\n    (l : ℕ) [Fact l.Prime] (Y : Scheme.{u})\n    [DiagonalTraceLocalizations l (ProjectiveLine Y)]\n    [DiagonalTraceLocalizations l (diagonalSurface Y)]\n    (f : diagonalSurface Y ⟶ ProjectiveLine Y)\n    (p : Presentation l (ULift.{u} (Padic l)) f)\n    (a : SupportedSource l Y f p.Rc) (n : ℕ) :\n    let E := ULift.{u} (Padic l)\n    let UX := diagonalCompletedUnderlying l (diagonalSurface Y)\n    let VX := p.restrictionX.F.mapDerivedCategory\n    let VS := p.restrictionS.F.mapDerivedCategory\n    let evX := ((evaluation ℕᵒᵖ (DiagonalMod l (diagonalSurface Y))).obj\n      (op n)).mapDerivedCategory\n    let evS := ((evaluation ℕᵒᵖ (DiagonalMod l (ProjectiveLine Y))).obj\n      (op n)).mapDerivedCategory\n    let line := (SpTowerClasses.line l E p.chernX)⟦(2 : ℤ)⟧\n    ∀ (Φ : (UX.obj (completedUnit l (diagonalSurface Y)) ⟶\n        evX.obj (VX.obj line)) →\n        ((diagonalCompletedUnderlying l (ProjectiveLine Y)).obj\n          (completedUnit l (ProjectiveLine Y)) ⟶\n            evS.obj (VS.obj ((SpTowerShriek.push l E p.base p.model.geometry).obj line)))),\n      (∀ γ : diagonalCompletedDomain l Y ⟶ diagonalCompletedCodomain l Y,\n        Φ (UX.map\n            ((DerivedCategory.singleFunctor (DiagonalCompleted l (diagonalSurface Y)) 0).map\n              (completedSupportedUnit l Y) ≫ γ) ≫\n          shiftedComparison UX (VX ⋙ p.LX.R) (p.coefficientsX.lineMap l E p.LX) 2 ≫\n            (p.LX.projection n).app _) =\n          (diagonalCompletedUnderlying l (ProjectiveLine Y)).map\n              (a.hom ≫ p.Rc.R.map γ) ≫ p.sourceMap l E ≫\n            (p.LS.projection n).app _ ≫ evS.map (p.varying.inv.app _)) →\n      ∀ θ : SpTowerClasses.unit (diagonalSurface Y)\n          (SpTowerClasses.Arings l E (diagonalSurface Y)) ⟶ line,\n        Φ ((p.coefficientsX.unitMap l E p.LX ≫ (p.LX.projection n).app _) ≫\n          evX.map (VX.map θ)) =\n          (p.coefficientsS.unitMap l E p.LS ≫ (p.LS.projection n).app _) ≫\n            evS.map (VS.map\n              ((SpTowerShriek.adjunction l E p.base p.model.geometry).homEquiv _ _\n                ((p.model.coefficientPullback.derivedIso l E).hom ≫ θ)))",
+  "branch": "sheaf-dag",
+  "by": "R5",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R5",
+  "result": "pass",
+  "landing": "20261027T180754-L-3899922",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R5",
+  "result": "pass",
+  "landing": "20261027T180754-L-3899922",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
