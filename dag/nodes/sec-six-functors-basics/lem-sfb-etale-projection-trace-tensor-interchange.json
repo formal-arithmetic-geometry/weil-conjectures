@@ -1,0 +1,116 @@
+{
+ "kind": "statement",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-geo-p1-adjunction/thm-amb-p1-adjunction.proof.md",
+  "place": "Second triangle: extracting the common coefficient and integrating the remaining kernel factor."
+ },
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleSecondCoordinateContraction",
+  "date": "2026-10-27",
+  "group": "P2"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-sf-rf-shriek-preservation",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-amb-p1-adjunction",
+   "place": "Second triangle: extracting the common coefficient and integrating the remaining kernel factor.",
+   "via": [
+    "lem-sfb-etale-second-coordinate-contraction",
+    "lem-sfb-etale-coordinate-trace-contractions"
+   ]
+  },
+  "same_as": []
+ },
+ "mathlib_match": null,
+ "stmt_deps": [
+  "def-sfb-etale-coordinate-trace-data"
+ ],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Pullback projection formula compatible with base change and tensor product trace contraction",
+   "results": "{\"t\": \"2026-10-27T15:18:42Z\", \"tool\": \"leanfinder\", \"query\": \"Pullback projection formula compatible with base change and tensor product trace contraction\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Pullback.Triplet.specTensorTo_snd\", \"AlgebraicGeometry.Scheme.Pullback.Triplet.specTensorTo_fst\", \"AlgebraicGeometry.Scheme.Pullback.Triplet.specTensorTo_snd_assoc\", \"AlgebraicGeometry.Scheme.Pullback.Triplet.specTensorTo_base_fst\", \"AlgebraicGeometry.Scheme.Pullback.Triplet.specTensorTo_base_snd\", \"AlgebraicGeometry.Scheme.Pullback.Triplet.fst_SpecTensorTo_apply\", \"AlgebraicGeometry.Scheme.Pullback.Triplet.snd_SpecTensorTo_apply\", \"AlgebraicGeometry.Scheme.Pullback.ofPointTensor_SpecTensorTo\"], \"digest\": \"caaf7d3e43339484\"}",
+   "date": "2026-10-27",
+   "verdict": "No matching canonical etale trace identity. The source library supplies projection/base-change compatibility and braided pullback; the remaining calculation is the stated specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"projection\", \"tensor\"",
+   "results": "{\"t\": \"2026-10-27T15:18:42Z\", \"tool\": \"loogle\", \"query\": \"\\\"projection\\\", \\\"tensor\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-27",
+   "verdict": "No matching canonical etale trace identity. The source library supplies projection/base-change compatibility and braided pullback; the remaining calculation is the stated specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "projection.*(trace|exchange)|exchange.*tensor",
+   "results": "{\"t\": \"2026-10-27T15:18:42Z\", \"tool\": \"grep\", \"query\": \"projection.*(trace|exchange)|exchange.*tensor\", \"sub\": \"\", \"ok\": true, \"n_hits\": 15, \"note\": \"\", \"top\": [\"Mathlib/Tactic/Simps/Basic.lean\", \"Mathlib/Tactic/Simps/Basic.lean\", \"Mathlib/CategoryTheory/Localization/Monoidal/Functor.lean\", \"Mathlib/CategoryTheory/Localization/Monoidal/Functor.lean\", \"Mathlib/CategoryTheory/Enriched/FunctorCategory.lean\", \"Mathlib/CategoryTheory/Enriched/FunctorCategory.lean\", \"Mathlib/CategoryTheory/Enriched/Ordinary/Basic.lean\", \"Mathlib/CategoryTheory/Monoidal/Closed/Ideal.lean\"], \"digest\": \"15b3a6c2cd6ab007\"}",
+   "date": "2026-10-27",
+   "verdict": "No matching canonical etale trace identity. The source library supplies projection/base-change compatibility and braided pullback; the remaining calculation is the stated specialization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "In a symmetric monoidal adjunction the projection formula commutes with base change and tensor trace evaluation",
+   "results": "{\"t\": \"2026-10-27T15:47:15Z\", \"tool\": \"leansearch\", \"query\": \"In a symmetric monoidal adjunction the projection formula commutes with base change and tensor trace evaluation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.tensorRightAdjunction\", \"CategoryTheory.Adjunction.ε_comp_map_ε_assoc\", \"CategoryTheory.Adjunction.IsMonoidal\", \"CategoryTheory.rightAdjointMate_comp_evaluation_assoc\", \"CategoryTheory.Adjunction.map_μ_comp_counit_app_tensor\", \"CategoryTheory.Adjunction.unit_app_tensor_comp_map_δ_assoc\", \"CategoryTheory.rightAdjointMate_comp_evaluation\", \"CategoryTheory.tensorLeftHomEquiv_whiskerRight_comp_evaluation\"], \"digest\": \"817df2d5fd01f995\"}",
+   "date": "2026-10-27",
+   "verdict": "Generic monoidal adjunction and rigid duality identities; no canonical etale trace/base-change identity. The generic tensor calculation is proved directly from the projection counit."
+  }
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-geo-p1-adjunction/thm-amb-p1-adjunction.proof.md",
+  "place": "Second triangle: extracting the common coefficient and integrating the remaining kernel factor."
+ },
+ "id": "lem-sfb-etale-projection-trace-tensor-interchange",
+ "title": "Interchanging a projection trace with a self symmetric tensor factor",
+ "statement": "Let $A$ be a finite commutative ring, $p:W\\to X$ proper, and $K,L$ in $D(X_{\\mathrm{et}},A)$, with $\\mathrm{swap}(L,L)=1$. Let $t:Rp_*(p^*L)\\to A_X$. Use [def-sfb-etale-coordinate-trace-data]. Tensor with $L$ the composite $Rp_*(p^*(K\\otimes L))\\to Rp_*(p^*K\\otimes p^*L)\\to K\\otimes Rp_*(p^*L)\\to K$, given by the pullback tensor comparison, inverse ordered projection, identity tensor $t$, and the right unitor. The result equals the ordinary unordered projection for $p$ on $p^*(K\\otimes L),L$, followed by inverse ordered projection on $K\\otimes L,p^*L$, identity tensor $t$, and the right unitor. This statement has no cartesian square, exchange map or trace base-change assumption.",
+ "proof": [
+  {
+   "text": "transpose the two projection composites under p* adjoint Rp*. Projection\nassociativity says that extracting K and then L agrees with extracting K tensor L,\nwith the canonical pullback tensor comparison and associators. Conjugate by the\ncanonical symmetries to put the outside coefficient first. The remaining permutation\ninterchanges the two copies of p*L. Braidedness of pullback transports hL to say this\npermutation is identity. Naturality of the symmetry for t moves the trace onto the\nother copy. Associator/right-unitor coherence cancels the tensor unit. All projection\nmaps are invertible because A is finite and p is proper, so invert the resulting\nsquare to obtain this equality. This calculation uses just p and t, no self-product\nsquare, exchange morphism, or trace base change hypothesis.",
+   "uses": [
+    "lem-asd-derived-pullback-symmetry"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-geo-p1-adjunction/thm-amb-p1-adjunction.proof.md",
+    "place": "Second triangle: extracting the common coefficient and integrating the remaining kernel factor."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-asd-derived-pullback-symmetry"
+ ],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleProjectionTraceTensorInterchange",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleProjectionTraceTensorInterchange.lean",
+  "declaration": "AlgebraicGeometry.Etale.CoordinateTrace.projectionTraceTensorInterchange",
+  "statement": "theorem projectionTraceTensorInterchange [Finite A] {W X : Scheme.{u}}\n    (p : W ⟶ X) [IsProper p] (K L : DerivedCategoryModule A X)\n    (hL : (swap A X L L).hom = 𝟙 _)\n    (t : (push A p).obj ((pull A p).obj L) ⟶ constantComplex A X) :\n    ((derivedTensor (ModuleCat.{u + 1} A) X).map\n        ((push A p).map\n            (leftDerivedUpperStarTensorIso (ModuleCat.{u + 1} A) p K L).hom ≫\n          (orderedProjectionIso A p K ((pull A p).obj L)).inv ≫\n          ((derivedTensor (ModuleCat.{u + 1} A) X).obj K).map t ≫\n          (derivedTensorRightUnitor (ModuleCat.{u + 1} A) X K).hom)).app L =\n      ((rightDerivedLowerStarProjectionMap (ModuleCat.{u + 1} A) p).app\n        ((pull A p).obj (tensor A X K L))).app L ≫\n      (orderedProjectionIso A p (tensor A X K L) ((pull A p).obj L)).inv ≫\n        ((derivedTensor (ModuleCat.{u + 1} A) X).obj (tensor A X K L)).map t ≫\n        (derivedTensorRightUnitor (ModuleCat.{u + 1} A) X (tensor A X K L)).hom",
+  "branch": "sheaf-dag",
+  "by": "P2",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P2",
+  "result": "pass",
+  "landing": "20261027T180720-L-3894223",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P2",
+  "result": "pass",
+  "landing": "20261027T180720-L-3894223",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
