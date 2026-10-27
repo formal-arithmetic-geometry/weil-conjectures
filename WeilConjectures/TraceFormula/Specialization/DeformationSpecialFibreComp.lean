@@ -5,7 +5,7 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.TraceFormula.Specialization.SupportCompactSupportExchange
+public import WeilConjectures.TraceFormula.Specialization.DeformationModel
 
 /-!
 

@@ -65,7 +65,9 @@ variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] {X Y : Scheme.{u}}
   (f : X ⟶ Y) [HasCompactification f] (d : ℕ) [SmoothOfRelativeDimension d f]
 
 include d in
-/-- Blueprint `thm-asd-smooth-tensor`: Smooth cohomological duality without a chosen
+/-- Compatibility required from `sec-six-functors-basics` (to be proved there):
+blueprint `thm-asd-smooth-tensor`.
+Blueprint `thm-asd-smooth-tensor`: Smooth cohomological duality without a chosen
 orientation.
 
 Let `f : X ⟶ Y` be smooth, separated, compactifiable and of pure relative dimension `d`, let `Λ`

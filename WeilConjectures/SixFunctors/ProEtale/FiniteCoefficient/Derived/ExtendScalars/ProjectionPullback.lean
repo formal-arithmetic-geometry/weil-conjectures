@@ -5,6 +5,7 @@ Authors: Claude
 -/
 module
 
+public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.CommIsoComp
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.ExtendScalars.Projection
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.TensorSheaf
 
@@ -135,16 +136,6 @@ noncomputable abbrev leftDerivedTensorRestrictScalarsUnitUpperStarMap :
   leftDerivedTensorRightUpperStarMap g (upperStarSheafRestrictScalarsUnitMap R S g)
 
 omit [IsNoetherianRing R] in
-/-- The isomorphism `Functor.mapHomotopyCategoryCompIso (Iso.refl (F ⋙ G))` has identity inverse
-components. -/
-private lemma mapHomotopyCategoryCompIso_refl_inv_app {V W V' : Type*} [Category V] [Category W]
-    [Category V'] [Preadditive V] [Preadditive W] [Preadditive V'] (F : V ⥤ W) (G : W ⥤ V')
-    [F.Additive] [G.Additive] (K : HomotopyCategory V (.up ℤ)) :
-    (Functor.mapHomotopyCategoryCompIso (Iso.refl (F ⋙ G)) (.up ℤ)).inv.app K = 𝟙 _ := by
-  rw [← cancel_epi ((Functor.mapHomotopyCategoryCompIso (Iso.refl (F ⋙ G)) (.up ℤ)).hom.app K),
-    Iso.hom_inv_id_app, Functor.mapHomotopyCategoryCompIso_refl_hom_app, Category.comp_id]
-
-omit [IsNoetherianRing R] in
 /-- `AlgebraicGeometry.ProEtale.sheafExtendScalarsProjectionTranspose_upperStar` on homotopy
 categories. -/
 lemma mapHomotopyCategory_sheafExtendScalarsProjectionTranspose_upperStar
@@ -170,7 +161,7 @@ lemma mapHomotopyCategory_sheafExtendScalarsProjectionTranspose_upperStar
   simp only [mapHomotopyCategorySheafExtendScalarsCompUpperStarIso,
     mapHomotopyCategoryTensorRightUpperStarMap, Iso.trans_hom, Iso.symm_hom,
     NatTrans.comp_app, Functor.mapHomotopyCategoryCompIso_refl_hom_app,
-    mapHomotopyCategoryCompIso_refl_inv_app, Category.id_comp, Category.comp_id,
+    Functor.mapHomotopyCategoryCompIso_refl_inv_app, Category.id_comp, Category.comp_id,
     NatTrans.mapHomotopyCategory, HomotopyCategory.quotient_obj_as,
     Functor.mapHomotopyCategory_map]
   simp only [← Functor.map_comp]
