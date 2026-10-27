@@ -9,6 +9,7 @@ public import WeilConjectures.CategoryTheory.FilteredTwoColimit
 public import WeilConjectures.ConstructibleSheaf.ProEtaleModule.DerivedCategory
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.DerivedExtendScalars
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.ExtendScalarsConstructible
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.PadicAlgClFaithful
 
 /-!
 
@@ -212,7 +213,15 @@ theorem constructibleCocone_homSurj : (constructibleCocone X ℓ).HomSurj :=
 extension of scalars to `ℚ̄_ℓ,X` have the same extension of scalars to `H'_X` for some finite
 subextension `H' ⊇ H`. See the module docstring. -/
 theorem constructibleCocone_homInj : (constructibleCocone X ℓ).HomInj :=
-  sorry
+  fun k _ _ g g' h ↦ by
+    have hΦ {K L : PadicSubfieldConstructible X ℓ k} (g : K ⟶ L) :
+        (((constructibleCocone X ℓ).Φ k).map g).hom =
+        (derivedExtendScalarsToPadicAlgCl X ℓ k).map g.hom := rfl
+    have h' := congrArg InducedCategory.Hom.hom h
+    rw [hΦ, hΦ] at h'
+    rw [InducedCategory.hom_ext
+      ((derivedExtendScalarsToPadicAlgCl X ℓ k).map_injective h')]
+    exact ⟨k, le_rfl, rfl⟩
 
 /-- **`ℚ̄_ℓ` is a 2-colimit**: the bounded constructible derived category `D^b_cons(X, ℚ̄_ℓ)`
 of `ℚ̄_ℓ,X`-modules, with the extensions of scalars from the bounded constructible derived
