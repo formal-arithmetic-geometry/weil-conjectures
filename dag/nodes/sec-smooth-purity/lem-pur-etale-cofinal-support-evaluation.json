@@ -1,0 +1,117 @@
+{
+ "id": "lem-pur-etale-cofinal-support-evaluation",
+ "kind": "statement",
+ "title": "Evaluation of a factorization-normalized cofinal support square",
+ "statement": "Let X,Y,f,c,l,T,B,r,Lx,Ly,R,Fx,Fy be actual projection, selected-extension, repetition and factorization data of [def-pur-etale-system-cofinal-data]. Suppose the coefficient projection for cofinalCoefficient B r is invertible and its evaluation agrees with compactScalarMap, in the precise coefficient-evaluation word of [lem-pur-etale-system-coefficient-projection]. Assume in addition the three explicit repetition and factor evaluation diagrams CofinalBlockEvaluation of [lem-pur-etale-cofinal-block-factorization]. If h is a natural isomorphism from Lx followed by compact support over B to compact support over the selected tower followed by Ly, and h satisfies the factorization normalization using R.kappa, then its evaluated morphisms satisfy the CofinalSupport.evaluation equation. This is a conditional equality for fixed data, with no existence assertion.\n\nPrecise Lean statement (notation and universes as in the cited definition):\n```lean\ntheorem etaleCofinalSupport_evaluation\n    {X Y : Scheme.{u}} {f : X ⟶ Y} {c : Compactification f} {l : ℕ}\n    (T : Theory c l) (B : Coefficients.{u} l) (r : ℕ ↪o ℕ)\n    (Lx : CofinalExtension X B r) (Ly : CofinalExtension Y B r)\n    (R : CofinalRepeatSupport T B r)\n    (Fx : CofinalFactor X B r Lx R.x (T.scalarX (cofinalCoefficient B r)))\n    (Fy : CofinalFactor Y B r Ly R.y (T.scalarY (cofinalCoefficient B r)))\n    (data : CofinalBlockEvaluation T B r Lx Ly R Fx Fy)\n    [IsIso (T.q (cofinalCoefficient B r))]\n    (hq : ∀ (m : ℕ) (M : Derived X (cofinalRepeated B r).rings),\n      (scalarExtension ((cofinalCoefficient B r).app (op m)).hom Y).map\n          ((T.supportEvaluation (cofinalRepeated B r) m).iso.inv.app M) ≫\n        (T.scalarEvaluationY (cofinalCoefficient B r) m).iso.inv.app\n          ((T.support (cofinalRepeated B r)).F.obj M) ≫\n        (T.evaluationY B m).E.map ((T.q (cofinalCoefficient B r)).app M) ≫\n        (T.supportEvaluation B m).iso.hom.app\n          ((T.scalarX (cofinalCoefficient B r)).model.T.obj M) ≫\n        (rightDerivedLowerShriekOfCompactification\n          (ModuleCat.{u + 1} (B.rings.obj (op m))) c).map\n            ((T.scalarEvaluationX (cofinalCoefficient B r) m).iso.hom.app M) =\n        (compactScalarMap ((cofinalCoefficient B r).app (op m)).hom c).app\n          ((T.evaluationX (cofinalRepeated B r) m).E.obj M))\n    (h : Lx.model.derived ⋙ (T.support B).F ≅\n      (T.support (cofinalCoefficients B r)).F ⋙ Ly.model.derived)\n    (hn : ∀ N : Derived X (cofinalCoefficients B r).rings,\n      (T.q (cofinalCoefficient B r)).app (R.x.R.mapDerivedCategory.obj N) ≫\n        (T.support B).F.map (Fx.derived.inv.app N) ≫ h.hom.app N ≫\n        Fy.derived.hom.app ((T.support (cofinalCoefficients B r)).F.obj N) =\n      (T.scalarY (cofinalCoefficient B r)).model.T.map (R.kappa.hom.app N)) :\n  ∀ (m : ℕ) (N : Derived X (cofinalCoefficients B r).rings),\n    ((T.evaluationY B m).E).map (h.hom.app N) ≫\n      (Ly.level m (T.evaluationY B m)\n        (T.evaluationY (cofinalCoefficients B r)\n          (SheafOfModules.systemNextSelected r m))).hom.app\n            ((T.support (cofinalCoefficients B r)).F.obj N) ≫\n      (scalarExtension\n        (B.rings.map (homOfLE (SheafOfModules.systemNextSelected_spec r m).1).op).hom Y).map\n          ((T.supportEvaluation (cofinalCoefficients B r)\n            (SheafOfModules.systemNextSelected r m)).iso.hom.app N) ≫\n      (compactScalarMap\n        (B.rings.map (homOfLE (SheafOfModules.systemNextSelected_spec r m).1).op).hom c).app\n          ((T.evaluationX (cofinalCoefficients B r)\n            (SheafOfModules.systemNextSelected r m)).E.obj N) =\n    (T.supportEvaluation B m).iso.hom.app\n      (Lx.model.derived.obj N) ≫\n      (rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} (B.rings.obj (op m))) c).map\n        ((Lx.level m (T.evaluationX B m)\n          (T.evaluationX (cofinalCoefficients B r)\n            (SheafOfModules.systemNextSelected r m))).hom.app N)\n```",
+ "source": {
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Construction 4.1 and paragraph preceding Lemma 4.10, printed pp. 21--23; finite-block generalization already in parent proof steps 1--3."
+ },
+ "stmt_deps": [
+  "def-pur-etale-system-cofinal-data",
+  "lem-pur-etale-system-coefficient-projection",
+  "lem-pur-etale-cofinal-block-factorization"
+ ],
+ "proof": [
+  {
+   "step": 1,
+   "text": "solve the normalization equation for h by composing with the inverse coefficient projection and the inverse factorization comparisons. Evaluate this word at m. Substitute data.factorX and data.factorY to identify the evaluated factorization words with the recorded selected-extension level comparisons. Use naturality of scalar evaluation to move past R.kappa, and then use data.support for the repeated compact-support square. The remaining coefficient square is exactly the assumed projection evaluation formula for D_m→B_m; naturality moves the repeated-evaluation isomorphisms past its scalar map. Cancel the adjacent evaluation and factorization isomorphisms. The remaining word is the displayed selected-extension/support equation. This is a diagram calculation from three explicitly recorded evaluation diagrams, not an inference from faithfulness of level evaluation. It does not demand literal section identities for arbitrary choices of open-adjoint data. Repeated least indices and nonflat coefficients are allowed.",
+   "uses": [
+    "lem-pur-etale-cofinal-block-factorization"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-etale-cofinal-block-factorization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Construction 4.1 and paragraph preceding Lemma 4.10, printed pp. 21--23; finite-block generalization already in parent proof steps 1--3."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Evaluation of the compact support comparison for a cofinal subsequence agrees with the coefficient projection map",
+   "results": "8 hits: ContDiffMapSupportedIn.coe_of_support_subset, TestFunction.coe_ofSupportedIn, CompactlySupportedContinuousMap.coe_mk, TestFunction.coe_ofSupportedInLM, CompactlySupportedContinuousMap.instFunLike, CompactlySupportedContinuousMap.coe_toContinuousMap, CompactlySupportedContinuousMap.continuousMapEquiv_apply_toFun, ContDiffMapSupportedIn.toFun_eq_coe.",
+   "date": "2026-10-28",
+   "verdict": "No complete match for this normalized statement about actual étale sequence-site systems. Reuse the existing Sheaf declarations recorded in proof_deps."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The evaluation of a normalized compact support cofinal subsequence comparison is the coefficient scalar projection formula",
+   "results": "8 hits: HahnEmbedding.Partial.evalCoeff, Profinite.NobelingProof.GoodProducts.eval, Profinite.NobelingProof.eval_eq_πJ, Profinite.NobelingProof.GoodProducts.max_eq_eval, Profinite.NobelingProof.GoodProducts.max_eq_eval_unapply, Profinite.NobelingProof.GoodProducts.SumEval, rieszContentAux_le, Profinite.NobelingProof.factors.",
+   "date": "2026-10-28",
+   "verdict": "No complete match for this normalized statement about actual étale sequence-site systems. Reuse the existing Sheaf declarations recorded in proof_deps."
+  },
+  {
+   "tool": "grep",
+   "query": "compact.*[Ss]calar|cofinal.*[Ss]upport",
+   "results": "8 hits: Mathlib/MeasureTheory/Measure/Haar/Unique.lean, Mathlib/MeasureTheory/Measure/Haar/Unique.lean, Mathlib/MeasureTheory/Measure/Haar/Unique.lean, Mathlib/MeasureTheory/Measure/Haar/Unique.lean, Mathlib/MeasureTheory/Measure/Haar/Unique.lean, Mathlib/Analysis/Normed/Algebra/Spectrum.lean, Mathlib/Analysis/Normed/Algebra/Spectrum.lean, Mathlib/Analysis/Calculus/LineDeriv/Measurable.lean.",
+   "date": "2026-10-28",
+   "verdict": "No complete match for this normalized statement about actual étale sequence-site systems. Reuse the existing Sheaf declarations recorded in proof_deps."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.EtaleCofinalSupportRealization",
+  "date": "2026-10-28",
+  "group": "U6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-exceptional-inverse-image",
+   "place": "Adic-stage paragraph: the compatible finite-level operations before derived inverse limit; geometric realization step of lem-pur-etale-system-cofinal-mate, specifically Evaluation of a factorization-normalized cofinal support square.",
+   "via": [
+    "lem-pur-etale-cofinal-support-realization",
+    "lem-pur-etale-system-cofinal-mate",
+    "lem-pur-etale-coefficient-system-adjoint"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-operations",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.EtaleCofinalSupportEvaluation",
+  "file": "lean/Sheaf/Paper/EtaleCofinalSupportEvaluation.lean",
+  "declaration": "AlgebraicGeometry.Etale.SystemProjection.etaleCofinalSupport_evaluation",
+  "statement": "theorem etaleCofinalSupport_evaluation\n    {X Y : Scheme.{u}} {f : X ⟶ Y} {c : Compactification f} {l : ℕ}\n    (T : Theory c l) (B : Coefficients.{u} l) (r : ℕ ↪o ℕ)\n    (Lx : CofinalExtension X B r) (Ly : CofinalExtension Y B r)\n    (R : CofinalRepeatSupport T B r)\n    (Fx : CofinalFactor X B r Lx R.x (T.scalarX (cofinalCoefficient B r)))\n    (Fy : CofinalFactor Y B r Ly R.y (T.scalarY (cofinalCoefficient B r)))\n    (data : CofinalBlockEvaluation T B r Lx Ly R Fx Fy)\n    [IsIso (T.q (cofinalCoefficient B r))]\n    (hq : ∀ (m : ℕ) (M : Derived X (cofinalRepeated B r).rings),\n      (scalarExtension ((cofinalCoefficient B r).app (op m)).hom Y).map\n          ((T.supportEvaluation (cofinalRepeated B r) m).iso.inv.app M) ≫\n        (T.scalarEvaluationY (cofinalCoefficient B r) m).iso.inv.app\n          ((T.support (cofinalRepeated B r)).F.obj M) ≫\n        (T.evaluationY B m).E.map ((T.q (cofinalCoefficient B r)).app M) ≫\n        (T.supportEvaluation B m).iso.hom.app\n          ((T.scalarX (cofinalCoefficient B r)).model.T.obj M) ≫\n        (rightDerivedLowerShriekOfCompactification\n          (ModuleCat.{u + 1} (B.rings.obj (op m))) c).map\n            ((T.scalarEvaluationX (cofinalCoefficient B r) m).iso.hom.app M) =\n        (compactScalarMap ((cofinalCoefficient B r).app (op m)).hom c).app\n          ((T.evaluationX (cofinalRepeated B r) m).E.obj M))\n    (h : Lx.model.derived ⋙ (T.support B).F ≅\n      (T.support (cofinalCoefficients B r)).F ⋙ Ly.model.derived)\n    (hn : ∀ N : Derived X (cofinalCoefficients B r).rings,\n      (T.q (cofinalCoefficient B r)).app (R.x.R.mapDerivedCategory.obj N) ≫\n        (T.support B).F.map (Fx.derived.inv.app N) ≫ h.hom.app N ≫\n        Fy.derived.hom.app ((T.support (cofinalCoefficients B r)).F.obj N) =\n      (T.scalarY (cofinalCoefficient B r)).model.T.map (R.kappa.hom.app N)) :\n  ∀ (m : ℕ) (N : Derived X (cofinalCoefficients B r).rings),\n    ((T.evaluationY B m).E).map (h.hom.app N) ≫\n      (Ly.level m (T.evaluationY B m)\n        (T.evaluationY (cofinalCoefficients B r)\n          (SheafOfModules.systemNextSelected r m))).hom.app\n            ((T.support (cofinalCoefficients B r)).F.obj N) ≫\n      (scalarExtension\n        (B.rings.map (homOfLE (SheafOfModules.systemNextSelected_spec r m).1).op).hom Y).map\n          ((T.supportEvaluation (cofinalCoefficients B r)\n            (SheafOfModules.systemNextSelected r m)).iso.hom.app N) ≫\n      (compactScalarMap\n        (B.rings.map (homOfLE (SheafOfModules.systemNextSelected_spec r m).1).op).hom c).app\n          ((T.evaluationX (cofinalCoefficients B r)\n            (SheafOfModules.systemNextSelected r m)).E.obj N) =\n    (T.supportEvaluation B m).iso.hom.app\n      (Lx.model.derived.obj N) ≫\n      (rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} (B.rings.obj (op m))) c).map\n        ((Lx.level m (T.evaluationX B m)\n          (T.evaluationX (cofinalCoefficients B r)\n            (SheafOfModules.systemNextSelected r m))).hom.app N)",
+  "branch": "sheaf-dag",
+  "by": "U6",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U6",
+  "result": "pass",
+  "landing": "20261027T180837-L-3908390",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U6",
+  "result": "pass",
+  "landing": "20261027T180837-L-3908390",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
