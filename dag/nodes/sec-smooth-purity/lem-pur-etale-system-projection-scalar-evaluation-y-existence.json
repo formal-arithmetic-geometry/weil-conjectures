@@ -1,0 +1,110 @@
+{
+ "id": "lem-pur-etale-system-projection-scalar-evaluation-y-existence",
+ "kind": "statement",
+ "title": "Target scalar evaluation comparison existence",
+ "statement": "Let f:X→Y be a scheme morphism, c a compactification of f, l a natural number,\nand b:BasicData c l. For coefficient sequences B,C, a compatible map a:B.rings→C.rings,\nand a level n, the normalized target scalar evaluation comparison exists.",
+ "source": {
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Zheng Lemma 5.16; Stacks Tag 0GL6, target scalar evaluation mate construction."
+ },
+ "stmt_deps": [
+  "def-pur-etale-system-projection-data"
+ ],
+ "proof": [
+  {
+   "text": "Construct the ordinary identity-on-sections comparison, take its canonical adjunction mate, and apply exact localization. The mate equations and their pasting give the prescribed normalization for this component.",
+   "uses": [
+    "lem-coef-semilinear-derived-sections",
+    "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+    "lem-pur-system-level-left-extension",
+    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-semilinear-derived-sections",
+  "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+  "lem-pur-system-level-left-extension",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Zheng Lemma 5.16; Stacks Tag 0GL6, target scalar evaluation mate construction."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "normalized etale system comparison mate evaluation restriction existence",
+   "results": "No direct match; generic adjunction-mate and localization APIs only.",
+   "date": "2026-10-28",
+   "verdict": "No direct match."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv",
+   "results": "Generic mate identities only.",
+   "date": "2026-10-28",
+   "verdict": "No direct match."
+  },
+  {
+   "tool": "grep",
+   "query": "SupportEvaluation ScalarEvaluation RestrictionSupport",
+   "results": "Only the project definitions; no existing existence theorem.",
+   "date": "2026-10-28",
+   "verdict": "No direct match."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.EtaleSystemProjectionComparisonData",
+  "date": "2026-10-28",
+  "group": "E5"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-operations",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-etale-system-projection-comparison-data",
+   "place": "Component extracted from normalized comparison data construction.",
+   "via": [
+    "lem-pur-etale-system-projection-comparison-data"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.EtaleSystemProjectionScalarEvaluationYExistence",
+  "file": "lean/Sheaf/Paper/EtaleSystemProjectionScalarEvaluationYExistence.lean",
+  "declaration": "AlgebraicGeometry.Etale.SystemProjection.scalarEvaluationY_nonempty",
+  "statement": "theorem scalarEvaluationY_nonempty\n    {X Y : Scheme.{u}} {f : X ⟶ Y} {c : Compactification f} {l : ℕ}\n    (b : BasicData c l) {B C : Coefficients.{u} l}\n    (a : B.rings ⟶ C.rings) (n : ℕ) :\n    Nonempty (ScalarEvaluation Y a (b.scalarY a) n\n      (b.evaluationY B n) (b.evaluationY C n))",
+  "branch": "sheaf-dag",
+  "by": "E5",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E5",
+  "result": "pass",
+  "landing": "20261027T205924-L-1634474",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E5",
+  "result": "pass",
+  "landing": "20261027T205924-L-1634474",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

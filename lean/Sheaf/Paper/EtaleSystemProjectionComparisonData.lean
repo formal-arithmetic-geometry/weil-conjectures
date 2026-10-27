@@ -5,6 +5,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import Sheaf.Paper.EtaleSystemProjectionBasicData
+import Sheaf.Paper.EtaleSystemProjectionSupportEvaluationExistence
+import Sheaf.Paper.EtaleSystemProjectionScalarEvaluationXExistence
+import Sheaf.Paper.EtaleSystemProjectionScalarEvaluationYExistence
+import Sheaf.Paper.EtaleSystemProjectionRestrictionSupportExistence
 
 /-! # Comparison data for normalized etale systems
 
@@ -54,6 +58,22 @@ than existence of a complete `Theory` record.
 -/
 theorem etaleSystemProjectionComparisonData_nonempty
     {X Y : Scheme.{u}} {f : X ⟶ Y} {c : Compactification f} {l : ℕ}
-    (b : BasicData c l) : Nonempty (ComparisonData b) := by sorry
+    (b : BasicData c l) : Nonempty (ComparisonData b) := by
+  classical
+  refine ⟨{
+    supportEvaluation := ?_
+    scalarEvaluationX := ?_
+    scalarEvaluationY := ?_
+    restriction := ?_
+  }⟩
+  · intro B n
+    exact (supportEvaluation_nonempty b B n).some
+  · intro B C a n
+    exact (scalarEvaluationX_nonempty b a n).some
+  · intro B C a n
+    exact (scalarEvaluationY_nonempty b a n).some
+  · intro B C a
+    exact (restrictionSupport_nonempty b a).some
+
 
 end AlgebraicGeometry.Etale.SystemProjection
