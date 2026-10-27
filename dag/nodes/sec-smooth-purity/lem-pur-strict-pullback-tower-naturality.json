@@ -1,0 +1,109 @@
+{
+ "id": "lem-pur-strict-pullback-tower-naturality",
+ "kind": "statement",
+ "title": "Naturality of the prescribed strict pullback tower",
+ "statement": "Fix a prime l, a finite extension E of Q_l and a scheme morphism f:X→Y in the same universe. Use the ordinary coherent reduction, sequence inverse image, simultaneous restriction and strict finite pullback towers of [def-pur-completed-pullback-tower-core]. The chosen strict tower isomorphism pullbackTensorPullbackTower(P), whose every component is the prescribed reordering, pullback evaluation and inverse reduction evaluation, is natural in every chain map P→Q of arbitrary unbounded completed-module cochain complexes. Thus the square comparing the restricted, reordered sequence pullback/reduction map with the actual finite-pullback tower map commutes.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 07A4, lemma-pullback-tensor-product; Tag 0941, the ringed sequence site"
+ },
+ "stmt_deps": [
+  "def-pur-completed-pullback-tower-core"
+ ],
+ "proof": [
+  {
+   "text": "Evaluate the proposed square at n. The tower normalization identifies its two comparison components with reordering, pullback evaluation and inverse reduction evaluation. These three factors form natural isomorphisms of cochain functors; paste their naturality squares. Replace the prescribed level components by the normalized tower components. Extensionality of natural transformations gives the tower equality.",
+   "uses": [
+    "def-pur-completed-pullback-tower-core",
+    "def-a1-integral-finite-pullback-tower"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pur-completed-pullback-tower-core",
+  "def-a1-integral-finite-pullback-tower"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "G3",
+  "date": "2026-10-27",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 07A4, 08TC and 0941; G3 stage-3 proof from existing total-tensor, generator and categorical APIs; no new sorry."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "pullbackTensorPullbackTower_naturality",
+   "results": "{\"t\": \"2026-10-27T11:53:27Z\", \"tool\": \"grep\", \"query\": \"pullbackTensorPullbackTower_naturality\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-27",
+   "verdict": "No existing theorem for the full normalized statement; reuse the categorical and total-tensor API."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatTrans.naturality",
+   "results": "{\"t\": \"2026-10-27T11:53:28Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.NatTrans.naturality\", \"sub\": \"\", \"ok\": true, \"n_hits\": 9, \"note\": \"\", \"top\": [\"CategoryTheory.NatTrans.naturality\", \"CategoryTheory.Limits.PullbackCone.isoMk\", \"CategoryTheory.Limits.PushoutCocone.isoMk\", \"CategoryTheory.Limits.PullbackCone.isoMk_hom_hom\", \"CategoryTheory.Limits.PullbackCone.isoMk_inv_hom\", \"CategoryTheory.Limits.PushoutCocone.isoMk_hom_hom\", \"CategoryTheory.Limits.PushoutCocone.isoMk_inv_hom\", \"CategoryTheory.Grothendieck.map_map\"], \"digest\": \"4b8320ba791eeca4\"}",
+   "date": "2026-10-27",
+   "verdict": "No existing theorem for the full normalized statement; reuse the categorical and total-tensor API."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A tower isomorphism defined by components of natural isomorphisms of complex functors is natural in the complex",
+   "results": "{\"t\": \"2026-10-27T11:53:30Z\", \"tool\": \"leanfinder\", \"query\": \"A tower isomorphism defined by components of natural isomorphisms of complex functors is natural in the complex\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.NatIso.mapHomologicalComplex\", \"CategoryTheory.NatIso.mapHomologicalComplex_hom_app_f\", \"CategoryTheory.ShortComplex.mapNatIso\", \"HomologicalComplex.natIsoSc'\", \"HomologicalComplex.natIsoSc'_hom_app_\\u03c4\\u2081\", \"CategoryTheory.NatIso.mapHomologicalComplex_inv_app_f\", \"HomologicalComplex.XIsoOfEq_inv_naturality\", \"HomologicalComplex.XIsoOfEq_inv_naturality_assoc\"], \"digest\": \"bb7ff8e15ade9fa0\"}",
+   "date": "2026-10-27",
+   "verdict": "No existing theorem for the full normalized statement; reuse the categorical and total-tensor API."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CompletedPullbackTowerRealizations",
+  "date": "2026-10-27",
+  "group": "G3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "The parent realization node retains null blueprint ancestry because its created.item chain is broken. Proved supporting step of lem-pur-integral-pullback-roos-realization, within the coherent reduction/tower realization argument; no new blueprint claim. The inherited documentary association is def-weil-frobenius-coefficient-twists, supporting finite reduction and scalar extension.",
+   "via": [
+    "lem-pur-integral-pullback-roos-realization",
+    "def-pur-completed-pullback-tower-realizations"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-purity-conv",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CompletedPullbackTowerNaturality",
+  "file": "lean/Sheaf/Paper/CompletedPullbackTowerNaturality.lean",
+  "declaration": "WeilConjectures.pullbackTensorPullbackTower_naturality",
+  "statement": "theorem pullbackTensorPullbackTower_naturality {X Y : Scheme.{u}} (f : X ⟶ Y)\n    {P Q : CochainComplex (integralTowerModules l E Y) ℤ} (g : P ⟶ Q) :\n    HomologicalComplex.complexOfFunctorsToFunctorToComplex.map\n        (((coefficientSequenceRestriction l E X).mapHomologicalComplex (.up ℤ)).map\n          (((pullbackTensorSequenceInverse l E f).mapHomologicalComplex (.up ℤ)).map\n            (((pullbackTensorOrdinaryReduction l E Y).mapHomologicalComplex (.up ℤ)).map g))) ≫\n      (pullbackTensorPullbackTower l E f Q).hom =\n    (pullbackTensorPullbackTower l E f P).hom ≫\n      (integralOperationsPullbackTowerFunctor l E f).map g",
+  "branch": "sheaf-dag",
+  "by": "G3",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G3",
+  "result": "pass",
+  "landing": "20261027T151707-L-1193701",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G3",
+  "result": "pass",
+  "landing": "20261027T151707-L-1193701",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

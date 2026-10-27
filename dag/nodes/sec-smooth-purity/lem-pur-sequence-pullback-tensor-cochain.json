@@ -23,101 +23,44 @@
  ],
  "proof": [
   {
-   "text": "Put $C_W=\\mathbf N\\times W_{\\mathrm{proet}}$ and $F=F_f$. Check the site hypotheses before using an ordinary tensor theorem. A sequence-site sheaf is precisely a presheaf whose restriction to each vertical slice is a sheaf, since the covering sieves are defined slice by slice. Thus precomposition by $b_f=\\mathrm{id}_{\\mathbf N}\\times u_f$ preserves sheaves: on every slice it is the pro-etale direct image. This proves continuity. The functor $u_f$ preserves terminal objects and pullbacks, hence finite limits. For each $T\\in X_{\\mathrm{proet}}$, the category of arrows $T\\to u_f(V)$ is cofiltered: for any finite diagram take the limit of its $V$'s and the induced arrow from $T$; the empty diagram uses the terminal object. For $(n,T)\\in C_X$, the category of arrows $(n,T)\\to b_f(m,V)$ is the product of this category with $(n\\downarrow\\mathrm{id}_{\\mathbf N})$. The latter has initial object $(n,\\mathrm{id})$. Choose cones in the two factors to obtain a cone on any finite diagram in the product. This is exactly representable flatness of $b_f$. The sites and all these indices are small in the stipulated module universe.",
+   "text": "The base-change functor on pro-etale sites preserves finite limits and hence is representably flat. For the sequence base functor id_N × u_f, the structured-arrow category is equivalent to the product of the two structured-arrow categories. Both are cofiltered, so the product is cofiltered. This verifies representable flatness of the sequence base, with the already specified continuous ringed-site morphism and adjunction.",
    "uses": [
     "def-coef-ringed-sequence-site",
     "def-weil-proetale-inverse-image"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 09A5, section-morphism; vertical sequence topology of def-coef-ringed-sequence-site; explicit finite-cone verification"
-   }
+   "elementary": true
   },
   {
-   "text": "Use the sequence ring sheaves $R_Y,R_X$ and their specified constant-section structural map $R_Y\\to (b_f)_*R_X$. The module direct image is exactly $f^s_*$, with scalar restriction through that map, and $F\\dashv f^s_*$ is the specified additive adjunction. Apply the ordinary tensor clause of [lem-sf-site-pullback-tensor-generators] to these sites, rings and this very adjunction. It gives isomorphisms $\\mu_{M,N}:F(M\\otimes_{R_Y}N)\\xrightarrow{\\sim}FM\\otimes_{R_X}FN$, natural in both module sheaves. Taking the restricted generator with arrow $\\mathrm{id}_{b_fV}$ and coefficient $1$ in that theorem gives\n$$\\mu_{M,N,b_fV}\\bigl(\\eta^f_{M\\otimes N,V}(x\\otimes y)\\bigr)=\\eta^f_{M,V}(x)\\otimes\\eta^f_{N,V}(y).$$\nNo choice of a different adjunction or of a finite-evaluation identification enters this application. Only the ordinary tensor clause is used; the theorem's additional K-flat conclusion is unnecessary.",
-   "uses": [
-    "def-trf-integral-comparison-sequence-systems",
-    "lem-sf-site-pullback-tensor-generators"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 03EL, lemma-tensor-product-pullback, with the actual-adjunction normalization in lem-sf-site-pullback-tensor-generators"
-   }
-  },
-  {
-   "text": "For fixed arbitrary $P,Q$ let $B^{p,q}=P^p\\otimes_{R_Y}Q^q$, with its two commuting differentials. For each $k$ the diagonal set $\\{(p,q)\\in\\mathbf Z^2:p+q=k\\}$ is small; its coproduct exists by the total-tensor definition. Since $F$ is a left adjoint, [lem-weil-pbc-left-adjoint-preserves-colimits] shows that it preserves each of these coproducts. Apply [lem-sfb-left-resolution-map-total-iso] to this bicomplex and the additive functor $F$. It gives a natural chain isomorphism\n$$a_B:\\operatorname{Tot}(FB)\\xrightarrow{\\sim}F^c\\operatorname{Tot}(B),\\qquad a_B^k\\iota^{FB}_{p,q}=F(\\iota^B_{p,q}).$$\nIts inverse therefore satisfies $(a_B^k)^{-1}F(\\iota^B_{p,q})=\\iota^{FB}_{p,q}$. The cited result applies to all integer-indexed bicomplexes with these diagonal coproducts; no finite diagonal or boundedness assumption has been introduced.",
-   "uses": [
-    "def-pc-tensor-complex-sheaves",
-    "lem-weil-pbc-left-adjoint-preserves-colimits",
-    "lem-sfb-left-resolution-map-total-iso"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 07A4, lemma-pullback-tensor-product, final total-complex comparison; explicit totalization naturality in the cited mapTotalIso result"
-   }
-  },
-  {
-   "text": "Naturality of $\\mu$ with the two differentials gives\n$$\\mu_{P^{p+1},Q^q}F(d_P^p\\otimes1)=(Fd_P^p\\otimes1)\\mu_{P^p,Q^q},\\qquad \\mu_{P^p,Q^{q+1}}F(1\\otimes d_Q^q)=(1\\otimes Fd_Q^q)\\mu_{P^p,Q^q}.$$\nThus the direct sum of the $\\mu_{P^p,Q^q}$ is a chain map $m:\\operatorname{Tot}(FB)\\to\\operatorname{Tot}(F^cP\\otimes F^cQ)$: multiply the second displayed equality by $(-1)^p$ and add the first. The direct sum of their inverses is its inverse, since the two composites restrict to the identity on every coproduct summand. The same calculation with a pair of chain maps, using module naturality of $\\mu$, proves naturality of $m$ in $P,Q$. Define $z_{f,P,Q}=m\\circ a_B^{-1}$; the naturality of $a_B$ and $m$ makes this a natural isomorphism of the two cochain bifunctors in the statement. In every degree it satisfies\n$$z^k_{f,P,Q}\\,F(\\iota^B_{p,q})=\\iota'_{p,q}\\mu_{P^p,Q^q}.$$\nEvery operation takes place in module sheaves on the entire sequence site, so these are also morphisms for all horizontal restrictions.",
+   "text": "Apply sitePullbackTensorGenerators to the specified sequence topology, rings, structural map, inverse-image functor and actual adjunction. It yields ordinary tensor data normalized by this same adjunction.",
    "uses": [
     "lem-sf-site-pullback-tensor-generators",
-    "def-pc-tensor-complex-sheaves"
+    "def-trf-integral-comparison-sequence-systems"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 07A4, lemma-pullback-tensor-product, constituents of the final comparison; both signed differential summands written explicitly"
-   }
+   "elementary": false
   },
   {
-   "text": "Write $t_{p,q}(x,y)$ for the pure tensor before its total-summand injection. Naturality of the actual unit for the module map $\\iota^B_{p,q}$ gives\n$$\\eta^f_{\\operatorname{Tot}(P,Q)^k,V}(\\iota^B_{p,q}t_{p,q}(x,y))=F(\\iota^B_{p,q})_{b_fV}\\bigl(\\eta^f_{P^p\\otimes Q^q,V}(t_{p,q}(x,y))\\bigr).$$\nApply the summand identity from step 4 and then the unit formula from step 2. The result is $\\iota'_{p,q}(\\eta^f_{P^p,V}(x)\\otimes\\eta^f_{Q^q,V}(y))$, which is exactly the displayed generator $g_{p,q,k,b_fV}$ in the statement. This proves the required equation for every integer triple and every site object, including the first quotient level.",
+   "text": "Apply the proved unitNormalizedCochainTensor theorem to that ordinary data. It totalizes the inverse comparisons, proves their summand/unit equation for all unbounded complexes, and proves uniqueness by transposing and testing all total pure generators. Its statement specializes verbatim to the required natural cochain isomorphism and normalization.",
    "uses": [
-    "def-trf-integral-comparison-sequence-systems",
-    "lem-sf-site-pullback-tensor-generators",
+    "lem-pur-unit-normalized-cochain-tensor",
     "def-pc-tensor-complex-sheaves"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 03EL, lemma-tensor-product-pullback, ordinary unit normalization, composed with total-summand injections"
-   }
-  },
-  {
-   "text": "Let $e$ be any other natural cochain isomorphism satisfying the required equation. Fix $P,Q,k$ and transpose $e^k$ and $z^k$ under the specified $F\\dashv f^s_*$; their transposes are $(f^s_*e^k)\\eta^f$ and $(f^s_*z^k)\\eta^f$, maps from $\\operatorname{Tot}_Y(P,Q)^k$ to $f^s_*\\operatorname{Tot}_X(F^cP,F^cQ)^k$. The normalization says these maps agree on every pure tensor followed by every summand injection, at every $V$. On one summand, precompose with the presheaf-to-sheaf tensor unit. The resulting linear maps on $P^p(V)\\otimes_{R_Y(V)}Q^q(V)$ agree because pure tensors generate the algebraic tensor product. The uniqueness in module sheafification then gives equality on the sheaf tensor summand. The coproduct universal property gives equality of the transposes on the entire degree. Injectivity of the adjunction bijection yields $e^k=z^k$. This holds for all $k,P,Q$, so their chain maps, natural transformations and isomorphisms agree. This proves uniqueness of the whole natural cochain isomorphism.",
-   "uses": [
-    "def-trf-integral-comparison-sequence-systems",
-    "def-pur-sheaf-tensor-product",
-    "def-weil-presheaf-modules-sheafification",
-    "def-weil-pbc-module-tensor-product",
-    "def-weil-pbc-category-colimit",
-    "def-pc-tensor-complex-sheaves"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Section 03EK, section-tensor-product, and Tag 03CY, lemma-sheafification-presheaf-modules; adjunction transpose and coproduct universal property"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
   "def-coef-ringed-sequence-site",
-  "def-pc-tensor-complex-sheaves",
-  "def-pur-sheaf-tensor-product",
-  "def-trf-integral-comparison-sequence-systems",
-  "def-weil-pbc-category-colimit",
-  "def-weil-pbc-module-tensor-product",
-  "def-weil-presheaf-modules-sheafification",
   "def-weil-proetale-inverse-image",
   "lem-sf-site-pullback-tensor-generators",
-  "lem-sfb-left-resolution-map-total-iso",
-  "lem-weil-pbc-left-adjoint-preserves-colimits"
+  "def-trf-integral-comparison-sequence-systems",
+  "lem-pur-unit-normalized-cochain-tensor",
+  "def-pc-tensor-complex-sheaves"
  ],
  "proof_origin": {
-  "by": "agent",
+  "by": "worker",
+  "group": "G3",
+  "date": "2026-10-27",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Tag 07A4, lemma-pullback-tensor-product, final ordinary total-complex comparison, using Tag 03EL; explicit extension to arbitrary unbounded complexes and uniqueness for the prescribed adjunction."
+  "place": "Tags 07A4, 08TC and 0941; G3, 2026-10-27: complete Lean proof, using the specified normalized comparisons; no statement or definition change."
  },
  "mathlib_searches": [
   {
@@ -274,8 +217,7 @@
   "is": null
  },
  "tool_uses": [
-  "lem-sf-site-pullback-tensor-generators",
-  "lem-sfb-left-resolution-map-total-iso"
+  "lem-sf-site-pullback-tensor-generators"
  ],
  "reviewed": {
   "date": "2026-10-27",
@@ -307,23 +249,10 @@
   "date": "2026-10-27",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "M3",
+  "group": "G3",
   "result": "pass",
-  "landing": "20261027T112410-L-1579585",
+  "landing": "20261027T151707-L-1193701",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
-  "sorry_before": [
-   "WeilConjectures.pullbackTensorIntegralTensorModel_existsUnique",
-   "WeilConjectures.pullbackTensorReductionGood",
-   "WeilConjectures.pullbackTensorSequenceCochain_existsUnique",
-   "WeilConjectures.pullbackTensorSequenceGood",
-   "WeilConjectures.pullbackTensorSystemComparison_existsUnique",
-   "WeilConjectures.pullbackTensorTensorTower_existsUnique"
-  ],
-  "sorry_after": [
-   "WeilConjectures.pullbackTensorIntegralTensorModel_existsUnique",
-   "WeilConjectures.pullbackTensorSequenceCochain_existsUnique",
-   "WeilConjectures.pullbackTensorTensorTower_existsUnique"
-  ]
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

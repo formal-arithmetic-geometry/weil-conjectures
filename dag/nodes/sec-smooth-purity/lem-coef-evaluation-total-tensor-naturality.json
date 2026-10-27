@@ -1,0 +1,119 @@
+{
+ "id": "lem-coef-evaluation-total-tensor-naturality",
+ "kind": "statement",
+ "title": "Naturality of normalized total-tensor evaluation",
+ "statement": "Fix a prime l, a finite extension E of Q_l, a scheme W and n≥0. On the ringed coefficient sequence site [def-coef-ringed-sequence-site], let e_n be evaluation and κ_n(P,Q):e_n Tot(P,Q)≅Tot(e_nP,e_nQ) the specified generator-normalized comparison [lem-coef-derived-system-evaluation-calculus]. For every pair of chain maps a:P→P′ and b:Q→Q′ of arbitrary unbounded sequence-module complexes, e_n(Tot(a,b)) followed by κ_n(P′,Q′) equals κ_n(P,Q) followed by Tot(e_na,e_nb), as cochain maps over the nth quotient ring.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 07A4, lemma-pullback-tensor-product; Tag 0941, the ringed sequence site"
+ },
+ "stmt_deps": [
+  "def-coef-ringed-sequence-site",
+  "lem-coef-derived-system-evaluation-calculus",
+  "def-pur-completed-pullback-tower-core"
+ ],
+ "proof": [
+  {
+   "text": "Precompose with κ_n(P,Q) inverse. Test degree k on all pure-tensor generators using total_pure_hom_ext. The prescribed normalization and the inverse isomorphism identity identify the inverse image of each evaluated pure tensor with the corresponding tensor of sequence sections.",
+   "uses": [
+    "lem-coef-derived-system-evaluation-calculus",
+    "lem-sfb-scalar-hom-tensor-coherence"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The map of a tensor complex sends each total pure generator to the generator of the two mapped factors. Apply this before and after evaluation, then use the forward normalization of κ_n(P′,Q′). Both routes agree on every generator, proving the naturality square.",
+   "uses": [
+    "lem-sfb-scalar-hom-tensor-coherence",
+    "lem-coef-derived-system-evaluation-calculus"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-derived-system-evaluation-calculus",
+  "lem-sfb-scalar-hom-tensor-coherence"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "G3",
+  "date": "2026-10-27",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 07A4, 08TC and 0941; G3 stage-3 proof from existing total-tensor, generator and categorical APIs; no new sorry."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "evaluation_tensor_natural|tensor_generator_map",
+   "results": "{\"t\": \"2026-10-27T11:53:27Z\", \"tool\": \"grep\", \"query\": \"evaluation_tensor_natural|tensor_generator_map\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-27",
+   "verdict": "No existing theorem for the full normalized statement; reuse the categorical and total-tensor API."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Iso.inv_comp_eq",
+   "results": "{\"t\": \"2026-10-27T11:53:28Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Iso.inv_comp_eq\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"CategoryTheory.Iso.inv_comp_eq\"], \"digest\": \"bcb7d82d78335e2f\"}",
+   "date": "2026-10-27",
+   "verdict": "No existing theorem for the full normalized statement; reuse the categorical and total-tensor API."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The normalized comparison evaluating the total tensor of complexes on a ringed sequence site is natural in both complexes",
+   "results": "{\"t\": \"2026-10-27T11:53:31Z\", \"tool\": \"leanfinder\", \"query\": \"The normalized comparison evaluating the total tensor of complexes on a ringed sequence site is natural in both complexes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomologicalComplex.\\u03b9TensorObj\", \"HomologicalComplex.tensorObj\", \"HomologicalComplex.HasGoodTensor\\u2081\\u2082\", \"HomologicalComplex.HasTensor\", \"SheafOfModules.Presentation.map_\\u03c0_eq\", \"HomologicalComplex.HasGoodTensor\\u2082\\u2083\", \"CategoryTheory.NatTrans.mapHomologicalComplex_naturality\", \"CategoryTheory.NatTrans.mapHomologicalComplex_naturality_assoc\"], \"digest\": \"1cd69bd00b38d3a7\"}",
+   "date": "2026-10-27",
+   "verdict": "No existing theorem for the full normalized statement; reuse the categorical and total-tensor API."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CompletedPullbackTowerRealizations",
+  "date": "2026-10-27",
+  "group": "G3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "The parent realization node retains null blueprint ancestry because its created.item chain is broken. Proved supporting step of lem-pur-integral-tensor-roos-realization, within the coherent reduction/tower realization argument; no new blueprint claim. The inherited documentary association is def-weil-frobenius-coefficient-twists, supporting finite reduction and scalar extension.",
+   "via": [
+    "lem-pur-integral-tensor-roos-realization",
+    "def-pur-completed-pullback-tower-realizations"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-purity-conv",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CoefficientEvaluationTensorNaturality",
+  "file": "lean/Sheaf/Paper/CoefficientEvaluationTensorNaturality.lean",
+  "declaration": "WeilConjectures.pullbackTensorEvaluationTensor_naturality",
+  "statement": "theorem pullbackTensorEvaluationTensor_naturality (W : Scheme.{u}) (n : ℕ)\n    {P P' Q Q' : CochainComplex (coefficientSequenceModules l E W) ℤ}\n    (a : P ⟶ P') (b : Q ⟶ Q') :\n    ((coefficientSequenceEvaluation l E W n).mapHomologicalComplex (.up ℤ)).map\n        ((coefficientTotalTensor.{u, u + 1, u}\n          (coefficientSequenceTopology (ProEt.topology W))\n          (coefficientSequenceCommRingSheaf l E W)).map (Prod.mkHom a b)) ≫\n        (coefficientEvaluationTensorIso.{u, u} l E W n P' Q').hom =\n      (coefficientEvaluationTensorIso.{u, u} l E W n P Q).hom ≫\n        (coefficientTotalTensor.{u, u + 1, u} (ProEt.topology W)\n          (integralCoefficientCommRingSheaf l E W n)).map\n          (Prod.mkHom\n            (((coefficientSequenceEvaluation l E W n).mapHomologicalComplex (.up ℤ)).map a)\n            (((coefficientSequenceEvaluation l E W n).mapHomologicalComplex (.up ℤ)).map b))",
+  "branch": "sheaf-dag",
+  "by": "G3",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G3",
+  "result": "pass",
+  "landing": "20261027T151707-L-1193701",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G3",
+  "result": "pass",
+  "landing": "20261027T151707-L-1193701",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

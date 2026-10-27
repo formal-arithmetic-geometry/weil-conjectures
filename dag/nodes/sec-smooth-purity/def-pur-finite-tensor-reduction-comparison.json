@@ -1,0 +1,113 @@
+{
+ "id": "def-pur-finite-tensor-reduction-comparison",
+ "kind": "definition",
+ "title": "The finite tensor of inverse reduction evaluations",
+ "statement": "Fix a prime l, a finite extension E of Q_l, a scheme W in universe u, and n≥0. Let r be the specified ordinary coherent reduction, e_n the sequence evaluation, T_n the specified total tensor over the finite coefficient ring, and s_n restriction to the completed coefficient ring. The normalized reduction evaluations identify ordinary finite scalar extension with r followed by e_n. Tensor their inverses and apply s_n to construct a natural isomorphism ((r^c × r^c);(e_n^c × e_n^c));T_n;s_n^c ≅ integralOperationsTensorLevel(l,E,W,n), on pairs of arbitrary unbounded completed-module cochain complexes. This is the actual threefold whiskering of the product of those inverse natural isomorphisms, with no choice of arbitrary witnesses, no boundedness hypothesis, and no claim about transitions between different n.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 07A4, lemma-pullback-tensor-product; Tag 0941, the ringed sequence site"
+ },
+ "stmt_deps": [
+  "def-pur-completed-pullback-tower-core",
+  "def-pur-integral-derived-operations",
+  "def-coef-ringed-tensor-hom-model"
+ ],
+ "proof": [
+  {
+   "text": "Take the product of two copies of the inverse unit-normalized reduction-evaluation natural isomorphism on complexes. Whisker by the finite total tensor bifunctor, then by finite scalar restriction. Its target is definitionally the actual integralOperationsTensorLevel functor, and its components are exactly the finite tensor of the two inverse reduction evaluations.",
+   "uses": [
+    "def-pur-completed-pullback-tower-core",
+    "def-pur-integral-derived-operations",
+    "def-coef-ringed-tensor-hom-model"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pur-completed-pullback-tower-core",
+  "def-pur-integral-derived-operations",
+  "def-coef-ringed-tensor-hom-model"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "G3",
+  "date": "2026-10-27",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 07A4, 08TC and 0941; G3 stage-3 proof from existing total-tensor, generator and categorical APIs; no new sorry."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "pullbackTensorFiniteReductionComparison|integralOperationsTensorComposite",
+   "results": "{\"t\": \"2026-10-27T12:55:13Z\", \"tool\": \"grep\", \"query\": \"pullbackTensorFiniteReductionComparison|integralOperationsTensorComposite\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-27",
+   "verdict": "NatIso.prod and whiskering implement the prescribed comparison; search found no existing specialized comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatIso.prod",
+   "results": "{\"t\": \"2026-10-27T12:55:14Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.NatIso.prod\", \"sub\": \"\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"CategoryTheory.NatIso.prod\", \"CategoryTheory.Equivalence.prod_counitIso\", \"CategoryTheory.Equivalence.prod_unitIso\", \"CategoryTheory.NatIso.prod_hom\", \"CategoryTheory.NatIso.prod_inv\"], \"digest\": \"e26f28bc44624096\"}",
+   "date": "2026-10-27",
+   "verdict": "NatIso.prod and whiskering implement the prescribed comparison; search found no existing specialized comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Tensor product of two inverse natural scalar reduction evaluation isomorphisms followed by restriction of scalars",
+   "results": "{\"t\": \"2026-10-27T12:55:15Z\", \"tool\": \"leanfinder\", \"query\": \"Tensor product of two inverse natural scalar reduction evaluation isomorphisms followed by restriction of scalars\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.Invertible.rTensorInv\", \"Module.Invertible.rTensorEquiv\", \"Module.Invertible.rTensorEquiv_symm_apply_apply\", \"Module.Invertible.rTensorInv_leftInverse\", \"IsBaseChange.tensorEquiv\", \"TensorProduct.AlgebraTensorModule.cancelBaseChange_symm_tmul\", \"Representation.repOfTprodIso_inv_apply\", \"Rep.finsuppTensorLeft_inv_hom\"], \"digest\": \"eb1044f5049e027d\"}",
+   "date": "2026-10-27",
+   "verdict": "NatIso.prod and whiskering implement the prescribed comparison; search found no existing specialized comparison."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CompletedPullbackTowerRealizations",
+  "date": "2026-10-27",
+  "group": "G3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Inherited null blueprint ancestry of the parent realization node (its created.item chain is broken). This factor of the coherent tensor-level comparison serves the naturality step of lem-pur-integral-tensor-roos-realization; documentary association: def-weil-frobenius-coefficient-twists.",
+   "via": [
+    "lem-pur-integral-tensor-roos-realization",
+    "def-pur-completed-pullback-tower-realizations"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-purity-conv",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FiniteTensorReductionComparison",
+  "file": "lean/Sheaf/Paper/FiniteTensorReductionComparison.lean",
+  "declaration": "WeilConjectures.pullbackTensorFiniteReductionComparison",
+  "statement": "def pullbackTensorFiniteReductionComparison (W : Scheme.{u}) (n : ℕ) :\n    ((((pullbackTensorOrdinaryReduction l E W).mapHomologicalComplex (.up ℤ)).prod\n      ((pullbackTensorOrdinaryReduction l E W).mapHomologicalComplex (.up ℤ))) ⋙\n      (((coefficientSequenceEvaluation l E W n).mapHomologicalComplex (.up ℤ)).prod\n        ((coefficientSequenceEvaluation l E W n).mapHomologicalComplex (.up ℤ)))) ⋙\n      coefficientTotalTensor.{u, u + 1, u} (ProEt.topology W)\n        (integralCoefficientCommRingSheaf l E W n) ⋙\n      (scalarReductionRestriction l E W n).mapHomologicalComplex (.up ℤ) ≅\n      integralOperationsTensorLevel l E W n",
+  "branch": "sheaf-dag",
+  "by": "G3",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G3",
+  "result": "pass",
+  "landing": "20261027T151707-L-1193701",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G3",
+  "result": "pass",
+  "landing": "20261027T151707-L-1193701",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

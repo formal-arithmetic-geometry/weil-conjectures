@@ -1,0 +1,137 @@
+{
+ "id": "lem-pur-unit-normalized-cochain-tensor",
+ "kind": "statement",
+ "title": "Unit-normalized tensor comparison on unbounded cochains",
+ "statement": "Let C,D be categories with objects in Type c, morphisms in Type v, and EssentiallySmall in universe max(c,v,r). Let J,K be Grothendieck topologies with sheafification of AddCommGrp in universe max(c,v,r) and the locally-bijective characterization of sheafification equivalences. Let U:C→D be continuous, R and S commutative ring sheaves in universe max(c,v,r), and φ:R→U_*S a ring map. Let F:Mod(J,R)→Mod(K,S) be additive with a specified adjunction to the corresponding module pushforward along U and φ. Given ordinary tensor pullback data normalized by this very adjunction [def-sf-ordinary-tensor-pullback-data], there exists a unique natural isomorphism Tot_J(P,Q);F^c ≅ Tot_K(F^cP,F^cQ) for arbitrary integer-indexed unbounded cochain complexes in the actual sheaf-module categories. For every p+q=k, V∈C, x∈P^p(V), y∈Q^q(V), its degree-k component sends the adjunction unit applied to the total pure generator g_{p,q,k}(x,y) to g_{p,q,k}(η(x),η(y)) at U(V). Use exactly the specified total tensor models [def-coef-ringed-tensor-hom-model]. No flatness or boundedness hypothesis is imposed on P,Q.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 07A4, lemma-pullback-tensor-product; Tag 0941, the ringed sequence site"
+ },
+ "stmt_deps": [
+  "def-sf-ordinary-tensor-pullback-data",
+  "def-coef-ringed-tensor-hom-model"
+ ],
+ "proof": [
+  {
+   "text": "Totalize the inverse ordinary tensor comparisons by tensorPullbackTotal. Ordinary naturality makes this a chain map; the left adjoint preserves the diagonal coproducts and the ordinary comparisons are invertible, so tensorPullbackTotal_isIso makes it an isomorphism. Naturality in both complexes gives a natural isomorphism after inversion.",
+   "uses": [
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "lem-sfb-scalar-tensor-comparison",
+    "def-sf-ordinary-tensor-pullback-data"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "On each summand the totalization equation says that the inverse total comparison followed by the summand injection is the ordinary inverse comparison followed by F of the injection. Invert this square. Naturality of the unit for the summand injection and the ordinary tensor normalization (restricted arrow identity and coefficient one) give exactly the stated unit equation.",
+   "uses": [
+    "def-sf-ordinary-tensor-pullback-data",
+    "def-pc-tensor-complex-sheaves"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For another comparison with this equation, transpose each degree map through the same adjunction. The two transposes agree on every pure generator, hence agree by total_pure_hom_ext from ScalarHomTensorCoherence. Injectivity of the adjunction Hom equivalence, then chain-map, natural-transformation and isomorphism extensionality, proves uniqueness.",
+   "uses": [
+    "lem-sfb-scalar-hom-tensor-coherence",
+    "def-pc-tensor-complex-sheaves"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-sfb-scalar-tensor-comparison",
+  "def-sf-ordinary-tensor-pullback-data",
+  "def-pc-tensor-complex-sheaves",
+  "lem-sfb-scalar-hom-tensor-coherence"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "G3",
+  "date": "2026-10-27",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 07A4, 08TC and 0941; G3 stage-3 proof from existing total-tensor, generator and categorical APIs; no new sorry."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatIso.ofComponents",
+   "results": "{\"t\": \"2026-10-27T11:26:00Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.NatIso.ofComponents\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.NatIso.ofComponents\", \"CategoryTheory.NatIso.ofComponents.app\", \"CategoryTheory.NatIso.ofComponents_hom_app\", \"CategoryTheory.NatIso.ofComponents_inv_app\", \"CategoryTheory.opOpEquivalence_counitIso\", \"CategoryTheory.opOpEquivalence_unitIso\", \"CategoryTheory.Functor.opUnopEquiv_unitIso\", \"CategoryTheory.Functor.opUnopEquiv_counitIso\"], \"digest\": \"d0d45c50c87b1b36\"}",
+   "date": "2026-10-27",
+   "verdict": "No existing theorem for the full normalized statement; reuse the categorical and total-tensor API."
+  },
+  {
+   "tool": "grep",
+   "query": "tensorPullbackTotal|total_pure_hom_ext",
+   "results": "{\"t\": \"2026-10-27T11:53:27Z\", \"tool\": \"grep\", \"query\": \"tensorPullbackTotal|total_pure_hom_ext\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-27",
+   "verdict": "No existing theorem for the full normalized statement; reuse the categorical and total-tensor API."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatIso.ofComponents",
+   "results": "{\"t\": \"2026-10-27T11:53:28Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.NatIso.ofComponents\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.NatIso.ofComponents\", \"CategoryTheory.NatIso.ofComponents.app\", \"CategoryTheory.NatIso.ofComponents_hom_app\", \"CategoryTheory.NatIso.ofComponents_inv_app\", \"CategoryTheory.opOpEquivalence_counitIso\", \"CategoryTheory.opOpEquivalence_unitIso\", \"CategoryTheory.Functor.opUnopEquiv_unitIso\", \"CategoryTheory.Functor.opUnopEquiv_counitIso\"], \"digest\": \"d0d45c50c87b1b36\"}",
+   "date": "2026-10-27",
+   "verdict": "No existing theorem for the full normalized statement; reuse the categorical and total-tensor API."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A tensor comparison for sheaf modules extends uniquely to an adjunction unit normalized tensor comparison on unbounded cochain complexes",
+   "results": "{\"t\": \"2026-10-27T11:53:29Z\", \"tool\": \"leanfinder\", \"query\": \"A tensor comparison for sheaf modules extends uniquely to an adjunction unit normalized tensor comparison on unbounded cochain complexes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.pushforwardSections_unitHomEquiv\", \"LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat\", \"CategoryTheory.Sheaf.monoidalCategory\", \"LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf\", \"LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat\", \"instMonoidalClosedSheafOfHasSheafifyOfFunctorOpposite\", \"CategoryTheory.sheafToPresheaf_\\u03bc\", \"CategoryTheory.sheafToPresheaf_\\u03b4\"], \"digest\": \"045248597b6b29d2\"}",
+   "date": "2026-10-27",
+   "verdict": "No existing theorem for the full normalized statement; reuse the categorical and total-tensor API."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CompletedPullbackTowerRealizations",
+  "date": "2026-10-27",
+  "group": "G3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "The parent realization node retains null blueprint ancestry because its created.item chain is broken. Proved supporting step of lem-pur-sequence-pullback-tensor-cochain, within the coherent reduction/tower realization argument; no new blueprint claim. The inherited documentary association is def-weil-frobenius-coefficient-twists, supporting finite reduction and scalar extension.",
+   "via": [
+    "lem-pur-sequence-pullback-tensor-cochain",
+    "def-pur-completed-pullback-tower-realizations"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-purity-conv",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.UnitNormalizedCochainTensor",
+  "file": "lean/Sheaf/Paper/UnitNormalizedCochainTensor.lean",
+  "declaration": "WeilConjectures.SemilinearSections.unitNormalizedCochainTensor",
+  "statement": "theorem unitNormalizedCochainTensor\n    (data : OrdinaryTensorPullbackData J K U R S phi F adj) :\n    ∃! e : coefficientTotalTensor.{r, c, v} J R ⋙ F.mapHomologicalComplex (.up ℤ) ≅\n      ((F.mapHomologicalComplex (.up ℤ)).prod\n        (F.mapHomologicalComplex (.up ℤ))) ⋙ coefficientTotalTensor.{r, c, v} K S,\n      ∀ (P Q : CochainComplex (Mod.{c, v, max c v r} J R) ℤ)\n        (p q k : ℤ) (h : p + q = k) (V : C)\n        (x : (P.X p).val.obj (op V)) (y : (Q.X q).val.obj (op V)),\n        ((e.hom.app (P,Q)).f k).val.app (op (U.obj V))\n          ((adj.unit.app (((coefficientTotalTensor.{r, c, v} J R).obj (P,Q)).X k)).val.app\n            (op V) (coefficientTensorGenerator.{r, c, v} J R P Q p q k h (op V) x y)) =\n        coefficientTensorGenerator.{r, c, v} K S\n          ((F.mapHomologicalComplex (.up ℤ)).obj P)\n          ((F.mapHomologicalComplex (.up ℤ)).obj Q) p q k h (op (U.obj V))\n          ((adj.unit.app (P.X p)).val.app (op V) x)\n          ((adj.unit.app (Q.X q)).val.app (op V) y)",
+  "branch": "sheaf-dag",
+  "by": "G3",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G3",
+  "result": "pass",
+  "landing": "20261027T151707-L-1193701",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G3",
+  "result": "pass",
+  "landing": "20261027T151707-L-1193701",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

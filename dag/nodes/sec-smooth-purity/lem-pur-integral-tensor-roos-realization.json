@@ -27,83 +27,46 @@
  ],
  "proof": [
   {
-   "text": "For good $P,Q$, $r_W^cP,r_W^cQ$ are K-flat [lem-pur-coherent-reduction-kflat], so the fixed K-flat tensor model $\\tau_W(r_W^cP,r_W^cQ)$ is a natural isomorphism [lem-coef-derived-system-evaluation-calculus, def-coef-ringed-tensor-hom-model]; $m_W$ and $\\rho_W$ are natural isomorphisms [def-pur-completed-pullback-tower-core] and $D(U_W)q^s_W\\cong q^t_WU_W^c$ [lem-weil-pbc-exact-functor-derived-factorization]. $d_{P,Q}$ is a strict tower isomorphism with the prescribed level components [lem-pur-coherent-tensor-tower]; each factor of $d_{P,Q,n}$ is natural in chain maps and tower maps are componentwise, so $d$ is natural. The displayed composite of these isomorphisms, ending with $q_WH_W(d_{P,Q})$, acting on both cone coordinates by $\\prod_nd_{P,Q,n}$ [def-sf-strict-roos-functor], is $\\nu_{W,P,Q}$, a natural isomorphism on good pairs retaining the zero shifted coordinate of $\\rho_W$.",
+   "text": "Use the constructed natural coherent tensor-level comparison def-pur-natural-coherent-tensor-level. Its component at (P,Q) is definitionally the prescribed tensor-tower level isomorphism. Combine this component equation with the chosen tower normalization, then apply its naturality and tower extensionality. This proves naturality of the chosen strict tensor-tower isomorphism without unfolding the total-tensor construction in the main proof.",
    "uses": [
-    "def-pur-completed-pullback-tower-core",
+    "def-pur-natural-coherent-tensor-level",
     "lem-pur-coherent-tensor-tower",
+    "def-pur-completed-pullback-tower-core"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply the real constructor def-pur-coherent-tensor-roos-comparison to the proved K-flat preservation of ordinary reduction on good complexes and the natural strict tensor-tower comparison of step 1. Its component theorem identifies the resulting natural isomorphism with the entire prescribed pullbackTensorReferenceTensorModel(P,Q), including exact restriction, the full Roos differential and both cone coordinates.",
+   "uses": [
     "lem-pur-coherent-reduction-kflat",
-    "lem-coef-derived-system-evaluation-calculus",
-    "def-coef-ringed-tensor-hom-model",
-    "lem-weil-pbc-exact-functor-derived-factorization",
-    "def-sf-strict-roos-functor"
+    "def-pur-coherent-tensor-roos-comparison"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0941 (lemma-derived-limit-is-ok) and Tag 08TC (definition-derived-limit), normalized two-input tensor comparison"
-   }
+   "elementary": false
   },
   {
-   "text": "The completed integral tensor is the functor obtained by localizing the strict quotient-tensor construction on good K-flat representatives. Its representative comparison epsilon^tensor_{P,Q} is the fixed isomorphism to the same localized strict Roos model q_W H_W(B_tensor^0(P,Q)), and it is independent of the chosen good representatives by the well-definedness theorem for the integral operations.",
+   "text": "Apply normalizedDescentComponents_existsUnique to the product good localization, the functor, comparison and universal property of integralCompletedTensorDescent, and the natural model comparison of the preceding step. The resulting natural isomorphism has the prescribed equation on every good pair. Replace each component of the natural model comparison by its definitionally equal recorded model component. This is exactly pullbackTensorIntegralTensorNormalization; the uniqueness clause of the same descent theorem proves uniqueness for this complete normalization.",
    "uses": [
-    "def-pur-integral-derived-operations",
-    "lem-pur-integral-operations-well-defined",
-    "lem-pur-coherent-tensor-tower"
+    "lem-pur-integral-pullback-descent-components",
+    "def-pur-integral-derived-operations"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0941, strict quotient tensor and derived-limit construction"
-   }
-  },
-  {
-   "text": "Let $L=q_W|_{\\mathrm{good}}$. Apply [lem-weil-pbc-resolving-representative-whiskering] with $K=\\mathrm{CoCh}(A_W)$, $H=K(A_W)$, $q:H\\to D(A_W)$ the localization at quasi-isomorphisms (a right calculus of fractions [lem-pc-quasi-isomorphisms-multiplicative-system, def-weil-abstract-derived-category]) and the good complexes; every complex receives a quasi-isomorphism from a good one [lem-pc-kflat-resolution]. So restriction along $L\\times L$ is fully faithful. By steps 1-2, $\\alpha_{P,Q}=\\nu_{W,P,Q}^{-1}\\circ\\epsilon^\\otimes_{P,Q}$ is a natural isomorphism between the restrictions of $\\widehat\\otimes_W$ and $T_W^{\\mathrm{ref}}$; it lifts to $\\beta_W$, the lift of $\\alpha^{-1}$ being its inverse [lem-weil-pbc-localization-universal-property], and evaluation at $(q_WP,q_WQ)$ gives the equation.",
-   "uses": [
-    "lem-weil-pbc-resolving-representative-whiskering",
-    "lem-pc-quasi-isomorphisms-multiplicative-system",
-    "def-weil-abstract-derived-category",
-    "lem-pc-kflat-resolution",
-    "lem-weil-pbc-localization-universal-property"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 08TC, derived localization universal property and normalized resolving-representative comparison"
-   }
-  },
-  {
-   "text": "If $\\beta'$ satisfies the same equation, $\\beta'$ and $\\beta_W$ have equal whiskerings along $L\\times L$, so faithfulness from step 3 (resolving hypothesis [lem-pc-kflat-resolution]) gives $\\beta'=\\beta_W$, with the entire Roos normalization.",
-   "uses": [
-    "lem-weil-pbc-resolving-representative-whiskering",
-    "lem-pc-kflat-resolution"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 08TC, uniqueness of descended natural transformations"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "def-coef-ringed-tensor-hom-model",
-  "def-pur-completed-pullback-tower-core",
-  "def-pur-integral-derived-operations",
-  "def-sf-strict-roos-functor",
-  "def-weil-abstract-derived-category",
-  "lem-coef-derived-system-evaluation-calculus",
-  "lem-pc-kflat-resolution",
-  "lem-pc-quasi-isomorphisms-multiplicative-system",
-  "lem-pur-coherent-reduction-kflat",
+  "def-pur-natural-coherent-tensor-level",
   "lem-pur-coherent-tensor-tower",
-  "lem-pur-integral-operations-well-defined",
-  "lem-weil-pbc-exact-functor-derived-factorization",
-  "lem-weil-pbc-localization-universal-property",
-  "lem-weil-pbc-resolving-representative-whiskering"
+  "def-pur-completed-pullback-tower-core",
+  "lem-pur-coherent-reduction-kflat",
+  "def-pur-coherent-tensor-roos-comparison",
+  "lem-pur-integral-pullback-descent-components",
+  "def-pur-integral-derived-operations"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "worker",
+  "group": "G3",
+  "date": "2026-10-27",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Tag 0941 (lemma-derived-limit-is-ok), Tag 08TC (definition-derived-limit), normalized two-input resolving-localization comparison"
+  "place": "Tags 07A4, 08TC and 0941; G3, 2026-10-27: complete Lean proof, using the specified normalized comparisons; no statement or definition change."
  },
  "mathlib_searches": [
   {
@@ -226,9 +189,7 @@
   "is": null
  },
  "tool_uses": [
-  "lem-coef-derived-system-evaluation-calculus",
-  "lem-weil-pbc-resolving-representative-whiskering",
-  "lem-pc-kflat-resolution"
+  "lem-coef-derived-system-evaluation-calculus"
  ],
  "reviewed": {
   "date": "2026-10-27",
@@ -260,23 +221,10 @@
   "date": "2026-10-27",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "M3",
+  "group": "G3",
   "result": "pass",
-  "landing": "20261027T112410-L-1579585",
+  "landing": "20261027T151707-L-1193701",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
-  "sorry_before": [
-   "WeilConjectures.pullbackTensorIntegralTensorModel_existsUnique",
-   "WeilConjectures.pullbackTensorReductionGood",
-   "WeilConjectures.pullbackTensorSequenceCochain_existsUnique",
-   "WeilConjectures.pullbackTensorSequenceGood",
-   "WeilConjectures.pullbackTensorSystemComparison_existsUnique",
-   "WeilConjectures.pullbackTensorTensorTower_existsUnique"
-  ],
-  "sorry_after": [
-   "WeilConjectures.pullbackTensorIntegralTensorModel_existsUnique",
-   "WeilConjectures.pullbackTensorSequenceCochain_existsUnique",
-   "WeilConjectures.pullbackTensorTensorTower_existsUnique"
-  ]
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
