@@ -6,6 +6,9 @@ module
 
 public import Sheaf.Paper.AdicRealizationFamilyData
 
+import Sheaf.Paper.AdicReindexingTensorIntegral
+import Sheaf.Paper.DerivedPullbackTensorIso
+
 /-! # Tensor compatibility of a normalized realization comparison
 
 Source: Bhatt--Scholze, Proposition 6.8.14 and Remark 6.8.15;
@@ -18,32 +21,34 @@ set_option autoImplicit false
 set_option synthInstance.maxSize 4096
 set_option cleanup.letToHave false
 attribute [local irreducible] HasDerivedCategory.standard
+set_option allowUnsafeReducibility true in
+attribute [local irreducible] WeilConjectures.GeneralAlgebraicallyClosedCoefficients.stageSystem
 
 universe u
-open CategoryTheory AlgebraicGeometry
+open CategoryTheory CategoryTheory.Functor AlgebraicGeometry
 namespace WeilConjectures.AdicQbarRealization
 variable (l : ℕ) [Fact l.Prime] (D : FiniteFieldDatum.{u})
+
+private theorem app_eq_of_iso {A B : Type*} [Category* A] [Category* B]
+    {F G : A ⥤ B} (α β : F ⟶ G) {X Y : A} (e : X ≅ Y)
+    (h : α.app Y = β.app Y) : α.app X = β.app X := by
+  apply (cancel_mono (G.map e.hom)).mp
+  rw [← α.naturality, ← β.naturality, h]
 
 /-- The tensor equation for one fixed scheme-isomorphism comparison.
 Source: Bhatt--Scholze, Proposition 6.8.14 and Remark 6.8.15; HRS Lemma 7.9.
 (blueprint: lem-sf-adic-reindexing-tensor-compatibility).
 
-Proof: Enlarge the two finite coefficient fields of M and N to their compositum.
-Choose integral constructible representatives there, then flat-term K-flat models.
-Substitute integralRealizationAgreement for the comparison and integral_tensor and
-representative from the two finite normalizations for the realization tensorators.
-The reindexing representative equation identifies its derived tensorator with its
-cochain tensorator. On homogeneous pure sections, balance_sections and pure identify
-both composites with multiplication of the two scalar factors followed by the same
-total-tensor generator. The cochain pullback tensor comparison respects the signed
-sum differential and every quotient transition, so these section equations give an
-equality of chain maps. The quotient-completion comparison has the prescribed quotient
-map as its product coordinate and zero shifted coordinate; hence the equality also
-holds for the whole completion map. Invert its isomorphism on constructible tensors,
-apply the model comparison isomorphisms and raw rationalization, and include the
-result at the common stage. Naturality along the stage and representative isomorphisms
-transports it back to M and N and cancels the intervening comparison factors. The result
-is precisely the displayed equation, with the fixed canonical pullback tensor map.
+Proof: Form the two routes as natural transformations of bifunctors, using the
+natural isomorphism whose components are canonicalCommonStagePullbackTensor.
+Choose the compositum E of the coefficient fields of M and N. The specified
+isoToStage maps identify both with objects included from E. Raw rationalization
+introduces no new objects, so each such object is the rationalization of its
+underlying integral object. Apply normalized_reindexing_tensor_integral at E,
+using the normalization hypothesis only at that field. Naturality transports the
+equality of components back along the product of the two isoToStage maps;
+postcomposition with the image of this isomorphism cancels. The component
+specification for the canonical comparison gives exactly the displayed equation.
 No identity, composition or internal-Hom equation is used. -/
 theorem normalized_reindexing_tensor_compatibility
     (C : FamilyCore l D) (T U : GeometricSpace D) (g : T.base.left ≅ U.base.left)
@@ -67,6 +72,50 @@ theorem normalized_reindexing_tensor_compatibility
         ((C.comparison T U g).inv.app M) ((C.comparison T U g).inv.app N)) ≫
       (C.data T).tensor.tensor.hom.app ((commonStageDerivedPullback l (PadicAlgCl l) g.hom).obj M,
         (commonStageDerivedPullback l (PadicAlgCl l) g.hom).obj N) := by
-  sorry
+  let := (C.data T).units
+  let := (C.data U).units
+  let P := commonStageDerivedPullback l (PadicAlgCl l) g.hom
+  let JX := ordinary l T.base.left (C.data T).realization
+  let JY := ordinary l U.base.left (C.data U).realization
+  let G := derivedPull l T.base.left g.hom (C.ring T U g)
+  let TY := commonStageDerivedTensor l (PadicAlgCl l) U.base.left
+  let BX := (C.data T).tensor.closed.tensor
+  let a := C.comparison T U g
+  intro M N
+  obtain ⟨_, _, _, _, _, _, _, ⟨μ, hμ⟩, _⟩ :=
+    derivedPullbackTensorIso l
+      (AlgebraicallyClosedCoefficients.Coefficient.{u} l (PadicAlgCl l) M.stage)
+      g.hom 0 (PadicAlgCl l)
+  let left := whiskerRight (C.data U).tensor.tensor.hom G ≫
+    whiskerLeft TY a.inv ≫ whiskerRight μ.hom JX
+  let right := whiskerLeft (JY.prod JY) (C.pullTensor T U g).tensor.hom ≫
+    whiskerRight (NatTrans.prod a.inv a.inv) BX ≫
+    whiskerLeft (P.prod P) (C.data T).tensor.tensor.hom
+  let E := Padic.finiteCoefficientCompositum l (PadicAlgCl l) M.stage N.stage
+  obtain ⟨hM, hN⟩ := (Padic.finiteCoefficientFields_properties l (PadicAlgCl l)).1
+    M.stage N.stage
+  let S := GeneralAlgebraicallyClosedCoefficients.stageSystem l (PadicAlgCl l) U.base.left
+  let eM := S.isoToStage M hM
+  let eN := S.isoToStage N hN
+  have hStage (F : AlgebraicallyClosedCoefficients.Index l (PadicAlgCl l))
+      (K L : sfRationalConstructibleCategory l
+        (AlgebraicallyClosedCoefficients.Coefficient.{u} l (PadicAlgCl l) F) U.base.left) :
+      let I := GeneralAlgebraicallyClosedCoefficients.inclusion
+        (l := l) (Ω := PadicAlgCl l) (Y := U.base.left) F
+      left.app (I.obj K, I.obj L) = right.app (I.obj K, I.obj L) := by
+    rcases K with ⟨K⟩
+    rcases L with ⟨L⟩
+    have hi := normalized_reindexing_tensor_integral l D C T U g F
+      (h_integral_normalization F) K L
+    simpa only [left, right, NatTrans.comp_app, whiskerRight_app, whiskerLeft_app,
+      NatTrans.prod, Functor.prod_obj, G, JX, JY, P, TY, BX, a,
+      sfRationalConstructibleLocalization, ScalarLocalization.localization,
+      ← Iso.app_hom, hμ] using hi
+  have h : left.app (M, N) = right.app (M, N) := by
+    apply app_eq_of_iso left right (eM.prod eN)
+    exact hStage E (M.toStage hM) (N.toStage hN)
+  simpa only [left, right, NatTrans.comp_app, whiskerRight_app, whiskerLeft_app,
+    NatTrans.prod, Functor.prod_obj, G, JX, JY, P, TY, BX, a,
+    ← Iso.app_hom, hμ] using h
 
 end WeilConjectures.AdicQbarRealization
