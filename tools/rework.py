@@ -37,7 +37,8 @@ Usage:
                                       write coord/rework-hold.txt for the dispatcher
   tools/rework.py cluster-restore [--dry-run]  put back every quarantined module no unfixed root blocks, in ONE
                                       landing; the global build verifies them together; failures (and importers) go
-                                      back to quarantine as rework roots with their own error
+                                      back to quarantine as rework roots with their own error. Modules whose imports
+                                      drifted meanwhile are compiled alone first (tools/rework_drift.py, 2026-10-28)
   tools/rework.py autorestore [--recheck-errors]  bulk and transitive: compile every quarantined module whose imports
                                       are all back, level by level; restore those that compile in one landing per level,
                                       give the others their own error (separate items)
@@ -1006,8 +1007,22 @@ def cluster_restore(rounds: int = 8, dry: bool = False, wait: bool = False) -> i
     settle_restores()
     rows = load()
     put, seeds = cluster_set(rows)
+    # 2026-10-28 (the owner, 02:10): a planned module whose imports drifted while it sat in quarantine/ (its text, or a
+    # name/class it mentions, changed in its import closure since it left) is compiled alone first
+    # (tools/rework_drift.py: a detached pre-compile); it stays out until it has a result, at most SHEAF_DRIFT_CAP
+    # (45 min), and one that fails becomes an error root (cluster_set then blocks it and its importers). Everything
+    # else comes back now. A failure of the check itself never stops the restore.
+    dnote = ""
+    if put:
+        try:
+            import rework_drift
+            held, dnote = rework_drift.hold(rows, put, spawn=not dry)
+            put = [m for m in put if m not in held]
+        except Exception as exc:  # noqa: BLE001
+            dnote = f"drift check failed, everything planned goes back ({exc!r})"[:300]
     print(f"{time.strftime('%F %T')} cluster restore: {len(put)} quarantined module(s) to put back "
-          f"({len(seeds)} confirmed unfixed roots block {sum(1 for m in rows if not landed(m)) - len(put)})", flush=True)
+          f"({len(seeds)} confirmed unfixed roots block {sum(1 for m in rows if not landed(m)) - len(put)})"
+          + (f"; {dnote}" if dnote else ""), flush=True)
     if dry or not put:
         return len(put)
     rec_of: dict[str, str] = {}
