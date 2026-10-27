@@ -6,6 +6,8 @@ Authors: SHEAF group J7
 module
 
 public import Sheaf.WeilSheaf.NativeExceptionalHomTransport
+import Sheaf.WeilSheaf.NativeExceptionalOrdinaryCounitComparison
+import Sheaf.WeilSheaf.NativeExceptionalOrdinaryCounitWitness
 
 /-! # Ordinary exceptional counit before lifting a native morphism
 
@@ -78,8 +80,11 @@ theorem native_exceptional_ordinary_counit (R : Family l D)
         (t ≫ (shiftFunctorZero _ ℤ).inv.app (WeilComplex.forget.obj L)) ∈
           CyclicDerivedHomInvariants (WeilSheaf.frobeniusPullback D.k₀ l Y.base.left)
             ((nativeShriek D l f₀).obj H).obj L.obj ∧
-        ∀ (K : W D l X) (r : ℤ), Function.Bijective
+      ∀ (K : W D l X) (r : ℤ), Function.Bijective
           (fun v : CyclicDerivedHom (WeilSheaf.frobeniusPullback D.k₀ l X.base.left)
-            K.obj H.obj r ↦ counitHomTransport D l f₀ K H r v ≫ t⟦r⟧') := by sorry
+            K.obj H.obj r ↦ counitHomTransport D l f₀ K H r v ≫ t⟦r⟧') := by
+  obtain ⟨a⟩ := native_exceptional_ordinary_counit_comparison D l R X Y VX VY f₀ S c
+  refine ⟨a, ?_⟩
+  exact native_exceptional_ordinary_counit_witness D l R X Y VX VY f₀ S c a
 
 end WeilConjectures.NativeExceptionalForgetful

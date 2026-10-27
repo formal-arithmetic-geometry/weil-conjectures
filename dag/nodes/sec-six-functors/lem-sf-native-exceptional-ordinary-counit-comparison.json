@@ -1,0 +1,108 @@
+{
+ "kind": "statement",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
+  "place": "Final exceptional-adjunction sentence, with the native-derived expansion of lem-sf-weil-native-exceptional-forgetful."
+ },
+ "status": "split",
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "ordinary exceptional adjunction comparison isomorphism between native compact support and a specified ordinary coefficient functor",
+   "results": "No exact geometric comparison theorem; the statement is an interface supplied by the native exceptional construction.",
+   "date": "2026-10-28",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Adjunction.homEquiv\" ordinary exceptional counit derived category",
+   "results": "Standard adjunction bijections only; no specified native realization comparison.",
+   "date": "2026-10-28",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "native_exceptional_ordinary_counit_comparison|native_exceptional_ordinary_counit_witness",
+   "results": "These are new declarations; no existing declaration has either strict substatement.",
+   "date": "2026-10-28",
+   "verdict": "no exact match"
+  }
+ ],
+ "proof_origin": {
+  "by": "H7",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
+  "place": "Decomposition of the ordinary exceptional counit argument into comparison and fixed-comparison witness steps."
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sf-native-exceptional-ordinary-counit",
+   "place": "Strict substeps of the ordinary exceptional counit statement.",
+   "via": [
+    "lem-sf-native-exceptional-ordinary-counit"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "id": "lem-sf-native-exceptional-ordinary-counit-comparison",
+ "title": "Ordinary exceptional comparison isomorphism",
+ "statement": "Fix D,l,R,X,Y,VX,VY,f₀,S,c under the hypotheses of lem-sf-native-exceptional-ordinary-counit. There exists a natural isomorphism a : nativeShriek D l f₀ ⋙ VY.functor ≅ VX.functor ⋙ (S.ring.operation c .closed).F. This is only the comparison component; it asserts no counit carrier, invariance, or Hom bijectivity.",
+ "stmt_deps": [
+  "def-sf-native-exceptional-forgetful-data"
+ ],
+ "proof": [
+  {
+   "text": "Compose the unit-normalized native open/proper forgetting comparison with the inverse scalar-normalized compact-support realization, transport through closure and section-module comparisons, and use full faithfulness to lift the result to the supplied ForgetModels and specified coefficient system.",
+   "uses": [
+    "lem-sf-native-weil-open-proper-forgetting",
+    "lem-sf-native-weil-scalar-frobenius-counit",
+    "lem-sf-adic-qbar-constructible-realization"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-native-weil-open-proper-forgetting",
+  "lem-sf-native-weil-scalar-frobenius-counit",
+  "lem-sf-adic-qbar-constructible-realization"
+ ],
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.WeilSheaf.NativeExceptionalOrdinaryCounit",
+  "date": "2026-10-28",
+  "group": "H7"
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.WeilSheaf.NativeExceptionalOrdinaryCounitComparison",
+  "file": "lean/Sheaf/WeilSheaf/NativeExceptionalOrdinaryCounitComparison.lean",
+  "declaration": "WeilConjectures.NativeExceptionalForgetful.native_exceptional_ordinary_counit_comparison",
+  "statement": "theorem native_exceptional_ordinary_counit_comparison (R : Family l D)\n    (X Y : Space D) (VX : ForgetModel D l R X) (VY : ForgetModel D l R Y)\n    (f₀ : X.base ⟶ Y.base)\n    [IsSeparated f₀.left] [LocallyOfFiniteType f₀.left] [QuasiCompact f₀.left]\n    (S : CoefficientSystem D l f₀) (c : Compactification (geometricMap D f₀)) :\n    Nonempty (nativeShriek D l f₀ ⋙ VY.functor ≅\n        VX.functor ⋙ (S.ring.operation c .closed).F)",
+  "branch": "sheaf-dag",
+  "by": "H7",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H7",
+  "result": "pass",
+  "landing": "20261027T210030-L-1649192",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H7",
+  "result": "pass",
+  "landing": "20261027T210030-L-1649192",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
