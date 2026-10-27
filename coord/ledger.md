@@ -19568,3 +19568,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 14:09 L: merged deliver/NA/lem-sf-native-ordinary-model-uniqueness (reviewer PASS; first push; new nodes: 1)
 - 14:13 L: returned deliver/G4/Sheaf.Paper.ExceptionalIntegralAdjunctionLocalization (reviewer RETURN: (reviewer C-f5dea, head f5deadc6c) the reviewer passed it, but the landing failed: NOT MERGED Sheaf.Paper.ExceptionalInt)
 - 14:26 L: returned deliver/U3/Sheaf.AlgebraicGeometry.SfP1IntegralSectionComparison (reviewer RETURN: (the global build of 6db8f8a0f6, still running) your landing 20261027T135443-L-3709832 fails to compile in Sheaf.Algebra)
+- 14:28 L: returned deliver/X3/Sheaf.Paper.DiagonalTowerLimit (reviewer RETURN: (reviewer C-9ce8f, head 9ce8fbdb6) the reviewer passed it, but the landing failed: NOT MERGED Sheaf.Paper.DiagonalTowerL)
