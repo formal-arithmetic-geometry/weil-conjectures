@@ -6,6 +6,7 @@ Authors: SHEAF group R5
 module
 
 public import Sheaf.AlgebraicGeometry.VectorTraceGeometry
+import Sheaf.AlgebraicGeometry.VectorIntegrationBaseChangeLocalUnit
 
 /-! # Base change on two vector-bundle frame opens
 
@@ -91,6 +92,9 @@ theorem vectorIntegration_baseChange_local (N : ℕ) (hN : 0 < N)
         ((Scheme.Modules.tensorPullback f).obj F) U eT) :
     (ordinaryFinitePullback A j).map (b.hom ≫ kT) =
       (ordinaryFinitePullback A j).map
-        ((ordinaryFinitePullback A f).map kS ≫ (ordinaryFiniteUnitPullback A f).hom) := by sorry
+        ((ordinaryFinitePullback A f).map kS ≫ (ordinaryFiniteUnitPullback A f).hom) := by
+  apply (cancel_mono (ordinaryFiniteUnitPullback A j).hom).mp
+  exact vectorIntegration_baseChange_local_unit N hN A hA t f hS r F c hc b hb D
+    V eS U eT W j a g ha hg kS kT hkS hkT
 
 end AlgebraicGeometry.Etale

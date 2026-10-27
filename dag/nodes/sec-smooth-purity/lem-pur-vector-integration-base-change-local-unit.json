@@ -1,0 +1,118 @@
+{
+ "id": "lem-pur-vector-integration-base-change-local-unit",
+ "kind": "lemma",
+ "title": "Degree-zero unit form of local vector integration base change",
+ "statement": "Under the hypotheses of lem-pur-vector-integration-base-change-local, the displayed base-change equation holds after postcomposition on W with the ordinary constant-unit pullback along j.",
+ "stmt_deps": [
+  "def-asd-vector-bundle-zero-section",
+  "def-pur-vector-trace-geometry",
+  "def-amb-vector-integration-charts",
+  "lem-amb-affine-space-top-trace",
+  "lem-amb-linear-trace-invariance",
+  "lem-amb-unbounded-compact-support-comparisons",
+  "lem-asd-etale-finite-twist-pullback"
+ ],
+ "proof": [
+  {
+   "text": "Restrict the two supplied frames along a and g, paste the Cartesian exchange square defining b with the coefficient comparison c, and apply the affine counit base-change equation over W. Substitute the two supplied frame equations hkS and hkT, then use naturality of the ordinary constant-unit pullback. This gives the degree-zero equation after postcomposition with the unit comparison; cancellation is deliberately left to the parent theorem.",
+   "uses": [
+    "def-asd-vector-bundle-zero-section",
+    "def-pur-vector-trace-geometry",
+    "def-amb-vector-integration-charts",
+    "lem-amb-affine-space-top-trace",
+    "lem-amb-linear-trace-invariance",
+    "lem-amb-unbounded-compact-support-comparisons",
+    "lem-asd-etale-finite-twist-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/cor-pur-vector-bundle-purity.proof.md",
+    "place": "paragraph 2: specified affine counits, base change and frame independence; geometric-descent Step 3"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-asd-vector-bundle-zero-section",
+  "def-pur-vector-trace-geometry",
+  "def-amb-vector-integration-charts",
+  "lem-amb-affine-space-top-trace",
+  "lem-amb-linear-trace-invariance",
+  "lem-amb-unbounded-compact-support-comparisons",
+  "lem-asd-etale-finite-twist-pullback"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "R3",
+  "date": "2026-10-28",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/cor-pur-vector-bundle-purity.proof.md",
+  "place": "paragraph 2: degree-zero local exchange"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "vectorIntegration base change local unit comparison",
+   "results": "Existing chart, restricted-chart, overlap, and affine counit declarations provide the component APIs but no complete arbitrary-map local calculation.",
+   "date": "2026-10-28",
+   "verdict": "The degree-zero exchange is split as a new project lemma."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.cancel_mono isomorphism postcomposition",
+   "results": "Mathlib cancellation by an isomorphism supplies the final parent step.",
+   "date": "2026-10-28",
+   "verdict": "Use cancel_mono in the parent theorem."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.VectorIntegrationBaseChangeLocal",
+  "date": "2026-10-28",
+  "group": "R3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-vector-integration-base-change-local",
+   "place": "paragraph 2: degree-zero local exchange"
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-an",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.VectorIntegrationBaseChangeLocalUnit",
+  "file": "lean/Sheaf/AlgebraicGeometry/VectorIntegrationBaseChangeLocalUnit.lean",
+  "declaration": "AlgebraicGeometry.Etale.vectorIntegration_baseChange_local_unit",
+  "statement": "theorem vectorIntegration_baseChange_local_unit (N : ℕ) (hN : 0 < N)\n    (A : Type (u + 1)) [CommRing A] [Finite A] (hA : (N : A) = 0)\n    (t : OrdinaryFiniteTwistTransport A N hA)\n    {S T : Scheme.{u}} [IsNoetherian S] [IsNoetherian T]\n    (f : T ⟶ S) (hS : IsUnit (N : Γ(S, ⊤))) (r : ℕ) (F : S.Modules)\n    [F.IsFiniteLocallyFreeOfRank r]\n    (c : (ordinaryFinitePullback A (VectorTraceGeometry.baseChange f r F)).obj\n        (vectorIntegrationCoefficient A N hA S r F) ≅\n      vectorIntegrationCoefficient A N hA T r ((Scheme.Modules.tensorPullback f).obj F))\n    (hc : c =\n      (leftDerivedUpperStarComp (ModuleCat.{u + 1} A)\n        (VectorTraceGeometry.baseChange f r F) (VectorBundleZeroSection.π S r F)).symm.app _ ≪≫\n      (eqToIso (congrArg (ordinaryFinitePullback A)\n        (VectorTraceGeometry.baseChange_isPullback f r F).w)).app _ ≪≫\n      (leftDerivedUpperStarComp (ModuleCat.{u + 1} A)\n        (VectorBundleZeroSection.π T r ((Scheme.Modules.tensorPullback f).obj F)) f).app _ ≪≫\n      (ordinaryFinitePullback A\n        (VectorBundleZeroSection.π T r ((Scheme.Modules.tensorPullback f).obj F))).mapIso\n        (vectorIntegrationBaseCoefficientPullback A N hA t f hS r))\n    (b : (ordinaryFinitePullback A f).obj (vectorIntegrationSource A N hA S r F) ≅\n      vectorIntegrationSource A N hA T r ((Scheme.Modules.tensorPullback f).obj F))\n    (hb : b.hom =\n      (rightDerivedLowerShriekBaseChangeMap A\n        (VectorTraceGeometry.baseChange_isPullback f r F)).app\n        (vectorIntegrationCoefficient A N hA S r F) ≫\n      (rightDerivedLowerShriek (ModuleCat.{u + 1} A)\n        (VectorBundleZeroSection.π T r ((Scheme.Modules.tensorPullback f).obj F))).map c.hom)\n    (D : ∀ (X : Scheme.{u}) [IsNoetherian X] (hX : IsUnit (N : Γ(X, ⊤))),\n      OrdinaryFiniteP1Datum A N hA t X hX)\n    (V : S.Opens) (eS : VectorBundleZeroSection.Trivialization S r F V)\n    (U : T.Opens)\n    (eT : VectorBundleZeroSection.Trivialization T r\n      ((Scheme.Modules.tensorPullback f).obj F) U)\n    (W : Scheme.{u}) [IsNoetherian W]\n    (j : W ⟶ T) (a : W ⟶ U.toScheme) (g : W ⟶ V.toScheme)\n    (ha : a ≫ U.ι = j) (hg : j ≫ f = g ≫ V.ι)\n    (kS : vectorIntegrationSource A N hA S r F ⟶ ordinaryFiniteUnit A S)\n    (kT : vectorIntegrationSource A N hA T r ((Scheme.Modules.tensorPullback f).obj F) ⟶\n      ordinaryFiniteUnit A T)\n    (hkS : (ordinaryFinitePullback A V.ι).map kS ≫ (ordinaryFiniteUnitPullback A V.ι).hom =\n      vectorIntegrationLocalTrace N hN A hA t D S hS r F V eS)\n    (hkT : (ordinaryFinitePullback A U.ι).map kT ≫ (ordinaryFiniteUnitPullback A U.ι).hom =\n      vectorIntegrationLocalTrace N hN A hA t D T (affineTracePullbackInvertible N f hS) r\n        ((Scheme.Modules.tensorPullback f).obj F) U eT) :\n    (ordinaryFinitePullback A j).map (b.hom ≫ kT) ≫\n        (ordinaryFiniteUnitPullback A j).hom =\n      (ordinaryFinitePullback A j).map\n        ((ordinaryFinitePullback A f).map kS ≫ (ordinaryFiniteUnitPullback A f).hom) ≫\n        (ordinaryFiniteUnitPullback A j).hom",
+  "branch": "sheaf-dag",
+  "by": "R3",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R3",
+  "result": "pass",
+  "landing": "20261027T234251-L-82352",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R3",
+  "result": "pass",
+  "landing": "20261027T234251-L-82352",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ },
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/cor-pur-vector-bundle-purity.proof.md",
+  "place": "paragraph 2: degree-zero local exchange"
+ }
+}
