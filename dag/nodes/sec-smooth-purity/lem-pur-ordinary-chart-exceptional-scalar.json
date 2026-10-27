@@ -1,0 +1,146 @@
+{
+ "id": "lem-pur-ordinary-chart-exceptional-scalar",
+ "kind": "statement",
+ "title": "Canonical ordinary exceptional coefficient mate on a single etale affine chart",
+ "statement": "Let N>0 and let A,B be finite commutative rings annihilated by N, with a unital map phi:A→B. Let g:V→S be any compactifiable morphism of Noetherian schemes, with N invertible on S. Let i:U→V be an open immersion from a Noetherian scheme and e:U→affineTraceTower S d an etale, separated, finite-type, quasi-compact map satisfying i≫g=e≫affineTraceProjection S d. For each ring fix an EtaleCompactSupportNormalization and normalized ordinary finite twist transport and P1 data on every Noetherian base where N is invertible. For every K in the ordinary unbounded etale A-derived category of S, scalar extension of the A chart comparison followed by canonical ordered Tate scalar reassociation equals inverse scalar/pullback balancing followed by i^* of the actual exceptional mate at K, followed by the B chart comparison at scalar(K). The full equation is the Lean signature. This is a local square for the mate at K; it asserts neither global invertibility nor a choice of chart cover. Use the published maps of [det-sp-reduction-exceptional], [def-per-exceptional-coefficient-maps] and [def-pur-exceptional-coefficient-tensor-maps].",
+ "stmt_deps": [
+  "det-sp-reduction-exceptional",
+  "def-per-exceptional-coefficient-maps",
+  "def-pur-exceptional-coefficient-tensor-maps"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-exceptional.proof.md",
+  "place": "Charts: the counit built from summation and the ordered projective-line traces commutes with coefficients; uniqueness of its transpose. Also sk-thm-smooth-purity-general-ring.proof.md, Proof (2), first two sentences."
+ },
+ "proof": [
+  {
+   "text": "Transpose the two displayed arrows under the B-coefficient chart adjunction. Its right-adjoint comparison is reductionEtaleChartRightIso, defined by right-adjoint uniqueness from the actual left comparison and preserving the counit. Expand mateMap as the transpose of the inverse compact-support coefficient comparison followed by scalar extension of the original counit. Compact-support composition and the normalized graph comparison reduce this transpose to the chart compact-support functor, without changing the chosen compactification.",
+   "uses": [
+    "def-per-exceptional-coefficient-maps",
+    "lem-pur-etale-compact-scalar-coherence",
+    "lem-asd-etale-compact-support-normalization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For the etale part, the sheaf counit is summation on the sheets. On each pure tensor the scalar-extended counit and the B-counit after scalar reassociation both send the sheet inclusion of x tensor b to x tensor b. Equality follows by the tensor, sum and sheafification universal properties, and descends on K-flat complexes. No field-base hypothesis or finite-Tor bound on the input is used in this computation.",
+   "uses": [
+    "def-pur-exceptional-coefficient-tensor-maps",
+    "lem-asd-etale-compact-support-normalization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For one affine coordinate, expand the given P1 datum counit as tensor with the trace. This trace is the inverse Kummer decomposition followed by its second projection. The Kummer boundary for O(1), its scalar map on roots and both summand maps commute with coefficient extension: the root tensor rule is (z tensor a) tensor b maps to z tensor phi(a)b. The free rank-one Tate line is flat, so derived extension on it is ordinary extension even for nonflat B/A. The two splitting squares therefore agree, hence their inverse splittings and second projections agree. The canonical tensorator and scalar/pullback comparison give the affine counit square on K. Paste in the open affine-chart comparison, and induct through the ordered affine tower. The zero-coordinate case is the identity adjunction.",
+   "uses": [
+    "lem-asd-ordinary-finite-p1-adjunction",
+    "thm-amb-p1-decomposition",
+    "lem-asd-etale-finite-twist-pullback",
+    "def-pur-exceptional-coefficient-tensor-maps"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Paste the etale sum square with these ordered affine squares. Naturality moves each intermediate counit across its scalar comparison; associativity and functoriality identify the result with the scalar image of the A-chart counit. Thus the two original arrows have the same B-chart transpose, and injectivity of the adjunction Hom equivalence proves the displayed equation. The proof is local to U and does not assert a cover or global invertibility. Empty schemes, zero coefficients and dimension zero satisfy the same formulas.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-per-exceptional-coefficient-maps",
+  "lem-pur-etale-compact-scalar-coherence",
+  "lem-asd-etale-compact-support-normalization",
+  "def-pur-exceptional-coefficient-tensor-maps",
+  "lem-asd-ordinary-finite-p1-adjunction",
+  "thm-amb-p1-decomposition",
+  "lem-asd-etale-finite-twist-pullback"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "M1",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-exceptional.proof.md",
+  "place": "Charts: the counit built from summation and the ordered projective-line traces commutes with coefficients; uniqueness of its transpose. Also sk-thm-smooth-purity-general-ring.proof.md, Proof (2), first two sentences."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Derived extension of scalars for smooth exceptional inverse image is an isomorphism and agrees with etale affine chart purity",
+   "results": "{\"t\": \"2026-10-27T19:18:14Z\", \"tool\": \"leanfinder\", \"query\": \"Derived extension of scalars for smooth exceptional inverse image is an isomorphism and agrees with etale affine chart purity\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.instEtaleOfIsStandardSmoothOfRelativeDimensionOfNatNat\", \"AlgebraicGeometry.IsSmooth.exists_isStandardSmooth\", \"AlgebraicGeometry.IsEtale\", \"AlgebraicGeometry.Scheme.Etale\", \"AlgebraicGeometry.IsEtale.instIsSmooth\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension\", \"Algebra.Etale.iff_isStandardSmoothOfRelativeDimension_zero\", \"AlgebraicGeometry.IsEtale.instFormallyUnramified\"], \"digest\": \"87f6b603933ded19\"} Eight hits about smooth and etale algebra or scheme charts; no ordinary derived exceptional coefficient chart equation.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.map_isIso",
+   "results": "{\"t\": \"2026-10-27T19:18:15Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Functor.map_isIso\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.map_isIso\", \"CategoryTheory.Functor.map_inv\", \"CategoryTheory.NatIso.inv_map_hom_app\", \"CategoryTheory.NatIso.inv_map_inv_app\", \"CategoryTheory.Adjunction.inv_counit_map\", \"CategoryTheory.Adjunction.inv_map_unit\", \"AlgebraicGeometry.coprodOpenCover\", \"AlgebraicGeometry.sigmaOpenCover\"], \"digest\": \"8e75fc200ebde28b\"} Generic Functor.map_isIso/map_inv and adjunction cancellation tools only; used in the completed global assembly.",
+   "date": "2026-10-27",
+   "verdict": "no exact match; component tools only"
+  },
+  {
+   "tool": "grep",
+   "query": "dualizingScalarMap|reductionEtaleChartRightIso",
+   "results": "{\"t\": \"2026-10-27T19:18:15Z\", \"tool\": \"grep\", \"query\": \"dualizingScalarMap|reductionEtaleChartRightIso\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"} No Mathlib occurrence of the two named project coefficient/chart maps.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The exceptional inverse image coefficient mate on a single etale affine coordinate chart equals the canonical scalar extension isomorphism normalized by the projective line trace",
+   "results": "{\"t\": \"2026-10-27T19:24:15Z\", \"tool\": \"leansearch\", \"query\": \"The exceptional inverse image coefficient mate on a single etale affine coordinate chart equals the canonical scalar extension isomorphism normalized by the projective line trace\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.AffineSpace.SpecIso_inv_appTop_coord\", \"LinearEquiv.extendScalarsOfSurjective_symm\", \"AlgebraicGeometry.IsAffineOpen.isoSpec_inv_appTop\", \"ModuleCat.extendScalarsId_inv_app_apply\", \"AlgebraicGeometry.AffineSpace.isoOfIsAffine_inv_appTop_coord\", \"KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_symm_D_algebraMap\", \"LinearEquiv.extendScalarsOfIsLocalizationEquiv\", \"Module.FinitePresentation.linearEquivMapExtendScalars_symm_apply\"], \"digest\": \"7c866f9b6a0e8560\"} Eight hits about affine coordinates, ordinary module scalar extension, localization and Kaehler differentials; no derived exceptional chart equation.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SecSmoothPurity.FiniteSmoothDualizingScalar",
+  "date": "2026-10-28",
+  "group": "M1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-sp-finite-general-ring",
+   "place": "Proof (2), local adjunctions commute with scalar extension; ordinary-site elaboration of the reduction-exceptional Charts paragraph.",
+   "via": [
+    "lem-pur-finite-smooth-dualizing-scalar",
+    "lem-pur-dnc-coefficient-transport"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-smooth-purity",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SecSmoothPurity.OrdinaryChartExceptionalScalar",
+  "file": "lean/Sheaf/SecSmoothPurity/OrdinaryChartExceptionalScalar.lean",
+  "declaration": "AlgebraicGeometry.Etale.ordinary_chart_exceptional_scalar",
+  "statement": "theorem ordinary_chart_exceptional_scalar\n    {A B : Type (u + 1)} [CommRing A] [CommRing B] [Finite A] [Finite B]\n    (φ : A →+* B) (N : ℕ) (hN : 0 < N)\n    (hA : (N : A) = 0) (hB : (N : B) = 0)\n    {V S U : Scheme.{u}} [IsNoetherian V] [IsNoetherian S] [IsNoetherian U]\n    (hS : IsUnit (N : Γ(S, ⊤))) (g : V ⟶ S) [HasCompactification g]\n    (i : U ⟶ V) [IsOpenImmersion i] (d : ℕ)\n    (e : U ⟶ affineTraceTower S d) [AlgebraicGeometry.Etale e]\n    [IsSeparated e] [LocallyOfFiniteType e] [QuasiCompact e]\n    (he : i ≫ g = e ≫ affineTraceProjection S d)\n    (MA : EtaleCompactSupportNormalization A) (MB : EtaleCompactSupportNormalization B)\n    (tA : OrdinaryFiniteTwistTransport A N hA)\n    (tB : OrdinaryFiniteTwistTransport B N hB)\n    (PA : ∀ (T : Scheme.{u}) [IsNoetherian T] (hT : IsUnit (N : Γ(T, ⊤))),\n      OrdinaryFiniteP1Datum A N hA tA T hT)\n    (PB : ∀ (T : Scheme.{u}) [IsNoetherian T] (hT : IsUnit (N : Γ(T, ⊤))),\n      OrdinaryFiniteP1Datum B N hB tB T hT)\n    (K : DerivedCategoryModule A S) :\n    (scalarExtension φ U).map\n        ((ProEtale.reductionEtaleChartRightIso A MA g i d e he\n          (HasCompactification.compactification g)\n          (rightDerivedUpperShriek (ModuleCat.{u + 1} A) g)\n          (rightDerivedUpperShriekAdjunction (ModuleCat.{u + 1} A) g)\n          N hA tA PA hS).hom.app K) ≫\n      (ProEtale.reductionEtaleChartScalarIso φ N hA hB hS d e K).hom =\n    (scalarPullbackIso φ i).inv.app\n        ((rightDerivedUpperShriek (ModuleCat.{u + 1} A) g).obj K) ≫\n      (ordinaryFinitePullback B i).map (ExceptionalCoefficients.mateMap φ g K) ≫\n      (ProEtale.reductionEtaleChartRightIso B MB g i d e he\n        (HasCompactification.compactification g)\n        (rightDerivedUpperShriek (ModuleCat.{u + 1} B) g)\n        (rightDerivedUpperShriekAdjunction (ModuleCat.{u + 1} B) g)\n        N hB tB PB hS).hom.app ((scalarExtension φ S).obj K)",
+  "branch": "sheaf-dag",
+  "by": "M1",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M1",
+  "result": "pass",
+  "landing": "20261027T210134-L-1662152",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M1",
+  "result": "pass",
+  "landing": "20261027T210134-L-1662152",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
