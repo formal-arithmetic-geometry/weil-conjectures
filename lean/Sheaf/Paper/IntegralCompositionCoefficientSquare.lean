@@ -7,6 +7,10 @@ module
 
 public import Sheaf.Paper.FieldShriekCompositionNormalization
 public import Sheaf.Paper.CompactSupportCoefficientAction
+-- Keep the rework ancestors available when their restored modules are rebuilt.
+public import Sheaf.Paper.QcqsCompactSupportRealization
+public import Sheaf.Paper.CompactSupportFiniteAction
+public import Sheaf.Paper.IntegralScalarExtensionConstructibleIntrinsic
 
 /-! # Integral coefficient compatibility of compact-support composition
 
