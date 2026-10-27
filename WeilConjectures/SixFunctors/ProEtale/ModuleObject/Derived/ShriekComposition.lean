@@ -74,11 +74,10 @@ composite of `Rf_! ⊣ Rf^!` and `Rg_! ⊣ Rg^!`.
   the exchange morphism is an isomorphism for `p'` proper. It is the exchange
   morphism of `WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.OpenLowerShriekInterchange`
   (`ProEtale.CondensedRing.boundedConstructibleLowerStarOpenImmersionLowerShriekExchange_eq`).
-
-## Sorried input
-
-- `ProEtale.CondensedRing.isIso_boundedConstructibleLowerStarOpenImmersionLowerShriekExchange`:
-  the same statement for `E̲`.
+- `isIso_boundedConstructibleLowerStarOpenImmersionLowerShriekExchange`: the same statement for
+  `E̲`, by the same argument: the restrictions to `X` and to its closed complement jointly
+  reflect isomorphisms; over `X` it follows from the mate calculus and proper base change, and
+  over the closed complement both sides vanish.
 
 -/
 
@@ -409,8 +408,80 @@ which do not meet `X' ⊆ Z'`, with coefficients in `i'_! K`, hence vanish. -/
 theorem isIso_boundedConstructibleLowerStarOpenImmersionLowerShriekExchange
     (sq : IsPullback p i' j p') :
     IsIso (ContinuousMapRingObj.boundedConstructibleLowerStarOpenImmersionLowerShriekExchange
-      ℓ E sq) :=
-  sorry
+      ℓ E sq) := by
+  have hex : ContinuousMapRingObj.boundedConstructibleLowerStarOpenImmersionLowerShriekExchange
+      ℓ E sq = Adjunction.exchangeRight
+        (ContinuousMapRingObj.boundedConstructibleUpperStarLowerStarAdjunction ℓ E p)
+        (ContinuousMapRingObj.boundedConstructibleUpperStarLowerStarAdjunction ℓ E p')
+        (boundedConstructibleOpenImmersionLowerShriekBaseChangeIso
+          (Profinite.continuousMapRingObj E) ℓ sq) := by
+    unfold ContinuousMapRingObj.boundedConstructibleLowerStarOpenImmersionLowerShriekExchange
+      ContinuousMapRingObj.boundedConstructibleLowerStarOpenImmersionLowerShriekExchangeUnitStep
+      ContinuousMapRingObj.boundedConstructibleLowerStarOpenImmersionLowerShriekExchangeSquareStep
+      ContinuousMapRingObj.boundedConstructibleLowerStarOpenImmersionLowerShriekExchangeCounitStep
+      Adjunction.exchangeRight
+    rfl
+  have h₁ := isIso_boundedConstructibleBaseChange_of_isProper ℓ E sq.flip
+  have h₂ := isIso_boundedConstructibleBaseChange_of_isProper ℓ E
+    (isPullback_overPullbackFst_overPullbackSnd p' (overClosedComplement j))
+  have : QuasiCompact (j.left ≫ Z.hom) := by
+    rw [Over.w j]
+    infer_instance
+  have : QuasiCompact j.left := QuasiCompact.of_comp j.left Z.hom
+  rw [hex]
+  have hK (K : Dᵇc(X'.left)⟦Profinite.continuousMapRingObj E⟧) :
+      IsIso ((Adjunction.exchangeRight
+        (ContinuousMapRingObj.boundedConstructibleUpperStarLowerStarAdjunction ℓ E p)
+        (ContinuousMapRingObj.boundedConstructibleUpperStarLowerStarAdjunction ℓ E p')
+        (boundedConstructibleOpenImmersionLowerShriekBaseChangeIso
+          (Profinite.continuousMapRingObj E) ℓ sq)).app K) := by
+    refine isIso_of_isIso_boundedConstructibleUpperStar_map_of_isCompl
+      (Profinite.continuousMapRingObj E) ℓ
+      (overClosedComplement j) j (isCompl_range_overClosedComplement j) _ ?_ ?_
+    · -- Over the open `X`, by the mate calculus and proper base change.
+      have : IsIso ((Adjunction.exchangeRight
+          (ContinuousMapRingObj.boundedConstructibleUpperStarLowerStarAdjunction ℓ E p')
+          (ContinuousMapRingObj.boundedConstructibleUpperStarLowerStarAdjunction ℓ E p)
+          (boundedConstructiblePullbackSquareComparison (Profinite.continuousMapRingObj E) ℓ
+              sq.toCommSq.flip)).app
+            ((boundedConstructibleOpenImmersionLowerShriek (Profinite.continuousMapRingObj E) ℓ
+              i').obj K)) := by
+        rw [← ContinuousMapRingObj.boundedConstructibleBaseChange_eq_exchangeRight]
+        infer_instance
+      exact Adjunction.isIso_map_exchangeRight_app
+        (ContinuousMapRingObj.boundedConstructibleUpperStarLowerStarAdjunction ℓ E p)
+        (ContinuousMapRingObj.boundedConstructibleUpperStarLowerStarAdjunction ℓ E p')
+        (boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunction
+            (Profinite.continuousMapRingObj E) ℓ j)
+        (boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunction
+            (Profinite.continuousMapRingObj E) ℓ i') _ _
+        (boundedConstructibleOpenImmersionLowerShriekBaseChange_eq_exchangeLeft
+          (Profinite.continuousMapRingObj E) ℓ sq.toCommSq) K
+    · -- Over the closed complement both sides vanish.
+      have hS : Limits.IsZero ((boundedConstructibleUpperStar (Profinite.continuousMapRingObj E) ℓ
+          (overClosedComplement j)).obj
+          ((boundedConstructibleOpenImmersionLowerShriek (Profinite.continuousMapRingObj E) ℓ
+            j).obj ((ContinuousMapRingObj.boundedConstructibleLowerStar ℓ E p).obj K))) :=
+        isZero_boundedConstructibleUpperStar_obj_openImmersionLowerShriek
+            (Profinite.continuousMapRingObj E) ℓ j
+          (overClosedComplement j) (isCompl_range_overClosedComplement j).disjoint.symm _
+      have hT : Limits.IsZero ((boundedConstructibleUpperStar (Profinite.continuousMapRingObj E) ℓ
+          (overClosedComplement j)).obj
+          ((ContinuousMapRingObj.boundedConstructibleLowerStar ℓ E p').obj
+            ((boundedConstructibleOpenImmersionLowerShriek (Profinite.continuousMapRingObj E) ℓ
+              i').obj K))) :=
+        ((ContinuousMapRingObj.boundedConstructibleLowerStar ℓ E
+          (overPullbackSnd p' (overClosedComplement j))).map_isZero
+          (isZero_boundedConstructibleUpperStar_obj_openImmersionLowerShriek
+              (Profinite.continuousMapRingObj E) ℓ i'
+            (overPullbackFst p' (overClosedComplement j))
+            (disjoint_range_overPullbackFst_overClosedComplement sq.toCommSq) K)).of_iso
+          (asIso ((ContinuousMapRingObj.boundedConstructibleBaseChange ℓ E
+            (isPullback_overPullbackFst_overPullbackSnd p' (overClosedComplement j)).toCommSq).app
+              ((boundedConstructibleOpenImmersionLowerShriek (Profinite.continuousMapRingObj E) ℓ
+                  i').obj K)))
+      exact ⟨⟨hT.to_ _, hS.eq_of_src _ _, hT.eq_of_src _ _⟩⟩
+  exact NatIso.isIso_of_isIso_app _
 
 /-- For bounded constructible `ℚ̄_ℓ`-sheaves, the exchange morphism
 `Rp_* ⋙ j_! ⟶ i'_! ⋙ Rp'_*` of a cartesian square with `p'` proper is an isomorphism. -/
