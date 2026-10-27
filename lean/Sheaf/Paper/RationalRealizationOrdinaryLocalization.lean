@@ -7,6 +7,8 @@ module
 
 public import Sheaf.Paper.RationalModuleRealizationFunctor
 public import Sheaf.Paper.RationalContinuousCoefficientDerivedLocalization
+import Sheaf.Paper.RationalRealizationCoefficientLocalization
+import Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous
 
 /-!
 # Ordinary coefficient comparison for normalized rational realization
@@ -40,6 +42,66 @@ def rationalLocalizationModulesLinear (Y : Scheme.{u})
 
 attribute [local irreducible] pbcIntegralDatum pbcRationalCoefficientEquiv
   ringedLocalizationRingOfUniverses ringedLocalizationRingUnitOfUniverses
+
+private def ordinaryCoefficientEquivalence {Y : Scheme.{u}}
+    {S T : Sheaf (ProEt.topology Y) CommRingCat.{u + 1}} (c : S ≅ T) :
+    pbcModules Y S ≌ pbcModules Y T := by
+  let d := (sheafCompose (ProEt.topology Y)
+    (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).mapIso c.symm
+  have : (CategoryTheory.Equivalence.refl (C := Y.ProEt)).functor.IsContinuous
+      (ProEt.topology Y) (ProEt.topology Y) :=
+    inferInstanceAs (Functor.IsContinuous (𝟭 Y.ProEt) _ _)
+  have : (CategoryTheory.Equivalence.refl (C := Y.ProEt)).inverse.IsContinuous
+      (ProEt.topology Y) (ProEt.topology Y) :=
+    inferInstanceAs (Functor.IsContinuous (𝟭 Y.ProEt) _ _)
+  exact SheafOfModules.pushforwardPushforwardEquivalence
+    (CategoryTheory.Equivalence.refl (C := Y.ProEt)) d.hom d.inv
+    (by
+      change Functor.whiskerRight (𝟙 (𝟭 Y.ProEtᵒᵖ))
+        ((sheafCompose (ProEt.topology Y)
+          (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj S).obj =
+            d.inv.hom ≫ d.hom.hom
+      rw [Functor.whiskerRight_id']
+      exact (congrArg (fun f ↦ f.hom) d.inv_hom_id).symm)
+    (by
+      change d.hom.hom ≫ d.inv.hom ≫ Functor.whiskerRight (𝟙 (𝟭 Y.ProEtᵒᵖ))
+        ((sheafCompose (ProEt.topology Y)
+          (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj T).obj = 𝟙 _
+      rw [Functor.whiskerRight_id']
+      change d.hom.hom ≫ d.inv.hom ≫ 𝟙 _ = 𝟙 _
+      rw [Category.comp_id]
+      exact congrArg (fun f ↦ f.hom) d.hom_inv_id)
+
+private def ordinaryExtensionIdentification {Y : Scheme.{u}}
+    {B S : Sheaf (ProEt.topology Y) CommRingCat.{u + 1}} (β : B ⟶ S)
+    (F : pbcModules Y B ⥤ pbcModules Y S)
+    (hF : ∀ M, F.obj M = SheafOfModules.changeOfRingsOfUniverses β M)
+    (hmap : ∀ {M N} (f : M ⟶ N), F.map f = eqToHom (hF M) ≫
+      SheafOfModules.changeOfRingsHomOfUniverses β M f ≫ eqToHom (hF N).symm) :
+    F ≅ pbcExtend β := by
+  have ho (M : pbcModules Y B) :
+      (pbcExtend β).obj M = SheafOfModules.changeOfRingsOfUniverses β M :=
+    (pbcExtensionExistence β).choose_spec.choose M
+  have hm {M N : pbcModules Y B} (f : M ⟶ N) :
+      (pbcExtend β).map f = eqToHom (ho M) ≫
+        SheafOfModules.changeOfRingsHomOfUniverses β M f ≫ eqToHom (ho N).symm :=
+    (pbcExtensionExistence β).choose_spec.choose_spec.choose f
+  exact NatIso.ofComponents
+    (fun M ↦ eqToIso (hF M) ≪≫ (eqToIso (ho M)).symm) (by
+      intro M N f
+      simp only [Iso.trans_hom, eqToIso.hom, Iso.symm_hom, eqToIso.inv]
+      rw [hmap, hm]
+      simp only [Category.assoc, eqToHom_trans_assoc, eqToHom_trans])
+
+private def ordinaryCoefficientTensorComparison {Y : Scheme.{u}}
+    {B S T : Sheaf (ProEt.topology Y) CommRingCat.{u + 1}}
+    (β : B ⟶ S) (c : S ≅ T) (ψ : B ⟶ T) (hc : β ≫ c.hom = ψ) :
+    pbcExtend β ⋙ (ordinaryCoefficientEquivalence c).functor ≅ pbcExtend ψ := by
+  let e := ordinaryCoefficientEquivalence c
+  let hr : e.inverse ⋙ pbcRestrict β ≅ pbcRestrict ψ :=
+    pbcRestrictComp β c.hom ψ hc
+  let adj := ((pbcScalarAdjunction β).comp e.toAdjunction).ofNatIsoRight hr
+  exact Adjunction.leftAdjointUniq adj (pbcScalarAdjunction ψ)
 
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
@@ -97,6 +159,35 @@ theorem rationalRealizationOrdinaryLocalization (R : RationalModuleRealization l
             G.map (r • f) = pbcRationalCoefficientEquiv l E r • G.map f) ∧
           Nonempty (F ⋙ G ≅ pbcExtend (R.integralIso.hom ≫ R.inclusion)))
       (_localizedLinear := rationalLocalizationModulesLinear X (PbcIntegralRing l E)
-        B a t) := by sorry
+        B a t) := by
+  classical
+  let := R.moduleLinear
+  let := rationalLocalizationModulesLinear X (PbcIntegralRing l E)
+    (pbcAdicCompletion X (pbcIntegralDatum l E))
+    (pbcCompletedScalarSections X (pbcIntegralDatum l E)) (pbcUniformizer l E)
+  dsimp only
+  intro F hF hmap
+  obtain ⟨c, hc, hs⟩ := rationalRealizationCoefficientLocalization l E X R
+  let e := ordinaryCoefficientEquivalence c
+  let G := e.functor
+  have hG : G = pbcRestrict c.inv := rfl
+  have : G.IsEquivalence := e.isEquivalence_functor
+  have : G.Additive := by rw [hG]; infer_instance
+  refine ⟨G, inferInstance, inferInstance, ?_, ?_⟩
+  · intro K L f r
+    ext U x
+    change (r • f).val.app U x = _
+    rw [R.scalar_normalization]
+    change (scalarLocalizationCoefficientMapOfUniverses (PbcIntegralRing l E)
+      (pbcAdicCompletion X (pbcIntegralDatum l E))
+      (pbcCompletedScalarSections X (pbcIntegralDatum l E))
+      (pbcUniformizer l E) r).val U • f.val.app U x = _
+    exact congrArg (fun s ↦ s • f.val.app U x) (hs r U).symm
+  · let β := ringedLocalizationRingUnitOfUniverses.{u + 1, u + 1, u}
+      (pbcAdicCompletion X (pbcIntegralDatum l E))
+      (pbcCompletedScalarSections X (pbcIntegralDatum l E) (pbcUniformizer l E))
+    let ψ := R.integralIso.hom ≫ R.inclusion
+    let q := ordinaryExtensionIdentification β F hF hmap
+    exact ⟨Functor.isoWhiskerRight q G ≪≫ ordinaryCoefficientTensorComparison β c ψ hc⟩
 
 end AlgebraicGeometry.Scheme

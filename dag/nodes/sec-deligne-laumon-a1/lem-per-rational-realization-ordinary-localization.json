@@ -17,50 +17,35 @@
  ],
  "proof": [
   {
-   "text": "Use the quotient-normalized integral comparison and inclusion of [lem-per-rational-module-realization-functor]. Projecting to each finite quotient identifies the constant sections. Localize the comparison sectionwise and sheafify. Its composite with R.localizationIso gives B[1/t] isomorphic to the continuous rational coefficient ring; on every integral numerator the unit agrees with R.integralIso.hom followed by R.inclusion. On fractions the same equality follows from invertibility of the uniformizer. Sheafification permits locally varying denominators.",
+   "text": "Obtain the ring-sheaf isomorphism c of completed localization with continuous rational coefficients, including its coefficient-unit square and inverse constant-scalar formula.",
    "uses": [
-    "lem-per-rational-module-realization-functor"
+    "lem-per-rational-realization-coefficient-localization"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Lemma 6.8.12 and Proposition 6.8.14(2), pp. 61--62; coefficient-presentation and universal-derived-functor transport in original comparison proof step 3."
-   }
+   "elementary": false
   },
   {
-   "text": "Let G be restriction of scalars along the inverse of the coefficient-ring isomorphism just obtained. The forward ring map gives its inverse, and both preserve underlying abelian sheaves, hence G is additive. Use the ordinary equivalence and tensor comparison of [lem-pur-ring-iso-derived-transport]. The source scalar r acts by its canonical section of S. The coefficient-ring comparison takes this section to the corresponding constant rational section: on A this follows from the preceding constant-section calculation, and extension to every fraction follows from [lem-weil-l-adic-integers-localization-uniformizer]. R.scalar_normalization identifies multiplication by this section with the recorded E-action, proving the semilinearity equation on every module morphism.",
+   "text": "Restriction of scalars along c.inv is an additive equivalence G. Construct its inverse from c.hom using Mathlib pushforwardPushforwardEquivalence for the identity site equivalence. Evaluate G.map(r smul f) sectionwise. The canonical localized action multiplies by its scalar section; the inverse scalar formula and R.scalar_normalization prove semilinearity.",
    "uses": [
-    "lem-pur-ring-iso-derived-transport",
-    "lem-weil-l-adic-integers-localization-uniformizer",
-    "lem-per-rational-module-realization-functor"
+    "lem-per-rational-realization-coefficient-localization"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Lemma 6.8.12 and Proposition 6.8.14(2), pp. 61--62; coefficient-presentation and universal-derived-functor transport in original comparison proof step 3."
-   }
+   "elementary": true
   },
   {
-   "text": "The object and map equations pin F to the actual ordinary sheafified tensor extension. Its composite with inverse ring-isomorphism restriction is naturally ordinary extension along the normalized coefficient map. This is the ordinary tensor comparison of [lem-pur-ring-iso-derived-transport]: locally send s tensor m to the image of s tensor m; the inverse uses the inverse coefficient map. The coefficient-unit square proves the balancing relation, both composites fix pure tensors, and these maps sheafify and commute with module maps. This proves the required ordinary functor isomorphism; no derived or Hom-localization computation occurs.",
+   "text": "The object and map equalities give an explicit natural isomorphism F to ordinary extension along B → S. Compose its scalar adjunction with G ⊣ G.inverse. The coefficient-unit square identifies the composite right adjoint with restriction along R.integralIso.hom followed by R.inclusion, using pbcRestrictComp. Uniqueness of left adjoints yields the tensor comparison. Whisker the first natural isomorphism by G.",
    "uses": [
-    "lem-pur-ring-iso-derived-transport"
+    "def-weil-pbc-bounded-constructible-tower"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Lemma 6.8.12 and Proposition 6.8.14(2), pp. 61--62; coefficient-presentation and universal-derived-functor transport in original comparison proof step 3."
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-per-rational-module-realization-functor",
-  "lem-pur-ring-iso-derived-transport",
-  "lem-weil-l-adic-integers-localization-uniformizer"
+  "lem-per-rational-realization-coefficient-localization",
+  "def-weil-pbc-bounded-constructible-tower"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-  "place": "Ordinary coefficient-presentation and tensor transport in Proposition 6.8.14(2), pp. 61--62; initial parts of original steps 2--3, detailed by Y5."
+  "place": "F8: ordinary scalar-restriction equivalence and uniqueness of left adjoints after the normalized coefficient-ring comparison; no derived transport is used."
  },
  "mathlib_searches": [
   {
@@ -159,9 +144,9 @@
   "date": "2026-10-27",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "Y5",
+  "group": "F8",
   "result": "pass",
-  "landing": "20261027T094544-L-241762",
+  "landing": "20261027T180606-L-3879621",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
