@@ -7,10 +7,8 @@ module
 
 public import Sheaf.Paper.RationalSmoothPurityCanonical
 public import Sheaf.Paper.RationalScalarComparisonData
-public import Sheaf.Paper.TwistedPullbackSquareMaps
 public import Sheaf.Paper.TwistedPullbackSquareScalars
 public import Sheaf.Paper.RationalPurityExchangeEndpoints
-public import Sheaf.Paper.RationalPurityLocalizedFamilyData
 public import Sheaf.Paper.RationalPurityExchangeEndpointData
 import Sheaf.Paper.DerivedPullbackTensorIso
 
