@@ -1,0 +1,110 @@
+{
+ "id": "lem-pur-common-stage-pullback-tensor-naturality",
+ "kind": "statement",
+ "title": "Naturality from common-stage pullback tensor representatives",
+ "statement": "Let l be prime, Ω an algebraic closure of Q_l, and f:X→Y a scheme morphism with l invertible on both schemes. Use [def-weil-derived-pullback-tensor-hom, def-pur-completed-pullback-tensor-comparison, def-weil-algebraically-closed-coefficients]. Assume that for every finite extension E of Q_l the canonical rational pullback tensor comparison is natural in both inputs. Then the canonical common-stage comparison is natural: for a:M→M′ and b:N→N′, pullback(tensor(a,b))≫μ(M′,N′)=μ(M,N)≫tensor(pullback(a),pullback(b)). The equality concerns the actual prescribed morphisms in the common-stage category, with no injectivity assumption on transition maps.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 07A4, label lemma-pullback-tensor-product; parent comparison proof: Parent proof step 6: represent a naturality diagram over one common finite coefficient field."
+ },
+ "stmt_deps": [
+  "def-weil-derived-pullback-tensor-hom",
+  "def-pur-completed-pullback-tensor-comparison",
+  "def-weil-algebraically-closed-coefficients"
+ ],
+ "proof": [
+  {
+   "text": "Represent the two input arrows over finite coefficient fields and enlarge\nboth fields so that they also contain the source and target tensor-object stages.\nUse the defining representative formulas for tensor and pullback on each arrow,\nand for the canonical comparison on each pair of objects. At this common stage,\ncomposition is represented by composition. The adjacent tensor and pullback\ncomparison inverses cancel, and the remaining square is rational naturality,\nconjugated by the endpoint comparisons. Taking the common-stage morphism class\ngives the asserted equality. No faithfulness of coefficient extension is used.",
+   "uses": [
+    "def-weil-derived-pullback-tensor-hom",
+    "def-pur-completed-pullback-tensor-comparison",
+    "def-weil-algebraically-closed-coefficients"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-derived-pullback-tensor-hom",
+  "def-pur-completed-pullback-tensor-comparison",
+  "def-weil-algebraically-closed-coefficients"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 07A4; elaboration of Parent proof step 6: represent a naturality diagram over one common finite coefficient field."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A natural transformation on filtered colimits of categories is natural if all its representatives are natural at a common stage",
+   "results": "8 hits: CategoryTheory.Limits.instHasFilteredColimitsOfSizeFunctor, CategoryTheory.Limits.colimMap_eq, CategoryTheory.Limits.colim_map, CategoryTheory.NonemptyParallelPairPresentationAux.hg, CategoryTheory.NonemptyParallelPairPresentationAux.hf, CategoryTheory.Limits.Types.Colimit.ι_map_apply', CategoryTheory.Limits.Types.Colimit.ι_map_apply, CategoryTheory.Limits.colimit.ι_map",
+   "date": "2026-10-27",
+   "verdict": "no exact specialization to the prescribed completed and common-stage comparison maps"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"NatTrans\", \"naturality\"",
+   "results": "12 hits: CategoryTheory.NatTrans.naturality, CategoryTheory.NatTrans.naturality_assoc, CategoryTheory.NatTrans.naturality_map, CategoryTheory.NatTrans.naturality_map_assoc, CategoryTheory.NatTrans.naturality_inv, CategoryTheory.NatTrans.naturality_inv_assoc, CategoryTheory.NatTrans.app_naturality, CategoryTheory.NatTrans.naturality_app",
+   "date": "2026-10-27",
+   "verdict": "no exact specialization to the prescribed completed and common-stage comparison maps"
+  },
+  {
+   "tool": "grep",
+   "query": "[Ss]tage.*[Nn]atural|[Nn]atural.*[Ss]tage",
+   "results": "0 hits: ",
+   "date": "2026-10-27",
+   "verdict": "no exact specialization to the prescribed completed and common-stage comparison maps"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.DerivedPullbackTensorIso",
+  "date": "2026-10-27",
+  "group": "A4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-frobenius-coefficient-twists",
+   "place": "Clause 5, the canonical pullback/tensor comparison before theta_K tensor theta_m; Parent proof step 6: represent a naturality diagram over one common finite coefficient field.",
+   "via": [
+    "lem-pur-derived-pullback-tensor-iso"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-purity-conv",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CommonStagePullbackTensorNaturality",
+  "file": "lean/Sheaf/Paper/CommonStagePullbackTensorNaturality.lean",
+  "declaration": "WeilConjectures.commonStagePullbackTensor_naturality",
+  "statement": "theorem commonStagePullbackTensor_naturality {X Y : Scheme.{u}} (f : X ⟶ Y)\n    [∀ x : X, Invertible (l : X.residueField x)]\n    [∀ y : Y, Invertible (l : Y.residueField y)]\n    (hn : ∀ (E : Type u) [Field E] [Algebra (Padic l) E]\n      [FiniteDimensional (Padic l) E]\n      {M M' N N' : sfRationalConstructibleCategory l E Y} (a : M ⟶ M') (b : N ⟶ N'),\n      (rationalDerivedPullback l E f).map\n          ((rationalDerivedTensor l E Y).map (Prod.mkHom a b)) ≫\n          (canonicalRationalPullbackTensor l E f M' N').hom =\n        (canonicalRationalPullbackTensor l E f M N).hom ≫\n          (rationalDerivedTensor l E X).map\n            (Prod.mkHom ((rationalDerivedPullback l E f).map a)\n              ((rationalDerivedPullback l E f).map b)))\n    {M M' N N' : generalAlgebraicallyClosedConstructibleCategory l Ω Y}\n    (a : M ⟶ M') (b : N ⟶ N') :\n    (commonStageDerivedPullback l Ω f).map\n        ((commonStageDerivedTensor l Ω Y).map (Prod.mkHom a b)) ≫\n        (canonicalCommonStagePullbackTensor l Ω f M' N').hom =\n      (canonicalCommonStagePullbackTensor l Ω f M N).hom ≫\n        (commonStageDerivedTensor l Ω X).map\n          (Prod.mkHom ((commonStageDerivedPullback l Ω f).map a)\n            ((commonStageDerivedPullback l Ω f).map b))",
+  "branch": "sheaf-dag",
+  "by": "A4",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-dad8e",
+  "group": "B4",
+  "result": "fix",
+  "landing": "20261027T180455-L-3864065",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-dad8e",
+  "group": "B4",
+  "result": "fix",
+  "landing": "20261027T180455-L-3864065",
+  "kind": "interface",
+  "note": "independent cc review: live clone 9e9701c6 DerivedPullbackTensorIso declaration blocks vs delivered Constraints/ReductionCalculus/item (90/94 byte-identical; 4 = proofs/private binder/docstring split); 4 def nodes and item node vs live dag; 24 direct importers compiled against the delivered modules (19 OK, 4 slow matched by published originals, SFOL >120 s pre-existing); #print axioms probe"
+ }
+}

@@ -1,0 +1,114 @@
+{
+ "id": "lem-pur-rational-pullback-tensor-associator-natural",
+ "kind": "statement",
+ "title": "Naturality of the normalized rational tensor associator",
+ "statement": "For a prime l, a finite extension E of Q_l, and a scheme X on which l is invertible, use [def-weil-derived-pullback-tensor-hom, lem-pur-derived-pullback-tensor-constraints]. The prescribed rational tensor associator is natural in each of its three inputs: for f:K→K′, g:L→L′, h:M→M′, tensor(tensor(f,g),h)≫α(K′,L′,M′)=α(K,L,M)≫tensor(f,tensor(g,h)). These are exactly the normalized associator and tensor functor of the assigned coefficient constructions.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YS, 07A4 and 0941; proved private integral_naturality and rational_naturality in lean/Sheaf/Paper/CommonStageTensorLineCoherenceNaturality.lean, extracted without importing its parent-dependent public theorem"
+ },
+ "stmt_deps": [
+  "def-weil-derived-pullback-tensor-hom",
+  "lem-pur-derived-pullback-tensor-constraints"
+ ],
+ "proof": [
+  {
+   "text": "First reflect integral associator naturality by faithful coherent reduction. The reduction/tensor comparison is natural. Apply its naturality twice to the two nested tensor functors. The prescribed reduction equation identifies the integral associator with the system associator, whose naturality gives the square. Cancel the target comparison and use faithfulness.",
+   "uses": [
+    "lem-pur-derived-pullback-tensor-constraints"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the prescribed bilinear formulas for the rational tensor functor. On pure scalar tensors a⊗f, b⊗g, c⊗h, the two nested tensor maps are the localized integral maps multiplied by (ab)c and a(bc). The normalized rational associator is the localized integral one. Composition_tmul and associativity of scalar multiplication therefore reduce the desired square to integral naturality. Tensor-product induction in the three arrows handles zero and sums, proving the general equation.",
+   "uses": [
+    "def-weil-derived-pullback-tensor-hom",
+    "lem-pur-derived-pullback-tensor-constraints"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-derived-pullback-tensor-hom",
+  "lem-pur-derived-pullback-tensor-constraints"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YS, 07A4 and 0941; proved private integral_naturality and rational_naturality in lean/Sheaf/Paper/CommonStageTensorLineCoherenceNaturality.lean, extracted without importing its parent-dependent public theorem"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Naturality of a normalized tensor associator after scalar localization, by induction on three scalar tensor morphisms",
+   "results": "8 hits: CategoryTheory.Localization.Monoidal.associator_naturality₃, CategoryTheory.Localization.Monoidal.associator_naturality₃_assoc, CategoryTheory.Localization.Monoidal.associator_naturality, CategoryTheory.Localization.Monoidal.associator_naturality_assoc, CategoryTheory.Localization.Monoidal.associator_naturality₁_assoc, CategoryTheory.Localization.Monoidal.associator_naturality₁, CategoryTheory.Localization.Monoidal.associator_naturality₂_assoc, CategoryTheory.Localization.Monoidal.associator_naturality₂",
+   "date": "2026-10-27",
+   "verdict": "The monoidal-localization API assumes a monoidal structure already installed on the localization; the assigned functor and associator are specified separately. Reuse the existing private proof for these actual normalized maps."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"associator_naturality\"",
+   "results": "12 hits: CategoryTheory.Bicategory.associator_naturality_left, CategoryTheory.Bicategory.associator_naturality_right, CategoryTheory.Bicategory.associator_naturality_middle, CategoryTheory.Bicategory.associator_naturality_left_assoc, CategoryTheory.Bicategory.associator_naturality_right_assoc, CategoryTheory.Bicategory.associator_naturality_middle_assoc, CategoryTheory.Limits.coprod.associator_naturality, CategoryTheory.Limits.prod.associator_naturality",
+   "date": "2026-10-27",
+   "verdict": "The monoidal-localization API assumes a monoidal structure already installed on the localization; the assigned functor and associator are specified separately. Reuse the existing private proof for these actual normalized maps."
+  },
+  {
+   "tool": "grep",
+   "query": "localiz.*[Aa]ssociator|[Aa]ssociator.*localiz",
+   "results": "13 hits: Mathlib/AlgebraicTopology/ModelCategory/CofibrantObjectHomotopy.lean, Mathlib/AlgebraicTopology/ModelCategory/FibrantObjectHomotopy.lean, Mathlib/CategoryTheory/Localization/LocalizerMorphism.lean, Mathlib/CategoryTheory/Localization/Adjunction.lean, Mathlib/CategoryTheory/Localization/Adjunction.lean, Mathlib/CategoryTheory/Localization/Monoidal/Basic.lean, Mathlib/CategoryTheory/Localization/Monoidal/Basic.lean, Mathlib/CategoryTheory/Localization/Monoidal/Basic.lean",
+   "date": "2026-10-27",
+   "verdict": "The monoidal-localization API assumes a monoidal structure already installed on the localization; the assigned functor and associator are specified separately. Reuse the existing private proof for these actual normalized maps."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.DerivedPullbackTensorIso",
+  "date": "2026-10-27",
+  "group": "A4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-frobenius-coefficient-twists",
+   "place": "Clause 5, the canonical pullback tensor comparison; naturality of its normalized rational associator",
+   "via": [
+    "lem-pur-derived-pullback-tensor-iso"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-purity-conv",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.RationalPullbackTensorAssociatorNaturality",
+  "file": "lean/Sheaf/Paper/RationalPullbackTensorAssociatorNaturality.lean",
+  "declaration": "WeilConjectures.rationalAssociator_natural",
+  "statement": "theorem rationalAssociator_natural\n    (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]\n    [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]\n    (X : Scheme.{u}) [∀ x : X, Invertible (l : X.residueField x)]\n    {K K' L L' M M' : sfRationalConstructibleCategory l E X}\n    (f : K ⟶ K') (g : L ⟶ L') (h : M ⟶ M') :\n    (rationalDerivedTensor l E X).map\n        (Prod.mkHom ((rationalDerivedTensor l E X).map (Prod.mkHom f g)) h) ≫\n        (pullbackTensorRationalAssociator l E X K' L' M').hom =\n      (pullbackTensorRationalAssociator l E X K L M).hom ≫\n        (rationalDerivedTensor l E X).map\n          (Prod.mkHom f ((rationalDerivedTensor l E X).map (Prod.mkHom g h)))",
+  "branch": "sheaf-dag",
+  "by": "A4",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-dad8e",
+  "group": "B4",
+  "result": "fix",
+  "landing": "20261027T180455-L-3864065",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-dad8e",
+  "group": "B4",
+  "result": "fix",
+  "landing": "20261027T180455-L-3864065",
+  "kind": "interface",
+  "note": "independent cc review: live clone 9e9701c6 DerivedPullbackTensorIso declaration blocks vs delivered Constraints/ReductionCalculus/item (90/94 byte-identical; 4 = proofs/private binder/docstring split); 4 def nodes and item node vs live dag; 24 direct importers compiled against the delivered modules (19 OK, 4 slow matched by published originals, SFOL >120 s pre-existing); #print axioms probe"
+ }
+}

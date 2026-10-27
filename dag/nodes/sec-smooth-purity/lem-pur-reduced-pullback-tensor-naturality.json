@@ -1,0 +1,98 @@
+{
+ "id": "lem-pur-reduced-pullback-tensor-naturality",
+ "kind": "statement",
+ "title": "Faithful reduction reflects pullback tensor comparison naturality",
+ "statement": "Let C,D,S,T be categories, Q:C→S and R:D→T functors, with R faithful. Let F:C→D, H:S→T, and bifunctors U,V,J,I on the corresponding categories. Suppose natural isomorphisms identify UQ with (Q×Q)J, VR with (R×R)I, FR with QH, and JH with (H×H)I. A componentwise isomorphism ν:F(U(M,N))≅V(FM,FN) satisfying the resulting component reduction equation is natural in both inputs.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 07A4 and the recorded parent coefficient-coherence argument"
+ },
+ "stmt_deps": [],
+ "proof": [
+  {
+   "text": "Compose the specified natural isomorphisms to obtain p from reduced V(F-,F-) to I(HQ-,HQ-) and q from reduced FU to that same functor. The component equation is R(ν) p = q. For a pair of morphisms, postcompose the desired reduced naturality square by p at the target. Naturality of p and q proves equality. Cancel p, whose components are isomorphisms, and use faithfulness of R.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 07A4; elaboration and factoring of the parent normalization argument"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A componentwise isomorphism is natural if a faithful functor maps it to a composite of natural isomorphisms",
+   "results": "8 hits: CategoryTheory.NatIso.ofComponents, CategoryTheory.NatIso.naturality_2', CategoryTheory.NatIso.ofComponents_hom_app, CategoryTheory.NatIso.naturality_1, CategoryTheory.NatIso.naturality_2, CategoryTheory.NatIso.naturality_1', CategoryTheory.NatIso.ofComponents.app, CategoryTheory.NatTrans.naturality_1",
+   "date": "2026-10-27",
+   "verdict": "no exact theorem for the prescribed normalized component equations; use the category-theory API"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Functor.Faithful\", \"naturality\"",
+   "results": "0 hits: ",
+   "date": "2026-10-27",
+   "verdict": "no exact theorem for the prescribed normalized component equations; use the category-theory API"
+  },
+  {
+   "tool": "grep",
+   "query": "Faithful.*[Nn]atural|[Nn]atural.*Faithful",
+   "results": "13 hits: Mathlib/CategoryTheory/Yoneda.lean, Mathlib/CategoryTheory/Yoneda.lean, Mathlib/CategoryTheory/Yoneda.lean, Mathlib/CategoryTheory/Yoneda.lean, Mathlib/CategoryTheory/Adjunction/Quadruple.lean, Mathlib/CategoryTheory/Adjunction/Quadruple.lean, Mathlib/CategoryTheory/Adjunction/Triple.lean, Mathlib/CategoryTheory/Adjunction/Triple.lean",
+   "date": "2026-10-27",
+   "verdict": "no exact theorem for the prescribed normalized component equations; use the category-theory API"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.DerivedPullbackTensorIso",
+  "date": "2026-10-27",
+  "group": "A4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-frobenius-coefficient-twists",
+   "place": "Clause 5, the canonical pullback tensor comparison; normalized higher coefficient constraints and naturality",
+   "via": [
+    "lem-pur-derived-pullback-tensor-iso"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-purity-conv",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.PullbackTensorReductionCalculus",
+  "file": "lean/Sheaf/Paper/PullbackTensorReductionCalculus.lean",
+  "declaration": "WeilConjectures.reducedComparison_natural",
+  "statement": "theorem reducedComparison_natural\n    {C D S T : Type*} [Category* C] [Category* D] [Category* S] [Category* T]\n    (Q : C ⥤ S) (R : D ⥤ T) [R.Faithful]\n    (F : C ⥤ D) (H : S ⥤ T) (U : C × C ⥤ C) (V : D × D ⥤ D)\n    (J : S × S ⥤ S) (I : T × T ⥤ T)\n    (a : U ⋙ Q ≅ (Q.prod Q) ⋙ J) (b : V ⋙ R ≅ (R.prod R) ⋙ I)\n    (c : F ⋙ R ≅ Q ⋙ H) (μ : J ⋙ H ≅ (H.prod H) ⋙ I)\n    (ν : ∀ M N, F.obj (U.obj (M, N)) ≅ V.obj (F.obj M, F.obj N))\n    (hc : ∀ M N, R.map (ν M N).hom ≫ b.hom.app (F.obj M, F.obj N) ≫\n        I.map (Prod.mkHom (c.hom.app M) (c.hom.app N)) =\n      c.hom.app (U.obj (M, N)) ≫ H.map (a.hom.app (M, N)) ≫\n        μ.hom.app (Q.obj M, Q.obj N))\n    {M M' N N' : C} (f : M ⟶ M') (g : N ⟶ N') :\n    F.map (U.map (Prod.mkHom f g)) ≫ (ν M' N').hom =\n      (ν M N).hom ≫ V.map (Prod.mkHom (F.map f) (F.map g))",
+  "branch": "sheaf-dag",
+  "by": "A4",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-dad8e",
+  "group": "B4",
+  "result": "fix",
+  "landing": "20261027T180455-L-3864065",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-dad8e",
+  "group": "B4",
+  "result": "fix",
+  "landing": "20261027T180455-L-3864065",
+  "kind": "interface",
+  "note": "independent cc review: live clone 9e9701c6 DerivedPullbackTensorIso declaration blocks vs delivered Constraints/ReductionCalculus/item (90/94 byte-identical; 4 = proofs/private binder/docstring split); 4 def nodes and item node vs live dag; 24 direct importers compiled against the delivered modules (19 OK, 4 slow matched by published originals, SFOL >120 s pre-existing); #print axioms probe"
+ }
+}
