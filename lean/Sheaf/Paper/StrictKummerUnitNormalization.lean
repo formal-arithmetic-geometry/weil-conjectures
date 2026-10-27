@@ -7,6 +7,8 @@ module
 
 public import Sheaf.Paper.DiagonalEvaluationUnit
 public import Sheaf.Paper.KummerStrictAdjunctData
+import Sheaf.Paper.StrictKummerCohomologyConcentration
+import Sheaf.Paper.StrictKummerPureKernelNormalization
 
 /-! # Strict Kummer target and normalization of its evaluated units
 Source: diagonal tower system proof, step (3), target paragraph, and step (4).
@@ -65,6 +67,41 @@ Source: diagonal tower proof, steps (3) and (4)
           (shiftFunctorAdd (DerivedCategory A) (1 : ℤ) 1).inv.app
             ((DerivedCategory.singleFunctor A 0).obj ((V n).obj (P n))))
 
+/-- The t-structure constructs the strict comparison from vanishing; kernel
+normalization then supplies its roots and finite-level identifications. -/
+private theorem kummer_target_of_concentration
+    {A B : Type*} [Category A] [abA : Abelian A] [hA : HasExt.{w} A]
+    [Category B] [abB : Abelian B]
+    [HasDerivedCategory.{w} A] [HasDerivedCategory.{w} (ℕᵒᵖ ⥤ B)]
+    [HasExt.{w} (ℕᵒᵖ ⥤ B)]
+    (ℓ : ℕ) (L : A ⥤ B) (U : B ⥤ A) (ad : L ⊣ U)
+    [U.Additive] [PreservesFiniteLimits U] [PreservesFiniteColimits U]
+    (D : DiagonalDerivedReduction ℓ L)
+    (C : ℕ → Type*) [catC : ∀ n, Category (C n)]
+    (F : ∀ n, C n ⥤ B)
+    (V : ∀ n, C n ⥤ A)
+    (M : A) (rootsTower : ℕᵒᵖ ⥤ A) (P : ∀ n, C n)
+    (κ : ∀ n, Ext M ((V n).obj (P n)) 1)
+    (rootNorm : ∀ H : ℕᵒᵖ ⥤ B, (H ⋙ U ≅ rootsTower) →
+      ∀ n, (H.obj (op n) ≅ (F n).obj (P n)) → Prop)
+    (σ : ∀ n, V n ≅ F n ⋙ U) (η : ∀ n, DiagonalEvaluationUnit U ad D n)
+    (hc : (D.T.obj (((DerivedCategory.singleFunctor A 0).obj M)⟦(1 : ℤ)⟧)).IsGE (-2) ∧
+      (D.T.obj (((DerivedCategory.singleFunctor A 0).obj M)⟦(1 : ℤ)⟧)).IsLE (-2))
+    (hn : KummerPureKernelNormalization ℓ L U ad D C F V M rootsTower P κ
+      rootNorm σ η) :
+    KummerUnitNormalizedTarget ℓ L U ad D C F V M rootsTower P κ rootNorm σ η := by
+  let := hc.1
+  let := hc.2
+  obtain ⟨H, ⟨e⟩⟩ := DerivedCategory.exists_iso_singleFunctor_obj_of_isGE_of_isLE
+    (D.T.obj (((DerivedCategory.singleFunctor A 0).obj M)⟦(1 : ℤ)⟧)) (-2)
+  let b := e ≪≫ (((DerivedCategory.singleFunctors (ℕᵒᵖ ⥤ B)).shiftIso
+    (2 : ℤ) (-2) 0 (by decide)).app H).symm
+  unfold KummerPureKernelNormalization at hn
+  have h := hn H b
+  obtain ⟨roots, t, ht, he⟩ := h
+  unfold KummerUnitNormalizedTarget
+  exact ⟨H, roots, b, t, ht, he⟩
+
 /-- The strict Kummer comparison is normalized on the unit of shifted units.
 There is no arbitrary source, extension class, or residue lift in this statement.
 
@@ -115,6 +152,9 @@ theorem strict_kummer_unit_normalization (ℓ : ℕ) [Fact ℓ.Prime] (W : Schem
       (cartierResidue_cast ℓ (n + 1)) W)
     (fun n => kummerComparedUnit ℓ W hW n)
     (kummerRootNormalization ℓ W hW)
-    (fun n ↦ diagonalFiniteForgetIso ℓ n W) η := by sorry
+    (fun n ↦ diagonalFiniteForgetIso ℓ n W) η := by
+  apply kummer_target_of_concentration
+  · exact strict_kummer_cohomology_concentration ℓ W hW D
+  · exact strict_kummer_pure_kernel_normalization ℓ W hW D η
 
 end AlgebraicGeometry.ProEtale

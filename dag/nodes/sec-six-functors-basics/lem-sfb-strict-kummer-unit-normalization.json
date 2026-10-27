@@ -20,45 +20,31 @@
  },
  "proof": [
   {
-   "text": "On a common K-flat resolution compare each positive prime-power reduction with its two-term coefficient resolution. Kummer exactness and exact site comparison identify the only cohomology with roots in degree minus one.",
+   "text": "Apply the proved strict cohomology-concentration calculation to T(M[1]). It supplies standard t-structure bounds in degree minus two without choosing any roots or boundary normalization.",
    "uses": [
-    "lem-pc-kflat-resolution",
-    "lem-pur-constant-two-term-resolution",
-    "lem-amb-kummer-any-base",
-    "lem-sp-cartier-reduction-site-comparison",
-    "lem-weil-pbc-site-module-sheaf-constant-ring-equivalence"
+    "lem-sfb-strict-kummer-cohomology-concentration"
    ],
    "elementary": false
   },
   {
-   "text": "The resolution transition is multiplication by the prime in degree minus one and identity in degree zero. Its kernel map is the actual roots transition. Truncate in the strict-system category, shift once and choose the negative normalized comparison b. The roots-to-line maps give t and their underlying-map equation.",
+   "text": "Apply Mathlib DerivedCategory.exists_iso_singleFunctor_obj_of_isGE_of_isLE in the strict-system category at degree minus two. Compose the resulting isomorphism with the inverse singleFunctors.shiftIso(2,-2,0), obtaining an actual strict system H and b:T(M[1])≅H[2]. This is the private proved helper kummer_target_of_concentration.",
    "uses": [
-    "def-pur-roots-of-unity-sheaf",
-    "def-kun-truncations",
-    "def-sfb-diagonal-system-interface"
+    "def-kun-truncations"
    ],
    "elementary": false
   },
   {
-   "text": "Apply the complexes equation of the supplied evaluated unit on the common resolution. The positive Kummer normalization identifies its unshifted unit with the compared Kummer class. Shift once, using the inverse shift-addition comparison, and negate b. This gives the asserted equation at shifted units, without using any arbitrary extension or residue lift.",
+   "text": "Apply the pure-kernel normalization statement to this constructed H and b. Its roots and finite-level identifications, underlying-map equations and evaluated unit equations complete the required existential package.",
    "uses": [
-    "lem-sfb-diagonal-evaluation-unit",
-    "lem-sfb-divisible-extension-derived-reduction"
+    "lem-sfb-strict-kummer-pure-kernel-normalization"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-pc-kflat-resolution",
-  "lem-pur-constant-two-term-resolution",
-  "lem-amb-kummer-any-base",
-  "lem-sp-cartier-reduction-site-comparison",
-  "lem-weil-pbc-site-module-sheaf-constant-ring-equivalence",
-  "def-pur-roots-of-unity-sheaf",
+  "lem-sfb-strict-kummer-cohomology-concentration",
   "def-kun-truncations",
-  "def-sfb-diagonal-system-interface",
-  "lem-sfb-diagonal-evaluation-unit",
-  "lem-sfb-divisible-extension-derived-reduction"
+  "lem-sfb-strict-kummer-pure-kernel-normalization"
  ],
  "proof_origin": {
   "by": "agent",
@@ -136,11 +122,11 @@
  "reviewed_proof": {
   "date": "2026-10-27",
   "by": "L",
-  "reviewer": "C-55c6b",
-  "group": "F5",
-  "result": "fix",
-  "landing": "20261027T180605-L-3879427",
+  "reviewer": "COMPILER",
+  "group": "A5",
+  "result": "pass",
+  "landing": "20261027T205743-L-1610648",
   "kind": "interface",
-  "note": "independent cc review: moved defs vs published item module (verbatim except blueprint labels); new sorry statements vs nodes/source (both true, strictly smaller); item proof vs axioms (sorryAx only via the two new holes); node stmt_deps vs owners of declarations used; direct importer KummerStrictTargetTransport compiled vs delivered files (46.8 s; published 43.8 s at the same time)"
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

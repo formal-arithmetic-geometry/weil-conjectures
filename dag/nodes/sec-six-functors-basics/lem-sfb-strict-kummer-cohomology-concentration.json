@@ -1,0 +1,136 @@
+{
+ "id": "lem-sfb-strict-kummer-cohomology-concentration",
+ "kind": "statement",
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-diagonal-tower",
+ "title": "Cohomology vanishing for simultaneous reduction of shifted units",
+ "statement": "Let ell be prime, W a scheme on which ell is invertible, and D an arbitrary simultaneous derived reduction of extension from integral pro-etale sheaves to constant p-adic module sheaves [def-sfb-diagonal-system-interface]. Write M for comparison pullback of the etale multiplicative-group sheaf. With the displayed derived-category universe choices, T(M[1]) lies in both standard t-structure halves D^{>=-2} and D^{<=-2}. This asserts only cohomology vanishing and no roots identification or boundary normalization.",
+ "stmt_deps": [
+  "def-sfb-diagonal-system-interface"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-system.proof.md",
+  "place": "Step (3), target paragraph, and step (4), normalization of the unit at shifted comparison units."
+ },
+ "proof": [
+  {
+   "text": "Use flat-term K-flat resolutions and exact scalar extension to resolve every complex by complexes with monic positive-prime-power multiplication. The multiplication/quotient short exact sequences show that simultaneous ordinary reduction preserves quasi-isomorphisms on this class. Apply the proved cochain resolving-class construction and left-derived uniqueness to make the arbitrary supplied D counit invertible on this class.",
+   "uses": [
+    "lem-sfb-diagonal-derived-reduction-exists",
+    "lem-sfb-abstract-kflat-resolution"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Positive-prime-power multiplication on etale units is epi by Kummer exactness. Comparison pullback and p-adic scalar extension preserve epis. On scalar extension of a resolution of comparison units, multiplication is therefore epi on H^0; in every other degree homology is zero.",
+   "uses": [
+    "lem-amb-kummer-any-base",
+    "def-sfb-diagonal-system-interface"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "In the long exact homology sequence of the level multiplication/quotient sequence, the first homology map is epi in every degree and mono in the next degree unless that degree is zero. Mathlib ShortExact.exactAt_X3 gives quotient exactness outside degree minus one. Evaluation and its homology comparison jointly detect these vanishings in the strict-system category.",
+   "uses": [
+    "lem-sfb-diagonal-derived-reduction-exists"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Transport the degree minus-one bounds through the invertible derived counit and the localized resolving quasi-isomorphism. Use D.triangulated for a shift comparison, shifting the source once to obtain both bounds at minus two.",
+   "uses": [
+    "def-sfb-diagonal-system-interface"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-diagonal-derived-reduction-exists",
+  "lem-sfb-abstract-kflat-resolution",
+  "lem-amb-kummer-any-base",
+  "def-sfb-diagonal-system-interface"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-system.proof.md",
+  "place": "Step (3), target paragraph, and step (4), normalization of the unit at shifted comparison units."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A complex with homology in one degree is isomorphic in the derived category to a single object in that degree",
+   "results": "8 hits: DerivedCategory.exists_iso_singleFunctor_obj_of_isGE_of_isLE, HomologicalComplex.singleObjCyclesSelfIso_hom_singleObjOpcyclesSelfIso_hom, HomologicalComplex.homologyπ_singleObjHomologySelfIso_hom, HomologicalComplex.singleObjXIsoOfEq.congr_simp, HomologicalComplex.singleObjHomologySelfIso_hom_singleObjHomologySelfIso_inv, HomologicalComplex.singleObjOpcyclesSelfIso, HomologicalComplex.singleObjCyclesSelfIso_hom_singleObjOpcyclesSelfIso_hom_assoc, HomologicalComplex.pOpcycles_singleObjOpcyclesSelfIso_inv",
+   "date": "2026-10-28",
+   "verdict": "No exact concentration theorem. Mathlib supplies single-object reconstruction and cohomological t-structure APIs; the project quotient-resolution calculation is still needed."
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory.exists_iso_singleFunctor_obj_of_isGE_of_isLE",
+   "results": "1 hits: DerivedCategory.exists_iso_singleFunctor_obj_of_isGE_of_isLE",
+   "date": "2026-10-28",
+   "verdict": "No exact concentration theorem. Mathlib supplies single-object reconstruction and cohomological t-structure APIs; the project quotient-resolution calculation is still needed."
+  },
+  {
+   "tool": "grep",
+   "query": "exists_iso_singleFunctor_obj_of_isGE_of_isLE|singleFunctors.*shiftIso",
+   "results": "10 hits: Mathlib/CategoryTheory/Shift/SingleFunctors.lean, Mathlib/Algebra/Homology/DerivedCategory/TStructure.lean, Mathlib/Algebra/Homology/DerivedCategory/Ext/TStructure.lean, Mathlib/Algebra/Homology/DerivedCategory/Ext/TStructure.lean, Mathlib/Algebra/Homology/DerivedCategory/Ext/TStructure.lean, Mathlib/Algebra/Homology/DerivedCategory/Ext/TStructure.lean, Mathlib/Algebra/Homology/DerivedCategory/Ext/EnoughProjectives.lean, Mathlib/Algebra/Homology/DerivedCategory/Ext/EnoughInjectives.lean",
+   "date": "2026-10-28",
+   "verdict": "No exact concentration theorem. Mathlib supplies single-object reconstruction and cohomological t-structure APIs; the project quotient-resolution calculation is still needed."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.StrictKummerUnitNormalization",
+  "group": "A5",
+  "date": "2026-10-28"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-prop-diagonal-tower-system",
+   "place": "Step (3), target paragraph, and step (4), normalization of the unit at shifted comparison units.",
+   "via": [
+    "lem-sfb-strict-kummer-unit-normalization",
+    "lem-sfb-kummer-strict-adjunct-compatibility",
+    "lem-sfb-kummer-strict-target-transport"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.StrictKummerCohomologyConcentration",
+  "file": "lean/Sheaf/Paper/StrictKummerCohomologyConcentration.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.strict_kummer_cohomology_concentration",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.strict_kummer_cohomology_concentration"
+  ],
+  "statement": "theorem strict_kummer_cohomology_concentration (ℓ : ℕ) [Fact ℓ.Prime] (W : Scheme.{u})\n    (hW : IsUnit (ℓ : Γ(W, ⊤)))\n    [HasDerivedCategory.{u + 1} (DiagonalAb W)]\n    [HasDerivedCategory.{u + 1} (DiagonalSystems ℓ W)]\n    (D : DiagonalDerivedReduction ℓ (diagonalScalarExtension ℓ W)) :\n    (D.T.obj (((DerivedCategory.singleFunctor (DiagonalAb W) 0).obj\n        ((comparisonUpperStar AddCommGrpCat.{u + 1} W).obj W.gmSheaf))⟦(1 : ℤ)⟧)).IsGE (-2) ∧\n    (D.T.obj (((DerivedCategory.singleFunctor (DiagonalAb W) 0).obj\n        ((comparisonUpperStar AddCommGrpCat.{u + 1} W).obj W.gmSheaf))⟦(1 : ℤ)⟧)).IsLE (-2)",
+  "branch": "sheaf-dag",
+  "by": "A5",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A5",
+  "result": "pass",
+  "landing": "20261027T205743-L-1610648",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A5",
+  "result": "pass",
+  "landing": "20261027T205743-L-1610648",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
