@@ -20185,3 +20185,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 23:37 L: merged deliver/A9/Sheaf.SixFunctors.RationalVerdierCompositionEquation (stage 3; reviewer PASS; first push; landing 20261027T233754-L-4112111 (interface); batch 20261027T233735; modules 2; new nodes 1)
 - 23:37 L: merged deliver/B2/Sheaf.Paper.ProperBaseChangeAdmissibleGenerators (stage 3; reviewer PASS; first push; landing 20261027T233756-L-4112459 (interface); batch 20261027T233735; modules 2; new nodes 1)
 - 23:37 L: merged deliver/B3/Sheaf.Paper.ClopenSystemRealizationData (stage 3; reviewer PASS; first push; landing 20261027T233757-L-4112985 (interface); batch 20261027T233735; modules 1; new nodes 0)
+- 23:37 L: merged deliver/B3/Sheaf.Paper.CompletedPullbackTensorAssociativityRepresentatives (stage 3; reviewer PASS; first push; landing 20261027T233758-L-4113545 (proof); batch 20261027T233735; modules 1; new nodes 0)
