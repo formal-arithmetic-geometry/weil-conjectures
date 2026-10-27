@@ -20301,3 +20301,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 23:40 L: merged deliver/J3/Sheaf.Paper.FrobeniusCompactIntegralNormalization (stage 3; reviewer PASS; first push; landing 20261027T234018-L-4161572 (interface); batch 20261027T233735; modules 2; new nodes 1)
 - 23:40 L: merged deliver/J3/Sheaf.Paper.IntrinsicSiteHomTransport (stage 3; reviewer PASS; first push; landing 20261027T234019-L-4161730 (interface); batch 20261027T233735; modules 2; new nodes 1)
 - 23:40 L: merged deliver/J4/Sheaf.Paper.IntegralCompactSupportCoefficientComparison (stage 3; reviewer PASS; first push; landing 20261027T234021-L-4161912 (interface); batch 20261027T233735; modules 3; new nodes 2; change records: coord/changes/finite-comparison-lower-steps.md)
+- 23:40 L: merged deliver/J5/Sheaf.Paper.NativeOrdinaryTensorModelNaturality (stage 3; reviewer PASS; first push; landing 20261027T234022-L-4162784 (proof); batch 20261027T233735; modules 1; new nodes 0)

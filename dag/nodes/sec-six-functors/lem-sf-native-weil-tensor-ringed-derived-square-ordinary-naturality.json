@@ -12,22 +12,39 @@
  },
  "proof": [
   {
-   "text": "Compare the two composites after applying the specified product-total Hom representatives. The normalization equation gives equal componentwise transposes when Q and Q' are K-flat; faithfulness of the tensor--Hom adjunction yields the naturality square.",
-   "uses": [],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
-    "place": "Native tensor transport, geometric tensor part of step 1"
-   }
+   "text": "Use the existing NativeCurrying.internalHomEquiv and uncurry_component calculation. For an actual chain map a:ordinaryTensorTotal(P,Q) to a K-injective I, apply normalization to its curry. The coproduct inclusions in each total degree show that the normalized witness is a itself. Thus model.hom;Q(a) is the inverse closed transpose of Q(curry(a));R.model.inv.",
+   "uses": [
+    "lem-sf-native-ordinary-representative-currying"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The counit formula for inverse transposition and S.evaluation_naturality give its naturality in both tensor inputs. Apply chain-level currying naturality to mapBifunctorMap(f,g);a. The supplied R.naturality, conjugated by its model isomorphisms, identifies the two derived Hom arrows, so the two proposed tensor composites become equal after postcomposition with Q(a).",
+   "uses": [
+    "lem-sf-native-ordinary-representative-currying",
+    "def-sf-native-weil-closed-models"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Choose a monomorphic quasi-isomorphism a from ordinaryTensorTotal(P',Q') to a K-injective I. Its image Q(a) is an isomorphism, so cancel it from the equality of the preceding step. This proves the original naturality square without replacing or changing model and without an additional unproved statement.",
+   "uses": [
+    "lem-sfb-grothendieck-k-injective"
+   ],
+   "elementary": false
   }
  ],
- "proof_deps": [],
+ "proof_deps": [
+  "lem-sf-native-ordinary-representative-currying",
+  "def-sf-native-weil-closed-models",
+  "lem-sfb-grothendieck-k-injective"
+ ],
  "proof_origin": {
   "by": "worker",
-  "group": "E7",
+  "group": "J5",
   "date": "2026-10-28",
   "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
-  "place": "K-flat-input naturality component of the ordinary derived-square argument."
+  "place": "Naturality of evaluation and transposition; implemented using the existing native degree-zero currying calculation and a K-injective target resolution."
  },
  "mathlib_searches": [
   {
@@ -94,11 +111,11 @@
  "reviewed_proof": {
   "date": "2026-10-27",
   "by": "L",
-  "reviewer": "C-a5338",
-  "group": "E7",
-  "result": "fix",
-  "landing": "20261027T205930-L-1635358",
-  "kind": "interface",
-  "note": "independent cc review: delivered split (kflat naturality + resolution extension) against the 401551ed return and NativeWeilClosedModels definitions (NativeAdjunctionNormalization, NativeHomRepresentatives, CoefficientClosedStructure); nodes against the Lean"
+  "reviewer": "COMPILER",
+  "group": "J5",
+  "result": "pass",
+  "landing": "20261027T234022-L-4162784",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
