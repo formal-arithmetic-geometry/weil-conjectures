@@ -12773,3 +12773,4 @@ public import WeilConjectures.SmoothPurity.Defs
 public import WeilConjectures.PoincareDuality.Poincare
 public import WeilConjectures.TraceFormula.Dualizing
 public import WeilConjectures.TraceFormula.BorelMoore
+public import WeilConjectures.TraceFormula.LocalTerm
