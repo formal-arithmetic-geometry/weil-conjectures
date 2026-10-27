@@ -10335,6 +10335,11 @@ public import WeilConjectures.NumberTheory.Padics.ULiftAdicComplete
 public import WeilConjectures.NumberTheory.Padics.ULiftDiscreteValuationRing
 public import WeilConjectures.NumberTheory.TateModule
 public import WeilConjectures.PoincareDuality.Abstract
+public import WeilConjectures.PoincareDuality.Biduality.CoefficientChange
+public import WeilConjectures.PoincareDuality.Biduality.Constructible
+public import WeilConjectures.PoincareDuality.Biduality.EtaleReading
+public import WeilConjectures.PoincareDuality.Biduality.Integral
+public import WeilConjectures.PoincareDuality.Biduality.Reduction
 public import WeilConjectures.PoincareDuality.Poincare
 public import WeilConjectures.PoincareDuality.ProjectionCoherence
 public import WeilConjectures.PoincareDuality.ProjectionFormula
@@ -12422,6 +12427,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal.Unit
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal.Vanishing
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarRestrictScalars
 public import WeilConjectures.SixFunctors.Etale.Derived.VerdierBiduality
+public import WeilConjectures.SixFunctors.Etale.Derived.VerdierBidualityField
 public import WeilConjectures.SixFunctors.Etale.Derived.VerdierDualWeil
 public import WeilConjectures.SixFunctors.Etale.Derived.VerdierExchange
 public import WeilConjectures.SixFunctors.Etale.Derived.VerdierPreservation
