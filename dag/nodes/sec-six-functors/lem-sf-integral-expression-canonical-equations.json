@@ -13,39 +13,60 @@
  ],
  "proof": [
   {
-   "text": "At a leaf the transpose is the actual unit, so its inverse is inverseOrZero of the unit; invertibility follows from Reconstruction.unit.",
+   "text": "Prove the generic transport calculation: if an isomorphism b has coefficient map r_H composed with A(R(c inverse) followed by epsilon), then its inverse is B(c inverse) followed by the inverse primitive comparison and L A(epsilon). Apply the inverse adjunction hom-set equivalence to both maps. Naturality of the counit, the primitive transpose equation, and naturality of r make their images equal. Injectivity identifies the inverse maps; cancel the isomorphisms to get the claimed hom equation. The same calculation works on a product input category.",
    "uses": [
     "def-sf-integral-expression-recursion-data",
-    "lem-sf-integral-expression-transpose-is-iso"
-   ],
-   "elementary": true
-  },
-  {
-   "text": "For a unary vertex use the child coefficient identity. Give basicUnaryDomain at L M its constructible condition from Reconstruction.limit, its Good input from Reconstruction.reduction, and its Good output by transporting the parent Good condition across A of the actual counit. All unit and counit components used here lie in their specified domains. Define the candidate comparison by unaryA(M) followed by A_int of the child comparison. Reduce its inverse, compose with the parent counit, apply naturality of the primitive reduction transformation at the child inverse, and use unaryTranspose and counit naturality at A(e_M). The result is the recursively prescribed parent coefficientMap. Injectivity of the inverse adjunction hom-set equivalence identifies that inverse with transposeComparison. Inverting gives the displayed equation. Include the child equations by induction.",
-   "uses": [
-    "def-sf-integral-expression-recursion-data",
-    "lem-sf-integral-expression-transpose-is-iso",
     "lem-coef-derived-system-evaluation-calculus"
    ],
    "elementary": true
   },
   {
-   "text": "At tensor apply the identical calculation to the pair of child inverses, using tensorTranspose and bifunctoriality. The two induction hypotheses give the two recursive child clauses. At compact support perform open then proper, retaining both basicUnaryDomain witnesses and the domain Good condition at the hidden open intermediate. This gives exactly the composite written in Equations.",
+   "text": "Transport Good across an isomorphism. Normalization is transported using naturality of the actual transition transformations and cancellation of evaluation isomorphisms. Keep the same four common bounds: each finite-level constructibility predicate is closed under isomorphisms by the triangulated constructibility theorem, cohomological support is transported through homology isomorphisms, and Tor amplitude through the existing isomorphism witnesses. Keep every origin and transition square, composing its evaluation isomorphism with the image of the given system isomorphism.",
+   "uses": [
+    "def-sf-integral-expression-recursion-data",
+    "lem-weil-proetale-dbc-triangulated"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For a unary vertex, Reconstruction.limit gives constructibility at L M and Reconstruction.reduction gives its Good reduction. Reconstruction.counit makes epsilon_M invertible. Transport the parent Good condition backwards through A(epsilon_M), using the preceding Good-invariance argument, to obtain the remaining basicUnaryDomain clause. Apply the generic transport calculation with the child and parent components of canonicalComparisons, whose coefficient identities are canonicalComparisons_coefficient; unaryTranspose supplies its primitive equation. Both factors of unaryA are isomorphisms. This proves the root equation and invertibility clause for pull, proper push and open extension; use the child induction hypothesis for the recursive clause.",
    "uses": [
     "def-sf-integral-expression-recursion-data",
     "lem-sf-integral-expression-transpose-is-iso",
-    "lem-coef-derived-system-evaluation-calculus"
+    "lem-coef-derived-system-evaluation-calculus",
+    "lem-weil-proetale-dbc-triangulated"
    ],
-   "elementary": true
+   "elementary": false
+  },
+  {
+   "text": "At a leaf explicitly unfold only the transpose and coefficient transformation: the latter is identity, so the component is the actual unit. Reconstruction.unit makes it invertible, and the canonical hom is its inverse, equal to inverseOrZero. At tensor apply the generic calculation in the product input category, with the product of the two child comparisons and the pair of actual counits. The two limit/reduction witnesses and Good transport of the tensor of the counits give basicTensorDomain. tensorTranspose supplies the primitive equation, and the two child induction hypotheses give both recursive clauses. No distinctness of variables is used.",
+   "uses": [
+    "def-sf-integral-expression-recursion-data",
+    "lem-sf-integral-expression-transpose-is-iso",
+    "lem-coef-derived-system-evaluation-calculus",
+    "lem-weil-proetale-dbc-triangulated"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For compact support form the hidden finite-type compactification object over the base and its open and proper arrows. Apply the unary calculation to the explicit open expression on the same input family, whose domain witness is exactly the retained intermediate Good condition and the child admissibility. Apply it again to the proper step, using that open comparison as child comparison and the parent coefficient identity. Substitute the resulting open equation into the proper equation and pair with the original child induction hypothesis. This is literally the composite and the two domain witnesses required by Equations.",
+   "uses": [
+    "def-sf-integral-expression-recursion-data",
+    "lem-sf-integral-expression-transpose-is-iso",
+    "lem-coef-derived-system-evaluation-calculus",
+    "lem-weil-proetale-dbc-triangulated"
+   ],
+   "elementary": false
   }
  ],
  "proof_deps": [
   "def-sf-integral-expression-recursion-data",
   "lem-coef-derived-system-evaluation-calculus",
-  "lem-sf-integral-expression-transpose-is-iso"
+  "lem-sf-integral-expression-transpose-is-iso",
+  "lem-weil-proetale-dbc-triangulated"
  ],
  "proof_origin": {
-  "by": "agent",
+  "by": "agent X5, complete Lean proof, 2026-10-28",
   "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-compatibility/fix-prop-coherence.proof.md",
   "place": "Coefficient-comparison sentence; agent-formulated expression-tree refinement, lem-sf-integral-expression-recursion, proof steps 1--11."
  },
@@ -114,13 +135,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-26",
+  "date": "2026-10-27",
   "by": "L",
-  "reviewer": "C-fe0fc",
-  "group": "T2",
+  "reviewer": "COMPILER",
+  "group": "X5",
   "result": "pass",
-  "landing": "20261026T201708-L-3409391",
+  "landing": "20261027T181007-L-3920193",
   "kind": "interface",
-  "note": "independent cc review: Item theorem type byte-identical to clones/live; 19 relocated declarations byte-identical (diff) and re-exported publicly; both direct importers compile against the delivered set (lcompile --all sandbox); the two open statements are each equivalent to a conjunct of the original item via the hom-set uniqueness of the transpose; unit realized empty; axioms show only pre-existing upstream sorryAx plus the two named holes"
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
