@@ -7,6 +7,7 @@ module
 
 public import Sheaf.Paper.TowerRestrictedScalarAdjunction
 public import Sheaf.Paper.TowerClassPullback
+import Sheaf.Paper.TowerScalarUnitAbelianTransposeSectionNormalized
 
 /-! # The abelian transpose of the coefficient-unit comparison
 
@@ -79,6 +80,14 @@ theorem scalarUnit_abelianTranspose_section
             cX.reduction.forget.F.map
               ((cX.scalar.ordinaryAdjunction.homEquiv _ _)
                 (cX.scalar.model.E.map d.unitIso.hom ≫ eX)))).app n).hom.app U)) x := by
-  sorry
+  have hY : eY = canonicalScalarUnit l E cY := by
+    apply (cY.scalar.ordinaryAdjunction.homEquiv _ _).injective
+    simpa only [canonicalScalarUnit, Equiv.apply_symm_apply] using heY
+  have hX : eX = canonicalScalarUnit l E cX := by
+    apply (cX.scalar.ordinaryAdjunction.homEquiv _ _).injective
+    simpa only [canonicalScalarUnit, Equiv.apply_symm_apply] using heX
+  subst eY
+  subst eX
+  exact scalarUnit_abelianTranspose_section_normalized l E f b g cY cX d χ hχ θ₀ n U x
 
 end AlgebraicGeometry.ProEtale.SpTowerClasses
