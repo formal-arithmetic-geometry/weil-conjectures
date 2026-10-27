@@ -1,0 +1,115 @@
+{
+ "id": "lem-sf-ringed-tensor-completion-chain-identification",
+ "kind": "statement",
+ "title": "Identification of the supplied ringed tensor chain with the specified completion chain",
+ "statement": "For a prime l, a finite l-adic coefficient field E, a scheme X, a supplied RingedModels presentation d and arbitrary completed-coefficient complexes P,Q, the component d.tensor(X).chain(P,Q) equals ConstructibleTensorModel.tensorCompletionChain(P,Q). The equality is of complete strict Roos chain maps, including the shifted coordinate. No K-flatness or invertibility hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 07A4, 06YS and 0941; representative normalization step of lem-sf-tensor-reduction-augmentation"
+ },
+ "stmt_deps": [
+  "def-sf-integral-system-canonical-bridge",
+  "lem-fix-constructible-tensor-completion-chain"
+ ],
+ "proof": [
+  {
+   "text": "Apply ringedTensorChain_eq_strictAugmentation to the supplied presentation. Evaluate the resulting transformation equality at P,Q. StrictTensorAugmentation.map_app identifies that component with IntegralAmbient.tensorOperationUnit. tensorCompletionChain_app identifies the specified completion chain with tensorCompletionUnitMap, whose definition is exactly the same operation unit. Thus the two cochain maps are equal, including both Roos coordinates.",
+   "uses": [
+    "lem-sf-ringed-tensor-chain-identification",
+    "lem-pur-strict-tensor-augmentation-construction",
+    "lem-fix-constructible-tensor-completion-chain"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-ringed-tensor-chain-identification",
+  "lem-pur-strict-tensor-augmentation-construction",
+  "lem-fix-constructible-tensor-completion-chain"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-rem-sf-pf-done/fix-prop-projection-formula.proof.md",
+  "place": "Representative comparison and augmentation identification in integral reconstruction; C9, 2026-10-28"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "mappingCocone.*(ext|fst|snd)|hom_ext",
+   "results": "2 hits: Mathlib/Algebra/Homology/HomotopyCategory/MappingCocone.lean, Mathlib/Algebra/Homology/HomotopyCategory/MappingCocone.lean",
+   "date": "2026-10-28",
+   "verdict": "The generic categorical APIs apply; the supplied coefficient-model normalization is specialized here from existing library declarations."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatTrans.ext",
+   "results": "1 hits: CategoryTheory.NatTrans.ext",
+   "date": "2026-10-28",
+   "verdict": "The generic categorical APIs apply; the supplied coefficient-model normalization is specialized here from existing library declarations."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Two maps into a cochain mapping cone are equal when their two components agree",
+   "results": "8 hits: CochainComplex.mappingCone.ext_from_iff, CochainComplex.mappingCone.ext_from, CochainComplex.mappingCone.ext_to, CochainComplex.mappingCone.ext_cochain_from_iff, CochainComplex.mappingCone.ext_to_iff, CochainComplex.mappingCone.ext_cochain_to_iff, CochainComplex.mappingCone.desc.congr_simp, CochainComplex.mappingCone.descCochain.congr_simp",
+   "date": "2026-10-28",
+   "verdict": "The generic categorical APIs apply; the supplied coefficient-model normalization is specialized here from existing library declarations."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralTensorReductionAugmentation",
+  "date": "2026-10-28",
+  "group": "C9"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "fix-prop-projection-formula",
+   "place": "Ordinary tensor model comparison in integral reconstruction",
+   "via": [
+    "lem-sf-tensor-reduction-augmentation",
+    "lem-sf-integral-tensor-pullback-augmentation",
+    "lem-sf-integral-ordinary-tensor-pullback-normalization",
+    "lem-sf-integral-projection-operation-presentation",
+    "lem-sf-integral-stage-projection-reduction",
+    "lem-sf-projection-integral-stage-laws",
+    "lem-sf-integral-proper-operation-projection-isomorphism"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-rem-sf-pf-done",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.TensorCompletionChainRingedIdentification",
+  "file": "lean/Sheaf/Paper/TensorCompletionChainRingedIdentification.lean",
+  "declaration": "WeilConjectures.IntegralOrdinary.ringedTensorChain_eq_tensorCompletionChain",
+  "statement": "theorem ringedTensorChain_eq_tensorCompletionChain (X : Scheme.{u})\n    (d : IntegralSystemRealization.RingedModels l E)\n    (P Q : CochainComplex (integralTowerModules l E X) ℤ) :\n    (d.tensor X).chain.app (P, Q) =\n      (ConstructibleTensorModel.tensorCompletionChain l E X).app (P, Q)",
+  "branch": "sheaf-dag",
+  "by": "C9",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C9",
+  "result": "pass",
+  "landing": "20261027T205855-L-1627574",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C9",
+  "result": "pass",
+  "landing": "20261027T205855-L-1627574",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

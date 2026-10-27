@@ -9,6 +9,12 @@ public import Sheaf.Paper.IntegralCompactSupportCoefficientData
 public import Sheaf.Paper.ConstructibleTensorCompletionChain
 public import Sheaf.Paper.CompletedPullbackTowerRealizations
 import Sheaf.Paper.ConstructibleTensorCompletionComparison
+import Sheaf.SixFunctors.IntegralRingedModelExistence
+import all Sheaf.SixFunctors.PrimitiveQuotientAugmentations
+import Sheaf.Paper.OrdinaryTensorRingedModelComparison
+import Sheaf.Paper.TensorCompletionChainRingedIdentification
+import all Sheaf.Paper.IntegralOperationsWellDefined
+import Mathlib.CategoryTheory.Localization.Prod
 
 /-! # Tensor augmentation and coherent reduction
 
@@ -55,6 +61,14 @@ def TensorAugmentationNormalized (X : Scheme.{u})
       DerivedCategory.Q.map
         ((ConstructibleTensorModel.tensorCompletionChain l E X).app (P.obj, Q.obj))
 
+attribute [local implicit_reducible] PurCompactSupport.completed
+  integralOperationsGoodLocalization integralOperationsTensorOnGood
+attribute [local irreducible] HasDerivedCategory.standard SheafOfModules.monoidalCategory
+  CategoryTheory.Functor.leftAdjoint CategoryTheory.Functor.mapDerivedCategory
+  completedIntegralCommRingSheafUnrestricted completedIntegralCoefficientSheafUnrestricted
+  pullbackTensorCalculus pullbackTensorIntegralTensorModel integralCompletedTensorComparison
+  coefficientSequenceLimit
+
 /-- Coherent reduction of ordinary tensor is strong monoidal, with its adjunct fixed
 by the specified strict tensor augmentation. This assertion involves one scheme and
 no geometric inverse image or tensor/pullback comparison.
@@ -88,7 +102,72 @@ theorem tensorReductionAugmentation_exists (X : Scheme.{u})
           τ.app (M, N) ≫ (pullbackTensorIntegralTensorModel l E X).hom.app (M, N) =
             (pullbackTensorCalculus l E X).adjunction.unit.app
                 ((tensorModel l E X).tensor.obj (M, N)) ≫
-              (coefficientSequenceLimit l E X).map (b.hom.app (M, N)) := by sorry
+              (coefficientSequenceLimit l E X).map (b.hom.app (M, N)) := by
+  obtain ⟨d, _⟩ := IntegralSystemRealization.integralRingedModelExistence l E
+  obtain ⟨e, he⟩ := tensorRingedModelComparison l E X d
+  let S := pullbackTensorCalculus l E X
+  let R := coefficientSequenceLimit l E X
+  let b : (tensorModel l E X).tensor ⋙ S.reduction ≅
+      S.reduction.prod S.reduction ⋙ S.systemClosed.tensor :=
+    Functor.isoWhiskerRight (e ≪≫ eqToIso (d.tensorClosed X)) S.reduction ≪≫ S.reductionTensor
+  let τ₀ : (tensorModel l E X).tensor ⟶ integralCompletedTensor l E X :=
+    e.hom ≫ (d.tensor X).chi l E
+  have hτ₀ : TensorAugmentationNormalized l E X τ₀ := by
+    intro P Q
+    have hc := (d.tensor X).canonical.2 P.obj Q.obj P.property Q.property
+    rw [ringedTensorChain_eq_tensorCompletionChain l E X d P.obj Q.obj] at hc
+    have hh := congrArg (fun z ↦ z ≫
+      ((d.tensor X).chi l E).app (DerivedCategory.Q.obj P.obj, DerivedCategory.Q.obj Q.obj) ≫
+        (integralCompletedTensorComparison l E X).hom.app (P, Q)) (he P Q)
+    calc
+      _ = (d.tensor X).ordinary.representative.hom.app
+          (⟨P.obj, P.property⟩, ⟨Q.obj, Q.property⟩) ≫
+          ((d.tensor X).chi l E).app
+            (DerivedCategory.Q.obj P.obj, DerivedCategory.Q.obj Q.obj) ≫
+            (integralCompletedTensorComparison l E X).hom.app (P, Q) := by
+        simpa only [τ₀, NatTrans.comp_app, Category.assoc] using hh
+      _ = _ := by
+        simpa only [OpenFactorCoherence.Tensor.chi, NatTrans.comp_app,
+          Functor.whiskerLeft_app, Category.assoc] using hc
+  let q := integralOperationsGoodLocalization l E X
+  let W := (HomologicalComplex.quasiIso (integralTowerModules l E X) (.up ℤ)).inverseImage
+    (integralOperationsGoodComplex l E X).ι
+  let : q.IsLocalization W := integralOperationsGoodLocalization_isLocalization l E X
+  have hu (τ : (tensorModel l E X).tensor ⟶ integralCompletedTensor l E X)
+      (hτ : TensorAugmentationNormalized l E X τ) : τ = τ₀ := by
+    apply Localization.natTrans_ext (q.prod q) (W.prod W)
+    rintro ⟨P, Q⟩
+    change τ.app (DerivedCategory.Q.obj P.obj, DerivedCategory.Q.obj Q.obj) =
+      τ₀.app (DerivedCategory.Q.obj P.obj, DerivedCategory.Q.obj Q.obj)
+    apply (cancel_epi
+      ((ConstructibleTensorModel.tensorRepresentativeIso l E X).hom.app (P, Q))).1
+    apply (cancel_mono ((integralCompletedTensorComparison l E X).hom.app (P, Q))).1
+    simpa only [Category.assoc] using (hτ P Q).trans (hτ₀ P Q).symm
+  let α := τ₀ ≫ (pullbackTensorIntegralTensorModel l E X).hom
+  let β := Functor.whiskerLeft (tensorModel l E X).tensor S.adjunction.unit ≫
+    Functor.whiskerRight b.hom R
+  have hab : α = β := by
+    apply Localization.natTrans_ext (q.prod q) (W.prod W)
+    rintro ⟨P, Q⟩
+    have ha := GeneratorReduction.tensor_augmentation_onGood l E d X P Q
+    have hn := S.adjunction.unit.naturality
+      (e.hom.app (DerivedCategory.Q.obj P.obj, DerivedCategory.Q.obj Q.obj))
+    dsimp only [Functor.id_map, Functor.comp_map] at hn
+    dsimp only [α, τ₀, NatTrans.comp_app]
+    rw [Category.assoc]
+    change e.hom.app (DerivedCategory.Q.obj P.obj, DerivedCategory.Q.obj Q.obj) ≫
+      (((d.tensor X).chi l E).app _ ≫
+        (pullbackTensorIntegralTensorModel l E X).hom.app _) = _
+    rw [ha, ← Category.assoc, hn, Category.assoc]
+    simp only [β, b, NatTrans.comp_app, Functor.whiskerLeft_app,
+      Functor.whiskerRight_app, Iso.trans_hom, Functor.isoWhiskerRight_hom,
+      eqToIso.hom, eqToHom_app, Functor.map_comp, Category.assoc,
+      q, R, S, integralOperationsGoodLocalization, Functor.prod_obj, Functor.comp_obj,
+      ObjectProperty.ι_obj]
+  refine ⟨b, ?_⟩
+  intro τ hτ M N
+  rw [hu τ hτ]
+  exact congrArg (fun t ↦ t.app (M, N)) hab
 
 /-- The adjunction Hom bijection makes the normalized reduction comparison unique.
 Source: Stacks 07A6; the reduction/limit adjunction

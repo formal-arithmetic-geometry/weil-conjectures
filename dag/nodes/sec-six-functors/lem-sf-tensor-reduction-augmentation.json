@@ -7,7 +7,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-rem-sf-pf-done/fix-prop-projection-formula.proof.md",
-  "place": "Integral reconstruction: compatibility of the specified augmentation maps; adjunction-mate refinement of the original two-step proof"
+  "place": "Integral reconstruction, using the existing representative-normalized RingedModels and proved tensorQuotientTranspose_onGood computation; C9 localization transport proof, 2026-10-28"
  },
  "mathlib_searches": [
   {
@@ -82,40 +82,41 @@
  ],
  "proof": [
   {
-   "text": "Use the common signed total tensor on simultaneous good representatives to compare the ordinary tensor with the calculus integral tensor. Product localization descends their representative comparisons to a natural isomorphism. Compose with the calculus reductionTensor to obtain the asserted strong reduction comparison.",
+   "text": "Use integralRingedModelExistence to obtain an existing representative-normalized ordinary tensor presentation d. Restrict d.tensor.ordinary.representative to good complexes and compare it with tensorRepresentativeIso. Fully faithful whiskering by the product of good-complex localizations descends their composite to an isomorphism e from the ordinary tensor to d.tensor.ordinary.tensor, preserving every representative map. Compose e with d.tensorClosed, whisker by reduction, and compose with reductionTensor to construct b.",
    "uses": [
-    "lem-fix-constructible-tensor-completion-presentation",
-    "lem-coef-derived-system-evaluation-calculus",
+    "lem-sf-integral-ringed-model-existence",
+    "lem-sf-ordinary-tensor-ringed-model-comparison",
+    "lem-coef-derived-system-evaluation-calculus"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The supplied ringed tensor chain equals StrictTensorAugmentation.map by its full-coordinate uniqueness, and map_app and tensorCompletionChain_app identify that chain with the specified tensor completion chain. Transport the supplied canonical augmentation by e. Its representative equation is exactly TensorAugmentationNormalized. The product localization is faithful, so every normalized tau equals this transported augmentation: cancel the ordinary representative and completed-tensor comparison on each good pair.",
+   "uses": [
+    "lem-sf-ringed-tensor-completion-chain-identification",
     "lem-pur-integral-operations-well-defined"
    ],
    "elementary": false
   },
   {
-   "text": "Transpose this map under the actual coherent reduction/limit adjunction. On good representatives the reduction model identifies its unit with the ordinary scalar unit followed by the total-limit unit. The normalized scalar tensor map takes 1 tensor (x tensor y) to (1 tensor x) tensor (1 tensor y). The strict quotient transitions agree. In the Roos model this is the specified product map with zero shifted coordinate. The integral tensor realization therefore identifies the adjunct with the prescribed tensor augmentation.",
+   "text": "Use the already proved private tensor_augmentation_onGood helper from PrimitiveQuotientAugmentations (whose proof uses tensorQuotientTranspose_onGood and cancels the full Roos model and ordinary representative) to get the prescribed unit-transpose formula on good pairs for the supplied ringed tensor. Naturality of the adjunction unit along e gives the formula for the transported augmentation and b. Faithfulness of the product localization extends this equality of natural transformations to all derived pairs. Existing tensorCompletionComparison and injectivity of the adjunction Hom bijection give the unchanged uniqueness corollary.",
    "uses": [
-    "def-pur-completed-pullback-tower-core",
-    "lem-coef-derived-system-evaluation-calculus",
+    "lem-sf-primitive-quotient-augmentations",
     "lem-pur-integral-tensor-roos-realization",
-    "lem-fix-constructible-tensor-completion-chain"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Any normalized tau has precisely that same representative equation. Cancel the representative isomorphisms and descend by the product localization, or transport along simultaneous good representative isomorphisms, to get the equality on every derived pair. For the proved uniqueness corollary, obtain one normalized tau from tensorCompletionComparison and apply injectivity of the adjunction Hom bijection componentwise.",
-   "uses": [
-    "lem-fix-constructible-tensor-completion-comparison",
-    "lem-pur-integral-operations-well-defined"
+    "lem-pur-integral-operations-well-defined",
+    "lem-fix-constructible-tensor-completion-comparison"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-fix-constructible-tensor-completion-presentation",
+  "lem-sf-integral-ringed-model-existence",
+  "lem-sf-ordinary-tensor-ringed-model-comparison",
   "lem-coef-derived-system-evaluation-calculus",
+  "lem-sf-ringed-tensor-completion-chain-identification",
   "lem-pur-integral-operations-well-defined",
-  "def-pur-completed-pullback-tower-core",
+  "lem-sf-primitive-quotient-augmentations",
   "lem-pur-integral-tensor-roos-realization",
-  "lem-fix-constructible-tensor-completion-chain",
   "lem-fix-constructible-tensor-completion-comparison"
  ],
  "lean": {
@@ -148,11 +149,11 @@
  "reviewed_proof": {
   "date": "2026-10-27",
   "by": "L",
-  "reviewer": "C-973e8",
-  "group": "F1",
-  "result": "fix",
-  "landing": "20261027T180554-L-3877743",
+  "reviewer": "COMPILER",
+  "group": "C9",
+  "result": "pass",
+  "landing": "20261027T205855-L-1627574",
   "kind": "interface",
-  "note": "independent cc review: item tensorPullback_augmentation proof + 3 new hole modules/nodes + tensorModel extraction against clone HEAD, node owners, importer IntegralOrdinaryTensorPullbackNormalization (compiled OK 29.5 s), axioms"
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
