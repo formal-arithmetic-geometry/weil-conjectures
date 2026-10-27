@@ -44,8 +44,9 @@ lemma derivedExtendScalarsCompIso_eq {E F : FiniteIntermediateField ℓ} (h : E 
         (Mod.extendScalarsCompIsoOfEq (padicSubfieldRingObjMap_comp_toPadicAlgCl X ℓ h)) :=
   rfl
 
--- Unifying the instances of the derived categories of module objects is slow.
 set_option maxHeartbeats 400000 in
+-- Unifying the generic statement `leftDerivedFunctorCompIso_symm_trans_natIso_hom_app_Qh` with
+-- the concrete derived categories of module objects (and their many instances) is slow.
 /-- The transitivity isomorphism `T^X_{E,F} ⋙ T^X_{F,Ω} ≅ T^X_{E,Ω}` on the image of an object
 `M` of the homotopy category, read through the counits of the derived extensions of scalars,
 is the isomorphism `ℚ̄_ℓ,X ⊗_{F_X} (F_X ⊗_{E_X} M) ≅ ℚ̄_ℓ,X ⊗_{E_X} M`. -/

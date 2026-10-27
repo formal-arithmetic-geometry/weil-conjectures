@@ -204,26 +204,78 @@ noncomputable def subfieldExtendScalarsCocone :
         exact (subfieldExtendScalarsTransfer_app_comp_toPadicAlgCl X ℓ _ _ _ _).trans
           (Category.comp_id _).symm }
 
-/-- The diagram `k ↦ k_X` over the finite subextensions `k ⊇ G`, with the inclusions as
-transition maps. -/
-noncomputable abbrev padicSubfieldAboveRingObjDiagram (G : FiniteIntermediateField ℓ) :
-    PadicSubfieldAbove ℓ G ⥤ Sheaf (ProEt.topology X) Ab.{u + 1} where
-  obj k := padicSubfieldRingObj X ℓ k.obj
-  map g := padicSubfieldRingObjMap X ℓ (leOfHom ((ObjectProperty.ι _).map g))
-  map_id k := padicSubfieldRingObjMap_refl X ℓ k.obj
-  map_comp _ _ := (padicSubfieldRingObjMap_comp_padicSubfieldRingObjMap X ℓ _ _).symm
+/-- The components of `subfieldExtendScalarsCocone`. -/
+lemma subfieldExtendScalarsCocone_ι_app_f (k : PadicSubfieldAbove ℓ G) (n : ℤ) :
+    ((subfieldExtendScalarsCocone X ℓ hE hF Y).ι.app k).f n =
+      (subfieldExtendScalarsTransferToPadicAlgCl X ℓ (hE.trans k.property)
+        (hF.trans k.property)).app (Y.X n) := rfl
 
-/-- `ℚ̄_ℓ,X = colim_{k ⊇ G} k_X`, for the diagram `padicSubfieldAboveRingObjDiagram`. -/
-noncomputable def isColimitPadicSubfieldAboveRingObjDiagramCocone (G : FiniteIntermediateField ℓ) :
-    IsColimit (Mod.algCocone (padicSubfieldAboveRingObjDiagram X ℓ G)
-      (fun k ↦ padicSubfieldRingObjToPadicAlgCl X ℓ k.obj)
-      (fun g ↦ padicSubfieldRingObjMap_comp_toPadicAlgCl X ℓ
-        (leOfHom ((ObjectProperty.ι _).map g)))) :=
-  IsColimit.equivOfNatIsoOfIso (F := padicSubfieldAboveRingObjFunctor ℓ G X)
-    (G := padicSubfieldAboveRingObjDiagram X ℓ G)
-    (NatIso.ofComponents (fun k ↦ Iso.refl _) fun _ ↦ rfl) _ _
-    (Cocone.ext (Iso.refl _) fun _ ↦ rfl) (isColimitPadicSubfieldAboveRingObjCocone ℓ G X)
+/-- The diagram `k ↦ k_X ⊗_{F_X} Y^n` of `Mod.isColimitExtendScalarsColimitCocone` is the
+underlying diagram of `subfieldExtendScalarsDiagram` in degree `n`. -/
+noncomputable def subfieldExtendScalarsDiagramForgetIso (n : ℤ) :
+    Mod.extendScalarsColimitDiagram (padicSubfieldAboveRingObjFunctor ℓ G X)
+      (fun k ↦ padicSubfieldRingObjMap X ℓ (hF.trans k.property))
+      (fun g ↦ padicSubfieldRingObjMap_comp_padicSubfieldRingObjMap X ℓ _ _) (Y.X n) ≅
+    (subfieldExtendScalarsDiagram X ℓ hE hF Y ⋙ HomologicalComplex.eval _ _ n) ⋙ Mod.forget _ :=
+  NatIso.ofComponents (fun k ↦ Iso.refl _) fun g ↦ by
+    simp only [Iso.refl_hom, Category.comp_id, Category.id_comp]
+    exact (subfieldExtendScalarsTransfer_app_hom X ℓ _ _ _ _).symm
 
+
+
+
+/-- The vertex of `Mod.extendScalarsColimitCocone` is that of the underlying cocone of
+`subfieldExtendScalarsCocone` in degree `n`. (A separate definition keeps the kernel checks
+cheap.) -/
+noncomputable def subfieldExtendScalarsCoconeForgetPtIso (n : ℤ) :
+    (Mod.extendScalarsColimitCocone (padicSubfieldAboveRingObjFunctor ℓ G X)
+    (fun k ↦ padicSubfieldRingObjMap X ℓ (hF.trans k.property))
+    (fun g ↦ padicSubfieldRingObjMap_comp_padicSubfieldRingObjMap X ℓ _ _) (Y.X n)
+    (fun k ↦ padicSubfieldRingObjToPadicAlgCl X ℓ k.obj)
+    (fun g ↦ padicSubfieldRingObjMap_comp_toPadicAlgCl X ℓ (leOfHom ((ObjectProperty.ι _).map g)))
+    (padicSubfieldRingObjToPadicAlgCl X ℓ F)
+    (fun k ↦ padicSubfieldRingObjMap_comp_toPadicAlgCl X ℓ (hF.trans k.property))).pt ≅
+    ((Mod.forget _).mapCocone ((HomologicalComplex.eval _ _ n).mapCocone
+      (subfieldExtendScalarsCocone X ℓ hE hF Y))).pt :=
+  Iso.refl _
+
+/-- The isomorphism `subfieldExtendScalarsCoconeForgetPtIso` is the identity. -/
+lemma subfieldExtendScalarsCoconeForgetPtIso_hom (n : ℤ) :
+    (subfieldExtendScalarsCoconeForgetPtIso X ℓ hE hF Y n).hom = 𝟙 _ := rfl
+
+
+/-- The cocone `Mod.extendScalarsColimitCocone`, transported along
+`subfieldExtendScalarsDiagramForgetIso`, is the underlying cocone of `subfieldExtendScalarsCocone`
+in degree `n`. -/
+noncomputable def subfieldExtendScalarsCoconeForgetIso (n : ℤ) :
+    (Cocone.precompose (subfieldExtendScalarsDiagramForgetIso X ℓ hE hF Y n).inv).obj
+      (Mod.extendScalarsColimitCocone (padicSubfieldAboveRingObjFunctor ℓ G X)
+    (fun k ↦ padicSubfieldRingObjMap X ℓ (hF.trans k.property))
+    (fun g ↦ padicSubfieldRingObjMap_comp_padicSubfieldRingObjMap X ℓ _ _) (Y.X n)
+    (fun k ↦ padicSubfieldRingObjToPadicAlgCl X ℓ k.obj)
+    (fun g ↦ padicSubfieldRingObjMap_comp_toPadicAlgCl X ℓ (leOfHom ((ObjectProperty.ι _).map g)))
+    (padicSubfieldRingObjToPadicAlgCl X ℓ F)
+    (fun k ↦ padicSubfieldRingObjMap_comp_toPadicAlgCl X ℓ (hF.trans k.property))) ≅
+    ((Mod.forget _).mapCocone ((HomologicalComplex.eval _ _ n).mapCocone
+      (subfieldExtendScalarsCocone X ℓ hE hF Y))) :=
+  Cocone.ext (subfieldExtendScalarsCoconeForgetPtIso X ℓ hE hF Y n) fun k ↦ by
+    simp only [subfieldExtendScalarsCoconeForgetPtIso_hom, Category.comp_id,
+      Cocone.precompose_obj_ι, NatTrans.comp_app, subfieldExtendScalarsDiagramForgetIso,
+      NatIso.ofComponents_inv_app, Iso.refl_inv, Category.id_comp,
+      Mod.extendScalarsColimitCocone_ι_app, Functor.mapCocone_ι_app, HomologicalComplex.eval_map,
+      Mod.forget_map, subfieldExtendScalarsCocone_ι_app_f,
+      subfieldExtendScalarsTransferToPadicAlgCl_app_hom]
+    exact (Category.comp_id _).trans (Category.id_comp _)
+
+/-- **`Res_E(ℚ̄_ℓ,X ⊗_{F_X} Y) = colim_{k ⊇ G} Res_E(k_X ⊗_{F_X} Y)`** as complexes of
+`E_X`-modules. -/
+noncomputable def isColimitSubfieldExtendScalarsCocone :
+    IsColimit (subfieldExtendScalarsCocone X ℓ hE hF Y) :=
+  HomologicalComplex.isColimitOfEval _ _ fun n ↦ isColimitOfReflects (Mod.forget _)
+    (IsColimit.equivOfNatIsoOfIso (subfieldExtendScalarsDiagramForgetIso X ℓ hE hF Y n) _ _
+      (subfieldExtendScalarsCoconeForgetIso X ℓ hE hF Y n)
+      (Mod.isColimitExtendScalarsColimitCocone _ _ _ (Y.X n) _ _ _ _
+        (isColimitPadicSubfieldAboveRingObjCocone ℓ G X)))
 end Diagram
 
 end AlgebraicGeometry.ProEtale

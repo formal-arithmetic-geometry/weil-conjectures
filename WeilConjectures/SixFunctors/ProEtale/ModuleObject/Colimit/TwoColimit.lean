@@ -10,6 +10,8 @@ public import WeilConjectures.ConstructibleSheaf.ProEtaleModule.DerivedCategory
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.DerivedExtendScalars
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.ExtendScalarsConstructible
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.PadicAlgClFaithful
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.TwoColimitEssSurj
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.TwoColimitHomSurj
 
 /-!
 
@@ -199,15 +201,39 @@ variable [TopologicalSpace.NoetherianSpace X]
 /-- **(Obj)**: every bounded constructible `ℚ̄_ℓ,X`-complex is isomorphic to the extension of
 scalars `T^X_{E,Ω} K_E` of a bounded constructible `E_X`-complex `K_E` for some finite
 subextension `E ⊆ ℚ̄_ℓ` of `ℚ_ℓ`. See the module docstring. -/
-theorem constructibleCocone_essSurjObj : (constructibleCocone X ℓ).EssSurjObj :=
-  sorry
+theorem constructibleCocone_essSurjObj : (constructibleCocone X ℓ).EssSurjObj := fun K ↦ by
+  obtain ⟨E, K', hK', ⟨e⟩⟩ := exists_iso_derivedExtendScalarsToPadicAlgCl_obj X ℓ
+    (fun K hK L hL f ↦ exists_derivedExtendScalarsToPadicAlgCl_map_eq X ℓ K hK L hL f)
+    K.obj K.property
+  exact ⟨E, ⟨K', hK'⟩, ⟨(boundedConstructible _).fullyFaithfulι.preimageIso e⟩⟩
 
 /-- **(Hom), surjectivity**: every morphism `T^X_{E,Ω} K_E ⟶ T^X_{F,Ω} L_F` between extensions of
 scalars of bounded constructible complexes is the extension of scalars of a morphism
 `T^X_{E,H} K_E ⟶ T^X_{F,H} L_F` for some finite subextension `H ⊇ E, F`. See the module
 docstring. -/
-theorem constructibleCocone_homSurj : (constructibleCocone X ℓ).HomSurj :=
-  sorry
+theorem constructibleCocone_homSurj : (constructibleCocone X ℓ).HomSurj := by
+  intro E F K L f
+  have hiso {E F : FiniteIntermediateField ℓ} (h : E ≤ F) (K : PadicSubfieldConstructible X ℓ E) :
+      (((constructibleCocone X ℓ).iso h).hom.app K).hom =
+        (derivedExtendScalarsCompIso X ℓ h).hom.app K.obj :=
+    ((boundedConstructible _).ι.map_preimage _).trans (Category.id_comp _)
+  have hiso' {E F : FiniteIntermediateField ℓ} (h : E ≤ F) (K : PadicSubfieldConstructible X ℓ E) :
+      (((constructibleCocone X ℓ).iso h).inv.app K).hom =
+        (derivedExtendScalarsCompIso X ℓ h).inv.app K.obj :=
+    ((boundedConstructible _).ι.map_preimage _).trans (Category.comp_id _)
+  have hΦ {H : FiniteIntermediateField ℓ} {K L : PadicSubfieldConstructible X ℓ H} (g : K ⟶ L) :
+      (((constructibleCocone X ℓ).Φ H).map g).hom =
+        (derivedExtendScalarsToPadicAlgCl X ℓ H).map g.hom := rfl
+  obtain ⟨H, hE, hF, g, hg⟩ := exists_derivedExtendScalarsToPadicAlgCl_map_eq X ℓ
+    K.obj K.property L.obj L.property
+    (f.hom : (derivedExtendScalarsToPadicAlgCl X ℓ E).obj K.obj ⟶
+      (derivedExtendScalarsToPadicAlgCl X ℓ F).obj L.obj)
+  let g' : (constructibleExtendScalars X ℓ hE).obj K ⟶ (constructibleExtendScalars X ℓ hF).obj L :=
+    InducedCategory.homMk g
+  refine ⟨H, hE, hF, g', InducedCategory.hom_ext ?_⟩
+  refine hg.trans ?_
+  simp only [ObjectProperty.FullSubcategory.comp_hom, hiso, hiso', hΦ]
+  rfl
 
 /-- **(Hom), injectivity**: two morphisms of bounded constructible `H_X`-complexes with the same
 extension of scalars to `ℚ̄_ℓ,X` have the same extension of scalars to `H'_X` for some finite
