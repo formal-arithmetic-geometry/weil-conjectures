@@ -78,6 +78,8 @@ the restriction comparison, and the two summand formulas, then localize. -/
 -- automorphism changes the right-hand side without changing the left-hand side.
 -- The missing `ambientBoth`/`openBoth` and naturality hypotheses occur only in
 -- the downstream resolving/descent statements.
+-- In particular, the hypotheses permit replacing one component of `ambientModel`
+-- by a nontrivial automorphism while leaving every datum on the left unchanged.
 theorem openTensorProjection_mate_canonical
     (D : OpenTensorCochainData.{c, v, r} J R J' R' F G adj H sectionPull)
     (restriction : A.tensor ⋙ G.mapDerivedCategory ≅
