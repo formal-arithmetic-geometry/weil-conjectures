@@ -8,6 +8,8 @@ public import Sheaf.Paper.TowerClassReduction
 public import Sheaf.AlgebraicGeometry.ProEtaleInverseImage
 public import WeilConjectures.ConstructibleSheaf.Defs
 public import WeilConjectures.SixFunctors.ProEtale.Comparison.LowerStarAcyclic
+import Sheaf.Paper.TowerIntegralPullbackData
+import Sheaf.Paper.IntegralSitePullbackUnitsEndpointCanonical
 
 /-! # Units endpoint in the change-of-site pullback square
 
@@ -50,7 +52,13 @@ theorem integral_site_pullback_units_endpoint {X Y : Scheme.{u}} (f : X ⟶ Y)
         (upperStar AddCommGrpCat.{u + 1} f).map (cartierUnitsComparison Y) ≫ a =
       (comparisonUpperStar AddCommGrpCat.{u + 1} X).map
           (Scheme.upperStarGmSheafToGmSheaf f) ≫ cartierUnitsComparison X) := by
-  sorry
+  let a₀ := towerIntegral_unitsSheafPull f
+  have ha₀ : a = a₀ := by
+    apply ((upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} f).homEquiv _ _).injective
+    ext U x
+    exact (ha U x).trans (towerIntegral_unitsPull_adjoint f U x).symm
+  rw [ha₀]
+  exact integral_site_pullback_units_endpoint_canonical f
 
 end AlgebraicGeometry.ProEtale.SpTowerClasses
 attribute [instance high] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall

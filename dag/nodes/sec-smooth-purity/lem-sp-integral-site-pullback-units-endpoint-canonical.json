@@ -1,0 +1,111 @@
+{
+ "id": "lem-sp-integral-site-pullback-units-endpoint-canonical",
+ "kind": "statement",
+ "title": "Canonical units endpoint mate calculation",
+ "statement": "For a morphism f of schemes, the units endpoint equality holds for the canonical units map towerIntegral_unitsSheafPull f, whose adjoint is the chartwise pullback map unitsDirect f.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-classes.proof.md",
+  "place": "Paragraph (2), canonical choice of the units map by pullback along the first projection; expanded using Stacks Tag 00WX"
+ },
+ "stmt_deps": [
+  "def-sp-tower-integral-pullback-data",
+  "def-weil-proetale-inverse-image",
+  "def-weil-pbc-site-comparison-morphism",
+  "def-sfb-cartier-reduction-data"
+ ],
+ "proof": [
+  {
+   "text": "Transpose the endpoint equality through the comparison adjunction. Expand the canonical units map as the adjoint of unitsDirect, expand cartierUnitsComparison and upperStarGmSheafToGmSheaf by their adjunction definitions, and use the conjugate-adjunction counit identity for comparisonUpperStarCompUpperStarIso. The two resulting maps are both the pullback of a unit along the first projection on each etale chart.",
+   "uses": [
+    "def-sp-tower-integral-pullback-data",
+    "def-weil-proetale-inverse-image",
+    "def-weil-pbc-site-comparison-morphism",
+    "def-sfb-cartier-reduction-data"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sp-tower-integral-pullback-data",
+  "def-weil-proetale-inverse-image",
+  "def-weil-pbc-site-comparison-morphism",
+  "def-sfb-cartier-reduction-data"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-classes.proof.md",
+  "place": "Paragraph (2), canonical units mate calculation"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "conjugateEquiv_counit|conjugateIsoEquiv_symm_apply_inv",
+   "results": "Mathlib Adjunction/Mates supplies the conjugate-adjunction counit identity used after unfolding the comparison square.",
+   "date": "2026-10-28",
+   "verdict": "Use the generic mate identity."
+  },
+  {
+   "tool": "loogle",
+   "query": "conjugateIsoEquiv_symm_apply_inv",
+   "results": "The declaration is available in Mathlib and rewrites the inverse comparison mate.",
+   "date": "2026-10-28",
+   "verdict": "Match confirmed by local source."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "comparison upper star pullback units endpoint mate",
+   "results": "No combined endpoint theorem; use the canonical map and generic adjunction API.",
+   "date": "2026-10-28",
+   "verdict": "No shorter existing theorem found."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralSitePullbackUnitsEndpoint",
+  "date": "2026-10-28",
+  "group": "K7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sp-integral-site-pullback-units-endpoint",
+   "place": "Strictly simpler canonical specialization used by the arbitrary-map proof",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sp-tower-geometric",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.IntegralSitePullbackUnitsEndpointCanonical",
+  "file": "lean/Sheaf/Paper/IntegralSitePullbackUnitsEndpointCanonical.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.SpTowerClasses.integral_site_pullback_units_endpoint_canonical",
+  "statement": "theorem integral_site_pullback_units_endpoint_canonical {X Y : Scheme.{u}} (f : X ⟶ Y) :\n    let κ := comparisonUpperStarCompUpperStarIso AddCommGrpCat.{u + 1} f\n    (κ.inv.app Y.gmSheaf ≫\n        (upperStar AddCommGrpCat.{u + 1} f).map (cartierUnitsComparison Y) ≫\n        towerIntegral_unitsSheafPull f =\n      (comparisonUpperStar AddCommGrpCat.{u + 1} X).map\n          (Scheme.upperStarGmSheafToGmSheaf f) ≫ cartierUnitsComparison X)",
+  "branch": "sheaf-dag",
+  "by": "K7",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K7",
+  "result": "pass",
+  "landing": "20261027T234043-L-4175719",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K7",
+  "result": "pass",
+  "landing": "20261027T234043-L-4175719",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
