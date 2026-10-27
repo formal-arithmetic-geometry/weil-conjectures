@@ -7,6 +7,10 @@ module
 
 public import Sheaf.SixFunctors.CoefQbarVerdierFunctor
 public import Sheaf.Paper.IntrinsicQbarCategory
+import Sheaf.SixFunctors.CoefQbarVerdierBiduality
+import Sheaf.SixFunctors.CoefQbarVerdierExactness
+import Sheaf.SixFunctors.CoefQbarVerdierScalars
+import Sheaf.SixFunctors.CoefQbarVerdierComparison
 
 /-! # Exact linear biduality for the constructed common-stage dual
 
@@ -33,6 +37,9 @@ open AlgebraicallyClosedCoefficients (Index Coefficient)
 open GeneralAlgebraicallyClosedCoefficients (Stage inclusion transition)
 open CategoryTheory.Pretriangulated CategoryTheory.Pretriangulated.Opposite
 
+set_option maxHeartbeats 800000 in
+-- Assembling the components elaborates the transported stage-system and scalar structures.
+-- The default budget is exhausted during type comparison; this proof compiles in 22 seconds.
 attribute [-instance] intrinsicQbarStageLocalizedLinear intrinsicQbarStageLinear in
 /-- The constructed representative functor is exact and linear, and the finite
 biduality isomorphisms descend with their prescribed comparisons.
@@ -96,6 +103,11 @@ theorem descended_duality_exists (F : Finite D l hl Ω X)
     (∀ E : Index l Ω,
       SfClassEvaluationCompatible (inclusion (Y := X) E) (F.datum E).dual
         (descendedDual D l hl Ω X F hF) (F.datum E).bidual.hom δ.hom
-        (descendedComparison D l hl Ω X F hF E)) := by sorry
+        (descendedComparison D l hl Ω X F hF E)) := by
+  obtain ⟨δ, hδ⟩ := descended_biduality D l hl Ω X F hF
+  obtain ⟨s, hs⟩ := descended_exactness D l hl Ω X F hF
+  obtain ⟨hΩ, hE⟩ := descended_scalar_formulas D l hl Ω X F hF
+  have hcomp := descended_comparison_formula D l hl Ω X F hF
+  exact ⟨δ, ⟨s, hs⟩, hΩ, hE, hcomp, hδ⟩
 
 end WeilConjectures.CoefQbarVerdier

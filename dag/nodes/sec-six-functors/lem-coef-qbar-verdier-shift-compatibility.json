@@ -1,0 +1,129 @@
+{
+ "id": "lem-coef-qbar-verdier-shift-compatibility",
+ "kind": "lemma",
+ "title": "Shift coherence for the explicit common-stage dual",
+ "statement": "Fix a finite-field datum D with algebraically closed field k of characteristic p, a prime l different from p, an algebraic closure Ω of Q_l in an independent universe, and a separated, quasi-compact, locally finite-type k-scheme X. Use the actual rational finite stages C_E, their scalar extensions T_h, and the literal common-stage pair category P of [def-weil-algebraically-closed-coefficients]. Let F be Finite data and let hF be FiniteCoherent as defined in [def-sf-common-stage-verdier-data]; thus d_E=(F.datum E).dual has the rational Verdier structures and normalized beta comparisons of [def-sf-rational-verdier-data]. Let V=descendedDual F hF and r_E=descendedComparison F hF E be the fixed constructions of [lem-coef-qbar-verdier-representative-functor]. There exists an integer CommShift structure s on V such that for every finite stage E there is an exact integer CommShift structure t_E on d_E for which r_E commutes with shifts. The inclusion and its opposite use the prescribed integer shift comparisons. This conclusion contains only shift coherence and finite-stage exactness, not preservation of arbitrary pair-category triangles.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-biduality-general/sk-prop-sf-biduality-general.proof.md",
+  "place": "Final coefficient-transports sentence: thm-coef-qbar-verdier; shift coherence for the explicit common-stage dual"
+ },
+ "stmt_deps": [
+  "def-sf-common-stage-verdier-data",
+  "def-sf-rational-verdier-data",
+  "def-weil-algebraically-closed-coefficients",
+  "lem-coef-qbar-verdier-representative-functor"
+ ],
+ "proof": [
+  {
+   "text": "Use the internal-Hom description and the normalized rational Verdier datum to choose each finite shift comparison as the transpose of the tensor shift comparison. Its zero and addition identities are the tensor-Hom shift identities; the finite rational exactness theorem applies to this canonical structure.",
+   "uses": [
+    "def-sf-rational-verdier-data",
+    "lem-coef-rational-operations"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The normalized beta comparison rationalizes the actual integral evaluation transpose. Compare the two ways around its shift square after evaluation: the normalized extension evaluation equation, exact scalar extension, and tensor-Hom shift identities identify them. The transpose bijection forces equality of the original comparisons.",
+   "uses": [
+    "lem-coef-rational-operations",
+    "def-sf-common-stage-verdier-data"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "At a literal pair (E,K), include the finite shift isomorphism and the normalized inclusion shift maps. For an arbitrary common-stage arrow, the beta shift square proves naturality after expanding its representative dual map. The zero and addition equations hold objectwise by their finite counterparts, yielding the CommShift structure s. The identity-component r_E then commutes with shifts by this same component formula.",
+   "uses": [
+    "lem-coef-qbar-verdier-representative-functor",
+    "def-weil-algebraically-closed-coefficients"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sf-rational-verdier-data",
+  "lem-coef-rational-operations",
+  "def-sf-common-stage-verdier-data",
+  "lem-coef-qbar-verdier-representative-functor",
+  "def-weil-algebraically-closed-coefficients"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-biduality-general/sk-prop-sf-biduality-general.proof.md",
+  "place": "Formal finite-representative expansion; shift coherence for the explicit common-stage dual"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Descent of natural shift comparisons compatible with a coherent family of contravariant finite-stage functors to the directed pair category",
+   "results": "{\"n_hits\": 8, \"top\": [\"CategoryTheory.Functor.ShiftSequence.induced_shiftMap\", \"CategoryTheory.Functor.ShiftSequence.induced\", \"CategoryTheory.Functor.ShiftSequence.induced.shiftIso\", \"CategoryTheory.Functor.ShiftSequence.induced_shiftMap_assoc\", \"CategoryTheory.shiftFunctor_of_induced\", \"CategoryTheory.Functor.ShiftSequence.induced.shiftIso_hom_app_obj\", \"CategoryTheory.Functor.IsLocallyDirected\", \"CategoryTheory.Functor.ShiftSequence.induced_shiftIso_hom_app_obj\"], \"note\": \"\", \"digest\": \"de881ab37bdfd21b\"}",
+   "date": "2026-10-28",
+   "verdict": "Generic categorical APIs only; no theorem about the specified normalized common-stage Verdier duality. The proof uses the existing project quotient and finite-data interfaces."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatTrans.CommShift",
+   "results": "{\"n_hits\": 12, \"top\": [\"CategoryTheory.NatTrans.CommShift.id\", \"CategoryTheory.NatTrans.CommShift.isoRefl_hom\", \"CategoryTheory.NatTrans.CommShift\", \"CategoryTheory.Functor.CommShift.ofIso_compatibility\", \"CategoryTheory.NatTrans.CommShift.of_core\", \"CategoryTheory.NatTrans.CommShift.leftUnitor\", \"CategoryTheory.NatTrans.CommShift.rightUnitor\", \"CategoryTheory.NatTrans.CommShift.of_iso_inv\"], \"note\": \"\", \"digest\": \"90520e9555bd11f4\"}",
+   "date": "2026-10-28",
+   "verdict": "Generic categorical APIs only; no theorem about the specified normalized common-stage Verdier duality. The proof uses the existing project quotient and finite-data interfaces."
+  },
+  {
+   "tool": "grep",
+   "query": "CommShift.*(descend|StageSystem)|beta.*CommShift",
+   "results": "{\"n_hits\": 0, \"top\": [], \"note\": \"\", \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-28",
+   "verdict": "Generic categorical APIs only; no theorem about the specified normalized common-stage Verdier duality. The proof uses the existing project quotient and finite-data interfaces."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.CoefQbarVerdierBidualityDescent",
+  "date": "2026-10-28",
+  "group": "Q2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-coef-qbar-verdier",
+   "place": "Coefficient transport: descend rational Verdier duality to the algebraically closed common-stage category, shift coherence for the explicit common-stage dual",
+   "via": [
+    "lem-coef-qbar-verdier-biduality-equations",
+    "lem-coef-qbar-verdier-core-descent"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.CoefQbarVerdierShift",
+  "file": "lean/Sheaf/SixFunctors/CoefQbarVerdierShift.lean",
+  "declaration": "WeilConjectures.CoefQbarVerdier.descended_shift_compatibility",
+  "statement": "theorem descended_shift_compatibility (F : Finite D l hl Ω X)\n    (hF : FiniteCoherent D l hl Ω X F) :\n    ∃ s : (descendedDual D l hl Ω X F hF).CommShift ℤ,\n      letI := s\n      ∀ E : AlgebraicallyClosedCoefficients.Index l Ω,\n        ∃ t : (F.datum E).dual.CommShift ℤ,\n          letI := t\n          (F.datum E).dual.IsTriangulated ∧\n          let J := GeneralAlgebraicallyClosedCoefficients.inclusion (Y := X) E\n          let jshift : J.CommShift ℤ :=\n            GeneralAlgebraicallyClosedCoefficients.inclusionCommShift E\n          let oshift : J.op.CommShift ℤ :=\n            @Pretriangulated.Opposite.commShiftFunctorOpInt _ _ _ _ _ _ J jshift\n          let cA : ((F.datum E).dual ⋙ J).CommShift ℤ :=\n            @Functor.CommShift.comp _ _ _ _ _ _ (F.datum E).dual J ℤ _ _ _ _ t jshift\n          let cB : (J.op ⋙ descendedDual D l hl Ω X F hF).CommShift ℤ :=\n            @Functor.CommShift.comp _ _ _ _ _ _ J.op\n              (descendedDual D l hl Ω X F hF) ℤ _ _ _ _ oshift s\n          @NatTrans.CommShift _ _ _ _ _ _\n            (descendedComparison D l hl Ω X F hF E).hom ℤ _ _ _ cA cB",
+  "branch": "sheaf-dag",
+  "by": "Q2",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q2",
+  "result": "pass",
+  "landing": "20261027T234149-L-19173",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q2",
+  "result": "pass",
+  "landing": "20261027T234149-L-19173",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

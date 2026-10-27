@@ -1,0 +1,124 @@
+{
+ "id": "lem-coef-qbar-verdier-exactness-component",
+ "kind": "lemma",
+ "title": "Exactness of the explicit common-stage dual",
+ "statement": "Fix a finite-field datum D with algebraically closed field k of characteristic p, a prime l different from p, an algebraic closure Ω of Q_l in an independent universe, and a separated, quasi-compact, locally finite-type k-scheme X. Use the actual rational finite stages C_E, their scalar extensions T_h, and the literal common-stage pair category P of [def-weil-algebraically-closed-coefficients]. Let F be Finite data and let hF be FiniteCoherent as defined in [def-sf-common-stage-verdier-data]; thus d_E=(F.datum E).dual has the rational Verdier structures and normalized beta comparisons of [def-sf-rational-verdier-data]. Let V=descendedDual F hF and r_E=descendedComparison F hF E be the fixed constructions of [lem-coef-qbar-verdier-representative-functor]. There exists an integer CommShift structure s on V such that its map on every distinguished triangle in Pᵒᵖ, with connecting arrow followed by s.commShiftIso(1), is distinguished in P.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-biduality-general/sk-prop-sf-biduality-general.proof.md",
+  "place": "Final coefficient-transports sentence: thm-coef-qbar-verdier; exactness of the explicit common-stage dual"
+ },
+ "stmt_deps": [
+  "def-sf-common-stage-verdier-data",
+  "def-sf-rational-verdier-data",
+  "def-weil-algebraically-closed-coefficients",
+  "lem-coef-qbar-verdier-representative-functor"
+ ],
+ "proof": [
+  {
+   "text": "Take the descended shift structure and the compatible exact finite structures supplied by the shift-coherence lemma.",
+   "uses": [
+    "lem-coef-qbar-verdier-shift-compatibility"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply the common-stage distinguished-triangle criterion to the unopposite triangle. The Mathlib triangleOpEquivalence counit, its image of the finite presentation isomorphism, and mapTriangleOpCompTriangleOpEquivalenceFunctorApp exhibit the original opposite triangle as an included finite opposite distinguished triangle.",
+   "uses": [
+    "def-weil-algebraically-closed-coefficients"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the finite exact dual and then its exact inclusion. Map the presentation isomorphism by V.mapTriangle, use mapTriangleCompIso on both sides, and use mapTriangleIso of the shift-compatible r_E between them. Isomorphism closure gives the displayed distinguished image.",
+   "uses": [
+    "lem-coef-qbar-verdier-shift-compatibility",
+    "def-weil-algebraically-closed-coefficients"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-qbar-verdier-shift-compatibility",
+  "def-weil-algebraically-closed-coefficients"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-biduality-general/sk-prop-sf-biduality-general.proof.md",
+  "place": "Formal finite-representative expansion; exactness of the explicit common-stage dual"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Descent of natural shift comparisons compatible with a coherent family of contravariant finite-stage functors to the directed pair category",
+   "results": "{\"n_hits\": 8, \"top\": [\"CategoryTheory.Functor.ShiftSequence.induced_shiftMap\", \"CategoryTheory.Functor.ShiftSequence.induced\", \"CategoryTheory.Functor.ShiftSequence.induced.shiftIso\", \"CategoryTheory.Functor.ShiftSequence.induced_shiftMap_assoc\", \"CategoryTheory.shiftFunctor_of_induced\", \"CategoryTheory.Functor.ShiftSequence.induced.shiftIso_hom_app_obj\", \"CategoryTheory.Functor.IsLocallyDirected\", \"CategoryTheory.Functor.ShiftSequence.induced_shiftIso_hom_app_obj\"], \"note\": \"\", \"digest\": \"de881ab37bdfd21b\"}",
+   "date": "2026-10-28",
+   "verdict": "Generic categorical APIs only; no theorem about the specified normalized common-stage Verdier duality. The proof uses the existing project quotient and finite-data interfaces."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatTrans.CommShift",
+   "results": "{\"n_hits\": 12, \"top\": [\"CategoryTheory.NatTrans.CommShift.id\", \"CategoryTheory.NatTrans.CommShift.isoRefl_hom\", \"CategoryTheory.NatTrans.CommShift\", \"CategoryTheory.Functor.CommShift.ofIso_compatibility\", \"CategoryTheory.NatTrans.CommShift.of_core\", \"CategoryTheory.NatTrans.CommShift.leftUnitor\", \"CategoryTheory.NatTrans.CommShift.rightUnitor\", \"CategoryTheory.NatTrans.CommShift.of_iso_inv\"], \"note\": \"\", \"digest\": \"90520e9555bd11f4\"}",
+   "date": "2026-10-28",
+   "verdict": "Generic categorical APIs only; no theorem about the specified normalized common-stage Verdier duality. The proof uses the existing project quotient and finite-data interfaces."
+  },
+  {
+   "tool": "grep",
+   "query": "CommShift.*(descend|StageSystem)|beta.*CommShift",
+   "results": "{\"n_hits\": 0, \"top\": [], \"note\": \"\", \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-28",
+   "verdict": "Generic categorical APIs only; no theorem about the specified normalized common-stage Verdier duality. The proof uses the existing project quotient and finite-data interfaces."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.CoefQbarVerdierBidualityDescent",
+  "date": "2026-10-28",
+  "group": "Q2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-coef-qbar-verdier",
+   "place": "Coefficient transport: descend rational Verdier duality to the algebraically closed common-stage category, exactness of the explicit common-stage dual",
+   "via": [
+    "lem-coef-qbar-verdier-biduality-equations",
+    "lem-coef-qbar-verdier-core-descent"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.CoefQbarVerdierExactness",
+  "file": "lean/Sheaf/SixFunctors/CoefQbarVerdierExactness.lean",
+  "declaration": "WeilConjectures.CoefQbarVerdier.descended_exactness",
+  "statement": "theorem descended_exactness (F : Finite D l hl Ω X)\n    (hF : FiniteCoherent D l hl Ω X F) :\n    ∃ s : (descendedDual D l hl Ω X F hF).CommShift ℤ,\n      ∀ T : Triangle (generalAlgebraicallyClosedConstructibleCategory l Ω X)ᵒᵖ,\n        T ∈ distTriang (generalAlgebraicallyClosedConstructibleCategory l Ω X)ᵒᵖ →\n        Triangle.mk ((descendedDual D l hl Ω X F hF).map T.mor₁)\n          ((descendedDual D l hl Ω X F hF).map T.mor₂)\n          ((descendedDual D l hl Ω X F hF).map T.mor₃ ≫\n            (s.commShiftIso (1 : ℤ)).hom.app T.obj₁) ∈\n          distTriang (generalAlgebraicallyClosedConstructibleCategory l Ω X)",
+  "branch": "sheaf-dag",
+  "by": "Q2",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q2",
+  "result": "pass",
+  "landing": "20261027T234149-L-19173",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q2",
+  "result": "pass",
+  "landing": "20261027T234149-L-19173",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -15,42 +15,44 @@
  ],
  "proof": [
   {
-   "text": "At a field containing a representative and the scalar, finite linearity and beta naturality give the scalar formula. The intrinsic quotient scalar formula gives Omega-linearity and its finite coefficient normalization. The representative map formula also gives the inclusion-transition square.",
+   "text": "Take the natural biduality isomorphism with its finite compatibility from the proved biduality component.",
    "uses": [
-    "thm-coef-rational-verdier",
-    "def-weil-pbc-qbar-category",
-    "lem-coef-qbar-verdier-representative-functor"
+    "lem-coef-qbar-verdier-biduality-component"
    ],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "Include the finite biduality components and transport through the canonical finite comparisons twice. Their scalar squares make them natural on common-stage representatives. Including the finite inverse gives inverse components, hence a natural isomorphism with exactly the finite compatibility asserted.",
+   "text": "Use the proved scalar formulas for Omega-linearity and the finite normalization.",
    "uses": [
-    "thm-coef-rational-verdier"
+    "lem-coef-qbar-verdier-scalars-component"
    ],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "Descend finite shift comparisons using uniqueness of their evaluation transposes. Every distinguished triangle has a finite representative, where exactness follows from rational duality. The consumer obtains anti-equivalence directly from delta and its opposite using the Mathlib quasi-inverse constructor, so no inverse-Hom-set descent is an obligation here.",
+   "text": "Use the proved transition-comparison square, including identity extensions.",
    "uses": [
-    "def-weil-algebraically-closed-coefficients",
-    "lem-coef-rational-operations",
-    "thm-coef-rational-verdier"
+    "lem-coef-qbar-verdier-comparison-component"
    ],
-   "elementary": false
+   "elementary": true
+  },
+  {
+   "text": "Use exactness derived from shift coherence and finite distinguished-triangle representatives, and assemble the existential witness and conjunctions without changing any statement.",
+   "uses": [
+    "lem-coef-qbar-verdier-exactness-component"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "thm-coef-rational-verdier",
-  "def-weil-pbc-qbar-category",
-  "lem-coef-qbar-verdier-representative-functor",
-  "def-weil-algebraically-closed-coefficients",
-  "lem-coef-rational-operations"
+  "lem-coef-qbar-verdier-biduality-component",
+  "lem-coef-qbar-verdier-scalars-component",
+  "lem-coef-qbar-verdier-comparison-component",
+  "lem-coef-qbar-verdier-exactness-component"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-biduality-general/sk-prop-sf-biduality-general.proof.md",
-  "place": "Formal expansion of the corresponding steps of lem-coef-qbar-verdier-core-descent"
+  "place": "Q2: explicit proofs of scalar, transition and biduality equations; exactness reduced to strictly smaller shift coherence."
  },
  "mathlib_searches": [
   {
@@ -122,11 +124,11 @@
  "reviewed_proof": {
   "date": "2026-10-27",
   "by": "L",
-  "reviewer": "C-fe296",
-  "group": "U4",
-  "result": "fix",
-  "landing": "20261027T210253-L-1681976",
+  "reviewer": "COMPILER",
+  "group": "Q2",
+  "result": "pass",
+  "landing": "20261027T234149-L-19173",
   "kind": "interface",
-  "note": "independent cc review: fe2967529cdd delivered Lean vs 73b3 delivery (byte-identical, coord text only differs); node JSONs vs 73b3 fixes (stmt_deps dropped again); delivered set + 2 direct importers compiled vs current build bd441cc55e6 (all OK)"
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
