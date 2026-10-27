@@ -9,6 +9,7 @@ public import Sheaf.CategoryTheory.CoefficientSequenceGlobalSections
 public import Sheaf.Paper.SemilinearSystemModels
 public import Sheaf.CategoryTheory.ClosedScalarHomComparison
 public import Sheaf.Paper.CoefficientHomZeroClass
+import Sheaf.CategoryTheory.ScalarHomZeroCompatibilityResolutionDescent
 
 /-! # Degree-zero normalization of the scalar internal-Hom adjunction
 
@@ -111,6 +112,10 @@ theorem scalarHomZeroCompatibility
         (ξR.inv.app ((internalHom.{c, v, r} J R).obj (op P, M))
           ((coefficientHomZeroEquiv.{r, c, v} J R P M).symm h))) =
       (σ.adjunction.homEquiv P N).symm (h ≫ k) := by
-  sorry
+  apply scalarHomZeroCompatibility_resolution_descent J R S φ σ a b am bm ν hm pR pS oR oS
+    hoR hoS ξR ξS hξR hξS γ hγ
+  intro L₀ M₀ N₀ k₀ h₀
+  exact scalarHomZeroCompatibility_onQ J R S φ σ a b am bm ν hm pR pS oR oS hoR hoS ξR ξS
+    hξR hξS γ hγ L₀ M₀ N₀ k₀ h₀
 
 end SheafOfModules.ScalarHomZero
