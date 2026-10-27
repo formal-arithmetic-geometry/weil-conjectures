@@ -29,6 +29,14 @@ open CategoryTheory
 namespace WeilConjectures
 
 /-- The forward form of the open tensor/pullback square.
+
+STATEMENT-DISPUTED: As written, this theorem quantifies over arbitrary `mu` and `mu'`
+with no compatibility hypothesis. Take all four categories to be `SingleObj (Multiplicative
+Bool)`, all four functors and comparison isomorphisms to be identities, and take `TA` and
+`TB` to be the first projection functor from the product category (likewise `TA'` and
+`TB'`). Then the displayed equation reduces to `mu = mu'`; choosing the two distinct
+endomorphisms `false` and `true` gives a counterexample. A valid forward transport lemma
+needs the canonical compatibility equation (or hypotheses that imply it).
 Source: thm-sf-pf-field.proof.md, Compatibility
 (blueprint: lem-sf-common-projection-open-pullback-tensor-forward).
 

@@ -20394,3 +20394,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 23:42 L: merged deliver/R4/Sheaf.Paper.AdicIntegralReindexingDescent (stage 3; reviewer PASS; first push; landing 20261027T234256-L-85098 (interface); batch 20261027T233735; modules 3; new nodes 2)
 - 23:42 L: merged deliver/R4/Sheaf.Paper.PodReindexingTensorSubstitution (stage 3; reviewer PASS; first push; landing 20261027T234257-L-85813 (interface); batch 20261027T233735; modules 2; new nodes 1)
 - 23:42 L: merged deliver/R4/Sheaf.Paper.ScalarTowerPullbackStrictSquare (stage 3; reviewer PASS; first push; landing 20261027T234258-L-86280 (interface); batch 20261027T233735; modules 1; new nodes 0)
+- 23:42 L: merged deliver/S1/Sheaf.Paper.CommonProjectionOpenPullbackTensorForward (stage 3; reviewer PASS; first push; landing 20261027T234259-L-86676 (proof); batch 20261027T233735; modules 1; new nodes 0)
