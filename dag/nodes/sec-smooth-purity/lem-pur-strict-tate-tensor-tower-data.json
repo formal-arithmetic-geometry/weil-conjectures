@@ -1,0 +1,105 @@
+{
+ "id": "lem-pur-strict-tate-tensor-tower-data",
+ "kind": "statement",
+ "title": "Strict ordinary Tate quotient tower data",
+ "statement": "For a Noetherian scheme T, a prime ell invertible on T, and d natural, there exist an AdicTower M for datum ell, isomorphisms from M.level n to the single complex in degree -2d of quotientLine T ell n d, and an equality M.tower = strictDerivedTower T ell d.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-purity-transport/_section.md",
+  "place": "Steps 2--3: strict ordinary quotient tower lift"
+ },
+ "stmt_deps": [
+  "def-pur-condensed-tate-integral-tower-data",
+  "def-weil-pbc-adic-coefficient-datum",
+  "def-weil-pbc-bounded-constructible-tower"
+ ],
+ "proof": [
+  {
+   "text": "The locally free integral root tensor is K-flat in its single degree. Ordinary quotient balancing therefore constructs the quotient-linear levels and their normalization maps; the balancing identities give the transition and cocycle fields, including equal indices and d = 0. Taking the strict quotient tower and the identity level comparisons gives the required data.",
+   "uses": [
+    "def-pur-condensed-tate-integral-tower-data",
+    "def-pc-kflat-complex",
+    "lem-pur-derived-change-of-rings"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pur-condensed-tate-integral-tower-data",
+  "def-pc-kflat-complex",
+  "lem-pur-derived-change-of-rings"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "C3",
+  "date": "2026-10-28",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-purity-transport/_section.md",
+  "place": "Steps 2--3: strict ordinary quotient tower lift"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "existence of an AdicTower with single-complex quotient levels and strict tower equality",
+   "results": "Only generic adic-completion and inverse-limit declarations; no project theorem constructs this strict quotient tower.",
+   "date": "2026-10-28",
+   "verdict": "No matching statement."
+  },
+  {
+   "tool": "grep",
+   "query": "strictTateTensorTower|AdicTower.*singleFunctor|pbcTowerEvaluation.*singleFunctor",
+   "results": "No duplicate declaration in lean/WeilConjectures or lean/Sheaf.",
+   "date": "2026-10-28",
+   "verdict": "No matching statement."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.StrictTateTensorTowerLift",
+  "group": "C3",
+  "date": "2026-10-28"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-purity-transport",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.StrictTateTensorTowerLiftData",
+  "file": "lean/Sheaf/Paper/StrictTateTensorTowerLiftData.lean",
+  "declaration": "AlgebraicGeometry.Scheme.PurityIntegralTower.strictTateTensorTower_data",
+  "statement": "theorem strictTateTensorTower_data (T : Scheme.{u}) [IsNoetherian T] (ell : ℕ) [Fact ell.Prime] (hT : IsUnit (ell : Γ(T, ⊤))) (d : ℕ) : ∃ (M : AdicTower T (datum.{u} ell)) (q : ∀ n : ℕ, M.level n ≅ (_root_.DerivedCategory.singleFunctor _ (-(2 * (d : ℤ)))).obj (quotientLine T ell n d)), M.tower = strictDerivedTower T ell d",
+  "branch": "sheaf-dag",
+  "by": "C3",
+  "date": "2026-10-28"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sk-thm-purity-transport",
+   "place": "Steps 2--3: strict quotient tower construction and exact evaluation comparison",
+   "via": [
+    "lem-pur-strict-tate-tensor-tower-lift"
+   ]
+  },
+  "same_as": []
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C3",
+  "result": "pass",
+  "landing": "20261027T205824-L-1621301",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C3",
+  "result": "pass",
+  "landing": "20261027T205824-L-1621301",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

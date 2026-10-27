@@ -5,6 +5,8 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import Sheaf.Paper.CondensedTateIntegralTowerData
+import Sheaf.Paper.StrictTateTensorTowerLiftData
+import Sheaf.Paper.StrictTateTensorTowerLiftEvaluation
 
 /-! Derived levels of the strict ordinary quotient tower.
 
@@ -64,6 +66,9 @@ theorem strictTateTensorTower_lift
           (Functor.mapDerivedCategorySingleFunctor
             ((CategoryTheory.evaluation ℕᵒᵖ
               (pbcModules T (pbcAdicCompletion T (datum.{u} ell)))).obj (op n))
-            (-(2 * (d : ℤ)))).inv.app (strictTower T ell d) := by sorry
+            (-(2 * (d : ℤ)))).inv.app (strictTower T ell d) := by
+  obtain ⟨M, q, h⟩ := strictTateTensorTower_data T ell hT d
+  refine ⟨M, q, h, ?_⟩
+  exact strictTateTensorTower_evaluation T ell hT d M q h
 
 end AlgebraicGeometry.Scheme.PurityIntegralTower
