@@ -185,24 +185,6 @@ instance integralResidue_finite [FiniteDimensional ℚ_[ℓ] E] : Finite (integr
     isCompact_iff_compactSpace.mp (hball ▸ isCompact_closedBall 0 1)
   exact finite_of_compact_of_discrete
 
-/-- The integral coefficients `𝒪̲_E` of a finite normed extension `E` of `ℚ_ℓ`, the closed
-unit ball of `E`, are a coefficient ring of Deligne's finiteness theorems. -/
-instance isFinitenessCoefficient_integralCoeff [FiniteDimensional ℚ_[ℓ] E] :
-    IsFinitenessCoefficient ℓ (integralCoeff.{u} ℓ E) :=
-  .unitBall E (continuousIntegers ℓ E) fun x ↦ by
-    change ‖x‖₊ ≤ 1 ↔ ‖x‖ ≤ 1
-    rw [← NNReal.coe_le_coe, NNReal.coe_one, coe_nnnorm]
-
-/-- The integral residue ring `𝒪_E / ℓ` of a finite normed extension `E` of `ℚ_ℓ` is finite,
-discrete and killed by `ℓ`, so its condensed ring is a coefficient ring of Deligne's finiteness
-theorems. -/
-instance isFinitenessCoefficient_integralResidue [FiniteDimensional ℚ_[ℓ] E] :
-    IsFinitenessCoefficient ℓ (Profinite.continuousMapRingObj.{u} (integralResidue ℓ E)) :=
-  .torsion (integralResidue ℓ E) 1 (by
-    rw [pow_one, ← map_natCast (Ideal.Quotient.mk (Ideal.span {(ℓ : continuousIntegers ℓ E)})),
-      Ideal.Quotient.eq_zero_iff_mem]
-    exact Ideal.mem_span_singleton_self _)
-
 /-- Continuous functions lift through the integral residue quotient: the discrete
 quotient has a continuous set-theoretic section. This holds without compactness.
 Source: Bhatt--Scholze, Section 6.8, finite coefficient reduction
