@@ -1,0 +1,108 @@
+{
+ "id": "def-pur-vector-trace-scalar-map-data",
+ "kind": "definition",
+ "title": "Canonical projective, affine and vector scalar comparison maps",
+ "statement": "Let A and B be finite commutative rings, φ:A→B, N>0 a common annihilator, and S a scheme on which N is invertible; assume S Noetherian where compact supports or traces require it. With base, line and unit of [def-pur-vector-trace-scalar-coefficient-data], define pullBase(f,d) by inverse scalar/pullback followed by pullback of base(d). Define projective as the actual proper scalar mate on the shifted Tate line followed by pushforward of line, and sum as the biproduct lift of Q(fst)≫line and Q(snd)≫unit. Define affineCoefficient by the two specified affine coefficient-descent identifications and pullBase on the coordinate projection; affineTrace as the inverse affine compact comparison followed by the actual coordinate-tower counit; affine as the chosen compact-support scalar map followed by lower-shriek of affineCoefficient. For a locally free rank-d module sheaf F, define vector by the chosen compact-support scalar map for its bundle projection followed by lower-shriek of pullBase. These are exactly the seven existing canonical composites, moved without changing their terms or signatures; no scalar-compatibility equation is asserted.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/cor-pur-vector-bundle-purity.proof.md",
+  "place": "Paragraph 2: coefficient compatibility, projective Kummer normalization, affine induction and bundle-frame descent."
+ },
+ "stmt_deps": [
+  "def-pur-vector-trace-scalar-coefficient-data",
+  "lem-pur-derived-change-of-rings",
+  "lem-asd-ordinary-finite-p1-adjunction",
+  "def-amb-p1-trace",
+  "lem-amb-affine-space-top-trace",
+  "lem-pur-etale-compact-scalar-coherence",
+  "def-amb-vector-integration",
+  "def-pur-etale-scalar-mate",
+  "def-amb-affine-trace-construction",
+  "def-amb-vector-integration-charts"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "Tate.*scalar|scalar.*Tate",
+   "results": "7 hits: Mathlib/Algebra/Group/Action/Defs.lean, Mathlib/Tactic/Algebra/Basic.lean, Mathlib/Tactic/Algebra/Basic.lean, Mathlib/Algebra/NoZeroSMulDivisors/Defs.lean, Mathlib/Analysis/Analytic/Constructions.lean, Mathlib/MeasureTheory/Function/ConditionalExpectation/PullOut.lean, Mathlib/MeasureTheory/Function/ConditionalExpectation/CondexpL2.lean.",
+   "date": "2026-10-28",
+   "verdict": "No matching small-etale normalized scalar trace statement. The local project search finds the parent theorem only; this is a strict substep of its stated proof."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Canonical scalar comparison maps for Tate coefficients projective decomposition affine compact support and vector bundle integration",
+   "results": "8 hits: ContDiffMapSupportedIn.coe_smul, CompactlySupportedContinuousMap.instIsScalarTower, SchwartzMap.instIsScalarTower, PadicComplex.instIsScalarTowerPadicPadicAlgCl, Mathlib.Tactic.Linarith.Comp.coeffs, TestFunction.instIsScalarTower, IsDedekindDomain.FiniteAdeleRing.instIsScalarTower, LinearMap.coeIsScalarTower.",
+   "date": "2026-10-28",
+   "verdict": "No matching small-etale normalized scalar trace statement. The local project search finds the parent theorem only; this is a strict substep of its stated proof."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical scalar comparison maps for Tate coefficients projective decomposition affine compact support and vector bundle integration",
+   "results": "8 hits: HahnEmbedding.Seed.coeff', Profinite.NobelingProof.πJ, Profinite.NobelingProof.πs', Profinite.NobelingProof.πs, Profinite.NobelingProof.Linear_CC'₀, Profinite.NobelingProof.Linear_CC'₁, HVertexOperator.coeff_of_coeff, Profinite.NobelingProof.Linear_CC'.",
+   "date": "2026-10-28",
+   "verdict": "No matching small-etale normalized scalar trace statement. The local project search finds the parent theorem only; this is a strict substep of its stated proof."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.VectorTraceScalarDescent",
+  "date": "2026-10-28",
+  "group": "R1"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-an",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "cor-pur-vector-bundle-purity",
+   "place": "Paragraph 2: coefficient compatibility, projective Kummer normalization, affine induction and bundle-frame descent.",
+   "via": [
+    "lem-pur-vector-trace-scalar-descent"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.VectorTraceScalarData",
+  "file": "lean/Sheaf/Paper/VectorTraceScalarData.lean",
+  "declaration": "AlgebraicGeometry.Etale.VectorTraceScalar.vector",
+  "statement": "def vector (φ : A →+* B) (N : ℕ) (hN : 0 < N)\n    (hA : (N : A) = 0) (hB : (N : B) = 0)\n    (S : Scheme.{u}) [IsNoetherian S] (hS : IsUnit (N : Γ(S, ⊤))) (d : ℕ)\n    (F : SheafOfModules.{u} S.ringCatSheaf) [F.IsFiniteLocallyFreeOfRank d] :\n    (scalarExtension φ S).obj (vectorIntegrationSource A N hA S d F) ⟶\n      vectorIntegrationSource B N hB S d F",
+  "branch": "sheaf-dag",
+  "by": "R1",
+  "date": "2026-10-28",
+  "declarations": [
+   "AlgebraicGeometry.Etale.VectorTraceScalar.pullBase",
+   "AlgebraicGeometry.Etale.VectorTraceScalar.projective",
+   "AlgebraicGeometry.Etale.VectorTraceScalar.sum",
+   "AlgebraicGeometry.Etale.VectorTraceScalar.affineCoefficient",
+   "AlgebraicGeometry.Etale.VectorTraceScalar.affineTrace",
+   "AlgebraicGeometry.Etale.VectorTraceScalar.affine",
+   "AlgebraicGeometry.Etale.VectorTraceScalar.vector"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-562fb",
+  "group": "R1",
+  "result": "fix",
+  "landing": "20261027T210210-L-1670181",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-562fb",
+  "group": "R1",
+  "result": "fix",
+  "landing": "20261027T210210-L-1670181",
+  "kind": "interface",
+  "note": "independent cc review: the 11 moved VectorTraceScalar definitions against the published item (verbatim apart from blueprint tags); the theorem signature against the clone (identical); the 3 new sorry statements against the node's statement (true and smaller than the item); the uses and proof_deps of all 4 proof nodes (equal); the 4 direct importers compiled against the delivered modules (3 OK, FinitePurityCounitSystem infra)"
+ }
+}

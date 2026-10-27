@@ -1,35 +1,18 @@
 /-
 Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
-Authors: SHEAF group Q88
+Authors: SHEAF group R1
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.VectorBundleIntegration
-public import Sheaf.AlgebraicGeometry.ProjectiveLineTrace
-public import Sheaf.AlgebraicGeometry.OrdinaryFiniteP1KummerMaps
-public import Sheaf.AlgebraicGeometry.AffineSpaceTopTrace
-public import Sheaf.Paper.FiniteTateScalarSourceNormalization
-public import Sheaf.Paper.EtaleCompactScalarCoherence
-public import Sheaf.Algebra.Homology.OrdinaryDerivedChangeOfRings
-public import WeilConjectures.AlgebraicGeometry.DerivedCategories
+public import Sheaf.Paper.VectorTraceScalarData
+import Sheaf.Paper.VectorTraceScalarProjectiveComponents
+import Sheaf.Paper.VectorTraceScalarAffineInduction
+import Sheaf.Paper.VectorTraceScalarFrameComparison
+import Mathlib.CategoryTheory.Preadditive.AdditiveFunctor
 import Sheaf.AlgebraicGeometry.EtaleDegreeZeroHom
-import Sheaf.AlgebraicGeometry.EtaleFiniteTwistPullback
-import Sheaf.AlgebraicGeometry.FiniteEtaleTwistLine
-import Sheaf.SecSmoothPurity.ProperFiniteCoefficientExtension
-import Sheaf.CategoryTheory.DerivedCategory.AdjunctionMateTranspose
-import Sheaf.Algebra.Homology.DerivedTensorAdditiveConstraints
-import Sheaf.AlgebraicGeometry.EtaleDirectImageScalarExchange
-import WeilConjectures.SixFunctors.Etale.Derived.OpenImmersionLowerShriekProjection
-import Sheaf.Paper.OpenScalarSiteCoherence
-import Sheaf.Paper.EtaleOpenScalarExchange
-import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.HomCoverGluing
-import Sheaf.SixFunctors.RingedDerivedMonoidalComparisons
-import Sheaf.Paper.P1KummerDerivedScalar
-import Mathlib.Algebra.Homology.DerivedCategory.FullyFaithful
-import Sheaf.AlgebraicGeometry.IsIsoIffOfJointlySurjectiveEtaleFamily
-import Mathlib.AlgebraicGeometry.Noetherian
-import Sheaf.Paper.RingedTopoiCanonicalTensorPullbackOfUniverses
+import Sheaf.AlgebraicGeometry.VectorTraceGeometricDescent
+import WeilConjectures.SixFunctors.OpenClosed.Conservative
 
 /-! # Scalar descent of the specified vector-bundle trace
 
@@ -59,160 +42,94 @@ namespace VectorTraceScalar
 
 variable {A B : Type (u + 1)} [CommRing A] [CommRing B] [Finite A] [Finite B]
 
-/-- The unique ordinary balancing family, selected from the existing normalization
- theorem. Its pure-root/scalar generator equations determine every map uniquely.
-Source: blueprint paragraph 2, normalized coefficient identifications
-(blueprint: lem-pur-vector-trace-scalar-descent). -/
-@[irreducible]
-def balancing (φ : A →+* B) (N : ℕ) (hN : 0 < N)
+private theorem splitting_square
+    {C D : Type*} [Category C] [Category D] [Preadditive C] [Preadditive D]
+    [HasBinaryBiproducts C] [HasBinaryBiproducts D]
+    (Q : C ⥤ D) [Q.Additive] {X Y Z : C} {X' Y' Z' : D}
+    (a : X ⟶ Z) (b : Y ⟶ Z) (a' : X' ⟶ Z') (b' : Y' ⟶ Z')
+    (l : Q.obj X ⟶ X') (u : Q.obj Y ⟶ Y') (q : Q.obj Z ⟶ Z')
+    (ha : Q.map a ≫ q = l ≫ a') (hb : Q.map b ≫ q = u ≫ b') :
+    Q.map (biprod.desc a b) ≫ q =
+      biprod.lift (Q.map biprod.fst ≫ l) (Q.map biprod.snd ≫ u) ≫
+        biprod.desc a' b' := by
+  let := preservesBinaryBiproducts_of_preservesBinaryCoproducts Q
+  apply (cancel_epi (Q.mapBiprod X Y).inv).mp
+  apply biprod.hom_ext' <;>
+    simp [← Functor.map_comp_assoc, ha, hb]
+
+private theorem trace_square
+    {C D : Type*} [Category C] [Category D] (Q : C ⥤ D)
+    {X Y Z : C} {X' Y' Z' : D} (b : X ≅ Y) (b' : X' ≅ Y')
+    (q : Q.obj Y ⟶ Y') (s : Q.obj X ⟶ X') (p : X ⟶ Z) (p' : X' ⟶ Z')
+    (u : Q.obj Z ⟶ Z') (hsq : Q.map b.hom ≫ q = s ≫ b'.hom)
+    (hp : s ≫ p' = Q.map p ≫ u) :
+    q ≫ b'.inv ≫ p' = Q.map (b.inv ≫ p) ≫ u := by
+  apply (cancel_epi (Q.map b.hom)).1
+  rw [← Category.assoc, hsq]
+  simp only [Category.assoc, Iso.hom_inv_id_assoc]
+  rw [← Q.map_comp_assoc, Iso.hom_inv_id_assoc]
+  exact hp
+
+private theorem derived_eq_of_cover (R : Type (u + 1)) [CommRing R]
+    {X : Scheme.{u}} {I : Type u} {U : I → Scheme.{u}} (a : ∀ i, U i ⟶ X)
+    [∀ i, Etale (a i)]
+    (ha : ∀ x : X, ∃ (i : I) (y : U i), (a i).base y = x)
+    {K : DerivedCategoryModule R X}
+    {M P : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} R)}
+    (α : K ≅ (_root_.DerivedCategory.singleFunctor _ 0).obj M)
+    (f g : K ⟶ (_root_.DerivedCategory.singleFunctor _ 0).obj P)
+    (h : ∀ i, (ordinaryFinitePullback R (a i)).map f =
+      (ordinaryFinitePullback R (a i)).map g) : f = g := by
+  obtain ⟨ell, hell⟩ := (_root_.DerivedCategory.singleFunctor _ 0).map_surjective (α.inv ≫ f)
+  obtain ⟨mu, hmu⟩ := (_root_.DerivedCategory.singleFunctor _ 0).map_surjective (α.inv ≫ g)
+  have he : α.hom ≫ (_root_.DerivedCategory.singleFunctor _ 0).map ell = f := by
+    rw [hell, ← Category.assoc, α.hom_inv_id, Category.id_comp]
+  have hm : α.hom ≫ (_root_.DerivedCategory.singleFunctor _ 0).map mu = g := by
+    rw [hmu, ← Category.assoc, α.hom_inv_id, Category.id_comp]
+  have hf : JointlyFaithful (fun i ↦ upperStar (ModuleCat.{u + 1} R) (a i)) := by
+    apply JointlyReflectIsomorphisms.jointlyFaithful
+    constructor
+    intro P Q z hz
+    exact isIso_of_isIso_upperStar_map_of_jointlySurjective (ModuleCat.{u + 1} R) a ha z hz
+  have heq : ell = mu := by
+    apply hf.map_injective
+    intro i
+    have hh := congrArg (etaleDegreeZeroHomEquiv R (a i) α) (h i)
+    rw [← he, ← hm, etaleDegreeZeroHomEquiv_map, etaleDegreeZeroHomEquiv_map] at hh
+    rw [← NatIso.naturality_2 (upperStarIsoLocalizationRestriction
+      (ModuleCat.{u + 1} R) (a i) inferInstance) ell,
+      ← NatIso.naturality_2 (upperStarIsoLocalizationRestriction
+        (ModuleCat.{u + 1} R) (a i) inferInstance) mu, hh]
+  rw [← he, ← hm, heq]
+
+private theorem projective_splitting_square (N : ℕ) (hN : 0 < N) (φ : A →+* B)
     (hA : (N : A) = 0) (hB : (N : B) = 0)
-    (T : Scheme.{u}) (hT : IsUnit (N : Γ(T, ⊤))) :
-    ∀ r : ℕ, (purityScalarSheaf φ T).obj (Scheme.finiteEtaleTateTwist T N A hA r) ≅
-      Scheme.finiteEtaleTateTwist T N B hB r :=
-  Classical.choose ((finite_tate_scalar_source_normalization φ N hN hA hB T
-    (fun x ↦ by
-      simpa only [map_natCast] using hT.map (T.presheaf.germ ⊤ x trivial).hom)).2.exists)
+    (S : Scheme.{u}) [IsNoetherian S] (hS : IsUnit (N : Γ(S, ⊤))) :
+    (scalarExtension φ S).map (projectiveLineTraceDatum N hN A hA S hS).decomposition.hom ≫
+      projective φ N hN hA hB S hS =
+    sum φ N hN hA hB S hS ≫ (projectiveLineTraceDatum N hN B hB S hS).decomposition.hom := by
+  let : (scalarExtension φ S).Additive := by
+    unfold scalarExtension ProEtale.pbcFixedScalarExtension
+    exact (Adjunction.ofIsRightAdjoint
+      (Sheaf.derivedRestrictScalars S.smallEtaleTopology φ)).left_adjoint_additive
+  obtain ⟨hv, hc⟩ := projective_components N hN φ hA hB S hS
+  rw [(projectiveLineTraceDatum N hN A hA S hS).decomposition_hom,
+    (projectiveLineTraceDatum N hN B hB S hS).decomposition_hom]
+  exact splitting_square (scalarExtension φ S) _ _ _ _
+    (line φ N hN hA hB S hS) (unit φ S) (projective φ N hN hA hB S hS) hv hc
 
-/-- The degree-one balancing from the uniquely generator-normalized Tate theorem,
-shifted using its actual scalar/single comparison. This is l_{T,1}.
-Source: blueprint paragraph 2, normalized coefficient identifications
-(blueprint: lem-pur-vector-trace-scalar-descent). -/
-def line (φ : A →+* B) (N : ℕ) (hN : 0 < N)
+private theorem projective_trace_square (N : ℕ) (hN : 0 < N) (φ : A →+* B)
     (hA : (N : A) = 0) (hB : (N : B) = 0)
-    (T : Scheme.{u}) (hT : IsUnit (N : Γ(T, ⊤))) :
-    (scalarExtension φ T).obj ((ordinaryFiniteLine A N hA T)⟦(2 : ℤ)⟧) ⟶
-      (ordinaryFiniteLine B N hB T)⟦(2 : ℤ)⟧ :=
-  finiteTateScalarLineMap φ N hA hB T 1 (balancing φ N hN hA hB T hT 1)
-
-/-- Multiplication on the constant coefficient complex, with the published single/unit
-identifications. Source: blueprint paragraph 2, u_T
-(blueprint: lem-pur-vector-trace-scalar-descent). -/
-abbrev unit (φ : A →+* B) (T : Scheme.{u}) :
-    (scalarExtension φ T).obj (ordinaryFiniteUnit A T) ⟶ ordinaryFiniteUnit B T :=
-  purityScalarUnitMap φ T
-
-/-- The tensor powers of shifted balanced lines, starting with multiplication at rank
-zero. This is l in the ordered shifted-Tate presentation already used by integration;
-no orientation or new Tate object is chosen.
-Source: blueprint paragraph 2, l_{T,d}
-(blueprint: lem-pur-vector-trace-scalar-descent). -/
-def base (φ : A →+* B) (N : ℕ) (hN : 0 < N)
-    (hA : (N : A) = 0) (hB : (N : B) = 0)
-    (T : Scheme.{u}) (hT : IsUnit (N : Γ(T, ⊤))) :
-    ∀ d : ℕ, (scalarExtension φ T).obj (affineLinearBaseCoefficient A N hA T d) ⟶
-      affineLinearBaseCoefficient B N hB T d
-  | 0 => unit φ T
-  | d + 1 =>
-    (ExceptionalCoefficients.tensorIso φ T).hom.app
-      (affineLinearBaseCoefficient A N hA T d, (ordinaryFiniteLine A N hA T)⟦(2 : ℤ)⟧) ≫
-    ((ordinaryFiniteTensor B T).map (base φ N hN hA hB T hT d)).app
-      ((scalarExtension φ T).obj ((ordinaryFiniteLine A N hA T)⟦(2 : ℤ)⟧)) ≫
-    ((ordinaryFiniteTensor B T).obj (affineLinearBaseCoefficient B N hB T d)).map
-      (line φ N hN hA hB T hT)
-
-/-- The normalized scalar map on the pullback of an ordered Tate coefficient. The
-inverse scalar/pullback comparison has source Q_X f^* and target f'^* Q_Y.
-Source: blueprint paragraph 2, pullback compatibility of l
-(blueprint: lem-pur-vector-trace-scalar-descent). -/
-def pullBase (φ : A →+* B) (N : ℕ) (hN : 0 < N)
-    (hA : (N : A) = 0) (hB : (N : B) = 0)
-    {X T : Scheme.{u}} (f : X ⟶ T) (hT : IsUnit (N : Γ(T, ⊤))) (d : ℕ) :
-    (scalarExtension φ X).obj
-        ((ordinaryFinitePullback A f).obj (affineLinearBaseCoefficient A N hA T d)) ⟶
-      (ordinaryFinitePullback B f).obj (affineLinearBaseCoefficient B N hB T d) :=
-  (scalarPullbackIso φ f).inv.app (affineLinearBaseCoefficient A N hA T d) ≫
-    (ordinaryFinitePullback B f).map (base φ N hN hA hB T hT d)
-
-/-- The actual proper scalar mate followed by the degree-one normalized balancing.
-Source: blueprint paragraph 2, tilde q_p
-(blueprint: lem-pur-vector-trace-scalar-descent). -/
-def projective (φ : A →+* B) (N : ℕ) (hN : 0 < N)
-    (hA : (N : A) = 0) (hB : (N : B) = 0)
-    (S : Scheme.{u}) (hS : IsUnit (N : Γ(S, ⊤))) :
-    (scalarExtension φ S).obj
-        ((ordinaryFinitePushforward A (ProjectiveLine S ↘ S)).obj
-          ((ordinaryFiniteLine A N hA (ProjectiveLine S))⟦(2 : ℤ)⟧)) ⟶
-      (ordinaryFinitePushforward B (ProjectiveLine S ↘ S)).obj
-        ((ordinaryFiniteLine B N hB (ProjectiveLine S))⟦(2 : ℤ)⟧) :=
-  (scalarMate φ (ProjectiveLine S ↘ S)).app
-      ((ordinaryFiniteLine A N hA (ProjectiveLine S))⟦(2 : ℤ)⟧) ≫
-    (ordinaryFinitePushforward B (ProjectiveLine S ↘ S)).map
-      (line φ N hN hA hB (ProjectiveLine S) (ordinaryFiniteP1_isUnit N S hS))
-
-/-- The comparison d_S is assembled from its two projections l_{S,1} and u_S.
-Source: blueprint paragraph 2, projective-line decomposition
-(blueprint: lem-pur-vector-trace-scalar-descent). -/
-def sum (φ : A →+* B) (N : ℕ) (hN : 0 < N)
-    (hA : (N : A) = 0) (hB : (N : B) = 0)
-    (S : Scheme.{u}) (hS : IsUnit (N : Γ(S, ⊤))) :
-    (scalarExtension φ S).obj
-        ((ordinaryFiniteLine A N hA S)⟦(2 : ℤ)⟧ ⊞ ordinaryFiniteUnit A S) ⟶
-      ((ordinaryFiniteLine B N hB S)⟦(2 : ℤ)⟧ ⊞ ordinaryFiniteUnit B S) :=
-  biprod.lift ((scalarExtension φ S).map biprod.fst ≫ line φ N hN hA hB S hS)
-    ((scalarExtension φ S).map biprod.snd ≫ unit φ S)
-
-/-- Normalized balancing on the coordinate tower's actual right-adjoint input,
-transported by the existing coefficient-descent isomorphisms.
-Source: blueprint paragraph 2, affine-space composition
-(blueprint: lem-pur-vector-trace-scalar-descent). -/
-def affineCoefficient (φ : A →+* B) (N : ℕ) (hN : 0 < N)
-    (hA : (N : A) = 0) (hB : (N : B) = 0)
-    (S : Scheme.{u}) (hS : IsUnit (N : Γ(S, ⊤))) (d : ℕ) :
-    (scalarExtension φ (affineTraceTower S d)).obj
-        ((affineTraceRight A N hA S d).obj (ordinaryFiniteUnit A S)) ⟶
-      (affineTraceRight B N hB S d).obj (ordinaryFiniteUnit B S) :=
-  (scalarExtension φ (affineTraceTower S d)).map
-      (affineLinearCoefficientDescent A N hA (projectiveLineTraceTransport N hN A hA)
-        S hS d).hom ≫
-    pullBase φ N hN hA hB (affineTraceProjection S d) hS d ≫
-    (affineLinearCoefficientDescent B N hB (projectiveLineTraceTransport N hN B hB)
-      S hS d).inv
-
-/-- The actual coordinate-tower counit, on the specified compact-support source.
-Source: blueprint paragraph 2, t_{p_d}
-(blueprint: lem-pur-vector-trace-scalar-descent). -/
-def affineTrace (N : ℕ) (hN : 0 < N) (A : Type (u + 1)) [CommRing A] [Finite A]
-    (hA : (N : A) = 0) (S : Scheme.{u}) [IsNoetherian S]
-    (hS : IsUnit (N : Γ(S, ⊤))) (d : ℕ) :
-    (rightDerivedLowerShriek (ModuleCat.{u + 1} A) (affineTraceProjection S d)).obj
-        ((affineTraceRight A N hA S d).obj (ordinaryFiniteUnit A S)) ⟶
-      ordinaryFiniteUnit A S :=
-  (affineLinearCompactComparison N hN A hA S hS d).inv ≫
-    affineTraceCounit A N hA (projectiveLineTraceTransport N hN A hA)
-      (projectiveLineTraceDatum N hN A hA) S hS d
-
-/-- The specified compactification scalar map followed by the tower's Tate balancing.
-Source: blueprint paragraph 2, affine tilde q
-(blueprint: lem-pur-vector-trace-scalar-descent). -/
-def affine (φ : A →+* B) (N : ℕ) (hN : 0 < N)
-    (hA : (N : A) = 0) (hB : (N : B) = 0)
-    (S : Scheme.{u}) [IsNoetherian S] (hS : IsUnit (N : Γ(S, ⊤))) (d : ℕ) :
-    (scalarExtension φ S).obj
-        ((rightDerivedLowerShriek (ModuleCat.{u + 1} A) (affineTraceProjection S d)).obj
-          ((affineTraceRight A N hA S d).obj (ordinaryFiniteUnit A S))) ⟶
-      (rightDerivedLowerShriek (ModuleCat.{u + 1} B) (affineTraceProjection S d)).obj
-        ((affineTraceRight B N hB S d).obj (ordinaryFiniteUnit B S)) :=
-  (compactScalarChosenMap φ (affineTraceProjection S d)).app
-      ((affineTraceRight A N hA S d).obj (ordinaryFiniteUnit A S)) ≫
-    (rightDerivedLowerShriek (ModuleCat.{u + 1} B) (affineTraceProjection S d)).map
-      (affineCoefficient φ N hN hA hB S hS d)
-
-/-- The specified compact-support comparison for the bundle followed by its actual
-pullback/Tate balancing. Geometry instances are furnished by the recorded construction.
-Source: blueprint paragraph 2, tilde q_pi
-(blueprint: lem-pur-vector-trace-scalar-descent). -/
-def vector (φ : A →+* B) (N : ℕ) (hN : 0 < N)
-    (hA : (N : A) = 0) (hB : (N : B) = 0)
-    (S : Scheme.{u}) [IsNoetherian S] (hS : IsUnit (N : Γ(S, ⊤))) (d : ℕ)
-    (F : SheafOfModules.{u} S.ringCatSheaf) [F.IsFiniteLocallyFreeOfRank d] :
-    (scalarExtension φ S).obj (vectorIntegrationSource A N hA S d F) ⟶
-      vectorIntegrationSource B N hB S d F :=
-  letI := (vectorIntegration_geometry S d F).1
-  letI := (vectorIntegration_geometry S d F).2.1
-  (compactScalarChosenMap φ (VectorBundleZeroSection.π S d F)).app
-      (vectorIntegrationCoefficient A N hA S d F) ≫
-    (rightDerivedLowerShriek (ModuleCat.{u + 1} B) (VectorBundleZeroSection.π S d F)).map
-      (pullBase φ N hN hA hB (VectorBundleZeroSection.π S d F) hS d)
+    (S : Scheme.{u}) [IsNoetherian S] (hS : IsUnit (N : Γ(S, ⊤))) :
+    projective φ N hN hA hB S hS ≫ projectiveLineTrace N hN B hB S hS =
+      (scalarExtension φ S).map (projectiveLineTrace N hN A hA S hS) ≫ unit φ S := by
+  exact trace_square (scalarExtension φ S)
+    (projectiveLineTraceDatum N hN A hA S hS).decomposition
+    (projectiveLineTraceDatum N hN B hB S hS).decomposition
+    (projective φ N hN hA hB S hS) (sum φ N hN hA hB S hS)
+    biprod.snd biprod.snd (unit φ S)
+    (projective_splitting_square N hN φ hA hB S hS)
+    (by simp only [sum, biprod.lift_snd])
 
 /-- Scalar extension preserves the specified Kummer component, projective decomposition,
 its second-projection trace, all coordinate-tower traces, and global vector integration.
@@ -273,7 +190,29 @@ theorem vectorTraceScalarDescent (N : ℕ) (hN : 0 < N) (φ : A →+* B)
       (scalarExtension φ S).map (affineTrace N hN A hA S hS d) ≫ unit φ S) ∧
     (vector φ N hN hA hB S hS r F ≫ vectorBundleIntegration N hN B hB S hS r F =
       (scalarExtension φ S).map (vectorBundleIntegration N hN A hA S hS r F) ≫ unit φ S) := by
-  sorry
+  have hp := projective_trace_square N hN φ hA hB
+  have ha := affine_of_projective N hN φ hA hB hp
+  refine ⟨(projective_components N hN φ hA hB S hS).2,
+    projective_splitting_square N hN φ hA hB S hS, hp S hS, ha S hS, ?_⟩
+  classical
+  obtain ⟨I, V, hV, e⟩ :=
+    Scheme.Modules.IsFiniteLocallyFreeOfRank.exists_restrict_iso_free F (r := r)
+  let : IsIso (vectorBundleIntegration N hN A hA S hS r F) :=
+    (vectorBundleIntegration_concentration_and_isIso N hN A hA S hS r F).2
+  let : IsIso (unit φ S) := by
+    dsimp only [unit, purityScalarUnitMap, purityTransportUnitMap]
+    infer_instance
+  let α : (scalarExtension φ S).obj (vectorIntegrationSource A N hA S r F) ≅
+      ordinaryFiniteUnit B S :=
+    (scalarExtension φ S).mapIso (asIso (vectorBundleIntegration N hN A hA S hS r F)) ≪≫
+      asIso (unit φ S)
+  refine derived_eq_of_cover B (fun i : I ↦ (V i).ι) ?_ α _ _ ?_
+  · intro x
+    obtain ⟨i, hi⟩ := TopologicalSpace.Opens.mem_iSup.mp
+      (hV.ge (Set.mem_univ x) : x ∈ ⨆ i, V i)
+    exact ⟨i, ⟨x, hi⟩, rfl⟩
+  · intro i
+    exact frame_scalar_square N hN φ hA hB ha S hS r F (V i) (e i).some
 
 end VectorTraceScalar
 end AlgebraicGeometry.Etale

@@ -1,0 +1,153 @@
+{
+ "id": "lem-pur-vector-scalar-projective-components",
+ "kind": "statement",
+ "title": "Normalized scalar compatibility of projective-line components",
+ "statement": "Let A and B be finite commutative rings, φ:A→B a unital ring map, N>0 a common annihilator, and S a Noetherian scheme on which N is invertible. Use the specified normalized balancing l, multiplication unit u, and proper scalar comparison q from [def-pur-vector-trace-scalar-coefficient-data] and [def-pur-vector-trace-scalar-map-data]. Let v_R be the twisted shifted unit and h_R the Kummer Chern pushforward in the specified ordinary finite projective-line decomposition [lem-asd-ordinary-finite-p1-adjunction], with the projective trace transport of [def-amb-p1-trace]. Then, in diagrammatic order, Q_S(v_A) ≫ q = l_S ≫ v_B and Q_S(h_A) ≫ q = u_S ≫ h_B. This asserts just the two projective columns, not affine or bundle compatibility.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/cor-pur-vector-bundle-purity.proof.md",
+  "place": "Paragraph 2: coefficient compatibility, projective Kummer normalization, affine induction and bundle-frame descent."
+ },
+ "stmt_deps": [
+  "def-pur-vector-trace-scalar-coefficient-data",
+  "def-pur-vector-trace-scalar-map-data",
+  "lem-asd-ordinary-finite-p1-adjunction",
+  "def-amb-p1-trace"
+ ],
+ "proof": [
+  {
+   "text": "Fix the normalized identifications throughout. The scalar functor is exact, and its tensor and composition comparisons are the K-flat comparisons. By the Tate normalization, $l_{T,0}=u_T$, $l_{T,1}$ is the balanced map, and $l_{T,d}$ is its tensor power with the prescribed shift. Thus the maps called $\\theta^0,\\theta^1[2]$ in the Kummer scalar lemma are precisely $u_T,l_{T,1}$ here: both send $(z\\otimes a)\\otimes b$ to $z\\otimes\\varphi(a)b$. The symmetric monoidal composition comparisons identify the two successive scalar extensions from $\\mathbf Z/N$ with extension to $A'$; no ordinary tensor exactness along $A\\to A'$ is being asserted. The Tate sheaves themselves are flat of rank one, so their derived extensions are the displayed shifted degree-zero sheaves. This also shows that every Tate input and its scalar extension used below is bounded below. The maps $l_{T,r}$ also commute with inverse image: for $f:X\\to Y$, under the scalar/pullback comparison and the canonical Tate pullback identifications $f^{-1}A_Y(r)\\cong A_X(r)$, $f^{-1}A'_Y(r)\\cong A'_X(r)$ of [lem-asd-etale-finite-twist-pullback], $f^*(l_{Y,r})$ equals $l_{X,r}$. Both sides are maps between shifted flat degree-zero sheaves, computed by the degree-zero resolutions; on such K-flat objects the scalar/pullback comparison is the ordinary module pullback of the tensor product [lem-weil-pbc-ringed-topoi-derived-tensor-pullback], and the sheaf formula $(z\\otimes a)\\otimes b\\mapsto z\\otimes\\varphi(a)b$ is preserved by inverse image of sections. Full faithfulness of the degree-zero embedding [lem-weil-pbc-derived-single-fully-faithful] turns this equality of sheaf maps into the derived equality. This is the pullback compatibility of $l$ used in Steps 3, 5, 6 and 9.",
+   "uses": [
+    "lem-pur-derived-change-of-rings",
+    "lem-pur-finite-tate-scalar-source-normalization",
+    "lem-asd-finite-etale-twist-line",
+    "lem-sfb-ringed-derived-monoidal-comparisons",
+    "lem-asd-etale-finite-twist-pullback",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "lem-weil-pbc-derived-single-fully-faithful"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/cor-pur-vector-bundle-purity.proof.md",
+    "place": "Paragraph 2: coefficient compatibility, projective Kummer normalization, affine induction and bundle-frame descent."
+   }
+  },
+  {
+   "text": "Write $c_R:R_P\\to W_R$ for the Kummer Chern morphism on $P=\\mathbf P^1_B$. The Kummer scalar lemma, for the present arbitrary Noetherian base and integer $N$, gives $l_{P,1}Q_P(c_A)=c_{A'}u_P$. Its statement identifies the adjunct of $c_R$ with the specified $h_R$. For this proper map, $q_p$ is exactly the counit transpose of the proper coefficient-extension lemma. Consequently the adjunct of $q_{p,W_A}Q_B(h_A)$ is $Q_P(\\varepsilon_{p,W_A})\\lambda_p p_{A'}^*Q_B(h_A)=Q_P(\\varepsilon_{p,W_A}p_A^*h_A)\\lambda_{p,A_B}=Q_P(c_A)\\lambda_{p,A_B}$. Here the middle equality is naturality of $\\lambda_p$. Compose with $l_{P,1}$. The preceding Kummer equation and the normalized coefficient-unit comparison turn this adjunct into $c_{A'}p_{A'}^*(u_B)$, the adjunct of $h_{A'}u_B$. Injectivity of the inverse-image/direct-image adjunction bijection proves $\\widetilde q_{p,W_A}Q_B(h_A)=h_{A'}u_B$.",
+   "uses": [
+    "lem-sp-p1-kummer-derived-scalar",
+    "lem-asd-proper-finite-coefficient-extension",
+    "lem-pur-finite-tate-scalar-source-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/cor-pur-vector-bundle-purity.proof.md",
+    "place": "Paragraph 2: coefficient compatibility, projective Kummer normalization, affine induction and bundle-frame descent."
+   }
+  },
+  {
+   "text": "Let $v_R:R_B(1)[2]\\to Rp_{*,R}W_R$ be the first component of $b_R$, the twisted shifted adjunction unit. Put $L_R=R_B(1)[2]$, so that $p_R^*L_R=W_R$. The adjunct of $q_{p,W_A}Q_B(v_A)$ is $Q_P(\\varepsilon_{p,W_A}p_A^*v_A)\\lambda_{p,L_A}=\\lambda_{p,L_A}$, because $\\varepsilon_p p^*\\eta_p=1$. Composing with $l_{P,1}$ gives $p_{A'}^*(l_{B,1})$ by the pullback compatibility of $l$ in Step 1 and the unit normalization of the Tate source node. This is the adjunct of $v_{A'}l_{B,1}$. Thus $\\widetilde q_{p,W_A}Q_B(v_A)=v_{A'}l_{B,1}$. This calculation uses the specified unit and counit, rather than an unspecified isomorphism between the two decompositions.",
+   "uses": [
+    "lem-asd-ordinary-finite-p1-adjunction",
+    "lem-asd-proper-finite-coefficient-extension",
+    "lem-pur-finite-tate-scalar-source-normalization",
+    "lem-asd-etale-finite-twist-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/cor-pur-vector-bundle-purity.proof.md",
+    "place": "Paragraph 2: coefficient compatibility, projective Kummer normalization, affine induction and bundle-frame descent."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-asd-etale-finite-twist-pullback",
+  "lem-asd-finite-etale-twist-line",
+  "lem-asd-ordinary-finite-p1-adjunction",
+  "lem-asd-proper-finite-coefficient-extension",
+  "lem-pur-derived-change-of-rings",
+  "lem-pur-finite-tate-scalar-source-normalization",
+  "lem-sfb-ringed-derived-monoidal-comparisons",
+  "lem-sp-p1-kummer-derived-scalar",
+  "lem-weil-pbc-derived-single-fully-faithful",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/cor-pur-vector-bundle-purity.proof.md",
+  "place": "Paragraph 2: coefficient compatibility, projective Kummer normalization, affine induction and bundle-frame descent."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "Kummer.*scalar|scalar.*Kummer",
+   "results": "0 hits: none.",
+   "date": "2026-10-28",
+   "verdict": "No matching small-etale normalized scalar trace statement. The local project search finds the parent theorem only; this is a strict substep of its stated proof."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived scalar extension preserves the twisted unit and Kummer Chern columns of the etale projective line decomposition",
+   "results": "8 hits: AlgHom.extendScalars, Algebra.Generators.extendScalars_val, AlgEquiv.extendScalarsOfSurjective, Module.FinitePresentation.isLocalizedModule_mapExtendScalars, RootPairing.restrictScalars_coe_root, KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_apply, LinearMap.extendScalarsOfSurjective_apply, LinearMap.extendScalarsOfSurjective.",
+   "date": "2026-10-28",
+   "verdict": "No matching small-etale normalized scalar trace statement. The local project search finds the parent theorem only; this is a strict substep of its stated proof."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived scalar extension preserves the twisted unit and Kummer Chern columns of the etale projective line decomposition",
+   "results": "8 hits: WeierstrassCurve.Projective.baseChange_dblU, WeierstrassCurve.Projective.baseChange_add, WeierstrassCurve.Projective.baseChange_equation, WeierstrassCurve.Affine.Point.map_baseChange, WeierstrassCurve.Projective.baseChange_dblZ, WeierstrassCurve.Projective.baseChange_dblX, WeierstrassCurve.Projective.Equation.baseChange, WeierstrassCurve.Affine.Point.baseChange.",
+   "date": "2026-10-28",
+   "verdict": "No matching small-etale normalized scalar trace statement. The local project search finds the parent theorem only; this is a strict substep of its stated proof."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.VectorTraceScalarDescent",
+  "date": "2026-10-28",
+  "group": "R1"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-an",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "cor-pur-vector-bundle-purity",
+   "place": "Paragraph 2: coefficient compatibility, projective Kummer normalization, affine induction and bundle-frame descent.",
+   "via": [
+    "lem-pur-vector-trace-scalar-descent"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.VectorTraceScalarProjectiveComponents",
+  "file": "lean/Sheaf/Paper/VectorTraceScalarProjectiveComponents.lean",
+  "declaration": "AlgebraicGeometry.Etale.VectorTraceScalar.projective_components",
+  "statement": "theorem projective_components (N : ℕ) (hN : 0 < N) (φ : A →+* B)\n    (hA : (N : A) = 0) (hB : (N : B) = 0)\n    (S : Scheme.{u}) [IsNoetherian S] (hS : IsUnit (N : Γ(S, ⊤))) :\n    ((scalarExtension φ S).map\n        (ordinaryFiniteP1Unit A N hA (projectiveLineTraceTransport N hN A hA) S hS) ≫\n      projective φ N hN hA hB S hS =\n      line φ N hN hA hB S hS ≫\n        ordinaryFiniteP1Unit B N hB (projectiveLineTraceTransport N hN B hB) S hS) ∧\n    ((scalarExtension φ S).map (ordinaryFiniteP1ChernPushforward A N hA S\n        (projectiveLineTraceDatum N hN A hA S hS).chern) ≫\n      projective φ N hN hA hB S hS =\n      unit φ S ≫ ordinaryFiniteP1ChernPushforward B N hB S\n        (projectiveLineTraceDatum N hN B hB S hS).chern)",
+  "branch": "sheaf-dag",
+  "by": "R1",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-562fb",
+  "group": "R1",
+  "result": "fix",
+  "landing": "20261027T210210-L-1670181",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-562fb",
+  "group": "R1",
+  "result": "fix",
+  "landing": "20261027T210210-L-1670181",
+  "kind": "interface",
+  "note": "independent cc review: the 11 moved VectorTraceScalar definitions against the published item (verbatim apart from blueprint tags); the theorem signature against the clone (identical); the 3 new sorry statements against the node's statement (true and smaller than the item); the uses and proof_deps of all 4 proof nodes (equal); the 4 direct importers compiled against the delivered modules (3 OK, FinitePurityCounitSystem infra)"
+ }
+}
