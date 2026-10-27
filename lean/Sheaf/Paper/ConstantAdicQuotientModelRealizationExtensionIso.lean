@@ -7,6 +7,7 @@ module
 
 public import Sheaf.Paper.ConstantAdicQuotientScalarComparison
 public import Sheaf.Paper.ConstantRealizationDerivedScalarExtension
+import Sheaf.Paper.ConstantAdicQuotientModelRealizationReduction
 
 /-! # Realization-level extension comparison for consecutive quotient models
 
@@ -53,6 +54,9 @@ theorem constantAdicQuotient_model_realization_extension_iso
             (algebraMap A (AdicCompletion d.ideal A)))
             (Nat.le_succ (n + 1))))).obj E') ≅
       (constantAdicQuotientRealization (W.hom ≫ g) d n).obj E) := by
-  sorry
+  rcases constantAdicQuotient_model_realization_reduction X Y g d M n W _w E' e' with
+    ⟨hred⟩
+  rcases e with ⟨e⟩
+  exact ⟨hred ≪≫ e.symm⟩
 
 end AlgebraicGeometry.Scheme
