@@ -6,6 +6,7 @@ Authors: SHEAF group K1
 module
 
 public import Sheaf.Paper.EtaleFiniteCoefficientHomArrow
+import WeilConjectures.SixFunctors.ProEtale.ScalarExtension
 
 /-! # Composition of the intrinsic finite scalar tensorators
 Source: blueprint thm-coef-finite-hom, successive quotient paragraph
