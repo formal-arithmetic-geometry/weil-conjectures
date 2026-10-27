@@ -19930,3 +19930,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 20:58 L: merged deliver/C4/Sheaf.Paper.CoefficientUnitTowerNormalized (stage 3; reviewer PASS; first push; landing 20261027T205828-L-1622397 (interface); batch 20261027T205736; modules 1; new nodes 0; change records: coord/changes/C4-coefficient-unit-local-transparency.md)
 - 20:58 L: merged deliver/C4/Sheaf.Paper.ConstantCompletionFlatAndQuotientsFlatness (stage 3; reviewer PASS; first push; landing 20261027T205830-L-1622627 (interface); batch 20261027T205736; modules 1; new nodes 0)
 - 20:58 L: merged deliver/C4/Sheaf.Paper.RationalP1FirstTraceTransportCore (stage 3; reviewer PASS; first push; landing 20261027T205843-L-1623987 (interface); batch 20261027T205736; modules 2; new nodes 1)
+- 20:58 L: merged deliver/C4/Sheaf.Paper.TateTensorNormalizedSquare (stage 3; reviewer PASS; first push; landing 20261027T205844-L-1624259 (interface); batch 20261027T205736; modules 2; new nodes 1)

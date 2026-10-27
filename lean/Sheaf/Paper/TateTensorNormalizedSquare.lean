@@ -5,6 +5,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import Sheaf.Paper.CondensedTateIntegralTowerData
+import Sheaf.Paper.TateTensorNormalizedSquarePair
 
 /-! The scalar comparison square for projection-normalized Tate levels.
 
@@ -62,6 +63,11 @@ theorem tateTensor_normalizedSquare
     (pbcDerivedExtend (pbcAdicQuotient T (datum.{u} ell) b a hab)).map (e b).hom ≫
         (scalarComparison T ell b a hab).hom.app (finiteTwist T ell b d) ≫
         (derivedRealization T ell a).map (proTwistMap d r) =
-      (M.normalization b a hab).hom ≫ (e a).hom := by sorry
+      (M.normalization b a hab).hom ≫ (e a).hom := by
+  let cb := (hp b).choose
+  let ca := (hp a).choose
+  have hcb : normalizedAt T ell hT d M e h b cb := (hp b).choose_spec
+  have hca : normalizedAt T ell hT d M e h a ca := (hp a).choose_spec
+  exact tateTensor_normalizedSquare_of_pair T ell hT d M e h b a hab cb ca hcb hca r
 
 end AlgebraicGeometry.Scheme.PurityIntegralTower
