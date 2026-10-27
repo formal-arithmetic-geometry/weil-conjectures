@@ -29,52 +29,54 @@
  ],
  "proof": [
   {
-   "text": "For extension by zero, apply the identity-coefficient clause of the normalized open restriction coherence theorem. Its square is the one made from the sectionwise identity comparisons i_X and i_Z. The same holds after exact termwise localization.",
+   "text": "Substitute the supplied equality q = RingHom.id A. Proof irrelevance and the identity eqToIso reduce compactSupportCoefficientResId to sfOpenDerivedCoefficientRestrictionId. Its component on Q(J) is the scalar localization factor followed by Q of the degreewise ordinary identity comparison: use the canonical derived identity factor and mapDerivedCategoryNatIso_fac.",
    "uses": [
+    "def-coef-scalar-restriction-identity",
+    "def-coef-compact-support-coefficient-presentation",
+    "lem-weil-pbc-exact-functor-derived-factorization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For direct image g and identity coefficients, let F be ordinary canonical direct image, x and y the two ordinary restrictions, and c the identity-on-sections ordinary comparison. The ordinary identity comparisons give y-to-identity and x-to-identity maps of squares: evaluate on sections and use their sectionwise identity normalizations. The identity square for F and its right-derived functor is unit-normalized by the identity laws. Apply normalized_naturality to this square and compactSupportScalarDirectNormalization. The preceding localization-factor equation verifies the two comparison hypotheses. Taking a component and cancelling the inverse of sfDerivedImageRestriction proves its identity law at every unbounded derived object.",
+   "uses": [
+    "lem-weil-proetale-direct-image-restriction-of-scalars",
     "lem-sf-open-extension-scalar-restriction-coherence",
-    "def-coef-scalar-restriction-identity"
+    "lem-weil-compact-support-scalar-direct-normalization",
+    "lem-pur-derived-square-normalization-naturality"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/lem-coef-integral-compact-support.proof.md",
-    "place": "Final paragraph: comparisons at different finite levels respect composition; expanded quotient-unit proof in lem-coef-compact-support-quotient-cocycle, Steps 1--6."
-   }
+   "elementary": false
   },
   {
-   "text": "For direct image, evaluate the specified comparison on a K-injective representative. Both composites are the same identity-coefficient restriction comparison on that representative, followed by its same universal direct-image comparison. The uniqueness clause in the normalized derived direct-image construction extends this equality to every derived object.",
+   "text": "Use the already proved sfOpenRestriction_derived_id for the open immersion c.i, on the given unbounded input. This supplies exactly the open identity square with the same canonical scalar identity comparisons.",
    "uses": [
-    "lem-weil-proetale-direct-image-restriction-of-scalars"
+    "lem-sf-open-extension-scalar-restriction-coherence"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/lem-coef-integral-compact-support.proof.md",
-    "place": "Final paragraph: comparisons at different finite levels respect composition; expanded quotient-unit proof in lem-coef-compact-support-quotient-cocycle, Steps 1--6."
-   }
+   "elementary": false
   },
   {
-   "text": "The compact-support restriction comparison is the composite of these open and proper squares, by its defining formula. Whisker the first by Rp_* and the second by j_!, and combine the equalities by functoriality and associativity. Transport along q=1_A to insert the specified eqToIso factors.",
+   "text": "Expand compactSupportCoefficientComparison and sfCompactSupportRestriction into direct image of the open comparison followed by the proper comparison. Apply the direct-image identity law at the open extension of K. Combine the resulting two direct-image maps with map_comp and apply the open identity law. The result is the composite compact-support functor applied to the input identity comparison, as required.",
    "uses": [
     "lem-sf-compact-support-restriction-of-scalars",
     "def-coef-compact-support-coefficient-presentation"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/lem-coef-integral-compact-support.proof.md",
-    "place": "Final paragraph: comparisons at different finite levels respect composition; expanded quotient-unit proof in lem-coef-compact-support-quotient-cocycle, Steps 1--6."
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-sf-open-extension-scalar-restriction-coherence",
   "def-coef-scalar-restriction-identity",
+  "def-coef-compact-support-coefficient-presentation",
+  "lem-weil-pbc-exact-functor-derived-factorization",
   "lem-weil-proetale-direct-image-restriction-of-scalars",
-  "lem-sf-compact-support-restriction-of-scalars",
-  "def-coef-compact-support-coefficient-presentation"
+  "lem-sf-open-extension-scalar-restriction-coherence",
+  "lem-weil-compact-support-scalar-direct-normalization",
+  "lem-pur-derived-square-normalization-naturality",
+  "lem-sf-compact-support-restriction-of-scalars"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/lem-coef-integral-compact-support.proof.md",
-  "place": "Final paragraph: comparisons at different finite levels respect composition; expanded quotient-unit proof in lem-coef-compact-support-quotient-cocycle, Steps 1--6."
+  "place": "Finite-level coefficient compatibility, identity normalization, implemented using the proved open identity law and naturality of the unit-normalized right-derived square (Stacks Tags 03DI, 015F, 0D6E and 0D6J)."
  },
  "mathlib_searches": [
   {
@@ -146,11 +148,11 @@
  "reviewed_proof": {
   "date": "2026-10-27",
   "by": "L",
-  "reviewer": "C-c35df",
-  "group": "Q3",
-  "result": "fix",
-  "landing": "20261027T135438-L-3708061",
+  "reviewer": "COMPILER",
+  "group": "T6",
+  "result": "pass",
+  "landing": "20261027T151742-L-1203174",
   "kind": "interface",
-  "note": "independent cc review: Q3 c35df53c819c (byte-identical to fd5b): item theorems vs published signatures, 20 new modules vs their nodes, node proof_deps vs step uses and merge rules (stage3_delivery check_nodes), both direct importers compiled against the delivered modules"
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

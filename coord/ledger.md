@@ -19619,3 +19619,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 15:17 L: merged deliver/S3/Sheaf.Paper.StrictCoefficientOpenReduction (stage 3; reviewer PASS; first push; landing 20261027T151738-L-1202444 (interface); batch 20261027T151642; modules 1; new nodes 0)
 - 15:17 L: merged deliver/S5/Sheaf.AlgebraicGeometry.ProperShriekCompSupports (stage 3; reviewer PASS; first push; landing 20261027T151739-L-1202638 (interface); batch 20261027T151642; modules 2; new nodes 1)
 - 15:17 L: merged deliver/S9/Sheaf.Paper.CompactSupportQuotientRawOutputComposition (stage 3; reviewer PASS; first push; landing 20261027T151741-L-1202996 (interface); batch 20261027T151642; modules 1; new nodes 0)
+- 15:17 L: merged deliver/T6/Sheaf.Paper.CompactSupportRestrictionIdentity (stage 3; reviewer PASS; first push; landing 20261027T151742-L-1203174 (interface); batch 20261027T151642; modules 1; new nodes 0)
