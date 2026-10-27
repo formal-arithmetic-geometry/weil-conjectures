@@ -13,28 +13,16 @@
  ],
  "proof": [
   {
-   "text": "Apply the completed derived-change bridge to the finite constant model.",
-   "uses": [
-    "lem-weil-pbc-finite-model-derived-change-bridge"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Apply the lifted constant-realization scalar comparison and compose the two isomorphisms.",
-   "uses": [
-    "lem-weil-pbc-finite-model-lift-comparison"
-   ],
-   "elementary": false
+   "text": "STATEMENT-DISPUTED: derived extension cannot be replaced by ordinary termwise extension on an arbitrary non-K-flat complex. For Z→Z/2 and P=(Z/2)[0], derived tensor has a nonzero Tor_1 term while ordinary tensor does not. This false intermediate has been withdrawn. Its parent lem-weil-pbc-finite-model-derived-scalar-comparison is proved directly from the generic derived constant-realization comparison and a coefficient-lift-compatible K-flat resolution, without this assertion.",
+   "uses": [],
+   "elementary": true
   }
  ],
- "proof_deps": [
-  "lem-weil-pbc-finite-model-derived-change-bridge",
-  "lem-weil-pbc-finite-model-lift-comparison"
- ],
+ "proof_deps": [],
  "proof_origin": {
-  "by": "P1 stage-3 worker",
-  "document": "Stacks Project, sites-cohomology.tex",
-  "place": "Tags 06YY, 0G7E and 093J; composition of the two comparison interfaces"
+  "by": "J3 stage-3 worker",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YY and 0G7E require K-flat representatives for an ordinary tensor computation. False split withdrawn; replacement argument is in the unchanged parent theorem."
  },
  "mathlib_searches": [
   {
@@ -77,16 +65,6 @@
  },
  "chapter": "sec-proper-base-change",
  "unit": "sk-thm-properbasechange",
- "lean": {
-  "existing": false,
-  "module": "Sheaf.Paper.FiniteModelConstantScalarExtensionCore",
-  "file": "lean/Sheaf/Paper/FiniteModelConstantScalarExtensionCore.lean",
-  "declaration": "AlgebraicGeometry.Scheme.finiteModel_constantScalarExtension_core",
-  "statement": "theorem finiteModel_constantScalarExtension_core (X : Scheme.{t}) {B C : Type t} [CommRing B] [CommRing C] (q : B →+* C) [(koszulConstantFunctor X B).PreservesZeroMorphisms] [(koszulConstantFunctor X C).PreservesZeroMorphisms] (P : CochainComplex (ModuleCat.{t} B) ℤ) : Nonempty ((completedAdicDerivedChange X (adicConstantMap X q)).obj (DerivedCategory.Q.obj (finiteModelConstantComplex X B P)) ≅ DerivedCategory.Q.obj (finiteModelConstantComplex X C (((ModuleCat.extendScalars q).mapHomologicalComplex (.up ℤ)).obj P)))",
-  "branch": "sheaf-dag",
-  "by": "V3",
-  "date": "2026-10-27"
- },
  "reviewed": {
   "date": "2026-10-27",
   "by": "L",
@@ -100,11 +78,11 @@
  "reviewed_proof": {
   "date": "2026-10-27",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "P1",
+  "reviewer": "C-d0409",
+  "group": "J3",
   "result": "pass",
-  "landing": "20261027T210152-L-1666318",
+  "landing": "20261027T234015-L-4161097",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent cc review: withdrawn liftComparison/Core (false: Z→Z/2, P=(Z/2)[0] Tor_1 counterexample) and the rewritten parent finiteModel_derivedScalarComparison (signature byte-identical, axioms clean) plus new proved CoefficientLiftKFlatResolution, against their DAG nodes, the change record, the DAG/Lean citers and the 3b importer FiniteQuotientModelResidueComparison OK"
  }
 }

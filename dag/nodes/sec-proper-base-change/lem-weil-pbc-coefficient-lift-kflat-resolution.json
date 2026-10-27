@@ -1,0 +1,130 @@
+{
+ "id": "lem-weil-pbc-coefficient-lift-kflat-resolution",
+ "kind": "statement",
+ "title": "K-flat resolutions survive the coefficient-universe lift",
+ "statement": "For any commutative ring B in universe t and any unbounded cochain complex P of B-modules in universe t, there exist a complex R and a quasi-isomorphism f:R→P such that R is K-flat and its degreewise universe lift, restricted along ULift B ≃ B, is K-flat as a complex of modules over ULift B in universe t+1. K-flat means preservation of all quasi-isomorphisms by total tensor on either side [def-sfb-preserves-kflat-quasi-iso]. No bound, finite generation, or flatness hypothesis on P is required.",
+ "stmt_deps": [
+  "def-sfb-preserves-kflat-quasi-iso"
+ ],
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "lemma-K-flat-resolution (Tag 06Y4), combined with the flat-term K-flat preservation argument of sites-cohomology.tex, lemma-pullback-K-flat (Tag 0G7E)."
+ },
+ "proof": [
+  {
+   "text": "Choose the existing flat-term K-flat resolution R→P in the small module universe. The free-on-underlying-set construction supplies functorial flat resolutions there.",
+   "uses": [
+    "lem-pc-source-module-kflat-resolution",
+    "lem-weil-pbc-derived-module-scalar-adjunction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The coefficient lift preserves flat modules: first lift the module carrier, then use flatness invariance under ULift of the ring. It preserves integer-indexed colimits: the small module forgetful functor preserves filtered colimits, the type-universe lift preserves colimits, and the larger module forgetful functor reflects filtered colimits. The forgetful functors use their size-shrunk filtered-colimit instances.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Apply kFlat_map_of_flat_terms to the chosen small flat-term K-flat resolution. This proves K-flatness of its image against every large-universe acyclic complex, not only lifted small tests. The categorical and total-tensor K-flat predicates agree definitionally.",
+   "uses": [
+    "lem-sfb-flat-term-kflat-functor"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-source-module-kflat-resolution",
+  "lem-weil-pbc-derived-module-scalar-adjunction",
+  "lem-sfb-flat-term-kflat-functor"
+ ],
+ "proof_origin": {
+  "by": "J3 stage-3 worker",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "lemma-K-flat-resolution, using the existing flat-term K-flat preservation theorem."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "ulift.*[Tt]ensor|[Tt]ensor.*ulift|ulift.*[Ff]lat",
+   "results": "20 results: Mathlib/LinearAlgebra/TensorProduct/Tower.lean, Mathlib/LinearAlgebra/TensorProduct/Tower.lean, Mathlib/Algebra/Category/Ring/Under/Limits.lean, Mathlib/RingTheory/IsTensorProduct.lean, Mathlib/RingTheory/Flat/Stability.lean, Mathlib/RingTheory/Flat/Stability.lean, Mathlib/RingTheory/Flat/Basic.lean, Mathlib/RingTheory/Flat/Basic.lean; ",
+   "date": "2026-10-28",
+   "verdict": "No exact theorem; use the proved source flat resolution and flat-term K-flat preservation APIs."
+  },
+  {
+   "tool": "loogle",
+   "query": "ModuleCat.uliftFunctor",
+   "results": "12 results: ModuleCat.uliftFunctor, ModuleCat.fullyFaithfulUliftFunctor, ModuleCat.instFaithfulUliftFunctor, ModuleCat.instFullUliftFunctor, ModuleCat.instPreservesFiniteColimitsUliftFunctor, ModuleCat.instPreservesFiniteLimitsUliftFunctor, ModuleCat.instPreservesLimitsOfSizeUliftFunctor, ModuleCat.instPreservesInjectiveObjectsUliftFunctorOfSmall; ",
+   "date": "2026-10-28",
+   "verdict": "No exact theorem; use the proved source flat resolution and flat-term K-flat preservation APIs."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Scalar extension of modules commutes with universe lift and derived constant sheaf realization for K-flat complexes",
+   "results": "8 results: Module.Flat.ulift, Module.Flat.of_ulift, ModuleCat.preservesFiniteLimits_extendScalars_of_flat, comonadicExtendScalars, ModuleCat.reflectsIsomorphisms_extendScalars_of_faithfullyFlat, Module.Flat.isBaseChange, Module.flat_of_isLocalized_span, Module.Flat.trans; ",
+   "date": "2026-10-28",
+   "verdict": "No exact theorem; use the proved source flat resolution and flat-term K-flat preservation APIs."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Additive functors preserving flat objects and countable colimits preserve K-flat complexes with flat terms",
+   "results": "8 results: CategoryTheory.compatiblePreservingOfFlat, CategoryTheory.lan_flat_of_flat, Module.Flat.iff_lTensor_preserves_shortComplex_exact, Module.Flat.iff_rTensor_preserves_shortComplex_exact, CategoryTheory.RepresentablyFlat, ModuleCat.preservesFiniteLimits_extendScalars_of_flat, Module.Flat.lTensor_shortComplex_exact, Module.Flat.rTensor_shortComplex_exact; ",
+   "date": "2026-10-28",
+   "verdict": "No exact theorem; use the proved source flat resolution and flat-term K-flat preservation APIs."
+  },
+  {
+   "tool": "grep",
+   "query": "PreservesFilteredColimits|ulift_left_iff",
+   "results": "4 results: Mathlib/Algebra/Category/ModuleCat/FilteredColimits.lean, Mathlib/Algebra/Category/ModuleCat/FilteredColimits.lean, Mathlib/Algebra/Category/ModuleCat/FilteredColimits.lean, Mathlib/Algebra/Category/ModuleCat/FilteredColimits.lean; ",
+   "date": "2026-10-28",
+   "verdict": "No exact theorem; use the proved source flat resolution and flat-term K-flat preservation APIs."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteModelConstantScalarExtensionLiftComparison",
+  "date": "2026-10-28",
+  "group": "J3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-finite-model-derived-scalar-comparison",
+   "place": "Lift the flat-term K-flat resolution before comparing small and site-universe scalar extension."
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.CoefficientLiftKFlatResolution",
+  "file": "lean/Sheaf/Algebra/Homology/CoefficientLiftKFlatResolution.lean",
+  "declaration": "CochainComplex.exists_coefficientLift_kFlat_resolution",
+  "statement": "theorem CochainComplex.exists_coefficientLift_kFlat_resolution\n    {B : Type t} [CommRing B] (P : CochainComplex (ModuleCat.{t} B) ℤ) :\n    ∃ (R : CochainComplex (ModuleCat.{t} B) ℤ) (f : R ⟶ P),\n      QuasiIso f ∧ R.IsKFlatForTotalTensor ∧\n        CochainComplex.IsKFlatForTotalTensor\n        (((ModuleCat.uliftFunctor.{t + 1, t} B ⋙\n          ModuleCat.restrictScalars.{t + 1}\n            (ULift.ringEquiv : ULift.{t + 1} B ≃+* B).toRingHom).mapHomologicalComplex\n              (.up ℤ)).obj R)",
+  "branch": "sheaf-dag",
+  "by": "J3",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-d0409",
+  "group": "J3",
+  "result": "pass",
+  "landing": "20261027T234015-L-4161097",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-d0409",
+  "group": "J3",
+  "result": "pass",
+  "landing": "20261027T234015-L-4161097",
+  "kind": "interface",
+  "note": "independent cc review: withdrawn liftComparison/Core (false: Z→Z/2, P=(Z/2)[0] Tor_1 counterexample) and the rewritten parent finiteModel_derivedScalarComparison (signature byte-identical, axioms clean) plus new proved CoefficientLiftKFlatResolution, against their DAG nodes, the change record, the DAG/Lean citers and the 3b importer FiniteQuotientModelResidueComparison OK"
+ }
+}
