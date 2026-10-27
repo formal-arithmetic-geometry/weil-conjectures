@@ -1,0 +1,105 @@
+{
+ "id": "lem-sfb-quotient-section-pull-transport-extension-localization",
+ "kind": "statement",
+ "title": "Localization descent for the normalized section computation",
+ "statement": "For a fixed ordinary section witness e, equality of the normalized derived computation maps on flat-term K-flat complexes descends through the derived localization and holds for every complex.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YS and 06YU; resolving-class/localization descent in the quotient section pull transport proof"
+ },
+ "status": "split",
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Equality on the resolving class descends through the derived localization"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sfb-quotient-section-pull-transport-extension",
+   "place": "The localization step after extracting the ordinary section witness",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sfb-proper-base-change",
+ "proof": [
+  {
+   "text": "View both displayed composites as natural transformations on the derived category. The K-flat resolving class is a localization presentation, so equality on flat-term K-flat representatives descends to every complex by naturality and inversion of the localization counits.",
+   "uses": [
+    "lem-sfb-quotient-section-pull-transport-kflat"
+   ],
+   "elementary": false
+  }
+ ],
+ "stmt_deps": [
+  "def-sfb-quotient-section-tensor-data",
+  "lem-sfb-quotient-section-pull-transport-kflat"
+ ],
+ "proof_deps": [
+  "lem-sfb-quotient-section-pull-transport-kflat"
+ ],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.QuotientSectionPullTransportLocalization",
+  "file": "lean/Sheaf/Paper/QuotientSectionPullTransportLocalization.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.QuotientSectionTensor.section_pull_normalized_localization_descent",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.QuotientSectionTensor.section_pull_normalized_localization_descent"
+  ],
+  "statement": "theorem section_pull_normalized_localization_descent {X Y : Scheme.{u}} (f : X ⟶ Y)\n    (cX : ScalarSectionData a X) (cY : ScalarSectionData a Y)\n    (barLam : cY.model.T ⋙ derivedPullback Λ' f ≅\n      derivedPullback Λ f ⋙ cX.model.T)\n    (e : cY.model.E ⋙ pullback Λ' f ≅ pullback Λ f ⋙ cX.model.E)\n    (hflat : ∀ P : CochainComplex (modules Λ Y) ℤ,\n      (HomologicalComplex.quasiIso _ (.up ℤ)).kFlat P →\n      (∀ i : ℤ, ObjectProperty.flat (P.X i)) →\n      barLam.hom.app (DerivedCategory.Q.obj P) ≫\n          cX.model.T.map ((pullback Λ f).mapDerivedCategoryFactors.hom.app P) ≫\n          cX.model.ε.app (((pullback Λ f).mapHomologicalComplex (.up ℤ)).obj P) ≫\n          DerivedCategory.Q.map ((Functor.mapHomologicalComplexCompIso\n            (Iso.refl (pullback Λ f ⋙ cX.model.E)) (.up ℤ)).hom.app P) =\n        (derivedPullback Λ' f).map (cY.model.ε.app P) ≫\n          (pullback Λ' f).mapDerivedCategoryFactors.hom.app\n            ((cY.model.E.mapHomologicalComplex (.up ℤ)).obj P) ≫\n          DerivedCategory.Q.map\n            ((Functor.mapHomologicalComplexCompIso e (.up ℤ)).hom.app P)) :\n    ∀ P : CochainComplex (modules Λ Y) ℤ,\n      barLam.hom.app (DerivedCategory.Q.obj P) ≫\n          cX.model.T.map ((pullback Λ f).mapDerivedCategoryFactors.hom.app P) ≫\n          cX.model.ε.app (((pullback Λ f).mapHomologicalComplex (.up ℤ)).obj P) ≫\n          DerivedCategory.Q.map ((Functor.mapHomologicalComplexCompIso\n            (Iso.refl (pullback Λ f ⋙ cX.model.E)) (.up ℤ)).hom.app P) =\n        (derivedPullback Λ' f).map (cY.model.ε.app P) ≫\n          (pullback Λ' f).mapDerivedCategoryFactors.hom.app\n            ((cY.model.E.mapHomologicalComplex (.up ℤ)).obj P) ≫\n          DerivedCategory.Q.map\n            ((Functor.mapHomologicalComplexCompIso e (.up ℤ)).hom.app P)",
+  "branch": "sheaf-dag",
+  "by": "W3",
+  "date": "2026-10-28"
+ },
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.QuotientSectionPullTransportExtension",
+  "date": "2026-10-28",
+  "group": "W3"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "derived localization equality from K-flat representatives",
+   "results": "No exact specialized match; search returned DerivedCategory.instIsLocalizationCochainComplexIntQQuasiIsoUp and localization infrastructure.",
+   "date": "2026-10-28",
+   "verdict": "No exact match for the specialized normalized section composites."
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory.exists_kFlat_iso",
+   "results": "No hit for this specialized theorem.",
+   "date": "2026-10-28",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "grep",
+   "query": "kFlat.*(eq|ext)|localization.*descent",
+   "results": "No existing declaration for this specialized quotient section model interface.",
+   "date": "2026-10-28",
+   "verdict": "New intermediate statement required."
+  }
+ ],
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W3",
+  "result": "pass",
+  "landing": "20261027T234348-L-114444",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W3",
+  "result": "pass",
+  "landing": "20261027T234348-L-114444",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

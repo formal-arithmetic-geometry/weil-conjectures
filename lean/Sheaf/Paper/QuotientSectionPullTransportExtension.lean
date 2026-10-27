@@ -5,6 +5,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import Sheaf.Paper.QuotientSectionPullTransportKFlat
+import Sheaf.Paper.QuotientSectionPullTransportLocalization
 
 /-! # Localization extension for normalized quotient section pull transport -/
 
@@ -41,6 +42,9 @@ theorem section_pull_transport_extend_kflat {X Y : Scheme.{u}} (f : X ⟶ Y)
       derivedPullback Λ f ⋙ cX.model.T)
     (hflat : SectionPullNormalizedOnKFlat a f cX cY barLam) :
     SectionPullNormalized a f cX cY barLam := by
-  sorry
+  rcases hflat with ⟨e, hordinary, hcomputation⟩
+  refine ⟨e, hordinary, ?_⟩
+  exact section_pull_normalized_localization_descent
+    a f cX cY barLam e hcomputation
 
 end AlgebraicGeometry.ProEtale.QuotientSectionTensor
