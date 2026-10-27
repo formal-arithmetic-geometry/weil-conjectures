@@ -47,6 +47,32 @@ open ModuleRingedComparison
 variable [∀ T : Scheme.{u}, HasDerivedCategory.{u + 1} (modules Λ T)]
   [∀ T : Scheme.{u}, HasDerivedCategory.{u + 1} (modules Λ' T)]
 
+/-- The normalized section pullback comparison exists for the supplied endpoint models.
+Source: Stacks 03EL, 06YY, 0D6D and 0G7E; parent proof step 8.
+(blueprint: lem-sfb-quotient-section-pull-transport-section-normalized).
+Proof: conjugate the ordinary pullback comparison through the endpoint scalar models,
+then descend its counit-compatible derived comparison along flat-term K-flat resolutions.
+Naturality and cancellation of the localization counits give SectionPullNormalized. -/
+theorem section_pull_transport_section_normalized {X Y : Scheme.{u}} (f : X ⟶ Y)
+    (cX : ScalarSectionData a X) (cY : ScalarSectionData a Y)
+    (hcX : ScalarSectionNormalized a X cX) (hcY : ScalarSectionNormalized a Y cY)
+    (lam : D a Y ⋙ L Λ' f ≅ L Λ f ⋙ D a X) (hlam : PullNormalized a f lam) :
+    ∃ barLam : cY.model.T ⋙ derivedPullback Λ' f ≅ derivedPullback Λ f ⋙ cX.model.T,
+      SectionPullNormalized a f cX cY barLam := by sorry
+
+/-- The derived section comparison satisfies the pull condition once its normalized
+counit square is fixed. Source: Stacks 06YY, 0D6D and 07A6; parent proof step 8.
+(blueprint: lem-sfb-quotient-section-pull-transport-condition).
+Proof: paste the scalar and geometric computation squares with PullNormalized and cancel
+the invertible computation counits on K-flat representatives; localization descent and
+naturality extend the equality to every derived object. -/
+theorem section_pull_transport_condition_of_normalized {X Y : Scheme.{u}} (f : X ⟶ Y)
+    (cX : ScalarSectionData a X) (cY : ScalarSectionData a Y)
+    (lam : D a Y ⋙ L Λ' f ≅ L Λ f ⋙ D a X) (hlam : PullNormalized a f lam)
+    (barLam : cY.model.T ⋙ derivedPullback Λ' f ≅ derivedPullback Λ f ⋙ cX.model.T)
+    (hnorm : SectionPullNormalized a f cX cY barLam) :
+    PullSectionCondition a f cX cY lam barLam := by sorry
+
 /-- The same normalized scalar models realize the specified scalar/pullback map.
 Source: Stacks 03EL, 06YY, 0D6D and 0G7E; parent proof step 8.
 (blueprint: lem-sfb-quotient-section-pull-transport).
@@ -70,6 +96,11 @@ theorem section_pull_transport {X Y : Scheme.{u}} (f : X ⟶ Y)
     (lam : D a Y ⋙ L Λ' f ≅ L Λ f ⋙ D a X) (hlam : PullNormalized a f lam) :
     ∃ barLam : cY.model.T ⋙ derivedPullback Λ' f ≅ derivedPullback Λ f ⋙ cX.model.T,
       PullSectionCondition a f cX cY lam barLam ∧
-        SectionPullNormalized a f cX cY barLam := by sorry
+        SectionPullNormalized a f cX cY barLam   := by
+  obtain ⟨barLam, hnorm⟩ := section_pull_transport_section_normalized
+    a f cX cY hcX hcY lam hlam
+  exact ⟨barLam, section_pull_transport_condition_of_normalized
+    a f cX cY lam hlam barLam hnorm, hnorm⟩
+
 
 end AlgebraicGeometry.ProEtale.QuotientSectionTensor
