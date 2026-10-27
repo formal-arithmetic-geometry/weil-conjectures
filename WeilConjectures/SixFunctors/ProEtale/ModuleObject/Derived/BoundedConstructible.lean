@@ -14,6 +14,7 @@ public import WeilConjectures.ConstructibleSheaf.ProEtaleModule.DerivedCategory
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructibleIhom
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructibleUpperStar
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.FieldCoefficientTensorHypotheses
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.IntegralLisseHypotheses
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Hom
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.LowerShriek
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Monoidal
@@ -781,7 +782,8 @@ instance isMonoidal_boundedConstructible [Fact (ringChar k ≠ ℓ)] :
   have : IsNoetherian X.left := {}
   { prop_unit := boundedConstructible_tensorUnit _ X.left
     prop_tensor _ _ hK hL :=
-      boundedConstructible_tensorObj (tensorHypotheses_padicAlgClRingObj ℓ) hK hL }
+      boundedConstructible_tensorObj
+        (tensorHypotheses_padicAlgClRingObj ℓ).lisseTensorHypotheses hK hL }
 
 -- An instance proved by `sorry` keeps only the section variables its statement mentions, so its
 -- hypotheses are restated as binders; they repeat section variables.
@@ -794,7 +796,8 @@ geometric point of characteristic `3`, `Ext^i_{ℤ/4}(ℤ/2, ℤ/2) = ℤ/2` for
 instance isMonoidalClosed_boundedConstructible [Fact (ringChar k ≠ ℓ)] :
     (boundedConstructible
       (condensedRingObj (Profinite.padicAlgClRingObj ℓ) X.left)).IsMonoidalClosed :=
-  ⟨fun _ _ hK hL ↦ boundedConstructible_ihom_of_over (tensorHypotheses_padicAlgClRingObj ℓ) X
+  ⟨fun _ _ hK hL ↦ boundedConstructible_ihom_of_over
+    (tensorHypotheses_padicAlgClRingObj ℓ).lisseHypotheses X
     (fun _ _ _ _ _ _ _ _ j _ A hA ↦ boundedConstructible_rightDerivedLowerStar_obj ℓ j ⟨A, hA⟩)
     hK hL⟩
 
@@ -885,7 +888,8 @@ instance isMonoidal_boundedConstructible
   have : IsNoetherian X.left := {}
   { prop_unit := boundedConstructible_tensorUnit _ X.left
     prop_tensor _ _ hK hL :=
-      boundedConstructible_tensorObj (tensorHypotheses_continuousMapRingObj ℓ E) hK hL }
+      boundedConstructible_tensorObj
+        (tensorHypotheses_continuousMapRingObj ℓ E).lisseTensorHypotheses hK hL }
 
 -- An instance proved by `sorry` keeps only the section variables its statement mentions, so its
 -- hypotheses are restated as binders; they repeat section variables.
@@ -898,7 +902,8 @@ instance isMonoidalClosed_boundedConstructible
     [Fact (ringChar k ≠ ℓ)] :
     (boundedConstructible
       (condensedRingObj (Profinite.continuousMapRingObj E) X.left)).IsMonoidalClosed :=
-  ⟨fun _ _ hK hL ↦ boundedConstructible_ihom_of_over (tensorHypotheses_continuousMapRingObj ℓ E) X
+  ⟨fun _ _ hK hL ↦ boundedConstructible_ihom_of_over
+    (tensorHypotheses_continuousMapRingObj ℓ E).lisseHypotheses X
     (fun _ _ _ _ _ _ _ _ j _ A hA ↦ boundedConstructible_rightDerivedLowerStar_obj ℓ E j ⟨A, hA⟩)
     hK hL⟩
 
@@ -989,7 +994,12 @@ instance isMonoidal_boundedConstructible
     [Fact (ringChar k ≠ ℓ)] :
     (boundedConstructible
       (condensedRingObj (Profinite.padicIntegersRingObj ℓ E) X.left)).IsMonoidal :=
-  sorry
+  have : IsLocallyNoetherian X.left := LocallyOfFiniteType.isLocallyNoetherian X.hom
+  have : CompactSpace X.left := QuasiCompact.compactSpace_of_compactSpace X.hom
+  have : IsNoetherian X.left := {}
+  { prop_unit := boundedConstructible_tensorUnit _ X.left
+    prop_tensor _ _ hK hL :=
+      boundedConstructible_tensorObj (lisseHypotheses ℓ E).toLisseTensorHypotheses hK hL }
 
 -- An instance proved by `sorry` keeps only the section variables its statement mentions, so its
 -- hypotheses are restated as binders; they repeat section variables.
@@ -1003,7 +1013,9 @@ instance isMonoidalClosed_boundedConstructible
     [Fact (ringChar k ≠ ℓ)] :
     (boundedConstructible
       (condensedRingObj (Profinite.padicIntegersRingObj ℓ E) X.left)).IsMonoidalClosed :=
-  sorry
+  ⟨fun _ _ hK hL ↦ boundedConstructible_ihom_of_over (lisseHypotheses ℓ E) X
+    (fun _ _ _ _ _ _ _ _ j _ A hA ↦ boundedConstructible_rightDerivedLowerStar_obj ℓ E j ⟨A, hA⟩)
+    hK hL⟩
 
 /-- The derived tensor product `- ⊗ᴸ - : Dᵇc(X)⟦𝒪̲_E⟧ ⥤ Dᵇc(X)⟦𝒪̲_E⟧ ⥤ Dᵇc(X)⟦𝒪̲_E⟧` on bounded
 constructible complexes: the tensor product of the monoidal structure on the
