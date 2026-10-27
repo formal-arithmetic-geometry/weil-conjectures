@@ -2,7 +2,7 @@
  "id": "new-trf-ambient-quotient-scalar-normalization",
  "kind": "statement",
  "title": "Ambient scalar quotient normalization",
- "statement": "theorem ambientQuotientScalarModel_normalization_exists (l : ℕ) [Fact l.Prime]\n    (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]\n    (L : Type u) [Field L] [Algebra ℚ_[l] L] [FiniteDimensional ℚ_[l] L]\n    (ι : E →ₐ[ℚ_[l]] L) (X : Scheme.{t})\n    (S : CoefficientDerivedSystemCalculus l E X)\n    (ρ : IntegralComparisonRoosModel l L X)\n    (realization : integralScalarExtensionOfUniverses l E L ι X ≅\n      S.reduction ⋙ integralComparisonDerivedSequenceScalar l E L ι X ⋙\n        coefficientSequenceLimit l L X) :\n    IsIntegralComparisonScalarNormalized l E L ι X S ρ realization",
+ "statement": "theorem ambientQuotientScalarModel_normalization_exists (l : ℕ) [Fact l.Prime]\n    (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]\n    (L : Type u) [Field L] [Algebra ℚ_[l] L] [FiniteDimensional ℚ_[l] L]\n    (ι : E →ₐ[ℚ_[l]] L) (X : Scheme.{t})\n    (S : CoefficientDerivedSystemCalculus l E X)\n    (ρ : IntegralComparisonRoosModel l L X) :\n    ∃ realization : integralScalarExtensionOfUniverses l E L ι X ≅\n        S.reduction ⋙ integralComparisonDerivedSequenceScalar l E L ι X ⋙\n          coefficientSequenceLimit l L X,\n      IsIntegralComparisonScalarNormalized l E L ι X S ρ realization",
  "stmt_deps": [
   "def-trf-integral-comparison-realization-models",
   "def-weil-l-adic-coefficient-extension"
@@ -13,16 +13,49 @@
  },
  "proof": [
   {
-   "text": "Transport the balanced finite quotient tensor association through coherent quotient comparisons and the normalized Roos bridge; the unit-tensor equation gives whole-system normalization.",
-   "uses": [],
+   "text": "Use CompletionUnit.fixedCalculusModels to obtain an ordinary quotient model M and its normalized derived comparison D for the supplied S, without imposing invertibility of l on the scheme. Form the ordinary scalar tower isomorphism by balanced tensor association.",
+   "uses": [
+    "lem-trf-completion-unit-fixed-calculus-models",
+    "lem-trf-ordinary-quotient-scalar-tower-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Reuse the primitive scalar construction's proved sequenceKFlat_of_evaluations helper: evaluated quotients of a good complex are K-flat, and componentwise tensor and exactness imply whole-system K-flatness. Thus the universal derived scalar cochain counit computes there. Compose with the supplied normalized Roos comparison and balanced association to obtain a natural isomorphism on good complexes. The universal good-complex localization descends it to a chosen ambient realization.",
+   "uses": [
+    "lem-trf-primitive-quotient-scalar-model-existence",
+    "lem-coef-semilinear-derived-sections",
+    "lem-coef-derived-system-evaluation-calculus",
+    "def-sfb-derived-change-of-rings-cochain-model",
+    "lem-weil-integral-scalar-extension-well-defined",
+    "lem-weil-pbc-ringed-topos-kflat-pullback"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Whole-system coherence compares any simultaneous quotient presentation to M by a strict chain isomorphism a. Transport the balanced scalar tower comparison along a inverse. Its generator formula is the prescribed tensor normalization. Naturality of the scalar counit and Roos comparison moves Q(a) across the comparison, cancels it against a inverse, and reduces the whole-system equation to the descended comparison equation. Return this chosen realization together with normalization.",
+   "uses": [
+    "lem-trf-coherent-quotient-model-comparison",
+    "lem-trf-ordinary-quotient-scalar-tower-comparison"
+   ],
    "elementary": false
   }
  ],
- "proof_deps": [],
+ "proof_deps": [
+  "lem-trf-completion-unit-fixed-calculus-models",
+  "lem-trf-ordinary-quotient-scalar-tower-comparison",
+  "lem-trf-primitive-quotient-scalar-model-existence",
+  "lem-coef-semilinear-derived-sections",
+  "lem-coef-derived-system-evaluation-calculus",
+  "def-sfb-derived-change-of-rings-cochain-model",
+  "lem-weil-integral-scalar-extension-well-defined",
+  "lem-weil-pbc-ringed-topos-kflat-pullback",
+  "lem-trf-coherent-quotient-model-comparison"
+ ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Final common-stage transport paragraph: normalization part."
+  "place": "Stacks 06YY and 0941, normalized whole-system scalar descent; reuse of the proved primitive scalar construction with fixedCalculusModels, D5, 2026-10-28."
  },
  "mathlib_searches": [
   {
@@ -72,7 +105,7 @@
   "module": "Sheaf.Paper.AmbientQuotientScalarNormalizationExistence",
   "file": "lean/Sheaf/Paper/AmbientQuotientScalarNormalizationExistence.lean",
   "declaration": "WeilConjectures.ambientQuotientScalarModel_normalization_exists",
-  "statement": "theorem ambientQuotientScalarModel_normalization_exists (l : ℕ) [Fact l.Prime]\n    (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]\n    (L : Type u) [Field L] [Algebra ℚ_[l] L] [FiniteDimensional ℚ_[l] L]\n    (ι : E →ₐ[ℚ_[l]] L) (X : Scheme.{t})\n    (S : CoefficientDerivedSystemCalculus l E X)\n    (ρ : IntegralComparisonRoosModel l L X)\n    (realization : integralScalarExtensionOfUniverses l E L ι X ≅\n      S.reduction ⋙ integralComparisonDerivedSequenceScalar l E L ι X ⋙\n        coefficientSequenceLimit l L X) :\n    IsIntegralComparisonScalarNormalized l E L ι X S ρ realization",
+  "statement": "theorem ambientQuotientScalarModel_normalization_exists (l : ℕ) [Fact l.Prime]\n    (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]\n    (L : Type u) [Field L] [Algebra ℚ_[l] L] [FiniteDimensional ℚ_[l] L]\n    (ι : E →ₐ[ℚ_[l]] L) (X : Scheme.{t})\n    (S : CoefficientDerivedSystemCalculus l E X)\n    (ρ : IntegralComparisonRoosModel l L X) :\n    ∃ realization : integralScalarExtensionOfUniverses l E L ι X ≅\n        S.reduction ⋙ integralComparisonDerivedSequenceScalar l E L ι X ⋙\n          coefficientSequenceLimit l L X,\n      IsIntegralComparisonScalarNormalized l E L ι X S ρ realization",
   "branch": "sheaf-dag",
   "by": "A9",
   "date": "2026-10-28"
@@ -90,11 +123,36 @@
  "reviewed_proof": {
   "date": "2026-10-27",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "A9",
+  "reviewer": "C-03d2c",
+  "group": "D5",
   "result": "pass",
-  "landing": "20261027T205748-L-1611791",
+  "landing": "20261027T233856-L-4128331",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent cc review: delivered ambientQuotientScalarModel_normalization_exists (∃ realization) against IsIntegralComparisonScalarNormalized, the primitive precedent proof, both DAG nodes, the change record, and the sole importer AmbientComparisonSystemExistence (3b OK)"
+ },
+ "statement_change": {
+  "date": "2026-10-28",
+  "by": "D5 stage 2",
+  "old_statement": "theorem ambientQuotientScalarModel_normalization_exists (l : ℕ) [Fact l.Prime]\n    (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]\n    (L : Type u) [Field L] [Algebra ℚ_[l] L] [FiniteDimensional ℚ_[l] L]\n    (ι : E →ₐ[ℚ_[l]] L) (X : Scheme.{t})\n    (S : CoefficientDerivedSystemCalculus l E X)\n    (ρ : IntegralComparisonRoosModel l L X)\n    (realization : integralScalarExtensionOfUniverses l E L ι X ≅\n      S.reduction ⋙ integralComparisonDerivedSequenceScalar l E L ι X ⋙\n        coefficientSequenceLimit l L X) :\n    IsIntegralComparisonScalarNormalized l E L ι X S ρ realization",
+  "what": "STATEMENT-DISPUTED: the previous theorem normalized an arbitrary realization isomorphism. A nontrivial scalar-unit twist changes the required Roos equation while the strict tensor-generator formula fixes q. Choose the realization together with normalization, as the source construction does, instead. The only consumer needs exactly this existential result; its own scalar-model statement is preserved.",
+  "source": {
+   "document": "literature/stacks-project/sites-cohomology.tex",
+   "place": "Tags 06YY and 0941: construct the derived scalar comparison on K-flat quotient systems and descend it, retaining its tensor-unit normalization."
+  },
+  "citers": [
+   {
+    "id": "lem-trf-ambient-quotient-scalar-model-existence",
+    "holds": true,
+    "note": "Its unchanged model-existence statement packages the chosen realization and normalization returned together. The same delivery adapts its proof and removes the separate unnormalized-realization dependency."
+   }
+  ],
+  "old_proof": [
+   {
+    "text": "Transport the balanced finite quotient tensor association through coherent quotient comparisons and the normalized Roos bridge; the unit-tensor equation gives whole-system normalization.",
+    "uses": [],
+    "elementary": false
+   }
+  ],
+  "old_proof_deps": []
  }
 }
