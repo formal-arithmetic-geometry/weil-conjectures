@@ -1,0 +1,114 @@
+{
+ "id": "lem-sf-finite-partial-tensor-identity-fixed-coordinates",
+ "kind": "statement",
+ "status": "split",
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-pf-coherence",
+ "title": "Fixed-coordinate identity-composition square for finite partial tensor",
+ "statement": "After applying the full fixed-coefficient coordinate functor and postcomposing with targetCoordinates, the finite partial tensor identity-composition component equation holds.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-prop-sf-pf-coherence/prop-sf-pf-coherence.proof.md",
+  "place": "First paragraph, fixed-coefficient expansion of the identity-composition component calculation."
+ },
+ "stmt_deps": [
+  "def-sf-finite-partial-pullback-tensor",
+  "def-sf-finite-projection-fixed-coordinates",
+  "lem-sf-finite-pullback-tensor-fixed-coordinates",
+  "lem-sf-finite-derived-pullback-tensor-identity-composition"
+ ],
+ "proof": [
+  {
+   "text": "Expand each pullbackTensorComparison with pullbackTensor_fixed_coordinates. Expand the target coordinate comparison and the two pullback compositors, then use functoriality, unit naturality and cancellation of the realization units. The remaining fixed-coefficient square is exactly leftDerivedUpperStarTensorComparison_identityComposition.",
+   "uses": [
+    "lem-sf-finite-pullback-tensor-fixed-coordinates",
+    "lem-sf-finite-derived-pullback-tensor-identity-composition",
+    "def-sf-finite-projection-fixed-coordinates"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-finite-pullback-tensor-fixed-coordinates",
+  "lem-sf-finite-derived-pullback-tensor-identity-composition",
+  "def-sf-finite-projection-fixed-coordinates"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-prop-sf-pf-coherence/prop-sf-pf-coherence.proof.md",
+  "place": "First paragraph, fixed-coefficient expansion of the identity-composition component calculation."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "leftDerivedUpperStarTensorComparison_comp pullbackTensor_fixed_coordinates",
+   "results": "Found the fixed-coordinate comparison and the fixed-coefficient identity composition theorem used by the coordinate square.",
+   "date": "2026-10-28",
+   "verdict": "exact project declarations used"
+  },
+  {
+   "tool": "loogle",
+   "query": "Functor.map_comp category associativity cancellation isomorphism morphism",
+   "results": "Only generic functoriality and categorical cancellation lemmas; no specialized finite partial tensor theorem.",
+   "date": "2026-10-28",
+   "verdict": "generic lemmas only"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "fixed coefficient pullback tensor identity composition square",
+   "results": "No external match; the project fixed-coefficient theorem is the applicable declaration.",
+   "date": "2026-10-28",
+   "verdict": "no Mathlib match"
+  }
+ ],
+ "mathlib_match": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FinitePartialTensorIdentityComponent",
+  "date": "2026-10-28",
+  "group": "E1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sf-finite-partial-tensor-identity-component",
+   "place": "Fixed-coefficient coordinate expansion",
+   "via": [
+    "lem-sf-finite-partial-tensor-identity-component"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FinitePartialTensorIdentityComponentCoordinates",
+  "file": "lean/Sheaf/Paper/FinitePartialTensorIdentityComponentCoordinates.lean",
+  "declaration": "WeilConjectures.finitePartialTensor_identityComponent_coordinates",
+  "declarations": [
+   "WeilConjectures.finitePartialTensor_identityComponent_coordinates"
+  ],
+  "statement": "theorem finitePartialTensor_identityComponent_coordinates (S : SixFunctorFiniteOperations D C E n hn) (X : SixFunctorSpace D) : let U := S.finite.pull (𝟙 X) let V := CompactSupportFiniteProjection.torPull S (𝟙 X) let T := Functor.uncurry.obj (CompactSupportFiniteProjection.partialTensor S X) let c : ∀ M, U.obj M ≅ U.obj (U.obj M) := fun M ↦ eqToIso (congrArg (fun f ↦ (S.finite.pull f).obj M) (Category.id_comp (𝟙 X)).symm) ≪≫ (S.finite.pullComposition (𝟙 X) (𝟙 X)).app M let d : ∀ L, V.obj L ≅ V.obj (V.obj L) := fun L ↦ eqToIso (congrArg (fun f ↦ (CompactSupportFiniteProjection.torPull S f).obj L) (Category.id_comp (𝟙 X)).symm) ≪≫ CompactSupportFiniteProjection.torPullComposition S (𝟙 X) (𝟙 X) L ∀ (M : sixFunctorFiniteCategory D C E n hn X) (L : finiteTorConstructibleCategory C.l E n hn X.obj.left), (CompactSupportFiniteProjection.coordinates (C := C) (E := E) (n := n) (hn := hn) X).map ((CompactSupportFiniteProjection.pullbackTensorComparison S (𝟙 X) M L).hom ≫ T.map (Prod.mkHom (c M).hom (d L).hom)) ≫ (CompactSupportFiniteProjection.targetCoordinates S (𝟙 X) (U.obj (U.obj M)) (V.obj L)).hom = (CompactSupportFiniteProjection.coordinates (C := C) (E := E) (n := n) (hn := hn) X).map ((c (T.obj (M, L))).hom ≫ U.map ((CompactSupportFiniteProjection.pullbackTensorComparison S (𝟙 X) M L).hom) ≫ (CompactSupportFiniteProjection.pullbackTensorComparison S (𝟙 X) (U.obj M) (V.obj L)).hom) ≫ (CompactSupportFiniteProjection.targetCoordinates S (𝟙 X) (U.obj (U.obj M)) (V.obj L)).hom",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261027T233906-L-4132468",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261027T233906-L-4132468",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

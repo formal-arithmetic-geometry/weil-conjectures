@@ -6,6 +6,7 @@ module
 
 public import Sheaf.Paper.FinitePartialPullbackTensor
 import Sheaf.Paper.FiniteDerivedPullbackTensorIdentityComposition
+import Sheaf.Paper.FinitePartialTensorIdentityComponentCoordinates
 
 /-! The component composition equation for the finite partial tensor comparison.
 (blueprint: lem-sf-finite-partial-tensor-identity-component) -/
@@ -51,6 +52,15 @@ theorem finitePartialTensor_identityComponent
           U.map ((CompactSupportFiniteProjection.pullbackTensorComparison S (𝟙 X) M L).hom) ≫
           (CompactSupportFiniteProjection.pullbackTensorComparison S (𝟙 X)
             (U.obj M) (V.obj L)).hom := by
-  sorry
+  dsimp only
+  intro M L
+  apply (CompactSupportFiniteProjection.coordinates (C := C) (E := E) (n := n)
+    (hn := hn) X).map_injective
+  simp only [Functor.map_comp]
+  apply (cancel_mono (CompactSupportFiniteProjection.targetCoordinates S (𝟙 X)
+    ((S.finite.pull (𝟙 X)).obj ((S.finite.pull (𝟙 X)).obj M))
+    ((CompactSupportFiniteProjection.torPull S (𝟙 X)).obj L)).hom).1
+  simpa only [Functor.map_comp, Category.assoc] using
+    (finitePartialTensor_identityComponent_coordinates S X M L)
 
 end WeilConjectures
