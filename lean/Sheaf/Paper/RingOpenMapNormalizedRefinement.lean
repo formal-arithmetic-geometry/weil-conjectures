@@ -6,6 +6,8 @@ module
 
 public import Sheaf.Paper.ConstructibleExceptionalCoefficientAssemblyData
 public import Sheaf.Paper.RefinementOpenRestriction
+import Sheaf.Paper.RingOpenMapNormalizedRefinementFinite
+import Sheaf.Paper.RingOpenMapNormalizedRefinementIntegral
 
 /-! # Normalized objectwise refinement comparisons -/
 
@@ -56,6 +58,10 @@ theorem exists_normalized_refinement_iso
             ((RingStage.inclusion.{u, v} l Ω X s).obj K) =
         (PurCompactSupport.openDerivedAdjunction (s.coefficients l) c.i).unit.app
           ((RingStage.inclusion.{u, v} l Ω X s).obj K) := by
-  sorry
+  cases s with
+  | finite E n =>
+      exact exists_normalized_refinement_iso_finite l Ω D hl r E n hi K
+  | integral E =>
+      exact exists_normalized_refinement_iso_integral l Ω D hl r E hi K
 
 end WeilConjectures.ConstructibleExceptionalCoefficients
