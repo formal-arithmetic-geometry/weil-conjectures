@@ -1,54 +1,52 @@
 ## What changed
 
-Restored the assigned quarantined module
-`Sheaf.Paper.CoefficientTowerShriekInterfaces` at its original Lean path, preserving
-all its public declarations, structure fields, defining terms and public imports.
-The original global disable/re-register pair for the generic essentially-small
-sheafification instance is replaced by a section-scoped removal. The inherited
-instance is restored automatically when the section ends. The coefficient-universe
-elaboration environment inside the interface remains the same.
+Restored `lean/Sheaf/Paper/CoefficientTowerShriekInterfaces.lean` from its quarantine
+archive. Repaired `AlgebraicGeometry.ProEtale.SpTowerCalculus.levelComparison` by
+transferring coefficient-evaluation additivity along `q.ordinaryEvaluation T n` with
+Mathlib's `Functor.additive_of_iso`, instead of the failing binary-product instance
+search. This is the only change to the archived Lean text. All original declarations,
+imports, structure fields and normalization equations are retained.
 
+The repaired item compiles on the server in 31.4 seconds with no diagnostics.
+All seven current direct importers compile unchanged against the repaired item:
+`CoefficientTowerGeometricComposition`, `CoefficientTowerSectionCoordinates`,
+`CoefficientTowerTransitionCompatibility`, `CoefficientTowerShriekCalculus`,
+`FieldShriekSystemModels`, `SmoothPurityTowerBinaryCounitPredicates` and
+`TowerIntrinsicShriekTransition` (all under `Sheaf.Paper`). Each file stays within
+60 seconds; the longest consumer took 54.5 seconds. The item took 45.0 seconds in
+this ordered validation set. Validation copies were removed from the sandbox.
+The live source reappeared during validation with the archived failing proof;
+this delivery still makes the substantive one-line repair to that source.
 Change record:
-`coord/changes/B2-coefficient-tower-shriek-interface-restoration.md`.
-The existing node `def-sp-coefficient-tower-shriek-interfaces`, its Lean attachment,
-statement dependencies, and the unit route remain unchanged.
+`coord/changes/B2-coefficient-tower-evaluation-additive-repair.md`.
 
 ## Proved and sorry left
 
-This is an assigned definition repair with zero holes. Original `sorry` count: 0;
-closed: 0; added: 0; left: 0. No theorem is split off. All original explicit
-constructions remain explicit constructions.
-
-The unchanged archived module compiled on the project server in 15.8 seconds.
-The scope behavior was independently checked in a small Lean file: after removing
-`instAddNat` inside a section, `#synth Add Nat` succeeds after the section closes.
-The repaired interface and all four unchanged archived consumers compiled together
-in import order on the server. The reported wall times were 86.3, 54.5, 54.0, 55.6
-and 71.3 seconds respectively; all five returned success, with no Lean diagnostics.
-Only the interface is delivered; the consumer copies were moved out of `lean/`
-after these compatibility checks. The delivery tool performs the final axiom probe
-and preflight.
+This is a zero-hole definition repair. Holes before: 0. Holes closed: 0.
+Holes added: 0. Holes remaining: 0. No theorem is split off.
+The repaired local additivity proof in `levelComparison` is complete.
 
 ## No longer needed
 
-None. No import, declaration, node, module, or planned dependency is pruned. In
-particular, the four quarantined consumers remain needed. They were checked from
-their archived source rather than treating their absence from `lean/` as withdrawal.
+None. No import, module, declaration, DAG dependency or unit step is pruned.
+The existing definition node `def-sp-coefficient-tower-shriek-interfaces` retains its
+Lean attachment and all dependencies. The strict-tower unit route is unchanged.
 
 ## Where the brief, the DAG or earlier work was wrong
 
-The item contains no `sorry`; the rework assignment is restoration of its definitions.
-The old cluster-build diagnostic does not reproduce against the current published
-server build: the unmodified archive compiles. The packet nevertheless makes a
-concrete elaboration-scope repair rather than only rebasing or returning an empty
-module. It removes the explicit global instance re-registration and scopes the
-existing instance removal, preserving the intended importer environment.
+Zero textual `sorry`s did not make this item complete: the current server rework
+assignment records a real global-build failure at line 186. The binary-product
+additivity argument fails instance search for coefficient evaluation in that build.
+The already supplied ordinary evaluation isomorphism gives a direct Mathlib proof.
+No mathematical statement or construction was found false, and no target was changed.
 
-The first local-service compile failed because its mirror lacked `Mathlib.olean`;
-explicit server compilation succeeded. An attempted `[local -instance]` spelling
-was rejected by Lean and replaced by the tested enclosing-section form. Neither
-failed experiment is included in the delivered module. Provider interruptions did
-not change the sandbox or result in a push.
+## Related modules compiled before delivery
+
+9 related module(s) compiled against this delivery by deliver3.py: 9 OK.
+
+```json
+{"capped": false, "direct": 8, "left_out": 0, "own": {"Sheaf.Paper.CoefficientTowerShriekInterfaces": "f8f5a527626070c8eaba26d7bc2cded25a3134e7"}, "results": {"Sheaf.Paper.CoefficientTowerGeometricComposition": {"hash": "b85472aec4dbc36e39ac332cad1ad21bb7c6d9f2", "status": "OK"}, "Sheaf.Paper.CoefficientTowerSectionCoordinates": {"hash": "04a4f6fde369e5e23179eaa458d3e40b25ad66bb", "status": "OK"}, "Sheaf.Paper.CoefficientTowerShriekCalculus": {"hash": "2f67bbae6353052d8a6d665a067630fbe641fa20", "status": "OK"}, "Sheaf.Paper.CoefficientTowerTransitionCompatibility": {"hash": "b7cf9552ddc275956a0ad2af1a151ff0de61324d", "status": "OK"}, "Sheaf.Paper.FieldShriekSystemComparison": {"hash": "a64b07d39146c1ade11d2aeb09c6eddfab1c213d", "status": "OK"}, "Sheaf.Paper.FieldShriekSystemModels": {"hash": "2f1887ef99fc01e69d1558d52def6bac9eb48bbf", "status": "OK"}, "Sheaf.Paper.SmoothPurityTowerBinaryCounitPredicates": {"hash": "54f6ab6b2011a04e2aa25c365077a503baa2ea4e", "status": "OK"}, "Sheaf.Paper.SmoothPurityTowerReductionTranspose": {"hash": "fc6ab4958ccf7eed6ceedabcf60294a97a5ebf58", "status": "OK"}, "Sheaf.Paper.TowerIntrinsicShriekTransition": {"hash": "3e0b3ba3866d330af871dd00c3c7f50a9f6e40f1", "status": "OK"}}, "seconds": 108, "time": "2026-10-28T02:53:35+0800", "transitive": 1, "version": 1}
+```
 
 ## Second reading by B2
 
