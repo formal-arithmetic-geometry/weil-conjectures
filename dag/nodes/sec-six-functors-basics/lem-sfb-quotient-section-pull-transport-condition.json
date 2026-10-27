@@ -7,7 +7,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "The parent transport proof, split into existence and compatibility components."
+  "place": "Tags 06YY, 0D6D and 07A6: universal computation counits, K-flat resolution, and naturality; H1 proof of the normalized endpoint transport."
  },
  "mathlib_searches": [
   {
@@ -39,21 +39,32 @@
  "id": "lem-sfb-quotient-section-pull-transport-condition",
  "kind": "statement",
  "title": "Compatibility of the normalized section pullback comparison",
- "statement": "theorem section_pull_transport_condition_of_normalized {X Y : Scheme.{u}} (f : X ⟶ Y)\n    (cX : ScalarSectionData a X) (cY : ScalarSectionData a Y)\n    (lam : D a Y ⋙ L Λ' f ≅ L Λ f ⋙ D a X) (hlam : PullNormalized a f lam)\n    (barLam : cY.model.T ⋙ derivedPullback Λ' f ≅ derivedPullback Λ f ⋙ cX.model.T)\n    (hnorm : SectionPullNormalized a f cX cY barLam) :\n    PullSectionCondition a f cX cY lam barLam",
+ "statement": "theorem section_pull_transport_condition_of_normalized {X Y : Scheme.{u}} (f : X ⟶ Y)\n    (cX : ScalarSectionData a X) (cY : ScalarSectionData a Y)\n    (hcX : ScalarSectionNormalized a X cX) (hcY : ScalarSectionNormalized a Y cY)\n    (lam : D a Y ⋙ L Λ' f ≅ L Λ f ⋙ D a X) (hlam : PullNormalized a f lam)\n    (barLam : cY.model.T ⋙ derivedPullback Λ' f ≅ derivedPullback Λ f ⋙ cX.model.T)\n    (hnorm : SectionPullNormalized a f cX cY barLam) :\n    PullSectionCondition a f cX cY lam barLam",
  "stmt_deps": [
-  "lem-sfb-quotient-section-pull-transport-section-normalized"
+  "def-sfb-quotient-section-tensor-data",
+  "def-sfb-internal-derived-scalar-comparisons"
  ],
  "proof": [
   {
-   "text": "Paste the scalar and geometric computation squares with PullNormalized. Cancel the invertible computation counits on flat-term K-flat representatives, and use localization descent and naturality to extend the equality to every derived object, obtaining PullSectionCondition.",
+   "text": "For a cochain representative whose internal scalar counit is invertible, apply section_pull_transport_condition_on_computed to the two endpoint normalizations and the supplied internal and section normalized comparisons.",
    "uses": [
-    "lem-sfb-quotient-section-pull-transport-section-normalized"
+    "lem-sfb-quotient-section-pull-transport-computed"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply the existing source-library CondensedRing.exists_kFlat_iso_Qh_obj to represent any derived object by a K-flat homotopy object. Scalar extension preserves K-flat quasi-isomorphisms, so Functor.derives_kFlat.isIso_of_isLeftDerivedFunctor makes its scalar counit invertible. Represent that homotopy object by a cochain complex and apply the preceding pasting argument. Naturality of the two composite transformations transports the equality across the representative isomorphism to the original object.",
+   "uses": [
+    "lem-sfb-extend-scalars-kflat",
+    "def-sfb-internal-derived-scalar-comparisons"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-sfb-quotient-section-pull-transport-section-normalized"
+  "lem-sfb-quotient-section-pull-transport-computed",
+  "lem-sfb-extend-scalars-kflat",
+  "def-sfb-internal-derived-scalar-comparisons"
  ],
  "lean": {
   "existing": false,
@@ -63,7 +74,7 @@
   "declarations": [
    "AlgebraicGeometry.ProEtale.QuotientSectionTensor.section_pull_transport_condition_of_normalized"
   ],
-  "statement": "theorem section_pull_transport_condition_of_normalized {X Y : Scheme.{u}} (f : X ⟶ Y)\n    (cX : ScalarSectionData a X) (cY : ScalarSectionData a Y)\n    (lam : D a Y ⋙ L Λ' f ≅ L Λ f ⋙ D a X) (hlam : PullNormalized a f lam)\n    (barLam : cY.model.T ⋙ derivedPullback Λ' f ≅ derivedPullback Λ f ⋙ cX.model.T)\n    (hnorm : SectionPullNormalized a f cX cY barLam) :\n    PullSectionCondition a f cX cY lam barLam",
+  "statement": "theorem section_pull_transport_condition_of_normalized {X Y : Scheme.{u}} (f : X ⟶ Y)\n    (cX : ScalarSectionData a X) (cY : ScalarSectionData a Y)\n    (hcX : ScalarSectionNormalized a X cX) (hcY : ScalarSectionNormalized a Y cY)\n    (lam : D a Y ⋙ L Λ' f ≅ L Λ f ⋙ D a X) (hlam : PullNormalized a f lam)\n    (barLam : cY.model.T ⋙ derivedPullback Λ' f ≅ derivedPullback Λ f ⋙ cX.model.T)\n    (hnorm : SectionPullNormalized a f cX cY barLam) :\n    PullSectionCondition a f cX cY lam barLam",
   "branch": "sheaf-dag",
   "by": "M3",
   "date": "2026-10-27"
@@ -81,18 +92,43 @@
  "reviewed_proof": {
   "date": "2026-10-27",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "R4",
-  "result": "pass",
-  "landing": "20261027T210219-L-1671745",
+  "reviewer": "C-b5e37",
+  "group": "H1",
+  "result": "fix",
+  "landing": "20261027T233957-L-4149584",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
-  "sorry_before": [
-   "AlgebraicGeometry.ProEtale.QuotientSectionTensor.section_pull_transport_condition_of_normalized",
-   "AlgebraicGeometry.ProEtale.QuotientSectionTensor.section_pull_transport_section_normalized"
+  "note": "independent cc review: section_pull_transport_condition_of_normalized (+hcX/hcY, change record) and 3 new proved modules against their nodes, QuotientSectionTensorData definitions, and the importer QuotientSectionTensorNormalization (sandbox compile OK, axioms clean)"
+ },
+ "statement_change": {
+  "date": "2026-10-28",
+  "by": "H1 stage 2",
+  "old_statement": "theorem section_pull_transport_condition_of_normalized {X Y : Scheme.{u}} (f : X ⟶ Y)\n    (cX : ScalarSectionData a X) (cY : ScalarSectionData a Y)\n    (lam : D a Y ⋙ L Λ' f ≅ L Λ f ⋙ D a X) (hlam : PullNormalized a f lam)\n    (barLam : cY.model.T ⋙ derivedPullback Λ' f ≅ derivedPullback Λ f ⋙ cX.model.T)\n    (hnorm : SectionPullNormalized a f cX cY barLam) :\n    PullSectionCondition a f cX cY lam barLam",
+  "what": "The endpoint derived isomorphisms in ScalarSectionData were unrestricted. SectionPullNormalized only constrains the ordinary isomorphisms and model counits, so changing an endpoint derived isomorphism preserves its hypotheses but changes the conclusion. Add ScalarSectionNormalized for both endpoints, already assumed by the parent transport theorem. The source comparison is normalized by these computation equations.",
+  "source": {
+   "document": "literature/stacks-project/sites-cohomology.tex",
+   "place": "Tags 06YS, 06YY, 0G7E, 07A4 and 07A6; extracted from the parent transport argument."
+  },
+  "citers": [
+   {
+    "id": "lem-sfb-quotient-section-pull-transport",
+    "holds": true,
+    "note": "The parent already assumes hcX and hcY and passes both to the corrected compatibility lemma. Its statement is unchanged."
+   }
   ],
-  "sorry_after": [
-   "AlgebraicGeometry.ProEtale.QuotientSectionTensor.section_pull_transport_condition_of_normalized"
+  "old_stmt_deps": [
+   "lem-sfb-quotient-section-pull-transport-section-normalized"
+  ],
+  "old_proof": [
+   {
+    "text": "Paste the scalar and geometric computation squares with PullNormalized. Cancel the invertible computation counits on flat-term K-flat representatives, and use localization descent and naturality to extend the equality to every derived object, obtaining PullSectionCondition.",
+    "uses": [
+     "lem-sfb-quotient-section-pull-transport-section-normalized"
+    ],
+    "elementary": false
+   }
+  ],
+  "old_proof_deps": [
+   "lem-sfb-quotient-section-pull-transport-section-normalized"
   ]
  }
 }

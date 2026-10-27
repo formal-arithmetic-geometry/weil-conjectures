@@ -1,0 +1,129 @@
+{
+ "id": "lem-sfb-quotient-section-pull-transport-computed",
+ "kind": "statement",
+ "title": "Pullback compatibility on scalar-computed cochain representatives",
+ "statement": "theorem section_pull_transport_condition_on_computed (a : Λ ⟶ Λ') [IsMonHom a]\n    {X Y : Scheme.{u}} (f : X ⟶ Y)\n    (cX : ScalarSectionData a X) (cY : ScalarSectionData a Y)\n    (hcX : ScalarSectionNormalized a X cX) (hcY : ScalarSectionNormalized a Y cY)\n    (lam : D a Y ⋙ L Λ' f ≅ L Λ f ⋙ D a X) (normalized : PullNormalized a f lam)\n    (barLam : cY.model.T ⋙ ModuleRingedComparison.derivedPullback Λ' f ≅\n      ModuleRingedComparison.derivedPullback Λ f ⋙ cX.model.T)\n    (hnorm : SectionPullNormalized a f cX cY barLam)\n    (P : CochainComplex (Modules Λ Y) ℤ)\n    [IsIso ((scalarCounit a Y).app ((HomotopyCategory.quotient _ (.up ℤ)).obj P))] :\n    (ModuleRingedComparison.derivedFunctor Λ' X).map\n        (lam.hom.app (DerivedCategory.Q.obj P)) ≫\n        cX.derived.hom.app ((L Λ f).obj (DerivedCategory.Q.obj P)) ≫\n        cX.model.T.map ((ModuleRingedComparison.derivedPullComparison Λ f).hom.app\n          (DerivedCategory.Q.obj P)) =\n      (ModuleRingedComparison.derivedPullComparison Λ' f).hom.app\n          ((D a Y).obj (DerivedCategory.Q.obj P)) ≫\n        (ModuleRingedComparison.derivedPullback Λ' f).map\n          (cY.derived.hom.app (DerivedCategory.Q.obj P)) ≫\n        barLam.hom.app ((ModuleRingedComparison.derivedFunctor Λ Y).obj\n          (DerivedCategory.Q.obj P))",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YY, 0D6D and 07A6; computation and pasting step of the parent transport argument."
+ },
+ "stmt_deps": [
+  "def-sfb-quotient-section-tensor-data",
+  "def-sfb-internal-derived-scalar-comparisons",
+  "def-pd-section-derived-tensor-data",
+  "def-pd-section-derived-realization"
+ ],
+ "proof": [
+  {
+   "text": "Use the proved scalar and geometric computation lemmas for the four sides of the diagram. Lift the ordinary square termwise and convert PullNormalized from homotopy to cochain computations.",
+   "uses": [
+    "def-sfb-quotient-section-tensor-data",
+    "def-sfb-internal-derived-scalar-comparisons",
+    "lem-sfb-quotient-section-pull-transport-scalar-computation",
+    "lem-sfb-quotient-section-pull-transport-geometric-computation",
+    "def-pd-section-module-operations-data",
+    "def-pd-section-derived-tensor-data",
+    "def-pd-section-derived-realization",
+    "sk-def-sfb-coefficient-comparisons",
+    "def-sfb-module-upper-star"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The scalar counit at P is invertible by hypothesis. Its scalar computation equation implies that the section scalar counit on the section image of P is invertible. The section pullback localization counit is also invertible. Postcompose the desired comparison equality with the resulting computation composite. Naturality, the ordinary square, the internal square and the section normalization identify the two composites, which can then be cancelled. All categorical pasting and cancellation are proved in private generic helpers.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-quotient-section-tensor-data",
+  "def-sfb-internal-derived-scalar-comparisons",
+  "lem-sfb-quotient-section-pull-transport-scalar-computation",
+  "lem-sfb-quotient-section-pull-transport-geometric-computation",
+  "def-pd-section-module-operations-data",
+  "def-pd-section-derived-tensor-data",
+  "def-pd-section-derived-realization",
+  "sk-def-sfb-coefficient-comparisons",
+  "def-sfb-module-upper-star"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "The scalar-computed representative step, split only to keep each proved module within the compilation limit."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Two normalized derived comparison squares commute on a complex where the scalar localization counit is invertible",
+   "results": "Eight generic results, including LocalizerMorphism.rightDerivedFunctorComparison_fac_app and Functor.mapHomologicalComplexUpToQuasiIsoFactorsh_hom_app. No specialized scalar/section pullback comparison.",
+   "date": "2026-10-28",
+   "verdict": "Use the existing project normalization equations and prove the categorical pasting."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.IsLeftDerivedFunctor",
+   "results": "Twelve generic results, including leftDerivedUnique, leftDerivedNatIso, leftDerivedNatTrans and the total-left-derived-functor instance.",
+   "date": "2026-10-28",
+   "verdict": "These describe derived functor uniqueness but do not directly supply the specified multi-square compatibility."
+  },
+  {
+   "tool": "grep",
+   "query": "PullSectionCondition|SectionPullNormalized",
+   "results": "No Mathlib hits. Local project search finds the interfaces and the proved private categorical helpers of SectionPullComputationOfRealization.",
+   "date": "2026-10-28",
+   "verdict": "Adapt the existing forward categorical diagram by cancellation to prove the reverse computation step."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.QuotientSectionPullTransport",
+  "group": "H1",
+  "date": "2026-10-28"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sfb-quotient-section-pull-transport-condition",
+   "place": "The computation on representatives before K-flat localization descent.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sfb-proper-base-change",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.QuotientSectionPullTransportComputed",
+  "file": "lean/Sheaf/Paper/QuotientSectionPullTransportComputed.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.QuotientSectionTensor.section_pull_transport_condition_on_computed",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.QuotientSectionTensor.section_pull_transport_condition_on_computed"
+  ],
+  "statement": "theorem section_pull_transport_condition_on_computed (a : Λ ⟶ Λ') [IsMonHom a]\n    {X Y : Scheme.{u}} (f : X ⟶ Y)\n    (cX : ScalarSectionData a X) (cY : ScalarSectionData a Y)\n    (hcX : ScalarSectionNormalized a X cX) (hcY : ScalarSectionNormalized a Y cY)\n    (lam : D a Y ⋙ L Λ' f ≅ L Λ f ⋙ D a X) (normalized : PullNormalized a f lam)\n    (barLam : cY.model.T ⋙ ModuleRingedComparison.derivedPullback Λ' f ≅\n      ModuleRingedComparison.derivedPullback Λ f ⋙ cX.model.T)\n    (hnorm : SectionPullNormalized a f cX cY barLam)\n    (P : CochainComplex (Modules Λ Y) ℤ)\n    [IsIso ((scalarCounit a Y).app ((HomotopyCategory.quotient _ (.up ℤ)).obj P))] :\n    (ModuleRingedComparison.derivedFunctor Λ' X).map\n        (lam.hom.app (DerivedCategory.Q.obj P)) ≫\n        cX.derived.hom.app ((L Λ f).obj (DerivedCategory.Q.obj P)) ≫\n        cX.model.T.map ((ModuleRingedComparison.derivedPullComparison Λ f).hom.app\n          (DerivedCategory.Q.obj P)) =\n      (ModuleRingedComparison.derivedPullComparison Λ' f).hom.app\n          ((D a Y).obj (DerivedCategory.Q.obj P)) ≫\n        (ModuleRingedComparison.derivedPullback Λ' f).map\n          (cY.derived.hom.app (DerivedCategory.Q.obj P)) ≫\n        barLam.hom.app ((ModuleRingedComparison.derivedFunctor Λ Y).obj\n          (DerivedCategory.Q.obj P))",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-b5e37",
+  "group": "H1",
+  "result": "fix",
+  "landing": "20261027T233957-L-4149584",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-b5e37",
+  "group": "H1",
+  "result": "fix",
+  "landing": "20261027T233957-L-4149584",
+  "kind": "interface",
+  "note": "independent cc review: section_pull_transport_condition_of_normalized (+hcX/hcY, change record) and 3 new proved modules against their nodes, QuotientSectionTensorData definitions, and the importer QuotientSectionTensorNormalization (sandbox compile OK, axioms clean)"
+ }
+}

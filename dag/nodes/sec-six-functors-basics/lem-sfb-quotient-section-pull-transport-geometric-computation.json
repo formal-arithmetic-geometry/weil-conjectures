@@ -1,0 +1,114 @@
+{
+ "kind": "statement",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YY, 0D6D and 07A6; computation and pasting step of the parent transport argument."
+ },
+ "stmt_deps": [
+  "def-sfb-quotient-section-tensor-data",
+  "def-sfb-internal-derived-scalar-comparisons",
+  "def-pd-section-derived-tensor-data",
+  "def-pd-section-derived-realization",
+  "def-pd-section-module-operations-data",
+  "def-sfb-module-upper-star"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "The scalar-computed representative step, split only to keep each proved module within the compilation limit."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Two normalized derived comparison squares commute on a complex where the scalar localization counit is invertible",
+   "results": "Eight generic results, including LocalizerMorphism.rightDerivedFunctorComparison_fac_app and Functor.mapHomologicalComplexUpToQuasiIsoFactorsh_hom_app. No specialized scalar/section pullback comparison.",
+   "date": "2026-10-28",
+   "verdict": "Use the existing project normalization equations and prove the categorical pasting."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.IsLeftDerivedFunctor",
+   "results": "Twelve generic results, including leftDerivedUnique, leftDerivedNatIso, leftDerivedNatTrans and the total-left-derived-functor instance.",
+   "date": "2026-10-28",
+   "verdict": "These describe derived functor uniqueness but do not directly supply the specified multi-square compatibility."
+  },
+  {
+   "tool": "grep",
+   "query": "PullSectionCondition|SectionPullNormalized",
+   "results": "No Mathlib hits. Local project search finds the interfaces and the proved private categorical helpers of SectionPullComputationOfRealization.",
+   "date": "2026-10-28",
+   "verdict": "Adapt the existing forward categorical diagram by cancellation to prove the reverse computation step."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.QuotientSectionPullTransport",
+  "group": "H1",
+  "date": "2026-10-28"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sfb-quotient-section-pull-transport-computed",
+   "place": "The corresponding computation square in the diagram argument.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sfb-proper-base-change",
+ "id": "lem-sfb-quotient-section-pull-transport-geometric-computation",
+ "title": "Geometric computation for normalized section transport",
+ "statement": "theorem section_pull_transport_geometric_computation {X Y : Scheme.{u}} (f : X ⟶ Y)\n    (P : CochainComplex (Modules Λ Y) ℤ) :\n    @Eq ((ModuleRingedComparison.derivedEquivalence Λ X).functor.obj\n      ((L Λ f).obj (DerivedCategory.Q.obj P)) ⟶\n      DerivedCategory.Q.obj\n        (((ModuleRingedComparison.pullback Λ f).mapHomologicalComplex (.up ℤ)).obj\n          (((ModuleRingedComparison.equivalence Λ Y).functor.mapHomologicalComplex (.up ℤ)).obj\n            P)))\n      ((ModuleRingedComparison.derivedEquivalence Λ X).functor.map\n        ((pullCounit (Λ := Λ) f).app ((HomotopyCategory.quotient _ _).obj P)) ≫\n      ((ModuleRingedComparison.equivalence Λ X).functor.mapDerivedCategoryFactors).hom.app\n        (((CondensedRing.upperStar Λ f).mapHomologicalComplex (.up ℤ)).obj P) ≫\n      DerivedCategory.Q.map\n        ((NatIso.mapHomologicalComplex (ModuleRingedComparison.pullComparison Λ f)\n          (.up ℤ)).hom.app P))\n      ((ModuleRingedComparison.derivedPullComparison Λ f).hom.app (DerivedCategory.Q.obj P) ≫\n      (ModuleRingedComparison.derivedPullback Λ f).map\n        (((ModuleRingedComparison.equivalence Λ Y).functor.mapDerivedCategoryFactors).hom.app P) ≫\n      ((ModuleRingedComparison.pullback Λ f).mapDerivedCategoryFactors.hom).app\n        (((ModuleRingedComparison.equivalence Λ Y).functor.mapHomologicalComplex (.up ℤ)).obj P))",
+ "proof": [
+  {
+   "text": "Extract the fifth geometric computation clause of sectionDerivedPushpullNormalization and reverse it. Unfold the small named internal pullback and section-localization interfaces to identify them with L, pullCounit and mapDerivedCategoryFactors.",
+   "uses": [
+    "lem-pd-section-derived-pushpull-normalization",
+    "def-sfb-internal-derived-scalar-comparisons",
+    "def-pd-section-derived-tensor-data"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pd-section-derived-pushpull-normalization",
+  "def-sfb-internal-derived-scalar-comparisons",
+  "def-pd-section-derived-tensor-data"
+ ],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.QuotientSectionPullTransportGeometricComputation",
+  "file": "lean/Sheaf/Paper/QuotientSectionPullTransportGeometricComputation.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.QuotientSectionTensor.section_pull_transport_geometric_computation",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.QuotientSectionTensor.section_pull_transport_geometric_computation"
+  ],
+  "statement": "theorem section_pull_transport_geometric_computation {X Y : Scheme.{u}} (f : X ⟶ Y)\n    (P : CochainComplex (Modules Λ Y) ℤ) :\n    @Eq ((ModuleRingedComparison.derivedEquivalence Λ X).functor.obj\n      ((L Λ f).obj (DerivedCategory.Q.obj P)) ⟶\n      DerivedCategory.Q.obj\n        (((ModuleRingedComparison.pullback Λ f).mapHomologicalComplex (.up ℤ)).obj\n          (((ModuleRingedComparison.equivalence Λ Y).functor.mapHomologicalComplex (.up ℤ)).obj\n            P)))\n      ((ModuleRingedComparison.derivedEquivalence Λ X).functor.map\n        ((pullCounit (Λ := Λ) f).app ((HomotopyCategory.quotient _ _).obj P)) ≫\n      ((ModuleRingedComparison.equivalence Λ X).functor.mapDerivedCategoryFactors).hom.app\n        (((CondensedRing.upperStar Λ f).mapHomologicalComplex (.up ℤ)).obj P) ≫\n      DerivedCategory.Q.map\n        ((NatIso.mapHomologicalComplex (ModuleRingedComparison.pullComparison Λ f)\n          (.up ℤ)).hom.app P))\n      ((ModuleRingedComparison.derivedPullComparison Λ f).hom.app (DerivedCategory.Q.obj P) ≫\n      (ModuleRingedComparison.derivedPullback Λ f).map\n        (((ModuleRingedComparison.equivalence Λ Y).functor.mapDerivedCategoryFactors).hom.app P) ≫\n      ((ModuleRingedComparison.pullback Λ f).mapDerivedCategoryFactors.hom).app\n        (((ModuleRingedComparison.equivalence Λ Y).functor.mapHomologicalComplex (.up ℤ)).obj P))",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-28"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-b5e37",
+  "group": "H1",
+  "result": "fix",
+  "landing": "20261027T233957-L-4149584",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-b5e37",
+  "group": "H1",
+  "result": "fix",
+  "landing": "20261027T233957-L-4149584",
+  "kind": "interface",
+  "note": "independent cc review: section_pull_transport_condition_of_normalized (+hcX/hcY, change record) and 3 new proved modules against their nodes, QuotientSectionTensorData definitions, and the importer QuotientSectionTensorNormalization (sandbox compile OK, axioms clean)"
+ }
+}
