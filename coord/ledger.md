@@ -19893,3 +19893,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 20:57 L: merged deliver/A4/Sheaf.Paper.LocallyClosedPairingCancellation (stage 3; reviewer PASS; after a return; landing 20261027T205741-L-1609628 (interface); batch 20261027T205736; modules 2; new nodes 1)
 - 20:57 L: merged deliver/A5/Sheaf.Paper.AdicReindexingTensor (stage 3; reviewer PASS; after a return; landing 20261027T205742-L-1609988 (interface); batch 20261027T205736; modules 3; new nodes 2)
 - 20:57 L: merged deliver/A5/Sheaf.Paper.StrictKummerUnitNormalization (stage 3; reviewer PASS; first push; landing 20261027T205743-L-1610648 (interface); batch 20261027T205736; modules 3; new nodes 2)
+- 20:57 L: merged deliver/A7/Sheaf.Paper.SystemOpenScalarEvaluation (stage 3; reviewer PASS; first push; landing 20261027T205745-L-1611192 (interface); batch 20261027T205736; modules 2; new nodes 1)

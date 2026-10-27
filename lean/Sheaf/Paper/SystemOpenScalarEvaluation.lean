@@ -7,6 +7,7 @@ module
 
 public import Sheaf.Paper.SystemOperationExchangeRealization
 public import Sheaf.Paper.SystemScalarFiniteEvaluation
+import Sheaf.Paper.SystemOpenScalarEvaluationCore
 
 /-! # Evaluation of the open scalar mate
 
@@ -16,6 +17,7 @@ Source: Zheng Construction 4.1 and Lemma 4.10; Stacks 03DI and 07A6.
 @[expose] public noncomputable section
 set_option autoImplicit false
 set_option synthInstance.maxSize 4096
+set_option linter.style.haveILetI false
 universe u
 open CategoryTheory CategoryTheory.Limits AlgebraicGeometry AlgebraicGeometry.Scheme
 namespace WeilConjectures.FrobeniusExchange
@@ -89,6 +91,21 @@ theorem systemOpenScalar_finiteEvaluation
         (pbcDerivedExtend (scalarRingMap (integralScalarQuotientMap l E L ι n) Z)).map
           ((systemOpenFiniteEvaluation l E j n).hom.app N) ≫
         (finiteOpenScalar (integralScalarQuotientMap l E L ι n) j).app
-          ((coefficientSequenceDerivedEvaluation l E X n).obj N) := by sorry
+          ((coefficientSequenceDerivedEvaluation l E X n).obj N) := by
+  let _ := Padic.finite_coefficientExtensionRing l E (n + 1) (Nat.succ_pos n)
+  let _ := Padic.finite_coefficientExtensionRing l L (n + 1) (Nat.succ_pos n)
+  haveI : IsIso (systemOpenScalarInv l E L ι j) :=
+    systemOpenScalarInv_isIso l E L ι j
+  have h := systemOpenScalarInv_finiteEvaluation_core l E L ι j n N
+  dsimp only [systemOpenFiniteEvaluation, finiteOpenScalar] at h ⊢
+  rw [h]
+  rw [show (systemOpenScalar l E L ι j).hom.app N =
+      (asIso (systemOpenScalarInv l E L ι j)).inv.app N by rfl]
+  rw [show (systemOpenScalarInv l E L ι j).app N =
+      (asIso (systemOpenScalarInv l E L ι j)).hom.app N by rfl]
+  rw [← Category.assoc]
+  rw [← (coefficientSequenceDerivedEvaluation l L Z n).map_comp]
+  rw [Iso.inv_hom_id_app]
+  rw [(coefficientSequenceDerivedEvaluation l L Z n).map_id, Category.id_comp]
 
 end WeilConjectures.FrobeniusExchange
