@@ -260,7 +260,7 @@ lemma pullIso_hom_app_comp
     (c := upperStarComp Λ f g) (c' := upperStarComp Λ' f g)
     (h := fun N ↦ by
       simp only [conjugateIsoEquiv_apply_hom, conjugateEquiv_upperStarComp_hom_eq_lowerStarComp]
-      exact comapLowerStarIso_hom_app_comp Λ f g a N) (M := M) ..
+      exact comapLowerStarIso_hom_app_lowerStarComp Λ f g a N) (M := M) ..
 
 /-- The underived (Pull) isomorphism `pullIso a h` on the homotopy categories:
 `h^*_h ⋙ Ext_h ⟶ Ext_h ⋙ h^*_h`. -/
