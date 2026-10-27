@@ -13,14 +13,25 @@
  ],
  "proof": [
   {
-   "text": "Use the etale arbitrary-triangle formula for ci, cp and c, with both middle maps identity on Z. The middle square is Cartesian. Apply the identity exchange law, the right open-composition unit and the left proper-composition unit to evaluate the model compositor.",
+   "text": "Use etale_compositor_tower for the triangle with cf=(i,id), cg=(id,p), cfg=(i,p) and both middle maps identity on Z. The canonical changes from a compactification to itself are identity. Identify native_bounded_triangle_iso with the bounded etale formalism compositor. Expand its component, use exchange_id_vert, shComp′_id_right and pfComp′_id_left_inv_app, and cancel the adjacent open identity isomorphism and its inverse. The result is proper image of the open identity unit followed by proper image of the direct-image identity unit. The existing etale_open_id_eq and etale_proper_id_eq identify the formalism units with the specified derived identity maps.",
    "uses": [
-    "lem-amb-etale-compact-comparisons"
+    "lem-amb-etale-compact-comparisons",
+    "lem-amb-unbounded-compact-support-comparisons",
+    "lem-sp-finite-compact-site-coherence"
    ],
    "elementary": false
   },
   {
-   "text": "The normalized composition site square identifies the etale compositor with the pro-etale compositor. The extension-by-zero comparison respects the identity open unit; the direct-image counit mate respects the identity direct-image unit. Naturality of proper image pastes these two unit equations. Cancel the invertible source comparison to give the asserted fixed-scalar compositor equation.",
+   "text": "For the identity direct image, use the bounded-below right-derived base-change identity formula. The normalized_identity_compat uniqueness lemma identifies the inclusion of its bounded-below identity map with rightDerivedLowerStarId; the two comparison-inclusion isomorphisms are identities. For the identity open extension, apply the identity clause of finiteSiteWordRefinement, include into the unbounded category by inclusion_square_hom, and identify leftAdjointUniq with leftAdjointIdIso. Thus both primitive comparisons respect the specified identity unit maps. Expand the compact-support boundary by compactComparison_hom, namely the proper direct-image comparison followed by proper image of the open comparison.",
+   "uses": [
+    "lem-sp-unbounded-open-counit-site-transport",
+    "lem-sp-finite-site-word-refinement",
+    "lem-pur-co-smooth-exchange-transport"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Paste those primitive identity equations: naturality of the pro-etale open identity moves the boundary for (i,id) past that identity; naturality of the direct-image identity moves the open comparison past the direct-image unit; naturality of the proper direct-image comparison combines the two etale units. This gives the composition site square with identityFactorFixedIso on its pro-etale side. The normalized composition_site_square supplies the same left side with coherenceProEtaleCompositor. Cancel the invertible source comparison. This calculation is valid for zero complexes and empty schemes.",
    "uses": [
     "lem-pur-compact-support-site-coherence"
    ],
@@ -29,12 +40,17 @@
  ],
  "proof_deps": [
   "lem-amb-etale-compact-comparisons",
+  "lem-amb-unbounded-compact-support-comparisons",
+  "lem-sp-finite-compact-site-coherence",
+  "lem-sp-unbounded-open-counit-site-transport",
+  "lem-sp-finite-site-word-refinement",
+  "lem-pur-co-smooth-exchange-transport",
   "lem-pur-compact-support-site-coherence"
  ],
  "proof_origin": {
-  "by": "agent",
+  "by": "E3 stage 3",
   "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-prop-sf-pf-coherence/prop-sf-pf-coherence.proof.md",
-  "place": "Identity-factor triangle calculation before coefficient realization in lem-sf-finite-support-identity-factor-compositor, proof step 1."
+  "place": "Identity-factor triangle calculation before coefficient realization in lem-sf-finite-support-identity-factor-compositor, proof step 1; realized by the identity triangle, primitive site-comparison unit laws, and naturality."
  },
  "mathlib_searches": [
   {
@@ -132,9 +148,9 @@
   "date": "2026-10-27",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "J6",
+  "group": "E3",
   "result": "pass",
-  "landing": "20261027T123458-L-2304837",
+  "landing": "20261027T180538-L-3873954",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
