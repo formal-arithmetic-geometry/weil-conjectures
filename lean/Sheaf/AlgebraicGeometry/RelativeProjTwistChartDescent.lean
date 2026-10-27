@@ -87,6 +87,7 @@ theorem exists_twist_chart_descent :
         (∀ a : A.grading V 1,
           t (A.twistChartFraction V a) =
             A.twistChartFraction U ⟨A.res h a, (A.res h).map_mem a.property⟩) := by
+  classical
   sorry
 
 end AlgebraicGeometry.Scheme.GradedAlgebraData
